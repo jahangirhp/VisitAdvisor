@@ -1,0 +1,34 @@
+"""Central environment configuration, loaded when the application starts."""
+
+from pydantic import Field, SecretStr, field_validator
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+class Settings(BaseSettings):
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
+        hide_input_in_errors=True,
+    )
+
+    app_env: str = Field(default="development", min_length=1)
+    app_host: str = Field(default="0.0.0.0", min_length=1)
+    app_port: int = Field(default=8001, ge=1, le=65535)
+    mongodb_uri: SecretStr
+    mongodb_database: str = Field(default="visitadvisor", min_length=1)
+
+    @field_validator("mongodb_uri")
+    @classmethod
+    def validate_uri(cls, value: SecretStr) -> SecretStr:
+        uri = value.get_secret_value()
+        if not uri.startswith(("mongodb://", "mongodb+srv://")):
+            raise ValueError("MONGODB_URI must be a non-empty MongoDB connection URI")
+        return value
+
+    @field_validator("mongodb_database")
+    @classmethod
+    def validate_database(cls, value: str) -> str:
+        if not value.strip() or any(char in value for char in '/\\. "$*<>:|?\x00'):
+            raise ValueError("MONGODB_DATABASE must be a valid database name")
+        return value
