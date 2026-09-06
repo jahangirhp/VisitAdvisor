@@ -35,6 +35,11 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         except Exception:
             logger.error("MongoDB connection failed; check configuration and access")
             raise RuntimeError("MongoDB connection failed") from None
+        try:
+            await mongodb.ensure_indexes()
+        except Exception:
+            logger.error("MongoDB index initialization failed")
+            raise RuntimeError("MongoDB index initialization failed") from None
         app.state.mongodb = mongodb
         app.state.settings = settings
         logger.info("MongoDB connection successful")

@@ -1,4 +1,4 @@
-"""One async client per application lifespan; no collections or indexes yet."""
+"""One async client per application lifespan and idempotent domain indexes."""
 
 from typing import Any, cast
 
@@ -16,8 +16,14 @@ class MongoDB:
             serverSelectionTimeoutMS=5000,
             connectTimeoutMS=5000,
             timeoutMS=5000,
+            tz_aware=True,
         )
         self.database = self.client[settings.mongodb_database]
+
+    async def ensure_indexes(self) -> None:
+        await self.database["locations"].create_index("slug", unique=True)
+        await self.database["objects"].create_index("location_id")
+        await self.database["sources"].create_index("location_id")
 
     async def ping(self) -> None:
         await self.database.command("ping")

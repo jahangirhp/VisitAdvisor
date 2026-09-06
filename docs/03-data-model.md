@@ -3,6 +3,37 @@
 **Version:** 0.1  
 **Database:** MongoDB Atlas
 
+## Phase 1 implementation contract
+
+The examples below describe the broader MVP. For the implemented Phase 1 API,
+the following decisions supersede conflicting examples:
+
+- Only `locations`, `objects`, and `sources` exist; `knowledge_chunks` is deferred.
+- API and stored fields use snake_case. MongoDB `_id` is an ObjectId; API `id`
+  and stored relationship IDs are its lowercase 24-character hex string.
+- Request models exclude IDs and timestamps; domain models also serve as API
+  response models. Repositories explicitly convert `_id` at the boundary.
+- Timestamps are server-generated UTC BSON dates, serialized as ISO timestamps.
+- Locations require name, slug, type, city, and country. Slugs are trimmed and
+  lowercased, then validated as hyphen-separated ASCII letters/digits. Status is
+  `active` (default) or `inactive`; coordinates use `latitude` and `longitude`.
+- Location types: museum, historical_site, landmark, gallery, exhibition,
+  public_space, attraction, other.
+- Objects require name, free-form type, and a valid parent location. Optional
+  creator/year/description/story/history, aliases/facts/source_ids lists, and
+  JSON metadata support different physical entities. Year accepts integer or
+  text. Source IDs are deduplicated and must all exist in the same location.
+- Sources require title, constrained type, and a valid parent location. URL is
+  optional (HTTP/HTTPS only); publisher, external_id, and language are optional.
+  Types: official_api, official_website, public_dataset, wikipedia, wikidata,
+  document, manual, other. Source references are evidence pointers; no source
+  content is fetched or generated during this phase.
+- Startup creates unique `locations.slug`, `objects.location_id`, and
+  `sources.location_id` indexes idempotently. Additional suggested indexes below
+  are deferred until their query paths exist.
+- No delete/update routes exist, so parent/source relationship checks need no
+  deletion coordination yet. Future deletion must preserve these relationships.
+
 ## 1. Goal
 
 The MVP data model must support:

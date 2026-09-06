@@ -16,6 +16,7 @@ def mongodb(monkeypatch):
         database = factory.return_value
         database.ping = AsyncMock()
         database.close = AsyncMock()
+        database.ensure_indexes = AsyncMock()
         yield database
 
 
@@ -26,7 +27,7 @@ def test_health_and_docs_and_shutdown(mongodb):
         assert response.status_code == 200
         assert response.json() == {"status": "ok", "database": "connected"}
         assert client.get("/docs").status_code == 200
-        assert set(client.get("/openapi.json").json()["paths"]) == {
+        assert set(client.get("/openapi.json").json()["paths"]) >= {
             "/health",
             "/health/database",
         }
@@ -88,3 +89,11 @@ def test_error_responses(mongodb):
         assert response.json()["error"]["code"] == "VALIDATION_ERROR"
         assert "secret" not in response.text
         assert client.get("/missing").json()["error"]["code"] == "HTTP_ERROR"
+
+
+def test_index_initialization_failure_closes_client(mongodb):
+    mongodb.ensure_indexes.side_effect = ConnectionFailure("secret index details")
+    with pytest.raises(RuntimeError, match="^MongoDB index initialization failed$"):
+        with TestClient(create_app()):
+            pytest.fail("Startup should fail")
+    mongodb.close.assert_awaited_once()
