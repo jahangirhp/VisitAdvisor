@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, HttpUrl
+from pydantic import BaseModel, ConfigDict, HttpUrl, JsonValue
 
 from app.core.domain import NonBlank
 
@@ -30,6 +30,9 @@ class SourceCreate(BaseModel):
 class Source(SourceCreate):
     """Domain record and public response."""
 
+    import_provider: str | None = None
+    raw_record: dict[str, JsonValue] | None = None
+    last_fetched_at: datetime | None = None
     id: str
     location_id: str
     created_at: datetime

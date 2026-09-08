@@ -34,6 +34,37 @@ the following decisions supersede conflicting examples:
 - No delete/update routes exist, so parent/source relationship checks need no
   deletion coordination yet. Future deletion must preserve these relationships.
 
+## Phase 2 ingestion additions
+
+Phase 2 implements a bounded Rijksmuseum CLI importer with the existing three
+collections. Imported objects and sources add read-only `import_provider` and
+`external_id` fields. The external ID is the full official persistent URI, not
+a title or a locally assigned accession number. Both collections have a partial
+unique `(location_id, import_provider, external_id)` index that applies when the
+provider and external ID are strings. Manual API records are not affected.
+
+Imported sources retain `raw_record` (latest Linked Art JSON) and
+`last_fetched_at` (UTC BSON date). Each object links to its evidence source via
+`source_ids`. The object stores a private `import_hash` of normalized import
+values to skip unchanged updates; this is excluded from API responses.
+Accession number and materials are stored under `metadata.rijksmuseum`.
+
+Reimports update only nonempty source-mapped fields, merge aliases/source IDs
+and museum metadata, and preserve facts/story/history and unrelated metadata.
+No title-based merging with manual records occurs. Source evidence is the latest
+snapshot only; historical snapshots and scheduled synchronization are deferred.
+See README for CLI usage, report semantics, and field mapping behavior.
+
+## Phase 3 prepared content
+
+`objects.prepared_content` is an optional generated subdocument. It contains
+introduction, facts, story, history, and interesting_fact with per-section source
+citations, plus source_ids, evidence_hash, provider, requested_model, model,
+prompt_version, generated_at, input_tokens, output_tokens, and review_status.
+Canonical object fields and source records are not overwritten. Existing
+collections/indexes suffice. `GET /api/v1/objects/{object_id}/experience` retrieves
+this subdocument; absent content returns 404. AI output is always marked unreviewed.
+
 ## 1. Goal
 
 The MVP data model must support:

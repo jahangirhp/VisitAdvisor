@@ -25,6 +25,17 @@ class MongoDB:
         await self.database["objects"].create_index("location_id")
         await self.database["sources"].create_index("location_id")
 
+        for collection in ("objects", "sources"):
+            await self.database[collection].create_index(
+                [("location_id", 1), ("import_provider", 1), ("external_id", 1)],
+                unique=True,
+                partialFilterExpression={
+                    "import_provider": {"$type": "string"},
+                    "external_id": {"$type": "string"},
+                },
+                name="unique_import_identity",
+            )
+
     async def ping(self) -> None:
         await self.database.command("ping")
 

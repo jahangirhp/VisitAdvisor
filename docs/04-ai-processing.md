@@ -3,6 +3,27 @@
 **Version:** 0.1  
 **Status:** MVP
 
+## Phase 3 implementation
+
+The foreground `python -m app.modules.knowledge` CLI prepares English content for
+imported objects using only stored raw source evidence. It uses a replaceable
+provider interface, initially the OpenAI Responses API with structured output.
+`OPENAI_API_KEY` and `LLM_MODEL` are centralized settings; they are not required
+for ordinary API startup. See README for limits, reruns, and sample review.
+
+Generated content is stored in `objects.prepared_content`, separate from canonical
+fields and `sources.raw_record`. Every nonempty section/fact includes a source ID
+and exact supporting quote. Model/prompt/provider, source IDs, evidence hash,
+generation time, and token usage are retained. Null sections/fewer facts are
+preferred over unsupported content, overriding suggested minimum lengths below.
+All results are marked unreviewed: structural and quote checks do not prove factual
+entailment. Refusal, invalid output, failed generation, or detected concurrent
+changes leave prior content intact. No AI extraction rewrites canonical fields.
+
+The camera-first product direction now prioritizes visual recognition; the older
+OCR-first examples below are background context. Neither camera recognition nor
+OCR is implemented in Phase 3. Embeddings/vector search and frontend remain deferred.
+
 ## 1. Purpose
 
 This document defines what AI does in the VisitAdvisor MVP and, equally importantly, what AI does **not** do.

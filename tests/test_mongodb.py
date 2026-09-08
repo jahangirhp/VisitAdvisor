@@ -16,7 +16,18 @@ def test_indexes_are_repeated_without_dropping_data():
         asyncio.run(database.ensure_indexes())
         collections["locations"].create_index.assert_awaited_with("slug", unique=True)
         for name in ("objects", "sources"):
-            collections[name].create_index.assert_awaited_with("location_id")
+            collections[name].create_index.assert_any_await("location_id")
+            collections[name].create_index.assert_any_await(
+                [("location_id", 1), ("import_provider", 1), ("external_id", 1)],
+                unique=True,
+                partialFilterExpression={
+                    "import_provider": {"$type": "string"},
+                    "external_id": {"$type": "string"},
+                },
+                name="unique_import_identity",
+            )
+        assert collections["locations"].create_index.await_count == 2
+        for name in ("objects", "sources"):
+            assert collections[name].create_index.await_count == 4
         for collection in collections.values():
-            assert collection.create_index.await_count == 2
             collection.drop.assert_not_called()

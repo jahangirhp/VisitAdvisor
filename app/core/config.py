@@ -15,6 +15,8 @@ class Settings(BaseSettings):
     app_env: str = Field(default="development", min_length=1)
     app_host: str = Field(default="0.0.0.0", min_length=1)
     app_port: int = Field(default=8001, ge=1, le=65535)
+    openai_api_key: SecretStr | None = None
+    llm_model: str = Field(default="gpt-4.1-mini-2025-04-14", min_length=1)
     mongodb_uri: SecretStr
     mongodb_database: str = Field(default="visitadvisor", min_length=1)
 

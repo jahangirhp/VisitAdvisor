@@ -3,6 +3,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, JsonValue, StrictInt
 
 from app.core.domain import NonBlank
+from app.modules.knowledge.models import PreparedContent
 
 
 class ObjectCreate(BaseModel):
@@ -23,6 +24,10 @@ class ObjectCreate(BaseModel):
 class Object(ObjectCreate):
     """Domain record and public response."""
 
+    prepared_content: PreparedContent | None = None
+    external_id: str | None = None
+    import_provider: str | None = None
+    import_hash: str | None = Field(default=None, exclude=True)
     id: str
     location_id: str
     created_at: datetime
