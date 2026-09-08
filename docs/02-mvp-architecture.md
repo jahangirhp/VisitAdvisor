@@ -231,7 +231,8 @@ Useful when OCR is incomplete or wording differs.
 
 Store embeddings in `knowledge_chunks` and filter retrieval by `locationId`.
 
-A future version may combine lexical and vector results into hybrid ranking.
+Phase 4 combines lexical and vector results with a simple weighted ranker.
+See `05-retrieval-and-matching.md` for the implemented contract and limits.
 
 ## 8. Source Traceability
 

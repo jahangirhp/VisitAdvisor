@@ -25,6 +25,18 @@ class MongoDB:
         await self.database["objects"].create_index("location_id")
         await self.database["sources"].create_index("location_id")
 
+        await self.database["knowledge_chunks"].create_index(
+            [
+                ("location_id", 1),
+                ("object_id", 1),
+                ("content_type", 1),
+                ("embedding_model", 1),
+                ("embedding_dimensions", 1),
+            ],
+            unique=True,
+            name="unique_identity_embedding",
+        )
+
         for collection in ("objects", "sources"):
             await self.database[collection].create_index(
                 [("location_id", 1), ("import_provider", 1), ("external_id", 1)],

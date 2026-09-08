@@ -65,6 +65,17 @@ Canonical object fields and source records are not overwritten. Existing
 collections/indexes suffice. `GET /api/v1/objects/{object_id}/experience` retrieves
 this subdocument; absent content returns 404. AI output is always marked unreviewed.
 
+## Phase 4 retrieval additions
+
+`knowledge_chunks` now stores one canonical `identity` text/vector per museum,
+object, embedding model, and dimension count, enforced by a unique compound index.
+Fields use snake_case and retain source IDs, content hash, text version, origin,
+language, embedding provider/model/dimensions, and timestamps. Generated Phase 3
+content is not embedded. Canonical object/source records are unchanged. Atlas
+Vector Search has a separate explicitly created index with mandatory museum/model/
+dimension/version/content-type filters. See `05-retrieval-and-matching.md` for the
+implemented schema and query contract; these supersede the illustrative fields below.
+
 ## 1. Goal
 
 The MVP data model must support:

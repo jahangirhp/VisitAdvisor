@@ -8,7 +8,8 @@ from app.db.mongodb import MongoDB
 def test_indexes_are_repeated_without_dropping_data():
     with patch("app.db.mongodb.AsyncMongoClient") as factory:
         collections = {
-            name: AsyncMock() for name in ("locations", "objects", "sources")
+            name: AsyncMock()
+            for name in ("locations", "objects", "sources", "knowledge_chunks")
         }
         factory.return_value.__getitem__.return_value = collections
         database = MongoDB(Settings(mongodb_uri="mongodb://localhost:27017"))

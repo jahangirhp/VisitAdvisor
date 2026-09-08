@@ -4,10 +4,10 @@ VisitAdvisor is a location-aware knowledge platform that will help visitors
 understand real-world places and objects through prepared, source-backed content.
 The primary experience will be automatic discovery after recognition.
 
-This repository implements **Phases 0–3**: a Python/FastAPI foundation,
+This repository implements **Phases 0–4**: a Python/FastAPI foundation,
 MongoDB lifecycle management, and creation/retrieval of locations, objects,
 and source references, bounded imports from the official Rijksmuseum API, and
-source-cited visitor content preparation.
+source-cited visitor content preparation, and museum-filtered text retrieval.
 The documents in `docs/` describe the broader MVP; they are not all implemented.
 
 ## Requirements
@@ -134,7 +134,8 @@ curl --fail http://localhost:8001/health/database
 - `docs/`: product and architecture specifications
 
 Repositories use the existing `get_database` dependency and async PyMongo client.
-There is no frontend, recognition, authentication, or background processing. Imports run explicitly through the CLI below.
+There is no frontend, camera upload, OCR extraction, authentication, or background
+processing. Phase 4 matches already-extracted text. Imports run through the CLI.
 
 ## Phase 1: manual domain data
 
@@ -386,10 +387,63 @@ Normal tests use mocked providers and isolated data without real API calls.
 Live content generation requires an API project with available credit. The model
 and provider boundary are defined in `app/modules/knowledge/provider.py`.
 
-Phase 3 verification on 2026-09-07: unit/API/provider tests pass. Real Atlas
-persistence was exercised with a mocked generator in an isolated temporary
-verification database, including reconnect and repeat-run checks; that database
-was removed afterward. Live OpenAI generation returned `credit_balance_exhausted`.
-No generated museum content or reviewed sample is available yet. Add API credit,
-run the three-object sample, review it against evidence, then run the 100-object
-batch. This live generation/review milestone remains outstanding.
+Phase 3 verification on 2026-09-08: all 84 automated tests, Ruff lint and
+format checks, and mypy pass. Live health/database checks and all three saved
+sample experience endpoints return HTTP 200 on port 8001; missing and malformed
+object IDs return 404 and 422 respectively. A repeat three-object preparation run
+reports 0 generated, 3 skipped, and 0 failed, reusing saved content.
+
+The live sample contains three generated objects using prompt `visitor-content-v2`.
+Numbered evidence selection lets the application attach exact source quotations.
+However, factual review found unsupported historical interpretations, an
+unsupported authenticity claim from a signature, and a frame/object dimension
+ambiguity. Exact citation validation does not guarantee claim support. All three
+results remain `unreviewed`; the 100-object generation milestone remains pending
+prompt/content corrections and another factual review.
+
+
+## Phase 4: retrieval and text matching
+
+Prepare museum identity embeddings and create the Atlas vector index:
+
+```bash
+.venv/bin/python -m app.modules.retrieval prepare \
+  --location-id 6a9dd4106d52c3bc3965869d --limit 500
+.venv/bin/python -m app.modules.retrieval index --create
+.venv/bin/python -m app.modules.retrieval index
+```
+
+Wait for index status `ready` before testing semantic search. Repeating preparation
+skips unchanged objects. Defaults: `EMBEDDING_MODEL=text-embedding-3-small`,
+`EMBEDDING_DIMENSIONS=1536`, `VECTOR_INDEX_NAME=visitadvisor_identity_v1`.
+The existing `OPENAI_API_KEY` is used; keep it in the ignored `.env` file.
+
+```bash
+curl -X POST http://localhost:8001/api/v1/recognition/match \
+  -H 'Content-Type: application/json' \
+  -d '{"location_id":"6a9dd4106d52c3bc3965869d","text":"SK C 1726","mode":"hybrid"}'
+
+curl -X POST http://localhost:8001/api/v1/locations/6a9dd4106d52c3bc3965869d/search \
+  -H 'Content-Type: application/json' \
+  -d '{"text":"seascape made from tiny dots of pigment","mode":"semantic","limit":3}'
+```
+
+Matching returns `matched`, `ambiguous` (up to three candidates), or `no_match`.
+Search and matching always filter by museum. Hybrid mode combines lexical signals
+with Atlas vector similarity; unique exact identity matches can skip paid requests.
+If semantic services are unavailable, hybrid responses report a lexical fallback;
+semantic-only requests fail explicitly with 503. Scores are not probabilities.
+
+Only canonical identity metadata and descriptions are embedded. Phase 3's
+unreviewed stories remain separate, and its factual-quality issue is still open.
+Phase 5 will add camera/image upload and OCR extraction; image embeddings are
+conditional on OCR/context proving insufficient.
+
+See [Phase 4 details](docs/05-retrieval-and-matching.md) for schema, limits, ranking,
+index migration, failure handling, and the agreed roadmap.
+
+Phase 4 verification (2026-09-09): 129 tests and all required static checks pass.
+Atlas index is ready with 103 current identity embeddings. A repeat run skips all
+103 with zero embedding tokens. Six live matching/search checks pass, covering
+exact identity, OCR-like errors, semantic and cross-language queries, and no match.
+See the Phase 4 document for the bounded test results and remaining limitations.

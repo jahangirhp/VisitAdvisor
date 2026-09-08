@@ -20,9 +20,10 @@ All results are marked unreviewed: structural and quote checks do not prove fact
 entailment. Refusal, invalid output, failed generation, or detected concurrent
 changes leave prior content intact. No AI extraction rewrites canonical fields.
 
-The camera-first product direction now prioritizes visual recognition; the older
-OCR-first examples below are background context. Neither camera recognition nor
-OCR is implemented in Phase 3. Embeddings/vector search and frontend remain deferred.
+The agreed roadmap keeps OCR first. Phase 4 implements text embeddings, Atlas
+Vector Search, hybrid retrieval, and OCR-text matching filtered by museum. Phase 5
+adds camera/image upload and OCR extraction; image embeddings are conditional on
+OCR/context proving insufficient. See `05-retrieval-and-matching.md`.
 
 ## 1. Purpose
 
