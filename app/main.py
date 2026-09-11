@@ -12,6 +12,7 @@ from app.core.config import Settings
 from app.core.exceptions import register_exception_handlers
 from app.core.logging import configure_logging
 from app.db.mongodb import MongoDB
+from app.modules.recognition.limits import ImageUploadLimit
 
 logger = logging.getLogger(__name__)
 
@@ -52,6 +53,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 
 def create_app() -> FastAPI:
     application = FastAPI(title="VisitAdvisor", version="0.1.0", lifespan=lifespan)
+    application.add_middleware(ImageUploadLimit)
     register_exception_handlers(application)
     application.include_router(health_router)
     application.include_router(api_router)

@@ -4,10 +4,10 @@ VisitAdvisor is a location-aware knowledge platform that will help visitors
 understand real-world places and objects through prepared, source-backed content.
 The primary experience will be automatic discovery after recognition.
 
-This repository implements **Phases 0–4**: a Python/FastAPI foundation,
+This repository implements **Phases 0–5**: a Python/FastAPI foundation,
 MongoDB lifecycle management, and creation/retrieval of locations, objects,
 and source references, bounded imports from the official Rijksmuseum API, and
-source-cited visitor content preparation, and museum-filtered text retrieval.
+source-cited visitor content preparation, museum-filtered text retrieval, and uploaded-label OCR recognition.
 The documents in `docs/` describe the broader MVP; they are not all implemented.
 
 ## Requirements
@@ -134,8 +134,9 @@ curl --fail http://localhost:8001/health/database
 - `docs/`: product and architecture specifications
 
 Repositories use the existing `get_database` dependency and async PyMongo client.
-There is no frontend, camera upload, OCR extraction, authentication, or background
-processing. Phase 4 matches already-extracted text. Imports run through the CLI.
+There is no frontend, live camera stream, authentication, or background processing.
+Phase 5 accepts label image uploads and performs OCR; Phase 4 also accepts text.
+Imports run through the CLI.
 
 ## Phase 1: manual domain data
 
@@ -447,3 +448,27 @@ Atlas index is ready with 103 current identity embeddings. A repeat run skips al
 103 with zero embedding tokens. Six live matching/search checks pass, covering
 exact identity, OCR-like errors, semantic and cross-language queries, and no match.
 See the Phase 4 document for the bounded test results and remaining limitations.
+
+
+## Phase 5: upload a label photo
+
+Update dependencies with `.venv/bin/pip install -e '.[dev]'`, then restart the API.
+Use the **recognition** section in http://localhost:8001/docs, or:
+
+```bash
+curl -X POST http://localhost:8001/api/v1/recognition/image \
+  -F 'location_id=6a9dd4106d52c3bc3965869d' \
+  -F 'image=@/path/to/label.jpg;type=image/jpeg'
+```
+
+Send one JPEG, PNG, or WebP (up to 5 MiB and 16 megapixels), containing a clear
+exhibit label. The API transcribes its text, matches within the selected museum,
+and returns the object with its saved `prepared_content` when confident. Otherwise,
+it returns up to three candidates or a rescan/no-match result. It does not generate
+visitor content during a scan, and unreviewed content is explicitly marked.
+
+The existing `OPENAI_API_KEY` powers OCR. Optional settings:
+`OCR_MODEL=gpt-4.1-mini-2025-04-14` and `OCR_TIMEOUT_SECONDS=30`.
+Uploads are metadata-stripped before provider submission and are not archived.
+No camera UI or image embeddings are added. See [Phase 5 details](docs/06-image-recognition.md)
+for response fields, validation limits, errors, cost behavior, and verification.

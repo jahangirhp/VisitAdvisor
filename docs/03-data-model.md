@@ -76,6 +76,13 @@ Vector Search has a separate explicitly created index with mandatory museum/mode
 dimension/version/content-type filters. See `05-retrieval-and-matching.md` for the
 implemented schema and query contract; these supersede the illustrative fields below.
 
+## Phase 5 recognition response
+
+No new collections or persisted fields are introduced. Label images and OCR text
+are transient. Recognition returns the existing object response (including nullable
+`prepared_content`) only for a confident museum-scoped match. Unreviewed content
+keeps its review status and citations. See `06-image-recognition.md`.
+
 ## 1. Goal
 
 The MVP data model must support:

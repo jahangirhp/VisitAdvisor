@@ -21,6 +21,9 @@ class Settings(BaseSettings):
     embedding_dimensions: int = Field(default=1536, ge=1, le=3072)
     vector_index_name: str = Field(default="visitadvisor_identity_v1", min_length=1)
 
+    ocr_model: str = Field(default="gpt-4.1-mini-2025-04-14", min_length=1)
+    ocr_timeout_seconds: float = Field(default=30, ge=1, le=60)
+
     mongodb_uri: SecretStr
     mongodb_database: str = Field(default="visitadvisor", min_length=1)
 

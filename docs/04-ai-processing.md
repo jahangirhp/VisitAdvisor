@@ -25,6 +25,14 @@ Vector Search, hybrid retrieval, and OCR-text matching filtered by museum. Phase
 adds camera/image upload and OCR extraction; image embeddings are conditional on
 OCR/context proving insufficient. See `05-retrieval-and-matching.md`.
 
+## Phase 5 implementation
+
+`POST /api/v1/recognition/image` accepts a museum ID and a still label image,
+validates and normalizes the image, transcribes visible text, and invokes Phase 4
+matching. It returns the saved object/content or uncertain candidates. OCR text is
+transient and never becomes canonical evidence. Camera UI, image embeddings, and
+background processing remain deferred. See `06-image-recognition.md`.
+
 ## 1. Purpose
 
 This document defines what AI does in the VisitAdvisor MVP and, equally importantly, what AI does **not** do.
