@@ -76,7 +76,7 @@ Vector Search has a separate explicitly created index with mandatory museum/mode
 dimension/version/content-type filters. See `05-retrieval-and-matching.md` for the
 implemented schema and query contract; these supersede the illustrative fields below.
 
-## Phase 5 recognition response
+## Current Phase 5 OCR response
 
 No new collections or persisted fields are introduced. Label images and OCR text
 are transient. Recognition returns the existing object response (including nullable
@@ -427,3 +427,11 @@ saved_items
 ```
 
 The four-collection model is intentionally small enough to evolve after the first real ingestion test.
+
+## Planned Phase 5 visual references
+
+The visual pilot will add source-linked reference metadata and separate derived
+visual descriptors. This is planned, not an existing schema. See
+`07-visual-recognition-pilot.md` for fields, invalidation, and storage decisions.
+Current text identity vectors must not be reused as image vectors. Canonical
+source evidence and generated visitor content remain separate.

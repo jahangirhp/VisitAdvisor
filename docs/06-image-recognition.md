@@ -1,4 +1,9 @@
-# Phase 5 — Label photo recognition
+# Phase 5 — Current label photo recognition
+
+**Scope revised 2026-09-11:** The full Phase 5 target is label-free object
+recognition, including partial views. See `07-visual-recognition-pilot.md`.
+This document describes the existing OCR implementation only; it does not meet
+the revised visual-recognition requirement.
 
 ## Implemented flow
 
@@ -8,8 +13,8 @@ text → run Phase 4 hybrid matching → return the identified object and its ex
 
 This phase implements the upload API, not a camera UI, live video, image embeddings,
 or recognition of unlabeled artworks. A future camera client can submit still
-images to this endpoint. Image embeddings remain conditional on OCR and context
-proving insufficient. Museum import and embedding preparation remain explicit CLI
+images to this endpoint. Visual reference matching is the next planned extension.
+Museum import and embedding preparation remain explicit CLI
 operations; no scheduler or worker has been added.
 
 ## API

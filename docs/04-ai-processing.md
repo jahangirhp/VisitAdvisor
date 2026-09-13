@@ -20,18 +20,19 @@ All results are marked unreviewed: structural and quote checks do not prove fact
 entailment. Refusal, invalid output, failed generation, or detected concurrent
 changes leave prior content intact. No AI extraction rewrites canonical fields.
 
-The agreed roadmap keeps OCR first. Phase 4 implements text embeddings, Atlas
-Vector Search, hybrid retrieval, and OCR-text matching filtered by museum. Phase 5
-adds camera/image upload and OCR extraction; image embeddings are conditional on
-OCR/context proving insufficient. See `05-retrieval-and-matching.md`.
+Phase 4 implements text embeddings, Atlas Vector Search, hybrid retrieval, and
+OCR-text matching filtered by museum. The revised Phase 5 requires visual matching
+without labels, including partial views, with OCR as optional evidence. See
+`07-visual-recognition-pilot.md` for the bounded pilot and validation gates.
 
-## Phase 5 implementation
+## Current Phase 5 OCR implementation
 
 `POST /api/v1/recognition/image` accepts a museum ID and a still label image,
 validates and normalizes the image, transcribes visible text, and invokes Phase 4
 matching. It returns the saved object/content or uncertain candidates. OCR text is
-transient and never becomes canonical evidence. Camera UI, image embeddings, and
-background processing remain deferred. See `06-image-recognition.md`.
+transient and never becomes canonical evidence. Visual matching is planned but
+not yet implemented; camera UI and background processing remain deferred.
+See `06-image-recognition.md` for the existing OCR contract.
 
 ## 1. Purpose
 
@@ -279,11 +280,11 @@ Store:
 }
 ```
 
-## 10. Recognition / OCR Processing
+## 10. Optional OCR Processing
 
 The MVP does not require an LLM to identify every object.
 
-Recognition pipeline:
+Existing OCR branch (visual matching is planned separately):
 
 ```text
 Image
@@ -420,7 +421,6 @@ Do not block MVP on:
 - autonomous research agents
 - automatic source discovery
 - multi-agent verification
-- image embeddings/reference-image recognition
 - graph-RAG
 - personalized storytelling
 - audio generation

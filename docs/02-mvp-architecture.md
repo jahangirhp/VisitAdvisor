@@ -1,7 +1,7 @@
 # VisitAdvisor — MVP System Architecture
 
 **Version:** 0.1  
-**Status:** Pre-development baseline
+**Status:** Revised MVP scope — 2026-09-11
 
 ## 1. Architecture Goal
 
@@ -48,7 +48,7 @@ These are logical boundaries, not separate microservices in the MVP.
                     ↓
               Camera / Image
                     ↓
-                   OCR
+          Visual matching + optional OCR
                     ↓
              Object Matcher
                     ↓
@@ -156,7 +156,9 @@ Only one source connector is required for the first location.
 
 ### 5.4 Recognition Module
 
-MVP recognition is primarily **OCR + metadata matching**.
+MVP recognition targets **visual reference matching with optional OCR**.
+The current implementation only supports OCR; the Phase 5 extension is specified
+in `07-visual-recognition-pilot.md`. Reference preparation runs before visits.
 
 Signals may include:
 
@@ -187,7 +189,9 @@ Self Portrait         0.22
 Return best match
 ```
 
-Do not make visual object recognition a blocking MVP dependency.
+Label-free full-object and partial-view recognition must be evaluated before
+claiming the recognition MVP is complete. Start with one museum and a bounded
+painting collection; do not infer support for arbitrary objects or 3D viewpoints.
 
 ### 5.5 MongoDB Atlas
 
@@ -329,7 +333,7 @@ Do beforehand:
 collection + AI extraction + story generation + embeddings
 
 Do at visit time:
-OCR + matching + retrieval + display
+Visual matching + optional OCR + retrieval + display
 ```
 
 The visitor runtime must remain much simpler and faster than the knowledge-preparation path.

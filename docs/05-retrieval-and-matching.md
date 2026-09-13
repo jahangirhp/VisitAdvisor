@@ -5,9 +5,10 @@
 - Phase 3: AI-prepared facts, story, and history. Its factual review remains open.
 - Phase 4: text embeddings, Atlas Vector Search, hybrid retrieval, and matching
   already-extracted OCR text within the selected museum.
-- Phase 5: camera/image upload, OCR first, then matching and Phase 3 content;
-  show up to three candidates when uncertain. Add image embeddings only if OCR
-  and context are insufficient.
+- Phase 5 (revised 2026-09-11): visual recognition without labels, including
+  partial views, with optional OCR and saved Phase 3 content. Show up to three
+  candidates when uncertain. The OCR upload exists; the visual pilot is planned
+  in `07-visual-recognition-pilot.md`.
 
 This roadmap supersedes the earlier camera-first paragraph in the AI document.
 Phase 4 does not accept images, extract OCR, or add a frontend.

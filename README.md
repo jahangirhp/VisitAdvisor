@@ -4,7 +4,7 @@ VisitAdvisor is a location-aware knowledge platform that will help visitors
 understand real-world places and objects through prepared, source-backed content.
 The primary experience will be automatic discovery after recognition.
 
-This repository implements **Phases 0–5**: a Python/FastAPI foundation,
+This repository implements **Phases 0–4 and the OCR portion of Phase 5**: a Python/FastAPI foundation,
 MongoDB lifecycle management, and creation/retrieval of locations, objects,
 and source references, bounded imports from the official Rijksmuseum API, and
 source-cited visitor content preparation, museum-filtered text retrieval, and uploaded-label OCR recognition.
@@ -437,8 +437,9 @@ semantic-only requests fail explicitly with 503. Scores are not probabilities.
 
 Only canonical identity metadata and descriptions are embedded. Phase 3's
 unreviewed stories remain separate, and its factual-quality issue is still open.
-Phase 5 will add camera/image upload and OCR extraction; image embeddings are
-conditional on OCR/context proving insufficient.
+Phase 5 now requires label-free visual recognition, including partial views.
+The existing OCR upload is only one component; see the
+[visual pilot plan](docs/07-visual-recognition-pilot.md).
 
 See [Phase 4 details](docs/05-retrieval-and-matching.md) for schema, limits, ranking,
 index migration, failure handling, and the agreed roadmap.
@@ -450,7 +451,11 @@ exact identity, OCR-like errors, semantic and cross-language queries, and no mat
 See the Phase 4 document for the bounded test results and remaining limitations.
 
 
-## Phase 5: upload a label photo
+## Phase 5: current label upload API
+
+Visual object recognition is planned and is not implemented by this endpoint.
+The [revised Phase 5 plan](docs/07-visual-recognition-pilot.md) records the image
+availability audit, implementation steps, and evaluation criteria.
 
 Update dependencies with `.venv/bin/pip install -e '.[dev]'`, then restart the API.
 Use the **recognition** section in http://localhost:8001/docs, or:

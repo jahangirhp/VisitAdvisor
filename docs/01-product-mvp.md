@@ -1,7 +1,7 @@
 # VisitAdvisor — Product Definition & MVP Scope
 
 **Version:** 0.1  
-**Status:** Pre-development baseline
+**Status:** Revised MVP scope — 2026-09-11
 
 ## 1. Product Goal
 
@@ -49,9 +49,11 @@ Select supported location
         ↓
 Open camera / upload image
         ↓
-OCR extracts label or plaque text
+Visual matching compares the object photo with reference images
         ↓
-System matches text against objects in that location
+Optional OCR adds evidence when a label is visible
+        ↓
+System ranks objects within the selected location
         ↓
 Best object/place is identified
         ↓
@@ -84,7 +86,8 @@ If recognition confidence is low, the system may show up to three likely matches
    - historical context
    - interesting fact when supported by evidence
 8. Text embeddings for semantic retrieval.
-9. OCR from camera/image input.
+9. Visual recognition from full-object and partial-object photos without labels;
+   OCR is an optional supporting signal. Validate first on a bounded painting pilot.
 10. Object matching constrained to the selected location.
 11. Mobile-first visitor result page.
 12. Basic source traceability.
@@ -97,7 +100,6 @@ Do not build these until the vertical slice is proven:
 - custom-trained LLMs
 - custom OCR models
 - custom computer-vision models
-- image recognition without labels as a core requirement
 - millions of reference images
 - indoor positioning
 - complex knowledge graphs
@@ -145,7 +147,8 @@ The MVP is successful when all of the following are demonstrated on one real loc
 3. AI can transform source data into the required structured format with acceptable quality.
 4. Sources remain linked to imported/generated knowledge.
 5. Embeddings can retrieve relevant object knowledge.
-6. OCR can read representative labels or plaques.
+6. Label-free recognition is evaluated on independent full-object and partial-view
+   photos; optional OCR can read representative labels or plaques.
 7. The matching layer correctly identifies the intended object in most controlled tests.
 8. A visitor receives prepared facts/story/history within a reasonable interactive response time.
 9. Incorrect matches can be detected or corrected without breaking the experience.
@@ -176,9 +179,9 @@ Import 100–500 exhibits
    ↓
 Generate structured knowledge
    ↓
-Visitor scans a real exhibit label
+Visitor photographs the exhibit, including a partial view
    ↓
-OCR extracts title / artist / year
+Visual matching uses source-linked reference images
    ↓
 System identifies the exhibit
    ↓
@@ -190,3 +193,10 @@ Visitor immediately sees:
 ```
 
 This vertical slice is the product milestone that should be proven before expanding the architecture.
+
+## Phase 5 scope correction — 2026-09-11
+
+Label-free recognition, including useful partial views, is a core requirement.
+The previous OCR-only scope is superseded. This is a target, not a claim that any
+arbitrary fragment is identifiable. The bounded pilot and acceptance criteria are
+in `07-visual-recognition-pilot.md`; the current API remains label OCR only.
