@@ -1,0 +1,1393 @@
+{
+  "model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056",
+  "preprocessing": "rgb-thumbnail2560-dino224-regions65-sift800-v1/4.57.6/2.14.0+cpu/4.14.0.94/12.3.0",
+  "policy": {
+    "model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056",
+    "preprocessing": "rgb-thumbnail2560-dino224-regions65-sift800-v1/4.57.6/2.14.0+cpu/4.14.0.94/12.3.0",
+    "methods": {
+      "global": {
+        "minimum": 0.45,
+        "automatic": 0.95,
+        "margin": 0.1
+      },
+      "regional": {
+        "minimum": 0.45,
+        "automatic": 0.95,
+        "margin": 0.1
+      },
+      "local": {
+        "minimum": 0.2,
+        "automatic": 0.95,
+        "margin": 0.1
+      }
+    }
+  },
+  "policy_hash": "66b6387185a9dbde5395f8833acbf093cb5e30ac4f11e4f36778631ec5dde361",
+  "manifest_hash": "23593dab347badd3b54bacc30b10c8c1382f45ecc32a93a206e73d071be6224f",
+  "split": "evaluation",
+  "photo_hashes": {
+    "0-0.jpg": "cd1f31360ad6b960f27dabf148eb899ab1c102e74c79bc589877cfec949e534e",
+    "0-1.jpg": "896803255c106dcd0e08d14a570b8ba7960e53006900a14fe8b361f88d966a64",
+    "0-2.jpg": "39b618fdc52532d562b009bb60f2792c92a430d8442ce59a56b21fba91475cbd",
+    "1-0.jpg": "bbcd705ac334b52928297cf447cc7a163fdefbfa8bc87cb27443141b2eea4f93",
+    "1-1.jpg": "a81780acec684c54dc6ccd95e48ec6dc6110a273b007ee38d948016540f3928b",
+    "1-2.jpg": "b099fe514569b965f9e172939acf6204b50c17cdfb8657d80adfc0af490e286e",
+    "2-0.jpg": "490d5d26ef883864df963ba9ebf3c4f10e58ee7d48d622b8f71bcd7b54219667",
+    "2-1.jpg": "e46e1a0b6469caf152fcf0481fda9d0e82318ca8a9750bddc6d10751744b4b4d",
+    "2-2.jpg": "42e5aab5f5d67bc80981f596ebb895bca4eff4361880724b2db1b19fb1108eb0",
+    "negative-0.jpg": "2a175383e3f65acf3cdc7f037b2f23ee6aad589598a9eb798ff727e5890c19e6",
+    "negative-1.jpg": "6b2382158d2c7201046fd06895fc262977a404cc89bfaeb00f58e9800d731933",
+    "negative-2.jpg": "0fb9de95013b119633c2a6956b2a2aebc6555b237ca2c3ca41a08df192af173e"
+  },
+  "reference_sets": {
+    "6a9dd4106d52c3bc3965869d": [
+      "02b79d578a7a4df5a3a652e79323a2c5",
+      "04d053a611d444148b8fb7615795dce6",
+      "09d603016bcc4771999f91aefb1fda8c",
+      "0a6f30323ed549ab8f77d97461cefa4d",
+      "0b666e586acf46dca54b4ba7d2900e82",
+      "0c93061e4d9a49d7b20e9e3abca5a686",
+      "0cfa6c4c1cde4994a469f40781d91864",
+      "111772e04b2b47c78e588bd777a823ba",
+      "1320d97481e74a9dba328d53ce39899c",
+      "1346cc1a1d0d47dcbcf4fa58cc03c4ee",
+      "14bafda4a5a54c44b9c64cd104fccfc4",
+      "1d13311a8a9b4fceb1bbf47f29f1ab85",
+      "1de16c67e8fb429a97db6a169cec579f",
+      "206e9d5fb5bf470abe742ab7cb5493cc",
+      "208f6abba8574266bdd9d88255a509d6",
+      "24943a4910ec4934aa51e9d45af634ac",
+      "24a48cd652684efb9fe642e782b714ca",
+      "274d2004af9b468ea129a8d7eefd3eb6",
+      "29251ebf0d3d4675ad06bc1a6cb3dbb4",
+      "2b645882dc4842f2b6299ee4adff0eb9",
+      "2f365a37724c41128c5fadd9ac2d9118",
+      "30fe8e5efbd84472ac2ce56d90a2407a",
+      "361bf9067b494fae80a68562d6a1ebc3",
+      "3b69c15b5bac49cfba043607c3cb6662",
+      "44450a14e92b4d4e8d524df44f923f63",
+      "445d13e4b16948668496580cb2b3cc2c",
+      "495fb71bdcc94df3b46b5a839ff15151",
+      "49791000d0ca456a870e0450722548cf",
+      "4cd7cde851a34b8fbc6686c24ba44142",
+      "537fa830c20947b79ca31f7150ddc5ac",
+      "53bb16be02194fe1a94efed5f28fcc1e",
+      "580e8a6752134fba8d5633d66e98d843",
+      "59b4357f7a9041fb93d1d654a7a2c1e2",
+      "5ac6623c00314acea0314720be7b4c67",
+      "5f1fd967c24448f69f2a1277f7c76c9b",
+      "6038fb3b56534a93bb0fd256df488ed7",
+      "6156d8ed074b46de8cceba80c5657498",
+      "689258a30bdd40e1b7263ac2d6a702d7",
+      "70371adfba8540e7af4267075e44fad3",
+      "726eb6a37542451a8c1af59f66b6d6a3",
+      "78164bed605540f1baccd41519df3f1f",
+      "801d355acdcd433a93abaad44df02379",
+      "80aaca3cc4d74b43b28c0a105e6282a2",
+      "81a7ff41670e438496b7b73afd89a166",
+      "83d0f65ee8ef4f66a7a1ae3b07d2fd89",
+      "8500728ab6f647979b3851179d4519c6",
+      "88cb41ec84ea41ef9d6ffb49bab41b5b",
+      "8b0bc5773ec0444e8f019da07aebc4a4",
+      "90129b04a40d418db9c4dbc0bf1c4fcf",
+      "916adc80b07947fc99434a29f7091617",
+      "92dc789d5e414e89a4fb4221da2c1777",
+      "9921c98eb9cc4419982e9749b255472f",
+      "9997b4745fdf4ab893770afef24b0362",
+      "9a0e7d052022489b9c67a9671422b051",
+      "9d8dfddef79841738214f37d850150dc",
+      "a73a05e903a045c08de59335bc9707fa",
+      "a8e2f9786f3f40b38d33141044466ddb",
+      "a92f39726b7f4288892f37df0e490d2b",
+      "ad19f7ecc6da4f438a82438d25f595ef",
+      "afd5d5460f584cec8e640d25f5406883",
+      "b537fee456674237b19860833da82554",
+      "b58db21e544649bbbabf16da60f805e2",
+      "b88daa1fd5f64c17b112097e2250c336",
+      "be03506826ca446db3bef9718bc6c7db",
+      "c1a168d2da3f4969a2d44c0560b361d1",
+      "c2fb0f7f64d2483298c44b7f57a9f1a8",
+      "c5034cdaa00d492cabf3506497b65c0f",
+      "c62e45754b1741c0baf5dad9ed9fbf07",
+      "c7e4dbdcbf654b709122d7cbd1e514fe",
+      "cbc7dd4f69604af2bb02bf3a46d4b533",
+      "cf789b365e8549e996203b882aa21234",
+      "cfe0f0a1539f40cdb9c87272d2ea4221",
+      "d8138f4339df4c8ab03a714aaa606dec",
+      "ddf7b955d861458493e0e34fd154d1f0",
+      "defed78aca5a4ce6af0372dc5dc82758",
+      "e39e82f34f38456b9382345f6533e2f2",
+      "e4fafb45b82c4b3fbf4aa554654611e6",
+      "e782b72e27694d1d94c379a66680e477",
+      "f04cbec6203e4d95a5c9245f5fa413bd",
+      "f1f16e7373a5485891841c025838b609",
+      "fae998f0d14a405aa6a48b636a6812de",
+      "fb78db9873a3472bbf43ac2033f7a9eb",
+      "fc8af16578e549328f371e86789be612",
+      "fd3ee834bf2c4be6928555003bd5837d",
+      "fdb5f8f181b549118efb48ccca65fa01"
+    ]
+  },
+  "coverage": {
+    "6a9dd4106d52c3bc3965869d": {
+      "covered": 85,
+      "total": 103
+    }
+  },
+  "methods": {
+    "global": {
+      "count": 12,
+      "positives": 9,
+      "negatives": 3,
+      "top3_correct": 9,
+      "automatic": 5,
+      "automatic_correct": 5,
+      "automatic_precision": 1.0,
+      "positive_automatic_coverage": 0.5555555555555556,
+      "abstention_rate": 0.5833333333333333,
+      "negative_false_automatic": 0,
+      "categories": {
+        "full": {
+          "count": 6,
+          "top3_correct": 6,
+          "false_automatic": 0
+        },
+        "partial": {
+          "count": 3,
+          "top3_correct": 3,
+          "false_automatic": 0
+        },
+        "uninformative": {
+          "count": 3,
+          "top3_correct": 0,
+          "false_automatic": 0
+        }
+      },
+      "by_object_type": {
+        "painting": {
+          "count": 9,
+          "positives": 9,
+          "negatives": 0,
+          "top3_correct": 9,
+          "automatic": 5,
+          "automatic_correct": 5,
+          "automatic_precision": 1.0,
+          "positive_automatic_coverage": 0.5555555555555556,
+          "abstention_rate": 0.4444444444444444,
+          "negative_false_automatic": 0,
+          "categories": {
+            "full": {
+              "count": 6,
+              "top3_correct": 6,
+              "false_automatic": 0
+            },
+            "partial": {
+              "count": 3,
+              "top3_correct": 3,
+              "false_automatic": 0
+            }
+          }
+        },
+        "synthetic": {
+          "count": 3,
+          "positives": 0,
+          "negatives": 3,
+          "top3_correct": 0,
+          "automatic": 0,
+          "automatic_correct": 0,
+          "automatic_precision": null,
+          "positive_automatic_coverage": null,
+          "abstention_rate": 1.0,
+          "negative_false_automatic": 0,
+          "categories": {
+            "uninformative": {
+              "count": 3,
+              "top3_correct": 0,
+              "false_automatic": 0
+            }
+          }
+        }
+      },
+      "gates": {
+        "calibration_split_present": false,
+        "held_out_independent_photos": false,
+        "minimum_photo_coverage": false,
+        "negative_categories": false,
+        "full_top3": true,
+        "partial_top3": true,
+        "automatic_precision": false,
+        "automatic_coverage": true,
+        "negative_false_matches": true
+      },
+      "recognition_gates_passed": false,
+      "rows": [
+        {
+          "id": "0-0.jpg",
+          "expected_object_id": "6a9dd7f8332abe8469d558f5",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-0",
+          "independent": false,
+          "candidates": [
+            "6a9dd7f8332abe8469d558f5",
+            "6a9dd83e332abe8469d55967",
+            "6a9dd821332abe8469d55943"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 0.9968555145255479
+            },
+            {
+              "object_id": "6a9dd83e332abe8469d55967",
+              "score": 0.6845816442668311
+            },
+            {
+              "object_id": "6a9dd821332abe8469d55943",
+              "score": 0.49955488511580676
+            }
+          ],
+          "selected": "6a9dd7f8332abe8469d558f5",
+          "seconds": 0.1375648729990644
+        },
+        {
+          "id": "0-1.jpg",
+          "expected_object_id": "6a9dd7f8332abe8469d558f5",
+          "category": "partial",
+          "object_type": "painting",
+          "capture_group": "reference-0",
+          "independent": false,
+          "candidates": [
+            "6a9dd7f8332abe8469d558f5",
+            "6a9dd83e332abe8469d55967",
+            "6a9dd82e332abe8469d55955"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 0.726635287450529
+            },
+            {
+              "object_id": "6a9dd83e332abe8469d55967",
+              "score": 0.6076558894062593
+            },
+            {
+              "object_id": "6a9dd82e332abe8469d55955",
+              "score": 0.5154016503986274
+            }
+          ],
+          "selected": null,
+          "seconds": 0.08136259400271229
+        },
+        {
+          "id": "0-2.jpg",
+          "expected_object_id": "6a9dd7f8332abe8469d558f5",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-0",
+          "independent": false,
+          "candidates": [
+            "6a9dd7f8332abe8469d558f5",
+            "6a9dd83e332abe8469d55967",
+            "6a9dd821332abe8469d55943"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 0.9345189941160011
+            },
+            {
+              "object_id": "6a9dd83e332abe8469d55967",
+              "score": 0.735026622309271
+            },
+            {
+              "object_id": "6a9dd821332abe8469d55943",
+              "score": 0.5303163240157064
+            }
+          ],
+          "selected": null,
+          "seconds": 0.12078131300222594
+        },
+        {
+          "id": "1-0.jpg",
+          "expected_object_id": "6a9dd7fa332abe8469d558f7",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-1",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fa332abe8469d558f7"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 0.99506722517812
+            },
+            {
+              "object_id": "6a9dd802332abe8469d558ff",
+              "score": 0.23154006806688598
+            },
+            {
+              "object_id": "6a9dd817332abe8469d55937",
+              "score": 0.23016360361057187
+            }
+          ],
+          "selected": "6a9dd7fa332abe8469d558f7",
+          "seconds": 0.1348479930020403
+        },
+        {
+          "id": "1-1.jpg",
+          "expected_object_id": "6a9dd7fa332abe8469d558f7",
+          "category": "partial",
+          "object_type": "painting",
+          "capture_group": "reference-1",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fa332abe8469d558f7"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 0.817544865584883
+            },
+            {
+              "object_id": "6a9dd802332abe8469d558ff",
+              "score": 0.18190628786308394
+            },
+            {
+              "object_id": "6a9dd817332abe8469d55937",
+              "score": 0.16192878985412196
+            }
+          ],
+          "selected": null,
+          "seconds": 0.07649648500228068
+        },
+        {
+          "id": "1-2.jpg",
+          "expected_object_id": "6a9dd7fa332abe8469d558f7",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-1",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fa332abe8469d558f7"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 0.9544665319370346
+            },
+            {
+              "object_id": "6a9dd817332abe8469d55937",
+              "score": 0.22810188461589295
+            },
+            {
+              "object_id": "6a9dd802332abe8469d558ff",
+              "score": 0.2269415235714343
+            }
+          ],
+          "selected": "6a9dd7fa332abe8469d558f7",
+          "seconds": 0.13638478700158885
+        },
+        {
+          "id": "2-0.jpg",
+          "expected_object_id": "6a9dd7fb332abe8469d558f8",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-2",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fb332abe8469d558f8",
+            "6a9dd829332abe8469d5594f",
+            "6a9dd820332abe8469d55942"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 0.9976154926637162
+            },
+            {
+              "object_id": "6a9dd829332abe8469d5594f",
+              "score": 0.7043254823723695
+            },
+            {
+              "object_id": "6a9dd820332abe8469d55942",
+              "score": 0.5418743056228769
+            }
+          ],
+          "selected": "6a9dd7fb332abe8469d558f8",
+          "seconds": 0.10501127499810536
+        },
+        {
+          "id": "2-1.jpg",
+          "expected_object_id": "6a9dd7fb332abe8469d558f8",
+          "category": "partial",
+          "object_type": "painting",
+          "capture_group": "reference-2",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fb332abe8469d558f8",
+            "6a9dd829332abe8469d5594f",
+            "6a9dd820332abe8469d55942"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 0.8750200643008498
+            },
+            {
+              "object_id": "6a9dd829332abe8469d5594f",
+              "score": 0.6906463543085025
+            },
+            {
+              "object_id": "6a9dd820332abe8469d55942",
+              "score": 0.5621095460220201
+            }
+          ],
+          "selected": null,
+          "seconds": 0.07300427000154741
+        },
+        {
+          "id": "2-2.jpg",
+          "expected_object_id": "6a9dd7fb332abe8469d558f8",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-2",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fb332abe8469d558f8",
+            "6a9dd829332abe8469d5594f",
+            "6a9dd820332abe8469d55942"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 0.9555714178227761
+            },
+            {
+              "object_id": "6a9dd829332abe8469d5594f",
+              "score": 0.6930526682341367
+            },
+            {
+              "object_id": "6a9dd820332abe8469d55942",
+              "score": 0.5786047125889556
+            }
+          ],
+          "selected": "6a9dd7fb332abe8469d558f8",
+          "seconds": 0.09750024599634344
+        },
+        {
+          "id": "negative-0.jpg",
+          "expected_object_id": null,
+          "category": "uninformative",
+          "object_type": "synthetic",
+          "capture_group": "negative-0.jpg",
+          "independent": false,
+          "candidates": [],
+          "scores": [
+            {
+              "object_id": "6a9dd80c332abe8469d55910",
+              "score": 0.17283060879491624
+            },
+            {
+              "object_id": "6a9dd826332abe8469d5594b",
+              "score": 0.11866416010533382
+            },
+            {
+              "object_id": "6a9dd84f332abe8469d55983",
+              "score": 0.11233404019786139
+            }
+          ],
+          "selected": null,
+          "seconds": 0.06870717100173351
+        },
+        {
+          "id": "negative-1.jpg",
+          "expected_object_id": null,
+          "category": "uninformative",
+          "object_type": "synthetic",
+          "capture_group": "negative-1.jpg",
+          "independent": false,
+          "candidates": [],
+          "scores": [
+            {
+              "object_id": "6a9dd80c332abe8469d55910",
+              "score": 0.17206484451373757
+            },
+            {
+              "object_id": "6a9dd826332abe8469d5594b",
+              "score": 0.1368177835449833
+            },
+            {
+              "object_id": "6a9dd84d332abe8469d5597d",
+              "score": 0.11880088025044938
+            }
+          ],
+          "selected": null,
+          "seconds": 0.06890992599801393
+        },
+        {
+          "id": "negative-2.jpg",
+          "expected_object_id": null,
+          "category": "uninformative",
+          "object_type": "synthetic",
+          "capture_group": "negative-2.jpg",
+          "independent": false,
+          "candidates": [],
+          "scores": [
+            {
+              "object_id": "6a9dd80c332abe8469d55910",
+              "score": 0.1630881529185115
+            },
+            {
+              "object_id": "6a9dd84d332abe8469d5597d",
+              "score": 0.1207417635286337
+            },
+            {
+              "object_id": "6a9dd807332abe8469d55907",
+              "score": 0.11136770538721211
+            }
+          ],
+          "selected": null,
+          "seconds": 0.06767831099932664
+        }
+      ],
+      "offline_p95_seconds": 0.1375648729990644
+    },
+    "regional": {
+      "count": 12,
+      "positives": 9,
+      "negatives": 3,
+      "top3_correct": 9,
+      "automatic": 5,
+      "automatic_correct": 5,
+      "automatic_precision": 1.0,
+      "positive_automatic_coverage": 0.5555555555555556,
+      "abstention_rate": 0.5833333333333333,
+      "negative_false_automatic": 0,
+      "categories": {
+        "full": {
+          "count": 6,
+          "top3_correct": 6,
+          "false_automatic": 0
+        },
+        "partial": {
+          "count": 3,
+          "top3_correct": 3,
+          "false_automatic": 0
+        },
+        "uninformative": {
+          "count": 3,
+          "top3_correct": 0,
+          "false_automatic": 0
+        }
+      },
+      "by_object_type": {
+        "painting": {
+          "count": 9,
+          "positives": 9,
+          "negatives": 0,
+          "top3_correct": 9,
+          "automatic": 5,
+          "automatic_correct": 5,
+          "automatic_precision": 1.0,
+          "positive_automatic_coverage": 0.5555555555555556,
+          "abstention_rate": 0.4444444444444444,
+          "negative_false_automatic": 0,
+          "categories": {
+            "full": {
+              "count": 6,
+              "top3_correct": 6,
+              "false_automatic": 0
+            },
+            "partial": {
+              "count": 3,
+              "top3_correct": 3,
+              "false_automatic": 0
+            }
+          }
+        },
+        "synthetic": {
+          "count": 3,
+          "positives": 0,
+          "negatives": 3,
+          "top3_correct": 0,
+          "automatic": 0,
+          "automatic_correct": 0,
+          "automatic_precision": null,
+          "positive_automatic_coverage": null,
+          "abstention_rate": 1.0,
+          "negative_false_automatic": 0,
+          "categories": {
+            "uninformative": {
+              "count": 3,
+              "top3_correct": 0,
+              "false_automatic": 0
+            }
+          }
+        }
+      },
+      "gates": {
+        "calibration_split_present": false,
+        "held_out_independent_photos": false,
+        "minimum_photo_coverage": false,
+        "negative_categories": false,
+        "full_top3": true,
+        "partial_top3": true,
+        "automatic_precision": false,
+        "automatic_coverage": true,
+        "negative_false_matches": true
+      },
+      "recognition_gates_passed": false,
+      "rows": [
+        {
+          "id": "0-0.jpg",
+          "expected_object_id": "6a9dd7f8332abe8469d558f5",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-0",
+          "independent": false,
+          "candidates": [
+            "6a9dd7f8332abe8469d558f5",
+            "6a9dd83e332abe8469d55967",
+            "6a9dd821332abe8469d55943"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 0.9968555145255479
+            },
+            {
+              "object_id": "6a9dd83e332abe8469d55967",
+              "score": 0.6845816442668311
+            },
+            {
+              "object_id": "6a9dd821332abe8469d55943",
+              "score": 0.5523461324424783
+            }
+          ],
+          "selected": "6a9dd7f8332abe8469d558f5",
+          "seconds": 0.14095292400452308
+        },
+        {
+          "id": "0-1.jpg",
+          "expected_object_id": "6a9dd7f8332abe8469d558f5",
+          "category": "partial",
+          "object_type": "painting",
+          "capture_group": "reference-0",
+          "independent": false,
+          "candidates": [
+            "6a9dd7f8332abe8469d558f5",
+            "6a9dd82e332abe8469d55955",
+            "6a9dd821332abe8469d55943"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 0.8230809364141378
+            },
+            {
+              "object_id": "6a9dd82e332abe8469d55955",
+              "score": 0.7238654593067737
+            },
+            {
+              "object_id": "6a9dd821332abe8469d55943",
+              "score": 0.6915813157140429
+            }
+          ],
+          "selected": null,
+          "seconds": 0.08438325000315672
+        },
+        {
+          "id": "0-2.jpg",
+          "expected_object_id": "6a9dd7f8332abe8469d558f5",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-0",
+          "independent": false,
+          "candidates": [
+            "6a9dd7f8332abe8469d558f5",
+            "6a9dd83e332abe8469d55967",
+            "6a9dd821332abe8469d55943"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 0.9345189941160011
+            },
+            {
+              "object_id": "6a9dd83e332abe8469d55967",
+              "score": 0.735026622309271
+            },
+            {
+              "object_id": "6a9dd821332abe8469d55943",
+              "score": 0.5967300434249307
+            }
+          ],
+          "selected": null,
+          "seconds": 0.12437078000220936
+        },
+        {
+          "id": "1-0.jpg",
+          "expected_object_id": "6a9dd7fa332abe8469d558f7",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-1",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fa332abe8469d558f7"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 0.99506722517812
+            },
+            {
+              "object_id": "6a9dd847332abe8469d55976",
+              "score": 0.2567532449667018
+            },
+            {
+              "object_id": "6a9dd802332abe8469d558ff",
+              "score": 0.2535948493255928
+            }
+          ],
+          "selected": "6a9dd7fa332abe8469d558f7",
+          "seconds": 0.13821837700379547
+        },
+        {
+          "id": "1-1.jpg",
+          "expected_object_id": "6a9dd7fa332abe8469d558f7",
+          "category": "partial",
+          "object_type": "painting",
+          "capture_group": "reference-1",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fa332abe8469d558f7"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 0.817544865584883
+            },
+            {
+              "object_id": "6a9dd847332abe8469d55976",
+              "score": 0.20832888795756604
+            },
+            {
+              "object_id": "6a9dd817332abe8469d55937",
+              "score": 0.18401613178794826
+            }
+          ],
+          "selected": null,
+          "seconds": 0.08000639700549073
+        },
+        {
+          "id": "1-2.jpg",
+          "expected_object_id": "6a9dd7fa332abe8469d558f7",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-1",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fa332abe8469d558f7"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 0.9544665319370346
+            },
+            {
+              "object_id": "6a9dd847332abe8469d55976",
+              "score": 0.2539698812926009
+            },
+            {
+              "object_id": "6a9dd817332abe8469d55937",
+              "score": 0.23453350668285672
+            }
+          ],
+          "selected": "6a9dd7fa332abe8469d558f7",
+          "seconds": 0.14126049500191584
+        },
+        {
+          "id": "2-0.jpg",
+          "expected_object_id": "6a9dd7fb332abe8469d558f8",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-2",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fb332abe8469d558f8",
+            "6a9dd829332abe8469d5594f",
+            "6a9dd82e332abe8469d55955"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 0.9976154926637162
+            },
+            {
+              "object_id": "6a9dd829332abe8469d5594f",
+              "score": 0.7524139405534408
+            },
+            {
+              "object_id": "6a9dd82e332abe8469d55955",
+              "score": 0.689835492909021
+            }
+          ],
+          "selected": "6a9dd7fb332abe8469d558f8",
+          "seconds": 0.10809539199908613
+        },
+        {
+          "id": "2-1.jpg",
+          "expected_object_id": "6a9dd7fb332abe8469d558f8",
+          "category": "partial",
+          "object_type": "painting",
+          "capture_group": "reference-2",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fb332abe8469d558f8",
+            "6a9dd829332abe8469d5594f",
+            "6a9dd82e332abe8469d55955"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 0.8750200643008498
+            },
+            {
+              "object_id": "6a9dd829332abe8469d5594f",
+              "score": 0.7314141389230421
+            },
+            {
+              "object_id": "6a9dd82e332abe8469d55955",
+              "score": 0.6997248550851137
+            }
+          ],
+          "selected": null,
+          "seconds": 0.07635530700281379
+        },
+        {
+          "id": "2-2.jpg",
+          "expected_object_id": "6a9dd7fb332abe8469d558f8",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-2",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fb332abe8469d558f8",
+            "6a9dd829332abe8469d5594f",
+            "6a9dd82e332abe8469d55955"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 0.9555714178227761
+            },
+            {
+              "object_id": "6a9dd829332abe8469d5594f",
+              "score": 0.7588468835367741
+            },
+            {
+              "object_id": "6a9dd82e332abe8469d55955",
+              "score": 0.7175462855073703
+            }
+          ],
+          "selected": "6a9dd7fb332abe8469d558f8",
+          "seconds": 0.10067583499767352
+        },
+        {
+          "id": "negative-0.jpg",
+          "expected_object_id": null,
+          "category": "uninformative",
+          "object_type": "synthetic",
+          "capture_group": "negative-0.jpg",
+          "independent": false,
+          "candidates": [],
+          "scores": [
+            {
+              "object_id": "6a9dd80c332abe8469d55910",
+              "score": 0.17283060879491624
+            },
+            {
+              "object_id": "6a9dd855332abe8469d5598d",
+              "score": 0.13728374275455288
+            },
+            {
+              "object_id": "6a9dd80b332abe8469d5590d",
+              "score": 0.1344914874535321
+            }
+          ],
+          "selected": null,
+          "seconds": 0.07158208300097613
+        },
+        {
+          "id": "negative-1.jpg",
+          "expected_object_id": null,
+          "category": "uninformative",
+          "object_type": "synthetic",
+          "capture_group": "negative-1.jpg",
+          "independent": false,
+          "candidates": [],
+          "scores": [
+            {
+              "object_id": "6a9dd80c332abe8469d55910",
+              "score": 0.17206484451373757
+            },
+            {
+              "object_id": "6a9dd855332abe8469d5598d",
+              "score": 0.14887689104799232
+            },
+            {
+              "object_id": "6a9dd80b332abe8469d5590d",
+              "score": 0.14213510169957014
+            }
+          ],
+          "selected": null,
+          "seconds": 0.07189904199913144
+        },
+        {
+          "id": "negative-2.jpg",
+          "expected_object_id": null,
+          "category": "uninformative",
+          "object_type": "synthetic",
+          "capture_group": "negative-2.jpg",
+          "independent": false,
+          "candidates": [],
+          "scores": [
+            {
+              "object_id": "6a9dd80c332abe8469d55910",
+              "score": 0.1630881529185115
+            },
+            {
+              "object_id": "6a9dd855332abe8469d5598d",
+              "score": 0.1484012064661617
+            },
+            {
+              "object_id": "6a9dd80b332abe8469d5590d",
+              "score": 0.14694274574365382
+            }
+          ],
+          "selected": null,
+          "seconds": 0.07228515400129254
+        }
+      ],
+      "offline_p95_seconds": 0.14126049500191584
+    },
+    "local": {
+      "count": 12,
+      "positives": 9,
+      "negatives": 3,
+      "top3_correct": 9,
+      "automatic": 9,
+      "automatic_correct": 9,
+      "automatic_precision": 1.0,
+      "positive_automatic_coverage": 1.0,
+      "abstention_rate": 0.25,
+      "negative_false_automatic": 0,
+      "categories": {
+        "full": {
+          "count": 6,
+          "top3_correct": 6,
+          "false_automatic": 0
+        },
+        "partial": {
+          "count": 3,
+          "top3_correct": 3,
+          "false_automatic": 0
+        },
+        "uninformative": {
+          "count": 3,
+          "top3_correct": 0,
+          "false_automatic": 0
+        }
+      },
+      "by_object_type": {
+        "painting": {
+          "count": 9,
+          "positives": 9,
+          "negatives": 0,
+          "top3_correct": 9,
+          "automatic": 9,
+          "automatic_correct": 9,
+          "automatic_precision": 1.0,
+          "positive_automatic_coverage": 1.0,
+          "abstention_rate": 0.0,
+          "negative_false_automatic": 0,
+          "categories": {
+            "full": {
+              "count": 6,
+              "top3_correct": 6,
+              "false_automatic": 0
+            },
+            "partial": {
+              "count": 3,
+              "top3_correct": 3,
+              "false_automatic": 0
+            }
+          }
+        },
+        "synthetic": {
+          "count": 3,
+          "positives": 0,
+          "negatives": 3,
+          "top3_correct": 0,
+          "automatic": 0,
+          "automatic_correct": 0,
+          "automatic_precision": null,
+          "positive_automatic_coverage": null,
+          "abstention_rate": 1.0,
+          "negative_false_automatic": 0,
+          "categories": {
+            "uninformative": {
+              "count": 3,
+              "top3_correct": 0,
+              "false_automatic": 0
+            }
+          }
+        }
+      },
+      "gates": {
+        "calibration_split_present": false,
+        "held_out_independent_photos": false,
+        "minimum_photo_coverage": false,
+        "negative_categories": false,
+        "full_top3": true,
+        "partial_top3": true,
+        "automatic_precision": false,
+        "automatic_coverage": true,
+        "negative_false_matches": true
+      },
+      "recognition_gates_passed": false,
+      "rows": [
+        {
+          "id": "0-0.jpg",
+          "expected_object_id": "6a9dd7f8332abe8469d558f5",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-0",
+          "independent": false,
+          "candidates": [
+            "6a9dd7f8332abe8469d558f5"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 1.0
+            },
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 0.0
+            },
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 0.0
+            }
+          ],
+          "selected": "6a9dd7f8332abe8469d558f5",
+          "seconds": 0.4895221960032359
+        },
+        {
+          "id": "0-1.jpg",
+          "expected_object_id": "6a9dd7f8332abe8469d558f5",
+          "category": "partial",
+          "object_type": "painting",
+          "capture_group": "reference-0",
+          "independent": false,
+          "candidates": [
+            "6a9dd7f8332abe8469d558f5"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 1.0
+            },
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 0.0
+            },
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 0.0
+            }
+          ],
+          "selected": "6a9dd7f8332abe8469d558f5",
+          "seconds": 0.26584206300321966
+        },
+        {
+          "id": "0-2.jpg",
+          "expected_object_id": "6a9dd7f8332abe8469d558f5",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-0",
+          "independent": false,
+          "candidates": [
+            "6a9dd7f8332abe8469d558f5"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 0.9961538461538462
+            },
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 0.0
+            },
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 0.0
+            }
+          ],
+          "selected": "6a9dd7f8332abe8469d558f5",
+          "seconds": 0.4987708249973366
+        },
+        {
+          "id": "1-0.jpg",
+          "expected_object_id": "6a9dd7fa332abe8469d558f7",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-1",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fa332abe8469d558f7"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 0.9966777408637874
+            },
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 0.0
+            },
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 0.0
+            }
+          ],
+          "selected": "6a9dd7fa332abe8469d558f7",
+          "seconds": 0.5101898760040058
+        },
+        {
+          "id": "1-1.jpg",
+          "expected_object_id": "6a9dd7fa332abe8469d558f7",
+          "category": "partial",
+          "object_type": "painting",
+          "capture_group": "reference-1",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fa332abe8469d558f7"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 1.0
+            },
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 0.0
+            },
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 0.0
+            }
+          ],
+          "selected": "6a9dd7fa332abe8469d558f7",
+          "seconds": 0.3930600560051971
+        },
+        {
+          "id": "1-2.jpg",
+          "expected_object_id": "6a9dd7fa332abe8469d558f7",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-1",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fa332abe8469d558f7"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 0.9906759906759907
+            },
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 0.0
+            },
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 0.0
+            }
+          ],
+          "selected": "6a9dd7fa332abe8469d558f7",
+          "seconds": 0.5162554099988483
+        },
+        {
+          "id": "2-0.jpg",
+          "expected_object_id": "6a9dd7fb332abe8469d558f8",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-2",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fb332abe8469d558f8"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 1.0
+            },
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 0.0
+            },
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 0.0
+            }
+          ],
+          "selected": "6a9dd7fb332abe8469d558f8",
+          "seconds": 0.486193007996917
+        },
+        {
+          "id": "2-1.jpg",
+          "expected_object_id": "6a9dd7fb332abe8469d558f8",
+          "category": "partial",
+          "object_type": "painting",
+          "capture_group": "reference-2",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fb332abe8469d558f8"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 0.9828571428571429
+            },
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 0.0
+            },
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 0.0
+            }
+          ],
+          "selected": "6a9dd7fb332abe8469d558f8",
+          "seconds": 0.3540007230003539
+        },
+        {
+          "id": "2-2.jpg",
+          "expected_object_id": "6a9dd7fb332abe8469d558f8",
+          "category": "full",
+          "object_type": "painting",
+          "capture_group": "reference-2",
+          "independent": false,
+          "candidates": [
+            "6a9dd7fb332abe8469d558f8"
+          ],
+          "scores": [
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 0.9868131868131869
+            },
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 0.0
+            },
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 0.0
+            }
+          ],
+          "selected": "6a9dd7fb332abe8469d558f8",
+          "seconds": 0.4753294799993455
+        },
+        {
+          "id": "negative-0.jpg",
+          "expected_object_id": null,
+          "category": "uninformative",
+          "object_type": "synthetic",
+          "capture_group": "negative-0.jpg",
+          "independent": false,
+          "candidates": [],
+          "scores": [
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 0.0
+            },
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 0.0
+            },
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 0.0
+            }
+          ],
+          "selected": null,
+          "seconds": 0.06747983500099508
+        },
+        {
+          "id": "negative-1.jpg",
+          "expected_object_id": null,
+          "category": "uninformative",
+          "object_type": "synthetic",
+          "capture_group": "negative-1.jpg",
+          "independent": false,
+          "candidates": [],
+          "scores": [
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 0.0
+            },
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 0.0
+            },
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 0.0
+            }
+          ],
+          "selected": null,
+          "seconds": 0.20409141599884606
+        },
+        {
+          "id": "negative-2.jpg",
+          "expected_object_id": null,
+          "category": "uninformative",
+          "object_type": "synthetic",
+          "capture_group": "negative-2.jpg",
+          "independent": false,
+          "candidates": [],
+          "scores": [
+            {
+              "object_id": "6a9dd7f8332abe8469d558f5",
+              "score": 0.0
+            },
+            {
+              "object_id": "6a9dd7fa332abe8469d558f7",
+              "score": 0.0
+            },
+            {
+              "object_id": "6a9dd7fb332abe8469d558f8",
+              "score": 0.0
+            }
+          ],
+          "selected": null,
+          "seconds": 0.20482020000054035
+        }
+      ],
+      "offline_p95_seconds": 0.5162554099988483
+    }
+  },
+  "elapsed_seconds": 4.540856927000277,
+  "hardware": {
+    "machine": "x86_64",
+    "processor": "x86_64"
+  },
+  "peak_process_rss_kib": 1418484,
+  "latency_scope": "Offline encoding/comparison; excludes HTTP and Atlas",
+  "phase5_complete": false,
+  "remaining_gate": "Independent API validation and object-type review required."
+}

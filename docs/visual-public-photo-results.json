@@ -1,0 +1,827 @@
+{
+  "purpose": "Initial public-photo calibration, not Phase 5 acceptance",
+  "dataset": {
+    "objects": 1,
+    "photos": 5,
+    "full": 3,
+    "partial": 2,
+    "photographers": 3,
+    "negative_photos": 0,
+    "local_folder": ".local/visual-public-photos",
+    "sources": [
+      {
+        "id": "misty-godenehler-full",
+        "photographer": "GodeNehler",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Barberini_August_2023-Jan_Toorop_-_Nebel_%C3%BCber_dem_Meer,_1889_-_Rijksmuseum,_Amsterdam.jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Barberini_August_2023-Jan_Toorop_-_Nebel_%C3%BCber_dem_Meer%2C_1889_-_Rijksmuseum%2C_Amsterdam.jpg/1280px-Barberini_August_2023-Jan_Toorop_-_Nebel_%C3%BCber_dem_Meer%2C_1889_-_Rijksmuseum%2C_Amsterdam.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "sha256": "b8940e743a21d1d86055fd758257bcbe1127058dc5d33eadade60571292e5bc0",
+        "captured_venue": "Museum Barberini, Potsdam",
+        "identity_evidence": "Commons description/category identifies Misty Sea, Rijksmuseum accession SK-C-1726; visually reviewed full composition and matching photographed details (running dogs and right-hand figure)."
+      },
+      {
+        "id": "misty-jojan-full",
+        "photographer": "JoJan",
+        "license": "CC BY-SA 3.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Jan_Toorop_Strand_bij_Katwijk_001.JPG",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/Jan_Toorop_Strand_bij_Katwijk_001.JPG/1280px-Jan_Toorop_Strand_bij_Katwijk_001.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "sha256": "f6653213a76b99777c38a4f74c2e2fe52a3aa4ba68493cbf3341bfade70a11b9",
+        "captured_venue": "Not verified",
+        "identity_evidence": "Commons description/category identifies Misty Sea, Rijksmuseum accession SK-C-1726; visually reviewed full composition and matching photographed details (running dogs and right-hand figure)."
+      },
+      {
+        "id": "misty-wuselig-full",
+        "photographer": "Wuselig",
+        "license": "CC0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Jan_Toorop-Nebel_%C3%BCber_dem_Meer-04033.jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Jan_Toorop-Nebel_%C3%BCber_dem_Meer-04033.jpg/1280px-Jan_Toorop-Nebel_%C3%BCber_dem_Meer-04033.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "sha256": "b83c0bbbb74755239a26e1cc44f606f3a4d0ceb175a717e6f284a048477a2759",
+        "captured_venue": "Museum Barberini, Potsdam",
+        "identity_evidence": "Commons description/category identifies Misty Sea, Rijksmuseum accession SK-C-1726; visually reviewed full composition and matching photographed details (running dogs and right-hand figure)."
+      },
+      {
+        "id": "misty-wuselig-detail-1",
+        "photographer": "Wuselig",
+        "license": "CC0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Jan_Toorop-Nebel_%C3%BCber_dem_Meer-04034_(detail).jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Jan_Toorop-Nebel_%C3%BCber_dem_Meer-04034_%28detail%29.jpg/1280px-Jan_Toorop-Nebel_%C3%BCber_dem_Meer-04034_%28detail%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "sha256": "030539826c11877c6403d3e38a895d15a229a48fde6bb54bbd3b4e7c925b3aaa",
+        "captured_venue": "Museum Barberini, Potsdam",
+        "identity_evidence": "Commons description/category identifies Misty Sea, Rijksmuseum accession SK-C-1726; visually reviewed full composition and matching photographed details (running dogs and right-hand figure)."
+      },
+      {
+        "id": "misty-wuselig-detail-2",
+        "photographer": "Wuselig",
+        "license": "CC0",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+        "source_page": "https://commons.wikimedia.org/wiki/File:Jan_Toorop-Nebel_%C3%BCber_dem_Meer-04035_(detail).jpg",
+        "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Jan_Toorop-Nebel_%C3%BCber_dem_Meer-04035_%28detail%29.jpg/1280px-Jan_Toorop-Nebel_%C3%BCber_dem_Meer-04035_%28detail%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "sha256": "de92d815f71334dbbcc7a682fc05f8ca73f79a722e34b969f99837a4f94a340f",
+        "captured_venue": "Museum Barberini, Potsdam",
+        "identity_evidence": "Commons description/category identifies Misty Sea, Rijksmuseum accession SK-C-1726; visually reviewed full composition and matching photographed details (running dogs and right-hand figure)."
+      }
+    ]
+  },
+  "limitations": [
+    "One painting only; no buildings, sculptures or other object types.",
+    "No negatives or held-out evaluation split.",
+    "Four photos captured at Museum Barberini on loan; query location is owning Rijksmuseum collection.",
+    "Wuselig photos share one capture group.",
+    "Offline benchmark excludes HTTP, Atlas request latency and actual phone capture."
+  ],
+  "report": {
+    "model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056",
+    "preprocessing": "rgb-thumbnail2560-dino224-regions65-sift800-v1/4.57.6/2.14.0+cpu/4.14.0.94/12.3.0",
+    "policy": {
+      "model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056",
+      "preprocessing": "rgb-thumbnail2560-dino224-regions65-sift800-v1/4.57.6/2.14.0+cpu/4.14.0.94/12.3.0",
+      "methods": {
+        "global": {
+          "minimum": 0.45,
+          "automatic": 0.95,
+          "margin": 0.1
+        },
+        "regional": {
+          "minimum": 0.45,
+          "automatic": 0.95,
+          "margin": 0.1
+        },
+        "local": {
+          "minimum": 0.2,
+          "automatic": 0.95,
+          "margin": 0.1
+        }
+      }
+    },
+    "policy_hash": "66b6387185a9dbde5395f8833acbf093cb5e30ac4f11e4f36778631ec5dde361",
+    "manifest_hash": "a3b8aa343d39b40c27ff7589507aeb2a33ce3c7cdfceebf0c78d950e57b4f9cb",
+    "split": "calibration",
+    "photo_hashes": {
+      "misty-godenehler-full": "b8940e743a21d1d86055fd758257bcbe1127058dc5d33eadade60571292e5bc0",
+      "misty-jojan-full": "f6653213a76b99777c38a4f74c2e2fe52a3aa4ba68493cbf3341bfade70a11b9",
+      "misty-wuselig-full": "b83c0bbbb74755239a26e1cc44f606f3a4d0ceb175a717e6f284a048477a2759",
+      "misty-wuselig-detail-1": "030539826c11877c6403d3e38a895d15a229a48fde6bb54bbd3b4e7c925b3aaa",
+      "misty-wuselig-detail-2": "de92d815f71334dbbcc7a682fc05f8ca73f79a722e34b969f99837a4f94a340f"
+    },
+    "reference_sets": {
+      "6a9dd4106d52c3bc3965869d": [
+        "02b79d578a7a4df5a3a652e79323a2c5",
+        "04d053a611d444148b8fb7615795dce6",
+        "09d603016bcc4771999f91aefb1fda8c",
+        "0a6f30323ed549ab8f77d97461cefa4d",
+        "0b666e586acf46dca54b4ba7d2900e82",
+        "0c93061e4d9a49d7b20e9e3abca5a686",
+        "0cfa6c4c1cde4994a469f40781d91864",
+        "111772e04b2b47c78e588bd777a823ba",
+        "1320d97481e74a9dba328d53ce39899c",
+        "1346cc1a1d0d47dcbcf4fa58cc03c4ee",
+        "14bafda4a5a54c44b9c64cd104fccfc4",
+        "1d13311a8a9b4fceb1bbf47f29f1ab85",
+        "1de16c67e8fb429a97db6a169cec579f",
+        "206e9d5fb5bf470abe742ab7cb5493cc",
+        "208f6abba8574266bdd9d88255a509d6",
+        "24943a4910ec4934aa51e9d45af634ac",
+        "24a48cd652684efb9fe642e782b714ca",
+        "274d2004af9b468ea129a8d7eefd3eb6",
+        "29251ebf0d3d4675ad06bc1a6cb3dbb4",
+        "2b645882dc4842f2b6299ee4adff0eb9",
+        "2f365a37724c41128c5fadd9ac2d9118",
+        "30fe8e5efbd84472ac2ce56d90a2407a",
+        "361bf9067b494fae80a68562d6a1ebc3",
+        "3b69c15b5bac49cfba043607c3cb6662",
+        "44450a14e92b4d4e8d524df44f923f63",
+        "445d13e4b16948668496580cb2b3cc2c",
+        "495fb71bdcc94df3b46b5a839ff15151",
+        "49791000d0ca456a870e0450722548cf",
+        "4cd7cde851a34b8fbc6686c24ba44142",
+        "537fa830c20947b79ca31f7150ddc5ac",
+        "53bb16be02194fe1a94efed5f28fcc1e",
+        "580e8a6752134fba8d5633d66e98d843",
+        "59b4357f7a9041fb93d1d654a7a2c1e2",
+        "5ac6623c00314acea0314720be7b4c67",
+        "5f1fd967c24448f69f2a1277f7c76c9b",
+        "6038fb3b56534a93bb0fd256df488ed7",
+        "6156d8ed074b46de8cceba80c5657498",
+        "689258a30bdd40e1b7263ac2d6a702d7",
+        "70371adfba8540e7af4267075e44fad3",
+        "726eb6a37542451a8c1af59f66b6d6a3",
+        "78164bed605540f1baccd41519df3f1f",
+        "801d355acdcd433a93abaad44df02379",
+        "80aaca3cc4d74b43b28c0a105e6282a2",
+        "81a7ff41670e438496b7b73afd89a166",
+        "83d0f65ee8ef4f66a7a1ae3b07d2fd89",
+        "8500728ab6f647979b3851179d4519c6",
+        "88cb41ec84ea41ef9d6ffb49bab41b5b",
+        "8b0bc5773ec0444e8f019da07aebc4a4",
+        "90129b04a40d418db9c4dbc0bf1c4fcf",
+        "916adc80b07947fc99434a29f7091617",
+        "92dc789d5e414e89a4fb4221da2c1777",
+        "9921c98eb9cc4419982e9749b255472f",
+        "9997b4745fdf4ab893770afef24b0362",
+        "9a0e7d052022489b9c67a9671422b051",
+        "9d8dfddef79841738214f37d850150dc",
+        "a73a05e903a045c08de59335bc9707fa",
+        "a8e2f9786f3f40b38d33141044466ddb",
+        "a92f39726b7f4288892f37df0e490d2b",
+        "ad19f7ecc6da4f438a82438d25f595ef",
+        "afd5d5460f584cec8e640d25f5406883",
+        "b537fee456674237b19860833da82554",
+        "b58db21e544649bbbabf16da60f805e2",
+        "b88daa1fd5f64c17b112097e2250c336",
+        "be03506826ca446db3bef9718bc6c7db",
+        "c1a168d2da3f4969a2d44c0560b361d1",
+        "c2fb0f7f64d2483298c44b7f57a9f1a8",
+        "c5034cdaa00d492cabf3506497b65c0f",
+        "c62e45754b1741c0baf5dad9ed9fbf07",
+        "c7e4dbdcbf654b709122d7cbd1e514fe",
+        "cbc7dd4f69604af2bb02bf3a46d4b533",
+        "cf789b365e8549e996203b882aa21234",
+        "cfe0f0a1539f40cdb9c87272d2ea4221",
+        "d8138f4339df4c8ab03a714aaa606dec",
+        "ddf7b955d861458493e0e34fd154d1f0",
+        "defed78aca5a4ce6af0372dc5dc82758",
+        "e39e82f34f38456b9382345f6533e2f2",
+        "e4fafb45b82c4b3fbf4aa554654611e6",
+        "e782b72e27694d1d94c379a66680e477",
+        "f04cbec6203e4d95a5c9245f5fa413bd",
+        "f1f16e7373a5485891841c025838b609",
+        "fae998f0d14a405aa6a48b636a6812de",
+        "fb78db9873a3472bbf43ac2033f7a9eb",
+        "fc8af16578e549328f371e86789be612",
+        "fd3ee834bf2c4be6928555003bd5837d",
+        "fdb5f8f181b549118efb48ccca65fa01"
+      ]
+    },
+    "coverage": {
+      "6a9dd4106d52c3bc3965869d": {
+        "covered": 85,
+        "total": 103
+      }
+    },
+    "methods": {
+      "global": {
+        "count": 5,
+        "positives": 5,
+        "negatives": 0,
+        "top3_correct": 5,
+        "automatic": 0,
+        "automatic_correct": 0,
+        "automatic_precision": null,
+        "positive_automatic_coverage": 0.0,
+        "abstention_rate": 1.0,
+        "negative_false_automatic": 0,
+        "categories": {
+          "full": {
+            "count": 3,
+            "top3_correct": 3,
+            "false_automatic": 0
+          },
+          "partial": {
+            "count": 2,
+            "top3_correct": 2,
+            "false_automatic": 0
+          }
+        },
+        "by_object_type": {
+          "painting": {
+            "count": 5,
+            "positives": 5,
+            "negatives": 0,
+            "top3_correct": 5,
+            "automatic": 0,
+            "automatic_correct": 0,
+            "automatic_precision": null,
+            "positive_automatic_coverage": 0.0,
+            "abstention_rate": 1.0,
+            "negative_false_automatic": 0,
+            "categories": {
+              "full": {
+                "count": 3,
+                "top3_correct": 3,
+                "false_automatic": 0
+              },
+              "partial": {
+                "count": 2,
+                "top3_correct": 2,
+                "false_automatic": 0
+              }
+            }
+          }
+        },
+        "gates": {
+          "calibration_split_present": true,
+          "held_out_independent_photos": false,
+          "minimum_photo_coverage": false,
+          "negative_categories": false,
+          "full_top3": true,
+          "partial_top3": true,
+          "automatic_precision": false,
+          "automatic_coverage": false,
+          "negative_false_matches": false
+        },
+        "recognition_gates_passed": false,
+        "rows": [
+          {
+            "id": "misty-godenehler-full",
+            "expected_object_id": "6a9dd7f8332abe8469d558f5",
+            "category": "full",
+            "object_type": "painting",
+            "capture_group": "Barberini-2023-GodeNehler",
+            "independent": true,
+            "candidates": [
+              "6a9dd7f8332abe8469d558f5",
+              "6a9dd83e332abe8469d55967"
+            ],
+            "scores": [
+              {
+                "object_id": "6a9dd7f8332abe8469d558f5",
+                "score": 0.5976827514808343
+              },
+              {
+                "object_id": "6a9dd83e332abe8469d55967",
+                "score": 0.5022758982715457
+              },
+              {
+                "object_id": "6a9dd807332abe8469d55907",
+                "score": 0.4345428600925828
+              }
+            ],
+            "selected": null,
+            "seconds": 0.2073822390048008
+          },
+          {
+            "id": "misty-jojan-full",
+            "expected_object_id": "6a9dd7f8332abe8469d558f5",
+            "category": "full",
+            "object_type": "painting",
+            "capture_group": "JoJan-Misty-Sea",
+            "independent": true,
+            "candidates": [
+              "6a9dd7f8332abe8469d558f5",
+              "6a9dd83e332abe8469d55967",
+              "6a9dd839332abe8469d55962"
+            ],
+            "scores": [
+              {
+                "object_id": "6a9dd7f8332abe8469d558f5",
+                "score": 0.9165532203829466
+              },
+              {
+                "object_id": "6a9dd83e332abe8469d55967",
+                "score": 0.6411565231290973
+              },
+              {
+                "object_id": "6a9dd839332abe8469d55962",
+                "score": 0.5200589785862456
+              }
+            ],
+            "selected": null,
+            "seconds": 0.18495394599813153
+          },
+          {
+            "id": "misty-wuselig-full",
+            "expected_object_id": "6a9dd7f8332abe8469d558f5",
+            "category": "full",
+            "object_type": "painting",
+            "capture_group": "Barberini-2023-Wuselig",
+            "independent": true,
+            "candidates": [
+              "6a9dd7f8332abe8469d558f5",
+              "6a9dd83e332abe8469d55967",
+              "6a9dd82e332abe8469d55955"
+            ],
+            "scores": [
+              {
+                "object_id": "6a9dd7f8332abe8469d558f5",
+                "score": 0.6762642406700591
+              },
+              {
+                "object_id": "6a9dd83e332abe8469d55967",
+                "score": 0.5296978941180096
+              },
+              {
+                "object_id": "6a9dd82e332abe8469d55955",
+                "score": 0.4878777329938534
+              }
+            ],
+            "selected": null,
+            "seconds": 0.16766633500083117
+          },
+          {
+            "id": "misty-wuselig-detail-1",
+            "expected_object_id": "6a9dd7f8332abe8469d558f5",
+            "category": "partial",
+            "object_type": "painting",
+            "capture_group": "Barberini-2023-Wuselig",
+            "independent": true,
+            "candidates": [
+              "6a9dd7f8332abe8469d558f5"
+            ],
+            "scores": [
+              {
+                "object_id": "6a9dd7f8332abe8469d558f5",
+                "score": 0.5734871194767652
+              },
+              {
+                "object_id": "6a9dd83e332abe8469d55967",
+                "score": 0.4050435690008361
+              },
+              {
+                "object_id": "6a9dd800332abe8469d558fd",
+                "score": 0.3772016748083782
+              }
+            ],
+            "selected": null,
+            "seconds": 0.15101763200436835
+          },
+          {
+            "id": "misty-wuselig-detail-2",
+            "expected_object_id": "6a9dd7f8332abe8469d558f5",
+            "category": "partial",
+            "object_type": "painting",
+            "capture_group": "Barberini-2023-Wuselig",
+            "independent": true,
+            "candidates": [
+              "6a9dd7f8332abe8469d558f5",
+              "6a9dd807332abe8469d55907"
+            ],
+            "scores": [
+              {
+                "object_id": "6a9dd7f8332abe8469d558f5",
+                "score": 0.6168672826170979
+              },
+              {
+                "object_id": "6a9dd807332abe8469d55907",
+                "score": 0.46106420131844594
+              },
+              {
+                "object_id": "6a9dd83e332abe8469d55967",
+                "score": 0.4396701726832969
+              }
+            ],
+            "selected": null,
+            "seconds": 0.12598495299607748
+          }
+        ],
+        "offline_p95_seconds": 0.2073822390048008
+      },
+      "regional": {
+        "count": 5,
+        "positives": 5,
+        "negatives": 0,
+        "top3_correct": 5,
+        "automatic": 0,
+        "automatic_correct": 0,
+        "automatic_precision": null,
+        "positive_automatic_coverage": 0.0,
+        "abstention_rate": 1.0,
+        "negative_false_automatic": 0,
+        "categories": {
+          "full": {
+            "count": 3,
+            "top3_correct": 3,
+            "false_automatic": 0
+          },
+          "partial": {
+            "count": 2,
+            "top3_correct": 2,
+            "false_automatic": 0
+          }
+        },
+        "by_object_type": {
+          "painting": {
+            "count": 5,
+            "positives": 5,
+            "negatives": 0,
+            "top3_correct": 5,
+            "automatic": 0,
+            "automatic_correct": 0,
+            "automatic_precision": null,
+            "positive_automatic_coverage": 0.0,
+            "abstention_rate": 1.0,
+            "negative_false_automatic": 0,
+            "categories": {
+              "full": {
+                "count": 3,
+                "top3_correct": 3,
+                "false_automatic": 0
+              },
+              "partial": {
+                "count": 2,
+                "top3_correct": 2,
+                "false_automatic": 0
+              }
+            }
+          }
+        },
+        "gates": {
+          "calibration_split_present": true,
+          "held_out_independent_photos": false,
+          "minimum_photo_coverage": false,
+          "negative_categories": false,
+          "full_top3": true,
+          "partial_top3": true,
+          "automatic_precision": false,
+          "automatic_coverage": false,
+          "negative_false_matches": false
+        },
+        "recognition_gates_passed": false,
+        "rows": [
+          {
+            "id": "misty-godenehler-full",
+            "expected_object_id": "6a9dd7f8332abe8469d558f5",
+            "category": "full",
+            "object_type": "painting",
+            "capture_group": "Barberini-2023-GodeNehler",
+            "independent": true,
+            "candidates": [
+              "6a9dd7f8332abe8469d558f5",
+              "6a9dd82e332abe8469d55955",
+              "6a9dd821332abe8469d55943"
+            ],
+            "scores": [
+              {
+                "object_id": "6a9dd7f8332abe8469d558f5",
+                "score": 0.5976827514808343
+              },
+              {
+                "object_id": "6a9dd82e332abe8469d55955",
+                "score": 0.53467151773294
+              },
+              {
+                "object_id": "6a9dd821332abe8469d55943",
+                "score": 0.5343626498177264
+              }
+            ],
+            "selected": null,
+            "seconds": 0.21031872700405074
+          },
+          {
+            "id": "misty-jojan-full",
+            "expected_object_id": "6a9dd7f8332abe8469d558f5",
+            "category": "full",
+            "object_type": "painting",
+            "capture_group": "JoJan-Misty-Sea",
+            "independent": true,
+            "candidates": [
+              "6a9dd7f8332abe8469d558f5",
+              "6a9dd83e332abe8469d55967",
+              "6a9dd821332abe8469d55943"
+            ],
+            "scores": [
+              {
+                "object_id": "6a9dd7f8332abe8469d558f5",
+                "score": 0.9165532203829466
+              },
+              {
+                "object_id": "6a9dd83e332abe8469d55967",
+                "score": 0.6411565231290973
+              },
+              {
+                "object_id": "6a9dd821332abe8469d55943",
+                "score": 0.5480845301406639
+              }
+            ],
+            "selected": null,
+            "seconds": 0.18794824699580204
+          },
+          {
+            "id": "misty-wuselig-full",
+            "expected_object_id": "6a9dd7f8332abe8469d558f5",
+            "category": "full",
+            "object_type": "painting",
+            "capture_group": "Barberini-2023-Wuselig",
+            "independent": true,
+            "candidates": [
+              "6a9dd7f8332abe8469d558f5",
+              "6a9dd82e332abe8469d55955",
+              "6a9dd818332abe8469d55938"
+            ],
+            "scores": [
+              {
+                "object_id": "6a9dd7f8332abe8469d558f5",
+                "score": 0.6762642406700591
+              },
+              {
+                "object_id": "6a9dd82e332abe8469d55955",
+                "score": 0.5643229852764167
+              },
+              {
+                "object_id": "6a9dd818332abe8469d55938",
+                "score": 0.56299449313748
+              }
+            ],
+            "selected": null,
+            "seconds": 0.16999229100110824
+          },
+          {
+            "id": "misty-wuselig-detail-1",
+            "expected_object_id": "6a9dd7f8332abe8469d558f5",
+            "category": "partial",
+            "object_type": "painting",
+            "capture_group": "Barberini-2023-Wuselig",
+            "independent": true,
+            "candidates": [
+              "6a9dd7f8332abe8469d558f5"
+            ],
+            "scores": [
+              {
+                "object_id": "6a9dd7f8332abe8469d558f5",
+                "score": 0.6927911590005773
+              },
+              {
+                "object_id": "6a9dd83e332abe8469d55967",
+                "score": 0.4050435690008361
+              },
+              {
+                "object_id": "6a9dd821332abe8469d55943",
+                "score": 0.38758377970833224
+              }
+            ],
+            "selected": null,
+            "seconds": 0.15381415099909646
+          },
+          {
+            "id": "misty-wuselig-detail-2",
+            "expected_object_id": "6a9dd7f8332abe8469d558f5",
+            "category": "partial",
+            "object_type": "painting",
+            "capture_group": "Barberini-2023-Wuselig",
+            "independent": true,
+            "candidates": [
+              "6a9dd7f8332abe8469d558f5",
+              "6a9dd821332abe8469d55943",
+              "6a9dd800332abe8469d558fd"
+            ],
+            "scores": [
+              {
+                "object_id": "6a9dd7f8332abe8469d558f5",
+                "score": 0.782486953484042
+              },
+              {
+                "object_id": "6a9dd821332abe8469d55943",
+                "score": 0.5112262833493391
+              },
+              {
+                "object_id": "6a9dd800332abe8469d558fd",
+                "score": 0.4899189857115226
+              }
+            ],
+            "selected": null,
+            "seconds": 0.1289295349997701
+          }
+        ],
+        "offline_p95_seconds": 0.21031872700405074
+      },
+      "local": {
+        "count": 5,
+        "positives": 5,
+        "negatives": 0,
+        "top3_correct": 3,
+        "automatic": 2,
+        "automatic_correct": 2,
+        "automatic_precision": 1.0,
+        "positive_automatic_coverage": 0.4,
+        "abstention_rate": 0.6,
+        "negative_false_automatic": 0,
+        "categories": {
+          "full": {
+            "count": 3,
+            "top3_correct": 1,
+            "false_automatic": 0
+          },
+          "partial": {
+            "count": 2,
+            "top3_correct": 2,
+            "false_automatic": 0
+          }
+        },
+        "by_object_type": {
+          "painting": {
+            "count": 5,
+            "positives": 5,
+            "negatives": 0,
+            "top3_correct": 3,
+            "automatic": 2,
+            "automatic_correct": 2,
+            "automatic_precision": 1.0,
+            "positive_automatic_coverage": 0.4,
+            "abstention_rate": 0.6,
+            "negative_false_automatic": 0,
+            "categories": {
+              "full": {
+                "count": 3,
+                "top3_correct": 1,
+                "false_automatic": 0
+              },
+              "partial": {
+                "count": 2,
+                "top3_correct": 2,
+                "false_automatic": 0
+              }
+            }
+          }
+        },
+        "gates": {
+          "calibration_split_present": true,
+          "held_out_independent_photos": false,
+          "minimum_photo_coverage": false,
+          "negative_categories": false,
+          "full_top3": false,
+          "partial_top3": true,
+          "automatic_precision": false,
+          "automatic_coverage": false,
+          "negative_false_matches": false
+        },
+        "recognition_gates_passed": false,
+        "rows": [
+          {
+            "id": "misty-godenehler-full",
+            "expected_object_id": "6a9dd7f8332abe8469d558f5",
+            "category": "full",
+            "object_type": "painting",
+            "capture_group": "Barberini-2023-GodeNehler",
+            "independent": true,
+            "candidates": [],
+            "scores": [
+              {
+                "object_id": "6a9dd7f8332abe8469d558f5",
+                "score": 0.0
+              },
+              {
+                "object_id": "6a9dd7fa332abe8469d558f7",
+                "score": 0.0
+              },
+              {
+                "object_id": "6a9dd7fb332abe8469d558f8",
+                "score": 0.0
+              }
+            ],
+            "selected": null,
+            "seconds": 0.5999371190046077
+          },
+          {
+            "id": "misty-jojan-full",
+            "expected_object_id": "6a9dd7f8332abe8469d558f5",
+            "category": "full",
+            "object_type": "painting",
+            "capture_group": "JoJan-Misty-Sea",
+            "independent": true,
+            "candidates": [
+              "6a9dd7f8332abe8469d558f5"
+            ],
+            "scores": [
+              {
+                "object_id": "6a9dd7f8332abe8469d558f5",
+                "score": 0.9875
+              },
+              {
+                "object_id": "6a9dd7fa332abe8469d558f7",
+                "score": 0.0
+              },
+              {
+                "object_id": "6a9dd7fb332abe8469d558f8",
+                "score": 0.0
+              }
+            ],
+            "selected": "6a9dd7f8332abe8469d558f5",
+            "seconds": 0.4634946099977242
+          },
+          {
+            "id": "misty-wuselig-full",
+            "expected_object_id": "6a9dd7f8332abe8469d558f5",
+            "category": "full",
+            "object_type": "painting",
+            "capture_group": "Barberini-2023-Wuselig",
+            "independent": true,
+            "candidates": [],
+            "scores": [
+              {
+                "object_id": "6a9dd7f8332abe8469d558f5",
+                "score": 0.0
+              },
+              {
+                "object_id": "6a9dd7fa332abe8469d558f7",
+                "score": 0.0
+              },
+              {
+                "object_id": "6a9dd7fb332abe8469d558f8",
+                "score": 0.0
+              }
+            ],
+            "selected": null,
+            "seconds": 0.5432893200013496
+          },
+          {
+            "id": "misty-wuselig-detail-1",
+            "expected_object_id": "6a9dd7f8332abe8469d558f5",
+            "category": "partial",
+            "object_type": "painting",
+            "capture_group": "Barberini-2023-Wuselig",
+            "independent": true,
+            "candidates": [
+              "6a9dd7f8332abe8469d558f5"
+            ],
+            "scores": [
+              {
+                "object_id": "6a9dd7f8332abe8469d558f5",
+                "score": 0.65
+              },
+              {
+                "object_id": "6a9dd7fa332abe8469d558f7",
+                "score": 0.0
+              },
+              {
+                "object_id": "6a9dd7fb332abe8469d558f8",
+                "score": 0.0
+              }
+            ],
+            "selected": null,
+            "seconds": 0.5361173040000722
+          },
+          {
+            "id": "misty-wuselig-detail-2",
+            "expected_object_id": "6a9dd7f8332abe8469d558f5",
+            "category": "partial",
+            "object_type": "painting",
+            "capture_group": "Barberini-2023-Wuselig",
+            "independent": true,
+            "candidates": [
+              "6a9dd7f8332abe8469d558f5"
+            ],
+            "scores": [
+              {
+                "object_id": "6a9dd7f8332abe8469d558f5",
+                "score": 0.95
+              },
+              {
+                "object_id": "6a9dd7fa332abe8469d558f7",
+                "score": 0.0
+              },
+              {
+                "object_id": "6a9dd7fb332abe8469d558f8",
+                "score": 0.0
+              }
+            ],
+            "selected": "6a9dd7f8332abe8469d558f5",
+            "seconds": 0.4930795429972932
+          }
+        ],
+        "offline_p95_seconds": 0.5999371190046077
+      }
+    },
+    "elapsed_seconds": 2.664727210998535,
+    "hardware": {
+      "machine": "x86_64",
+      "processor": "x86_64"
+    },
+    "peak_process_rss_kib": 1168388,
+    "latency_scope": "Offline encoding/comparison; excludes HTTP and Atlas",
+    "phase5_complete": false,
+    "remaining_gate": "Independent API validation and object-type review required."
+  }
+}

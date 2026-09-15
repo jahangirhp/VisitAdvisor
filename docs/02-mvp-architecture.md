@@ -157,8 +157,10 @@ Only one source connector is required for the first location.
 ### 5.4 Recognition Module
 
 MVP recognition targets **visual reference matching with optional OCR**.
-The current implementation only supports OCR; the Phase 5 extension is specified
-in `07-visual-recognition-pilot.md`. Reference preparation runs before visits.
+The implementation supports OCR plus an opt-in visual candidate preview.
+`07-visual-recognition-pilot.md` specifies the local image encoder, separate Atlas
+visual index, and evaluation gates. Reference preparation runs before visits;
+reference images are transient, and descriptors persist in Atlas.
 
 Signals may include:
 
@@ -191,7 +193,8 @@ Return best match
 
 Label-free full-object and partial-view recognition must be evaluated before
 claiming the recognition MVP is complete. Start with one museum and a bounded
-painting collection; do not infer support for arbitrary objects or 3D viewpoints.
+reference collection across object types; do not infer accuracy for unseen
+viewpoints. Multiple references can represent one object, including a building.
 
 ### 5.5 MongoDB Atlas
 

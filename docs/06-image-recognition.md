@@ -2,8 +2,9 @@
 
 **Scope revised 2026-09-11:** The full Phase 5 target is label-free object
 recognition, including partial views. See `07-visual-recognition-pilot.md`.
-This document describes the existing OCR implementation only; it does not meet
-the revised visual-recognition requirement.
+This document describes the OCR mode. The separate `mode=visual` candidate preview
+is documented in `07-visual-recognition-pilot.md`; automatic visual recognition
+still requires independent evaluation.
 
 ## Implemented flow
 
@@ -11,9 +12,9 @@ Upload a label photo with a selected museum → validate image → transcribe vi
 text → run Phase 4 hybrid matching → return the identified object and its existing
 `prepared_content`, or up to three candidates for selection.
 
-This phase implements the upload API, not a camera UI, live video, image embeddings,
-or recognition of unlabeled artworks. A future camera client can submit still
-images to this endpoint. Visual reference matching is the next planned extension.
+The OCR mode implements label uploads; it does not use image embeddings.
+A separate experimental visual mode handles unlabeled images. A future camera client can submit still
+images to this endpoint. Visual reference matching is available as an opt-in candidate preview.
 Museum import and embedding preparation remain explicit CLI
 operations; no scheduler or worker has been added.
 
@@ -23,6 +24,7 @@ operations; no scheduler or worker has been added.
 
 - `location_id`: required existing museum ID.
 - `image`: required JPEG, PNG, or WebP file.
+- `mode`: optional; `ocr` (default, this contract) or `visual` (separate pilot contract).
 
 ```bash
 curl -X POST http://localhost:8001/api/v1/recognition/image \

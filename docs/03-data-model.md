@@ -78,7 +78,7 @@ implemented schema and query contract; these supersede the illustrative fields b
 
 ## Current Phase 5 OCR response
 
-No new collections or persisted fields are introduced. Label images and OCR text
+The OCR path introduces no new collections or persisted fields. Label images and OCR text
 are transient. Recognition returns the existing object response (including nullable
 `prepared_content`) only for a confident museum-scoped match. Unreviewed content
 keeps its review status and citations. See `06-image-recognition.md`.
@@ -428,10 +428,31 @@ saved_items
 
 The four-collection model is intentionally small enough to evolve after the first real ingestion test.
 
-## Planned Phase 5 visual references
+## Phase 5 visual references and vectors
 
-The visual pilot will add source-linked reference metadata and separate derived
-visual descriptors. This is planned, not an existing schema. See
-`07-visual-recognition-pilot.md` for fields, invalidation, and storage decisions.
-Current text identity vectors must not be reused as image vectors. Canonical
-source evidence and generated visitor content remain separate.
+`visual_references` stores one active reference set per `(location_id, object_id)`.
+A set has a unique `set_id`, model revision, preprocessing/dependency versions,
+canonical evidence hash, fetch time, and up to four views. Each view keeps original
+linked metadata under `reference.evidence`, source IDs/URLs, rights status, image
+and metadata hashes, and a separate `derived` section with normalized dimensions,
+whole-image/regional embeddings, crop coordinates, and bounded SIFT descriptors.
+Each set also retains a `canonical_evidence` copy of its object/source membership,
+external ID, source URLs, and raw source records. Preparation verifies its SHA-256
+hash before publication. Runtime compares this copy with current evidence inside
+MongoDB and returns only validated metadata, avoiding full source transfers on
+every scan. The original `sources` records remain canonical; the copy contains no
+AI-generated content or image pixels and shares the reference set's size limit.
+Buildings and natural objects use the existing free-form object type and location.
+
+`visual_vectors` contains the separate Atlas-search projection: one normalized
+384-dimensional image embedding per region/view, with location/object/set IDs,
+model, dimensions, and preprocessing version. The visual index filters all these
+version fields and the active set IDs before ranking distinct objects. Reference
+publication stages vectors before atomically replacing the active object set.
+Failed publication leaves the prior reference set intact; any staged vectors are
+ineligible until their set is active. Previous-version vector cleanup is best effort.
+
+Reference images and uploaded photos are processed temporarily. No image files or
+base64 pixels are stored in MongoDB. Model weights are cached locally. The text
+identity index and generated content remain separate. See
+`07-visual-recognition-pilot.md` for commands, limits, and evaluation requirements.

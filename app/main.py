@@ -1,3 +1,4 @@
+import asyncio
 import logging
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
@@ -43,6 +44,16 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
             raise RuntimeError("MongoDB index initialization failed") from None
         app.state.mongodb = mongodb
         app.state.settings = settings
+        if settings.visual_enabled:
+            from app.modules.visual.features import DinoEncoder, VisualFailure
+
+            try:
+                app.state.visual_encoder = await asyncio.to_thread(DinoEncoder)
+                app.state.visual_lock = asyncio.Lock()
+            except VisualFailure:
+                raise RuntimeError(
+                    "Visual model unavailable; run visual model setup"
+                ) from None
         logger.info("MongoDB connection successful")
         yield
     finally:

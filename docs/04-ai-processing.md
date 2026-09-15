@@ -30,8 +30,9 @@ without labels, including partial views, with OCR as optional evidence. See
 `POST /api/v1/recognition/image` accepts a museum ID and a still label image,
 validates and normalizes the image, transcribes visible text, and invokes Phase 4
 matching. It returns the saved object/content or uncertain candidates. OCR text is
-transient and never becomes canonical evidence. Visual matching is planned but
-not yet implemented; camera UI and background processing remain deferred.
+transient and never becomes canonical evidence. Visual embeddings and an opt-in
+candidate preview are implemented separately. Automatic visual identification,
+camera UI, and background processing remain deferred pending evaluation.
 See `06-image-recognition.md` for the existing OCR contract.
 
 ## 1. Purpose
@@ -284,7 +285,7 @@ Store:
 
 The MVP does not require an LLM to identify every object.
 
-Existing OCR branch (visual matching is planned separately):
+Existing OCR branch (visual embeddings use the separate Phase 5 pilot):
 
 ```text
 Image

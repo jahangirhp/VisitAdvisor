@@ -23,6 +23,7 @@ class Settings(BaseSettings):
 
     ocr_model: str = Field(default="gpt-4.1-mini-2025-04-14", min_length=1)
     ocr_timeout_seconds: float = Field(default=30, ge=1, le=60)
+    visual_enabled: bool = False
 
     mongodb_uri: SecretStr
     mongodb_database: str = Field(default="visitadvisor", min_length=1)

@@ -7,7 +7,8 @@
   already-extracted OCR text within the selected museum.
 - Phase 5 (revised 2026-09-11): visual recognition without labels, including
   partial views, with optional OCR and saved Phase 3 content. Show up to three
-  candidates when uncertain. The OCR upload exists; the visual pilot is planned
+  candidates when uncertain. The OCR upload and experimental visual candidate
+  preview exist; the benchmark and remaining acceptance gates are documented
   in `07-visual-recognition-pilot.md`.
 
 This roadmap supersedes the earlier camera-first paragraph in the AI document.

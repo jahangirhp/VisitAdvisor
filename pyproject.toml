@@ -20,6 +20,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest>=8,<10", "ruff>=0.9,<1", "mypy>=1.13,<2"]
+visual = ["torch>=2.6,<3", "transformers>=4.57,<5", "opencv-python-headless>=4.10,<5"]
 
 [tool.setuptools.packages.find]
 include = ["app*"]

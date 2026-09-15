@@ -87,7 +87,8 @@ If recognition confidence is low, the system may show up to three likely matches
    - interesting fact when supported by evidence
 8. Text embeddings for semantic retrieval.
 9. Visual recognition from full-object and partial-object photos without labels;
-   OCR is an optional supporting signal. Validate first on a bounded painting pilot.
+   OCR is another recognition path. Evaluate a bounded set of objects and places,
+   including paintings, statues, artifacts, rocks, and buildings where references exist.
 10. Object matching constrained to the selected location.
 11. Mobile-first visitor result page.
 12. Basic source traceability.
@@ -199,4 +200,9 @@ This vertical slice is the product milestone that should be proven before expand
 Label-free recognition, including useful partial views, is a core requirement.
 The previous OCR-only scope is superseded. This is a target, not a claim that any
 arbitrary fragment is identifiable. The bounded pilot and acceptance criteria are
-in `07-visual-recognition-pilot.md`; the current API remains label OCR only.
+in `07-visual-recognition-pilot.md`. The API supports OCR and an experimental
+visual candidate mode; automatic visual identification remains unvalidated.
+
+The long-term target is almost any observable object. The MVP requires a
+user-selected visit location and recognizes known entities with reference coverage.
+Museums provide the initial dataset, not the boundary of the product.

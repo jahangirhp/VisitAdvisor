@@ -4,7 +4,7 @@ VisitAdvisor is a location-aware knowledge platform that will help visitors
 understand real-world places and objects through prepared, source-backed content.
 The primary experience will be automatic discovery after recognition.
 
-This repository implements **Phases 0–4 and the OCR portion of Phase 5**: a Python/FastAPI foundation,
+This repository implements **Phases 0–4, Phase 5 OCR, and an experimental visual-recognition pilot**: a Python/FastAPI foundation,
 MongoDB lifecycle management, and creation/retrieval of locations, objects,
 and source references, bounded imports from the official Rijksmuseum API, and
 source-cited visitor content preparation, museum-filtered text retrieval, and uploaded-label OCR recognition.
@@ -453,9 +453,9 @@ See the Phase 4 document for the bounded test results and remaining limitations.
 
 ## Phase 5: current label upload API
 
-Visual object recognition is planned and is not implemented by this endpoint.
-The [revised Phase 5 plan](docs/07-visual-recognition-pilot.md) records the image
-availability audit, implementation steps, and evaluation criteria.
+The existing default is label OCR. An opt-in `mode=visual` now returns image-embedding
+candidates without requiring readable text. Automatic visual identification remains
+disabled pending independent evaluation. See the [Phase 5 visual pilot](docs/07-visual-recognition-pilot.md).
 
 Update dependencies with `.venv/bin/pip install -e '.[dev]'`, then restart the API.
 Use the **recognition** section in http://localhost:8001/docs, or:
@@ -475,5 +475,26 @@ visitor content during a scan, and unreviewed content is explicitly marked.
 The existing `OPENAI_API_KEY` powers OCR. Optional settings:
 `OCR_MODEL=gpt-4.1-mini-2025-04-14` and `OCR_TIMEOUT_SECONDS=30`.
 Uploads are metadata-stripped before provider submission and are not archived.
-No camera UI or image embeddings are added. See [Phase 5 details](docs/06-image-recognition.md)
+The OCR mode adds no camera UI and uses no image embeddings. See [Phase 5 details](docs/06-image-recognition.md)
 for response fields, validation limits, errors, cost behavior, and verification.
+
+## Phase 5: visual recognition pilot
+
+Visual preparation now stores DINOv2 image/regional embeddings and a local-feature
+baseline in separate Atlas collections. Reference images are temporary. Multiple
+source-linked views may represent any object type, including a building; the first
+live reference sample uses existing Rijksmuseum paintings.
+
+After installing the optional `visual` dependencies and downloading the pinned
+model, prepare references and the separate visual index. Set `VISUAL_ENABLED=true`
+and send `mode=visual` to `/api/v1/recognition/image` for up to three candidates
+without OCR. This mode never automatically identifies an object yet.
+
+The [visual pilot guide](docs/07-visual-recognition-pilot.md) includes setup,
+reference manifests for other object types, the benchmark workflow, and remaining
+acceptance gates. Independent phone photos are required before Phase 5 can be
+declared complete.
+
+The [calibration and validation guide](docs/09-visual-calibration-and-validation.md)
+documents `visual audit`, `visual calibrate`, and `visual validate`, frozen policy
+artifacts, the current real-photo results, and missing dataset coverage.

@@ -1,0 +1,272 @@
+{
+  "id": "commons-38157250",
+  "photographer": "Dqfn13",
+  "license": "CC BY-SA 4.0",
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "source_page": "https://commons.wikimedia.org/wiki/File:Guanyin,_Rijksmuseum_Amsterdam.JPG",
+  "downloaded_at": "2026-09-15T18:07:38.910685+00:00",
+  "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Guanyin%2C_Rijksmuseum_Amsterdam.JPG/1280px-Guanyin%2C_Rijksmuseum_Amsterdam.JPG",
+  "sha256": "255d5d1e2e5e12f5121eb98f213a503710da66a8e933d1bee2d18ec7a561b298",
+  "visual_review": "Single museum sculpture; independent camera photograph, not a reference reproduction. Used only as a new calibration negative. Original held-out rows unchanged.",
+  "metadata": {
+    "pageid": 38157250,
+    "ns": 6,
+    "title": "File:Guanyin, Rijksmuseum Amsterdam.JPG",
+    "index": 2,
+    "imagerepository": "local",
+    "imageinfo": [
+      {
+        "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Guanyin%2C_Rijksmuseum_Amsterdam.JPG/1280px-Guanyin%2C_Rijksmuseum_Amsterdam.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+        "thumbwidth": 1280,
+        "thumbheight": 1920,
+        "responsiveUrls": {
+          "2": "https://upload.wikimedia.org/wikipedia/commons/8/87/Guanyin%2C_Rijksmuseum_Amsterdam.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+        },
+        "thumbattribs": {
+          "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Guanyin%2C_Rijksmuseum_Amsterdam.JPG/1280px-Guanyin%2C_Rijksmuseum_Amsterdam.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "decoding": "async",
+          "loading": "lazy",
+          "width": 1280,
+          "height": 1920,
+          "srcset": "https://upload.wikimedia.org/wikipedia/commons/8/87/Guanyin%2C_Rijksmuseum_Amsterdam.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+        },
+        "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Guanyin%2C_Rijksmuseum_Amsterdam.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+        "descriptionurl": "https://commons.wikimedia.org/wiki/File:Guanyin,_Rijksmuseum_Amsterdam.JPG",
+        "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=38157250",
+        "metadata": [
+          {
+            "name": "Make",
+            "value": "SONY"
+          },
+          {
+            "name": "Model",
+            "value": "DSC-RX100"
+          },
+          {
+            "name": "Orientation",
+            "value": 1
+          },
+          {
+            "name": "XResolution",
+            "value": "350/1"
+          },
+          {
+            "name": "YResolution",
+            "value": "350/1"
+          },
+          {
+            "name": "ResolutionUnit",
+            "value": 2
+          },
+          {
+            "name": "Software",
+            "value": "Microsoft Windows Photo Viewer 6.1.7600.16385"
+          },
+          {
+            "name": "DateTime",
+            "value": "2015:02:01 18:54:45"
+          },
+          {
+            "name": "YCbCrPositioning",
+            "value": 2
+          },
+          {
+            "name": "ExposureTime",
+            "value": "1/30"
+          },
+          {
+            "name": "FNumber",
+            "value": "18/10"
+          },
+          {
+            "name": "ExposureProgram",
+            "value": 2
+          },
+          {
+            "name": "ISOSpeedRatings",
+            "value": 160
+          },
+          {
+            "name": "ExifVersion",
+            "value": "0230"
+          },
+          {
+            "name": "DateTimeOriginal",
+            "value": "2015:02:01 12:02:57"
+          },
+          {
+            "name": "DateTimeDigitized",
+            "value": "2015:02:01 12:02:57"
+          },
+          {
+            "name": "ComponentsConfiguration",
+            "value": "\n#1\n#2\n#3\n#0"
+          },
+          {
+            "name": "CompressedBitsPerPixel",
+            "value": "2/1"
+          },
+          {
+            "name": "BrightnessValue",
+            "value": "4754/2560"
+          },
+          {
+            "name": "ExposureBiasValue",
+            "value": "0/10"
+          },
+          {
+            "name": "MaxApertureValue",
+            "value": "434/256"
+          },
+          {
+            "name": "MeteringMode",
+            "value": 5
+          },
+          {
+            "name": "LightSource",
+            "value": 0
+          },
+          {
+            "name": "Flash",
+            "value": 16
+          },
+          {
+            "name": "FocalLength",
+            "value": "1040/100"
+          },
+          {
+            "name": "FlashPixVersion",
+            "value": "0100"
+          },
+          {
+            "name": "ColorSpace",
+            "value": 1
+          },
+          {
+            "name": "FileSource",
+            "value": 3
+          },
+          {
+            "name": "SceneType",
+            "value": 1
+          },
+          {
+            "name": "CustomRendered",
+            "value": 0
+          },
+          {
+            "name": "ExposureMode",
+            "value": 0
+          },
+          {
+            "name": "WhiteBalance",
+            "value": 0
+          },
+          {
+            "name": "DigitalZoomRatio",
+            "value": "16/16"
+          },
+          {
+            "name": "FocalLengthIn35mmFilm",
+            "value": 28
+          },
+          {
+            "name": "SceneCaptureType",
+            "value": 0
+          },
+          {
+            "name": "Contrast",
+            "value": 0
+          },
+          {
+            "name": "Saturation",
+            "value": 0
+          },
+          {
+            "name": "Sharpness",
+            "value": 0
+          },
+          {
+            "name": "MEDIAWIKI_EXIF_VERSION",
+            "value": 1
+          }
+        ],
+        "extmetadata": {
+          "DateTime": {
+            "value": "2015-02-01 20:04:35",
+            "source": "mediawiki-metadata",
+            "hidden": ""
+          },
+          "ObjectName": {
+            "value": "<div class=\"fn\">\n<div style=\"font-weight:bold;display:inline-block;\"><div style=\"display:inline-block\" dir=\"ltr\" lang=\"en\"><i>Guanyin</i></div></div><div style=\"display: none;\">label QS:Lja,\"\u89b3\u97f3\u83e9\u85a9\"</div><div style=\"display: none;\">label QS:Len,\"Guanyin\"</div><div style=\"display: none;\">label QS:Lhak,\"K\u00f4n-y\u00eem\"</div><div style=\"display: none;\">label QS:Lcs,\"Kuan-jin\"</div></div>",
+            "source": "commons-desc-page"
+          },
+          "CommonsMetadataExtension": {
+            "value": 1.2,
+            "source": "extension",
+            "hidden": ""
+          },
+          "Categories": {
+            "value": "Artworks without Wikidata item|Unsupported technique|Self-published work|Artworks with known accession number|Pages using Template:Technique with deprecated term|Pages with complex technique templates|Template Unknown (author)|Wooden statues in the Netherlands|Statues of Guanyin|October 2008 in Amsterdam|Wood Buddhist sculptures of the Jin Dynasty|Rijksmuseum Amsterdam - Asian Pavilion - Room 2|Art of the Jin Dynasty in the Rijksmuseum Amsterdam|Art of the Liao Dynasty in the Rijksmuseum Amsterdam|Art of the Song Dynasty in the Rijksmuseum Amsterdam|Buddhist art of China in the Rijksmuseum Amsterdam|Sculptures from China in the Rijksmuseum Amsterdam",
+            "source": "commons-categories",
+            "hidden": ""
+          },
+          "Assessments": {
+            "value": "",
+            "source": "commons-categories",
+            "hidden": ""
+          },
+          "Artist": {
+            "value": "<bdi><a href=\"https://www.wikidata.org/wiki/Q4233718\" class=\"extiw\" title=\"d:Q4233718\"><span title='unknown creator of a work (do not use as value of P50; use \"unknown value\" instead)'>anonymous</span></a></bdi>",
+            "source": "commons-desc-page"
+          },
+          "ImageDescription": {
+            "value": "<div class=\"description\">\nStatue of Guanyin in the Rijksmusuem in Amsterdam. It is made during the <a href=\"https://en.wikipedia.org/wiki/Song_dynasty\" class=\"extiw\" title=\"en:Song dynasty\">Song dynasty</a>. Made out of two different types of wood.</div>",
+            "source": "commons-desc-page"
+          },
+          "DateTimeOriginal": {
+            "value": "Between 1100 and 1200<div style=\"display: none;\">date QS:P571,+1500-00-00T00:00:00Z/6,P1319,+1100-00-00T00:00:00Z/9,P1326,+1200-00-00T00:00:00Z/9</div>",
+            "source": "commons-desc-page"
+          },
+          "Credit": {
+            "value": "<a href=\"//commons.wikimedia.org/wiki/User:Dqfn13\" title=\"User:Dqfn13\">Dqfn13</a>",
+            "source": "commons-desc-page"
+          },
+          "LicenseShortName": {
+            "value": "CC BY-SA 4.0",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "UsageTerms": {
+            "value": "Creative Commons Attribution-Share Alike 4.0",
+            "source": "commons-desc-page"
+          },
+          "AttributionRequired": {
+            "value": "true",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "LicenseUrl": {
+            "value": "https://creativecommons.org/licenses/by-sa/4.0",
+            "source": "commons-desc-page"
+          },
+          "Copyrighted": {
+            "value": "True",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "Restrictions": {
+            "value": "",
+            "source": "commons-desc-page",
+            "hidden": ""
+          },
+          "License": {
+            "value": "cc-by-sa-4.0",
+            "source": "commons-templates",
+            "hidden": ""
+          }
+        }
+      }
+    ]
+  }
+}
