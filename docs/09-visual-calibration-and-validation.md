@@ -1,8 +1,25 @@
 # Phase 5 calibration and validation — 2026-09-15
 
 The calibration workflow is implemented and exercised against real Atlas references.
-Phase 5 remains incomplete: the evaluation corpus does not meet its coverage and
-sample-size gates. Automatic API identification remains disabled.
+Phase 5 remains incomplete. The current v5 corpus meets all coverage and
+sample-size gates, but the frozen regional ensemble fails retrieval, precision,
+and negative-rejection gates. Automatic API identification remains disabled. See
+the [v5 report](15-visual-online-validation-v5.md) for the current result; the
+historical exercises below remain reproducibility records.
+
+The subsequent [expanded validation run](10-visual-expanded-validation.md) uses
+62 photos and 91 reference-covered objects, including sculpture and building
+references. It exposes missed architectural partial views and still fails the
+coverage and automatic-match sample-size gates. The historical results below are
+preserved; use the new report and [collection checklist](11-visual-field-photo-checklist.md)
+for the current remaining work.
+The later [v3 run](12-visual-expanded-validation-v3.md) fixes those architectural
+misses with broader references, but a larger held-out set exposes false simulated
+automatic selections. V5 is the current validation state.
+The historical manifest below assumes the former 85-object reference corpus;
+its building negatives are no longer valid against the expanded live corpus.
+Use the v5 artifacts for the current result. Frozen artifacts intentionally reject
+changed reference sets; the older commands below remain historical examples.
 
 ## Operator workflow
 

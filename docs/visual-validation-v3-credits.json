@@ -1,0 +1,347 @@
+[
+  {
+    "id": "commons-189918713",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Cornelis_Cornelisz_van_Haarlem_-_The_Fall_of_Man.jpg",
+    "metadata": {
+      "Artist": "   Cornelis van Haarlem   ",
+      "Credit": "  Web Gallery of Art  : \u00a0       Image \u00a0       Info about artwork  wga QS:P11807,\"c/cornelis/fall_man\" ",
+      "Attribution": "",
+      "LicenseShortName": "Public domain",
+      "LicenseUrl": "",
+      "DateTimeOriginal": "1592\u00a0     "
+    },
+    "commons_uploader": "Jdsteakley",
+    "camera": "Galaxy S23",
+    "original_exposure_time": "2026:04:16 10:47:24",
+    "download": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ac/Cornelis_Cornelisz_van_Haarlem_-_The_Fall_of_Man.jpg/1280px-Cornelis_Cornelisz_van_Haarlem_-_The_Fall_of_Man.jpg",
+      "bytes": 664248,
+      "sha256": "abb5cd7eff4057001991199b600759d437ac8cb3109697ee2190fc039f1c60fe"
+    },
+    "split": "evaluation",
+    "capture_group": "commons-original-capture-189918713",
+    "review": "Assistant visual inspection and original exposure metadata review before inference. Human field confirmation remains open."
+  },
+  {
+    "id": "commons-26253375",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Cornelis_Cornelisz._van_Haarlem_-_The_Fall_of_Man_-_Bear_(detail).jpg",
+    "metadata": {
+      "Artist": "   Cornelis van Haarlem   ",
+      "Credit": " Self-photographed ",
+      "Attribution": "",
+      "LicenseShortName": "Public domain",
+      "LicenseUrl": "",
+      "DateTimeOriginal": "1592 date QS:P571,+1592-00-00T00:00:00Z/9 "
+    },
+    "commons_uploader": "Syrcro",
+    "camera": "iPad mini",
+    "original_exposure_time": "2013:05:17 11:36:48",
+    "download": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/Cornelis_Cornelisz._van_Haarlem_-_The_Fall_of_Man_-_Bear_%28detail%29.jpg/1280px-Cornelis_Cornelisz._van_Haarlem_-_The_Fall_of_Man_-_Bear_%28detail%29.jpg",
+      "bytes": 372513,
+      "sha256": "60fb5c97447cb82a4c5d59e7ff23b81260fd1e644cc4f95f61d496734cf7aa9b"
+    },
+    "split": "evaluation",
+    "capture_group": "commons-original-capture-26253375",
+    "review": "Assistant visual inspection and original exposure metadata review before inference. Human field confirmation remains open."
+  },
+  {
+    "id": "commons-26253448",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Cornelis_Cornelisz._van_Haarlem_-_The_Fall_of_Man_-_Dog_(detail).jpg",
+    "metadata": {
+      "Artist": "   Cornelis van Haarlem   ",
+      "Credit": " Self-photographed ",
+      "Attribution": "",
+      "LicenseShortName": "Public domain",
+      "LicenseUrl": "",
+      "DateTimeOriginal": "1592 date QS:P571,+1592-00-00T00:00:00Z/9 "
+    },
+    "commons_uploader": "Syrcro",
+    "camera": "iPad mini",
+    "original_exposure_time": "2013:05:17 11:37:05",
+    "download": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/78/Cornelis_Cornelisz._van_Haarlem_-_The_Fall_of_Man_-_Dog_%28detail%29.jpg/1280px-Cornelis_Cornelisz._van_Haarlem_-_The_Fall_of_Man_-_Dog_%28detail%29.jpg",
+      "bytes": 532045,
+      "sha256": "a66dab4bf383117f2fa0f61013444134f71e55bd8192520fa90d2c822d404e25"
+    },
+    "split": "evaluation",
+    "capture_group": "commons-original-capture-26253448",
+    "review": "Assistant visual inspection and original exposure metadata review before inference. Human field confirmation remains open."
+  },
+  {
+    "id": "commons-26253548",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Cornelis_Cornelisz._van_Haarlem_-_The_Fall_of_Man_-_Monkey,_Cat,_Frog,_Hedgehog_(detail),.jpg",
+    "metadata": {
+      "Artist": "   Cornelis van Haarlem   ",
+      "Credit": " Self-photographed ",
+      "Attribution": "",
+      "LicenseShortName": "Public domain",
+      "LicenseUrl": "",
+      "DateTimeOriginal": "1592 date QS:P571,+1592-00-00T00:00:00Z/9 "
+    },
+    "commons_uploader": "Syrcro",
+    "camera": "iPad mini",
+    "original_exposure_time": "2013:05:17 11:36:42",
+    "download": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fb/Cornelis_Cornelisz._van_Haarlem_-_The_Fall_of_Man_-_Monkey%2C_Cat%2C_Frog%2C_Hedgehog_%28detail%29%2C.jpg/1280px-Cornelis_Cornelisz._van_Haarlem_-_The_Fall_of_Man_-_Monkey%2C_Cat%2C_Frog%2C_Hedgehog_%28detail%29%2C.jpg",
+      "bytes": 373825,
+      "sha256": "52b96f7cdae5b37edd6114a241a8e7ccb090bcf708d5f25b3db98f00cf0d4a2d"
+    },
+    "split": "evaluation",
+    "capture_group": "commons-original-capture-26253548",
+    "review": "Assistant visual inspection and original exposure metadata review before inference. Human field confirmation remains open."
+  },
+  {
+    "id": "commons-50148850",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Rijksmuseum.amsterdam_(53)_(15195115852).jpg",
+    "metadata": {
+      "Artist": " bertknot  from scarborough, australia",
+      "Credit": " rijksmuseum.amsterdam (53) ",
+      "Attribution": "",
+      "LicenseShortName": "CC BY-SA 2.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/2.0",
+      "DateTimeOriginal": "2014-06-19 21:40"
+    },
+    "commons_uploader": "Hannolans",
+    "camera": "Canon EOS 100D",
+    "original_exposure_time": "2014:06:19 21:40:05",
+    "download": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Rijksmuseum.amsterdam_%2853%29_%2815195115852%29.jpg/1280px-Rijksmuseum.amsterdam_%2853%29_%2815195115852%29.jpg",
+      "bytes": 470001,
+      "sha256": "92387774d305b8084f71d4b32e90a5f7a1868f31a35445d4f3fa604798aae4fd"
+    },
+    "split": "evaluation",
+    "capture_group": "commons-original-capture-50148850",
+    "review": "Assistant visual inspection and original exposure metadata review before inference. Human field confirmation remains open."
+  },
+  {
+    "id": "commons-67086858",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Frans_post,_veduta_dell%27isola_di_itamarac%C3%A0_in_brasile,_1637,_02_cavallo.jpg",
+    "metadata": {
+      "Artist": " Sailko ",
+      "Credit": " Own work ",
+      "Attribution": "",
+      "LicenseShortName": "CC BY 3.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "DateTimeOriginal": "2017-03-14 10:57:17"
+    },
+    "commons_uploader": "Sailko",
+    "camera": "Canon EOS 6D",
+    "original_exposure_time": "2017:03:14 10:57:17",
+    "download": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Frans_post%2C_veduta_dell%27isola_di_itamarac%C3%A0_in_brasile%2C_1637%2C_02_cavallo.jpg/1280px-Frans_post%2C_veduta_dell%27isola_di_itamarac%C3%A0_in_brasile%2C_1637%2C_02_cavallo.jpg",
+      "bytes": 323270,
+      "sha256": "4ed0cb607e1510f1450f5890223cf771ad3cd426e503934a11fd3348a3ec2c77"
+    },
+    "split": "evaluation",
+    "capture_group": "commons-original-capture-67086858",
+    "review": "Assistant visual inspection and original exposure metadata review before inference. Human field confirmation remains open."
+  },
+  {
+    "id": "commons-67086859",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Frans_post,_veduta_dell%27isola_di_itamarac%C3%A0_in_brasile,_1637,_03_cavallo_e_uomo_di_colore.jpg",
+    "metadata": {
+      "Artist": "   Frans Post   ",
+      "Credit": " Self-photographed   Sailko  Taken on\u00a014 March 2017",
+      "Attribution": "",
+      "LicenseShortName": "Public domain",
+      "LicenseUrl": "",
+      "DateTimeOriginal": "1637\u00a0     "
+    },
+    "commons_uploader": "Sailko",
+    "camera": "Canon EOS 6D",
+    "original_exposure_time": "2017:03:14 10:57:20",
+    "download": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f7/Frans_post%2C_veduta_dell%27isola_di_itamarac%C3%A0_in_brasile%2C_1637%2C_03_cavallo_e_uomo_di_colore.jpg/1280px-Frans_post%2C_veduta_dell%27isola_di_itamarac%C3%A0_in_brasile%2C_1637%2C_03_cavallo_e_uomo_di_colore.jpg",
+      "bytes": 204225,
+      "sha256": "c5c28eac474f9fe33a0a82680de7b8d937f52a8bf70f1da1b40fb9a77c46bfb0"
+    },
+    "split": "evaluation",
+    "capture_group": "commons-original-capture-67086859",
+    "review": "Assistant visual inspection and original exposure metadata review before inference. Human field confirmation remains open."
+  },
+  {
+    "id": "commons-105350359",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Den_Haag_-_Mauritshuis_-_Frans_Post_(1612-1680)_-_View_of_Itamaric%C3%A1_Island_in_Brazil_1637.jpg",
+    "metadata": {
+      "Artist": " Txllxt TxllxT ",
+      "Credit": " Own work  RAW Developing by DxO Photolab 4",
+      "Attribution": "",
+      "LicenseShortName": "CC BY-SA 4.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "DateTimeOriginal": "2018-08-17 15:53:12"
+    },
+    "commons_uploader": "Txllxt TxllxT",
+    "camera": "ILCE-7RM2",
+    "original_exposure_time": "2018:08:17 15:53:12",
+    "download": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Den_Haag_-_Mauritshuis_-_Frans_Post_%281612-1680%29_-_View_of_Itamaric%C3%A1_Island_in_Brazil_1637.jpg/1280px-Den_Haag_-_Mauritshuis_-_Frans_Post_%281612-1680%29_-_View_of_Itamaric%C3%A1_Island_in_Brazil_1637.jpg",
+      "bytes": 302448,
+      "sha256": "cbd24d3b881b05bb6ba67b1c72943160756f961ca195713450a222452d2636c5"
+    },
+    "split": "evaluation",
+    "capture_group": "commons-original-capture-105350359",
+    "review": "Assistant visual inspection and original exposure metadata review before inference. Human field confirmation remains open."
+  },
+  {
+    "id": "commons-67086856",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Frans_post,_veduta_dell%27isola_di_itamarac%C3%A0_in_brasile,_1637,_01.jpg",
+    "metadata": {
+      "Artist": " Sailko ",
+      "Credit": " Own work ",
+      "Attribution": "",
+      "LicenseShortName": "CC BY 3.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "DateTimeOriginal": "2017-03-14 10:57:11"
+    },
+    "commons_uploader": "Sailko",
+    "camera": "Canon EOS 6D",
+    "original_exposure_time": "2017:03:14 10:57:11",
+    "download": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/16/Frans_post%2C_veduta_dell%27isola_di_itamarac%C3%A0_in_brasile%2C_1637%2C_01.jpg/1280px-Frans_post%2C_veduta_dell%27isola_di_itamarac%C3%A0_in_brasile%2C_1637%2C_01.jpg",
+      "bytes": 227918,
+      "sha256": "0ce07c7206e0f046a532f3f089d5bad802e15f1822f9e2798c05d606e1eb7eae"
+    },
+    "split": "evaluation",
+    "capture_group": "commons-original-capture-67086856",
+    "review": "Assistant visual inspection and original exposure metadata review before inference. Human field confirmation remains open."
+  },
+  {
+    "id": "commons-159588439",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Budapest,_Hungarian_National_Gallery,_Pierre_Bonnard,_dining_room_at_Grand-Lemps.jpg",
+    "metadata": {
+      "Artist": " Dguendel ",
+      "Credit": " Own work ",
+      "Attribution": "",
+      "LicenseShortName": "CC BY 4.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "DateTimeOriginal": "2024-10-26 12:46:28"
+    },
+    "commons_uploader": "Dguendel",
+    "camera": "iPhone 15 Pro Max",
+    "original_exposure_time": "2024:10:26 12:46:28",
+    "download": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bc/Budapest%2C_Hungarian_National_Gallery%2C_Pierre_Bonnard%2C_dining_room_at_Grand-Lemps.jpg/1280px-Budapest%2C_Hungarian_National_Gallery%2C_Pierre_Bonnard%2C_dining_room_at_Grand-Lemps.jpg",
+      "bytes": 587762,
+      "sha256": "8201d03cc4ccd8d5900a72c1e8eba4287f744f4d4f1c06f4a2cdce17f1083594"
+    },
+    "split": "calibration",
+    "capture_group": "commons-original-capture-159588439",
+    "review": "Assistant visual inspection and original exposure metadata review before inference. Human field confirmation remains open."
+  },
+  {
+    "id": "commons-81315943",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Hoffman_Gallia_Apartment_smoking_room.jpg",
+    "metadata": {
+      "Artist": " Rohanstorey ",
+      "Credit": " Own work ",
+      "Attribution": "",
+      "LicenseShortName": "CC BY-SA 4.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "DateTimeOriginal": "2017-06-27 15:29:42"
+    },
+    "commons_uploader": "Rohanstorey",
+    "camera": "iPhone 6s Plus",
+    "original_exposure_time": "2017:06:27 15:29:42",
+    "download": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Hoffman_Gallia_Apartment_smoking_room.jpg/1280px-Hoffman_Gallia_Apartment_smoking_room.jpg",
+      "bytes": 158655,
+      "sha256": "a987a8f185143652f3264f6d6c3b1ce0a1615f0afe4e12171b2072b0d358cee5"
+    },
+    "split": "calibration",
+    "capture_group": "commons-original-capture-81315943",
+    "review": "Assistant visual inspection and original exposure metadata review before inference. Human field confirmation remains open."
+  },
+  {
+    "id": "commons-109412945",
+    "source_page": "https://commons.wikimedia.org/wiki/File:London_National_Gallery_Cognoscenti_in_a_Room_hung_with_Pictures_02.jpg",
+    "metadata": {
+      "Artist": " Ad Meskens  \n You are free to use this picture for any purpose as long as you credit its author,   Ad Meskens  .\n  Example:   \u00a9 Ad Meskens / Wikimedia Commons \n         If you use this work  outside  of the Wikimedia projects,   a message   or a copy is very much appreciated.\n       \n\tThis image is not in the public domain. A statement such as \"From Wikimedia Commons\" or similar is not by itself sufficient. If you do not provide clear attribution to the author you do not comply with the terms of the file's license and you may not use this file. If you are unable or unwilling to provide attribution you should contact Ad Meskens to negotiate a different license.\n \n ",
+      "Credit": "photo:  Own work ",
+      "Attribution": "",
+      "LicenseShortName": "CC BY-SA 4.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "DateTimeOriginal": "2019-09-22 11:39:48"
+    },
+    "commons_uploader": "Ad Meskens",
+    "camera": "DSC-HX400V",
+    "original_exposure_time": "2019:09:22 11:39:48",
+    "download": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/London_National_Gallery_Cognoscenti_in_a_Room_hung_with_Pictures_02.jpg/1280px-London_National_Gallery_Cognoscenti_in_a_Room_hung_with_Pictures_02.jpg",
+      "bytes": 280997,
+      "sha256": "39036ee42541e6ecc06892211c6bad12433a422c61ab173bb9638035e13779e1"
+    },
+    "split": "calibration",
+    "capture_group": "commons-original-capture-109412945",
+    "review": "Assistant visual inspection and original exposure metadata review before inference. Human field confirmation remains open."
+  },
+  {
+    "id": "commons-72268883",
+    "source_page": "https://commons.wikimedia.org/wiki/File:National_Gallery_of_Victoria_The_Tea_Room_2017.jpg",
+    "metadata": {
+      "Artist": " Wpcpey ",
+      "Credit": " Own work ",
+      "Attribution": "",
+      "LicenseShortName": "CC BY-SA 4.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "DateTimeOriginal": "2017-08-22"
+    },
+    "commons_uploader": "Wpcpey",
+    "camera": "DMC-LX7",
+    "original_exposure_time": "2017:08:22 15:41:05",
+    "download": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/National_Gallery_of_Victoria_The_Tea_Room_2017.jpg/1280px-National_Gallery_of_Victoria_The_Tea_Room_2017.jpg",
+      "bytes": 255671,
+      "sha256": "4e6abb4ecd2fbebd4079356a2d25230467b68b5eb6bdf3238d1eab9f35d51f43"
+    },
+    "split": "calibration",
+    "capture_group": "commons-original-capture-72268883",
+    "review": "Assistant visual inspection and original exposure metadata review before inference. Human field confirmation remains open."
+  },
+  {
+    "id": "commons-73223917",
+    "source_page": "https://commons.wikimedia.org/wiki/File:North_Room,_Chung-shan_National_Gallery_20180929.jpg",
+    "metadata": {
+      "Artist": " Solomon203 ",
+      "Credit": " Own work ",
+      "Attribution": "",
+      "LicenseShortName": "CC BY-SA 4.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "DateTimeOriginal": "2018-09-29 13:16:03"
+    },
+    "commons_uploader": "Solomon203",
+    "camera": "DSC-WX7                ",
+    "original_exposure_time": "2018:09:29 13:16:03",
+    "download": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/North_Room%2C_Chung-shan_National_Gallery_20180929.jpg/1280px-North_Room%2C_Chung-shan_National_Gallery_20180929.jpg",
+      "bytes": 200203,
+      "sha256": "dd5fe0cc4058fe79df476e1d8785838f7e5d60c8df19e5291a110e087699122f"
+    },
+    "split": "calibration",
+    "capture_group": "commons-original-capture-73223917",
+    "review": "Assistant visual inspection and original exposure metadata review before inference. Human field confirmation remains open."
+  },
+  {
+    "id": "commons-32578889",
+    "source_page": "https://commons.wikimedia.org/wiki/File:Room_10,_Art_of_Tibetan_Buddhism,_Prague_Kinsky,_NG_Vp_1085,_141058.jpg",
+    "metadata": {
+      "Artist": " Zde ",
+      "Credit": " Own work ",
+      "Attribution": "",
+      "LicenseShortName": "CC BY-SA 3.0",
+      "LicenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "DateTimeOriginal": "2014-04-23 11:03:26"
+    },
+    "commons_uploader": "Zde",
+    "camera": "Canon EOS 60D",
+    "original_exposure_time": "2014:04:23 11:03:26",
+    "download": {
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4c/Room_10%2C_Art_of_Tibetan_Buddhism%2C_Prague_Kinsky%2C_NG_Vp_1085%2C_141058.jpg/1280px-Room_10%2C_Art_of_Tibetan_Buddhism%2C_Prague_Kinsky%2C_NG_Vp_1085%2C_141058.jpg",
+      "bytes": 238786,
+      "sha256": "813bb530f279cff855ba25cf0f2c1359bc3b857ed39dea7f34f04ebf65b3da87"
+    },
+    "split": "calibration",
+    "capture_group": "commons-original-capture-32578889",
+    "review": "Assistant visual inspection and original exposure metadata review before inference. Human field confirmation remains open."
+  }
+]

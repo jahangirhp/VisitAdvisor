@@ -1,8 +1,13 @@
 # Phase 5 — Visual object recognition pilot
 
-**Updated:** 2026-09-14
+**Updated:** 2026-09-18
 **Status:** Preparation, benchmark tools, and opt-in visual candidate API implemented.
 Independent recognition accuracy and automatic identification are not complete.
+
+The latest [v5 validation](15-visual-online-validation-v5.md) passes every dataset
+and API transport gate on a 180-photo source-separated corpus. Recognition still
+fails the required retrieval, automatic-precision, and negative-rejection gates,
+so candidate-only behavior remains the correct production setting.
 
 ## Scope and current behavior
 
@@ -397,11 +402,14 @@ processing, versioned image/regional/SIFT descriptors in Atlas, atomic reference
 publication, a separate visual index, a capture-separated benchmark runner, and
 opt-in visual candidate responses without OCR.
 
-Still required to complete Phase 5: a curated multi-category reference set,
-independent full/partial phone photos and negatives, threshold calibration and
-held-out evaluation, model/method selection from those results, and end-to-end
-latency/accuracy validation. Only then should automatic visual matching be enabled.
-The existing Phase 3 factual-content review is still open independently.
+The [v5 online validation](15-visual-online-validation-v5.md) now supplies a
+source-separated 180-photo corpus, 20 held-out identities, complete full/partial
+coverage, and 30 held-out negatives. The regional ensemble reaches the automatic
+coverage target, but fails full/partial retrieval, automatic precision, and
+negative rejection. Improve references and ranking, then freeze another unseen
+validation corpus before enabling automatic matching. Physical phone/network
+latency validation remains required after recognition gates pass. The existing
+Phase 3 factual-content review is still open independently.
 
 The [calibration/validation workflow](09-visual-calibration-and-validation.md) is
 implemented and tested. Its first real regression run preserved 5/5 positive

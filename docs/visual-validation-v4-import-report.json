@@ -1,0 +1,155 @@
+[
+  {
+    "accession": "SK-C-5",
+    "object_id": "6aab0dbcdd73e04d96150a00",
+    "source_ids": [
+      "6aab0dbafb35e84081574b05"
+    ],
+    "name": "Officers and other civic guardsmen of District II in Amsterdam, under the command of Captain Frans Banninck Cocq and Lieutenant Willem van Ruytenburch, known as ‘The Night Watch’",
+    "status": "skipped"
+  },
+  {
+    "accession": "SK-C-2",
+    "object_id": "6aab0decdd73e04d96150a13",
+    "source_ids": [
+      "6aab0dec303f7d479a4f23d6"
+    ],
+    "name": "The Celebration of the Peace of Münster, 18 June 1648, in the Headquarters of the Crossbowmen's Civic Guard (St George Guard), Amsterdam",
+    "status": "imported"
+  },
+  {
+    "accession": "SK-A-5104",
+    "object_id": "6aab0deedd73e04d96150a15",
+    "source_ids": [
+      "6aab0ded303f7d479a4f23d7"
+    ],
+    "name": "Vanitas stilleven",
+    "status": "imported"
+  },
+  {
+    "accession": "BK-1976-75",
+    "object_id": "6aab0defdd73e04d96150a16",
+    "source_ids": [
+      "6aab0def303f7d479a4f23d8"
+    ],
+    "name": "Lidded ewer for the Amsterdam Goldsmiths Guild",
+    "status": "imported"
+  },
+  {
+    "accession": "BK-2015-57",
+    "object_id": "6aab0df0dd73e04d96150a18",
+    "source_ids": [
+      "6aab0df0303f7d479a4f23d9"
+    ],
+    "name": "Crucified Christ",
+    "status": "imported"
+  },
+  {
+    "accession": "BK-16978",
+    "object_id": "6aab0df2dd73e04d96150a19",
+    "source_ids": [
+      "6aab0df1303f7d479a4f23da"
+    ],
+    "name": "Retabel met Maria met kind tussen Hieronymus en Nicolaas van Myra",
+    "status": "imported"
+  },
+  {
+    "accession": "BK-NM-8672",
+    "object_id": "6aab0df3dd73e04d96150a1a",
+    "source_ids": [
+      "6aab0df3303f7d479a4f23db"
+    ],
+    "name": "Spring",
+    "status": "imported"
+  },
+  {
+    "accession": "BK-NM-8674",
+    "object_id": "6aab0df5dd73e04d96150a1b",
+    "source_ids": [
+      "6aab0df4303f7d479a4f23dc"
+    ],
+    "name": "Autumn",
+    "status": "imported"
+  },
+  {
+    "accession": "BK-NM-8673",
+    "object_id": "6aab0df6dd73e04d96150a1c",
+    "source_ids": [
+      "6aab0df5303f7d479a4f23dd"
+    ],
+    "name": "Summer",
+    "status": "imported"
+  },
+  {
+    "accession": "BK-1961-50",
+    "object_id": "6aab0df8dd73e04d96150a1e",
+    "source_ids": [
+      "6aab0df7303f7d479a4f23de"
+    ],
+    "name": "Apollo",
+    "status": "imported"
+  },
+  {
+    "accession": null,
+    "object_id": "6aab0dfa303f7d479a4f23e0",
+    "source_ids": [
+      "6aab0df9303f7d479a4f23df"
+    ],
+    "name": "Rijksmuseum Atrium",
+    "status": "upserted"
+  },
+  {
+    "accession": null,
+    "object_id": "6aab0dfb303f7d479a4f23e2",
+    "source_ids": [
+      "6aab0dfb303f7d479a4f23e1"
+    ],
+    "name": "Rijksmuseum Passage",
+    "status": "upserted"
+  },
+  {
+    "accession": null,
+    "object_id": "6aab0dfc303f7d479a4f23e4",
+    "source_ids": [
+      "6aab0dfb303f7d479a4f23e3"
+    ],
+    "name": "Rijksmuseum Great Hall",
+    "status": "upserted"
+  },
+  {
+    "accession": null,
+    "object_id": "6aab0dfd303f7d479a4f23e6",
+    "source_ids": [
+      "6aab0dfc303f7d479a4f23e5"
+    ],
+    "name": "Rijksmuseum Gallery of Honour",
+    "status": "upserted"
+  },
+  {
+    "accession": null,
+    "object_id": "6aab0dfd303f7d479a4f23e8",
+    "source_ids": [
+      "6aab0dfd303f7d479a4f23e7"
+    ],
+    "name": "Rijksmuseum Night Watch Room",
+    "status": "upserted"
+  },
+  {
+    "accession": null,
+    "object_id": "6aab0dff303f7d479a4f23ea",
+    "source_ids": [
+      "6aab0dff303f7d479a4f23e9"
+    ],
+    "name": "Rijksmuseum Research Library",
+    "status": "upserted"
+  },
+  {
+    "accession": null,
+    "object_id": "6aab0e00303f7d479a4f23ec",
+    "source_ids": [
+      "6aab0e00303f7d479a4f23eb"
+    ],
+    "name": "Rijksmuseum Room 0.1",
+    "status": "upserted"
+  }
+]

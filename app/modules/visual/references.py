@@ -17,9 +17,11 @@ HOSTS = {
     "id.rijksmuseum.nl",
     "iiif.micr.io",
     "upload.wikimedia.org",
+    "thumb.wikimedia.org",
 }
 MAX_REQUESTS = 32
 MAX_VIEWS = 4
+USER_AGENT = "VisitAdvisor/0.1 (bounded visual reference preparation; Python httpx)"
 
 
 def validate_url(url: str) -> None:
@@ -73,7 +75,11 @@ class ReferenceClient:
                         raise VisualFailure("REFERENCE_REQUEST_LIMIT")
                     self.requests += 1
                     async with self.http.stream(
-                        "GET", url, follow_redirects=False, timeout=15
+                        "GET",
+                        url,
+                        headers={"User-Agent": USER_AGENT},
+                        follow_redirects=False,
+                        timeout=15,
                     ) as response:
                         if response.is_redirect:
                             url = urljoin(url, response.headers.get("location", ""))

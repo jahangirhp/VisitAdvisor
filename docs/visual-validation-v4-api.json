@@ -1,0 +1,3000 @@
+{
+  "started_at": "2026-09-17T18:56:51.870062+00:00",
+  "model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056",
+  "preprocessing": "rgb-thumbnail2560-dino224-regions65-sift800-v1/4.57.6/2.14.0+cpu/4.14.0.94/12.3.0",
+  "manifest_hash": "3a6ffb8d78d67d6b51848868a0e4a70e71a97bc9354bc9a15720fb3640d29c8f",
+  "measurement": "Sequential in-process ASGI multipart uploads and real Atlas; excludes startup, camera capture, mobile network and public HTTP transport",
+  "hardware": {
+    "machine": "x86_64",
+    "processor": "x86_64"
+  },
+  "summary": {
+    "requests": 110,
+    "http_200": 110,
+    "statuses": {
+      "ambiguous": 91,
+      "no_match": 19
+    },
+    "positive_photos": 72,
+    "positive_top3_correct": 63,
+    "negative_photos": 38,
+    "negative_with_candidates": 23,
+    "negative_abstentions": 15,
+    "automatic_matches": 0,
+    "p95_all_requests_seconds": 2.494103894016007
+  },
+  "by_split": {
+    "calibration": {
+      "requests": 20,
+      "http_200": 20,
+      "statuses": {
+        "ambiguous": 18,
+        "no_match": 2
+      },
+      "positive_photos": 12,
+      "positive_top3_correct": 12,
+      "negative_photos": 8,
+      "negative_with_candidates": 6,
+      "negative_abstentions": 2,
+      "automatic_matches": 0,
+      "p95_all_requests_seconds": 2.6031071720062755
+    },
+    "evaluation": {
+      "requests": 90,
+      "http_200": 90,
+      "statuses": {
+        "no_match": 17,
+        "ambiguous": 73
+      },
+      "positive_photos": 60,
+      "positive_top3_correct": 51,
+      "negative_photos": 30,
+      "negative_with_candidates": 17,
+      "negative_abstentions": 13,
+      "automatic_matches": 0,
+      "p95_all_requests_seconds": 2.4629363730200566
+    }
+  },
+  "rows": [
+    {
+      "id": "commons-109412945",
+      "split": "calibration",
+      "category": "similar_object",
+      "object_type": "painting",
+      "expected_object_id": null,
+      "photo_hash": "39036ee42541e6ecc06892211c6bad12433a422c61ab173bb9638035e13779e1",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6a9dd844332abe8469d55971",
+        "6a9dd82d332abe8469d55954",
+        "6a9dd81d332abe8469d5593d"
+      ],
+      "scores": [
+        0.5825047492980957,
+        0.5719611644744873,
+        0.558053731918335
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 3.315371306001907
+    },
+    {
+      "id": "commons-155893740",
+      "split": "calibration",
+      "category": "full",
+      "object_type": "building",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "photo_hash": "55597671ff1e87f4ada0e70aec1fc5903d80462038a3c95689ef52ffaff846ba",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aa9a7fa60b7ca89b6355b9c"
+      ],
+      "scores": [
+        0.7105896472930908
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 2.088407178001944
+    },
+    {
+      "id": "commons-159588439",
+      "split": "calibration",
+      "category": "similar_object",
+      "object_type": "painting",
+      "expected_object_id": null,
+      "photo_hash": "8201d03cc4ccd8d5900a72c1e8eba4287f744f4d4f1c06f4a2cdce17f1083594",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6a9dd844332abe8469d55971",
+        "6a9dd843332abe8469d5596f",
+        "6a9dd842332abe8469d5596c"
+      ],
+      "scores": [
+        0.4900355339050293,
+        0.47720277309417725,
+        0.4727661609649658
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.666657813009806
+    },
+    {
+      "id": "commons-29902991",
+      "split": "calibration",
+      "category": "full",
+      "object_type": "painting",
+      "expected_object_id": "6a9dd7fb332abe8469d558f8",
+      "photo_hash": "46b19174e835c6f140b30cc9d80d731c76529b7e9efea096981f4a63d9e40786",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6a9dd7fb332abe8469d558f8",
+        "6a9dd829332abe8469d5594f",
+        "6a9dd82e332abe8469d55955"
+      ],
+      "scores": [
+        0.9400496482849121,
+        0.7601773738861084,
+        0.6914911270141602
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.481019159022253
+    },
+    {
+      "id": "commons-29918689",
+      "split": "calibration",
+      "category": "full",
+      "object_type": "painting",
+      "expected_object_id": "6a9dd839332abe8469d55962",
+      "photo_hash": "09aed40c2c4b32942b92cf86c2a2f5b95d5a7be7bdc05699f278b25722815528",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6a9dd839332abe8469d55962",
+        "6a9dd800332abe8469d558fd",
+        "6a9dd82e332abe8469d55955"
+      ],
+      "scores": [
+        0.8623369932174683,
+        0.6662169694900513,
+        0.6552630662918091
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.3626190680079162
+    },
+    {
+      "id": "commons-29934080",
+      "split": "calibration",
+      "category": "full",
+      "object_type": "painting",
+      "expected_object_id": "6aa9a743dd73e04d9614615c",
+      "photo_hash": "71b810199c4b8500bee16d0e19a660cb42943939a4e4538d9fc8a28ce1b912c8",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aa9a743dd73e04d9614615c",
+        "6aab0dbcdd73e04d96150a00",
+        "6a9dd80e332abe8469d55911"
+      ],
+      "scores": [
+        0.9063417911529541,
+        0.6609406471252441,
+        0.5805448293685913
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.605639435001649
+    },
+    {
+      "id": "commons-29948991",
+      "split": "calibration",
+      "category": "full",
+      "object_type": "painting",
+      "expected_object_id": "6a9dd818332abe8469d55938",
+      "photo_hash": "8aaf9298ecb8dbff820545fe8d1cafb6d09ec0302a7ba2432c341a7374a72ec7",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6a9dd818332abe8469d55938",
+        "6a9dd856332abe8469d5598e",
+        "6a9dd802332abe8469d558ff"
+      ],
+      "scores": [
+        0.8603439331054688,
+        0.7375726699829102,
+        0.7075138092041016
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.6510560720053036
+    },
+    {
+      "id": "commons-30014376",
+      "split": "calibration",
+      "category": "full",
+      "object_type": "painting",
+      "expected_object_id": "6aa9a744dd73e04d9614615e",
+      "photo_hash": "6ca98a27555eea40a92f2fc994a16bb14d82f6d1677b038448a33a26011005a0",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aa9a744dd73e04d9614615e",
+        "6a9dd843332abe8469d5596f",
+        "6a9dd844332abe8469d55971"
+      ],
+      "scores": [
+        0.9471285343170166,
+        0.751124382019043,
+        0.7382616996765137
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.4329062949982472
+    },
+    {
+      "id": "commons-32578889",
+      "split": "calibration",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "813bb530f279cff855ba25cf0f2c1359bc3b857ed39dea7f34f04ebf65b3da87",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0e00303f7d479a4f23ec"
+      ],
+      "scores": [
+        0.7195682525634766
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.4076141589903273
+    },
+    {
+      "id": "commons-32614566",
+      "split": "calibration",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "4a0572851168494b25483a41b45eafb256b10e792be92ad2e8932db81564ef96",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df0dd73e04d96150a18",
+        "6aab0e00303f7d479a4f23ec"
+      ],
+      "scores": [
+        0.4728745222091675,
+        0.4652513265609741
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.8190912450081669
+    },
+    {
+      "id": "commons-38157250",
+      "split": "calibration",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "255d5d1e2e5e12f5121eb98f213a503710da66a8e933d1bee2d18ec7a561b298",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df0dd73e04d96150a18",
+        "6aab0df5dd73e04d96150a1b",
+        "6aab0df8dd73e04d96150a1e"
+      ],
+      "scores": [
+        0.5110492706298828,
+        0.4969632625579834,
+        0.462399959564209
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 2.0336267550010234
+    },
+    {
+      "id": "commons-72268883",
+      "split": "calibration",
+      "category": "uninformative",
+      "object_type": "interior",
+      "expected_object_id": null,
+      "photo_hash": "4e6abb4ecd2fbebd4079356a2d25230467b68b5eb6bdf3238d1eab9f35d51f43",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.9972373839991633
+    },
+    {
+      "id": "commons-73223917",
+      "split": "calibration",
+      "category": "wrong_location",
+      "object_type": "interior",
+      "expected_object_id": null,
+      "photo_hash": "dd5fe0cc4058fe79df476e1d8785838f7e5d60c8df19e5291a110e087699122f",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0e00303f7d479a4f23ec"
+      ],
+      "scores": [
+        0.5190906524658203
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.5178980189957656
+    },
+    {
+      "id": "commons-81315943",
+      "split": "calibration",
+      "category": "outside_reference",
+      "object_type": "furniture",
+      "expected_object_id": null,
+      "photo_hash": "a987a8f185143652f3264f6d6c3b1ce0a1615f0afe4e12171b2072b0d358cee5",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.8809269150078762
+    },
+    {
+      "id": "commons-86203548",
+      "split": "calibration",
+      "category": "full",
+      "object_type": "sculpture",
+      "expected_object_id": "6aa9a746dd73e04d96146161",
+      "photo_hash": "f41870d2ba17b6610eb1dcc48cc5bc155c9d20a8f1f0a669fb9f29f987ee0290",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aa9a746dd73e04d96146161"
+      ],
+      "scores": [
+        0.8645155429840088
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 2.6031071720062755
+    },
+    {
+      "id": "misty-godenehler-full",
+      "split": "calibration",
+      "category": "full",
+      "object_type": "painting",
+      "expected_object_id": "6a9dd7f8332abe8469d558f5",
+      "photo_hash": "b8940e743a21d1d86055fd758257bcbe1127058dc5d33eadade60571292e5bc0",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6a9dd7f8332abe8469d558f5",
+        "6aaad084dd73e04d9614e9e8",
+        "6a9dd82e332abe8469d55955"
+      ],
+      "scores": [
+        0.5976827144622803,
+        0.5677331686019897,
+        0.5346715450286865
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.5531663869915064
+    },
+    {
+      "id": "misty-jojan-full",
+      "split": "calibration",
+      "category": "full",
+      "object_type": "painting",
+      "expected_object_id": "6a9dd7f8332abe8469d558f5",
+      "photo_hash": "f6653213a76b99777c38a4f74c2e2fe52a3aa4ba68493cbf3341bfade70a11b9",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6a9dd7f8332abe8469d558f5",
+        "6a9dd83e332abe8469d55967",
+        "6aaad084dd73e04d9614e9e8"
+      ],
+      "scores": [
+        0.916553258895874,
+        0.6411564350128174,
+        0.6040031909942627
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.5488694469968323
+    },
+    {
+      "id": "misty-wuselig-detail-1",
+      "split": "calibration",
+      "category": "partial",
+      "object_type": "painting",
+      "expected_object_id": "6a9dd7f8332abe8469d558f5",
+      "photo_hash": "030539826c11877c6403d3e38a895d15a229a48fde6bb54bbd3b4e7c925b3aaa",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6a9dd7f8332abe8469d558f5"
+      ],
+      "scores": [
+        0.6927911043167114
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.3313889830023982
+    },
+    {
+      "id": "misty-wuselig-detail-2",
+      "split": "calibration",
+      "category": "partial",
+      "object_type": "painting",
+      "expected_object_id": "6a9dd7f8332abe8469d558f5",
+      "photo_hash": "de92d815f71334dbbcc7a682fc05f8ca73f79a722e34b969f99837a4f94a340f",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6a9dd7f8332abe8469d558f5",
+        "6aaad084dd73e04d9614e9e8",
+        "6a9dd821332abe8469d55943"
+      ],
+      "scores": [
+        0.7824869155883789,
+        0.5718421936035156,
+        0.5112264156341553
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.7569005499826744
+    },
+    {
+      "id": "misty-wuselig-full",
+      "split": "calibration",
+      "category": "full",
+      "object_type": "painting",
+      "expected_object_id": "6a9dd7f8332abe8469d558f5",
+      "photo_hash": "b83c0bbbb74755239a26e1cc44f606f3a4d0ceb175a717e6f284a048477a2759",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6a9dd7f8332abe8469d558f5",
+        "6aaad084dd73e04d9614e9e8",
+        "6a9dd82e332abe8469d55955"
+      ],
+      "scores": [
+        0.6762642860412598,
+        0.6029305458068848,
+        0.5643229484558105
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.8432489240076393
+    },
+    {
+      "id": "commons-105215391",
+      "split": "evaluation",
+      "category": "wrong_location",
+      "object_type": "monument",
+      "expected_object_id": null,
+      "photo_hash": "ba25faeee42b3d769a6d63c3763ae8b7681f8104be3944f5ac284bbc015397d6",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.509623518009903
+    },
+    {
+      "id": "commons-105350359",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "painting",
+      "expected_object_id": "6aaad084dd73e04d9614e9e8",
+      "photo_hash": "cbd24d3b881b05bb6ba67b1c72943160756f961ca195713450a222452d2636c5",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aaad084dd73e04d9614e9e8",
+        "6a9dd83e332abe8469d55967",
+        "6a9dd7f8332abe8469d558f5"
+      ],
+      "scores": [
+        0.7036457061767578,
+        0.5886530876159668,
+        0.5405106544494629
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.9268527049862314
+    },
+    {
+      "id": "commons-105393269",
+      "split": "evaluation",
+      "category": "similar_object",
+      "object_type": "painting",
+      "expected_object_id": null,
+      "photo_hash": "0d999c61ee8c7ffa5f623a51301765ca9ffccedf83682a5311d2f84ef5e618a1",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.7675495829898864
+    },
+    {
+      "id": "commons-105393270",
+      "split": "evaluation",
+      "category": "similar_object",
+      "object_type": "painting",
+      "expected_object_id": null,
+      "photo_hash": "a711d192b3f715e251748116639ac6f626b5f4d3101398910bbff0b260849076",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0e00303f7d479a4f23ec",
+        "6aab0dfd303f7d479a4f23e8"
+      ],
+      "scores": [
+        0.5207666158676147,
+        0.5151114463806152
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 0.9730791290057823
+    },
+    {
+      "id": "commons-105410228",
+      "split": "evaluation",
+      "category": "similar_object",
+      "object_type": "painting",
+      "expected_object_id": null,
+      "photo_hash": "0a8191e20a859a8eaaa65955664463d4a18724a877f92c64c576d8b78e63fdc5",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6a9dd857332abe8469d55990",
+        "6a9dd854332abe8469d5598c",
+        "6a9dd84e332abe8469d55981"
+      ],
+      "scores": [
+        0.7182583808898926,
+        0.6922502517700195,
+        0.6784327030181885
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.987464508973062
+    },
+    {
+      "id": "commons-105411117",
+      "split": "evaluation",
+      "category": "similar_object",
+      "object_type": "painting",
+      "expected_object_id": null,
+      "photo_hash": "2655a69cb736ab02aad46cfc68ac36ff5ace6610ef54c1bcdbd3c2db71e8492c",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0e00303f7d479a4f23ec",
+        "6aab0dfd303f7d479a4f23e8"
+      ],
+      "scores": [
+        0.5948712825775146,
+        0.5347023010253906
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.554784018022474
+    },
+    {
+      "id": "commons-109821618",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "painting",
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "photo_hash": "c594e16a2cba8e01c89f22ba5e888462080f9881f73899697738ee64f78db6f9",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0dbcdd73e04d96150a00",
+        "6a9dd811332abe8469d55917",
+        "6a9dd81f332abe8469d55941"
+      ],
+      "scores": [
+        0.8700037002563477,
+        0.7328493595123291,
+        0.7268307209014893
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.3144709639891516
+    },
+    {
+      "id": "commons-113303445",
+      "split": "evaluation",
+      "category": "uninformative",
+      "object_type": "painting",
+      "expected_object_id": null,
+      "photo_hash": "5648ee78c118fd74a0291d396dd101403fcc661d7706da68f458a8eca684a22e",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6a9dd813332abe8469d5591b",
+        "6aa9a745dd73e04d96146160",
+        "6a9dd826332abe8469d5594b"
+      ],
+      "scores": [
+        0.7096166610717773,
+        0.6973006725311279,
+        0.6899590492248535
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.259880311001325
+    },
+    {
+      "id": "commons-114415747",
+      "split": "evaluation",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "8a925418a50a9aa696b37012669ec14ed300c8ea2c58f760f679911a579f86ee",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df0dd73e04d96150a18",
+        "6aab0df8dd73e04d96150a1e",
+        "6aab0e00303f7d479a4f23ec"
+      ],
+      "scores": [
+        0.518993616104126,
+        0.48745226860046387,
+        0.47184836864471436
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 2.0802828239975497
+    },
+    {
+      "id": "commons-114415750",
+      "split": "evaluation",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "6e5711f3ad01bf5dc40ccd247b7ff2dca45afb4e999bc8b793a7bbc2498eeab7",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df8dd73e04d96150a1e",
+        "6aab0e00303f7d479a4f23ec",
+        "6aab0df5dd73e04d96150a1b"
+      ],
+      "scores": [
+        0.4686877727508545,
+        0.4548516273498535,
+        0.45458877086639404
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.7725637989933603
+    },
+    {
+      "id": "commons-114415752",
+      "split": "evaluation",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "7359932bb12d70f896ceec93f1889c862f6225378af9e8a1653427c1879bc14d",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df0dd73e04d96150a18",
+        "6aab0e00303f7d479a4f23ec"
+      ],
+      "scores": [
+        0.47722601890563965,
+        0.4658043384552002
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.8465656469925307
+    },
+    {
+      "id": "commons-114415753",
+      "split": "evaluation",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "3e934bbcec42bf64f24312550e785baaaf0916c2a6f127443106e4fe188ced09",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0e00303f7d479a4f23ec",
+        "6aab0df0dd73e04d96150a18",
+        "6aab0df8dd73e04d96150a1e"
+      ],
+      "scores": [
+        0.4765641689300537,
+        0.46854567527770996,
+        0.4545830488204956
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.7694314229884185
+    },
+    {
+      "id": "commons-11805816",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "painting",
+      "expected_object_id": "6aab0decdd73e04d96150a13",
+      "photo_hash": "e5654dfb743ddaff3b4980ea62e578776abf003b65273bb9eb5a3f54f24c5986",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0decdd73e04d96150a13",
+        "6a9dd819332abe8469d55939",
+        "6a9dd81d332abe8469d5593d"
+      ],
+      "scores": [
+        0.593123197555542,
+        0.5541119575500488,
+        0.5480349063873291
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.441524168010801
+    },
+    {
+      "id": "commons-120891454",
+      "split": "evaluation",
+      "category": "similar_object",
+      "object_type": "painting",
+      "expected_object_id": null,
+      "photo_hash": "c9a2f54940da82acd2d7f6416acb4c47820db3967f74a8c920c18e879dca2852",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6a9dd81d332abe8469d5593d",
+        "6a9dd816332abe8469d55920",
+        "6a9dd81b332abe8469d5593b"
+      ],
+      "scores": [
+        0.5843126773834229,
+        0.5827062129974365,
+        0.5789904594421387
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.7015364019898698
+    },
+    {
+      "id": "commons-120891708",
+      "split": "evaluation",
+      "category": "similar_object",
+      "object_type": "painting",
+      "expected_object_id": null,
+      "photo_hash": "bdca38cc0c9ee26abe55cefc3dc4c0e623e4860f233a93c18192945cd44872ec",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6a9dd816332abe8469d55920",
+        "6a9dd811332abe8469d55917",
+        "6a9dd823332abe8469d55946"
+      ],
+      "scores": [
+        0.6786880493164062,
+        0.6542632579803467,
+        0.6425672769546509
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.4554323710035533
+    },
+    {
+      "id": "commons-121424564",
+      "split": "evaluation",
+      "category": "wrong_location",
+      "object_type": "painting",
+      "expected_object_id": null,
+      "photo_hash": "6180879f4d9e3e091f153924126790f0b3ce6cc89273eba741bb07a9e44b4239",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.9426376829796936
+    },
+    {
+      "id": "commons-132511731",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "building",
+      "expected_object_id": "6aab0dff303f7d479a4f23ea",
+      "photo_hash": "11465854da9971ffc3cbd3fa98d190e5b2cf467adfc5bf23986ae85a7cfa08c3",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0dff303f7d479a4f23ea"
+      ],
+      "scores": [
+        0.8832778930664062
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.6265772249898873
+    },
+    {
+      "id": "commons-132703964",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "building",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "photo_hash": "f7026d74d4e6289f57656b988107ecb7ace4612efa5b7b0134dac392ba9a116a",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aa9a7fa60b7ca89b6355b9c",
+        "6aab0df2dd73e04d96150a19",
+        "6aab0df8dd73e04d96150a1e"
+      ],
+      "scores": [
+        0.6683590412139893,
+        0.48468124866485596,
+        0.47597432136535645
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 2.4629363730200566
+    },
+    {
+      "id": "commons-132703965",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "building",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "photo_hash": "1480c8b7fd107d4ac1f2d43a0063323494a939589bbb392debf010bc2d70b485",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aa9a7fa60b7ca89b6355b9c",
+        "6aab0df8dd73e04d96150a1e",
+        "6aab0df5dd73e04d96150a1b"
+      ],
+      "scores": [
+        0.7065742015838623,
+        0.5162719488143921,
+        0.49204397201538086
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.5609386430005543
+    },
+    {
+      "id": "commons-147181821",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df2dd73e04d96150a19",
+      "photo_hash": "54fb3d5c533b820160c6d8f6dad6c70fc78c62cfa1624ba2b6ea52cfbc43b09e",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6a9dd827332abe8469d5594d",
+        "6aab0df2dd73e04d96150a19",
+        "6a9dd83c332abe8469d55965"
+      ],
+      "scores": [
+        0.5484229326248169,
+        0.5228512287139893,
+        0.481143593788147
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 2.5741298959765118
+    },
+    {
+      "id": "commons-147181822",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df2dd73e04d96150a19",
+      "photo_hash": "1ff2f6f8a0ffcf04b3326379ff7082e2a470f0a78bd987c5ac8b3844479dbba7",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df2dd73e04d96150a19",
+        "6a9dd812332abe8469d5591a",
+        "6aa9a7fa60b7ca89b6355b9c"
+      ],
+      "scores": [
+        0.6509515047073364,
+        0.6206495761871338,
+        0.614464521408081
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.8217486739740707
+    },
+    {
+      "id": "commons-147181823",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df2dd73e04d96150a19",
+      "photo_hash": "f515fa8233fe16a04e8008fe862923053b583f4b3563d07fadf16d699b32ebd5",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df2dd73e04d96150a19",
+        "6a9dd812332abe8469d5591a",
+        "6a9dd827332abe8469d5594d"
+      ],
+      "scores": [
+        0.7584924697875977,
+        0.6559879779815674,
+        0.6141980886459351
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.914883756020572
+    },
+    {
+      "id": "commons-147394325",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "building",
+      "expected_object_id": "6aab0dfd303f7d479a4f23e6",
+      "photo_hash": "a3626017bf1de31ea804ceddbeeb458cdf80c06145609af5ae096d1b588690d6",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0dfd303f7d479a4f23e8",
+        "6aab0dfd303f7d479a4f23e6",
+        "6aab0e00303f7d479a4f23ec"
+      ],
+      "scores": [
+        0.6661264896392822,
+        0.6563220024108887,
+        0.6451919078826904
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.4339294539822731
+    },
+    {
+      "id": "commons-148796162",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "building",
+      "expected_object_id": "6aab0dfa303f7d479a4f23e0",
+      "photo_hash": "e7c332efec31fe404a7cc7bac5a3d938b434a349e465b0b30d1810621cf5b7bd",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0dfa303f7d479a4f23e0"
+      ],
+      "scores": [
+        0.7131576538085938
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.428043104999233
+    },
+    {
+      "id": "commons-150619313",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "building",
+      "expected_object_id": "6aab0e00303f7d479a4f23ec",
+      "photo_hash": "78ef94c94909fd1ebfa0c982e78b64c3cda52979e9e481da23fad7a099691f95",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0e00303f7d479a4f23ec",
+        "6aab0dfd303f7d479a4f23e8"
+      ],
+      "scores": [
+        0.7843010425567627,
+        0.45880889892578125
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 2.864583913993556
+    },
+    {
+      "id": "commons-150621660",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "building",
+      "expected_object_id": "6aab0e00303f7d479a4f23ec",
+      "photo_hash": "6c814f940456ada5e2066d1eb38d18cd19af928fcf77f18f42a9583b3a252bde",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0e00303f7d479a4f23ec",
+        "6aab0dfd303f7d479a4f23e8",
+        "6aab0dfd303f7d479a4f23e6"
+      ],
+      "scores": [
+        0.7673892974853516,
+        0.5267199277877808,
+        0.45223116874694824
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.997630717989523
+    },
+    {
+      "id": "commons-150621668",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "building",
+      "expected_object_id": "6aab0e00303f7d479a4f23ec",
+      "photo_hash": "84737945eda63cefb9d3dd7c88af1588559306ea527b83c48073f5eca1af0664",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0e00303f7d479a4f23ec",
+        "6aab0dfd303f7d479a4f23e8"
+      ],
+      "scores": [
+        0.7978342771530151,
+        0.4847676753997803
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.9871784179995302
+    },
+    {
+      "id": "commons-151640577",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "building",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "photo_hash": "745b3524dbc63c02a2b9ae7c057c7f02f7eaee78c3e7af61d65afc025694e06b",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aa9a7fa60b7ca89b6355b9c"
+      ],
+      "scores": [
+        0.8992412090301514
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 2.0151548229914624
+    },
+    {
+      "id": "commons-152548760",
+      "split": "evaluation",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "d16e52ba564793754aaea475f4e559a24d135609611855e71fe2b38277a50a33",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.7885436340002343
+    },
+    {
+      "id": "commons-161498033",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "painting",
+      "expected_object_id": "6aab0deedd73e04d96150a15",
+      "photo_hash": "6d3c05091b016d6946436f4e26c717a883aa7ff02b7169ef6ed061eb40553406",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0deedd73e04d96150a15",
+        "6a9dd844332abe8469d55971",
+        "6a9dd812332abe8469d55919"
+      ],
+      "scores": [
+        0.7681194543838501,
+        0.5505908727645874,
+        0.5181210041046143
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 2.0350121129886247
+    },
+    {
+      "id": "commons-161500490",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "painting",
+      "expected_object_id": "6aab0deedd73e04d96150a15",
+      "photo_hash": "d080b747a0edcdf7af5277c8b432ba4048c20bbde41f4712d3baf030590c2d83",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0deedd73e04d96150a15"
+      ],
+      "scores": [
+        0.6148984432220459
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.646861446002731
+    },
+    {
+      "id": "commons-161500919",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "painting",
+      "expected_object_id": "6aab0deedd73e04d96150a15",
+      "photo_hash": "78c821df546e29c3339bd1657fd35339055d5df7e190694bf1c1b8272ab6c410",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0deedd73e04d96150a15"
+      ],
+      "scores": [
+        0.4756147861480713
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.4177651459758636
+    },
+    {
+      "id": "commons-193989612",
+      "split": "evaluation",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "9b36bc0ea4793666e0804eef064063dfa851a006648ec564d2be04335f8b08a1",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df0dd73e04d96150a18",
+        "6aab0df8dd73e04d96150a1e",
+        "6aab0df5dd73e04d96150a1b"
+      ],
+      "scores": [
+        0.5712077617645264,
+        0.48813319206237793,
+        0.45983803272247314
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.4354254030040465
+    },
+    {
+      "id": "commons-193989620",
+      "split": "evaluation",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "edbb7e9bfe70c687ed1892a0ebdc6b1eac41b8d11da09a0150a84b944f3ccae6",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df0dd73e04d96150a18",
+        "6aa9a746dd73e04d96146161",
+        "6aab0df8dd73e04d96150a1e"
+      ],
+      "scores": [
+        0.5295554399490356,
+        0.48439550399780273,
+        0.47136807441711426
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.085213215003023
+    },
+    {
+      "id": "commons-24670799",
+      "split": "evaluation",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "fed1d8a9d27652572f382d36301a6fa62e97b68bf43b2450c349f552f1d2df1f",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.2874240909877699
+    },
+    {
+      "id": "commons-24671002",
+      "split": "evaluation",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "c660c5005b279f9eeaa204401a899d137599dcb01ad72a9c147a2ac4d97ec62e",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aa9a7fa60b7ca89b6355b9c",
+        "6aab0df8dd73e04d96150a1e",
+        "6aab0df5dd73e04d96150a1b"
+      ],
+      "scores": [
+        0.6787183284759521,
+        0.5473663806915283,
+        0.5356180667877197
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.0817128730122931
+    },
+    {
+      "id": "commons-24673671",
+      "split": "evaluation",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "be7d58cd6f487d872ea25fbcf83134746054972acd51a309565388d2efe0a6a7",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.4927372870151885
+    },
+    {
+      "id": "commons-25765422",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "building",
+      "expected_object_id": "6aab0dfb303f7d479a4f23e2",
+      "photo_hash": "2227f4b80252bb3f7807a6112285f58480c76130830f964e95d7327b7ce68120",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0dfb303f7d479a4f23e2",
+        "6aab0dfc303f7d479a4f23e4"
+      ],
+      "scores": [
+        0.7696762084960938,
+        0.5259103775024414
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.7357187279849313
+    },
+    {
+      "id": "commons-26253375",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "painting",
+      "expected_object_id": "6aaad084dd73e04d9614e9e7",
+      "photo_hash": "60fb5c97447cb82a4c5d59e7ff23b81260fd1e644cc4f95f61d496734cf7aa9b",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.3392399190051947
+    },
+    {
+      "id": "commons-26253448",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "painting",
+      "expected_object_id": "6aaad084dd73e04d9614e9e7",
+      "photo_hash": "a66dab4bf383117f2fa0f61013444134f71e55bd8192520fa90d2c822d404e25",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.6159216280211695
+    },
+    {
+      "id": "commons-33581388",
+      "split": "evaluation",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "df48e6bc2d7d8d8edeeb705131d1714d1ddfade7427bc5a1d9f43a36aef56da5",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df8dd73e04d96150a1e",
+        "6aab0df5dd73e04d96150a1b",
+        "6aab0df6dd73e04d96150a1c"
+      ],
+      "scores": [
+        0.5754797458648682,
+        0.5552771091461182,
+        0.5211132764816284
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.0247268860111944
+    },
+    {
+      "id": "commons-39763867",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "building",
+      "expected_object_id": "6aab0dfd303f7d479a4f23e6",
+      "photo_hash": "b4a16ea95a7e3c23f06ae2fb3912772c9cb0dd03d06ea8a6ac2243d5fae2f4b8",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0dfc303f7d479a4f23e4",
+        "6aab0dfb303f7d479a4f23e2",
+        "6aab0dfd303f7d479a4f23e6"
+      ],
+      "scores": [
+        0.6266777515411377,
+        0.58201003074646,
+        0.460451602935791
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.2215294820198324
+    },
+    {
+      "id": "commons-39777756",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "painting",
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "photo_hash": "5c3de548befb7d170e95cf768488fb47ebc3d0c44e8c36b83b66cd4b2c574c9c",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0dbcdd73e04d96150a00",
+        "6a9dd825332abe8469d5594a",
+        "6a9dd81a332abe8469d5593a"
+      ],
+      "scores": [
+        0.9146760702133179,
+        0.6806197166442871,
+        0.648085355758667
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.7120877300039865
+    },
+    {
+      "id": "commons-41150509",
+      "split": "evaluation",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "b2644a74b60482889e1e12d3d7d27a114747b88e7929581fe8a2ddef72149d7a",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df8dd73e04d96150a1e",
+        "6aab0df6dd73e04d96150a1c",
+        "6aa9a7fa60b7ca89b6355b9c"
+      ],
+      "scores": [
+        0.5581072568893433,
+        0.5038144588470459,
+        0.49730730056762695
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 2.0426852260134183
+    },
+    {
+      "id": "commons-47603207",
+      "split": "evaluation",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "ddc0f2d92caa303d6848d0e898927e6828a57c344f9431659fc19e31ddb757e3",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df8dd73e04d96150a1e",
+        "6aab0df5dd73e04d96150a1b"
+      ],
+      "scores": [
+        0.47202634811401367,
+        0.46005213260650635
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.874397098988993
+    },
+    {
+      "id": "commons-50148689",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "painting",
+      "expected_object_id": "6aab0decdd73e04d96150a13",
+      "photo_hash": "6849b3306ef758e3074f5da8aaa1428513ff21c01c9d7c35300c7439df3c6be8",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0decdd73e04d96150a13",
+        "6aab0dbcdd73e04d96150a00",
+        "6aa9a744dd73e04d9614615e"
+      ],
+      "scores": [
+        0.9383435249328613,
+        0.7293010950088501,
+        0.7265326976776123
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.6722370649804361
+    },
+    {
+      "id": "commons-50148850",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "painting",
+      "expected_object_id": "6aaad084dd73e04d9614e9e7",
+      "photo_hash": "92387774d305b8084f71d4b32e90a5f7a1868f31a35445d4f3fa604798aae4fd",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aaad084dd73e04d9614e9e7",
+        "6a9dd849332abe8469d55979",
+        "6a9dd80e332abe8469d55911"
+      ],
+      "scores": [
+        0.9167938232421875,
+        0.642338752746582,
+        0.622169017791748
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.8266130589763634
+    },
+    {
+      "id": "commons-50148863",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "building",
+      "expected_object_id": "6aab0dfd303f7d479a4f23e8",
+      "photo_hash": "e81b19b4926d3df916dd3d266aa7d1573b7fec8a8e1d6a2c216501b5935692a5",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0dfd303f7d479a4f23e6",
+        "6aab0dfd303f7d479a4f23e8",
+        "6aab0dfc303f7d479a4f23e4"
+      ],
+      "scores": [
+        0.6895707845687866,
+        0.6838232278823853,
+        0.4996020793914795
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.369414794986369
+    },
+    {
+      "id": "commons-51045218",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "building",
+      "expected_object_id": "6aab0dfc303f7d479a4f23e4",
+      "photo_hash": "61a23763929bc0817042d94f64c1c7dd20383baf135949d475eaa54c73d31604",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.4822912559902761
+    },
+    {
+      "id": "commons-52310849",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "building",
+      "expected_object_id": "6aab0dff303f7d479a4f23ea",
+      "photo_hash": "590bc600cb842a7634c254787dbfc8108bac61d9e09967e75e143e85f9e49c26",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0dff303f7d479a4f23ea"
+      ],
+      "scores": [
+        0.8416761159896851
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.4241332169913221
+    },
+    {
+      "id": "commons-57958531",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df0dd73e04d96150a18",
+      "photo_hash": "63bc5373f93b5b001426c896c1d2709f9fda9a88ef9e59bca3d5b7202bcc4c89",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df0dd73e04d96150a18",
+        "6aab0df8dd73e04d96150a1e"
+      ],
+      "scores": [
+        0.7923588752746582,
+        0.4887220859527588
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.5332659859850537
+    },
+    {
+      "id": "commons-57958532",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df0dd73e04d96150a18",
+      "photo_hash": "863e891bf41a3e13bf94ce18e78a0365432f55d5b74e9d1134421b540e4cce70",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df0dd73e04d96150a18",
+        "6aab0df8dd73e04d96150a1e"
+      ],
+      "scores": [
+        0.712261438369751,
+        0.4723782539367676
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.1402655319834594
+    },
+    {
+      "id": "commons-57958540",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df0dd73e04d96150a18",
+      "photo_hash": "a55f4ade9e8f94f46e85f61c57e0191e748d8373dcef300606fc774ec9c86ced",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df0dd73e04d96150a18"
+      ],
+      "scores": [
+        0.7765661478042603
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 2.4446460329927504
+    },
+    {
+      "id": "commons-60376335",
+      "split": "evaluation",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "a84088b1f852c87df469e5947b97e95f36b7ae01a2148ab1a20f6776b7c64031",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df8dd73e04d96150a1e"
+      ],
+      "scores": [
+        0.49021875858306885
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.9399629549880046
+    },
+    {
+      "id": "commons-62967997",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "building",
+      "expected_object_id": "6aab0dff303f7d479a4f23ea",
+      "photo_hash": "df4d5ee5c0bea87d0ff9298b0cb03aa021142293b84d6595da480cfab6f03835",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0dff303f7d479a4f23ea"
+      ],
+      "scores": [
+        0.7985912561416626
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.6427855959918816
+    },
+    {
+      "id": "commons-66977516",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "building",
+      "expected_object_id": "6aab0dfa303f7d479a4f23e0",
+      "photo_hash": "d73101b79068ebace84c2c008fe8f963be3d167dc320cde1745374ad1d581bbc",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aa9a7fa60b7ca89b6355b9c"
+      ],
+      "scores": [
+        0.48780298233032227
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 2.0613329719926696
+    },
+    {
+      "id": "commons-66977547",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "painting",
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "photo_hash": "2377a00d249f9f82cf1f09753bfbc6cb15c36637054107909c0102b3fd3e53b6",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0dbcdd73e04d96150a00",
+        "6a9dd825332abe8469d5594a",
+        "6aab0decdd73e04d96150a13"
+      ],
+      "scores": [
+        0.8076162338256836,
+        0.7351962327957153,
+        0.7123738527297974
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.5252144999976736
+    },
+    {
+      "id": "commons-66977578",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "building",
+      "expected_object_id": "6aab0dfc303f7d479a4f23e4",
+      "photo_hash": "dccea2d2edb8d9ebb58d9a12fe33be9b5cf16128000acf61deae58aefa6c62ba",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.258744557009777
+    },
+    {
+      "id": "commons-66977619",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "building",
+      "expected_object_id": "6aab0dfd303f7d479a4f23e6",
+      "photo_hash": "a39bf3a2e9548e26b95d966c2529971c6a7788a158cd740f2cc51f92b8decaf8",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0dfc303f7d479a4f23e4",
+        "6aab0dfd303f7d479a4f23e6",
+        "6aab0dfb303f7d479a4f23e2"
+      ],
+      "scores": [
+        0.6958285570144653,
+        0.6386555433273315,
+        0.6164010763168335
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.3156046110088937
+    },
+    {
+      "id": "commons-66977722",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "painting",
+      "expected_object_id": "6aab0decdd73e04d96150a13",
+      "photo_hash": "6452d764c83b9f302a6c5b378a0c2d435ae36d2701e16bd4fe0eb66406c9c522",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6a9dd848332abe8469d55977",
+        "6a9dd852332abe8469d5598a",
+        "6a9dd857332abe8469d55990"
+      ],
+      "scores": [
+        0.8120474815368652,
+        0.7550041675567627,
+        0.7454949617385864
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.3552631030033808
+    },
+    {
+      "id": "commons-67086858",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "painting",
+      "expected_object_id": "6aaad084dd73e04d9614e9e8",
+      "photo_hash": "4ed0cb607e1510f1450f5890223cf771ad3cd426e503934a11fd3348a3ec2c77",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aaad084dd73e04d9614e9e8",
+        "6aa9a743dd73e04d9614615c",
+        "6a9dd83a332abe8469d55963"
+      ],
+      "scores": [
+        0.7492725849151611,
+        0.65645432472229,
+        0.5274102687835693
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.6918371790088713
+    },
+    {
+      "id": "commons-67086859",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "painting",
+      "expected_object_id": "6aaad084dd73e04d9614e9e8",
+      "photo_hash": "c5c28eac474f9fe33a0a82680de7b8d937f52a8bf70f1da1b40fb9a77c46bfb0",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aaad084dd73e04d9614e9e8",
+        "6a9dd83b332abe8469d55964",
+        "6aa9a743dd73e04d9614615c"
+      ],
+      "scores": [
+        0.7431581020355225,
+        0.5535118579864502,
+        0.5193216800689697
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 2.057007429015357
+    },
+    {
+      "id": "commons-70176575",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df8dd73e04d96150a1e",
+      "photo_hash": "fbbc357d785bb8e7cc8c4e65aa6741c429ce5b2086d8f3800e278fc5303f9dae",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df8dd73e04d96150a1e",
+        "6aab0df5dd73e04d96150a1b",
+        "6aab0df6dd73e04d96150a1c"
+      ],
+      "scores": [
+        0.7596727609634399,
+        0.676530122756958,
+        0.6668566465377808
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.4371811549935956
+    },
+    {
+      "id": "commons-70176628",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df3dd73e04d96150a1a",
+      "photo_hash": "5b34d881bafda5917abc73bf7648b893989ca8f9f73a8b7937b926fd88965c64",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df3dd73e04d96150a1a",
+        "6aab0df6dd73e04d96150a1c",
+        "6aab0df5dd73e04d96150a1b"
+      ],
+      "scores": [
+        0.9355049133300781,
+        0.8646703958511353,
+        0.8585629463195801
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.6395868200052064
+    },
+    {
+      "id": "commons-70176630",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df5dd73e04d96150a1b",
+      "photo_hash": "2dcc8495aca30509ec66173ae9688fe44b67d69541027c839b4186482c2014d3",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df5dd73e04d96150a1b",
+        "6aab0df6dd73e04d96150a1c",
+        "6aab0df3dd73e04d96150a1a"
+      ],
+      "scores": [
+        0.9403092861175537,
+        0.9107730388641357,
+        0.8599804639816284
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.4774367100035306
+    },
+    {
+      "id": "commons-70176632",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df6dd73e04d96150a1c",
+      "photo_hash": "4aa281534c77951906afe27e68c5d2b937dadc7e3b497aa1f2915a3aef2a3c2c",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df8dd73e04d96150a1e",
+        "6aab0df6dd73e04d96150a1c",
+        "6aab0df5dd73e04d96150a1b"
+      ],
+      "scores": [
+        0.9103696346282959,
+        0.8108720779418945,
+        0.7980895042419434
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.7818447670142632
+    },
+    {
+      "id": "commons-70246444",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "building",
+      "expected_object_id": "6aab0dfd303f7d479a4f23e8",
+      "photo_hash": "6a1f253cc165791d99c3fc785f61b45e7a18dc3707595c6e6afc9e0fc6a0e349",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0dfd303f7d479a4f23e6",
+        "6aab0dfd303f7d479a4f23e8",
+        "6a9dd81e332abe8469d5593e"
+      ],
+      "scores": [
+        0.7558197975158691,
+        0.7425292730331421,
+        0.5023937225341797
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.352656836999813
+    },
+    {
+      "id": "commons-70931163",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0defdd73e04d96150a16",
+      "photo_hash": "be5370229950282314e77076d2a866c1a761ec8789e8a41c227458e836641c96",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0e00303f7d479a4f23ec",
+        "6aab0dfd303f7d479a4f23e8",
+        "6aab0dfd303f7d479a4f23e6"
+      ],
+      "scores": [
+        0.653364896774292,
+        0.5599682331085205,
+        0.5066347122192383
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.8613039890187792
+    },
+    {
+      "id": "commons-71049404",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0defdd73e04d96150a16",
+      "photo_hash": "1e7ed5618aa412c847d9068260aab9bafeb6364fee7582b3dceb1fcb8c8d0787",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0defdd73e04d96150a16"
+      ],
+      "scores": [
+        0.47450220584869385
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.6345301649998873
+    },
+    {
+      "id": "commons-72638460",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0defdd73e04d96150a16",
+      "photo_hash": "c8e3f6dd634c045358bce478dd470253fe90c814e310ed5fd9af25e327531e7d",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0defdd73e04d96150a16"
+      ],
+      "scores": [
+        0.6839628219604492
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.498491633014055
+    },
+    {
+      "id": "commons-72919371",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df5dd73e04d96150a1b",
+      "photo_hash": "c8884547c5b1169e12b96791b1345224e9938ff186927ff7677d1491105e4578",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df5dd73e04d96150a1b",
+        "6aab0df6dd73e04d96150a1c",
+        "6aab0df8dd73e04d96150a1e"
+      ],
+      "scores": [
+        0.747084379196167,
+        0.7221982479095459,
+        0.7112317085266113
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.5373754800239112
+    },
+    {
+      "id": "commons-72919385",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df5dd73e04d96150a1b",
+      "photo_hash": "e66308c8b4fa6ae5699b388ecdf2e8bdf7982a91418fe0edcb0285dd085f9cf7",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df5dd73e04d96150a1b",
+        "6aab0df6dd73e04d96150a1c",
+        "6aab0df3dd73e04d96150a1a"
+      ],
+      "scores": [
+        0.8380963802337646,
+        0.8336169719696045,
+        0.8083124160766602
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.7376976980012842
+    },
+    {
+      "id": "commons-72938888",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df6dd73e04d96150a1c",
+      "photo_hash": "c7bffd2dce8a81c88c019d10b3d82e1ed44712bfd222a749ac326dceac6fb412",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df5dd73e04d96150a1b",
+        "6aab0df6dd73e04d96150a1c",
+        "6aab0df3dd73e04d96150a1a"
+      ],
+      "scores": [
+        0.8625285625457764,
+        0.8444750308990479,
+        0.8074105978012085
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.831946310994681
+    },
+    {
+      "id": "commons-72938910",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df6dd73e04d96150a1c",
+      "photo_hash": "b7829fb7100fbebd1869cd697150ff1bc0943a2e5a527bac2891f606ff9c80b0",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df5dd73e04d96150a1b",
+        "6aab0df6dd73e04d96150a1c",
+        "6aab0df3dd73e04d96150a1a"
+      ],
+      "scores": [
+        0.8409758806228638,
+        0.811072826385498,
+        0.8017281293869019
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.772777681995649
+    },
+    {
+      "id": "commons-72968220",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df3dd73e04d96150a1a",
+      "photo_hash": "8ba5ade1a13a4f93a81a5989b4ee3a7599e5f04d81592800669bebdb78f45096",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df3dd73e04d96150a1a",
+        "6aab0df5dd73e04d96150a1b",
+        "6aab0df6dd73e04d96150a1c"
+      ],
+      "scores": [
+        0.7480708360671997,
+        0.7336246967315674,
+        0.7322382926940918
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.7417229629936628
+    },
+    {
+      "id": "commons-72968229",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df3dd73e04d96150a1a",
+      "photo_hash": "61176a092f397e841acdd884ef017811abd0626f34556cc2a11ae7f5f0e95931",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df3dd73e04d96150a1a",
+        "6aab0df6dd73e04d96150a1c",
+        "6aab0df5dd73e04d96150a1b"
+      ],
+      "scores": [
+        0.8458513021469116,
+        0.8155460357666016,
+        0.7945568561553955
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.0365322350116912
+    },
+    {
+      "id": "commons-73006512",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df8dd73e04d96150a1e",
+      "photo_hash": "c17ff5021e941247df0ec5b0e15c15702b76a3e62566d8180c358b4bffcee228",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df8dd73e04d96150a1e",
+        "6aab0df5dd73e04d96150a1b",
+        "6aab0df6dd73e04d96150a1c"
+      ],
+      "scores": [
+        0.6731463670730591,
+        0.6088829040527344,
+        0.5934066772460938
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.5918964140000753
+    },
+    {
+      "id": "commons-73006520",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "sculpture",
+      "expected_object_id": "6aab0df8dd73e04d96150a1e",
+      "photo_hash": "482d6d68d2f209e23c005e8fc51f9e92b92eb6fac18d1405b0592f47788a34ed",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df8dd73e04d96150a1e",
+        "6aab0df5dd73e04d96150a1b",
+        "6aab0df6dd73e04d96150a1c"
+      ],
+      "scores": [
+        0.7692887783050537,
+        0.7067785263061523,
+        0.6934499740600586
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.3378220199956559
+    },
+    {
+      "id": "commons-74467003",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "building",
+      "expected_object_id": "6aab0dfb303f7d479a4f23e2",
+      "photo_hash": "42902d961c4a87cdb63db8098448206215a55438657c27eafccd87c01fbfd2ca",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0dfb303f7d479a4f23e2",
+        "6aab0dfc303f7d479a4f23e4",
+        "6aa9a7fa60b7ca89b6355b9c"
+      ],
+      "scores": [
+        0.758720874786377,
+        0.4693793058395386,
+        0.4546198844909668
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.332090281008277
+    },
+    {
+      "id": "commons-81464511",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "building",
+      "expected_object_id": "6aab0dfc303f7d479a4f23e4",
+      "photo_hash": "e3fedc1ce71b24db06b7a6a8272801c03f21868f045f150405f0c52dee56f0b6",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0df2dd73e04d96150a19"
+      ],
+      "scores": [
+        0.4658776521682739
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 2.1390963589947205
+    },
+    {
+      "id": "commons-83326056",
+      "split": "evaluation",
+      "category": "outside_reference",
+      "object_type": "sculpture",
+      "expected_object_id": null,
+      "photo_hash": "eebc9ecb9170bb378e487024590681b66b165b63ae8a4c333dbcb2ac3ee657c1",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.6618373120145407
+    },
+    {
+      "id": "commons-88940232",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "building",
+      "expected_object_id": "6aab0dfa303f7d479a4f23e0",
+      "photo_hash": "2e6b6d3272331d8670ace667008d52a50050e223c06c77fac8939cd412d60093",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aa9a7fa60b7ca89b6355b9c"
+      ],
+      "scores": [
+        0.47210240364074707
+      ],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.9961551900196355
+    },
+    {
+      "id": "commons-88945970",
+      "split": "evaluation",
+      "category": "full",
+      "object_type": "building",
+      "expected_object_id": "6aab0dfd303f7d479a4f23e8",
+      "photo_hash": "12feabf8c4aa1b9ec794b61ecda9ca55cb017a5817b5811ada1b7f36b5e7ef8c",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0dfd303f7d479a4f23e6",
+        "6aab0dfd303f7d479a4f23e8",
+        "6aab0dfc303f7d479a4f23e4"
+      ],
+      "scores": [
+        0.707450270652771,
+        0.6479310989379883,
+        0.5628187656402588
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 2.494103894016007
+    },
+    {
+      "id": "commons-92635172",
+      "split": "evaluation",
+      "category": "partial",
+      "object_type": "building",
+      "expected_object_id": "6aab0dfb303f7d479a4f23e2",
+      "photo_hash": "63ea833c2e077936092db81fc6cd28736d69b312d60b915aeb595445a7b641f3",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        "6aab0dfb303f7d479a4f23e2"
+      ],
+      "scores": [
+        0.4866490364074707
+      ],
+      "top3_correct": true,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.7267205549869686
+    },
+    {
+      "id": "commons-95915428",
+      "split": "evaluation",
+      "category": "wrong_location",
+      "object_type": "monument",
+      "expected_object_id": null,
+      "photo_hash": "ee5c2c0040d8505cc5c7efe3051941860c596cb4d9d86ae43d423e216387eb0d",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.7775466839957517
+    },
+    {
+      "id": "commons-98518229",
+      "split": "evaluation",
+      "category": "wrong_location",
+      "object_type": "monument",
+      "expected_object_id": null,
+      "photo_hash": "fb6a2cbc5c2a2b4ee525c36b4b00f35c12f014af44e315316d2b601f571263b6",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.4835389840009157
+    },
+    {
+      "id": "commons-98966072",
+      "split": "evaluation",
+      "category": "wrong_location",
+      "object_type": "monument",
+      "expected_object_id": null,
+      "photo_hash": "3293b3d8aa07d487701b902272a783f5f455e2d1ad1c5ea6d0aa7b1b474a4f86",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 2.9758525880170055
+    },
+    {
+      "id": "commons-99117145",
+      "split": "evaluation",
+      "category": "wrong_location",
+      "object_type": "monument",
+      "expected_object_id": null,
+      "photo_hash": "e03cd1231585e26c134c24762abd37aed6630fe69a28d0c209f62df58b8993f6",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.0077495420118794
+    },
+    {
+      "id": "commons-99170425",
+      "split": "evaluation",
+      "category": "wrong_location",
+      "object_type": "monument",
+      "expected_object_id": null,
+      "photo_hash": "e90d3adebfc09749b07240b307e71b76dbc543e5f4da6b78204c1219614eafdc",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.4568215040198993
+    },
+    {
+      "id": "commons-99703667",
+      "split": "evaluation",
+      "category": "wrong_location",
+      "object_type": "monument",
+      "expected_object_id": null,
+      "photo_hash": "da79d72f486c454b316b810c619047352a3dd9a5615a41962b44b116e46bf232",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "scores": [],
+      "top3_correct": false,
+      "ocr": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "seconds": 1.9934140050027054
+    }
+  ],
+  "automatic_precision_validated": false,
+  "phase5_complete": false
+}

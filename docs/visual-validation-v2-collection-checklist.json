@@ -1,0 +1,168 @@
+{
+  "location_id": "6a9dd4106d52c3bc3965869d",
+  "purpose": "Collection checklist, not an evaluation manifest. Confirm gallery availability and identity on site. Additional ten are suggestions from existing reference coverage.",
+  "remaining_minimum_positive_photos": 46,
+  "targets": [
+    {
+      "object_id": "6a9dd812332abe8469d55919",
+      "name": "Woman Playing the Virginal",
+      "accession": "SK-C-140",
+      "object_type": "painting",
+      "additional_full": 0,
+      "additional_partial": 2
+    },
+    {
+      "object_id": "6a9dd817332abe8469d55937",
+      "name": "Portrait of a Man, possibly Reijnier Pauw (1591-1676)",
+      "accession": "SK-C-1440",
+      "object_type": "painting",
+      "additional_full": 0,
+      "additional_partial": 2
+    },
+    {
+      "object_id": "6a9dd818332abe8469d55938",
+      "name": "Portrait of a woman",
+      "accession": "SK-A-3843",
+      "object_type": "painting",
+      "additional_full": 0,
+      "additional_partial": 2
+    },
+    {
+      "object_id": "6a9dd820332abe8469d55942",
+      "name": "Landscape by Moonlight",
+      "accession": "SK-A-3245",
+      "object_type": "painting",
+      "additional_full": 0,
+      "additional_partial": 2
+    },
+    {
+      "object_id": "6a9dd841332abe8469d5596a",
+      "name": "Dancing Couple",
+      "accession": "SK-A-2568",
+      "object_type": "painting",
+      "additional_full": 0,
+      "additional_partial": 2
+    },
+    {
+      "object_id": "6aa9a744dd73e04d9614615e",
+      "name": "The merry family",
+      "accession": "SK-C-229",
+      "object_type": "painting",
+      "additional_full": 0,
+      "additional_partial": 2
+    },
+    {
+      "object_id": "6aa9a745dd73e04d96146160",
+      "name": "The Sampling Officials of the Amsterdam Drapers\u2019 Guild, known as \u2018The Syndics\u2019",
+      "accession": "SK-C-6",
+      "object_type": "painting",
+      "additional_full": 0,
+      "additional_partial": 1
+    },
+    {
+      "object_id": "6aa9a746dd73e04d96146161",
+      "name": "Shiva Nataraja",
+      "accession": "AK-MAK-187",
+      "object_type": "sculpture",
+      "additional_full": 0,
+      "additional_partial": 2
+    },
+    {
+      "object_id": "6aa9a747dd73e04d96146163",
+      "name": "The Threatened Swan; Interpreted later as an Allegory on Johan de Witt",
+      "accession": "SK-A-4",
+      "object_type": "painting",
+      "additional_full": 0,
+      "additional_partial": 1
+    },
+    {
+      "object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "name": "Rijksmuseum building",
+      "accession": null,
+      "object_type": "building",
+      "additional_full": 0,
+      "additional_partial": 0
+    },
+    {
+      "object_id": "6a9dd7f8332abe8469d558f5",
+      "name": "Misty Sea",
+      "accession": "SK-C-1726",
+      "object_type": "painting",
+      "additional_full": 1,
+      "additional_partial": 2
+    },
+    {
+      "object_id": "6a9dd7fa332abe8469d558f7",
+      "name": "The cat at play",
+      "accession": "SK-A-3089",
+      "object_type": "painting",
+      "additional_full": 1,
+      "additional_partial": 2
+    },
+    {
+      "object_id": "6a9dd7fb332abe8469d558f8",
+      "name": "Pinken in de branding",
+      "accession": "SK-A-2670",
+      "object_type": "painting",
+      "additional_full": 1,
+      "additional_partial": 2
+    },
+    {
+      "object_id": "6a9dd7fc332abe8469d558f9",
+      "name": "Portret van een Surinaams meisje",
+      "accession": "SK-A-2637",
+      "object_type": "miniature (painting)",
+      "additional_full": 1,
+      "additional_partial": 2
+    },
+    {
+      "object_id": "6a9dd7fd332abe8469d558fa",
+      "name": "Portret van Surinaams meisje",
+      "accession": "SK-A-2641",
+      "object_type": "miniature (painting)",
+      "additional_full": 1,
+      "additional_partial": 2
+    },
+    {
+      "object_id": "6a9dd7fe332abe8469d558fb",
+      "name": "Portret van een Surinaams meisje",
+      "accession": "SK-A-2635",
+      "object_type": "miniature (painting)",
+      "additional_full": 1,
+      "additional_partial": 2
+    },
+    {
+      "object_id": "6a9dd7ff332abe8469d558fc",
+      "name": "Zelfportret",
+      "accession": "SK-A-5110",
+      "object_type": "painting",
+      "additional_full": 1,
+      "additional_partial": 2
+    },
+    {
+      "object_id": "6a9dd800332abe8469d558fd",
+      "name": "Landscape with Stone Bridge",
+      "accession": "SK-A-1935",
+      "object_type": "painting",
+      "additional_full": 1,
+      "additional_partial": 2
+    },
+    {
+      "object_id": "6a9dd802332abe8469d558ff",
+      "name": "Portret van Paulus Joseph Gabri\u00ebl, beeldhouwer",
+      "accession": "SK-A-2121",
+      "object_type": "painting",
+      "additional_full": 1,
+      "additional_partial": 2
+    },
+    {
+      "object_id": "6a9dd802332abe8469d55900",
+      "name": "The Raampoortje in Amsterdam",
+      "accession": "SK-C-1535",
+      "object_type": "painting",
+      "additional_full": 1,
+      "additional_partial": 2
+    }
+  ],
+  "fresh_blind_test": "Prefer fresh full + two separately captured partial views for all 20 targets, plus separate representative calibration and at least 30 negative photos. Do not reuse inspected evaluation results to tune thresholds."
+}

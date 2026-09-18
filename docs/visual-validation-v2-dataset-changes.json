@@ -1,0 +1,21 @@
+{
+  "preserved_manifest": "calibration-manifest-v1.json",
+  "excluded_old_ids": [
+    "commons-106890842",
+    "commons-106890845",
+    "commons-106890838",
+    "commons-106890844",
+    "commons-106890830",
+    "commons-106002578",
+    "commons-69343841",
+    "commons-69343839",
+    "commons-97400085",
+    "commons-91128406"
+  ],
+  "reason": "Museum building now has references; old negative annotations no longer apply. No old photo relabeled or moved between splits.",
+  "new_query_photos": 26,
+  "total_photos": 62,
+  "reference_only_photo": 195668158,
+  "calibration_locked_before_evaluation": true,
+  "notes": "Prior test rows are regression evidence, not a new blind field test. Full/partial and identity annotations are operator-reviewed; field confirmation remains required."
+}

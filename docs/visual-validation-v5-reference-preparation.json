@@ -1,0 +1,905 @@
+{
+  "attempted": 128,
+  "prepared": 2,
+  "skipped": 0,
+  "failed": 0,
+  "uncovered": 126,
+  "objects": [
+    {
+      "object_id": "6a9dd4116d52c3bc3965869f",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd4126d52c3bc396586a0",
+      "status": "prepared",
+      "views": 2,
+      "warnings": []
+    },
+    {
+      "object_id": "6a9dd4136d52c3bc396586a1",
+      "status": "prepared",
+      "views": 2,
+      "warnings": []
+    },
+    {
+      "object_id": "6a9dd7f8332abe8469d558f5",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd7f9332abe8469d558f6",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd7fa332abe8469d558f7",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd7fb332abe8469d558f8",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd7fc332abe8469d558f9",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd7fd332abe8469d558fa",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd7fe332abe8469d558fb",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd7ff332abe8469d558fc",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd800332abe8469d558fd",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd801332abe8469d558fe",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd802332abe8469d558ff",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd802332abe8469d55900",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd803332abe8469d55901",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd804332abe8469d55902",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd805332abe8469d55903",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd806332abe8469d55906",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd807332abe8469d55907",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd808332abe8469d5590b",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd80b332abe8469d5590d",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd80c332abe8469d5590f",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd80c332abe8469d55910",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd80e332abe8469d55911",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd80f332abe8469d55912",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd810332abe8469d55913",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd811332abe8469d55917",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd812332abe8469d55919",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd812332abe8469d5591a",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd813332abe8469d5591b",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd814332abe8469d5591d",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd816332abe8469d55920",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd817332abe8469d55937",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd818332abe8469d55938",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd819332abe8469d55939",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd81a332abe8469d5593a",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd81b332abe8469d5593b",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd81c332abe8469d5593c",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd81d332abe8469d5593d",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd81e332abe8469d5593e",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd81f332abe8469d55941",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd820332abe8469d55942",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd821332abe8469d55943",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd822332abe8469d55945",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd823332abe8469d55946",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd824332abe8469d55947",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd825332abe8469d5594a",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd826332abe8469d5594b",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd827332abe8469d5594c",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd827332abe8469d5594d",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd829332abe8469d5594e",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd829332abe8469d5594f",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd82a332abe8469d55950",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd82b332abe8469d55951",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd82c332abe8469d55953",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd82d332abe8469d55954",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd82e332abe8469d55955",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd82f332abe8469d55956",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd830332abe8469d55957",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd831332abe8469d55959",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd832332abe8469d5595a",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd833332abe8469d5595c",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd834332abe8469d5595e",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd835332abe8469d5595f",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd837332abe8469d55960",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd838332abe8469d55961",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd839332abe8469d55962",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd83a332abe8469d55963",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd83b332abe8469d55964",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd83c332abe8469d55965",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd83d332abe8469d55966",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd83e332abe8469d55967",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd83f332abe8469d55968",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd840332abe8469d55969",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd841332abe8469d5596a",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd842332abe8469d5596c",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd843332abe8469d5596f",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd844332abe8469d55971",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd845332abe8469d55974",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd846332abe8469d55975",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd847332abe8469d55976",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd848332abe8469d55977",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd849332abe8469d55979",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd84a332abe8469d5597a",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd84c332abe8469d5597b",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd84d332abe8469d5597d",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd84e332abe8469d55981",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd84e332abe8469d55982",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd84f332abe8469d55983",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd850332abe8469d55985",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd851332abe8469d55986",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd852332abe8469d55988",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd852332abe8469d5598a",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd853332abe8469d5598b",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd854332abe8469d5598c",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd855332abe8469d5598d",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd856332abe8469d5598e",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd857332abe8469d55990",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd858332abe8469d55992",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd859332abe8469d55993",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd8f4332abe8469d559f6",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6a9dd8f5332abe8469d559f7",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aa9a743dd73e04d9614615c",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aa9a744dd73e04d9614615e",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aa9a745dd73e04d96146160",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aa9a746dd73e04d96146161",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aa9a747dd73e04d96146163",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aaad084dd73e04d9614e9e7",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aaad084dd73e04d9614e9e8",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aab0dbcdd73e04d96150a00",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aab0decdd73e04d96150a13",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aab0deedd73e04d96150a15",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aab0defdd73e04d96150a16",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aab0df0dd73e04d96150a18",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aab0df2dd73e04d96150a19",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aab0df3dd73e04d96150a1a",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aab0df5dd73e04d96150a1b",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aab0df6dd73e04d96150a1c",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aab0df8dd73e04d96150a1e",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aab0dfa303f7d479a4f23e0",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aab0dfb303f7d479a4f23e2",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aab0dfc303f7d479a4f23e4",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aab0dfd303f7d479a4f23e6",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aab0dfd303f7d479a4f23e8",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aab0dff303f7d479a4f23ea",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    },
+    {
+      "object_id": "6aab0e00303f7d479a4f23ec",
+      "status": "uncovered",
+      "warnings": [
+        "REFERENCE_IMAGES_MISSING"
+      ]
+    }
+  ],
+  "model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056",
+  "preprocessing": "rgb-thumbnail2560-dino224-regions65-sift800-v1/4.57.6/2.14.0+cpu/4.14.0.94/12.3.0"
+}

@@ -9,7 +9,12 @@ from pymongo.asynchronous.database import AsyncDatabase
 from pymongo.errors import PyMongoError
 from pymongo.operations import ReplaceOne, SearchIndexModel, UpdateOne
 
-from app.modules.visual.features import DIMENSIONS, VisualFailure, digest
+from app.modules.visual.features import (
+    DIMENSIONS,
+    REGIONAL_GLOBAL_WEIGHT,
+    VisualFailure,
+    digest,
+)
 
 INDEX_NAME = "visitadvisor_visual_v1"
 MAX_OBJECTS = 500
@@ -541,6 +546,8 @@ class VisualRepository:
             },
             {
                 "$project": {
+                    "vector_id": "$_id",
+                    "view_id": {"$arrayElemAt": [{"$split": ["$_id", ":"]}, 1]},
                     "object_id": 1,
                     "set_id": 1,
                     "score": {"$meta": "vectorSearchScore"},
@@ -548,10 +555,49 @@ class VisualRepository:
             },
             {
                 "$group": {
-                    "_id": "$set_id",
+                    "_id": {"set_id": "$set_id", "view_id": "$view_id"},
                     "object_id": {"$first": "$object_id"},
                     "count": {"$sum": 1},
-                    "score": {"$max": "$score"},
+                    "regional_score": {"$max": "$score"},
+                    "global_score": {
+                        "$max": {
+                            "$cond": [
+                                {
+                                    "$regexMatch": {
+                                        "input": "$vector_id",
+                                        "regex": ":0$",
+                                    }
+                                },
+                                "$score",
+                                -1,
+                            ]
+                        }
+                    },
+                }
+            },
+            {
+                "$group": {
+                    "_id": "$_id.set_id",
+                    "object_id": {"$first": "$object_id"},
+                    "count": {"$sum": "$count"},
+                    "score": {
+                        "$max": {
+                            "$add": [
+                                {
+                                    "$multiply": [
+                                        REGIONAL_GLOBAL_WEIGHT,
+                                        "$global_score",
+                                    ]
+                                },
+                                {
+                                    "$multiply": [
+                                        1 - REGIONAL_GLOBAL_WEIGHT,
+                                        "$regional_score",
+                                    ]
+                                },
+                            ]
+                        }
+                    },
                 }
             },
         ]
@@ -560,7 +606,10 @@ class VisualRepository:
             raise VisualFailure("VISUAL_INDEX_UPDATING")
         return sorted(
             [
-                {"object_id": row["object_id"], "score": 2 * row["score"] - 1}
+                {
+                    "object_id": row["object_id"],
+                    "score": 2 * row["score"] - 1,
+                }
                 for row in rows
             ],
             key=lambda row: (-row["score"], row["object_id"]),

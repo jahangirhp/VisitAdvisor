@@ -25,6 +25,7 @@ from app.modules.visual.benchmark import (
     validate_manifest,
 )
 from app.modules.visual.features import (
+    REGIONAL_GLOBAL_WEIGHT,
     VisualFailure,
     geometric_score,
     rank,
@@ -192,6 +193,7 @@ async def prepare_one(setup, manual=None, handler=None):
         "https://localhost/image",
         "https://127.0.0.1/",
         "https://iiif.micr.io.evil.test/image",
+        "https://thumb.wikimedia.org.evil.test/image",
         "https://user:pass@iiif.micr.io/image",
         "https://iiif.micr.io:444/image",
         "file:///etc/passwd",
@@ -201,6 +203,24 @@ async def prepare_one(setup, manual=None, handler=None):
 def test_reference_url_allowlist(url):
     with pytest.raises(VisualFailure, match="UNEXPECTED_REFERENCE_URL"):
         validate_url(url)
+
+
+def test_wikimedia_thumbnail_reference_download():
+    url = "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/test.jpg/1280px-test.jpg"
+
+    def handler(request):
+        assert str(request.url) == url
+        return httpx.Response(
+            200, content=picture(), headers={"content-type": "image/png"}
+        )
+
+    async def run():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as http:
+            return await ReferenceClient(http).image(url)
+
+    clean, image_hash = asyncio.run(run())
+    assert clean.startswith(b"\xff\xd8")
+    assert len(image_hash) == 64
 
 
 def test_redirect_is_validated_before_following():
@@ -217,6 +237,31 @@ def test_redirect_is_validated_before_following():
 
     asyncio.run(run())
     assert calls == [IMAGE_URL]
+
+
+def test_reference_download_identifies_application_on_redirects():
+    calls = []
+
+    def handler(request):
+        calls.append(request)
+        if len(calls) == 1:
+            return httpx.Response(
+                302, headers={"location": "https://upload.wikimedia.org/image.jpg"}
+            )
+        # Wikimedia rejects the generic httpx user agent on real downloads.
+        if not request.headers.get("user-agent", "").startswith("VisitAdvisor/"):
+            return httpx.Response(403)
+        return httpx.Response(
+            200, content=b"image", headers={"content-type": "image/jpeg"}
+        )
+
+    async def run():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as http:
+            return await ReferenceClient(http).fetch(IMAGE_URL, 20)
+
+    assert asyncio.run(run()) == (b"image", "image/jpeg")
+    assert len(calls) == 2
+    assert all(r.headers["user-agent"].startswith("VisitAdvisor/") for r in calls)
 
 
 def test_download_budget_and_byte_limit():
@@ -377,6 +422,15 @@ def test_regions_and_multiple_views_rank_distinct_objects():
     ]
     assert rank(q, records, "global")[0]["object_id"] == "two"
     assert rank(q, records, "regional")[0]["object_id"] == "one"
+    assert (
+        rank(
+            q,
+            records,
+            "regional",
+            regional_global_weight=REGIONAL_GLOBAL_WEIGHT,
+        )[0]["object_id"]
+        == "two"
+    )
     assert len(rank(q, records, "regional")) == 2
 
 
@@ -394,7 +448,12 @@ def test_atlas_query_filters_active_location_model_and_versions(setup):
         return_value=SimpleNamespace(
             to_list=AsyncMock(
                 return_value=[
-                    {"_id": "active", "object_id": "one", "count": 5, "score": 0.9}
+                    {
+                        "_id": "active",
+                        "object_id": "one",
+                        "count": 5,
+                        "score": 0.825,
+                    }
                 ]
             )
         )
@@ -412,7 +471,15 @@ def test_atlas_query_filters_active_location_model_and_versions(setup):
         "set_id": {"$in": ["active"]},
     }
     assert query["exact"] is True and query["limit"] == 5
-    assert result[0]["score"] == pytest.approx(0.8)
+    first_group = pipeline[2]["$group"]
+    assert first_group["_id"] == {
+        "set_id": "$set_id",
+        "view_id": "$view_id",
+    }
+    assert first_group["regional_score"] == {"$max": "$score"}
+    assert pipeline[3]["$group"]["count"] == {"$sum": "$count"}
+    expected = 2 * 0.825 - 1
+    assert result[0]["score"] == pytest.approx(expected)
 
 
 def test_visual_never_auto_selects_even_with_perfect_score(setup):

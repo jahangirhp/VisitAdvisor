@@ -491,10 +491,42 @@ and send `mode=visual` to `/api/v1/recognition/image` for up to three candidates
 without OCR. This mode never automatically identifies an object yet.
 
 The [visual pilot guide](docs/07-visual-recognition-pilot.md) includes setup,
-reference manifests for other object types, the benchmark workflow, and remaining
-acceptance gates. Independent phone photos are required before Phase 5 can be
-declared complete.
+reference manifests for other object types, the benchmark workflow, and acceptance
+gates. Public visitor photos now provide the full source-separated validation set;
+a physical phone/network run remains the final deployment measurement.
 
 The [calibration and validation guide](docs/09-visual-calibration-and-validation.md)
 documents `visual audit`, `visual calibrate`, and `visual validate`, frozen policy
 artifacts, the current real-photo results, and missing dataset coverage.
+
+The [expanded validation run](docs/10-visual-expanded-validation.md) adds sculpture,
+building, partial-view, and wrong-location cases. Full-view recognition passes the
+pilot target on this sample, but building details and dataset/sample-size gates
+still fail. Use the [field-photo checklist](docs/11-visual-field-photo-checklist.md)
+to collect the remaining independent captures. Automatic visual identification
+remains disabled.
+
+The [v3 follow-up](docs/12-visual-expanded-validation-v3.md) expands building
+references and the evaluation corpus. Regional partial-view top-three accuracy
+reaches 8/10, but simulated automatic precision fails after the broader negatives
+expose three false selections. At least 40 additional independent positive photos
+and fresh held-out validation remain required.
+
+The [online-photo acquisition decision](docs/13-visual-online-photo-acquisition.md)
+records the no-new-photographer constraint, the first reviewed public-source batch,
+strict acceptance rules, and the criterion for changing the pilot location.
+
+The [v4 online validation](docs/14-visual-online-validation-v4.md) closes the
+dataset gap with 110 photos and 20 evaluation identities. Regional embeddings pass
+full and partial top-three targets at 18/20 and 33/40 with zero negative automatic
+errors. The frozen policy makes only 11 automatic selections, below the required
+30, so automatic identification remains disabled while broader calibration and a
+new blind validation set are developed.
+
+The [v5 source-separated validation](docs/15-visual-online-validation-v5.md) tests
+the 75/25 global/regional ensemble on 180 photos, including a fresh 90-photo
+held-out split from 90 unique source pages. Dataset and API checks pass, but the
+regional method reaches only 85.3% automatic precision and makes four false
+automatic selections on negatives. Automatic identification therefore remains
+disabled; the next iteration must improve ranking and references before another
+unseen validation run.

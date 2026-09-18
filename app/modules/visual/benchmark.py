@@ -55,6 +55,7 @@ class BenchmarkPolicy(BaseModel):
     model_config = ConfigDict(extra="forbid")
     model: str
     preprocessing: str
+    regional_global_weight: float = Field(default=0.0, ge=0, le=1)
     methods: dict[Literal["global", "regional", "local"], Thresholds]
 
 
@@ -315,7 +316,13 @@ async def benchmark(
         encoding_seconds = time.perf_counter() - tick
         for method, thresholds in policy.methods.items():
             tick = time.perf_counter()
-            candidates = await asyncio.to_thread(rank, query, records, method)
+            candidates = await asyncio.to_thread(
+                rank,
+                query,
+                records,
+                method,
+                regional_global_weight=policy.regional_global_weight,
+            )
             selected_id = select(candidates, thresholds)
             rows[method].append(
                 {

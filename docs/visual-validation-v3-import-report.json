@@ -1,0 +1,20 @@
+[
+  {
+    "accession": "SK-A-129",
+    "object_id": "6aaad084dd73e04d9614e9e7",
+    "source_ids": [
+      "6aaad083173021d412571f90"
+    ],
+    "name": "The Fall of Man",
+    "status": "imported"
+  },
+  {
+    "accession": "SK-A-4271",
+    "object_id": "6aaad084dd73e04d9614e9e8",
+    "source_ids": [
+      "6aaad084173021d412571f91"
+    ],
+    "name": "View of Itamarac\u00e1 Island",
+    "status": "imported"
+  }
+]

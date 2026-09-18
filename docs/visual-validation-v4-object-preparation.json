@@ -1,0 +1,91 @@
+{
+  "attempted": 10,
+  "prepared": 10,
+  "skipped": 0,
+  "failed": 0,
+  "uncovered": 0,
+  "objects": [
+    {
+      "object_id": "6aab0dbcdd73e04d96150a00",
+      "status": "prepared",
+      "views": 1,
+      "warnings": [
+        "REFERENCE_RIGHTS_UNKNOWN"
+      ]
+    },
+    {
+      "object_id": "6aab0decdd73e04d96150a13",
+      "status": "prepared",
+      "views": 1,
+      "warnings": [
+        "REFERENCE_RIGHTS_UNKNOWN"
+      ]
+    },
+    {
+      "object_id": "6aab0deedd73e04d96150a15",
+      "status": "prepared",
+      "views": 1,
+      "warnings": [
+        "REFERENCE_RIGHTS_UNKNOWN"
+      ]
+    },
+    {
+      "object_id": "6aab0defdd73e04d96150a16",
+      "status": "prepared",
+      "views": 1,
+      "warnings": [
+        "REFERENCE_RIGHTS_UNKNOWN"
+      ]
+    },
+    {
+      "object_id": "6aab0df0dd73e04d96150a18",
+      "status": "prepared",
+      "views": 1,
+      "warnings": [
+        "REFERENCE_RIGHTS_UNKNOWN"
+      ]
+    },
+    {
+      "object_id": "6aab0df2dd73e04d96150a19",
+      "status": "prepared",
+      "views": 1,
+      "warnings": [
+        "REFERENCE_RIGHTS_UNKNOWN"
+      ]
+    },
+    {
+      "object_id": "6aab0df3dd73e04d96150a1a",
+      "status": "prepared",
+      "views": 1,
+      "warnings": [
+        "REFERENCE_RIGHTS_UNKNOWN"
+      ]
+    },
+    {
+      "object_id": "6aab0df5dd73e04d96150a1b",
+      "status": "prepared",
+      "views": 1,
+      "warnings": [
+        "REFERENCE_RIGHTS_UNKNOWN"
+      ]
+    },
+    {
+      "object_id": "6aab0df6dd73e04d96150a1c",
+      "status": "prepared",
+      "views": 1,
+      "warnings": [
+        "REFERENCE_RIGHTS_UNKNOWN"
+      ]
+    },
+    {
+      "object_id": "6aab0df8dd73e04d96150a1e",
+      "status": "prepared",
+      "views": 1,
+      "warnings": [
+        "REFERENCE_RIGHTS_UNKNOWN"
+      ]
+    }
+  ],
+  "model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056",
+  "preprocessing": "rgb-thumbnail2560-dino224-regions65-sift800-v1/4.57.6/2.14.0+cpu/4.14.0.94/12.3.0"
+}

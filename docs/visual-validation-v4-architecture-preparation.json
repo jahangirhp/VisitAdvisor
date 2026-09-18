@@ -1,0 +1,53 @@
+{
+  "attempted": 7,
+  "prepared": 7,
+  "skipped": 0,
+  "failed": 0,
+  "uncovered": 0,
+  "objects": [
+    {
+      "object_id": "6aab0dfa303f7d479a4f23e0",
+      "status": "prepared",
+      "views": 1,
+      "warnings": []
+    },
+    {
+      "object_id": "6aab0dfb303f7d479a4f23e2",
+      "status": "prepared",
+      "views": 1,
+      "warnings": []
+    },
+    {
+      "object_id": "6aab0dfc303f7d479a4f23e4",
+      "status": "prepared",
+      "views": 1,
+      "warnings": []
+    },
+    {
+      "object_id": "6aab0dfd303f7d479a4f23e6",
+      "status": "prepared",
+      "views": 1,
+      "warnings": []
+    },
+    {
+      "object_id": "6aab0dfd303f7d479a4f23e8",
+      "status": "prepared",
+      "views": 1,
+      "warnings": []
+    },
+    {
+      "object_id": "6aab0dff303f7d479a4f23ea",
+      "status": "prepared",
+      "views": 1,
+      "warnings": []
+    },
+    {
+      "object_id": "6aab0e00303f7d479a4f23ec",
+      "status": "prepared",
+      "views": 1,
+      "warnings": []
+    }
+  ],
+  "model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056",
+  "preprocessing": "rgb-thumbnail2560-dino224-regions65-sift800-v1/4.57.6/2.14.0+cpu/4.14.0.94/12.3.0"
+}

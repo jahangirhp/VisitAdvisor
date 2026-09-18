@@ -1,0 +1,27 @@
+{
+  "attempted": 2,
+  "prepared": 2,
+  "skipped": 0,
+  "failed": 0,
+  "uncovered": 0,
+  "objects": [
+    {
+      "object_id": "6aaad084dd73e04d9614e9e7",
+      "status": "prepared",
+      "views": 1,
+      "warnings": [
+        "REFERENCE_RIGHTS_UNKNOWN"
+      ]
+    },
+    {
+      "object_id": "6aaad084dd73e04d9614e9e8",
+      "status": "prepared",
+      "views": 1,
+      "warnings": [
+        "REFERENCE_RIGHTS_UNKNOWN"
+      ]
+    }
+  ],
+  "model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056",
+  "preprocessing": "rgb-thumbnail2560-dino224-regions65-sift800-v1/4.57.6/2.14.0+cpu/4.14.0.94/12.3.0"
+}

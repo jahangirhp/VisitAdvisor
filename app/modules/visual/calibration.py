@@ -161,7 +161,10 @@ async def calibrate(
         normalized_photo_hashes=report["normalized_photo_hashes"],
         reference_sets=report["reference_sets"],
         policy=BenchmarkPolicy(
-            model=encoder.model, preprocessing=encoder.preprocessing, methods=thresholds
+            model=encoder.model,
+            preprocessing=encoder.preprocessing,
+            regional_global_weight=seed.regional_global_weight,
+            methods=thresholds,
         ),
         methods=methods,
     )

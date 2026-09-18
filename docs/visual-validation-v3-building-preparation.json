@@ -1,0 +1,17 @@
+{
+  "attempted": 1,
+  "prepared": 1,
+  "skipped": 0,
+  "failed": 0,
+  "uncovered": 0,
+  "objects": [
+    {
+      "object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "status": "prepared",
+      "views": 4,
+      "warnings": []
+    }
+  ],
+  "model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056",
+  "preprocessing": "rgb-thumbnail2560-dino224-regions65-sift800-v1/4.57.6/2.14.0+cpu/4.14.0.94/12.3.0"
+}

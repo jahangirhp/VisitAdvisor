@@ -1,0 +1,15 @@
+{
+  "manifest_hash": "3a6ffb8d78d67d6b51848868a0e4a70e71a97bc9354bc9a15720fb3640d29c8f",
+  "calibration_artifact_hash": "5742240e7070599faff9d4793d8a2c13a38d53a5b5d3a09fd28a2d77b9112221",
+  "reference_sets_unchanged": true,
+  "api_candidate_order_matches_offline_regional": true,
+  "api_score_max_absolute_difference": 1.3876858939720904e-07,
+  "dataset_ready": true,
+  "regional_recognition_gates_passed": false,
+  "remaining_failed_regional_gates": [
+    "automatic_precision",
+    "automatic_coverage"
+  ],
+  "automatic_api_enabled": false,
+  "phase5_complete": false
+}

@@ -1,0 +1,384 @@
+{
+  "live_counts_after_test": {
+    "objects": 109,
+    "active_reference_sets": 91,
+    "sources": 107,
+    "vectors": 455,
+    "index_status": "ready"
+  },
+  "manifest_and_raw_and_normalized_photo_hashes_verified": true,
+  "frozen_reference_sets_unchanged_after_api": true,
+  "all_twenty_checklist_targets_have_references": true,
+  "api_requests": {
+    "requests": 62,
+    "http_200": 62,
+    "statuses": {
+      "ambiguous": 35,
+      "no_match": 27
+    },
+    "positive_photos": 30,
+    "positive_top3_correct": 28,
+    "negative_photos": 32,
+    "negative_with_candidates": 6,
+    "negative_abstentions": 26,
+    "automatic_matches": 0,
+    "p95_all_requests_seconds": 1.702298186981352
+  },
+  "api_evaluation": {
+    "requests": 48,
+    "http_200": 48,
+    "statuses": {
+      "ambiguous": 23,
+      "no_match": 25
+    },
+    "positive_photos": 18,
+    "positive_top3_correct": 16,
+    "negative_photos": 30,
+    "negative_with_candidates": 6,
+    "negative_abstentions": 24,
+    "automatic_matches": 0,
+    "p95_all_requests_seconds": 1.5209546409896575
+  },
+  "api_vs_offline": [
+    {
+      "id": "commons-50148700",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-50148708",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": "6a9dd820332abe8469d55942",
+      "offline_policy_simulation": "6a9dd820332abe8469d55942",
+      "selections_equal": true
+    },
+    {
+      "id": "commons-50148770",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": "6a9dd817332abe8469d55937",
+      "offline_policy_simulation": "6a9dd817332abe8469d55937",
+      "selections_equal": true
+    },
+    {
+      "id": "commons-64970240",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-113176229",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": "6a9dd818332abe8469d55938",
+      "offline_policy_simulation": "6a9dd818332abe8469d55938",
+      "selections_equal": true
+    },
+    {
+      "id": "commons-113303445",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-152548760",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-193989612",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-193989620",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-60376335",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-33581388",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-83326056",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-41150509",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-24673671",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-24670799",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-47603207",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-24671002",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-114415747",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-114415750",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-114415752",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-114415753",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-105410228",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-105393270",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-105393269",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-105411117",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-120891454",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-120891708",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-39789382",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": "6aa9a744dd73e04d9614615e",
+      "offline_policy_simulation": "6aa9a744dd73e04d9614615e",
+      "selections_equal": true
+    },
+    {
+      "id": "commons-43986065",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-43986158",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": "6aa9a747dd73e04d96146163",
+      "offline_policy_simulation": "6aa9a747dd73e04d96146163",
+      "selections_equal": true
+    },
+    {
+      "id": "commons-39775117",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": "6aa9a747dd73e04d96146163",
+      "offline_policy_simulation": "6aa9a747dd73e04d96146163",
+      "selections_equal": true
+    },
+    {
+      "id": "commons-59463738",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": "6aa9a747dd73e04d96146163",
+      "offline_policy_simulation": "6aa9a747dd73e04d96146163",
+      "selections_equal": true
+    },
+    {
+      "id": "commons-39744327",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": "6aa9a745dd73e04d96146160",
+      "offline_policy_simulation": "6aa9a745dd73e04d96146160",
+      "selections_equal": true
+    },
+    {
+      "id": "commons-109821620",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": "6aa9a745dd73e04d96146160",
+      "offline_policy_simulation": "6aa9a745dd73e04d96146160",
+      "selections_equal": true
+    },
+    {
+      "id": "commons-30586019",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": "6aa9a745dd73e04d96146160",
+      "offline_policy_simulation": "6aa9a745dd73e04d96146160",
+      "selections_equal": true
+    },
+    {
+      "id": "commons-57997345",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": "6aa9a746dd73e04d96146161",
+      "offline_policy_simulation": "6aa9a746dd73e04d96146161",
+      "selections_equal": true
+    },
+    {
+      "id": "commons-50088048",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": "6aa9a746dd73e04d96146161",
+      "offline_policy_simulation": "6aa9a746dd73e04d96146161",
+      "selections_equal": true
+    },
+    {
+      "id": "commons-121424564",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-132703964",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-132703965",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-151640577",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": "6aa9a7fa60b7ca89b6355b9c",
+      "offline_policy_simulation": "6aa9a7fa60b7ca89b6355b9c",
+      "selections_equal": true
+    },
+    {
+      "id": "commons-95915428",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-99703667",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-98518229",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-98966072",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-99170425",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-99117145",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    },
+    {
+      "id": "commons-105215391",
+      "candidate_ids_equal": true,
+      "api_policy_simulation": null,
+      "offline_policy_simulation": null,
+      "selections_equal": true
+    }
+  ],
+  "api_policy_simulation_only": true,
+  "automatic_api_enabled": false,
+  "phase5_complete": false,
+  "field_test_complete": false
+}

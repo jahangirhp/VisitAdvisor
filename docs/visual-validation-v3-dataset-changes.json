@@ -1,0 +1,15 @@
+{
+  "base_manifest": "validation-manifest-v2.json",
+  "base_rows_unchanged": true,
+  "added_query_photos": 15,
+  "added_evaluation_photos": 9,
+  "added_calibration_negatives": 6,
+  "excluded_near_duplicates": [
+    67086860,
+    73223916,
+    74460127
+  ],
+  "grouping": "New separately exposed photos use original-capture IDs. Different detail compositions and EXIF exposure times support separation. All photos from each contributor/visit remain within one split; old conservative session groups are unchanged.",
+  "reference_selection": "Three added architectural references depict different panels from the failed evaluation reliefs; no query image used as a reference.",
+  "field_validation_complete": false
+}

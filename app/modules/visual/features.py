@@ -13,6 +13,7 @@ from PIL import Image
 MODEL = "facebook/dinov2-small"
 REVISION = "ed25f3a31f01632728cabb09d1542f84ab7b0056"
 DIMENSIONS = 384
+REGIONAL_GLOBAL_WEIGHT = 0.75
 REGIONS = [(0.0, 0.0, 1.0, 1.0)] + [
     (x, y, x + 0.65, y + 0.65) for y in (0.0, 0.35) for x in (0.0, 0.35)
 ]
@@ -167,7 +168,11 @@ def geometric_score(query: dict[str, Any], reference: dict[str, Any]) -> float:
 
 
 def rank(
-    query: dict[str, Any], records: list[dict[str, Any]], method: str
+    query: dict[str, Any],
+    records: list[dict[str, Any]],
+    method: str,
+    *,
+    regional_global_weight: float = 0.0,
 ) -> list[dict[str, Any]]:
     candidates = []
     q = query["regions"][0]["embedding"]
@@ -178,14 +183,19 @@ def rank(
             if method == "local":
                 similarity = geometric_score(query["local"], features["local"])
             else:
-                regions = (
-                    features["regions"]
-                    if method == "regional"
-                    else features["regions"][:1]
+                global_similarity = sum(
+                    a * b
+                    for a, b in zip(q, features["regions"][0]["embedding"], strict=True)
                 )
-                similarity = max(
+                regional_similarity = max(
                     sum(a * b for a, b in zip(q, r["embedding"], strict=True))
-                    for r in regions
+                    for r in features["regions"]
+                )
+                similarity = (
+                    global_similarity
+                    if method == "global"
+                    else regional_global_weight * global_similarity
+                    + (1 - regional_global_weight) * regional_similarity
                 )
             score = max(score, similarity)
         if score >= 0:

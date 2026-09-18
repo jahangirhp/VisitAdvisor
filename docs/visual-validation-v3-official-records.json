@@ -1,0 +1,3288 @@
+[
+  {
+    "external_id": "https://id.rijksmuseum.nl/200109196",
+    "type_provided": true,
+    "object": {
+      "name": "The Fall of Man",
+      "aliases": [
+        "De zondeval"
+      ],
+      "type": "painting",
+      "creator": "Cornelis Cornelisz. van Haarlem",
+      "year": "1592",
+      "description": "De zondeval. Adam en Eva staande voor de boom der kennis. Een slang reikt Eva een appel aan. Om de figuren allerlei dieren: aap, kat, hond, naaktslakken, egel, kikker, vos en uil.  Links op de achtergrond worden Adam en Eva door God gewaarschuwd niet van de boom te eten.",
+      "facts": [],
+      "story": null,
+      "history": null,
+      "source_ids": [],
+      "metadata": {
+        "rijksmuseum": {
+          "object_number": "SK-A-129",
+          "materials": [
+            "canvas",
+            "oil paint (paint)"
+          ]
+        }
+      }
+    },
+    "raw_record": {
+      "@context": "https://linked.art/ns/v1/linked-art.json",
+      "id": "https://id.rijksmuseum.nl/200109196",
+      "type": "HumanMadeObject",
+      "produced_by": {
+        "type": "Production",
+        "timespan": {
+          "type": "TimeSpan",
+          "identified_by": [
+            {
+              "type": "Name",
+              "content": "1592",
+              "language": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300388277",
+                  "type": "Language"
+                }
+              ]
+            },
+            {
+              "type": "Name",
+              "content": "1592",
+              "language": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300388256",
+                  "type": "Language"
+                }
+              ]
+            }
+          ],
+          "begin_of_the_begin": "1592-01-01T00:00:00Z",
+          "end_of_the_end": "1592-12-31T23:59:59Z"
+        },
+        "referred_to_by": [
+          {
+            "type": "LinguisticObject",
+            "content": "Cornelis Cornelisz. van Haarlem",
+            "classified_as": [
+              {
+                "id": "http://vocab.getty.edu/aat/300435416",
+                "type": "Type"
+              }
+            ],
+            "language": [
+              {
+                "id": "http://vocab.getty.edu/aat/300388277",
+                "type": "Language"
+              }
+            ]
+          },
+          {
+            "type": "LinguisticObject",
+            "content": "Cornelis Cornelisz. van Haarlem",
+            "classified_as": [
+              {
+                "id": "http://vocab.getty.edu/aat/300435416",
+                "type": "Type"
+              }
+            ],
+            "language": [
+              {
+                "id": "http://vocab.getty.edu/aat/300388256",
+                "type": "Language"
+              }
+            ]
+          }
+        ],
+        "part": [
+          {
+            "type": "Production",
+            "carried_out_by": [
+              {
+                "id": "https://id.rijksmuseum.nl/2105664",
+                "type": "Person",
+                "notation": [
+                  {
+                    "@language": "nl",
+                    "@value": "Cornelis Cornelisz. van Haarlem"
+                  },
+                  {
+                    "@language": "en",
+                    "@value": "Cornelis Cornelisz. van Haarlem"
+                  }
+                ],
+                "equivalent": [
+                  {
+                    "id": "http://vocab.getty.edu/ulan/500020887",
+                    "type": "Person"
+                  },
+                  {
+                    "id": "http://www.wikidata.org/entity/Q442484",
+                    "type": "Person"
+                  },
+                  {
+                    "id": "http://viaf.org/viaf/35257139",
+                    "type": "Person"
+                  },
+                  {
+                    "id": "https://rkd.nl/artists/18412",
+                    "type": "Person"
+                  }
+                ]
+              }
+            ],
+            "identified_by": [
+              {
+                "type": "Identifier",
+                "content": "1",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300456575",
+                    "type": "Type"
+                  }
+                ]
+              }
+            ],
+            "classified_as": [
+              {
+                "id": "http://vocab.getty.edu/aat/300404450",
+                "type": "Type"
+              }
+            ],
+            "technique": [
+              {
+                "id": "https://id.rijksmuseum.nl/2202217",
+                "type": "Type",
+                "notation": [
+                  {
+                    "@language": "en",
+                    "@value": "painter"
+                  },
+                  {
+                    "@language": "nl",
+                    "@value": "schilder"
+                  }
+                ],
+                "equivalent": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300025136",
+                    "type": "Type"
+                  }
+                ]
+              }
+            ],
+            "referred_to_by": [
+              {
+                "type": "LinguisticObject",
+                "content": "Cornelis Cornelisz. van Haarlem",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300435417",
+                    "type": "Type"
+                  }
+                ],
+                "language": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300388256",
+                    "type": "Language"
+                  }
+                ]
+              },
+              {
+                "type": "LinguisticObject",
+                "content": "Cornelis Cornelisz. van Haarlem",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300435417",
+                    "type": "Type"
+                  }
+                ],
+                "language": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300388277",
+                    "type": "Language"
+                  }
+                ]
+              },
+              {
+                "type": "LinguisticObject",
+                "content": "schilder: Cornelis Cornelisz. van Haarlem",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300435416",
+                    "type": "Type"
+                  }
+                ],
+                "language": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300388256",
+                    "type": "Language"
+                  }
+                ]
+              },
+              {
+                "type": "LinguisticObject",
+                "content": "painter: Cornelis Cornelisz. van Haarlem",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300435416",
+                    "type": "Type"
+                  }
+                ],
+                "language": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300388277",
+                    "type": "Language"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "subject_of": [
+        {
+          "type": "LinguisticObject",
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ],
+          "digitally_carried_by": [
+            {
+              "type": "DigitalObject",
+              "format": "text/html",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300264578",
+                  "type": "Type"
+                }
+              ],
+              "access_point": [
+                {
+                  "id": "https://www.rijksmuseum.nl/nl/collectie/object/SK-A-129--46f050cb5979716be5f6ba65ec3d782e",
+                  "type": "DigitalObject"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "LinguisticObject",
+          "part": [
+            {
+              "type": "LinguisticObject",
+              "content": "In the left background we see God (a cloud with a human face and hands) cautioning Adam and Eve. They may eat the fruit of all of the trees, except the tree of \u2018the knowledge of good and evil\u2019. Tempted by the serpent (with a human torso), Adam and Eve nevertheless eat the  forbidden fruit, for which they were driven from Paradise.",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300048722",
+                  "type": "Type"
+                }
+              ]
+            },
+            {
+              "type": "LinguisticObject",
+              "part": [
+                {
+                  "type": "LinguisticObject",
+                  "content": "Cornelis Cornelisz van Haarlem (1562\u20131638), oil on canvas, 1592"
+                },
+                {
+                  "id": "_:b18",
+                  "type": "Name",
+                  "content": "The Fall of Man",
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300417207",
+                      "type": "Type"
+                    },
+                    {
+                      "id": "http://vocab.getty.edu/aat/300404670",
+                      "type": "Type",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300418049",
+                          "type": "Type",
+                          "_label": "brief text"
+                        }
+                      ]
+                    }
+                  ],
+                  "language": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300388277",
+                      "type": "Language"
+                    }
+                  ]
+                }
+              ],
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300312075",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300404670",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            },
+            {
+              "id": "http://vocab.getty.edu/aat/300417268",
+              "type": "Type"
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388277",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "id": "https://data.rijksmuseum.nl/200109196",
+          "type": "LinguisticObject",
+          "subject_to": [
+            {
+              "type": "Right",
+              "classified_as": [
+                {
+                  "id": "https://creativecommons.org/publicdomain/zero/1.0/",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300379475",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "LinguisticObject",
+          "part": [
+            {
+              "type": "LinguisticObject",
+              "part": [
+                {
+                  "id": "_:b19",
+                  "type": "Name",
+                  "content": "De zondeval",
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300417207",
+                      "type": "Type"
+                    },
+                    {
+                      "id": "http://vocab.getty.edu/aat/300404670",
+                      "type": "Type",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300418049",
+                          "type": "Type",
+                          "_label": "brief text"
+                        }
+                      ]
+                    }
+                  ],
+                  "language": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300388256",
+                      "type": "Language"
+                    }
+                  ]
+                },
+                {
+                  "type": "LinguisticObject",
+                  "content": "Cornelis Cornelisz van Haarlem (1562\u20131638), olieverf op doek, 1592"
+                }
+              ],
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300312075",
+                  "type": "Type"
+                }
+              ]
+            },
+            {
+              "type": "LinguisticObject",
+              "content": "Links op de achtergrond is te zien hoe God (een wolk met een mensengezicht en handen) Adam en Eva waarschuwt. De vruchten van alle bomen mogen zij eten, behalve die van de boom der kennis van goed en kwaad. Verleid door de slang (met het bovenlichaam van een mens) eten Adam en Eva toch van de verboden vruchten, waarna ze uit het paradijs worden verdreven.",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300048722",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300417268",
+              "type": "Type"
+            },
+            {
+              "id": "http://vocab.getty.edu/aat/300404670",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ]
+        }
+      ],
+      "attributed_by": [
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "id": "https://id.rijksmuseum.nl/200302757",
+              "type": "HumanMadeObject"
+            }
+          ],
+          "identified_by": [
+            {
+              "type": "Name",
+              "content": "related object",
+              "language": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300388277",
+                  "type": "Language"
+                }
+              ]
+            },
+            {
+              "type": "Name",
+              "content": "gerelateerd object",
+              "language": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300388256",
+                  "type": "Language"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300444120",
+              "type": "Type"
+            }
+          ]
+        }
+      ],
+      "assigned_by": [
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "type": "LinguisticObject",
+              "part_of": [
+                {
+                  "id": "https://id.rijksmuseum.nl/30198970",
+                  "type": "LinguisticObject"
+                }
+              ],
+              "identified_by": [
+                {
+                  "type": "Identifier",
+                  "part": [
+                    {
+                      "type": "Identifier",
+                      "content": "p. 33 - 36, afb.",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300445022",
+                          "type": "Type"
+                        }
+                      ]
+                    }
+                  ],
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300311705",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "id": "https://id.rijksmuseum.nl/30133127",
+              "type": "http://id.loc.gov/ontologies/bibframe/Instance"
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "id": "https://id.rijksmuseum.nl/30191693",
+              "type": "http://id.loc.gov/ontologies/bibframe/Instance"
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "type": "LinguisticObject",
+              "part_of": [
+                {
+                  "id": "https://id.rijksmuseum.nl/30157704",
+                  "type": "LinguisticObject"
+                }
+              ],
+              "identified_by": [
+                {
+                  "type": "Identifier",
+                  "part": [
+                    {
+                      "type": "Identifier",
+                      "content": "2",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300404620",
+                          "type": "Type"
+                        }
+                      ]
+                    }
+                  ],
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300311705",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "type": "LinguisticObject",
+              "part_of": [
+                {
+                  "id": "https://id.rijksmuseum.nl/30150450",
+                  "type": "LinguisticObject"
+                }
+              ],
+              "identified_by": [
+                {
+                  "type": "Identifier",
+                  "part": [
+                    {
+                      "type": "Identifier",
+                      "content": "p. 13",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300445022",
+                          "type": "Type"
+                        }
+                      ]
+                    }
+                  ],
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300311705",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "type": "LinguisticObject",
+              "part_of": [
+                {
+                  "id": "https://id.rijksmuseum.nl/3015253",
+                  "type": "LinguisticObject"
+                }
+              ],
+              "identified_by": [
+                {
+                  "type": "Identifier",
+                  "part": [
+                    {
+                      "type": "Identifier",
+                      "content": "p. 174-175",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300445022",
+                          "type": "Type"
+                        }
+                      ]
+                    }
+                  ],
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300311705",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "type": "LinguisticObject",
+              "part_of": [
+                {
+                  "id": "https://id.rijksmuseum.nl/301154610",
+                  "type": "LinguisticObject"
+                }
+              ],
+              "identified_by": [
+                {
+                  "type": "Identifier",
+                  "part": [
+                    {
+                      "type": "Identifier",
+                      "content": "afb. 10",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300445022",
+                          "type": "Type"
+                        }
+                      ]
+                    }
+                  ],
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300311705",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "type": "LinguisticObject",
+              "part_of": [
+                {
+                  "id": "https://id.rijksmuseum.nl/301100933",
+                  "type": "LinguisticObject"
+                }
+              ],
+              "identified_by": [
+                {
+                  "type": "Identifier",
+                  "part": [
+                    {
+                      "type": "Identifier",
+                      "content": "95",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300404620",
+                          "type": "Type"
+                        }
+                      ]
+                    }
+                  ],
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300311705",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "type": "LinguisticObject",
+              "part_of": [
+                {
+                  "id": "https://id.rijksmuseum.nl/30158489",
+                  "type": "LinguisticObject"
+                }
+              ],
+              "identified_by": [
+                {
+                  "type": "Identifier",
+                  "part": [
+                    {
+                      "type": "Identifier",
+                      "content": "p. 13, afb. 3",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300445022",
+                          "type": "Type"
+                        }
+                      ]
+                    }
+                  ],
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300311705",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "type": "LinguisticObject",
+              "part_of": [
+                {
+                  "id": "https://id.rijksmuseum.nl/301210566",
+                  "type": "LinguisticObject"
+                }
+              ],
+              "identified_by": [
+                {
+                  "type": "Identifier",
+                  "part": [
+                    {
+                      "type": "Identifier",
+                      "content": "p. 54, afb. 44",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300445022",
+                          "type": "Type"
+                        }
+                      ]
+                    }
+                  ],
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300311705",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "type": "LinguisticObject",
+              "part_of": [
+                {
+                  "id": "https://id.rijksmuseum.nl/30130951",
+                  "type": "LinguisticObject"
+                }
+              ],
+              "identified_by": [
+                {
+                  "type": "Identifier",
+                  "part": [
+                    {
+                      "type": "Identifier",
+                      "content": "1",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300404620",
+                          "type": "Type"
+                        }
+                      ]
+                    }
+                  ],
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300311705",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ]
+        }
+      ],
+      "identified_by": [
+        {
+          "id": "_:b17",
+          "type": "Name",
+          "content": "De zondeval",
+          "identified_by": [
+            {
+              "id": "_:b78",
+              "type": "Identifier",
+              "content": "1",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300456575",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300417200",
+              "type": "Type"
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "id": "_:b18",
+          "type": "Name",
+          "content": "The Fall of Man",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300417207",
+              "type": "Type"
+            },
+            {
+              "id": "http://vocab.getty.edu/aat/300404670",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388277",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "id": "_:b19",
+          "type": "Name",
+          "content": "De zondeval",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300417207",
+              "type": "Type"
+            },
+            {
+              "id": "http://vocab.getty.edu/aat/300404670",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "type": "Identifier",
+          "content": "SK-A-129",
+          "classified_as": [
+            {
+              "id": "https://id.rijksmuseum.nl/22015218",
+              "type": "Type",
+              "notation": [
+                {
+                  "@language": "en",
+                  "@value": "object number"
+                },
+                {
+                  "@language": "nl",
+                  "@value": "objectnummer"
+                }
+              ]
+            },
+            {
+              "id": "http://vocab.getty.edu/aat/300312355",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "Name",
+          "content": "The Fall of Man",
+          "identified_by": [
+            {
+              "type": "Identifier",
+              "content": "1",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300456575",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300417200",
+              "type": "Type"
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388277",
+              "type": "Language"
+            }
+          ],
+          "translation_of": [
+            {
+              "id": "_:b17",
+              "type": "Name",
+              "content": "De zondeval",
+              "identified_by": [
+                {
+                  "id": "_:b78",
+                  "type": "Identifier",
+                  "content": "1",
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300456575",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ],
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300417200",
+                  "type": "Type"
+                }
+              ],
+              "language": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300388256",
+                  "type": "Language"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "classified_as": [
+        {
+          "id": "https://id.rijksmuseum.nl/2208",
+          "type": "Type",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300435443",
+              "type": "Type",
+              "_label": "Type of Work"
+            }
+          ],
+          "notation": [
+            {
+              "@language": "nl",
+              "@value": "schilderij"
+            },
+            {
+              "@language": "en",
+              "@value": "painting"
+            }
+          ],
+          "equivalent": [
+            {
+              "id": "http://vocab.getty.edu/aat/300033618",
+              "type": "Type"
+            },
+            {
+              "id": "http://www.wikidata.org/entity/Q3305213",
+              "type": "Type"
+            }
+          ]
+        }
+      ],
+      "dimension": [
+        {
+          "type": "Dimension",
+          "identified_by": [
+            {
+              "type": "Name",
+              "content": "doekmaat",
+              "language": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300388256",
+                  "type": "Language"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "https://id.rijksmuseum.nl/22011",
+              "type": "Type",
+              "notation": [
+                {
+                  "@language": "en",
+                  "@value": "height"
+                },
+                {
+                  "@language": "nl",
+                  "@value": "hoogte"
+                }
+              ],
+              "equivalent": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300055644",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "value": "273",
+          "unit": {
+            "id": "http://vocab.getty.edu/aat/300379098",
+            "type": "MeasurementUnit"
+          }
+        },
+        {
+          "type": "Dimension",
+          "identified_by": [
+            {
+              "type": "Name",
+              "content": "doekmaat",
+              "language": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300388256",
+                  "type": "Language"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "https://id.rijksmuseum.nl/22012",
+              "type": "Type",
+              "notation": [
+                {
+                  "@language": "nl",
+                  "@value": "breedte"
+                },
+                {
+                  "@language": "en",
+                  "@value": "width"
+                }
+              ],
+              "equivalent": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300055647",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "value": "220",
+          "unit": {
+            "id": "http://vocab.getty.edu/aat/300379098",
+            "type": "MeasurementUnit"
+          }
+        }
+      ],
+      "made_of": [
+        {
+          "id": "https://id.rijksmuseum.nl/22010",
+          "type": "Material",
+          "identified_by": [
+            {
+              "type": "Identifier",
+              "assigned_by": [
+                {
+                  "type": "AttributeAssignment",
+                  "assigned": [
+                    "https://id.rijksmuseum.nl/200109196"
+                  ],
+                  "assigned_property": "influenced_by"
+                }
+              ],
+              "content": "1",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300456575",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "notation": [
+            {
+              "@language": "en",
+              "@value": "canvas"
+            },
+            {
+              "@language": "nl",
+              "@value": "doek"
+            }
+          ],
+          "equivalent": [
+            {
+              "id": "http://vocab.getty.edu/aat/300014078",
+              "type": "Material"
+            }
+          ]
+        },
+        {
+          "id": "https://id.rijksmuseum.nl/2209",
+          "type": "Material",
+          "identified_by": [
+            {
+              "type": "Identifier",
+              "assigned_by": [
+                {
+                  "type": "AttributeAssignment",
+                  "assigned": [
+                    "https://id.rijksmuseum.nl/200109196"
+                  ],
+                  "assigned_property": "influenced_by"
+                }
+              ],
+              "content": "2",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300456575",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "notation": [
+            {
+              "@language": "nl",
+              "@value": "olieverf"
+            },
+            {
+              "@language": "en",
+              "@value": "oil paint (paint)"
+            }
+          ],
+          "equivalent": [
+            {
+              "id": "http://vocab.getty.edu/aat/300015050",
+              "type": "Material"
+            },
+            {
+              "id": "http://www.wikidata.org/entity/Q296955",
+              "type": "Material"
+            },
+            {
+              "id": "https://data.cultureelerfgoed.nl/term/id/cht/d2070bd1-9a89-4623-b793-81f9ec1f5862",
+              "type": "Material"
+            }
+          ]
+        }
+      ],
+      "current_location": {
+        "type": "Place",
+        "identified_by": [
+          {
+            "type": "Identifier",
+            "part": [
+              {
+                "type": "Identifier",
+                "content": "HG",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300004188",
+                    "type": "Type"
+                  }
+                ]
+              },
+              {
+                "type": "Identifier",
+                "content": "2.1",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300260522",
+                    "type": "Type"
+                  }
+                ]
+              }
+            ],
+            "content": "HG-2.1",
+            "classified_as": [
+              {
+                "id": "http://vocab.getty.edu/aat/300435449",
+                "type": "Type"
+              }
+            ]
+          },
+          {
+            "type": "Name",
+            "part": [
+              {
+                "type": "Name",
+                "content": "De geboorte van de Republiek / Mani\u00ebrisme en caravaggisme",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300260522",
+                    "type": "Type"
+                  }
+                ],
+                "language": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300388256",
+                    "type": "Language"
+                  }
+                ]
+              },
+              {
+                "type": "Name",
+                "content": "17de Eeuw",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300379391",
+                    "type": "Type"
+                  }
+                ],
+                "language": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300388256",
+                    "type": "Language"
+                  }
+                ]
+              },
+              {
+                "type": "Name",
+                "content": "Hoofdgebouw",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300004188",
+                    "type": "Type"
+                  }
+                ],
+                "language": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300388256",
+                    "type": "Language"
+                  }
+                ]
+              }
+            ],
+            "classified_as": [
+              {
+                "id": "http://vocab.getty.edu/aat/300404670",
+                "type": "Type",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300418049",
+                    "type": "Type",
+                    "_label": "brief text"
+                  }
+                ]
+              },
+              {
+                "id": "http://vocab.getty.edu/aat/300435449",
+                "type": "Type"
+              }
+            ],
+            "language": [
+              {
+                "id": "http://vocab.getty.edu/aat/300388256",
+                "type": "Language"
+              }
+            ]
+          },
+          {
+            "type": "Name",
+            "part": [
+              {
+                "type": "Name",
+                "content": "The birth of the Republic / Mannerism and caravaggism",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300260522",
+                    "type": "Type"
+                  }
+                ],
+                "language": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300388277",
+                    "type": "Language"
+                  }
+                ]
+              },
+              {
+                "type": "Name",
+                "content": "Main building",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300004188",
+                    "type": "Type"
+                  }
+                ],
+                "language": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300388277",
+                    "type": "Language"
+                  }
+                ]
+              },
+              {
+                "type": "Name",
+                "content": "17th Century",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300379391",
+                    "type": "Type"
+                  }
+                ],
+                "language": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300388277",
+                    "type": "Language"
+                  }
+                ]
+              }
+            ],
+            "classified_as": [
+              {
+                "id": "http://vocab.getty.edu/aat/300404670",
+                "type": "Type",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300418049",
+                    "type": "Type",
+                    "_label": "brief text"
+                  }
+                ]
+              },
+              {
+                "id": "http://vocab.getty.edu/aat/300435449",
+                "type": "Type"
+              }
+            ],
+            "language": [
+              {
+                "id": "http://vocab.getty.edu/aat/300388277",
+                "type": "Language"
+              }
+            ]
+          }
+        ]
+      },
+      "shows": [
+        {
+          "id": "https://id.rijksmuseum.nl/202109196",
+          "type": "VisualItem"
+        }
+      ],
+      "referred_to_by": [
+        {
+          "type": "LinguisticObject",
+          "content": "olieverf op doek",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300435429",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "type": "LinguisticObject",
+          "content": "De zondeval. Adam en Eva staande voor de boom der kennis. Een slang reikt Eva een appel aan. Om de figuren allerlei dieren: aap, kat, hond, naaktslakken, egel, kikker, vos en uil.  Links op de achtergrond worden Adam en Eva door God gewaarschuwd niet van de boom te eten.",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300404670",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            },
+            {
+              "id": "http://vocab.getty.edu/aat/300435452",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ],
+          "created_by": {
+            "type": "Creation",
+            "timespan": {
+              "type": "TimeSpan",
+              "identified_by": [
+                {
+                  "type": "Name",
+                  "content": "2000-12-22",
+                  "language": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300388277",
+                      "type": "Language"
+                    }
+                  ]
+                },
+                {
+                  "type": "Name",
+                  "content": "2000-12-22",
+                  "language": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300388256",
+                      "type": "Language"
+                    }
+                  ]
+                }
+              ],
+              "begin_of_the_begin": "2000-12-22T00:00:00Z",
+              "end_of_the_end": "2000-12-22T23:59:59Z"
+            }
+          }
+        },
+        {
+          "type": "LinguisticObject",
+          "content": "signature and date: \u2018A\u00ba 1592 C.C.H fec.\u2019",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300435414",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388277",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "type": "LinguisticObject",
+          "content": "doekmaat: hoogte 273 cm x breedte 220 cm",
+          "identified_by": [
+            {
+              "type": "Identifier",
+              "content": "1",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300456575",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300435430",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "type": "LinguisticObject",
+          "content": "height 273 cm x width 220 cm",
+          "identified_by": [
+            {
+              "type": "Identifier",
+              "content": "1",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300456575",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300435430",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388277",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "type": "LinguisticObject",
+          "content": "oil on canvas",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300435429",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388277",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "type": "LinguisticObject",
+          "content": "signatuur en datum, rechtsonder op een steen: \u2018A\u00ba 1592 C.C.H fec.\u2019",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300435414",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ]
+        }
+      ],
+      "equivalent": [
+        {
+          "id": "http://hdl.handle.net/10934/RM0001.COLLECT.8165",
+          "type": "HumanMadeObject"
+        }
+      ],
+      "member_of": [
+        {
+          "id": "https://id.rijksmuseum.nl/260238",
+          "type": "Set"
+        },
+        {
+          "id": "https://id.rijksmuseum.nl/260251",
+          "type": "Set"
+        },
+        {
+          "id": "https://id.rijksmuseum.nl/261208",
+          "type": "Set"
+        },
+        {
+          "id": "https://id.rijksmuseum.nl/260214",
+          "type": "Set"
+        },
+        {
+          "id": "https://id.rijksmuseum.nl/260212",
+          "type": "Set"
+        },
+        {
+          "id": "https://id.rijksmuseum.nl/260239",
+          "type": "Set"
+        }
+      ]
+    }
+  },
+  {
+    "external_id": "https://id.rijksmuseum.nl/200110519",
+    "type_provided": true,
+    "object": {
+      "name": "View of Itamarac\u00e1 Island",
+      "aliases": [
+        "Gezicht op het eiland Itamarac\u00e1",
+        "View of the Island of Itamarac\u00e1, Brazil",
+        "Gezicht op het eiland Itamarac\u00e1, Brazili\u00eb"
+      ],
+      "type": "painting",
+      "creator": "Frans Jansz Post",
+      "year": "1637",
+      "description": "Gezicht op het eiland Itamarac\u00e1, Nederlands-Brazili\u00eb. Aan de overkant van het water ligt het eiland met de stad Schoppe en Fort Oranje. Op de voorgrond een Portugees te paard en lokale bewoners.",
+      "facts": [],
+      "story": null,
+      "history": null,
+      "source_ids": [],
+      "metadata": {
+        "rijksmuseum": {
+          "object_number": "SK-A-4271",
+          "materials": [
+            "canvas",
+            "oil paint (paint)"
+          ]
+        }
+      }
+    },
+    "raw_record": {
+      "@context": "https://linked.art/ns/v1/linked-art.json",
+      "id": "https://id.rijksmuseum.nl/200110519",
+      "type": "HumanMadeObject",
+      "produced_by": {
+        "type": "Production",
+        "timespan": {
+          "type": "TimeSpan",
+          "identified_by": [
+            {
+              "type": "Name",
+              "content": "1637",
+              "language": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300388277",
+                  "type": "Language"
+                }
+              ]
+            },
+            {
+              "type": "Name",
+              "content": "1637",
+              "language": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300388256",
+                  "type": "Language"
+                }
+              ]
+            }
+          ],
+          "begin_of_the_begin": "1637-01-01T00:00:00Z",
+          "end_of_the_end": "1637-12-31T23:59:59Z"
+        },
+        "referred_to_by": [
+          {
+            "type": "LinguisticObject",
+            "content": "Frans Jansz Post",
+            "classified_as": [
+              {
+                "id": "http://vocab.getty.edu/aat/300435416",
+                "type": "Type"
+              }
+            ],
+            "language": [
+              {
+                "id": "http://vocab.getty.edu/aat/300388277",
+                "type": "Language"
+              }
+            ]
+          },
+          {
+            "type": "LinguisticObject",
+            "content": "Frans Jansz. Post",
+            "classified_as": [
+              {
+                "id": "http://vocab.getty.edu/aat/300435416",
+                "type": "Type"
+              }
+            ],
+            "language": [
+              {
+                "id": "http://vocab.getty.edu/aat/300388256",
+                "type": "Language"
+              }
+            ]
+          }
+        ],
+        "part": [
+          {
+            "type": "Production",
+            "carried_out_by": [
+              {
+                "id": "https://id.rijksmuseum.nl/2101266",
+                "type": "Person",
+                "notation": [
+                  {
+                    "@language": "nl",
+                    "@value": "Frans Jansz. Post"
+                  },
+                  {
+                    "@language": "en",
+                    "@value": "Frans Jansz Post"
+                  }
+                ],
+                "equivalent": [
+                  {
+                    "id": "http://www.wikidata.org/entity/Q577489",
+                    "type": "Person"
+                  },
+                  {
+                    "id": "https://rkd.nl/artists/64415",
+                    "type": "Person"
+                  },
+                  {
+                    "id": "http://viaf.org/viaf/12579434",
+                    "type": "Person"
+                  },
+                  {
+                    "id": "http://vocab.getty.edu/ulan/500017077",
+                    "type": "Person"
+                  }
+                ]
+              }
+            ],
+            "identified_by": [
+              {
+                "type": "Identifier",
+                "content": "1",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300456575",
+                    "type": "Type"
+                  }
+                ]
+              }
+            ],
+            "classified_as": [
+              {
+                "id": "http://vocab.getty.edu/aat/300404450",
+                "type": "Type"
+              }
+            ],
+            "technique": [
+              {
+                "id": "https://id.rijksmuseum.nl/2202217",
+                "type": "Type",
+                "notation": [
+                  {
+                    "@language": "nl",
+                    "@value": "schilder"
+                  },
+                  {
+                    "@language": "en",
+                    "@value": "painter"
+                  }
+                ],
+                "equivalent": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300025136",
+                    "type": "Type"
+                  }
+                ]
+              }
+            ],
+            "referred_to_by": [
+              {
+                "type": "LinguisticObject",
+                "content": "painter: Frans Jansz Post",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300435416",
+                    "type": "Type"
+                  }
+                ],
+                "language": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300388277",
+                    "type": "Language"
+                  }
+                ]
+              },
+              {
+                "type": "LinguisticObject",
+                "content": "Frans Jansz. Post",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300435417",
+                    "type": "Type"
+                  }
+                ],
+                "language": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300388256",
+                    "type": "Language"
+                  }
+                ]
+              },
+              {
+                "type": "LinguisticObject",
+                "content": "schilder: Frans Jansz. Post",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300435416",
+                    "type": "Type"
+                  }
+                ],
+                "language": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300388256",
+                    "type": "Language"
+                  }
+                ]
+              },
+              {
+                "type": "LinguisticObject",
+                "content": "Frans Jansz Post",
+                "classified_as": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300435417",
+                    "type": "Type"
+                  }
+                ],
+                "language": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300388277",
+                    "type": "Language"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "subject_of": [
+        {
+          "type": "LinguisticObject",
+          "part": [
+            {
+              "type": "LinguisticObject",
+              "content": "This is the earliest known painting of Post, made on 3 November 1637. At first Johan Maurits wanted to build the new capital on the island of Itamarac\u00e1. The group of men, including two enslaved, in the foreground are probably exploring the island. On the hill across the water lies Schoppestad, with on the right Fort Oranje, which can still be visited today.",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300048722",
+                  "type": "Type"
+                }
+              ]
+            },
+            {
+              "type": "LinguisticObject",
+              "part": [
+                {
+                  "type": "LinguisticObject",
+                  "content": "Frans Post (1612\u20131680), oil on canvas, 1637"
+                },
+                {
+                  "id": "_:b16",
+                  "type": "Name",
+                  "content": "View of the Island of Itamarac\u00e1, Brazil",
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300417207",
+                      "type": "Type"
+                    },
+                    {
+                      "id": "http://vocab.getty.edu/aat/300404670",
+                      "type": "Type",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300418049",
+                          "type": "Type",
+                          "_label": "brief text"
+                        }
+                      ]
+                    }
+                  ],
+                  "language": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300388277",
+                      "type": "Language"
+                    }
+                  ]
+                }
+              ],
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300312075",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300417268",
+              "type": "Type"
+            },
+            {
+              "id": "http://vocab.getty.edu/aat/300404670",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388277",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "id": "https://data.rijksmuseum.nl/200110519",
+          "type": "LinguisticObject",
+          "subject_to": [
+            {
+              "type": "Right",
+              "classified_as": [
+                {
+                  "id": "https://creativecommons.org/publicdomain/zero/1.0/",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300379475",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "LinguisticObject",
+          "part": [
+            {
+              "type": "LinguisticObject",
+              "part": [
+                {
+                  "id": "_:b17",
+                  "type": "Name",
+                  "content": "Gezicht op het eiland Itamarac\u00e1, Brazili\u00eb",
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300417207",
+                      "type": "Type"
+                    },
+                    {
+                      "id": "http://vocab.getty.edu/aat/300404670",
+                      "type": "Type",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300418049",
+                          "type": "Type",
+                          "_label": "brief text"
+                        }
+                      ]
+                    }
+                  ],
+                  "language": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300388256",
+                      "type": "Language"
+                    }
+                  ]
+                },
+                {
+                  "type": "LinguisticObject",
+                  "content": "Frans Post (1612\u20131680), olieverf op doek, 1637"
+                }
+              ],
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300312075",
+                  "type": "Type"
+                }
+              ]
+            },
+            {
+              "type": "LinguisticObject",
+              "content": "Dit is het vroegst bekende schilderij van Frans Post, gemaakt op 3 november 1637. Aanvankelijk wilde Johan Maurits op het eiland Itamarac\u00e1 een nieuwe hoofdstad vestigen. Mogelijk verkent de groep mannen, waaronder twee tot slaaf gemaakten, het eiland. Op de heuvel aan de overkant van het water ligt Schoppestad. Helemaal rechts ligt Fort Oranje, dat nog steeds te bezichtigen is.",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300048722",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300417268",
+              "type": "Type"
+            },
+            {
+              "id": "http://vocab.getty.edu/aat/300404670",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "type": "LinguisticObject",
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ],
+          "digitally_carried_by": [
+            {
+              "type": "DigitalObject",
+              "format": "text/html",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300264578",
+                  "type": "Type"
+                }
+              ],
+              "access_point": [
+                {
+                  "id": "https://www.rijksmuseum.nl/nl/collectie/object/SK-A-4271--787c88d5576082a405a27a4ea4eca82a",
+                  "type": "DigitalObject"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "assigned_by": [
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "type": "LinguisticObject",
+              "part_of": [
+                {
+                  "id": "https://id.rijksmuseum.nl/30150488",
+                  "type": "LinguisticObject"
+                }
+              ],
+              "identified_by": [
+                {
+                  "type": "Identifier",
+                  "part": [
+                    {
+                      "type": "Identifier",
+                      "content": "p. 86-89",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300445022",
+                          "type": "Type"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Identifier",
+                      "content": "1",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300404620",
+                          "type": "Type"
+                        }
+                      ]
+                    }
+                  ],
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300311705",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "type": "LinguisticObject",
+              "part_of": [
+                {
+                  "id": "https://id.rijksmuseum.nl/301202001",
+                  "type": "LinguisticObject"
+                }
+              ],
+              "identified_by": [
+                {
+                  "type": "Identifier",
+                  "part": [
+                    {
+                      "type": "Identifier",
+                      "content": "p. 244, afb. 5",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300445022",
+                          "type": "Type"
+                        }
+                      ]
+                    }
+                  ],
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300311705",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "type": "LinguisticObject",
+              "part_of": [
+                {
+                  "id": "https://id.rijksmuseum.nl/301304725",
+                  "type": "LinguisticObject"
+                }
+              ],
+              "identified_by": [
+                {
+                  "type": "Identifier",
+                  "part": [
+                    {
+                      "type": "Identifier",
+                      "content": "p. 113, fig. 19",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300445022",
+                          "type": "Type"
+                        }
+                      ]
+                    }
+                  ],
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300311705",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ],
+          "referred_to_by": [
+            {
+              "type": "LinguisticObject",
+              "content": "2020, vol. 68, no. 2",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300435416",
+                  "type": "Type"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "type": "LinguisticObject",
+              "part_of": [
+                {
+                  "id": "https://id.rijksmuseum.nl/301151249",
+                  "type": "LinguisticObject"
+                }
+              ],
+              "identified_by": [
+                {
+                  "type": "Identifier",
+                  "part": [
+                    {
+                      "type": "Identifier",
+                      "content": "100",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300404620",
+                          "type": "Type"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Identifier",
+                      "content": "p. 46-48",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300445022",
+                          "type": "Type"
+                        }
+                      ]
+                    }
+                  ],
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300311705",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "type": "LinguisticObject",
+              "part_of": [
+                {
+                  "id": "https://id.rijksmuseum.nl/3011873",
+                  "type": "LinguisticObject"
+                }
+              ],
+              "identified_by": [
+                {
+                  "type": "Identifier",
+                  "part": [
+                    {
+                      "type": "Identifier",
+                      "content": "p. 28-30, p. 29 (afbeelding)",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300445022",
+                          "type": "Type"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "Identifier",
+                      "content": "10",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300404620",
+                          "type": "Type"
+                        }
+                      ]
+                    }
+                  ],
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300311705",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "type": "LinguisticObject",
+              "part_of": [
+                {
+                  "id": "https://id.rijksmuseum.nl/3015254",
+                  "type": "LinguisticObject"
+                }
+              ],
+              "identified_by": [
+                {
+                  "type": "Identifier",
+                  "part": [
+                    {
+                      "type": "Identifier",
+                      "content": "p. 75",
+                      "classified_as": [
+                        {
+                          "id": "http://vocab.getty.edu/aat/300445022",
+                          "type": "Type"
+                        }
+                      ]
+                    }
+                  ],
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300311705",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ]
+        },
+        {
+          "type": "AttributeAssignment",
+          "assigned": [
+            {
+              "type": "LinguisticObject",
+              "identified_by": [
+                {
+                  "type": "Identifier",
+                  "content": "Documentatiemap Schilderijen: aantekeningen R. van Luttervelt (voor 1963).",
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300311705",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "assigned_property": "referred_to_by",
+          "identified_by": [
+            {
+              "type": "Identifier",
+              "content": "1",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300456575",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300311954",
+              "type": "Type"
+            }
+          ]
+        }
+      ],
+      "identified_by": [
+        {
+          "id": "_:b15",
+          "type": "Name",
+          "content": "Gezicht op het eiland Itamarac\u00e1",
+          "identified_by": [
+            {
+              "id": "_:b42",
+              "type": "Identifier",
+              "content": "1",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300456575",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300417200",
+              "type": "Type"
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "id": "_:b16",
+          "type": "Name",
+          "content": "View of the Island of Itamarac\u00e1, Brazil",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300417207",
+              "type": "Type"
+            },
+            {
+              "id": "http://vocab.getty.edu/aat/300404670",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388277",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "id": "_:b17",
+          "type": "Name",
+          "content": "Gezicht op het eiland Itamarac\u00e1, Brazili\u00eb",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300417207",
+              "type": "Type"
+            },
+            {
+              "id": "http://vocab.getty.edu/aat/300404670",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "type": "Name",
+          "content": "View of Itamarac\u00e1 Island",
+          "identified_by": [
+            {
+              "type": "Identifier",
+              "content": "1",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300456575",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300417200",
+              "type": "Type"
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388277",
+              "type": "Language"
+            }
+          ],
+          "translation_of": [
+            {
+              "id": "_:b15",
+              "type": "Name",
+              "content": "Gezicht op het eiland Itamarac\u00e1",
+              "identified_by": [
+                {
+                  "id": "_:b42",
+                  "type": "Identifier",
+                  "content": "1",
+                  "classified_as": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300456575",
+                      "type": "Type"
+                    }
+                  ]
+                }
+              ],
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300417200",
+                  "type": "Type"
+                }
+              ],
+              "language": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300388256",
+                  "type": "Language"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "Identifier",
+          "content": "SK-A-4271",
+          "classified_as": [
+            {
+              "id": "https://id.rijksmuseum.nl/22015218",
+              "type": "Type",
+              "notation": [
+                {
+                  "@language": "en",
+                  "@value": "object number"
+                },
+                {
+                  "@language": "nl",
+                  "@value": "objectnummer"
+                }
+              ]
+            },
+            {
+              "id": "http://vocab.getty.edu/aat/300312355",
+              "type": "Type"
+            }
+          ]
+        }
+      ],
+      "classified_as": [
+        {
+          "id": "https://id.rijksmuseum.nl/2208",
+          "type": "Type",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300435443",
+              "type": "Type",
+              "_label": "Type of Work"
+            }
+          ],
+          "notation": [
+            {
+              "@language": "en",
+              "@value": "painting"
+            },
+            {
+              "@language": "nl",
+              "@value": "schilderij"
+            }
+          ],
+          "equivalent": [
+            {
+              "id": "http://vocab.getty.edu/aat/300033618",
+              "type": "Type"
+            },
+            {
+              "id": "http://www.wikidata.org/entity/Q3305213",
+              "type": "Type"
+            }
+          ]
+        }
+      ],
+      "dimension": [
+        {
+          "type": "Dimension",
+          "classified_as": [
+            {
+              "id": "https://id.rijksmuseum.nl/22011",
+              "type": "Type",
+              "notation": [
+                {
+                  "@language": "en",
+                  "@value": "height"
+                },
+                {
+                  "@language": "nl",
+                  "@value": "hoogte"
+                }
+              ],
+              "equivalent": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300055644",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "value": "63.5",
+          "unit": {
+            "id": "http://vocab.getty.edu/aat/300379098",
+            "type": "MeasurementUnit"
+          }
+        },
+        {
+          "type": "Dimension",
+          "classified_as": [
+            {
+              "id": "https://id.rijksmuseum.nl/22012",
+              "type": "Type",
+              "notation": [
+                {
+                  "@language": "en",
+                  "@value": "width"
+                },
+                {
+                  "@language": "nl",
+                  "@value": "breedte"
+                }
+              ],
+              "equivalent": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300055647",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "value": "89.5",
+          "unit": {
+            "id": "http://vocab.getty.edu/aat/300379098",
+            "type": "MeasurementUnit"
+          }
+        }
+      ],
+      "made_of": [
+        {
+          "id": "https://id.rijksmuseum.nl/22010",
+          "type": "Material",
+          "identified_by": [
+            {
+              "type": "Identifier",
+              "assigned_by": [
+                {
+                  "type": "AttributeAssignment",
+                  "assigned": [
+                    "https://id.rijksmuseum.nl/200110519"
+                  ],
+                  "assigned_property": "influenced_by"
+                }
+              ],
+              "content": "1",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300456575",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "notation": [
+            {
+              "@language": "en",
+              "@value": "canvas"
+            },
+            {
+              "@language": "nl",
+              "@value": "doek"
+            }
+          ],
+          "equivalent": [
+            {
+              "id": "http://vocab.getty.edu/aat/300014078",
+              "type": "Material"
+            }
+          ]
+        },
+        {
+          "id": "https://id.rijksmuseum.nl/2209",
+          "type": "Material",
+          "identified_by": [
+            {
+              "type": "Identifier",
+              "assigned_by": [
+                {
+                  "type": "AttributeAssignment",
+                  "assigned": [
+                    "https://id.rijksmuseum.nl/200110519"
+                  ],
+                  "assigned_property": "influenced_by"
+                }
+              ],
+              "content": "2",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300456575",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "notation": [
+            {
+              "@language": "en",
+              "@value": "oil paint (paint)"
+            },
+            {
+              "@language": "nl",
+              "@value": "olieverf"
+            }
+          ],
+          "equivalent": [
+            {
+              "id": "http://www.wikidata.org/entity/Q296955",
+              "type": "Material"
+            },
+            {
+              "id": "http://vocab.getty.edu/aat/300015050",
+              "type": "Material"
+            },
+            {
+              "id": "https://data.cultureelerfgoed.nl/term/id/cht/d2070bd1-9a89-4623-b793-81f9ec1f5862",
+              "type": "Material"
+            }
+          ]
+        }
+      ],
+      "shows": [
+        {
+          "id": "https://id.rijksmuseum.nl/202110519",
+          "type": "VisualItem"
+        }
+      ],
+      "referred_to_by": [
+        {
+          "type": "LinguisticObject",
+          "content": "hoogte 63,5 cm x breedte 89,5 cm",
+          "identified_by": [
+            {
+              "type": "Identifier",
+              "content": "1",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300456575",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300435430",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "type": "LinguisticObject",
+          "content": "signatuur en datum, linksonder: \u2018F. Post 1637 D3\u2019",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300435414",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "type": "LinguisticObject",
+          "content": "height 63.5 cm x width 89.5 cm",
+          "identified_by": [
+            {
+              "type": "Identifier",
+              "content": "1",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300456575",
+                  "type": "Type"
+                }
+              ]
+            }
+          ],
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300435430",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388277",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "type": "LinguisticObject",
+          "content": "olieverf op doek",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300435429",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "type": "LinguisticObject",
+          "content": "Gezicht op het eiland Itamarac\u00e1, Nederlands-Brazili\u00eb. Aan de overkant van het water ligt het eiland met de stad Schoppe en Fort Oranje. Op de voorgrond een Portugees te paard en lokale bewoners.",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300404670",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            },
+            {
+              "id": "http://vocab.getty.edu/aat/300435452",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ],
+          "created_by": {
+            "type": "Creation",
+            "timespan": {
+              "type": "TimeSpan",
+              "identified_by": [
+                {
+                  "type": "Name",
+                  "content": "2022-04-28",
+                  "language": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300388277",
+                      "type": "Language"
+                    }
+                  ]
+                },
+                {
+                  "type": "Name",
+                  "content": "2022-04-28",
+                  "language": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300388256",
+                      "type": "Language"
+                    }
+                  ]
+                }
+              ],
+              "begin_of_the_begin": "2022-04-28T00:00:00Z",
+              "end_of_the_end": "2022-04-28T23:59:59Z"
+            }
+          }
+        },
+        {
+          "type": "LinguisticObject",
+          "content": "oil on canvas",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300435429",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388277",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "type": "LinguisticObject",
+          "content": "signature and date: \u2018F. Post 1637 D3\u2019",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300435414",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388277",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "type": "LinguisticObject",
+          "content": "inscriptie, op papier op achterzijde: \u2018Het Eijlant I. Tamaraca gelijck hetselve int Zuijden verthoont, de stadt legt boven op de Berg beneden is het Fort Orangien; het welcke leit inden mont van de Zee, op dese manier sitten de Portugisen de peert.\u2019",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300435414",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ]
+        },
+        {
+          "type": "LinguisticObject",
+          "content": "Gezicht op het eiland Itamarac\u00e1, Brazili\u00eb. Aan de overkant van het water ligt het eiland met de stad Schoppe en Fort Oranje. Op de voorgrond een Portugees te paard en enkele inlanders.",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300435452",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388256",
+              "type": "Language"
+            }
+          ],
+          "created_by": {
+            "type": "Creation",
+            "timespan": {
+              "type": "TimeSpan",
+              "identified_by": [
+                {
+                  "type": "Name",
+                  "content": "2001-03-06",
+                  "language": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300388256",
+                      "type": "Language"
+                    }
+                  ]
+                },
+                {
+                  "type": "Name",
+                  "content": "2001-03-06",
+                  "language": [
+                    {
+                      "id": "http://vocab.getty.edu/aat/300388277",
+                      "type": "Language"
+                    }
+                  ]
+                }
+              ],
+              "begin_of_the_begin": "2001-03-06T00:00:00Z",
+              "end_of_the_end": "2001-03-06T23:59:59Z"
+            }
+          }
+        },
+        {
+          "type": "LinguisticObject",
+          "content": "inscription: \u2018Het Eijlant I. Tamaraca gelijck hetselve int Zuijden verthoont, de stadt legt boven op de Berg beneden is het Fort Orangien; het welcke leit inden mont van de Zee, op dese manier sitten de Portugisen de peert.\u2019",
+          "classified_as": [
+            {
+              "id": "http://vocab.getty.edu/aat/300435414",
+              "type": "Type",
+              "classified_as": [
+                {
+                  "id": "http://vocab.getty.edu/aat/300418049",
+                  "type": "Type",
+                  "_label": "brief text"
+                }
+              ]
+            }
+          ],
+          "language": [
+            {
+              "id": "http://vocab.getty.edu/aat/300388277",
+              "type": "Language"
+            }
+          ]
+        }
+      ],
+      "equivalent": [
+        {
+          "id": "http://hdl.handle.net/10934/RM0001.COLLECT.10180",
+          "type": "HumanMadeObject"
+        }
+      ],
+      "member_of": [
+        {
+          "id": "https://id.rijksmuseum.nl/260251",
+          "type": "Set"
+        },
+        {
+          "id": "https://id.rijksmuseum.nl/260239",
+          "type": "Set"
+        },
+        {
+          "id": "https://id.rijksmuseum.nl/260212",
+          "type": "Set"
+        },
+        {
+          "id": "https://id.rijksmuseum.nl/261208",
+          "type": "Set"
+        },
+        {
+          "id": "https://id.rijksmuseum.nl/260238",
+          "type": "Set"
+        },
+        {
+          "id": "https://id.rijksmuseum.nl/260241",
+          "type": "Set"
+        }
+      ]
+    }
+  }
+]

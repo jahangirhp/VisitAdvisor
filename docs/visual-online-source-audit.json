@@ -1,0 +1,133 @@
+{
+  "audited_at": "2026-09-16",
+  "location": "Rijksmuseum",
+  "decision": "keep_location_for_bounded_online_audit",
+  "automatic_identification_enabled": false,
+  "candidate_downloads_reviewed": 36,
+  "review_summary": {
+    "positive_camera_photo_candidates": 26,
+    "uninformative_calibration_candidates": 1,
+    "excluded_reproductions_or_derivatives": 9,
+    "positive_page_ids": [
+      11805816,
+      29900994,
+      29934080,
+      39779202,
+      50148689,
+      50148707,
+      57997556,
+      65653237,
+      66977601,
+      66977722,
+      66977726,
+      134386043,
+      39777756,
+      32614562,
+      59463727,
+      50148861,
+      109821629,
+      109821631,
+      39771231,
+      50088034,
+      66977610,
+      56038306,
+      860598,
+      66977547,
+      109821618,
+      109821619
+    ],
+    "uninformative_page_ids": [50228737],
+    "excluded_page_ids": [
+      1615580,
+      89181483,
+      198967618,
+      25840525,
+      4055422,
+      5777988,
+      5777990,
+      5778003,
+      88994676
+    ],
+    "inference_run": false
+  },
+  "candidate_download_directory": ".local/visual-public-photos/online-audit",
+  "sources": [
+    {
+      "identity": "The Night Watch",
+      "accession": "SK-C-5",
+      "source": "https://commons.wikimedia.org/wiki/Category:The_Night_Watch_by_Rembrandt",
+      "reported_top_level_files": 60,
+      "additional_detail_files": 32,
+      "reviewed_page_ids": [39777756, 32614562, 59463727, 50148861, 109821629, 109821631, 860598, 66977547, 109821618, 109821619, 4055422, 5777988, 5777990, 5778003, 88994676],
+      "assessment": "full_and_independently_photographed_partial_coverage_found"
+    },
+    {
+      "identity": "The Milkmaid",
+      "accession": "SK-A-2344",
+      "source": "https://commons.wikimedia.org/wiki/Category:The_Milkmaid_by_Johannes_Vermeer",
+      "reviewed_page_ids": [39771231, 50088034, 66977610, 56038306, 25840525],
+      "assessment": "four_physical_object_photos_accepted_advertising_reproduction_excluded_more_close_views_needed"
+    },
+    {
+      "identity": "Banquet of the Amsterdam Civic Guard in Celebration of the Peace of Munster",
+      "accession": "SK-C-2",
+      "source": "https://commons.wikimedia.org/wiki/Category:Banquet_of_the_Amsterdam_Civic_Guard_in_Celebration_of_the_Peace_of_M%C3%BCnster_by_Bartholomeus_van_der_Helst",
+      "reviewed_page_ids": [50148689, 66977722, 66977726, 11805816],
+      "assessment": "promising_full_plus_independently_photographed_details"
+    },
+    {
+      "identity": "The Battle of Waterloo",
+      "accession": "SK-A-1115",
+      "source": "https://commons.wikimedia.org/wiki/Category:De_slag_bij_Waterloo,_Pieneman",
+      "reported_files": 11,
+      "reviewed_page_ids": [29934080, 89181483, 50228737],
+      "assessment": "one_positive_full_found_close_reproduction_excluded_more_captures_needed"
+    },
+    {
+      "identity": "Self-Portrait with Grey Felt Hat",
+      "accession": "SK-A-3262",
+      "source": "https://commons.wikimedia.org/wiki/Category:Self-Portrait_with_Grey_Felt_Hat_by_Vincent_van_Gogh",
+      "reported_files": 7,
+      "reviewed_page_ids": [29900994, 57997556, 134386043],
+      "assessment": "multiple_camera_contexts_more_partial_views_needed"
+    },
+    {
+      "identity": "The Windmill at Wijk bij Duurstede",
+      "accession": "SK-C-211",
+      "source": "https://commons.wikimedia.org/wiki/Category:The_Windmill_at_Wijk_bij_Duurstede_by_Jacob_van_Ruisdael",
+      "reported_files": 12,
+      "reviewed_page_ids": [39779202, 66977601, 65653237],
+      "assessment": "multiple_camera_photos_more_partial_views_needed"
+    },
+    {
+      "identity": "Winter Landscape with Skaters",
+      "accession": "SK-A-1718",
+      "source": "https://commons.wikimedia.org/wiki/Category:Winter_Landscape_with_Skaters_by_Hendrick_Avercamp,_Rijksmuseum_Amsterdam,_SK-A-1718",
+      "reported_files": 21,
+      "reviewed_page_ids": [1615580, 50148707, 198967618],
+      "assessment": "one_visitor_full_found_reproduction_and_derived_detail_excluded"
+    },
+    {
+      "identity": "Woman in Blue Reading a Letter",
+      "accession": "SK-C-251",
+      "source": "https://commons.wikimedia.org/wiki/Category:Woman_Reading_a_Letter_by_Johannes_Vermeer",
+      "reported_files": 11,
+      "assessment": "low_yield_most_files_are_reproductions_or_derivatives"
+    },
+    {
+      "identity": "The Jewish Bride",
+      "accession": "SK-C-216",
+      "source": "https://commons.wikimedia.org/wiki/Category:The_Jewish_Bride_by_Rembrandt",
+      "reported_files": 18,
+      "assessment": "low_yield_only_one_clear_modern_visitor_capture_in_initial_review"
+    }
+  ],
+  "acceptance_requires": [
+    "exact_identity_evidence",
+    "camera_capture_of_physical_object",
+    "license_and_source_provenance",
+    "capture_group_independence",
+    "no_synthetic_partial_crops"
+  ],
+  "switch_location_if": "bounded_review_cannot_supply_eight_additional_identities_with_three_independent_camera_captures_each_and_missing_existing_viewpoints"
+}

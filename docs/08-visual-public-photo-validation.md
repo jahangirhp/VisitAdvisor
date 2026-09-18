@@ -3,6 +3,12 @@
 This run tests the existing candidate-only implementation against public photographs
 independent of its museum reference images. It does not complete Phase 5.
 
+The [v5 validation](15-visual-online-validation-v5.md) supersedes the live corpus
+and current rerun instructions. This historical manifest assumes 85 covered
+objects and treats the museum building as unknown; that annotation is no longer
+valid after adding building references. Preserve it as historical evidence and use
+the v5 artifacts for the current result.
+
 ## Dataset and review
 
 The reviewed dataset contains 45 inputs: 13 positive photos covering eight indexed

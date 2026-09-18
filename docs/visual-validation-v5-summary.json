@@ -1,0 +1,62 @@
+{
+  "manifest_hash": "c529878fbfc4b09c47e93619afbe52351f2e9ddfe6187ecf109434ba09c5c085",
+  "calibration_artifact_hash": "1515b2f82bb7dca1d1189af3c24ccf35807ec5e5403b21f9bb4dd63cef215caa",
+  "dataset_ready": true,
+  "source_separation": {
+    "selected_online_photos": 90,
+    "unique_evaluation_source_pages": 90,
+    "evaluation_calibration_page_overlap": [],
+    "evaluation_reference_page_overlap": [],
+    "positive_photos": 60,
+    "negative_photos": 30,
+    "manifest_rows": 180
+  },
+  "active_reference_sets": 112,
+  "regional": {
+    "positives": 60,
+    "negatives": 30,
+    "top3_correct": 42,
+    "automatic": 34,
+    "automatic_correct": 29,
+    "automatic_precision": 0.8529411764705882,
+    "positive_automatic_coverage": 0.5,
+    "negative_false_automatic": 4,
+    "offline_p95_seconds": 0.22747035798965953,
+    "gates": {
+      "calibration_policy_verified": true,
+      "calibration_split_present": true,
+      "held_out_independent_photos": true,
+      "minimum_photo_coverage": true,
+      "object_types": true,
+      "negative_categories": true,
+      "full_top3": false,
+      "partial_top3": false,
+      "automatic_precision": false,
+      "automatic_coverage": true,
+      "negative_false_matches": false
+    },
+    "recognition_gates_passed": false
+  },
+  "api": {
+    "requests": 90,
+    "http_200": 90,
+    "statuses": {
+      "ambiguous": 63,
+      "no_match": 27
+    },
+    "positive_photos": 60,
+    "positive_top3_correct": 42,
+    "negative_photos": 30,
+    "negative_with_candidates": 12,
+    "negative_abstentions": 18,
+    "automatic_matches": 0,
+    "p95_all_requests_seconds": 2.0850546620204113,
+    "initial_http_200": 89,
+    "retried_requests": 1,
+    "candidate_order_matches_offline_regional": true,
+    "score_max_absolute_difference": 1.5973522715651e-07
+  },
+  "automatic_api_enabled": false,
+  "phase5_complete": false,
+  "remaining_work": "Improve reference coverage/ranking and repeat calibration with a new unseen held-out corpus; then perform physical phone/network validation."
+}

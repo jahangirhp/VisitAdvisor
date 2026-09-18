@@ -1,0 +1,458 @@
+{
+  "manifest_hash": "9821cbac2eec7a069e04041a73244c6f23a9a0a5ef92b6906167dd9b48f084a8",
+  "photo_hashes": {
+    "misty-godenehler-full": "b8940e743a21d1d86055fd758257bcbe1127058dc5d33eadade60571292e5bc0",
+    "misty-jojan-full": "f6653213a76b99777c38a4f74c2e2fe52a3aa4ba68493cbf3341bfade70a11b9",
+    "misty-wuselig-full": "b83c0bbbb74755239a26e1cc44f606f3a4d0ceb175a717e6f284a048477a2759",
+    "misty-wuselig-detail-1": "030539826c11877c6403d3e38a895d15a229a48fde6bb54bbd3b4e7c925b3aaa",
+    "misty-wuselig-detail-2": "de92d815f71334dbbcc7a682fc05f8ca73f79a722e34b969f99837a4f94a340f",
+    "commons-29918689": "09aed40c2c4b32942b92cf86c2a2f5b95d5a7be7bdc05699f278b25722815528",
+    "commons-29948991": "8aaf9298ecb8dbff820545fe8d1cafb6d09ec0302a7ba2432c341a7374a72ec7",
+    "commons-50148700": "402e739a538248603b8a9663d581c955ff0c935eee0e0ac58efb0d1154242e3c",
+    "commons-50148708": "75b88dfd0b4e55ab936ee8f642beee1bbdce38d7dfcb745873b630fe5eecac87",
+    "commons-50148770": "ce4f387bb697f41d21ed74e2f7bded80ae67218c791596c31eb3f922b78a74b3",
+    "commons-64970240": "3ab3d777be60ff7b2d94f255c2cade3e078f3145faadbfc0d30d70c335d25b7e",
+    "commons-113176229": "97c7fb9f35ba3866655008988d4f93e512ee3e304f9a1ccdac9d9393c9d3a135",
+    "commons-113303445": "5648ee78c118fd74a0291d396dd101403fcc661d7706da68f458a8eca684a22e",
+    "commons-29902991": "46b19174e835c6f140b30cc9d80d731c76529b7e9efea096981f4a63d9e40786",
+    "commons-152548760": "d16e52ba564793754aaea475f4e559a24d135609611855e71fe2b38277a50a33",
+    "commons-193989612": "9b36bc0ea4793666e0804eef064063dfa851a006648ec564d2be04335f8b08a1",
+    "commons-193989620": "edbb7e9bfe70c687ed1892a0ebdc6b1eac41b8d11da09a0150a84b944f3ccae6",
+    "commons-60376335": "a84088b1f852c87df469e5947b97e95f36b7ae01a2148ab1a20f6776b7c64031",
+    "commons-33581388": "df48e6bc2d7d8d8edeeb705131d1714d1ddfade7427bc5a1d9f43a36aef56da5",
+    "commons-83326056": "eebc9ecb9170bb378e487024590681b66b165b63ae8a4c333dbcb2ac3ee657c1",
+    "commons-41150509": "b2644a74b60482889e1e12d3d7d27a114747b88e7929581fe8a2ddef72149d7a",
+    "commons-24673671": "be7d58cd6f487d872ea25fbcf83134746054972acd51a309565388d2efe0a6a7",
+    "commons-24670799": "fed1d8a9d27652572f382d36301a6fa62e97b68bf43b2450c349f552f1d2df1f",
+    "commons-47603207": "ddc0f2d92caa303d6848d0e898927e6828a57c344f9431659fc19e31ddb757e3",
+    "commons-24671002": "c660c5005b279f9eeaa204401a899d137599dcb01ad72a9c147a2ac4d97ec62e",
+    "commons-114415747": "8a925418a50a9aa696b37012669ec14ed300c8ea2c58f760f679911a579f86ee",
+    "commons-114415750": "6e5711f3ad01bf5dc40ccd247b7ff2dca45afb4e999bc8b793a7bbc2498eeab7",
+    "commons-114415752": "7359932bb12d70f896ceec93f1889c862f6225378af9e8a1653427c1879bc14d",
+    "commons-114415753": "3e934bbcec42bf64f24312550e785baaaf0916c2a6f127443106e4fe188ced09",
+    "commons-105410228": "0a8191e20a859a8eaaa65955664463d4a18724a877f92c64c576d8b78e63fdc5",
+    "commons-105393270": "a711d192b3f715e251748116639ac6f626b5f4d3101398910bbff0b260849076",
+    "commons-105393269": "0d999c61ee8c7ffa5f623a51301765ca9ffccedf83682a5311d2f84ef5e618a1",
+    "commons-105411117": "2655a69cb736ab02aad46cfc68ac36ff5ace6610ef54c1bcdbd3c2db71e8492c",
+    "commons-120891454": "c9a2f54940da82acd2d7f6416acb4c47820db3967f74a8c920c18e879dca2852",
+    "commons-120891708": "bdca38cc0c9ee26abe55cefc3dc4c0e623e4860f233a93c18192945cd44872ec",
+    "commons-38157250": "255d5d1e2e5e12f5121eb98f213a503710da66a8e933d1bee2d18ec7a561b298",
+    "commons-32614566": "4a0572851168494b25483a41b45eafb256b10e792be92ad2e8932db81564ef96",
+    "commons-39789382": "da0bb7c29139d2e3a8c3b38e64a7383f99cbbdf7b2358f8d433bd9ab4714f2f7",
+    "commons-30014376": "6ca98a27555eea40a92f2fc994a16bb14d82f6d1677b038448a33a26011005a0",
+    "commons-43986065": "a40c7ce3fe52b8ce5976757bb186e8b603bdd2b0e6589905e202155a18b6834d",
+    "commons-43986158": "f976efe2deee709c569018138d4a8414a0000d509974d9d9a92ef3d21af76c95",
+    "commons-39775117": "6b902148c00a4460ac7bbfd7532176932fc8162ed96eb99761db0e432631b381",
+    "commons-59463738": "ee52f46f48f4385dc80fe15a3e3eb5e092a95d1980c89ed6d3f83ea016a63a47",
+    "commons-29934080": "71b810199c4b8500bee16d0e19a660cb42943939a4e4538d9fc8a28ce1b912c8",
+    "commons-39744327": "9fbc8e560ea09e254b7e66dc73ed5e3ebeb4d08089f190507335fe798ed7bbc7",
+    "commons-109821620": "2845477bf95c2b17f019ec73fb09124026ae4eafa36162403c310fdaf13803c0",
+    "commons-30586019": "d3b09537156cd068219f4db7e2a2f11da1e9c95c09dbf7e46291940381463aaf",
+    "commons-57997345": "787ef7c667014e389ff42ea6eb94ede9f35860da5ba77aa92cbd7b75522814c3",
+    "commons-50088048": "11a922b57fd63d9c2fc9fd3ed8fe701b1d25f2f26824bb0a8d45934b297417f2",
+    "commons-86203548": "f41870d2ba17b6610eb1dcc48cc5bc155c9d20a8f1f0a669fb9f29f987ee0290",
+    "commons-121424564": "6180879f4d9e3e091f153924126790f0b3ce6cc89273eba741bb07a9e44b4239",
+    "commons-132703964": "f7026d74d4e6289f57656b988107ecb7ace4612efa5b7b0134dac392ba9a116a",
+    "commons-132703965": "1480c8b7fd107d4ac1f2d43a0063323494a939589bbb392debf010bc2d70b485",
+    "commons-155893740": "55597671ff1e87f4ada0e70aec1fc5903d80462038a3c95689ef52ffaff846ba",
+    "commons-151640577": "745b3524dbc63c02a2b9ae7c057c7f02f7eaee78c3e7af61d65afc025694e06b",
+    "commons-95915428": "ee5c2c0040d8505cc5c7efe3051941860c596cb4d9d86ae43d423e216387eb0d",
+    "commons-99703667": "da79d72f486c454b316b810c619047352a3dd9a5615a41962b44b116e46bf232",
+    "commons-98518229": "fb6a2cbc5c2a2b4ee525c36b4b00f35c12f014af44e315316d2b601f571263b6",
+    "commons-98966072": "3293b3d8aa07d487701b902272a783f5f455e2d1ad1c5ea6d0aa7b1b474a4f86",
+    "commons-99170425": "e90d3adebfc09749b07240b307e71b76dbc543e5f4da6b78204c1219614eafdc",
+    "commons-99117145": "e03cd1231585e26c134c24762abd37aed6630fe69a28d0c209f62df58b8993f6",
+    "commons-105215391": "ba25faeee42b3d769a6d63c3763ae8b7681f8104be3944f5ac284bbc015397d6",
+    "commons-189918713": "abb5cd7eff4057001991199b600759d437ac8cb3109697ee2190fc039f1c60fe",
+    "commons-26253375": "60fb5c97447cb82a4c5d59e7ff23b81260fd1e644cc4f95f61d496734cf7aa9b",
+    "commons-26253448": "a66dab4bf383117f2fa0f61013444134f71e55bd8192520fa90d2c822d404e25",
+    "commons-26253548": "52b96f7cdae5b37edd6114a241a8e7ccb090bcf708d5f25b3db98f00cf0d4a2d",
+    "commons-50148850": "92387774d305b8084f71d4b32e90a5f7a1868f31a35445d4f3fa604798aae4fd",
+    "commons-67086858": "4ed0cb607e1510f1450f5890223cf771ad3cd426e503934a11fd3348a3ec2c77",
+    "commons-67086859": "c5c28eac474f9fe33a0a82680de7b8d937f52a8bf70f1da1b40fb9a77c46bfb0",
+    "commons-105350359": "cbd24d3b881b05bb6ba67b1c72943160756f961ca195713450a222452d2636c5",
+    "commons-67086856": "0ce07c7206e0f046a532f3f089d5bad802e15f1822f9e2798c05d606e1eb7eae",
+    "commons-159588439": "8201d03cc4ccd8d5900a72c1e8eba4287f744f4d4f1c06f4a2cdce17f1083594",
+    "commons-81315943": "a987a8f185143652f3264f6d6c3b1ce0a1615f0afe4e12171b2072b0d358cee5",
+    "commons-109412945": "39036ee42541e6ecc06892211c6bad12433a422c61ab173bb9638035e13779e1",
+    "commons-72268883": "4e6abb4ecd2fbebd4079356a2d25230467b68b5eb6bdf3238d1eab9f35d51f43",
+    "commons-73223917": "dd5fe0cc4058fe79df476e1d8785838f7e5d60c8df19e5291a110e087699122f",
+    "commons-32578889": "813bb530f279cff855ba25cf0f2c1359bc3b857ed39dea7f34f04ebf65b3da87"
+  },
+  "normalized_photo_hashes": {
+    "misty-godenehler-full": "26d05d56325e5da6ea505c2b6d7cbf5565f2eaf26ef9e1c493344bebdd09de1d",
+    "misty-jojan-full": "371ec3e03e156b1fe71116b051551c887c2c2a597228b5ac6fa8ed4caf10857d",
+    "misty-wuselig-full": "ca582ee96c8c215ae9f5e46b0a487f93896b547c600bf25f4efdd9a3a75f0dd4",
+    "misty-wuselig-detail-1": "a915935ab2d08c3a92b653d21fa5fee977c8c59d1aaf73864c8c8bbd4efc14f5",
+    "misty-wuselig-detail-2": "d07df5518fea1482581efc98fb9360355e8e843de58977ca9cc1f59757b01428",
+    "commons-29918689": "e9197ddc96977b3494de9b22c55cfd9da2b53c051d283d7bbb1b675961144d9b",
+    "commons-29948991": "88a26a00e9318326184cf1217be3543932795a61164591d38ec8263e84bd7c3e",
+    "commons-50148700": "43ee95ed5df3ecf892cae613aac56f7584b9acc259fb4d0f121d3271f735e7a7",
+    "commons-50148708": "f62c3cbd550d8aa4a39f3d509b8e9c7bd861ed3b7ebe1ad6b3a609c050764402",
+    "commons-50148770": "dfb4dde206bcafd27fd3460523199225e7ddb5d01723e8db39de3af8004debc6",
+    "commons-64970240": "90e1937f6624ac1ac963b3726f16f0c1a378d2c51bd6277921012918ea8d80b4",
+    "commons-113176229": "60c08db109bad652fbc5e107c01637c273eb1b2e6e91d579d990d2b280ebf338",
+    "commons-113303445": "c0d3098991514b5d87f76ee7fc9be99c2573e75d2bace6f382e7ef162ed2f1ea",
+    "commons-29902991": "ed76cdbcfdbe787fbf3197293c1f52767fe252b95786b5d020f18c3c59926df8",
+    "commons-152548760": "daece12ab78c6557db646af6f03842a0c9e712fcd675076975ef235772cfd9b9",
+    "commons-193989612": "43eb8559cd72303a3d093d31600d798867e72d9f44f941790b126c66c227c750",
+    "commons-193989620": "86c6f33133ee8b83cc8a010ee430d0110e4b47a5614f2f71a70d5e48a3df06f1",
+    "commons-60376335": "0ac426b7fdfe6e95b635c0dc84b749508bd20db409de072b1f21878d03fdf456",
+    "commons-33581388": "0a9996e05e6f78dfc2bc2b117d4f613adc3709a98dffa6ea56dd798831d45310",
+    "commons-83326056": "6d797b7bba59f8216af8470f88395898ef7aef537701dac45190be750c47eb4c",
+    "commons-41150509": "48a7e66a1405bf40ad6d27fb0e1af42f7a845880d0c154bf71ddf047a065d681",
+    "commons-24673671": "b7266e8b96f00537dff899bc8c09ce2a0a7663efe34cafdca05198021cf6267b",
+    "commons-24670799": "3201d2519cd0e00b6cc6d3b8269e00f993014d290e6fcd154417613731bbf509",
+    "commons-47603207": "34159f5cacf4d0cf031146dd9b43f3f481ab4563e09fae4b042da2c9dadb0cc8",
+    "commons-24671002": "a2186fd4b07e6f6338adabcaee0bf4a3e8300dc4ccb3ff86bb5888c46376121c",
+    "commons-114415747": "2d9d42a8ffb70de489533b05ffd86ecb9f1b49ec565072de3ed58d81dc1b98b6",
+    "commons-114415750": "ee6e5565fa0a35345a1d87c6343d212b2294c25cee20f95c5b550fddedc153b7",
+    "commons-114415752": "dd765dfabd3e5c6c1ab42c7b508ba52a717803bf176b68ac3dfc91c7fd8ecc3e",
+    "commons-114415753": "28cc0ab85dc402e906eafab558a00bb806c0a5ec526ab5a29cab26ffc205a45e",
+    "commons-105410228": "b07c11aaf05f8db13bb7a5bcf99ce2ff392399f18a6985705633b8adb34473e4",
+    "commons-105393270": "9cbbe1ab11f8c94c85fb913cd7c4795d5a81bb00a1ba8d754630736f830a0154",
+    "commons-105393269": "6d87a109983bf7354a0ae3f94752acf585244f779a59d353a4c70904b537b750",
+    "commons-105411117": "34077e268fe312224cbd01150abf5e66ce6b4385dd1faa079b3b1087627b173b",
+    "commons-120891454": "52195cdf47ac7e31e888be8e6f01fe803f9ff5986c8fc49111a1ea9d2b37df42",
+    "commons-120891708": "c9d5ec8c8f462bf6ee4484e3a4a52a21790a6df9b02a720f3888a08331f3e9cb",
+    "commons-38157250": "eac322f0dd053ba6a6fd2ab56e3a6ea7ba80703d660dcb20db4f3007455b285d",
+    "commons-32614566": "59c56411c02996250e67ebbf7d717e5409f64acf493b5dcbfc33e153d73f47d1",
+    "commons-39789382": "d9dfba5fa65d950e1e67073f5befe2f25f386611b2730fa77f682177e2b0c5cc",
+    "commons-30014376": "58d7224cb5ac052cd56e25e40a7f0ccbe32b02a33a1f2865a5d3ca015edc4053",
+    "commons-43986065": "5d781360fe02df90451960c0a949ce07b2e8e141f3d64817386ddc424bfd4070",
+    "commons-43986158": "ab6c139249d27a5876ffed10350774019b8a843d06c2179629bdce89a3d6a071",
+    "commons-39775117": "0c7c930e230045c0e40821242e3d5d8d004285d1c9c72448578a578fc6ca82fc",
+    "commons-59463738": "8f645ee3904a0c8ba6eab053c8d7caf774f09da2f032a0476b49891f0c6f0887",
+    "commons-29934080": "f93b812ae64341161d2d83b47028f49bddf2a05dedb5c0d295714995a30640ca",
+    "commons-39744327": "953c7d2572080936c0888f4c7774139ba1a6c374475308fbeb24ad567d586bf4",
+    "commons-109821620": "149bd08797a816646aad8de26614ef5fa0085d90c5212422d113af971746b657",
+    "commons-30586019": "70dcf22ce7b51c48aeed5708d74ad8d067881103e7646d7633fceaea5b7eed4d",
+    "commons-57997345": "20f89b96b5cf8915a4a9f8a701cd564e9ea331cb41fa9c3184de89074243958d",
+    "commons-50088048": "24ac29fb122700d908a907bd0c670451e234e7a687c087d35d89aa66cc3eb24f",
+    "commons-86203548": "bf801d55ef84d8800fe7de8b62bec238de0784298779ce29556f27f5ec36230b",
+    "commons-121424564": "7ede12cec16a55a06a0dde2f0cb2a76531c3278dc1bfe33e562576e466844c48",
+    "commons-132703964": "141319770d4078452c0b71d2341d505d353a5bca4af8993f7b7b136a42831e44",
+    "commons-132703965": "bf3e5e62520f202a3a81997edb7b279194f80582c60b11be6431c2126efe5cce",
+    "commons-155893740": "273f0496bc6e0e3e78036e18e4ebe862551c14a157f7a47f3fe3ed079cd282ef",
+    "commons-151640577": "968f53c884c73266102322fe3d0e03754dedb2407606f5269ee2a66f61ab1f20",
+    "commons-95915428": "7b264d863f1f0b8408e722c99cc277a059e7375e59f2aaf4bc0975d57dbc7e64",
+    "commons-99703667": "338acf519be21f8901f02e7311ca2e4c53c7128124859c2723621c8917c16535",
+    "commons-98518229": "0230fbe6411d516a1a19574e3b07f31beb55d6f955d2646cabeecfa1660b0179",
+    "commons-98966072": "333be06ca27d0640bce8defcc512715dd7d403f1b9629c82f83aa4f9fed732b2",
+    "commons-99170425": "7ee6dcee237a4ea62afdd942a694cea44f9cb70a502d2715630848702647a242",
+    "commons-99117145": "f95f19181f6ee4625e170f932b4ed06266490992f0459be6a4cbf9c3b2cb4f04",
+    "commons-105215391": "b01f6107011f5b0e2b6becb86e047eaf95de893045a804ea52c93dbf09e2f23c",
+    "commons-189918713": "58cbe4c9fc3ba0e689b041c6f1d58d884e408eac63733c973058c285129389eb",
+    "commons-26253375": "adee3fc23d39766489bf8a9e25821319e07f639b7e1c46fe9d6d9c542ca08bcc",
+    "commons-26253448": "c321d7d0eb89aa6c356a5d79b91e63372973f23d5bf612197c28a80c8c32f9cd",
+    "commons-26253548": "d870d656ebb87fccd236e40e4a1fb287432b23fec433e0847d97e371b4dcfeab",
+    "commons-50148850": "7210bd10f1860ba6bf0755a7fad2db7a6239ce209a67210151f4936b0736ff11",
+    "commons-67086858": "80d35094b03286a1dc9fa354503b72e9e0e966f28474b132399f4e5aad6e03b2",
+    "commons-67086859": "65cd52cab3ecac65b024cca07b146039bbcd08087a80e354b9986bc3aad04355",
+    "commons-105350359": "a6db78a2951f09ad4a7e404a8052996129862849b642852f5613b0eb0fb44515",
+    "commons-67086856": "b701e60b94a32e775ba22a0f4c6e5256a9ac44a3b06552412fac8fb2a961c754",
+    "commons-159588439": "6566ba00844868b11532b6af58f42cffc41f7021771dc7b6d900c73bcf5f54a9",
+    "commons-81315943": "8afd35da0d763b284ea3b12ac803a932dde56542bc2851bbb5e80b25cc36a8cc",
+    "commons-109412945": "95dbfc4a817c7d287acebb987cd297741a16dc787c5bbe23affe956afa5f0692",
+    "commons-72268883": "d5f11d392c0f124a1a04c5b11f618ba884029c74fceb975364223ecd482c91f7",
+    "commons-73223917": "fe3940df256ccdbfb886b0523ace9feb4e4e0d54ef91271387845f65d2c38f1e",
+    "commons-32578889": "f843ffef49a2c3c8a9c3a6bd3d5b1fabe44ff34e0e5c89bcd9f257938bf3f364"
+  },
+  "splits": {
+    "calibration": {
+      "photos": 20,
+      "independent_photos": 20,
+      "positive_photos": 12,
+      "negative_photos": 8,
+      "positive_objects": 8,
+      "objects": [
+        {
+          "object_id": "6a9dd7f8332abe8469d558f5",
+          "object_type": "painting",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "Barberini-2023-GodeNehler",
+            "Barberini-2023-Wuselig",
+            "JoJan-2013-11-24"
+          ],
+          "partial_capture_groups": [
+            "Barberini-2023-Wuselig"
+          ],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 1
+        },
+        {
+          "object_id": "6a9dd7fb332abe8469d558f8",
+          "object_type": "painting",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "JoJan-2013-11-24"
+          ],
+          "partial_capture_groups": [],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 2
+        },
+        {
+          "object_id": "6a9dd818332abe8469d55938",
+          "object_type": "painting",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "JoJan-2013-11-24"
+          ],
+          "partial_capture_groups": [],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 2
+        },
+        {
+          "object_id": "6a9dd839332abe8469d55962",
+          "object_type": "painting",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "JoJan-2013-11-24"
+          ],
+          "partial_capture_groups": [],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 2
+        },
+        {
+          "object_id": "6aa9a743dd73e04d9614615c",
+          "object_type": "painting",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "JoJan-2013-11-24"
+          ],
+          "partial_capture_groups": [],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 2
+        },
+        {
+          "object_id": "6aa9a744dd73e04d9614615e",
+          "object_type": "painting",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "JoJan-2013-11-24"
+          ],
+          "partial_capture_groups": [],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 2
+        },
+        {
+          "object_id": "6aa9a746dd73e04d96146161",
+          "object_type": "sculpture",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "Alf-van-Beem-2018-05-11"
+          ],
+          "partial_capture_groups": [],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 2
+        },
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "object_type": "building",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "Chabe01-2024-11-25"
+          ],
+          "partial_capture_groups": [],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 2
+        }
+      ],
+      "missing_objects": 12,
+      "missing_negatives": 22,
+      "missing_negative_categories": [],
+      "missing_object_types": [],
+      "excluded_photo_ids": [],
+      "gates": {
+        "independent_photos": true,
+        "twenty_objects": false,
+        "full_and_partial_captures": false,
+        "thirty_negatives": false,
+        "negative_categories": true,
+        "object_types": true
+      },
+      "evaluation_dataset_ready": false
+    },
+    "evaluation": {
+      "photos": 57,
+      "independent_photos": 57,
+      "positive_photos": 27,
+      "negative_photos": 30,
+      "positive_objects": 12,
+      "objects": [
+        {
+          "object_id": "6a9dd812332abe8469d55919",
+          "object_type": "painting",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "public-session-1d08d2bf1fcdc27d"
+          ],
+          "partial_capture_groups": [],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 2
+        },
+        {
+          "object_id": "6a9dd817332abe8469d55937",
+          "object_type": "painting",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "public-session-1d08d2bf1fcdc27d"
+          ],
+          "partial_capture_groups": [],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 2
+        },
+        {
+          "object_id": "6a9dd818332abe8469d55938",
+          "object_type": "painting",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "public-session-b99ed60e52afb497"
+          ],
+          "partial_capture_groups": [],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 2
+        },
+        {
+          "object_id": "6a9dd820332abe8469d55942",
+          "object_type": "painting",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "public-session-1d08d2bf1fcdc27d"
+          ],
+          "partial_capture_groups": [],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 2
+        },
+        {
+          "object_id": "6a9dd841332abe8469d5596a",
+          "object_type": "painting",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "public-session-4b3f4eb0cf1665f5"
+          ],
+          "partial_capture_groups": [],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 2
+        },
+        {
+          "object_id": "6aa9a744dd73e04d9614615e",
+          "object_type": "painting",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "Txllxt-2015-04-16"
+          ],
+          "partial_capture_groups": [],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 2
+        },
+        {
+          "object_id": "6aa9a745dd73e04d96146160",
+          "object_type": "painting",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "Dennis-Jarvis-2013-09-21",
+            "Txllxt-2015-04-16"
+          ],
+          "partial_capture_groups": [
+            "FrDr-2019-01-04"
+          ],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 1
+        },
+        {
+          "object_id": "6aa9a746dd73e04d96146161",
+          "object_type": "sculpture",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "Eric-de-Redelijkheid-2016-05-11",
+            "Oren-Rozen-2017-02-21"
+          ],
+          "partial_capture_groups": [],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 2
+        },
+        {
+          "object_id": "6aa9a747dd73e04d96146163",
+          "object_type": "painting",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "Henk-Monster-2015-07-31",
+            "Txllxt-2015-04-16"
+          ],
+          "partial_capture_groups": [
+            "WJV-and-DB-2015-10-04"
+          ],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 1
+        },
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "object_type": "building",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "Kerkhof123-2024-08-20"
+          ],
+          "partial_capture_groups": [
+            "Oursana-2021-07-20",
+            "Oursana-2021-09-22"
+          ],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 0
+        },
+        {
+          "object_id": "6aaad084dd73e04d9614e9e7",
+          "object_type": "painting",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "commons-original-capture-189918713",
+            "commons-original-capture-50148850"
+          ],
+          "partial_capture_groups": [
+            "commons-original-capture-26253375",
+            "commons-original-capture-26253448",
+            "commons-original-capture-26253548"
+          ],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 0
+        },
+        {
+          "object_id": "6aaad084dd73e04d9614e9e8",
+          "object_type": "painting",
+          "location_id": "6a9dd4106d52c3bc3965869d",
+          "full_capture_groups": [
+            "commons-original-capture-105350359",
+            "commons-original-capture-67086856"
+          ],
+          "partial_capture_groups": [
+            "commons-original-capture-67086858",
+            "commons-original-capture-67086859"
+          ],
+          "missing_full_captures": 0,
+          "missing_partial_captures": 0
+        }
+      ],
+      "missing_objects": 8,
+      "missing_negatives": 0,
+      "missing_negative_categories": [],
+      "missing_object_types": [],
+      "excluded_photo_ids": [],
+      "gates": {
+        "independent_photos": true,
+        "twenty_objects": false,
+        "full_and_partial_captures": false,
+        "thirty_negatives": true,
+        "negative_categories": true,
+        "object_types": true
+      },
+      "evaluation_dataset_ready": false
+    }
+  },
+  "ready_for_calibration": true,
+  "ready_for_held_out_validation": false,
+  "reference_coverage": "Unchecked locally; calibration checks Atlas references.",
+  "provenance_review": "Identity and independence require human review.",
+  "automatic_api_enabled": false,
+  "phase5_complete": false
+}
