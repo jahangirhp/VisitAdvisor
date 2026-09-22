@@ -1,10 +1,15 @@
 # VisitAdvisor
 
+The current camera trial uses **server-side recognition**: selected 224 × 224 JPEG
+crops are uploaded while scanning and processed in memory, without storage. The
+phone downloads no model. See [server setup, deployment and limits](docs/17-server-camera-trial.md).
+Earlier on-device camera instructions below describe the historical prototype.
+
 VisitAdvisor is a location-aware knowledge platform that will help visitors
 understand real-world places and objects through prepared, source-backed content.
 The primary experience will be automatic discovery after recognition.
 
-This repository implements **Phases 0–4, Phase 5 OCR, and an experimental visual-recognition pilot**: a Python/FastAPI foundation,
+This repository implements **Phases 0–4, Phase 5 OCR, an experimental visual-recognition pilot, and a local live-camera prototype**: a Python/FastAPI foundation,
 MongoDB lifecycle management, and creation/retrieval of locations, objects,
 and source references, bounded imports from the official Rijksmuseum API, and
 source-cited visitor content preparation, museum-filtered text retrieval, and uploaded-label OCR recognition.
@@ -134,9 +139,38 @@ curl --fail http://localhost:8001/health/database
 - `docs/`: product and architecture specifications
 
 Repositories use the existing `get_database` dependency and async PyMongo client.
-There is no frontend, live camera stream, authentication, or background processing.
+The experimental `/live/` frontend processes the live camera on the device. It has
+no image uploads, recording, authentication, or background processing.
 Phase 5 accepts label image uploads and performs OCR; Phase 4 also accepts text.
 Imports run through the CLI.
+
+## Live camera prototype — iPhone 12 Pro / Safari
+
+See [setup and limitations](docs/16-live-camera-prototype.md). This is an explicit
+scope extension, not completion of Phase 5 recognition validation. It continuously
+analyzes the center of the live view and shows tentative candidates. Camera pixels
+stay on the phone. The current recorded-source demo covers **The Milkmaid** and
+**The Jewish Bride**; an explicit Atlas export supports 2–12 selected objects.
+
+```bash
+.venv/bin/pip install -e '.[dev,visual,camera]'
+npm ci
+npm run camera:vendor
+# Uses the cached DINOv2 weights; run the existing visual model setup if absent.
+.venv/bin/python -m scripts.prepare_camera_demo
+.venv/bin/uvicorn app.modules.live_camera.server:app --host 127.0.0.1 --port 8002 --no-access-log
+```
+
+Open `http://localhost:8002/` on the development computer. The standalone host
+serves only the prototype and allowlisted downloads; it requires no Atlas connection
+and does not expose the existing writable or paid API routes. A physical iPhone
+requires trusted HTTPS; a LAN IP over ordinary HTTP cannot access its camera.
+The guide includes a local certificate setup. No public deployment is performed.
+
+Browser checks: `npm test`, then `npx playwright install --with-deps chromium webkit`
+and `npm run test:browser`. The real-model browser test runs when a local bundle is
+prepared; other browser tests use synthetic camera/worker fixtures. Keep the
+existing Python checks as well.
 
 ## Phase 1: manual domain data
 

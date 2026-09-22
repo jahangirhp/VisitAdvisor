@@ -1,0 +1,219 @@
+{
+  "scope": "Regression-only browser canvas replay of six previously inspected photos; two-object demo, not held-out accuracy or physical-phone evidence",
+  "browsers": {
+    "chromium": {
+      "top_one_correct": 4,
+      "queries": 6,
+      "preview_threshold_eligible": 2,
+      "eligible_correct": 2,
+      "rows": [
+        {
+          "type": "result",
+          "id": "v5-jewish-bride-143862351-partial",
+          "candidates": [
+            {
+              "id": "6a9dd4136d52c3bc396586a1",
+              "score": 0.7114315605352998
+            },
+            {
+              "id": "6a9dd4126d52c3bc396586a0",
+              "score": 0.6404445598009572
+            }
+          ],
+          "inferenceMs": 334.29999999981374,
+          "expected_object_id": "6a9dd4136d52c3bc396586a1"
+        },
+        {
+          "type": "result",
+          "id": "v5-jewish-bride-143938244-full",
+          "candidates": [
+            {
+              "id": "6a9dd4126d52c3bc396586a0",
+              "score": 0.5121672910224364
+            },
+            {
+              "id": "6a9dd4136d52c3bc396586a1",
+              "score": 0.3371989046001438
+            }
+          ],
+          "inferenceMs": 364.79999999981374,
+          "expected_object_id": "6a9dd4136d52c3bc396586a1"
+        },
+        {
+          "type": "result",
+          "id": "v5-jewish-bride-59134781-partial",
+          "candidates": [
+            {
+              "id": "6a9dd4126d52c3bc396586a0",
+              "score": 0.10396485053616535
+            },
+            {
+              "id": "6a9dd4136d52c3bc396586a1",
+              "score": 0.0640721407701405
+            }
+          ],
+          "inferenceMs": 363.5,
+          "expected_object_id": "6a9dd4136d52c3bc396586a1"
+        },
+        {
+          "type": "result",
+          "id": "v5-milkmaid-106022487-full",
+          "candidates": [
+            {
+              "id": "6a9dd4126d52c3bc396586a0",
+              "score": 0.7516582871105766
+            },
+            {
+              "id": "6a9dd4136d52c3bc396586a1",
+              "score": 0.5175101916356577
+            }
+          ],
+          "inferenceMs": 397,
+          "expected_object_id": "6a9dd4126d52c3bc396586a0"
+        },
+        {
+          "type": "result",
+          "id": "v5-milkmaid-144231974-partial",
+          "candidates": [
+            {
+              "id": "6a9dd4126d52c3bc396586a0",
+              "score": 0.18458786433404845
+            },
+            {
+              "id": "6a9dd4136d52c3bc396586a1",
+              "score": 0.1823148012438101
+            }
+          ],
+          "inferenceMs": 327.20000000018626,
+          "expected_object_id": "6a9dd4126d52c3bc396586a0"
+        },
+        {
+          "type": "result",
+          "id": "v5-milkmaid-15398880-partial",
+          "candidates": [
+            {
+              "id": "6a9dd4126d52c3bc396586a0",
+              "score": 0.6880041683806762
+            },
+            {
+              "id": "6a9dd4136d52c3bc396586a1",
+              "score": 0.6639079725345981
+            }
+          ],
+          "inferenceMs": 359.5,
+          "expected_object_id": "6a9dd4126d52c3bc396586a0"
+        }
+      ]
+    },
+    "webkit": {
+      "top_one_correct": 4,
+      "queries": 6,
+      "preview_threshold_eligible": 2,
+      "eligible_correct": 2,
+      "rows": [
+        {
+          "type": "result",
+          "id": "v5-jewish-bride-143862351-partial",
+          "candidates": [
+            {
+              "id": "6a9dd4136d52c3bc396586a1",
+              "score": 0.7145168249322523
+            },
+            {
+              "id": "6a9dd4126d52c3bc396586a0",
+              "score": 0.6422495466179227
+            }
+          ],
+          "inferenceMs": 348,
+          "expected_object_id": "6a9dd4136d52c3bc396586a1"
+        },
+        {
+          "type": "result",
+          "id": "v5-jewish-bride-143938244-full",
+          "candidates": [
+            {
+              "id": "6a9dd4126d52c3bc396586a0",
+              "score": 0.47167791196273146
+            },
+            {
+              "id": "6a9dd4136d52c3bc396586a1",
+              "score": 0.3126301199821662
+            }
+          ],
+          "inferenceMs": 328,
+          "expected_object_id": "6a9dd4136d52c3bc396586a1"
+        },
+        {
+          "type": "result",
+          "id": "v5-jewish-bride-59134781-partial",
+          "candidates": [
+            {
+              "id": "6a9dd4126d52c3bc396586a0",
+              "score": 0.09917531121344149
+            },
+            {
+              "id": "6a9dd4136d52c3bc396586a1",
+              "score": 0.06051410895108601
+            }
+          ],
+          "inferenceMs": 374,
+          "expected_object_id": "6a9dd4136d52c3bc396586a1"
+        },
+        {
+          "type": "result",
+          "id": "v5-milkmaid-106022487-full",
+          "candidates": [
+            {
+              "id": "6a9dd4126d52c3bc396586a0",
+              "score": 0.768331074559568
+            },
+            {
+              "id": "6a9dd4136d52c3bc396586a1",
+              "score": 0.5506531622443999
+            }
+          ],
+          "inferenceMs": 333,
+          "expected_object_id": "6a9dd4126d52c3bc396586a0"
+        },
+        {
+          "type": "result",
+          "id": "v5-milkmaid-144231974-partial",
+          "candidates": [
+            {
+              "id": "6a9dd4126d52c3bc396586a0",
+              "score": 0.1831755053826831
+            },
+            {
+              "id": "6a9dd4136d52c3bc396586a1",
+              "score": 0.1811198456668342
+            }
+          ],
+          "inferenceMs": 330,
+          "expected_object_id": "6a9dd4126d52c3bc396586a0"
+        },
+        {
+          "type": "result",
+          "id": "v5-milkmaid-15398880-partial",
+          "candidates": [
+            {
+              "id": "6a9dd4126d52c3bc396586a0",
+              "score": 0.6858534521028686
+            },
+            {
+              "id": "6a9dd4136d52c3bc396586a1",
+              "score": 0.6647119697390345
+            }
+          ],
+          "inferenceMs": 331,
+          "expected_object_id": "6a9dd4126d52c3bc396586a0"
+        }
+      ]
+    }
+  },
+  "model_sha256": "d5225e26eb6f54fbf9733321947b945f5b6c15cb94e8c6a619ec1ff3fbf5a255",
+  "reference_origin": "recorded-v5-source-demo",
+  "platform": "Linux-7.0.0-31-generic-x86_64-with-glibc2.39",
+  "physical_iphone_tested": false,
+  "phase5_complete": false,
+  "query_manifest_sha256": "29a91c68024923319d1b6bbdc2c73c2804decf288812b951ed9e86fd12617a5a"
+}

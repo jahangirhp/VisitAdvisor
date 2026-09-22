@@ -1,0 +1,2787 @@
+{
+  "reference_version": "01316ceaf7e5be08743e4489b4805dbfc000ec6261001c4705e0e364a6f5ff8b",
+  "automatic_identification": false,
+  "method": "DINO candidate scores gated by SIFT planar verification >=0.4; existing floor .55 / margin .04 unchanged",
+  "limitations": [
+    "Historical regression set, not an independent release gate.",
+    "Six historical positives retain original labels; two show a reproduction/crowd; one is a canonical detail.",
+    "Additional photos are separate captures but already appeared in a source audit.",
+    "Pillow replay approximates browser cropping; phone performance unverified."
+  ],
+  "results": [
+    {
+      "id": "v5-atrium-29899240-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 221.41,
+      "image_sha256": "c0090e63e71b4af5d454334a9ab67eb6275241dc9d0890f743fd9f7f8c2eab36",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.021525556221604347
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": -0.007451437413692474
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-atrium-67501931-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 169.03,
+      "image_sha256": "af9a497c6f89526ea4e834b24a6426dede9f05d3d2023ca6239744ff7f9bc144",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.054622747004032135
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.023258615285158157
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-atrium-88940231-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 138.3,
+      "image_sha256": "97ad938f2b00fdfee9aed2d123ef3f8224e41a133cc3dee6b1fb761649305439",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.1444392427802086
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.0005497660022228956
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-gallery-24264552-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 137.18,
+      "image_sha256": "26580657c481a557bd9cc3ded40f3e21fdc26d75ff8b0c8787f71dd3e37ccbd1",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.12638986110687256
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": -0.015101945959031582
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-gallery-50147724-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 147.07,
+      "image_sha256": "109193f9ebf5d6f4a060b0dfac38f473bdb865a5fa0a729dcbf8df30f49787dc",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.21326275542378426
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.19555838033556938
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-gallery-62361618-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 149.78,
+      "image_sha256": "5567e4160f4f93876baa4441c04bcb0464f43cfaffe0c8912a63e77656ba1d11",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.09304802119731903
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.09122459590435028
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-great-hall-132224348-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 158.08,
+      "image_sha256": "2c2e8e27c503e75b770c5bcf76ce2ea70edb8369a021ca859f345770fa768988",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.13368235528469086
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.02828132826834917
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-great-hall-144193720-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 164.06,
+      "image_sha256": "b5012345f358c50dd6f443def65fb876f7443d1300b55d64eb74c5ff474d2fdf",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.2467067539691925
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.15992549061775208
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-great-hall-144193786-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 201.7,
+      "image_sha256": "b068d9b6dc379632a5db88c2a1f9b0648caa9c44736d381fbc76c44954533b05",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.13057179749011993
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.039298322051763535
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-guild-cup-72638461-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 166.33,
+      "image_sha256": "6daeccabde9af074867d8c407ade5a00b7c65243b420728883227316db81d47a",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.1806601881980896
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.08201120421290398
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-guild-cup-72638462-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 163.12,
+      "image_sha256": "8fbc68a46e8f1a48996707843cb17ed7efaa8ecaf6efb7f2fafc707cd3271548",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.1739048957824707
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.0311248148791492
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-guild-cup-72638464-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 165.89,
+      "image_sha256": "9ccff0de4bd7d21d9b078ba3ebd9165ed98ed4d2d8b934330ce68180c9f8da8a",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.13168220221996307
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.04563589207828045
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-jewish-bride-143862351-partial",
+      "expected": "6a9dd4136d52c3bc396586a1",
+      "suggestion": "6a9dd4136d52c3bc396586a1",
+      "scores": [
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.6834357976913452
+        },
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 141.23,
+      "image_sha256": "febf69c963e606a7ec3279b1c06742ebbe83e4232763517c6dc7a54b2cac3fe9",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.6834357976913452
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.658295750617981
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-jewish-bride-143938244-full",
+      "expected": "6a9dd4136d52c3bc396586a1",
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 152.67,
+      "image_sha256": "aa377e3cfdd4d10f5c418340269c2ff4da144b182160f8ba8f9ffc978cfc9fce",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.511751651763916
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.32216164469718933
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-jewish-bride-59134781-partial",
+      "expected": "6a9dd4136d52c3bc396586a1",
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 164.18,
+      "image_sha256": "018b5020601d9d9056bd1173f9dea1d91935a97f3c0564f8414e437d7eae2fb6",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.07051701284945011
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.052426318638026714
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-library-23972942-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 176.64,
+      "image_sha256": "a2a238faeb84293613e87f7fce5e397de2e66412ce77a1e374078cf79053e01e",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.05825137346982956
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": -0.017345302738249302
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-library-62967984-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 182.38,
+      "image_sha256": "995b9dda81ba3a67ad6276a3f900356fe2ed8df20469c19def209791b02299eb",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.09187609702348709
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.02070084773004055
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-library-85764287-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 211.73,
+      "image_sha256": "7e028a5a2ecb6e7263f15c9a899305ef7e252990cbfb0564d286c44dba571b3c",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.04267370607703924
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.0017420104704797268
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-milkmaid-106022487-full",
+      "expected": "6a9dd4126d52c3bc396586a0",
+      "suggestion": "6a9dd4126d52c3bc396586a0",
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.7804155051708221
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 147.73,
+      "image_sha256": "ea585e729c4822687ff662a43180d02567a95a1a0f58467740ded86430adf927",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.7804155051708221
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.5483947098255157
+          }
+        ],
+        "suggestion": "6a9dd4126d52c3bc396586a0"
+      }
+    },
+    {
+      "id": "v5-milkmaid-144231974-partial",
+      "expected": "6a9dd4126d52c3bc396586a0",
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 152.5,
+      "image_sha256": "670ffafa3a704cf38a2b4b580441a83b78dcfabe9f1e692620f9b10594be3b25",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.17722860723733902
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.1610029935836792
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-milkmaid-15398880-partial",
+      "expected": "6a9dd4126d52c3bc396586a0",
+      "suggestion": "6a9dd4126d52c3bc396586a0",
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.6815712600946426
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 141.54,
+      "image_sha256": "3c8bbe85fda5e0261afc5ad32e50493683d36bfcba1b16faad0293957e4cb861",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.6815712600946426
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.6573444753885269
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-library-24264480-uninformative",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 111.61,
+      "image_sha256": "cbede8123c711b2ba994a461c90ca32826edf60be2c9441482b7373bffd8a2d1",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.15057118609547615
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.09372746013104916
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-louvre-107269911-wrong_location",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 141.32,
+      "image_sha256": "543375c4f1d09024a81aa2289a5c05cca8848ae72434dcda18ec24f877772881",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.2533111199736595
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.2451726198196411
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-louvre-139075622-wrong_location",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 175.0,
+      "image_sha256": "12970897312df5189d6a4fc9a3b3a1e62f79df4fffc7ebb1964b55b688ee6269",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.10173448175191879
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.013630187138915062
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-louvre-170359627-wrong_location",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 178.03,
+      "image_sha256": "5a656e5e510fab85bdb0f5e6c74c0983158ab1de42e81858cccf8545dad612a0",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.1913766786456108
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.1626405566930771
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-louvre-172024352-wrong_location",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 157.94,
+      "image_sha256": "37f5f428a962b06baafb60516f59f380b1227381863151d6e2f967ccf6a58889",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.18071801587939262
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.17627282440662384
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-louvre-172024762-wrong_location",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 174.18,
+      "image_sha256": "d8bad9281c73bd7f0495c7bd6e9823a87b7e4d837a99577817f2e26bad500e9b",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.14742432534694672
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.11637793481349945
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-louvre-175155186-wrong_location",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 148.31,
+      "image_sha256": "de7fa858d5a6e519ceb36d7fdde6e7f2da8908c93adae41cb6a9bbe1d851c4b8",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.47986555099487305
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.39488834142684937
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-louvre-68365741-wrong_location",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 158.31,
+      "image_sha256": "3c9a6bed745a7bc374207c77f253495fe74ba136d736a1bae3f72fadbd20c632",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.20741108059883118
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.20292134582996368
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-louvre-69755043-wrong_location",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 145.24,
+      "image_sha256": "9113cf81af9da46a87cc126c9ad33301571225b2acade5695254034a559b60f9",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.16336381807923317
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.11671743541955948
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-2-19-13409722-similar_object",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 144.76,
+      "image_sha256": "124a97fe860b9b4850861cb2efecdf16d860adcff72b4c55ac190c9dd4d8bac8",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.42271924018859863
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.3967117592692375
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-2-19-20645965-similar_object",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 148.54,
+      "image_sha256": "3b9ea408050fe4ab79ae6e4bb82adca9f51b7b681ccde87b1e4013bde50f74d3",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.27839019894599915
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.24995971098542213
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-2-19-25153313-similar_object",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 148.5,
+      "image_sha256": "84cc8c565f3cc80e34470877494aab8a482e251d196a01174411cb3ae548670e",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.6952073723077774
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.5109914988279343
+          }
+        ],
+        "suggestion": "6a9dd4136d52c3bc396586a1"
+      }
+    },
+    {
+      "id": "v5-negative-room-2-19-860726-similar_object",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 140.35,
+      "image_sha256": "33c3ffe9b3a9b7b51338c1f979bd682561a8e714019b4edd7aae68c75bf843b1",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.6085303425788879
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.42650632560253143
+          }
+        ],
+        "suggestion": "6a9dd4136d52c3bc396586a1"
+      }
+    },
+    {
+      "id": "v5-negative-room-2-22-12693169-similar_object",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 145.27,
+      "image_sha256": "6cf4144f5366b73a571656be2b7595620c1e8bc71e43b8016c57b8c59ec72556",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.6278150081634521
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.4711005687713623
+          }
+        ],
+        "suggestion": "6a9dd4136d52c3bc396586a1"
+      }
+    },
+    {
+      "id": "v5-negative-room-2-22-1578932-similar_object",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 142.85,
+      "image_sha256": "311f7c3bf820f96ced9b851720305b31f75d4f86d299e180883c3ad27e93bb12",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.43729250133037567
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.37762609124183655
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-2-22-34318437-similar_object",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 158.26,
+      "image_sha256": "491fa76532bfcc8ffe3eb776168d86965cdcb57038b3b62d4bf55ebf732a11f4",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.22383659705519676
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.16997404024004936
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-2-22-34318443-outside_reference",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 140.15,
+      "image_sha256": "61264a64e7a8f24e6f411a89c81086e44d675fb54bebc17c6951b3277db52bca",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.4486462399363518
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.39039620757102966
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-2-22-34318681-similar_object",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 135.34,
+      "image_sha256": "483216bf036b552441c040949c5c656c3fb2448812e815203fae6e1146caaea7",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.36682313680648804
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.2183883935213089
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-2-22-83647244-outside_reference",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 156.68,
+      "image_sha256": "dbace16ce464570de0f890b912eba1ed9e96e5769b6791dcfd7dcc4b7df853e3",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.16865286976099014
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.10438075475394726
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-2-22-89081694-outside_reference",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 159.79,
+      "image_sha256": "66337a522700f2f554c3eaec09dd3a10e6d6bcc26f4ab31336cdcacf0511ae4a",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.3211367726325989
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.17926986515522003
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-2-22-89082710-outside_reference",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 171.07,
+      "image_sha256": "f0294245fe349995597f493ee5bf357931e46ed0e699a06cd9a4296e9661cf3b",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.15354269742965698
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.08359836414456367
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-2-22-89082957-outside_reference",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 172.71,
+      "image_sha256": "8a1e549b2493565567061935b90dfa0df4cd802a86999e75ea82f107246b58dc",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.17259231954813004
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.06293830182403326
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-2-22-89082958-outside_reference",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 162.33,
+      "image_sha256": "381d309ef447bac3bf209ce62999db15272f925f47f92a8414ce19d76a107757",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.22540027648210526
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.07861258834600449
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-2-22-89084570-outside_reference",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 149.82,
+      "image_sha256": "8ae81e2d1a940db71cf235aec8b50289871a58ea84d8be776778c931ba7277a9",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.1709391102194786
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.0727104227989912
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-2-23-24052314-uninformative",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 114.7,
+      "image_sha256": "719b2bbb437b388f96a941f10a3d52eeb6cfc82e420bf090f3e368a52b4befa8",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.052134664729237556
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.03260885877534747
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-2-23-24052319-uninformative",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 115.19,
+      "image_sha256": "99bf8bfcd6685369b6a44786d8828ba571fe13d2ebac9d7c81aeff5e2bbb7243",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.046069348230957985
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.007600932382047176
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-2-23-24052320-uninformative",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 115.09,
+      "image_sha256": "da1a387df9742f5816d0a7972a3bbde22be3c26365f58b889cd3c8efff5c1587",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.08771739713847637
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.03342670202255249
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-3-2-24052308-uninformative",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 114.47,
+      "image_sha256": "937a4b484d5ab4d5e311969705d127e6f4833314e262ee3195a3fa7bf9b5b5ab",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.039278121665120125
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": -0.007221465930342674
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-3-2-24052310-uninformative",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 115.33,
+      "image_sha256": "90308d8dd51df8b6b76f9790515651674144f18f42f56867710965561f8d2a09",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.05564327258616686
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.05168470926582813
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-negative-room-3-2-24052312-uninformative",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 116.39,
+      "image_sha256": "0805770ab2170642a6afb485aa36c167881825e24dbaad8cbbdb79a4e4cdfbb2",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.10837439075112343
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": -0.009323759004473686
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-night-watch-47347484-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 159.26,
+      "image_sha256": "7b28f68a728d17a1ee2477e5ac770063fdaa24d59b47f0e3f761343328a062e7",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.4934138059616089
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.48517443239688873
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-night-watch-50088024-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 184.44,
+      "image_sha256": "1bcc0cfacd5be64c9ef52e3db6b0aeb19cd13680dc12c40bd674838d6aa14743",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.31662455201148987
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.254263561218977
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-night-watch-62361627-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 170.12,
+      "image_sha256": "dd257a9563d84c8d8546d5f232112093c580c621a5e979dd9e18fd1947ad2e36",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.2656205967068672
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.13084539771080017
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-night-watch-room-24052246-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 164.74,
+      "image_sha256": "cc4c2643c993c50a248efaf54573601155ef9ce963a2595dead05a5dc96f9260",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.1203891783952713
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.05840533971786499
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-night-watch-room-50088403-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 179.46,
+      "image_sha256": "e1ab58e96d9cf74fd5ac34586fe5e27bcc21562594c4ee939f833add8dcdd846",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.34423893690109253
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.3189297392964363
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-night-watch-room-67509008-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 174.54,
+      "image_sha256": "a852d9c624ed8c604a1b2f69d20193172e85a04ef218ca82ed210478e8174544",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.21072959527373314
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.19625726342201233
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-north-facade-119213870-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 197.27,
+      "image_sha256": "8468b4878305db53de0d6a8e86a28ac596a233d64f059e8358317128d41359a9",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.024363704025745392
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": -0.005299779586493969
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-north-facade-24138482-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 209.65,
+      "image_sha256": "186e3a305476a2bf5049fdbdc19354934edd25ce784c8d9c572ab142028a4a53",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.06945094838738441
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.02691618539392948
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-north-facade-67502004-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 181.73,
+      "image_sha256": "9ede8780469f0986c040255e87cc69036483a40df24c2c439872d69ace0204e2",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.045116811990737915
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.010523655451834202
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-passage-25748812-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 178.45,
+      "image_sha256": "293948c6eb150e5f540d45eebe0ce2c627746d559bbae60c8a343a5e14326406",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.14042111299932003
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.007292250171303749
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-passage-25748817-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 158.1,
+      "image_sha256": "2f25b677f837b466b20fb638c65f542f2f540e2f52375ca1af5cfef1e675be06",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.0915053328499198
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": -0.012677364982664585
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-passage-62670946-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 166.76,
+      "image_sha256": "934df2b199eb3e43f2d27b4a1ed6c707778ab9914cf6e9fd766e9dd074cd3dcb",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.04921297775581479
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": -0.03211457864381373
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-positive-banquet-15394953-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 183.81,
+      "image_sha256": "a3579f91b25019604b404425f3a549f5c169c355a3d3b97968eccc5ae50a10f5",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.5828802585601807
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.44001130759716034
+          }
+        ],
+        "suggestion": "6a9dd4136d52c3bc396586a1"
+      }
+    },
+    {
+      "id": "v5-positive-banquet-15394956-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 195.99,
+      "image_sha256": "617992156c01e00e05d19a1ca6e76135cfdc957c40eceee901ae5072df83ca94",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.70066237449646
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.461522214114666
+          }
+        ],
+        "suggestion": "6a9dd4136d52c3bc396586a1"
+      }
+    },
+    {
+      "id": "v5-positive-banquet-157311435-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 189.03,
+      "image_sha256": "c86842be3cc112360b39b43ec8c4548791257a59aa89f4582828fb295ee7ec53",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.5917888879776001
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.43523646146059036
+          }
+        ],
+        "suggestion": "6a9dd4136d52c3bc396586a1"
+      }
+    },
+    {
+      "id": "v5-positive-itamaraca-106723438-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 157.54,
+      "image_sha256": "5232a99607143674d3aa528837ebb39926391f83437afcc7a9af7467e3e78060",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.2587326839566231
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.24838198721408844
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-positive-itamaraca-34249676-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 154.51,
+      "image_sha256": "3c05d998ce13a33f3787feca9bcf5a71adac7db914c04f36d58519eadc413c3a",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.243704192340374
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.18438903614878654
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-positive-itamaraca-67086860-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 169.8,
+      "image_sha256": "5a1b976bd92748321d802ba288fc1ed527bad8c778c7cc14fdec17c627399c03",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.28316672146320343
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.1800355538725853
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-positive-merry-family-13408877-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 176.54,
+      "image_sha256": "e701b2f0cccc75074098ed9ca19d382025da27d57fc42f643befd37f13e9058c",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.5845475792884827
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.5704638957977295
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-positive-merry-family-50274741-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 166.58,
+      "image_sha256": "e68836e12f63b8553090039caf51e8ea903e21e316785f0c7d459747f2cdfb93",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.2983081042766571
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.2544122636318207
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-positive-merry-family-6020764-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 173.32,
+      "image_sha256": "2516d520ea464fadc2ea826a200b00d58bc323f4320b15ee391f23ec6d18dd68",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.5909375548362732
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.5361344814300537
+          }
+        ],
+        "suggestion": "6a9dd4136d52c3bc396586a1"
+      }
+    },
+    {
+      "id": "v5-positive-room-0-1-new-149673220-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 167.8,
+      "image_sha256": "a1863254ea32cb9e2defa5586d3ddc4bd616890849d981be5bd39bb22fd8586f",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.325519859790802
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.19996944069862366
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-positive-room-0-1-new-166058792-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 166.09,
+      "image_sha256": "83ef24871be0dc6ba5de989d03e7b2d1d6c6ed3c2a8f08174ccc6836ac358e8c",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.5384607315063477
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.3260514736175537
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-positive-room-0-1-new-166058794-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 179.41,
+      "image_sha256": "e89432ebc8a342245329f916d60dd836d5f26e59783f9d1762b45764588f9d52",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.326294481754303
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.26760658621788025
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-positive-vanitas-new-143319500-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 178.18,
+      "image_sha256": "f6826485512d40a51422533344076dcc35800c51076f3e3902a115caf23b902d",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.3964892700314522
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.3226882964372635
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-positive-vanitas-new-161498270-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 164.09,
+      "image_sha256": "c3f064ac1c908ef3267db08b8992e9a80da32e98fcbcece4c5f7a082e4eba89e",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.3066645860671997
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.19007333740592003
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-positive-vanitas-new-161498357-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 174.03,
+      "image_sha256": "a36bbc8885657eab2ad77cb3341308983bbd96b3bcbb3e516b9eb07cc6d23aa6",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.24728844314813614
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.14216343685984612
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-positive-waterloo-34320141-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 169.12,
+      "image_sha256": "1478d2f64ff78dc8c7c12b8a4442fd129a2534734700229f5407e58c0a341df1",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.4633568227291107
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.28345953673124313
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-positive-waterloo-50228737-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 165.85,
+      "image_sha256": "4dd405c7d50d6f458c75a75541afdb578c806094a083c0b88d32924de22a73c9",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.28064799308776855
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.14960314705967903
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-positive-waterloo-89181483-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 151.53,
+      "image_sha256": "aedd7c2a3d023558a7b3dad551bc704be87d67535e6b4872a94575a83b82b08e",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.5444679111242294
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.40259498357772827
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-shiva-143912324-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 162.07,
+      "image_sha256": "ced18c8c324bc237674ff3457f964fea5b1daa8d687f52cbaf2a580cc734e371",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.2597780004143715
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.10309573449194431
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-shiva-143912338-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 182.22,
+      "image_sha256": "0a656cbc53c284049b3d4f7454aebc380eb3a70b50af5f3db8a54f39eb751fb7",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.2093724012374878
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.18216536194086075
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-shiva-144195613-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 162.75,
+      "image_sha256": "18c186e8050cd20c483477ccde8886c4b030abbc74bb9b6e27a93dc9aefd4328",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.22034190595149994
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.162038654088974
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-swan-106025630-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 180.56,
+      "image_sha256": "77e0188533c85cfdb52108a5e18e763ff6853f0f2c50d7fa2bfa249590b45544",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.16223611310124397
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.16032713651657104
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-swan-168196893-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 171.21,
+      "image_sha256": "5a62c8ffe3f912afc6cea401911d604c4e7c73543659c925cd9d044951685123",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.07614812813699245
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.0710702370852232
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-swan-34316469-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 164.54,
+      "image_sha256": "2086e80175df4160862a06c01850ac82865b4ef921ae5f656c576ec6c7de9ebc",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.11406602151691914
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.09810351021587849
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "v5-syndics-105779165-full",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 168.57,
+      "image_sha256": "17a57e1e8b0317b50739a2b601e8587595731dcf388ed619bcddd94efc66bb0f",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.6152174472808838
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.5203882157802582
+          }
+        ],
+        "suggestion": "6a9dd4136d52c3bc396586a1"
+      }
+    },
+    {
+      "id": "v5-syndics-43883915-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 175.57,
+      "image_sha256": "af8e211634d4231150ef3c845a9d38a2026aa4fa5f582b5b4cc5ca96252c89e0",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.5996756255626678
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.4901401996612549
+          }
+        ],
+        "suggestion": "6a9dd4136d52c3bc396586a1"
+      }
+    },
+    {
+      "id": "v5-syndics-65007931-partial",
+      "expected": null,
+      "suggestion": null,
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 152.0,
+      "image_sha256": "0e0c0fffda17d233de20bffbeaa0fcdb1bc2a4d3b9609c6c971a6a2c0a5da4be",
+      "baseline": {
+        "scores": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.494523286819458
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.2906501293182373
+          }
+        ],
+        "suggestion": null
+      }
+    },
+    {
+      "id": "additional-66977610",
+      "expected": "6a9dd4126d52c3bc396586a0",
+      "suggestion": "6a9dd4126d52c3bc396586a0",
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.8357140868902206
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 184.6,
+      "image_sha256": "dc40528d430f2e811132b7cdc72fba7c5101bc32faf304a7567ae1c335217254",
+      "provenance": "https://commons.wikimedia.org/wiki/File:Netherlands-4205_-_Milkmaid_(11715339273).jpg",
+      "license": "CC BY-SA 2.0",
+      "credit": "<bdi><a href=\"https://www.wikidata.org/wiki/Q122977591\" class=\"extiw\" title=\"d:Q122977591\"><span title=\"photographer\">Dennis G. Jarvis</span></a></bdi>",
+      "independence": "Separately sourced photograph; previously listed in online source audit, not an unseen Phase 5 holdout."
+    },
+    {
+      "id": "additional-56038306",
+      "expected": "6a9dd4126d52c3bc396586a0",
+      "suggestion": "6a9dd4126d52c3bc396586a0",
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.805857926607132
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 175.15,
+      "image_sha256": "6e44821eb01f6c579df51eccd7b3b80b1be82944f925ad04073b6aa57509585b",
+      "provenance": "https://commons.wikimedia.org/wiki/File:Rijkmuseum_-_Milkmaid_by_Vermeer_-_panoramio.jpg",
+      "license": "CC BY-SA 3.0",
+      "credit": "<bdi><a href=\"https://en.wikipedia.org/wiki/en:Johannes_Vermeer\" class=\"extiw\" title=\"w:en:Johannes Vermeer\"><span title=\"Dutch painter (1632\u20131675)\">Johannes Vermeer</span></a></bdi>",
+      "independence": "Separately sourced photograph; previously listed in online source audit, not an unseen Phase 5 holdout."
+    },
+    {
+      "id": "additional-7623789",
+      "expected": "6a9dd4126d52c3bc396586a0",
+      "suggestion": "6a9dd4126d52c3bc396586a0",
+      "scores": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.8656808137893677
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "inference_ms": 166.77,
+      "image_sha256": "d4db0d67c8a1ee4831da3ed2baef1845e74be0d417ad8334620534d901230025",
+      "provenance": "https://commons.wikimedia.org/wiki/File:WLANL_-_Ritanila_-_IMG_2678.jpg",
+      "license": "CC BY-SA 2.0",
+      "credit": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/86882370@N00\">Rita Niland</a> from Dordrecht, Netherlands",
+      "independence": "Separately sourced photograph; previously listed in online source audit, not an unseen Phase 5 holdout."
+    }
+  ],
+  "baseline_reference_version": "2e527ef28f1ba60ce7b8854389cdcdfb9f44d20cb325726d8081077575fecdf9",
+  "summary": {
+    "historical_positive_labels": 6,
+    "baseline_correct_suggestions": 1,
+    "updated_correct_suggestions": 3,
+    "other_evaluation_images": 84,
+    "baseline_incorrect_suggestions": 9,
+    "updated_incorrect_suggestions": 0,
+    "additional_photos": 3,
+    "additional_correct_suggestions": 3
+  }
+}

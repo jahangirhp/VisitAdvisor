@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>VisitAdvisor · iPhone setup</title><link rel="stylesheet" href="./camera.css"><script type="module" src="./phone-setup.mjs"></script></head>
+<body><main>
+  <header><a class="brand" href="./">VisitAdvisor<span>LOCAL IPHONE TEST</span></a></header>
+  <section class="intro"><p class="eyebrow">ONE-TIME SETUP</p><h1>Open your camera.<br>Keep it local.</h1><p>Connect your iPhone to the same Wi-Fi as the computer running VisitAdvisor. Safari requires a trusted HTTPS connection for camera access.</p></section>
+  <ol>
+    <li><p><a href="./bundle/phone-ca.cer">Download the local test certificate</a> and allow the download.</p></li>
+    <li><p>Open Settings → Profile Downloaded and install <strong>VisitAdvisor local camera trial</strong>.</p></li>
+    <li><p>Open Settings → General → About → Certificate Trust Settings. Enable full trust for <strong>VisitAdvisor local camera trial</strong>.</p></li>
+    <li><p><a id="open-camera" href="./">Open the live camera prototype</a>, tap Start live camera, and allow camera access.</p></li>
+  </ol>
+  <p>This certificate is generated on your computer for this seven-day test. It adds a trusted root on your phone. Remove the profile from Settings → General → VPN & Device Management after testing.</p>
+  <p>Camera imagery stays on your phone. The model download is about 84 MB plus the browser runtime. The first demo supports The Milkmaid and The Jewish Bride.</p>
+  <p><a href="https://support.apple.com/102390" rel="noreferrer">Apple’s certificate trust instructions</a></p>
+</main></body></html>

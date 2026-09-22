@@ -1,0 +1,275 @@
+{
+  "base": "https://server-preview---visitadvisor-t4ckjib5aq-ez.a.run.app/",
+  "scope": "Previously inspected six-photo regression; not held-out or physical-phone validation",
+  "browsers": {
+    "chromium": [
+      {
+        "status": 200,
+        "version": "camera-server-v1",
+        "location_id": "6a9dd4106d52c3bc3965869d",
+        "reference_version": "2e527ef28f1ba60ce7b8854389cdcdfb9f44d20cb325726d8081077575fecdf9",
+        "automatic_identification": false,
+        "candidates": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.6796109676361084
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.6514848470687866
+          }
+        ],
+        "inferenceMs": 221.99,
+        "roundtripMs": 364.8999999985099,
+        "uploadBytes": 12392,
+        "id": "v5-jewish-bride-143862351-partial",
+        "expected": "6a9dd4136d52c3bc396586a1"
+      },
+      {
+        "status": 200,
+        "version": "camera-server-v1",
+        "location_id": "6a9dd4106d52c3bc3965869d",
+        "reference_version": "2e527ef28f1ba60ce7b8854389cdcdfb9f44d20cb325726d8081077575fecdf9",
+        "automatic_identification": false,
+        "candidates": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.5132623314857483
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.33684444427490234
+          }
+        ],
+        "inferenceMs": 216.17,
+        "roundtripMs": 375.5,
+        "uploadBytes": 14983,
+        "id": "v5-jewish-bride-143938244-full",
+        "expected": "6a9dd4136d52c3bc396586a1"
+      },
+      {
+        "status": 200,
+        "version": "camera-server-v1",
+        "location_id": "6a9dd4106d52c3bc3965869d",
+        "reference_version": "2e527ef28f1ba60ce7b8854389cdcdfb9f44d20cb325726d8081077575fecdf9",
+        "automatic_identification": false,
+        "candidates": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.11401133984327316
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.061805423349142075
+          }
+        ],
+        "inferenceMs": 211.62,
+        "roundtripMs": 404.6000000014901,
+        "uploadBytes": 27819,
+        "id": "v5-jewish-bride-59134781-partial",
+        "expected": "6a9dd4136d52c3bc396586a1"
+      },
+      {
+        "status": 200,
+        "version": "camera-server-v1",
+        "location_id": "6a9dd4106d52c3bc3965869d",
+        "reference_version": "2e527ef28f1ba60ce7b8854389cdcdfb9f44d20cb325726d8081077575fecdf9",
+        "automatic_identification": false,
+        "candidates": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.7705268859863281
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.5348713546991348
+          }
+        ],
+        "inferenceMs": 217.67,
+        "roundtripMs": 321.5,
+        "uploadBytes": 17244,
+        "id": "v5-milkmaid-106022487-full",
+        "expected": "6a9dd4126d52c3bc396586a0"
+      },
+      {
+        "status": 200,
+        "version": "camera-server-v1",
+        "location_id": "6a9dd4106d52c3bc3965869d",
+        "reference_version": "2e527ef28f1ba60ce7b8854389cdcdfb9f44d20cb325726d8081077575fecdf9",
+        "automatic_identification": false,
+        "candidates": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.17944011837244034
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.1774660050868988
+          }
+        ],
+        "inferenceMs": 230.53,
+        "roundtripMs": 378.5,
+        "uploadBytes": 17460,
+        "id": "v5-milkmaid-144231974-partial",
+        "expected": "6a9dd4126d52c3bc396586a0"
+      },
+      {
+        "status": 200,
+        "version": "camera-server-v1",
+        "location_id": "6a9dd4106d52c3bc3965869d",
+        "reference_version": "2e527ef28f1ba60ce7b8854389cdcdfb9f44d20cb325726d8081077575fecdf9",
+        "automatic_identification": false,
+        "candidates": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.6897035241127014
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.6542767286300659
+          }
+        ],
+        "inferenceMs": 219.46,
+        "roundtripMs": 298.8999999985099,
+        "uploadBytes": 18557,
+        "id": "v5-milkmaid-15398880-partial",
+        "expected": "6a9dd4126d52c3bc396586a0"
+      }
+    ],
+    "webkit": [
+      {
+        "status": 200,
+        "version": "camera-server-v1",
+        "location_id": "6a9dd4106d52c3bc3965869d",
+        "reference_version": "2e527ef28f1ba60ce7b8854389cdcdfb9f44d20cb325726d8081077575fecdf9",
+        "automatic_identification": false,
+        "candidates": [
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.6767085790634155
+          },
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.6503883600234985
+          }
+        ],
+        "inferenceMs": 242.45,
+        "roundtripMs": 1036,
+        "uploadBytes": 12458,
+        "id": "v5-jewish-bride-143862351-partial",
+        "expected": "6a9dd4136d52c3bc396586a1"
+      },
+      {
+        "status": 200,
+        "version": "camera-server-v1",
+        "location_id": "6a9dd4106d52c3bc3965869d",
+        "reference_version": "2e527ef28f1ba60ce7b8854389cdcdfb9f44d20cb325726d8081077575fecdf9",
+        "automatic_identification": false,
+        "candidates": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.47544199228286743
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.319059818983078
+          }
+        ],
+        "inferenceMs": 215.37,
+        "roundtripMs": 958,
+        "uploadBytes": 17524,
+        "id": "v5-jewish-bride-143938244-full",
+        "expected": "6a9dd4136d52c3bc396586a1"
+      },
+      {
+        "status": 200,
+        "version": "camera-server-v1",
+        "location_id": "6a9dd4106d52c3bc3965869d",
+        "reference_version": "2e527ef28f1ba60ce7b8854389cdcdfb9f44d20cb325726d8081077575fecdf9",
+        "automatic_identification": false,
+        "candidates": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.1109627690166235
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.05960184242576361
+          }
+        ],
+        "inferenceMs": 230.27,
+        "roundtripMs": 883,
+        "uploadBytes": 27795,
+        "id": "v5-jewish-bride-59134781-partial",
+        "expected": "6a9dd4136d52c3bc396586a1"
+      },
+      {
+        "status": 200,
+        "version": "camera-server-v1",
+        "location_id": "6a9dd4106d52c3bc3965869d",
+        "reference_version": "2e527ef28f1ba60ce7b8854389cdcdfb9f44d20cb325726d8081077575fecdf9",
+        "automatic_identification": false,
+        "candidates": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.7822213172912598
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.556349128484726
+          }
+        ],
+        "inferenceMs": 223.47,
+        "roundtripMs": 900,
+        "uploadBytes": 18615,
+        "id": "v5-milkmaid-106022487-full",
+        "expected": "6a9dd4126d52c3bc396586a0"
+      },
+      {
+        "status": 200,
+        "version": "camera-server-v1",
+        "location_id": "6a9dd4106d52c3bc3965869d",
+        "reference_version": "2e527ef28f1ba60ce7b8854389cdcdfb9f44d20cb325726d8081077575fecdf9",
+        "automatic_identification": false,
+        "candidates": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.18354107439517975
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.17945218086242676
+          }
+        ],
+        "inferenceMs": 233.23,
+        "roundtripMs": 898,
+        "uploadBytes": 17504,
+        "id": "v5-milkmaid-144231974-partial",
+        "expected": "6a9dd4126d52c3bc396586a0"
+      },
+      {
+        "status": 200,
+        "version": "camera-server-v1",
+        "location_id": "6a9dd4106d52c3bc3965869d",
+        "reference_version": "2e527ef28f1ba60ce7b8854389cdcdfb9f44d20cb325726d8081077575fecdf9",
+        "automatic_identification": false,
+        "candidates": [
+          {
+            "id": "6a9dd4126d52c3bc396586a0",
+            "score": 0.6857847273349762
+          },
+          {
+            "id": "6a9dd4136d52c3bc396586a1",
+            "score": 0.6520940959453583
+          }
+        ],
+        "inferenceMs": 218.86,
+        "roundtripMs": 914,
+        "uploadBytes": 23456,
+        "id": "v5-milkmaid-15398880-partial",
+        "expected": "6a9dd4126d52c3bc396586a0"
+      }
+    ]
+  },
+  "revision": "visitadvisor-00006-yer"
+}

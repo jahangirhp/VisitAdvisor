@@ -13,3 +13,7 @@ dist/
 .coverage
 htmlcov/
 .local/visual-public-photos/
+.local/live-camera/
+node_modules/
+test-results/
+playwright-report/

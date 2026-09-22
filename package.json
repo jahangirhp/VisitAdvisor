@@ -1,0 +1,12 @@
+{
+  "name": "visitadvisor-camera-prototype",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/camera/*.test.mjs",
+    "test:browser": "playwright test",
+    "camera:vendor": "node scripts/camera_vendor.mjs"
+  },
+  "dependencies": { "onnxruntime-web": "1.30.0" },
+  "devDependencies": { "@playwright/test": "1.63.0" }
+}

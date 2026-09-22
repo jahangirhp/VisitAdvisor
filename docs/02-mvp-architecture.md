@@ -1,7 +1,25 @@
 # VisitAdvisor — MVP System Architecture
 
+> **Superseded camera architecture — 2026-09-20:** The user authorized moving
+> recognition to the server with temporary frame uploads and no phone model
+> download. See [the server camera trial](17-server-camera-trial.md). On-device
+> statements below describe the earlier prototype.
+
 **Version:** 0.1  
 **Status:** Revised MVP scope — 2026-09-11
+
+## Implemented live-camera extension — 2026-09-19
+
+The user-authorized phone prototype uses a small HTML/CSS/JavaScript client served
+by the existing FastAPI app at `/live/`, or the same read-only application alone for
+a LAN phone trial. It does not require Next.js for this bounded experiment. A
+dedicated browser worker runs the pinned DINOv2 model through ONNX Runtime Web and
+ranks against a small source-linked descriptor download. Camera imagery remains
+in browser memory; no frame, embedding, recognition result, or telemetry is sent
+back. Atlas remains the canonical store. The exported bundle is a seven-day test
+snapshot, not a new canonical database or a general offline package system.
+See `16-live-camera-prototype.md` for the explicit recorded-source demo option,
+new preprocessing identity, provenance constraints, and limitations.
 
 ## 1. Architecture Goal
 

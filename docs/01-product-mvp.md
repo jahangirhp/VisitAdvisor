@@ -1,7 +1,22 @@
 # VisitAdvisor — Product Definition & MVP Scope
 
+> **Superseded camera architecture — 2026-09-20:** The user authorized moving
+> recognition to the server with temporary frame uploads and no phone model
+> download. See [the server camera trial](17-server-camera-trial.md). On-device
+> statements below describe the earlier prototype.
+
 **Version:** 0.1  
-**Status:** Revised MVP scope — 2026-09-11
+**Status:** Revised MVP scope — live-camera extension 2026-09-19
+
+## Live-camera scope extension — 2026-09-19
+
+The user requested continuous recognition while moving an iPhone 12 Pro camera
+between objects, without manual captures, gallery uploads, or transmitting camera
+imagery. The bounded prototype in `16-live-camera-prototype.md` supersedes the
+camera/upload flow below for this client. It runs local frame inference and shows
+tentative candidates; existing server OCR and visual upload APIs remain separate.
+This extension does not declare Phase 5 accuracy gates passed or add global
+recognition, recording, custom model training, or a complete offline visitor app.
 
 ## 1. Product Goal
 

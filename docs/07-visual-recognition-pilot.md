@@ -1,8 +1,20 @@
 # Phase 5 — Visual object recognition pilot
 
+> **Superseded camera architecture — 2026-09-20:** The user authorized moving
+> recognition to the server with temporary frame uploads and no phone model
+> download. See [the server camera trial](17-server-camera-trial.md). On-device
+> statements below describe the earlier prototype.
+
 **Updated:** 2026-09-18
 **Status:** Preparation, benchmark tools, and opt-in visual candidate API implemented.
 Independent recognition accuracy and automatic identification are not complete.
+
+**Scope extension — 2026-09-19:** The user has now authorized a continuous,
+on-device camera prototype for iPhone 12 Pro / Safari. The previous exclusion of
+camera UI and continuous video below describes the server pilot, and is superseded
+only for this bounded prototype. See `16-live-camera-prototype.md`. It shows
+tentative candidates and does not activate automatic API identification or reuse
+the v5 thresholds as a validated browser policy.
 
 The latest [v5 validation](15-visual-online-validation-v5.md) passes every dataset
 and API transport gate on a 180-photo source-separated corpus. Recognition still
