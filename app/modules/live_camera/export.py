@@ -211,13 +211,17 @@ async def export_catalog(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--location-id", required=True)
-    parser.add_argument("--object-id", action="append", required=True)
+    parser.add_argument("--location-id")
+    parser.add_argument("--object-id", action="append", default=[])
+    parser.add_argument("--model-only", action="store_true")
     parser.add_argument("--output", type=Path, default=Path(".local/live-camera"))
     args = parser.parse_args()
     ids = list(dict.fromkeys(args.object_id))
-    if not 2 <= len(ids) <= 12 or not all(
-        ObjectId.is_valid(value) for value in [args.location_id, *ids]
+    if args.model_only and (args.location_id or ids):
+        parser.error("Model-only preparation does not accept an object selection.")
+    if not args.model_only and (
+        not 2 <= len(ids) <= 12
+        or not all(ObjectId.is_valid(value) for value in [args.location_id, *ids])
     ):
         parser.error(
             "Use a valid location ID and between 2 and 12 distinct object IDs."
@@ -228,13 +232,23 @@ def main() -> None:
         with tempfile.TemporaryDirectory(dir=args.output, prefix="build-") as temporary:
             stage = Path(temporary)
             model = export_model(encoder, stage / "model.onnx")
-            catalog = asyncio.run(export_catalog(encoder, args.location_id, ids))
-            catalog["model"] = model
-            (stage / "catalog.json").write_text(json.dumps(catalog, indent=2) + "\n")
+            if not args.model_only:
+                catalog = asyncio.run(export_catalog(encoder, args.location_id, ids))
+                catalog["model"] = model
+                (stage / "catalog.json").write_text(
+                    json.dumps(catalog, indent=2) + "\n"
+                )
+            (stage / "model-metadata.json").write_text(
+                json.dumps(model, indent=2) + "\n"
+            )
             # Model is deterministic; publish the catalog last. Hash verification
             # makes a client fail closed if it observes a mixed export during refresh.
             shutil.move(stage / "model.onnx", args.output / "model.onnx")
-            shutil.move(stage / "catalog.json", args.output / "catalog.json")
+            shutil.move(
+                stage / "model-metadata.json", args.output / "model-metadata.json"
+            )
+            if not args.model_only:
+                shutil.move(stage / "catalog.json", args.output / "catalog.json")
         print(json.dumps({"objects": len(ids), "model": model, "atlas_writes": 0}))
     except Exception:
         # Database/model exceptions can include credentials, URLs or local paths.

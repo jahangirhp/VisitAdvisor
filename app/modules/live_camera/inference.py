@@ -23,12 +23,24 @@ class CameraFailure(Exception):
 
 
 class CameraRecognizer:
-    def __init__(self, directory: Path) -> None:
+    def __init__(
+        self,
+        directory: Path,
+        catalog: dict[str, Any] | None = None,
+        session: Any = None,
+    ) -> None:
         import numpy as np
 
-        raw = (directory / "catalog.json").read_bytes()
-        self.reference_version = hashlib.sha256(raw).hexdigest()
+        # File input is retained only for explicit historical replay callers.
+        raw = (
+            (directory / "catalog.json").read_bytes()
+            if catalog is None
+            else json.dumps(catalog, sort_keys=True).encode()
+        )
         self.catalog: dict[str, Any] = json.loads(raw)
+        self.reference_version = self.catalog.get(
+            "reference_version", hashlib.sha256(raw).hexdigest()
+        )
         self.expires = datetime.fromisoformat(self.catalog["expires_at"])
         self.check_fresh()
         model = self.catalog["model"]
@@ -80,6 +92,9 @@ class CameraRecognizer:
                     raise ValueError("Empty camera vectors")
                 views.append(vectors / norms)
             self.views.append((obj["id"], views))
+        if session is not None:
+            self.session = session
+            return
         path = directory / "model.onnx"
         with path.open("rb") as source:
             if hashlib.file_digest(source, "sha256").hexdigest() != model["sha256"]:

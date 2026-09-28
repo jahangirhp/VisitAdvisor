@@ -14,7 +14,10 @@ from fastapi.staticfiles import StaticFiles
 from starlette.concurrency import run_in_threadpool
 from starlette.middleware.base import RequestResponseEndpoint
 
+from app.core.config import Settings
+from app.db.mongodb import MongoDB
 from app.modules.live_camera.inference import CameraFailure, CameraRecognizer
+from app.modules.live_camera.references import AtlasCameraReferences
 
 STATIC = Path(__file__).with_name("static")
 MAX_FRAME_BYTES = 128 * 1024
@@ -27,22 +30,22 @@ def create_camera_app(
 
     @asynccontextmanager
     async def lifespan(application: FastAPI) -> AsyncIterator[None]:
-        if application.state.recognizer is None and all(
-            (directory / name).is_file() for name in ("catalog.json", "model.onnx")
-        ):
-            try:
-                application.state.recognizer = await run_in_threadpool(
-                    CameraRecognizer, directory
-                )
-            except Exception:
-                raise RuntimeError("Camera recognition could not initialize.") from None
-        yield
-        application.state.recognizer = None
+        try:
+            yield
+        finally:
+            if application.state.owns_mongodb:
+                await application.state.mongodb.close()
+            application.state.mongodb = None
+            application.state.references = None
+            application.state.recognizer = None
 
     application = FastAPI(
         docs_url=None, redoc_url=None, openapi_url=None, lifespan=lifespan
     )
     application.state.recognizer = recognizer
+    application.state.references = None
+    application.state.mongodb = None
+    application.state.owns_mongodb = False
     init_gate = asyncio.Lock()
     gate = asyncio.Lock()
     last_scan = -1.0
@@ -78,15 +81,37 @@ def create_camera_app(
         return response
 
     async def engine() -> CameraRecognizer:
+        nonlocal directory
         async with init_gate:
             value = cast(CameraRecognizer | None, application.state.recognizer)
-            if value is None:
+            if value is not None:
+                return value
+            # Explicit directory callers may replay old snapshots. The deployed
+            # default always uses Atlas, even when a legacy catalog file exists.
+            if bundle is not None:
                 try:
                     value = await run_in_threadpool(CameraRecognizer, directory)
                 except Exception:
                     raise CameraFailure("RECOGNITION_UNAVAILABLE") from None
                 application.state.recognizer = value
-            return value
+                return value
+            references = cast(
+                AtlasCameraReferences | None, application.state.references
+            )
+            if references is None:
+                try:
+                    settings = Settings()
+                    directory = settings.live_camera_bundle
+                    if application.state.mongodb is None:
+                        application.state.mongodb = MongoDB(settings)
+                        application.state.owns_mongodb = True
+                    references = AtlasCameraReferences(
+                        application.state.mongodb.database, settings, directory
+                    )
+                    application.state.references = references
+                except Exception:
+                    raise CameraFailure("RECOGNITION_UNAVAILABLE") from None
+        return await references.get()
 
     @application.get("/bundle/catalog.json")
     async def catalog() -> Response:
@@ -132,8 +157,14 @@ def create_camera_app(
                         body.extend(chunk)
                 if not body:
                     raise CameraFailure("INVALID_FRAME", 422)
+                current = await engine()
+                if current.reference_version != service.reference_version:
+                    raise CameraFailure("REFERENCES_CHANGED", 409)
                 last_scan = monotonic()
                 result = await run_in_threadpool(service.recognize, bytes(body))
+                current = await engine()
+                if current.reference_version != service.reference_version:
+                    raise CameraFailure("REFERENCES_CHANGED", 409)
                 return JSONResponse(result)
             except TimeoutError:
                 raise CameraFailure("UPLOAD_TIMEOUT", 408) from None

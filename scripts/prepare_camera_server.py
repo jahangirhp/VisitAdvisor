@@ -1,4 +1,4 @@
-"""Stage only the camera server, public UI and private model/reference bundle."""
+"""Stage the camera server and private model; references load from Atlas."""
 
 import importlib.metadata
 import shutil
@@ -16,6 +16,13 @@ def main() -> None:
         "app/modules/live_camera/server.py",
         "app/modules/live_camera/inference.py",
         "app/modules/live_camera/geometry.py",
+        "app/modules/live_camera/references.py",
+        "app/modules/live_camera/export.py",
+        "app/modules/visual/repository.py",
+        "app/core/__init__.py",
+        "app/core/config.py",
+        "app/db/__init__.py",
+        "app/db/mongodb.py",
         "app/modules/visual/__init__.py",
         "app/modules/visual/features.py",
     ]
@@ -35,7 +42,9 @@ def main() -> None:
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(name, destination)
     (output / "bundle").mkdir(exist_ok=True)
-    for name in ("catalog.json", "model.onnx", "MODEL_LICENSE"):
+    # Remove the obsolete snapshot from earlier staging runs.
+    (output / "bundle" / "catalog.json").unlink(missing_ok=True)
+    for name in ("model-metadata.json", "model.onnx", "MODEL_LICENSE"):
         shutil.copy2(root / name, output / "bundle" / name)
     (output / "requirements.txt").write_text(
         "".join(
@@ -47,6 +56,9 @@ def main() -> None:
                 "numpy",
                 "onnxruntime",
                 "opencv-python-headless",
+                "pymongo",
+                "pydantic-settings",
+                "dnspython",
             )
         )
     )

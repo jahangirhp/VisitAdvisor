@@ -1,5 +1,9 @@
 # Server camera trial — 2026-09-20
 
+> Reference loading and deployment are superseded by
+> [Atlas-backed camera references](18-atlas-camera-references.md). The results below
+> describe the historical recorded-source bundle.
+
 The user explicitly replaced the on-device requirement with server recognition.
 This supersedes the local-inference and no-upload requirements in documents 01,
 02, 07 and 16 for the current camera client. The scope remains the same two-artwork
