@@ -150,3 +150,29 @@ downloads. That single blank-frame round trip was 132 ms on the development host
 The staged application imported successfully with no catalog or `.env` file.
 Docker execution was not verified because the local Docker socket denied access.
 No public deployment or Atlas writes were performed.
+
+
+## Deployment attempt — 2026-09-28
+
+Implementation commit `9dfb7b9` was pushed to `main`. Cloud Build successfully
+built the staged Docker image, and revision `visitadvisor-00013-maw` was deployed
+under the `atlas-preview` tag with zero public traffic. Its runtime reads the
+Atlas URI from Secret Manager, with accessor permission on that secret granted
+to the existing camera runtime identity. No credential was embedded in the image.
+
+The [90-image Atlas reference regression](server-camera-atlas-regression.json)
+reproduced 3/6 correct positive suggestions and zero false suggestions on 84
+negative cases, matching the historical regression counts. This is development
+regression evidence, not new held-out accuracy validation.
+
+Preview readiness failed: Cloud Run returned `REFERENCES_UNAVAILABLE`. A temporary
+cloud diagnostic using the same image, runtime identity and secret confirmed
+`ServerSelectionTimeoutError` during MongoDB ping, with a TLS handshake failure.
+Local Atlas reads succeeded. No certificate-verification bypass or network-access
+broadening was applied. Atlas network access for the cloud deployment needs review;
+the exact underlying TLS failure is not established by the timeout alone.
+
+Public traffic remains 100% on `visitadvisor-00011-boj`. Do not promote the preview
+until Atlas connectivity and public browser/frame checks pass. The temporary
+diagnostic job was removed. The preview URL is:
+https://atlas-preview---visitadvisor-t4ckjib5aq-ez.a.run.app
