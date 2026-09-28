@@ -166,10 +166,10 @@ test('stopping while permission is pending closes the late stream', async ({ pag
   expect(await page.evaluate(() => window.frameMessages)).toBe(0);
 });
 
-test('missing bundle never enables camera access', async ({ page }) => {
+test('unavailable references never enable camera access', async ({ page }) => {
   await page.route('**/bundle/catalog.json', route => route.fulfill({ status: 503, json: { error: 'RECOGNITION_UNAVAILABLE' } }));
   await page.goto('/');
-  await expect(page.locator('#status')).toContainText('Museum references are not ready');
+  await expect(page.locator('#status')).toContainText('Museum references are unavailable');
   await expect(page.locator('#start')).toBeDisabled();
 });
 
@@ -207,4 +207,27 @@ test('zero-score ordering does not flicker a verified second painting', async ({
   await page.evaluate(ids => { window.testCandidates = ids.map(id => ({ id, score: 0 })); }, ids);
   await expect(page.locator('#result')).toBeHidden({ timeout: 2500 });
   await page.locator('#stop').click();
+});
+
+test('changed references reload metadata and require a new camera start', async ({ page }) => {
+  await fakeCamera(page);
+  let catalogReads = 0;
+  await page.route('**/bundle/catalog.json', route => {
+    catalogReads++;
+    return route.fulfill({ json: {
+      ...catalog,
+      reference_version: (catalogReads > 1 ? 'd' : 'a').repeat(64),
+    } });
+  });
+  await page.route('**/recognize?*', route => route.fulfill({
+    status: 409, json: { error: 'REFERENCES_CHANGED' },
+  }));
+  await page.goto('/');
+  await page.locator('#start').click();
+  await expect.poll(() => catalogReads).toBe(2);
+  await expect(page.locator('#start')).toBeVisible();
+  await expect(page.locator('#start')).toBeEnabled();
+  await expect(page.locator('#result')).toBeHidden();
+  expect(await page.evaluate(() => window.tracksStopped)).toBe(1);
+  expect(await page.evaluate(() => window.cameraRequests)).toBe(1);
 });

@@ -22,7 +22,7 @@ let timings = [];
 let frameCount = 0;
 let catalogRequest = 0;
 const catalogs = {
-  rijksmuseum: { file: 'catalog.json', label: 'Rijksmuseum' },
+  rijksmuseum: { file: 'catalog.json', label: 'Supported location' },
 };
 
 function status(message) { $('status').textContent = message; }
@@ -97,7 +97,7 @@ function showCandidate(id) {
 async function nextFrame(run) {
   if (!running || run !== generation || pending) return;
   if (Date.now() >= Date.parse(catalog.expires_at)) {
-    stop('Museum references expired. Refresh the reference download before continuing.');
+    await loadCatalog($('location').value);
     return;
   }
   const started = performance.now();
@@ -126,7 +126,7 @@ async function nextFrame(run) {
     if (!response.ok) {
       const error = await response.json().catch(() => ({}));
       if (response.status === 409 || error.error === 'REFERENCES_EXPIRED') {
-        stop('Museum references changed or expired. Reload the page to continue.');
+        await loadCatalog($('location').value);
         return;
       }
       throw new Error('network');
@@ -250,7 +250,7 @@ async function loadCatalog(key) {
   $('frames').textContent = '0';
   try {
     const response = await fetch(`./bundle/${catalogs[key].file}`, { cache: 'no-store' });
-    if (!response.ok) throw new Error('Museum references are not ready. Prepare the camera bundle first.');
+    if (!response.ok) throw new Error('Museum references are unavailable. Try reloading shortly.');
     const loaded = validateCatalog(await response.json());
     if (request !== catalogRequest) return;
     catalog = loaded;

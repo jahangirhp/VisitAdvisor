@@ -1,0 +1,1360 @@
+{
+  "scope": "Historical reference regression, not unseen accuracy validation",
+  "reference_version": "fdd4441c32b57527a082336df84e89aa48620b19531d615b47d9302e6068949b",
+  "positive_correct": 3,
+  "positive_count": 6,
+  "negative_false_suggestions": 0,
+  "negative_count": 84,
+  "results": [
+    {
+      "id": "v5-atrium-29899240-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-atrium-67501931-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-atrium-88940231-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-gallery-24264552-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-gallery-50147724-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-gallery-62361618-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-great-hall-132224348-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-great-hall-144193720-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-great-hall-144193786-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-guild-cup-72638461-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-guild-cup-72638462-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-guild-cup-72638464-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-jewish-bride-143862351-partial",
+      "expected": "6a9dd4136d52c3bc396586a1",
+      "suggestion": "6a9dd4136d52c3bc396586a1",
+      "candidates": [
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.6742349863052368
+        },
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-jewish-bride-143938244-full",
+      "expected": "6a9dd4136d52c3bc396586a1",
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-jewish-bride-59134781-partial",
+      "expected": "6a9dd4136d52c3bc396586a1",
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-library-23972942-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-library-62967984-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-library-85764287-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-milkmaid-106022487-full",
+      "expected": "6a9dd4126d52c3bc396586a0",
+      "suggestion": "6a9dd4126d52c3bc396586a0",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.7699726819992065
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-milkmaid-144231974-partial",
+      "expected": "6a9dd4126d52c3bc396586a0",
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-milkmaid-15398880-partial",
+      "expected": "6a9dd4126d52c3bc396586a0",
+      "suggestion": "6a9dd4126d52c3bc396586a0",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.6809451580047607
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-library-24264480-uninformative",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-louvre-107269911-wrong_location",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-louvre-139075622-wrong_location",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-louvre-170359627-wrong_location",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-louvre-172024352-wrong_location",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-louvre-172024762-wrong_location",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-louvre-175155186-wrong_location",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-louvre-68365741-wrong_location",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-louvre-69755043-wrong_location",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-19-13409722-similar_object",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-19-20645965-similar_object",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-19-25153313-similar_object",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-19-860726-similar_object",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-22-12693169-similar_object",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-22-1578932-similar_object",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-22-34318437-similar_object",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-22-34318443-outside_reference",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-22-34318681-similar_object",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-22-83647244-outside_reference",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-22-89081694-outside_reference",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-22-89082710-outside_reference",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-22-89082957-outside_reference",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-22-89082958-outside_reference",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-22-89084570-outside_reference",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-23-24052314-uninformative",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-23-24052319-uninformative",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-2-23-24052320-uninformative",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-3-2-24052308-uninformative",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-3-2-24052310-uninformative",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-negative-room-3-2-24052312-uninformative",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-night-watch-47347484-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-night-watch-50088024-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-night-watch-62361627-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-night-watch-room-24052246-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-night-watch-room-50088403-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-night-watch-room-67509008-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-north-facade-119213870-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-north-facade-24138482-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-north-facade-67502004-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-passage-25748812-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-passage-25748817-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-passage-62670946-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-banquet-15394953-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-banquet-15394956-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-banquet-157311435-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-itamaraca-106723438-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-itamaraca-34249676-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-itamaraca-67086860-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-merry-family-13408877-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-merry-family-50274741-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-merry-family-6020764-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-room-0-1-new-149673220-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-room-0-1-new-166058792-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-room-0-1-new-166058794-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-vanitas-new-143319500-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-vanitas-new-161498270-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-vanitas-new-161498357-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-waterloo-34320141-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-waterloo-50228737-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-positive-waterloo-89181483-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-shiva-143912324-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-shiva-143912338-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-shiva-144195613-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-swan-106025630-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-swan-168196893-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-swan-34316469-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-syndics-105779165-full",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-syndics-43883915-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    },
+    {
+      "id": "v5-syndics-65007931-partial",
+      "expected": null,
+      "suggestion": null,
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ]
+    }
+  ]
+}

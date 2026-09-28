@@ -45,6 +45,9 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
             raise RuntimeError("MongoDB index initialization failed") from None
         app.state.mongodb = mongodb
         app.state.settings = settings
+        # Mounted applications do not receive a separate ASGI lifespan. Share
+        # the parent client, whose shutdown is owned by this lifespan.
+        app.state.camera.state.mongodb = mongodb
         if settings.visual_enabled:
             from app.modules.visual.features import DinoEncoder, VisualFailure
 
@@ -58,6 +61,8 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         logger.info("MongoDB connection successful")
         yield
     finally:
+        app.state.camera.state.references = None
+        app.state.camera.state.mongodb = None
         if mongodb is not None:
             await mongodb.close()
         logger.info("Application shutdown")
@@ -69,7 +74,8 @@ def create_app() -> FastAPI:
     register_exception_handlers(application)
     application.include_router(health_router)
     application.include_router(api_router)
-    application.mount("/live", create_camera_app())
+    application.state.camera = create_camera_app()
+    application.mount("/live", application.state.camera)
     return application
 
 
