@@ -7,7 +7,7 @@ WORKDIR /app
 
 COPY pyproject.toml ./
 COPY app ./app
-RUN pip install --no-cache-dir . \
+RUN pip install --no-cache-dir ".[camera-server]" \
     && groupadd --system visitadvisor \
     && useradd --system --gid visitadvisor --no-create-home visitadvisor
 

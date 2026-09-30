@@ -86,17 +86,21 @@ Python installation is not required for this option; Docker Engine must be
 running and accessible to your user.
 
 Create `.env` from `.env.example` if it does not already exist, then set your
-Atlas `MONGODB_URI`. Use unquoted `KEY=value` entries for Docker's `--env-file`.
-Allow your machine's public outbound IP in Atlas network access.
+Atlas `MONGODB_URI`. Allow your machine's public outbound IP in Atlas network
+access. Compose passes `.env` to the API container; it is not included in the
+image. For live camera recognition at `/live`, prepare `.local/live-camera/`
+with `catalog.json` and `model.onnx` before starting Compose. Compose mounts this
+private bundle read-only at `/app/.local/live-camera`; it is not copied into the
+image. The rest of `.local/` stays on the host.
 
 ```bash
-docker build -t visitadvisor:local .
-docker run --rm --name visitadvisor \
-  --env-file .env \
-  -e APP_HOST=0.0.0.0 -e APP_PORT=8001 \
-  -p 127.0.0.1:8001:8001 \
-  visitadvisor:local
+docker compose up --build
 ```
+
+Compose mounts `app/` from the host and runs Uvicorn with reload enabled, so
+Python source changes take effect without rebuilding. For subsequent starts,
+use `docker compose up`; rebuild with `docker compose up --build` only after
+changing dependencies or the Dockerfile.
 
 Open http://localhost:8001/docs or check connectivity:
 
@@ -104,10 +108,11 @@ Open http://localhost:8001/docs or check connectivity:
 curl --fail http://localhost:8001/health/database
 ```
 
-Stop with Ctrl+C, or `docker stop visitadvisor` from another terminal. Rebuild
-the image after code changes. The container runs as a non-root user, installs
-only runtime dependencies, and receives configuration at runtime. `.env` and
-the local virtual environment are excluded from the build context.
+Stop with Ctrl+C, or run `docker compose down` from another terminal. The
+container runs as a non-root user, installs only runtime dependencies, and
+receives configuration at runtime. `.env` and the local virtual environment
+are excluded from the build context. MongoDB remains in Atlas; Compose does not
+start a local database.
 
 If Docker reports permission denied for `/var/run/docker.sock`, run these
 commands from a terminal with Docker access (for example, use `sudo docker`
