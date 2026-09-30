@@ -13,6 +13,7 @@ dist/
 .coverage
 htmlcov/
 .local/visual-public-photos/
+.local/visual-evaluation/
 .local/live-camera/
 node_modules/
 test-results/
