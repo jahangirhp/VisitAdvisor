@@ -1,0 +1,1080 @@
+{
+  "command": "RUN_VISUAL_IMAGE_CHECK=1 VISUAL_ENABLED=true .venv/bin/pytest -s -q tests/test_visual_image_atlas.py",
+  "duration_seconds": 210.09,
+  "tested": 55,
+  "correct": 12,
+  "wrong": 43,
+  "positive_top1_correct": 2,
+  "positive_count": 2,
+  "negative_rejected": 10,
+  "negative_count": 53,
+  "new_negative_rejected": 9,
+  "new_negative_count": 50,
+  "limitations": [
+    "Diagnostic pytest mode does not fail on wrong predictions.",
+    "Ambiguous candidates count as errors for negative images; they are not automatic identifications.",
+    "Only two positive cases; Jewish Bride fixture provenance is unverified and marked independent=false."
+  ],
+  "results": [
+    {
+      "id": "flickr-3085955962-milkmaid-full",
+      "path": "positive/milkmaid.jpg",
+      "expected_object_id": "6a9dd4126d52c3bc396586a0",
+      "status": "ambiguous",
+      "correct": true,
+      "candidates": [
+        {
+          "object_id": "6a9dd4126d52c3bc396586a0",
+          "name": "The Milkmaid",
+          "score": 0.814
+        },
+        {
+          "object_id": "6a9dd859332abe8469d55993",
+          "name": "Portrait of Jan Six, Poet and Burgomaster of Amsterdam",
+          "score": 0.569
+        },
+        {
+          "object_id": "6a9dd852332abe8469d55988",
+          "name": "Portrait of Adriaen Pietersz van de Venne, Painter and Poet",
+          "score": 0.559
+        }
+      ]
+    },
+    {
+      "id": "local-jewish-bride-diagnostic",
+      "path": "positive/jewish-bride-mortel.jpg",
+      "expected_object_id": "6a9dd4136d52c3bc396586a1",
+      "status": "ambiguous",
+      "correct": true,
+      "candidates": [
+        {
+          "object_id": "6a9dd4136d52c3bc396586a1",
+          "name": "The Jewish Bride",
+          "score": 0.912
+        },
+        {
+          "object_id": "6a9dd804332abe8469d55902",
+          "name": "De Aanbidding van de koningen",
+          "score": 0.79
+        },
+        {
+          "object_id": "6a9dd811332abe8469d55917",
+          "name": "Mooy-Aal and her Suitors",
+          "score": 0.748
+        }
+      ]
+    },
+    {
+      "id": "nasa-pia25172-mars-landscape",
+      "path": "negative/mars-perseverance.jpg",
+      "expected_object_id": null,
+      "status": "no_match",
+      "correct": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-1951.355-de-hooch-family-music",
+      "path": "negative/de-hooch-family-music.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd81e332abe8469d5593e",
+          "name": "Aernout van Beeftingh (1759-1831) with his first Wife Jacoba Maria Boon (1760-1800) and their Children",
+          "score": 0.724
+        },
+        {
+          "object_id": "6a9dd81b332abe8469d5593b",
+          "name": "Thomas Hees and his Servant Thomas and Nephews Jan and Andries Hees",
+          "score": 0.702
+        },
+        {
+          "object_id": "6aa9a744dd73e04d9614615e",
+          "name": "The merry family",
+          "score": 0.659
+        }
+      ]
+    },
+    {
+      "id": "cleveland-1962.292-kalf-wineglass-fruit",
+      "path": "negative/kalf-wineglass-fruit.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6aab0deedd73e04d96150a15",
+          "name": "Vanitas stilleven",
+          "score": 0.477
+        }
+      ]
+    },
+    {
+      "id": "cleveland-94979-negative",
+      "path": "negative/cma-94979-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd806332abe8469d55906",
+          "name": "A Young Woman Warming her Hands over a Brazier, Allegory of Winter",
+          "score": 0.822
+        },
+        {
+          "object_id": "6a9dd802332abe8469d558ff",
+          "name": "Portret van Paulus Joseph Gabriël, beeldhouwer",
+          "score": 0.76
+        },
+        {
+          "object_id": "6a9dd81d332abe8469d5593d",
+          "name": "Portrait of Johannes Hudde (1628-1704), burgomaster of Amsterdam",
+          "score": 0.76
+        }
+      ]
+    },
+    {
+      "id": "cleveland-102578-negative",
+      "path": "negative/cma-102578-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd81d332abe8469d5593d",
+          "name": "Portrait of Johannes Hudde (1628-1704), burgomaster of Amsterdam",
+          "score": 0.598
+        },
+        {
+          "object_id": "6a9dd813332abe8469d5591b",
+          "name": "Portrait of Anne Fernely. Wife of Sir Thomas Gresham",
+          "score": 0.589
+        },
+        {
+          "object_id": "6a9dd81b332abe8469d5593b",
+          "name": "Thomas Hees and his Servant Thomas and Nephews Jan and Andries Hees",
+          "score": 0.584
+        }
+      ]
+    },
+    {
+      "id": "cleveland-92937-negative",
+      "path": "negative/cma-92937-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6aaad084dd73e04d9614e9e7",
+          "name": "The Fall of Man",
+          "score": 0.458
+        }
+      ]
+    },
+    {
+      "id": "cleveland-151904-negative",
+      "path": "negative/cma-151904-painting.jpg",
+      "expected_object_id": null,
+      "status": "no_match",
+      "correct": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-110180-negative",
+      "path": "negative/cma-110180-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd810332abe8469d55913",
+          "name": "The Meeting of Jacob and Rachel",
+          "score": 0.559
+        },
+        {
+          "object_id": "6a9dd80e332abe8469d55911",
+          "name": "The Meeting of Granida and Daifilo",
+          "score": 0.552
+        },
+        {
+          "object_id": "6a9dd807332abe8469d55907",
+          "name": "Fragment van een muurschildering",
+          "score": 0.537
+        }
+      ]
+    },
+    {
+      "id": "cleveland-137259-negative",
+      "path": "negative/cma-137259-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd837332abe8469d55960",
+          "name": "Portret van Jacob de Witt (1589-1674)",
+          "score": 0.763
+        },
+        {
+          "object_id": "6a9dd838332abe8469d55961",
+          "name": "Portrait of Anna van den Corput (1599-1645). Wife of Jacob de Witt",
+          "score": 0.736
+        },
+        {
+          "object_id": "6a9dd816332abe8469d55920",
+          "name": "A Shepherdess, known as ‘The beautiful Shepherdess’",
+          "score": 0.696
+        }
+      ]
+    },
+    {
+      "id": "cleveland-141639-negative",
+      "path": "negative/cma-141639-painting.jpg",
+      "expected_object_id": null,
+      "status": "no_match",
+      "correct": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-149112-negative",
+      "path": "negative/cma-149112-painting.jpg",
+      "expected_object_id": null,
+      "status": "no_match",
+      "correct": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-135299-negative",
+      "path": "negative/cma-135299-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd837332abe8469d55960",
+          "name": "Portret van Jacob de Witt (1589-1674)",
+          "score": 0.581
+        },
+        {
+          "object_id": "6a9dd823332abe8469d55946",
+          "name": "Portrait of Willem III (1650-1702), Prince of Orange and since 1689, King of England",
+          "score": 0.58
+        },
+        {
+          "object_id": "6a9dd84c332abe8469d5597b",
+          "name": "Portrait of Alexander Morus, Professor at Amsterdam",
+          "score": 0.576
+        }
+      ]
+    },
+    {
+      "id": "cleveland-93014-negative",
+      "path": "negative/cma-93014-painting.jpg",
+      "expected_object_id": null,
+      "status": "no_match",
+      "correct": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-135382-negative",
+      "path": "negative/cma-135382-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd845332abe8469d55974",
+          "name": "The Painter’s Studio",
+          "score": 0.49
+        },
+        {
+          "object_id": "6a9dd841332abe8469d5596a",
+          "name": "Dancing Couple",
+          "score": 0.451
+        }
+      ]
+    },
+    {
+      "id": "cleveland-140161-negative",
+      "path": "negative/cma-140161-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6aa9a745dd73e04d96146160",
+          "name": "The Sampling Officials of the Amsterdam Drapers’ Guild, known as ‘The Syndics’",
+          "score": 0.451
+        }
+      ]
+    },
+    {
+      "id": "cleveland-125104-negative",
+      "path": "negative/cma-125104-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd810332abe8469d55913",
+          "name": "The Meeting of Jacob and Rachel",
+          "score": 0.555
+        },
+        {
+          "object_id": "6a9dd80e332abe8469d55911",
+          "name": "The Meeting of Granida and Daifilo",
+          "score": 0.539
+        },
+        {
+          "object_id": "6a9dd841332abe8469d5596a",
+          "name": "Dancing Couple",
+          "score": 0.53
+        }
+      ]
+    },
+    {
+      "id": "cleveland-138464-negative",
+      "path": "negative/cma-138464-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd81c332abe8469d5593c",
+          "name": "Self-Portrait",
+          "score": 0.695
+        },
+        {
+          "object_id": "6a9dd81e332abe8469d5593e",
+          "name": "Aernout van Beeftingh (1759-1831) with his first Wife Jacoba Maria Boon (1760-1800) and their Children",
+          "score": 0.67
+        },
+        {
+          "object_id": "6a9dd849332abe8469d55979",
+          "name": "Venus and Adonis",
+          "score": 0.664
+        }
+      ]
+    },
+    {
+      "id": "cleveland-127571-negative",
+      "path": "negative/cma-127571-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd813332abe8469d5591b",
+          "name": "Portrait of Anne Fernely. Wife of Sir Thomas Gresham",
+          "score": 0.684
+        },
+        {
+          "object_id": "6a9dd811332abe8469d55917",
+          "name": "Mooy-Aal and her Suitors",
+          "score": 0.667
+        },
+        {
+          "object_id": "6a9dd802332abe8469d558ff",
+          "name": "Portret van Paulus Joseph Gabriël, beeldhouwer",
+          "score": 0.645
+        }
+      ]
+    },
+    {
+      "id": "cleveland-109245-negative",
+      "path": "negative/cma-109245-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd84e332abe8469d55981",
+          "name": "Portrait of Matthijs Gansneb, called Tengnagel, Poet in Amsterdam",
+          "score": 0.681
+        },
+        {
+          "object_id": "6a9dd84d332abe8469d5597d",
+          "name": "Portrait of Balthasar Bekker, Clergyman and Man of Letters in Amsterdam",
+          "score": 0.678
+        },
+        {
+          "object_id": "6a9dd858332abe8469d55992",
+          "name": "Portrait of Andries Pels, Dramatic Poet in Amsterdam",
+          "score": 0.677
+        }
+      ]
+    },
+    {
+      "id": "cleveland-160885-negative",
+      "path": "negative/cma-160885-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd817332abe8469d55937",
+          "name": "Portrait of a Man, possibly Reijnier Pauw (1591-1676)",
+          "score": 0.734
+        },
+        {
+          "object_id": "6a9dd813332abe8469d5591b",
+          "name": "Portrait of Anne Fernely. Wife of Sir Thomas Gresham",
+          "score": 0.731
+        },
+        {
+          "object_id": "6a9dd838332abe8469d55961",
+          "name": "Portrait of Anna van den Corput (1599-1645). Wife of Jacob de Witt",
+          "score": 0.703
+        }
+      ]
+    },
+    {
+      "id": "cleveland-140408-negative",
+      "path": "negative/cma-140408-painting.jpg",
+      "expected_object_id": null,
+      "status": "no_match",
+      "correct": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-117032-negative",
+      "path": "negative/cma-117032-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd80e332abe8469d55911",
+          "name": "The Meeting of Granida and Daifilo",
+          "score": 0.753
+        },
+        {
+          "object_id": "6a9dd849332abe8469d55979",
+          "name": "Venus and Adonis",
+          "score": 0.722
+        },
+        {
+          "object_id": "6a9dd80f332abe8469d55912",
+          "name": "Portrait of Govert van Slingelandt (1623-1690), with his First Wife Christina van Beveren (1632-1656) and their Two Children",
+          "score": 0.716
+        }
+      ]
+    },
+    {
+      "id": "cleveland-135428-negative",
+      "path": "negative/cma-135428-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd7f8332abe8469d558f5",
+          "name": "Misty Sea",
+          "score": 0.59
+        },
+        {
+          "object_id": "6a9dd810332abe8469d55913",
+          "name": "The Meeting of Jacob and Rachel",
+          "score": 0.552
+        },
+        {
+          "object_id": "6a9dd847332abe8469d55976",
+          "name": "Country inn with a horse at the trough",
+          "score": 0.544
+        }
+      ]
+    },
+    {
+      "id": "cleveland-131819-negative",
+      "path": "negative/cma-131819-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd82b332abe8469d55951",
+          "name": "Portrait of a Boy, possibly Louis of Nassau, later Lord of Beverweerd, De Leck, Odijk and Lekkerkerk, Illegitimate Son of Maurice, Prince of Orange, and Margaretha van Mechelen",
+          "score": 0.767
+        },
+        {
+          "object_id": "6a9dd81f332abe8469d55941",
+          "name": "Portrait of a Couple and Four Children",
+          "score": 0.751
+        },
+        {
+          "object_id": "6a9dd4136d52c3bc396586a1",
+          "name": "The Jewish Bride",
+          "score": 0.745
+        }
+      ]
+    },
+    {
+      "id": "cleveland-150389-negative",
+      "path": "negative/cma-150389-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd81e332abe8469d5593e",
+          "name": "Aernout van Beeftingh (1759-1831) with his first Wife Jacoba Maria Boon (1760-1800) and their Children",
+          "score": 0.696
+        },
+        {
+          "object_id": "6a9dd80f332abe8469d55912",
+          "name": "Portrait of Govert van Slingelandt (1623-1690), with his First Wife Christina van Beveren (1632-1656) and their Two Children",
+          "score": 0.664
+        },
+        {
+          "object_id": "6a9dd81c332abe8469d5593c",
+          "name": "Self-Portrait",
+          "score": 0.654
+        }
+      ]
+    },
+    {
+      "id": "cleveland-148758-negative",
+      "path": "negative/cma-148758-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6aaad084dd73e04d9614e9e7",
+          "name": "The Fall of Man",
+          "score": 0.706
+        },
+        {
+          "object_id": "6a9dd849332abe8469d55979",
+          "name": "Venus and Adonis",
+          "score": 0.656
+        },
+        {
+          "object_id": "6a9dd81c332abe8469d5593c",
+          "name": "Self-Portrait",
+          "score": 0.648
+        }
+      ]
+    },
+    {
+      "id": "cleveland-98268-negative",
+      "path": "negative/cma-98268-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd823332abe8469d55946",
+          "name": "Portrait of Willem III (1650-1702), Prince of Orange and since 1689, King of England",
+          "score": 0.632
+        },
+        {
+          "object_id": "6a9dd813332abe8469d5591b",
+          "name": "Portrait of Anne Fernely. Wife of Sir Thomas Gresham",
+          "score": 0.581
+        },
+        {
+          "object_id": "6a9dd825332abe8469d5594a",
+          "name": "William III (1650-1702), Prince of Orange and since 1689, King of England",
+          "score": 0.577
+        }
+      ]
+    },
+    {
+      "id": "cleveland-122351-negative",
+      "path": "negative/cma-122351-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd800332abe8469d558fd",
+          "name": "Landscape with Stone Bridge",
+          "score": 0.654
+        },
+        {
+          "object_id": "6a9dd82e332abe8469d55955",
+          "name": "View of Canton, China",
+          "score": 0.593
+        },
+        {
+          "object_id": "6a9dd821332abe8469d55943",
+          "name": "Winter Landscape near a Town with Bare Trees",
+          "score": 0.576
+        }
+      ]
+    },
+    {
+      "id": "cleveland-126769-negative",
+      "path": "negative/cma-126769-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd80e332abe8469d55911",
+          "name": "The Meeting of Granida and Daifilo",
+          "score": 0.457
+        }
+      ]
+    },
+    {
+      "id": "cleveland-149410-negative",
+      "path": "negative/cma-149410-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6aaad084dd73e04d9614e9e7",
+          "name": "The Fall of Man",
+          "score": 0.542
+        },
+        {
+          "object_id": "6a9dd849332abe8469d55979",
+          "name": "Venus and Adonis",
+          "score": 0.479
+        },
+        {
+          "object_id": "6a9dd80e332abe8469d55911",
+          "name": "The Meeting of Granida and Daifilo",
+          "score": 0.453
+        }
+      ]
+    },
+    {
+      "id": "cleveland-135661-negative",
+      "path": "negative/cma-135661-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd849332abe8469d55979",
+          "name": "Venus and Adonis",
+          "score": 0.639
+        },
+        {
+          "object_id": "6a9dd80e332abe8469d55911",
+          "name": "The Meeting of Granida and Daifilo",
+          "score": 0.614
+        },
+        {
+          "object_id": "6a9dd80f332abe8469d55912",
+          "name": "Portrait of Govert van Slingelandt (1623-1690), with his First Wife Christina van Beveren (1632-1656) and their Two Children",
+          "score": 0.573
+        }
+      ]
+    },
+    {
+      "id": "cleveland-135214-negative",
+      "path": "negative/cma-135214-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd80e332abe8469d55911",
+          "name": "The Meeting of Granida and Daifilo",
+          "score": 0.593
+        },
+        {
+          "object_id": "6a9dd81c332abe8469d5593c",
+          "name": "Self-Portrait",
+          "score": 0.582
+        },
+        {
+          "object_id": "6a9dd841332abe8469d5596a",
+          "name": "Dancing Couple",
+          "score": 0.568
+        }
+      ]
+    },
+    {
+      "id": "cleveland-97155-negative",
+      "path": "negative/cma-97155-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd813332abe8469d5591b",
+          "name": "Portrait of Anne Fernely. Wife of Sir Thomas Gresham",
+          "score": 0.766
+        },
+        {
+          "object_id": "6a9dd811332abe8469d55917",
+          "name": "Mooy-Aal and her Suitors",
+          "score": 0.713
+        },
+        {
+          "object_id": "6a9dd817332abe8469d55937",
+          "name": "Portrait of a Man, possibly Reijnier Pauw (1591-1676)",
+          "score": 0.704
+        }
+      ]
+    },
+    {
+      "id": "cleveland-134072-negative",
+      "path": "negative/cma-134072-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd800332abe8469d558fd",
+          "name": "Landscape with Stone Bridge",
+          "score": 0.608
+        },
+        {
+          "object_id": "6a9dd83e332abe8469d55967",
+          "name": "Vergezicht over de weiden bij ’s-Graveland",
+          "score": 0.59
+        },
+        {
+          "object_id": "6a9dd821332abe8469d55943",
+          "name": "Winter Landscape near a Town with Bare Trees",
+          "score": 0.563
+        }
+      ]
+    },
+    {
+      "id": "cleveland-136510-negative",
+      "path": "negative/cma-136510-painting.jpg",
+      "expected_object_id": null,
+      "status": "no_match",
+      "correct": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-155783-negative",
+      "path": "negative/cma-155783-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd841332abe8469d5596a",
+          "name": "Dancing Couple",
+          "score": 0.617
+        },
+        {
+          "object_id": "6a9dd842332abe8469d5596c",
+          "name": "Peasants in an Interior",
+          "score": 0.617
+        },
+        {
+          "object_id": "6aab0dbcdd73e04d96150a00",
+          "name": "Officers and other civic guardsmen of District II in Amsterdam, under the command of Captain Frans Banninck Cocq and Lieutenant Willem van Ruytenburch, known as ‘The Night Watch’",
+          "score": 0.605
+        }
+      ]
+    },
+    {
+      "id": "cleveland-125249-negative",
+      "path": "negative/cma-125249-painting.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd800332abe8469d558fd",
+          "name": "Landscape with Stone Bridge",
+          "score": 0.467
+        }
+      ]
+    },
+    {
+      "id": "cleveland-136911-negative",
+      "path": "negative/cma-136911-painting.jpg",
+      "expected_object_id": null,
+      "status": "no_match",
+      "correct": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-135539-negative",
+      "path": "negative/cma-135539-sculpture.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df6dd73e04d96150a1c",
+          "name": "Summer",
+          "score": 0.531
+        },
+        {
+          "object_id": "6aab0df3dd73e04d96150a1a",
+          "name": "Spring",
+          "score": 0.524
+        },
+        {
+          "object_id": "6aab0df5dd73e04d96150a1b",
+          "name": "Autumn",
+          "score": 0.523
+        }
+      ]
+    },
+    {
+      "id": "cleveland-111811-negative",
+      "path": "negative/cma-111811-sculpture.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6aa9a746dd73e04d96146161",
+          "name": "Shiva Nataraja",
+          "score": 0.912
+        }
+      ]
+    },
+    {
+      "id": "cleveland-135920-negative",
+      "path": "negative/cma-135920-sculpture.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd82c332abe8469d55953",
+          "name": "Portrait of Lysbeth van Duvenvoirde (?-1472)",
+          "score": 0.529
+        },
+        {
+          "object_id": "6a9dd825332abe8469d5594a",
+          "name": "William III (1650-1702), Prince of Orange and since 1689, King of England",
+          "score": 0.528
+        },
+        {
+          "object_id": "6a9dd823332abe8469d55946",
+          "name": "Portrait of Willem III (1650-1702), Prince of Orange and since 1689, King of England",
+          "score": 0.52
+        }
+      ]
+    },
+    {
+      "id": "cleveland-98823-negative",
+      "path": "negative/cma-98823-sculpture.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df2dd73e04d96150a19",
+          "name": "Retabel met Maria met kind tussen Hieronymus en Nicolaas van Myra",
+          "score": 0.47
+        }
+      ]
+    },
+    {
+      "id": "cleveland-135538-negative",
+      "path": "negative/cma-135538-sculpture.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df5dd73e04d96150a1b",
+          "name": "Autumn",
+          "score": 0.575
+        },
+        {
+          "object_id": "6aab0df6dd73e04d96150a1c",
+          "name": "Summer",
+          "score": 0.554
+        },
+        {
+          "object_id": "6aab0df3dd73e04d96150a1a",
+          "name": "Spring",
+          "score": 0.552
+        }
+      ]
+    },
+    {
+      "id": "cleveland-145412-negative",
+      "path": "negative/cma-145412-sculpture.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df5dd73e04d96150a1b",
+          "name": "Autumn",
+          "score": 0.563
+        },
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.527
+        },
+        {
+          "object_id": "6aab0df3dd73e04d96150a1a",
+          "name": "Spring",
+          "score": 0.511
+        }
+      ]
+    },
+    {
+      "id": "cleveland-119143-negative",
+      "path": "negative/cma-119143-sculpture.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df5dd73e04d96150a1b",
+          "name": "Autumn",
+          "score": 0.52
+        },
+        {
+          "object_id": "6aab0df3dd73e04d96150a1a",
+          "name": "Spring",
+          "score": 0.496
+        },
+        {
+          "object_id": "6aab0df6dd73e04d96150a1c",
+          "name": "Summer",
+          "score": 0.487
+        }
+      ]
+    },
+    {
+      "id": "cleveland-142560-negative",
+      "path": "negative/cma-142560-sculpture.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df8dd73e04d96150a1e",
+          "name": "Apollo",
+          "score": 0.578
+        },
+        {
+          "object_id": "6aab0df0dd73e04d96150a18",
+          "name": "Crucified Christ",
+          "score": 0.577
+        },
+        {
+          "object_id": "6aab0df6dd73e04d96150a1c",
+          "name": "Summer",
+          "score": 0.543
+        }
+      ]
+    },
+    {
+      "id": "cleveland-129799-negative",
+      "path": "negative/cma-129799-sculpture.jpg",
+      "expected_object_id": null,
+      "status": "no_match",
+      "correct": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-148021-negative",
+      "path": "negative/cma-148021-sculpture.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df0dd73e04d96150a18",
+          "name": "Crucified Christ",
+          "score": 0.559
+        },
+        {
+          "object_id": "6aa9a746dd73e04d96146161",
+          "name": "Shiva Nataraja",
+          "score": 0.473
+        }
+      ]
+    },
+    {
+      "id": "cleveland-119132-negative",
+      "path": "negative/cma-119132-sculpture.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df5dd73e04d96150a1b",
+          "name": "Autumn",
+          "score": 0.523
+        },
+        {
+          "object_id": "6aab0df2dd73e04d96150a19",
+          "name": "Retabel met Maria met kind tussen Hieronymus en Nicolaas van Myra",
+          "score": 0.518
+        },
+        {
+          "object_id": "6a9dd82c332abe8469d55953",
+          "name": "Portrait of Lysbeth van Duvenvoirde (?-1472)",
+          "score": 0.518
+        }
+      ]
+    },
+    {
+      "id": "cleveland-98627-negative",
+      "path": "negative/cma-98627-sculpture.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df0dd73e04d96150a18",
+          "name": "Crucified Christ",
+          "score": 0.526
+        },
+        {
+          "object_id": "6aaad084dd73e04d9614e9e7",
+          "name": "The Fall of Man",
+          "score": 0.493
+        }
+      ]
+    },
+    {
+      "id": "cleveland-127239-negative",
+      "path": "negative/cma-127239-sculpture.jpg",
+      "expected_object_id": null,
+      "status": "no_match",
+      "correct": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-145407-negative",
+      "path": "negative/cma-145407-sculpture.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6aa9a746dd73e04d96146161",
+          "name": "Shiva Nataraja",
+          "score": 0.534
+        },
+        {
+          "object_id": "6aab0df0dd73e04d96150a18",
+          "name": "Crucified Christ",
+          "score": 0.532
+        }
+      ]
+    },
+    {
+      "id": "cleveland-122979-negative",
+      "path": "negative/cma-122979-sculpture.jpg",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "correct": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd80c332abe8469d5590f",
+          "name": "Guardian figure",
+          "score": 0.461
+        }
+      ]
+    }
+  ]
+}

@@ -83,3 +83,9 @@ the canonical database or a guarantee that references remain active later.
 
 Keep any additional fixture photos independently captured and source-attributed.
 Do not add source/reference images as evaluation queries.
+
+## Current fixture audit
+
+The current `positive/jewish-bride-mortel.jpg` is 800x648 with SHA-256 `e17f477193f38b0a4176e0430fe9e32ec93bbd757f03853ac2710894ee7372cb`. It differs from the historical Flickr file described above. The depicted painting was visually checked, but attribution and capture independence remain unverified; `photos.json` labels it as a local diagnostic with `independent: false`.
+
+The test list now also includes the 50 Cleveland Museum negatives described in `negative/manifest.json`.
