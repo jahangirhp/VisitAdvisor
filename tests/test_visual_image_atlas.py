@@ -2,6 +2,7 @@
 
 RUN_VISUAL_IMAGE_CHECK=1 .venv/bin/pytest -s tests/test_visual_image_atlas.py
 Set VISUAL_IMAGE_STRICT=1 as well to fail on wrong rankings or false candidates.
+Set VISUAL_IMAGE_ONLY_NEW_POSITIVES=1 to run just the 50-photo positive batch.
 """
 
 import asyncio
@@ -72,14 +73,27 @@ def recognize_with_atlas(image: bytes, location_id: str) -> dict:
 
 
 def test_atlas_photo_report():
+    positives_only = os.environ.get("VISUAL_IMAGE_ONLY_NEW_POSITIVES") == "1"
+    if positives_only:
+        batch_ids = {
+            image["photo_id"]
+            for image in json.loads((ROOT / "positive" / "manifest.json").read_text())[
+                "images"
+            ]
+        }
+        selected = [photo for photo in PHOTOS if photo.id in batch_ids]
+        assert len(selected) == len(batch_ids) == 50
+        assert all(photo.in_database for photo in selected)
+    else:
+        selected = PHOTOS
     correct = 0
     positive_correct = 0
     positive_top3 = 0
     negative_correct = 0
     wrong = []
-    positives = sum(photo.in_database for photo in PHOTOS)
-    negatives = len(PHOTOS) - positives
-    for photo in PHOTOS:
+    positives = sum(photo.in_database for photo in selected)
+    negatives = len(selected) - positives
+    for photo in selected:
         image, raw_hash = load_photo(ROOT, photo.path)
         assert raw_hash == photo.sha256, f"Changed test image: {photo.id}"
         result = recognize_with_atlas(image, photo.location_id)
@@ -92,7 +106,8 @@ def test_atlas_photo_report():
             )
             for candidate in result["candidates"]
         ]
-        print(f"{photo.id}: status={result['status']} candidates={candidates}")
+        if not positives_only:
+            print(f"{photo.id}: status={result['status']} candidates={candidates}")
         if photo.in_database:
             positive_top3 += photo.expected_object_id in [
                 candidate_id for candidate_id, _, _ in candidates
@@ -115,12 +130,13 @@ def test_atlas_photo_report():
     def rate(count: int, total: int) -> str:
         return f"{count}/{total} ({count / total:.0%})" if total else "0/0 (n/a)"
 
-    print(f"Real photos tested: {len(PHOTOS)}")
-    print(f"Correct: {rate(correct, len(PHOTOS))}")
-    print(f"Wrong: {rate(len(wrong), len(PHOTOS))}")
+    print(f"Real photos tested: {len(selected)}")
+    print(f"Correct: {rate(correct, len(selected))}")
+    print(f"Wrong: {rate(len(wrong), len(selected))}")
     print(f"Covered objects top-1: {rate(positive_correct, positives)}")
     print(f"Covered objects top-3: {rate(positive_top3, positives)}")
-    print(f"Out-of-reference rejected: {rate(negative_correct, negatives)}")
+    if negatives:
+        print(f"Out-of-reference rejected: {rate(negative_correct, negatives)}")
     print("Wrong results:\n" + "\n".join(wrong) if wrong else "Wrong results: none")
     if os.environ.get("VISUAL_IMAGE_STRICT") == "1":
         assert not wrong, "Real-photo recognition results did not meet expectations"

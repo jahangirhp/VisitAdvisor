@@ -1,0 +1,3076 @@
+{
+  "run_at_utc": "2026-10-05T19:51:49.633460+00:00",
+  "pytest_passed": true,
+  "duration_seconds": 223.19,
+  "test": "RUN_VISUAL_IMAGE_CHECK=1 VISUAL_ENABLED=true .venv/bin/pytest -s -q tests/test_visual_image_atlas.py",
+  "system_under_test": "Atlas-backed /api/v1/recognition/image visual candidate preview; global embedding retrieval floor 0.45; automatic identification disabled",
+  "fixture_manifest_sha256": "112606a16a127f2ea60cb7f6c5c98da6684293fffcb363931d2a40d5b9f96de3",
+  "batch": {
+    "count": 50,
+    "top1_correct": 42,
+    "top1_rate": 0.84,
+    "top3_correct": 42,
+    "top3_rate": 0.84,
+    "no_candidate": 3,
+    "top1_wilson_95": [
+      0.7149,
+      0.9166
+    ],
+    "top3_wilson_95": [
+      0.7149,
+      0.9166
+    ]
+  },
+  "prior_positives": {
+    "count": 2,
+    "top1_correct": 2,
+    "top1_rate": 1.0,
+    "top3_correct": 2,
+    "top3_rate": 1.0,
+    "no_candidate": 0,
+    "top1_wilson_95": [
+      0.3424,
+      1
+    ],
+    "top3_wilson_95": [
+      0.3424,
+      1
+    ]
+  },
+  "negatives": {
+    "count": 53,
+    "rejected": 10,
+    "false_candidates": 43
+  },
+  "by_category": {
+    "full": {
+      "count": 33,
+      "top1_correct": 31,
+      "top1_rate": 0.9394,
+      "top3_correct": 31,
+      "top3_rate": 0.9394,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.8039,
+        0.9832
+      ],
+      "top3_wilson_95": [
+        0.8039,
+        0.9832
+      ]
+    },
+    "partial": {
+      "count": 17,
+      "top1_correct": 11,
+      "top1_rate": 0.6471,
+      "top3_correct": 11,
+      "top3_rate": 0.6471,
+      "no_candidate": 3,
+      "top1_wilson_95": [
+        0.413,
+        0.8269
+      ],
+      "top3_wilson_95": [
+        0.413,
+        0.8269
+      ]
+    }
+  },
+  "by_similarity_group": {
+    "civic-group-portraits": {
+      "count": 12,
+      "top1_correct": 8,
+      "top1_rate": 0.6667,
+      "top3_correct": 8,
+      "top3_rate": 0.6667,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.3906,
+        0.8619
+      ],
+      "top3_wilson_95": [
+        0.3906,
+        0.8619
+      ]
+    },
+    "domestic-interiors": {
+      "count": 4,
+      "top1_correct": 4,
+      "top1_rate": 1.0,
+      "top3_correct": 4,
+      "top3_rate": 1.0,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.5101,
+        1
+      ],
+      "top3_wilson_95": [
+        0.5101,
+        1
+      ]
+    },
+    "landscapes-and-seascapes": {
+      "count": 13,
+      "top1_correct": 13,
+      "top1_rate": 1.0,
+      "top3_correct": 13,
+      "top3_rate": 1.0,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.7719,
+        1.0
+      ],
+      "top3_wilson_95": [
+        0.7719,
+        1.0
+      ]
+    },
+    "other-paintings": {
+      "count": 18,
+      "top1_correct": 14,
+      "top1_rate": 0.7778,
+      "top3_correct": 14,
+      "top3_rate": 0.7778,
+      "no_candidate": 3,
+      "top1_wilson_95": [
+        0.5479,
+        0.91
+      ],
+      "top3_wilson_95": [
+        0.5479,
+        0.91
+      ]
+    },
+    "portraits": {
+      "count": 3,
+      "top1_correct": 3,
+      "top1_rate": 1.0,
+      "top3_correct": 3,
+      "top3_rate": 1.0,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.4385,
+        1
+      ],
+      "top3_wilson_95": [
+        0.4385,
+        1
+      ]
+    }
+  },
+  "by_object": {
+    "6a9dd4126d52c3bc396586a0": {
+      "count": 1,
+      "top1_correct": 1,
+      "top1_rate": 1.0,
+      "top3_correct": 1,
+      "top3_rate": 1.0,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.2065,
+        1
+      ],
+      "top3_wilson_95": [
+        0.2065,
+        1
+      ]
+    },
+    "6a9dd4136d52c3bc396586a1": {
+      "count": 1,
+      "top1_correct": 1,
+      "top1_rate": 1.0,
+      "top3_correct": 1,
+      "top3_rate": 1.0,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.2065,
+        1
+      ],
+      "top3_wilson_95": [
+        0.2065,
+        1
+      ]
+    },
+    "6a9dd7f8332abe8469d558f5": {
+      "count": 5,
+      "top1_correct": 5,
+      "top1_rate": 1.0,
+      "top3_correct": 5,
+      "top3_rate": 1.0,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.5655,
+        1
+      ],
+      "top3_wilson_95": [
+        0.5655,
+        1
+      ]
+    },
+    "6a9dd7fb332abe8469d558f8": {
+      "count": 1,
+      "top1_correct": 1,
+      "top1_rate": 1.0,
+      "top3_correct": 1,
+      "top3_rate": 1.0,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.2065,
+        1
+      ],
+      "top3_wilson_95": [
+        0.2065,
+        1
+      ]
+    },
+    "6a9dd812332abe8469d55919": {
+      "count": 1,
+      "top1_correct": 1,
+      "top1_rate": 1.0,
+      "top3_correct": 1,
+      "top3_rate": 1.0,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.2065,
+        1
+      ],
+      "top3_wilson_95": [
+        0.2065,
+        1
+      ]
+    },
+    "6a9dd817332abe8469d55937": {
+      "count": 1,
+      "top1_correct": 1,
+      "top1_rate": 1.0,
+      "top3_correct": 1,
+      "top3_rate": 1.0,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.2065,
+        1
+      ],
+      "top3_wilson_95": [
+        0.2065,
+        1
+      ]
+    },
+    "6a9dd818332abe8469d55938": {
+      "count": 1,
+      "top1_correct": 1,
+      "top1_rate": 1.0,
+      "top3_correct": 1,
+      "top3_rate": 1.0,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.2065,
+        1
+      ],
+      "top3_wilson_95": [
+        0.2065,
+        1
+      ]
+    },
+    "6a9dd820332abe8469d55942": {
+      "count": 1,
+      "top1_correct": 1,
+      "top1_rate": 1.0,
+      "top3_correct": 1,
+      "top3_rate": 1.0,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.2065,
+        1
+      ],
+      "top3_wilson_95": [
+        0.2065,
+        1
+      ]
+    },
+    "6a9dd839332abe8469d55962": {
+      "count": 1,
+      "top1_correct": 1,
+      "top1_rate": 1.0,
+      "top3_correct": 1,
+      "top3_rate": 1.0,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.2065,
+        1
+      ],
+      "top3_wilson_95": [
+        0.2065,
+        1
+      ]
+    },
+    "6a9dd841332abe8469d5596a": {
+      "count": 1,
+      "top1_correct": 1,
+      "top1_rate": 1.0,
+      "top3_correct": 1,
+      "top3_rate": 1.0,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.2065,
+        1
+      ],
+      "top3_wilson_95": [
+        0.2065,
+        1
+      ]
+    },
+    "6aa9a743dd73e04d9614615c": {
+      "count": 1,
+      "top1_correct": 1,
+      "top1_rate": 1.0,
+      "top3_correct": 1,
+      "top3_rate": 1.0,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.2065,
+        1
+      ],
+      "top3_wilson_95": [
+        0.2065,
+        1
+      ]
+    },
+    "6aa9a744dd73e04d9614615e": {
+      "count": 1,
+      "top1_correct": 1,
+      "top1_rate": 1.0,
+      "top3_correct": 1,
+      "top3_rate": 1.0,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.2065,
+        1
+      ],
+      "top3_wilson_95": [
+        0.2065,
+        1
+      ]
+    },
+    "6aa9a745dd73e04d96146160": {
+      "count": 4,
+      "top1_correct": 3,
+      "top1_rate": 0.75,
+      "top3_correct": 3,
+      "top3_rate": 0.75,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.3006,
+        0.9544
+      ],
+      "top3_wilson_95": [
+        0.3006,
+        0.9544
+      ]
+    },
+    "6aa9a747dd73e04d96146163": {
+      "count": 5,
+      "top1_correct": 5,
+      "top1_rate": 1.0,
+      "top3_correct": 5,
+      "top3_rate": 1.0,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.5655,
+        1
+      ],
+      "top3_wilson_95": [
+        0.5655,
+        1
+      ]
+    },
+    "6aaad084dd73e04d9614e9e7": {
+      "count": 4,
+      "top1_correct": 3,
+      "top1_rate": 0.75,
+      "top3_correct": 3,
+      "top3_rate": 0.75,
+      "no_candidate": 1,
+      "top1_wilson_95": [
+        0.3006,
+        0.9544
+      ],
+      "top3_wilson_95": [
+        0.3006,
+        0.9544
+      ]
+    },
+    "6aaad084dd73e04d9614e9e8": {
+      "count": 5,
+      "top1_correct": 5,
+      "top1_rate": 1.0,
+      "top3_correct": 5,
+      "top3_rate": 1.0,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.5655,
+        1
+      ],
+      "top3_wilson_95": [
+        0.5655,
+        1
+      ]
+    },
+    "6aab0dbcdd73e04d96150a00": {
+      "count": 4,
+      "top1_correct": 3,
+      "top1_rate": 0.75,
+      "top3_correct": 3,
+      "top3_rate": 0.75,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.3006,
+        0.9544
+      ],
+      "top3_wilson_95": [
+        0.3006,
+        0.9544
+      ]
+    },
+    "6aab0decdd73e04d96150a13": {
+      "count": 4,
+      "top1_correct": 2,
+      "top1_rate": 0.5,
+      "top3_correct": 2,
+      "top3_rate": 0.5,
+      "no_candidate": 0,
+      "top1_wilson_95": [
+        0.15,
+        0.85
+      ],
+      "top3_wilson_95": [
+        0.15,
+        0.85
+      ]
+    },
+    "6aab0deedd73e04d96150a15": {
+      "count": 8,
+      "top1_correct": 5,
+      "top1_rate": 0.625,
+      "top3_correct": 5,
+      "top3_rate": 0.625,
+      "no_candidate": 2,
+      "top1_wilson_95": [
+        0.3057,
+        0.8632
+      ],
+      "top3_wilson_95": [
+        0.3057,
+        0.8632
+      ]
+    }
+  },
+  "related_top1_confusions": 0,
+  "related_top1_confusion_ids": [],
+  "limitations": [
+    "41 of the 50 positive photographs appeared in prior corpora; this is regression evidence, not a blind holdout.",
+    "Similarity groups are broad subject groups, not the five preselected matched pairs required by docs/19.",
+    "Some photographs share one uploader and capture day; rates treat files as rows and are not independent-session estimates.",
+    "The tested visual API is the global embedding preview, not the server camera JPEG/geometry/tracker path.",
+    "Candidate presence is not an automatic identification. A negative with any candidate is a retrieval false candidate, not necessarily a displayed false suggestion.",
+    "Scores are rounded to three decimals by the existing diagnostic test."
+  ],
+  "results": [
+    {
+      "id": "flickr-3085955962-milkmaid-full",
+      "path": "positive/milkmaid.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": "6a9dd4126d52c3bc396586a0",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd4126d52c3bc396586a0",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd4126d52c3bc396586a0",
+          "name": "The Milkmaid",
+          "score_rounded_3dp": 0.814
+        },
+        {
+          "object_id": "6a9dd859332abe8469d55993",
+          "name": "Portrait of Jan Six, Poet and Burgomaster of Amsterdam",
+          "score_rounded_3dp": 0.569
+        },
+        {
+          "object_id": "6a9dd852332abe8469d55988",
+          "name": "Portrait of Adriaen Pietersz van de Venne, Painter and Poet",
+          "score_rounded_3dp": 0.559
+        }
+      ]
+    },
+    {
+      "id": "local-jewish-bride-diagnostic",
+      "path": "positive/jewish-bride-mortel.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": "6a9dd4136d52c3bc396586a1",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd4136d52c3bc396586a1",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd4136d52c3bc396586a1",
+          "name": "The Jewish Bride",
+          "score_rounded_3dp": 0.912
+        },
+        {
+          "object_id": "6a9dd804332abe8469d55902",
+          "name": "De Aanbidding van de koningen",
+          "score_rounded_3dp": 0.79
+        },
+        {
+          "object_id": "6a9dd811332abe8469d55917",
+          "name": "Mooy-Aal and her Suitors",
+          "score_rounded_3dp": 0.748
+        }
+      ]
+    },
+    {
+      "id": "nasa-pia25172-mars-landscape",
+      "path": "negative/mars-perseverance.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "no_match",
+      "top1_object_id": null,
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-1951.355-de-hooch-family-music",
+      "path": "negative/de-hooch-family-music.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd81e332abe8469d5593e",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd81e332abe8469d5593e",
+          "name": "Aernout van Beeftingh (1759-1831) with his first Wife Jacoba Maria Boon (1760-1800) and their Children",
+          "score_rounded_3dp": 0.724
+        },
+        {
+          "object_id": "6a9dd81b332abe8469d5593b",
+          "name": "Thomas Hees and his Servant Thomas and Nephews Jan and Andries Hees",
+          "score_rounded_3dp": 0.702
+        },
+        {
+          "object_id": "6aa9a744dd73e04d9614615e",
+          "name": "The merry family",
+          "score_rounded_3dp": 0.659
+        }
+      ]
+    },
+    {
+      "id": "cleveland-1962.292-kalf-wineglass-fruit",
+      "path": "negative/kalf-wineglass-fruit.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6aab0deedd73e04d96150a15",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6aab0deedd73e04d96150a15",
+          "name": "Vanitas stilleven",
+          "score_rounded_3dp": 0.477
+        }
+      ]
+    },
+    {
+      "id": "cleveland-94979-negative",
+      "path": "negative/cma-94979-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd806332abe8469d55906",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd806332abe8469d55906",
+          "name": "A Young Woman Warming her Hands over a Brazier, Allegory of Winter",
+          "score_rounded_3dp": 0.822
+        },
+        {
+          "object_id": "6a9dd802332abe8469d558ff",
+          "name": "Portret van Paulus Joseph Gabriël, beeldhouwer",
+          "score_rounded_3dp": 0.76
+        },
+        {
+          "object_id": "6a9dd81d332abe8469d5593d",
+          "name": "Portrait of Johannes Hudde (1628-1704), burgomaster of Amsterdam",
+          "score_rounded_3dp": 0.76
+        }
+      ]
+    },
+    {
+      "id": "cleveland-102578-negative",
+      "path": "negative/cma-102578-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd81d332abe8469d5593d",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd81d332abe8469d5593d",
+          "name": "Portrait of Johannes Hudde (1628-1704), burgomaster of Amsterdam",
+          "score_rounded_3dp": 0.598
+        },
+        {
+          "object_id": "6a9dd813332abe8469d5591b",
+          "name": "Portrait of Anne Fernely. Wife of Sir Thomas Gresham",
+          "score_rounded_3dp": 0.589
+        },
+        {
+          "object_id": "6a9dd81b332abe8469d5593b",
+          "name": "Thomas Hees and his Servant Thomas and Nephews Jan and Andries Hees",
+          "score_rounded_3dp": 0.584
+        }
+      ]
+    },
+    {
+      "id": "cleveland-92937-negative",
+      "path": "negative/cma-92937-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6aaad084dd73e04d9614e9e7",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6aaad084dd73e04d9614e9e7",
+          "name": "The Fall of Man",
+          "score_rounded_3dp": 0.458
+        }
+      ]
+    },
+    {
+      "id": "cleveland-151904-negative",
+      "path": "negative/cma-151904-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "no_match",
+      "top1_object_id": null,
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-110180-negative",
+      "path": "negative/cma-110180-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd810332abe8469d55913",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd810332abe8469d55913",
+          "name": "The Meeting of Jacob and Rachel",
+          "score_rounded_3dp": 0.559
+        },
+        {
+          "object_id": "6a9dd80e332abe8469d55911",
+          "name": "The Meeting of Granida and Daifilo",
+          "score_rounded_3dp": 0.552
+        },
+        {
+          "object_id": "6a9dd807332abe8469d55907",
+          "name": "Fragment van een muurschildering",
+          "score_rounded_3dp": 0.537
+        }
+      ]
+    },
+    {
+      "id": "cleveland-137259-negative",
+      "path": "negative/cma-137259-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd837332abe8469d55960",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd837332abe8469d55960",
+          "name": "Portret van Jacob de Witt (1589-1674)",
+          "score_rounded_3dp": 0.763
+        },
+        {
+          "object_id": "6a9dd838332abe8469d55961",
+          "name": "Portrait of Anna van den Corput (1599-1645). Wife of Jacob de Witt",
+          "score_rounded_3dp": 0.736
+        },
+        {
+          "object_id": "6a9dd816332abe8469d55920",
+          "name": "A Shepherdess, known as ‘The beautiful Shepherdess’",
+          "score_rounded_3dp": 0.696
+        }
+      ]
+    },
+    {
+      "id": "cleveland-141639-negative",
+      "path": "negative/cma-141639-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "no_match",
+      "top1_object_id": null,
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-149112-negative",
+      "path": "negative/cma-149112-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "no_match",
+      "top1_object_id": null,
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-135299-negative",
+      "path": "negative/cma-135299-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd837332abe8469d55960",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd837332abe8469d55960",
+          "name": "Portret van Jacob de Witt (1589-1674)",
+          "score_rounded_3dp": 0.581
+        },
+        {
+          "object_id": "6a9dd823332abe8469d55946",
+          "name": "Portrait of Willem III (1650-1702), Prince of Orange and since 1689, King of England",
+          "score_rounded_3dp": 0.58
+        },
+        {
+          "object_id": "6a9dd84c332abe8469d5597b",
+          "name": "Portrait of Alexander Morus, Professor at Amsterdam",
+          "score_rounded_3dp": 0.576
+        }
+      ]
+    },
+    {
+      "id": "cleveland-93014-negative",
+      "path": "negative/cma-93014-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "no_match",
+      "top1_object_id": null,
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-135382-negative",
+      "path": "negative/cma-135382-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd845332abe8469d55974",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd845332abe8469d55974",
+          "name": "The Painter’s Studio",
+          "score_rounded_3dp": 0.49
+        },
+        {
+          "object_id": "6a9dd841332abe8469d5596a",
+          "name": "Dancing Couple",
+          "score_rounded_3dp": 0.451
+        }
+      ]
+    },
+    {
+      "id": "cleveland-140161-negative",
+      "path": "negative/cma-140161-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6aa9a745dd73e04d96146160",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6aa9a745dd73e04d96146160",
+          "name": "The Sampling Officials of the Amsterdam Drapers’ Guild, known as ‘The Syndics’",
+          "score_rounded_3dp": 0.451
+        }
+      ]
+    },
+    {
+      "id": "cleveland-125104-negative",
+      "path": "negative/cma-125104-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd810332abe8469d55913",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd810332abe8469d55913",
+          "name": "The Meeting of Jacob and Rachel",
+          "score_rounded_3dp": 0.555
+        },
+        {
+          "object_id": "6a9dd80e332abe8469d55911",
+          "name": "The Meeting of Granida and Daifilo",
+          "score_rounded_3dp": 0.539
+        },
+        {
+          "object_id": "6a9dd841332abe8469d5596a",
+          "name": "Dancing Couple",
+          "score_rounded_3dp": 0.53
+        }
+      ]
+    },
+    {
+      "id": "cleveland-138464-negative",
+      "path": "negative/cma-138464-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd81c332abe8469d5593c",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd81c332abe8469d5593c",
+          "name": "Self-Portrait",
+          "score_rounded_3dp": 0.695
+        },
+        {
+          "object_id": "6a9dd81e332abe8469d5593e",
+          "name": "Aernout van Beeftingh (1759-1831) with his first Wife Jacoba Maria Boon (1760-1800) and their Children",
+          "score_rounded_3dp": 0.67
+        },
+        {
+          "object_id": "6a9dd849332abe8469d55979",
+          "name": "Venus and Adonis",
+          "score_rounded_3dp": 0.664
+        }
+      ]
+    },
+    {
+      "id": "cleveland-127571-negative",
+      "path": "negative/cma-127571-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd813332abe8469d5591b",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd813332abe8469d5591b",
+          "name": "Portrait of Anne Fernely. Wife of Sir Thomas Gresham",
+          "score_rounded_3dp": 0.684
+        },
+        {
+          "object_id": "6a9dd811332abe8469d55917",
+          "name": "Mooy-Aal and her Suitors",
+          "score_rounded_3dp": 0.667
+        },
+        {
+          "object_id": "6a9dd802332abe8469d558ff",
+          "name": "Portret van Paulus Joseph Gabriël, beeldhouwer",
+          "score_rounded_3dp": 0.645
+        }
+      ]
+    },
+    {
+      "id": "cleveland-109245-negative",
+      "path": "negative/cma-109245-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd84e332abe8469d55981",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd84e332abe8469d55981",
+          "name": "Portrait of Matthijs Gansneb, called Tengnagel, Poet in Amsterdam",
+          "score_rounded_3dp": 0.681
+        },
+        {
+          "object_id": "6a9dd84d332abe8469d5597d",
+          "name": "Portrait of Balthasar Bekker, Clergyman and Man of Letters in Amsterdam",
+          "score_rounded_3dp": 0.678
+        },
+        {
+          "object_id": "6a9dd858332abe8469d55992",
+          "name": "Portrait of Andries Pels, Dramatic Poet in Amsterdam",
+          "score_rounded_3dp": 0.677
+        }
+      ]
+    },
+    {
+      "id": "cleveland-160885-negative",
+      "path": "negative/cma-160885-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd817332abe8469d55937",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd817332abe8469d55937",
+          "name": "Portrait of a Man, possibly Reijnier Pauw (1591-1676)",
+          "score_rounded_3dp": 0.734
+        },
+        {
+          "object_id": "6a9dd813332abe8469d5591b",
+          "name": "Portrait of Anne Fernely. Wife of Sir Thomas Gresham",
+          "score_rounded_3dp": 0.731
+        },
+        {
+          "object_id": "6a9dd838332abe8469d55961",
+          "name": "Portrait of Anna van den Corput (1599-1645). Wife of Jacob de Witt",
+          "score_rounded_3dp": 0.703
+        }
+      ]
+    },
+    {
+      "id": "cleveland-140408-negative",
+      "path": "negative/cma-140408-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "no_match",
+      "top1_object_id": null,
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-117032-negative",
+      "path": "negative/cma-117032-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd80e332abe8469d55911",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd80e332abe8469d55911",
+          "name": "The Meeting of Granida and Daifilo",
+          "score_rounded_3dp": 0.753
+        },
+        {
+          "object_id": "6a9dd849332abe8469d55979",
+          "name": "Venus and Adonis",
+          "score_rounded_3dp": 0.722
+        },
+        {
+          "object_id": "6a9dd80f332abe8469d55912",
+          "name": "Portrait of Govert van Slingelandt (1623-1690), with his First Wife Christina van Beveren (1632-1656) and their Two Children",
+          "score_rounded_3dp": 0.716
+        }
+      ]
+    },
+    {
+      "id": "cleveland-135428-negative",
+      "path": "negative/cma-135428-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd7f8332abe8469d558f5",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd7f8332abe8469d558f5",
+          "name": "Misty Sea",
+          "score_rounded_3dp": 0.59
+        },
+        {
+          "object_id": "6a9dd810332abe8469d55913",
+          "name": "The Meeting of Jacob and Rachel",
+          "score_rounded_3dp": 0.552
+        },
+        {
+          "object_id": "6a9dd847332abe8469d55976",
+          "name": "Country inn with a horse at the trough",
+          "score_rounded_3dp": 0.544
+        }
+      ]
+    },
+    {
+      "id": "cleveland-131819-negative",
+      "path": "negative/cma-131819-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd82b332abe8469d55951",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd82b332abe8469d55951",
+          "name": "Portrait of a Boy, possibly Louis of Nassau, later Lord of Beverweerd, De Leck, Odijk and Lekkerkerk, Illegitimate Son of Maurice, Prince of Orange, and Margaretha van Mechelen",
+          "score_rounded_3dp": 0.767
+        },
+        {
+          "object_id": "6a9dd81f332abe8469d55941",
+          "name": "Portrait of a Couple and Four Children",
+          "score_rounded_3dp": 0.751
+        },
+        {
+          "object_id": "6a9dd4136d52c3bc396586a1",
+          "name": "The Jewish Bride",
+          "score_rounded_3dp": 0.745
+        }
+      ]
+    },
+    {
+      "id": "cleveland-150389-negative",
+      "path": "negative/cma-150389-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd81e332abe8469d5593e",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd81e332abe8469d5593e",
+          "name": "Aernout van Beeftingh (1759-1831) with his first Wife Jacoba Maria Boon (1760-1800) and their Children",
+          "score_rounded_3dp": 0.696
+        },
+        {
+          "object_id": "6a9dd80f332abe8469d55912",
+          "name": "Portrait of Govert van Slingelandt (1623-1690), with his First Wife Christina van Beveren (1632-1656) and their Two Children",
+          "score_rounded_3dp": 0.664
+        },
+        {
+          "object_id": "6a9dd81c332abe8469d5593c",
+          "name": "Self-Portrait",
+          "score_rounded_3dp": 0.654
+        }
+      ]
+    },
+    {
+      "id": "cleveland-148758-negative",
+      "path": "negative/cma-148758-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6aaad084dd73e04d9614e9e7",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6aaad084dd73e04d9614e9e7",
+          "name": "The Fall of Man",
+          "score_rounded_3dp": 0.706
+        },
+        {
+          "object_id": "6a9dd849332abe8469d55979",
+          "name": "Venus and Adonis",
+          "score_rounded_3dp": 0.656
+        },
+        {
+          "object_id": "6a9dd81c332abe8469d5593c",
+          "name": "Self-Portrait",
+          "score_rounded_3dp": 0.648
+        }
+      ]
+    },
+    {
+      "id": "cleveland-98268-negative",
+      "path": "negative/cma-98268-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd823332abe8469d55946",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd823332abe8469d55946",
+          "name": "Portrait of Willem III (1650-1702), Prince of Orange and since 1689, King of England",
+          "score_rounded_3dp": 0.632
+        },
+        {
+          "object_id": "6a9dd813332abe8469d5591b",
+          "name": "Portrait of Anne Fernely. Wife of Sir Thomas Gresham",
+          "score_rounded_3dp": 0.581
+        },
+        {
+          "object_id": "6a9dd825332abe8469d5594a",
+          "name": "William III (1650-1702), Prince of Orange and since 1689, King of England",
+          "score_rounded_3dp": 0.577
+        }
+      ]
+    },
+    {
+      "id": "cleveland-122351-negative",
+      "path": "negative/cma-122351-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd800332abe8469d558fd",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd800332abe8469d558fd",
+          "name": "Landscape with Stone Bridge",
+          "score_rounded_3dp": 0.654
+        },
+        {
+          "object_id": "6a9dd82e332abe8469d55955",
+          "name": "View of Canton, China",
+          "score_rounded_3dp": 0.593
+        },
+        {
+          "object_id": "6a9dd821332abe8469d55943",
+          "name": "Winter Landscape near a Town with Bare Trees",
+          "score_rounded_3dp": 0.576
+        }
+      ]
+    },
+    {
+      "id": "cleveland-126769-negative",
+      "path": "negative/cma-126769-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd80e332abe8469d55911",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd80e332abe8469d55911",
+          "name": "The Meeting of Granida and Daifilo",
+          "score_rounded_3dp": 0.457
+        }
+      ]
+    },
+    {
+      "id": "cleveland-149410-negative",
+      "path": "negative/cma-149410-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6aaad084dd73e04d9614e9e7",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6aaad084dd73e04d9614e9e7",
+          "name": "The Fall of Man",
+          "score_rounded_3dp": 0.542
+        },
+        {
+          "object_id": "6a9dd849332abe8469d55979",
+          "name": "Venus and Adonis",
+          "score_rounded_3dp": 0.479
+        },
+        {
+          "object_id": "6a9dd80e332abe8469d55911",
+          "name": "The Meeting of Granida and Daifilo",
+          "score_rounded_3dp": 0.453
+        }
+      ]
+    },
+    {
+      "id": "cleveland-135661-negative",
+      "path": "negative/cma-135661-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd849332abe8469d55979",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd849332abe8469d55979",
+          "name": "Venus and Adonis",
+          "score_rounded_3dp": 0.639
+        },
+        {
+          "object_id": "6a9dd80e332abe8469d55911",
+          "name": "The Meeting of Granida and Daifilo",
+          "score_rounded_3dp": 0.614
+        },
+        {
+          "object_id": "6a9dd80f332abe8469d55912",
+          "name": "Portrait of Govert van Slingelandt (1623-1690), with his First Wife Christina van Beveren (1632-1656) and their Two Children",
+          "score_rounded_3dp": 0.573
+        }
+      ]
+    },
+    {
+      "id": "cleveland-135214-negative",
+      "path": "negative/cma-135214-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd80e332abe8469d55911",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd80e332abe8469d55911",
+          "name": "The Meeting of Granida and Daifilo",
+          "score_rounded_3dp": 0.593
+        },
+        {
+          "object_id": "6a9dd81c332abe8469d5593c",
+          "name": "Self-Portrait",
+          "score_rounded_3dp": 0.582
+        },
+        {
+          "object_id": "6a9dd841332abe8469d5596a",
+          "name": "Dancing Couple",
+          "score_rounded_3dp": 0.568
+        }
+      ]
+    },
+    {
+      "id": "cleveland-97155-negative",
+      "path": "negative/cma-97155-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd813332abe8469d5591b",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd813332abe8469d5591b",
+          "name": "Portrait of Anne Fernely. Wife of Sir Thomas Gresham",
+          "score_rounded_3dp": 0.766
+        },
+        {
+          "object_id": "6a9dd811332abe8469d55917",
+          "name": "Mooy-Aal and her Suitors",
+          "score_rounded_3dp": 0.713
+        },
+        {
+          "object_id": "6a9dd817332abe8469d55937",
+          "name": "Portrait of a Man, possibly Reijnier Pauw (1591-1676)",
+          "score_rounded_3dp": 0.704
+        }
+      ]
+    },
+    {
+      "id": "cleveland-134072-negative",
+      "path": "negative/cma-134072-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd800332abe8469d558fd",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd800332abe8469d558fd",
+          "name": "Landscape with Stone Bridge",
+          "score_rounded_3dp": 0.608
+        },
+        {
+          "object_id": "6a9dd83e332abe8469d55967",
+          "name": "Vergezicht over de weiden bij ’s-Graveland",
+          "score_rounded_3dp": 0.59
+        },
+        {
+          "object_id": "6a9dd821332abe8469d55943",
+          "name": "Winter Landscape near a Town with Bare Trees",
+          "score_rounded_3dp": 0.563
+        }
+      ]
+    },
+    {
+      "id": "cleveland-136510-negative",
+      "path": "negative/cma-136510-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "no_match",
+      "top1_object_id": null,
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-155783-negative",
+      "path": "negative/cma-155783-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd841332abe8469d5596a",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd841332abe8469d5596a",
+          "name": "Dancing Couple",
+          "score_rounded_3dp": 0.617
+        },
+        {
+          "object_id": "6a9dd842332abe8469d5596c",
+          "name": "Peasants in an Interior",
+          "score_rounded_3dp": 0.617
+        },
+        {
+          "object_id": "6aab0dbcdd73e04d96150a00",
+          "name": "Officers and other civic guardsmen of District II in Amsterdam, under the command of Captain Frans Banninck Cocq and Lieutenant Willem van Ruytenburch, known as ‘The Night Watch’",
+          "score_rounded_3dp": 0.605
+        }
+      ]
+    },
+    {
+      "id": "cleveland-125249-negative",
+      "path": "negative/cma-125249-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd800332abe8469d558fd",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd800332abe8469d558fd",
+          "name": "Landscape with Stone Bridge",
+          "score_rounded_3dp": 0.467
+        }
+      ]
+    },
+    {
+      "id": "cleveland-136911-negative",
+      "path": "negative/cma-136911-painting.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "no_match",
+      "top1_object_id": null,
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-135539-negative",
+      "path": "negative/cma-135539-sculpture.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6aab0df6dd73e04d96150a1c",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df6dd73e04d96150a1c",
+          "name": "Summer",
+          "score_rounded_3dp": 0.531
+        },
+        {
+          "object_id": "6aab0df3dd73e04d96150a1a",
+          "name": "Spring",
+          "score_rounded_3dp": 0.524
+        },
+        {
+          "object_id": "6aab0df5dd73e04d96150a1b",
+          "name": "Autumn",
+          "score_rounded_3dp": 0.523
+        }
+      ]
+    },
+    {
+      "id": "cleveland-111811-negative",
+      "path": "negative/cma-111811-sculpture.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6aa9a746dd73e04d96146161",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6aa9a746dd73e04d96146161",
+          "name": "Shiva Nataraja",
+          "score_rounded_3dp": 0.912
+        }
+      ]
+    },
+    {
+      "id": "cleveland-135920-negative",
+      "path": "negative/cma-135920-sculpture.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd82c332abe8469d55953",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd82c332abe8469d55953",
+          "name": "Portrait of Lysbeth van Duvenvoirde (?-1472)",
+          "score_rounded_3dp": 0.529
+        },
+        {
+          "object_id": "6a9dd825332abe8469d5594a",
+          "name": "William III (1650-1702), Prince of Orange and since 1689, King of England",
+          "score_rounded_3dp": 0.528
+        },
+        {
+          "object_id": "6a9dd823332abe8469d55946",
+          "name": "Portrait of Willem III (1650-1702), Prince of Orange and since 1689, King of England",
+          "score_rounded_3dp": 0.52
+        }
+      ]
+    },
+    {
+      "id": "cleveland-98823-negative",
+      "path": "negative/cma-98823-sculpture.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6aab0df2dd73e04d96150a19",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df2dd73e04d96150a19",
+          "name": "Retabel met Maria met kind tussen Hieronymus en Nicolaas van Myra",
+          "score_rounded_3dp": 0.47
+        }
+      ]
+    },
+    {
+      "id": "cleveland-135538-negative",
+      "path": "negative/cma-135538-sculpture.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6aab0df5dd73e04d96150a1b",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df5dd73e04d96150a1b",
+          "name": "Autumn",
+          "score_rounded_3dp": 0.575
+        },
+        {
+          "object_id": "6aab0df6dd73e04d96150a1c",
+          "name": "Summer",
+          "score_rounded_3dp": 0.554
+        },
+        {
+          "object_id": "6aab0df3dd73e04d96150a1a",
+          "name": "Spring",
+          "score_rounded_3dp": 0.552
+        }
+      ]
+    },
+    {
+      "id": "cleveland-145412-negative",
+      "path": "negative/cma-145412-sculpture.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6aab0df5dd73e04d96150a1b",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df5dd73e04d96150a1b",
+          "name": "Autumn",
+          "score_rounded_3dp": 0.563
+        },
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score_rounded_3dp": 0.527
+        },
+        {
+          "object_id": "6aab0df3dd73e04d96150a1a",
+          "name": "Spring",
+          "score_rounded_3dp": 0.511
+        }
+      ]
+    },
+    {
+      "id": "cleveland-119143-negative",
+      "path": "negative/cma-119143-sculpture.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6aab0df5dd73e04d96150a1b",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df5dd73e04d96150a1b",
+          "name": "Autumn",
+          "score_rounded_3dp": 0.52
+        },
+        {
+          "object_id": "6aab0df3dd73e04d96150a1a",
+          "name": "Spring",
+          "score_rounded_3dp": 0.496
+        },
+        {
+          "object_id": "6aab0df6dd73e04d96150a1c",
+          "name": "Summer",
+          "score_rounded_3dp": 0.487
+        }
+      ]
+    },
+    {
+      "id": "cleveland-142560-negative",
+      "path": "negative/cma-142560-sculpture.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6aab0df8dd73e04d96150a1e",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df8dd73e04d96150a1e",
+          "name": "Apollo",
+          "score_rounded_3dp": 0.578
+        },
+        {
+          "object_id": "6aab0df0dd73e04d96150a18",
+          "name": "Crucified Christ",
+          "score_rounded_3dp": 0.577
+        },
+        {
+          "object_id": "6aab0df6dd73e04d96150a1c",
+          "name": "Summer",
+          "score_rounded_3dp": 0.543
+        }
+      ]
+    },
+    {
+      "id": "cleveland-129799-negative",
+      "path": "negative/cma-129799-sculpture.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "no_match",
+      "top1_object_id": null,
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-148021-negative",
+      "path": "negative/cma-148021-sculpture.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6aab0df0dd73e04d96150a18",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df0dd73e04d96150a18",
+          "name": "Crucified Christ",
+          "score_rounded_3dp": 0.559
+        },
+        {
+          "object_id": "6aa9a746dd73e04d96146161",
+          "name": "Shiva Nataraja",
+          "score_rounded_3dp": 0.473
+        }
+      ]
+    },
+    {
+      "id": "cleveland-119132-negative",
+      "path": "negative/cma-119132-sculpture.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6aab0df5dd73e04d96150a1b",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df5dd73e04d96150a1b",
+          "name": "Autumn",
+          "score_rounded_3dp": 0.523
+        },
+        {
+          "object_id": "6aab0df2dd73e04d96150a19",
+          "name": "Retabel met Maria met kind tussen Hieronymus en Nicolaas van Myra",
+          "score_rounded_3dp": 0.518
+        },
+        {
+          "object_id": "6a9dd82c332abe8469d55953",
+          "name": "Portrait of Lysbeth van Duvenvoirde (?-1472)",
+          "score_rounded_3dp": 0.518
+        }
+      ]
+    },
+    {
+      "id": "cleveland-98627-negative",
+      "path": "negative/cma-98627-sculpture.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6aab0df0dd73e04d96150a18",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6aab0df0dd73e04d96150a18",
+          "name": "Crucified Christ",
+          "score_rounded_3dp": 0.526
+        },
+        {
+          "object_id": "6aaad084dd73e04d9614e9e7",
+          "name": "The Fall of Man",
+          "score_rounded_3dp": 0.493
+        }
+      ]
+    },
+    {
+      "id": "cleveland-127239-negative",
+      "path": "negative/cma-127239-sculpture.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "no_match",
+      "top1_object_id": null,
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": true,
+      "candidates": []
+    },
+    {
+      "id": "cleveland-145407-negative",
+      "path": "negative/cma-145407-sculpture.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6aa9a746dd73e04d96146161",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6aa9a746dd73e04d96146161",
+          "name": "Shiva Nataraja",
+          "score_rounded_3dp": 0.534
+        },
+        {
+          "object_id": "6aab0df0dd73e04d96150a18",
+          "name": "Crucified Christ",
+          "score_rounded_3dp": 0.532
+        }
+      ]
+    },
+    {
+      "id": "cleveland-122979-negative",
+      "path": "negative/cma-122979-sculpture.jpg",
+      "batch": "existing_fixture",
+      "expected_object_id": null,
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd80c332abe8469d5590f",
+      "positive_top1_correct": null,
+      "positive_top3_correct": null,
+      "negative_rejected": false,
+      "candidates": [
+        {
+          "object_id": "6a9dd80c332abe8469d5590f",
+          "name": "Guardian figure",
+          "score_rounded_3dp": 0.461
+        }
+      ]
+    },
+    {
+      "id": "positive-batch-commons-43986065",
+      "path": "positive/6aa9a747dd73e04d96146163-commons-43986065.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aa9a747dd73e04d96146163",
+      "status": "ambiguous",
+      "top1_object_id": "6aa9a747dd73e04d96146163",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a747dd73e04d96146163",
+          "name": "The Threatened Swan; Interpreted later as an Allegory on Johan de Witt",
+          "score_rounded_3dp": 0.563
+        }
+      ],
+      "similarity_group": "other-paintings",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-43986158",
+      "path": "positive/6aa9a747dd73e04d96146163-commons-43986158.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aa9a747dd73e04d96146163",
+      "status": "ambiguous",
+      "top1_object_id": "6aa9a747dd73e04d96146163",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a747dd73e04d96146163",
+          "name": "The Threatened Swan; Interpreted later as an Allegory on Johan de Witt",
+          "score_rounded_3dp": 0.719
+        }
+      ],
+      "similarity_group": "other-paintings",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-64970240",
+      "path": "positive/6a9dd841332abe8469d5596a-commons-64970240.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6a9dd841332abe8469d5596a",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd841332abe8469d5596a",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd841332abe8469d5596a",
+          "name": "Dancing Couple",
+          "score_rounded_3dp": 0.625
+        },
+        {
+          "object_id": "6a9dd842332abe8469d5596c",
+          "name": "Peasants in an Interior",
+          "score_rounded_3dp": 0.574
+        },
+        {
+          "object_id": "6a9dd4126d52c3bc396586a0",
+          "name": "The Milkmaid",
+          "score_rounded_3dp": 0.563
+        }
+      ],
+      "similarity_group": "domestic-interiors",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-39789382",
+      "path": "positive/6aa9a744dd73e04d9614615e-commons-39789382.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aa9a744dd73e04d9614615e",
+      "status": "ambiguous",
+      "top1_object_id": "6aa9a744dd73e04d9614615e",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a744dd73e04d9614615e",
+          "name": "The merry family",
+          "score_rounded_3dp": 0.883
+        },
+        {
+          "object_id": "6a9dd842332abe8469d5596c",
+          "name": "Peasants in an Interior",
+          "score_rounded_3dp": 0.812
+        },
+        {
+          "object_id": "6a9dd844332abe8469d55971",
+          "name": "Travellers at Rest",
+          "score_rounded_3dp": 0.771
+        }
+      ],
+      "similarity_group": "domestic-interiors",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-39775117",
+      "path": "positive/6aa9a747dd73e04d96146163-commons-39775117.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aa9a747dd73e04d96146163",
+      "status": "ambiguous",
+      "top1_object_id": "6aa9a747dd73e04d96146163",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a747dd73e04d96146163",
+          "name": "The Threatened Swan; Interpreted later as an Allegory on Johan de Witt",
+          "score_rounded_3dp": 0.937
+        }
+      ],
+      "similarity_group": "other-paintings",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-137937335",
+      "path": "positive/6a9dd7f8332abe8469d558f5-commons-137937335.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6a9dd7f8332abe8469d558f5",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd7f8332abe8469d558f5",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd7f8332abe8469d558f5",
+          "name": "Misty Sea",
+          "score_rounded_3dp": 0.612
+        },
+        {
+          "object_id": "6a9dd83e332abe8469d55967",
+          "name": "Vergezicht over de weiden bij ’s-Graveland",
+          "score_rounded_3dp": 0.514
+        },
+        {
+          "object_id": "6a9dd82e332abe8469d55955",
+          "name": "View of Canton, China",
+          "score_rounded_3dp": 0.461
+        }
+      ],
+      "similarity_group": "landscapes-and-seascapes",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-29902991",
+      "path": "positive/6a9dd7fb332abe8469d558f8-commons-29902991.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6a9dd7fb332abe8469d558f8",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd7fb332abe8469d558f8",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd7fb332abe8469d558f8",
+          "name": "Pinken in de branding",
+          "score_rounded_3dp": 0.939
+        },
+        {
+          "object_id": "6a9dd829332abe8469d5594f",
+          "name": "The Naval Battle near Livorno, 14 March 1653",
+          "score_rounded_3dp": 0.73
+        },
+        {
+          "object_id": "6a9dd82e332abe8469d55955",
+          "name": "View of Canton, China",
+          "score_rounded_3dp": 0.573
+        }
+      ],
+      "similarity_group": "landscapes-and-seascapes",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-29948991",
+      "path": "positive/6a9dd818332abe8469d55938-commons-29948991.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6a9dd818332abe8469d55938",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd818332abe8469d55938",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd818332abe8469d55938",
+          "name": "Portrait of a woman",
+          "score_rounded_3dp": 0.866
+        },
+        {
+          "object_id": "6a9dd856332abe8469d5598e",
+          "name": "Jan Vos (1610-67), Amsterdam poet",
+          "score_rounded_3dp": 0.74
+        },
+        {
+          "object_id": "6a9dd84c332abe8469d5597b",
+          "name": "Portrait of Alexander Morus, Professor at Amsterdam",
+          "score_rounded_3dp": 0.702
+        }
+      ],
+      "similarity_group": "portraits",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-137438418",
+      "path": "positive/6a9dd7f8332abe8469d558f5-commons-137438418.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6a9dd7f8332abe8469d558f5",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd7f8332abe8469d558f5",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd7f8332abe8469d558f5",
+          "name": "Misty Sea",
+          "score_rounded_3dp": 0.67
+        },
+        {
+          "object_id": "6a9dd83e332abe8469d55967",
+          "name": "Vergezicht over de weiden bij ’s-Graveland",
+          "score_rounded_3dp": 0.531
+        },
+        {
+          "object_id": "6a9dd82e332abe8469d55955",
+          "name": "View of Canton, China",
+          "score_rounded_3dp": 0.512
+        }
+      ],
+      "similarity_group": "landscapes-and-seascapes",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-137438549",
+      "path": "positive/6a9dd7f8332abe8469d558f5-commons-137438549.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6a9dd7f8332abe8469d558f5",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd7f8332abe8469d558f5",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd7f8332abe8469d558f5",
+          "name": "Misty Sea",
+          "score_rounded_3dp": 0.607
+        }
+      ],
+      "similarity_group": "landscapes-and-seascapes",
+      "category": "partial"
+    },
+    {
+      "id": "positive-batch-commons-137438600",
+      "path": "positive/6a9dd7f8332abe8469d558f5-commons-137438600.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6a9dd7f8332abe8469d558f5",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd7f8332abe8469d558f5",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd7f8332abe8469d558f5",
+          "name": "Misty Sea",
+          "score_rounded_3dp": 0.659
+        },
+        {
+          "object_id": "6a9dd807332abe8469d55907",
+          "name": "Fragment van een muurschildering",
+          "score_rounded_3dp": 0.464
+        }
+      ],
+      "similarity_group": "landscapes-and-seascapes",
+      "category": "partial"
+    },
+    {
+      "id": "positive-batch-commons-29899449",
+      "path": "positive/6a9dd7f8332abe8469d558f5-commons-29899449.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6a9dd7f8332abe8469d558f5",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd7f8332abe8469d558f5",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd7f8332abe8469d558f5",
+          "name": "Misty Sea",
+          "score_rounded_3dp": 0.916
+        },
+        {
+          "object_id": "6a9dd83e332abe8469d55967",
+          "name": "Vergezicht over de weiden bij ’s-Graveland",
+          "score_rounded_3dp": 0.639
+        },
+        {
+          "object_id": "6aaad084dd73e04d9614e9e8",
+          "name": "View of Itamaracá Island",
+          "score_rounded_3dp": 0.559
+        }
+      ],
+      "similarity_group": "landscapes-and-seascapes",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-29934080",
+      "path": "positive/6aa9a743dd73e04d9614615c-commons-29934080.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aa9a743dd73e04d9614615c",
+      "status": "ambiguous",
+      "top1_object_id": "6aa9a743dd73e04d9614615c",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a743dd73e04d9614615c",
+          "name": "The Battle of Waterloo",
+          "score_rounded_3dp": 0.907
+        },
+        {
+          "object_id": "6aab0dbcdd73e04d96150a00",
+          "name": "Officers and other civic guardsmen of District II in Amsterdam, under the command of Captain Frans Banninck Cocq and Lieutenant Willem van Ruytenburch, known as ‘The Night Watch’",
+          "score_rounded_3dp": 0.655
+        },
+        {
+          "object_id": "6a9dd80e332abe8469d55911",
+          "name": "The Meeting of Granida and Daifilo",
+          "score_rounded_3dp": 0.578
+        }
+      ],
+      "similarity_group": "other-paintings",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-59463738",
+      "path": "positive/6aa9a747dd73e04d96146163-commons-59463738.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aa9a747dd73e04d96146163",
+      "status": "ambiguous",
+      "top1_object_id": "6aa9a747dd73e04d96146163",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a747dd73e04d96146163",
+          "name": "The Threatened Swan; Interpreted later as an Allegory on Johan de Witt",
+          "score_rounded_3dp": 0.933
+        }
+      ],
+      "similarity_group": "other-paintings",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-50148708",
+      "path": "positive/6a9dd820332abe8469d55942-commons-50148708.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6a9dd820332abe8469d55942",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd820332abe8469d55942",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd820332abe8469d55942",
+          "name": "Landscape by Moonlight",
+          "score_rounded_3dp": 0.754
+        },
+        {
+          "object_id": "6a9dd821332abe8469d55943",
+          "name": "Winter Landscape near a Town with Bare Trees",
+          "score_rounded_3dp": 0.629
+        },
+        {
+          "object_id": "6a9dd82e332abe8469d55955",
+          "name": "View of Canton, China",
+          "score_rounded_3dp": 0.619
+        }
+      ],
+      "similarity_group": "landscapes-and-seascapes",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-50148700",
+      "path": "positive/6a9dd812332abe8469d55919-commons-50148700.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6a9dd812332abe8469d55919",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd812332abe8469d55919",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd812332abe8469d55919",
+          "name": "Woman Playing the Virginal",
+          "score_rounded_3dp": 0.709
+        },
+        {
+          "object_id": "6a9dd4126d52c3bc396586a0",
+          "name": "The Milkmaid",
+          "score_rounded_3dp": 0.671
+        },
+        {
+          "object_id": "6a9dd81e332abe8469d5593e",
+          "name": "Aernout van Beeftingh (1759-1831) with his first Wife Jacoba Maria Boon (1760-1800) and their Children",
+          "score_rounded_3dp": 0.651
+        }
+      ],
+      "similarity_group": "domestic-interiors",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-50148770",
+      "path": "positive/6a9dd817332abe8469d55937-commons-50148770.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6a9dd817332abe8469d55937",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd817332abe8469d55937",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd817332abe8469d55937",
+          "name": "Portrait of a Man, possibly Reijnier Pauw (1591-1676)",
+          "score_rounded_3dp": 0.901
+        },
+        {
+          "object_id": "6a9dd837332abe8469d55960",
+          "name": "Portret van Jacob de Witt (1589-1674)",
+          "score_rounded_3dp": 0.795
+        },
+        {
+          "object_id": "6a9dd802332abe8469d558ff",
+          "name": "Portret van Paulus Joseph Gabriël, beeldhouwer",
+          "score_rounded_3dp": 0.776
+        }
+      ],
+      "similarity_group": "portraits",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-29918689",
+      "path": "positive/6a9dd839332abe8469d55962-commons-29918689.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6a9dd839332abe8469d55962",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd839332abe8469d55962",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd839332abe8469d55962",
+          "name": "Schipbreuk op een rotsachtige kust",
+          "score_rounded_3dp": 0.865
+        },
+        {
+          "object_id": "6a9dd82e332abe8469d55955",
+          "name": "View of Canton, China",
+          "score_rounded_3dp": 0.644
+        },
+        {
+          "object_id": "6a9dd800332abe8469d558fd",
+          "name": "Landscape with Stone Bridge",
+          "score_rounded_3dp": 0.634
+        }
+      ],
+      "similarity_group": "landscapes-and-seascapes",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-39744327",
+      "path": "positive/6aa9a745dd73e04d96146160-commons-39744327.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aa9a745dd73e04d96146160",
+      "status": "ambiguous",
+      "top1_object_id": "6aa9a745dd73e04d96146160",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a745dd73e04d96146160",
+          "name": "The Sampling Officials of the Amsterdam Drapers’ Guild, known as ‘The Syndics’",
+          "score_rounded_3dp": 0.924
+        },
+        {
+          "object_id": "6a9dd811332abe8469d55917",
+          "name": "Mooy-Aal and her Suitors",
+          "score_rounded_3dp": 0.787
+        },
+        {
+          "object_id": "6a9dd81d332abe8469d5593d",
+          "name": "Portrait of Johannes Hudde (1628-1704), burgomaster of Amsterdam",
+          "score_rounded_3dp": 0.749
+        }
+      ],
+      "similarity_group": "civic-group-portraits",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-39777756",
+      "path": "positive/6aab0dbcdd73e04d96150a00-commons-39777756.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "status": "ambiguous",
+      "top1_object_id": "6aab0dbcdd73e04d96150a00",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aab0dbcdd73e04d96150a00",
+          "name": "Officers and other civic guardsmen of District II in Amsterdam, under the command of Captain Frans Banninck Cocq and Lieutenant Willem van Ruytenburch, known as ‘The Night Watch’",
+          "score_rounded_3dp": 0.914
+        },
+        {
+          "object_id": "6a9dd825332abe8469d5594a",
+          "name": "William III (1650-1702), Prince of Orange and since 1689, King of England",
+          "score_rounded_3dp": 0.68
+        },
+        {
+          "object_id": "6aab0decdd73e04d96150a13",
+          "name": "The Celebration of the Peace of Münster, 18 June 1648, in the Headquarters of the Crossbowmen's Civic Guard (St George Guard), Amsterdam",
+          "score_rounded_3dp": 0.654
+        }
+      ],
+      "similarity_group": "civic-group-portraits",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-109821620",
+      "path": "positive/6aa9a745dd73e04d96146160-commons-109821620.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aa9a745dd73e04d96146160",
+      "status": "ambiguous",
+      "top1_object_id": "6aa9a745dd73e04d96146160",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a745dd73e04d96146160",
+          "name": "The Sampling Officials of the Amsterdam Drapers’ Guild, known as ‘The Syndics’",
+          "score_rounded_3dp": 0.841
+        },
+        {
+          "object_id": "6a9dd811332abe8469d55917",
+          "name": "Mooy-Aal and her Suitors",
+          "score_rounded_3dp": 0.764
+        },
+        {
+          "object_id": "6a9dd837332abe8469d55960",
+          "name": "Portret van Jacob de Witt (1589-1674)",
+          "score_rounded_3dp": 0.75
+        }
+      ],
+      "similarity_group": "civic-group-portraits",
+      "category": "partial"
+    },
+    {
+      "id": "positive-batch-commons-26253448",
+      "path": "positive/6aaad084dd73e04d9614e9e7-commons-26253448.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aaad084dd73e04d9614e9e7",
+      "status": "no_match",
+      "top1_object_id": null,
+      "positive_top1_correct": false,
+      "positive_top3_correct": false,
+      "negative_rejected": null,
+      "candidates": [],
+      "similarity_group": "other-paintings",
+      "category": "partial"
+    },
+    {
+      "id": "positive-batch-commons-26253548",
+      "path": "positive/6aaad084dd73e04d9614e9e7-commons-26253548.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aaad084dd73e04d9614e9e7",
+      "status": "ambiguous",
+      "top1_object_id": "6aaad084dd73e04d9614e9e7",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aaad084dd73e04d9614e9e7",
+          "name": "The Fall of Man",
+          "score_rounded_3dp": 0.473
+        }
+      ],
+      "similarity_group": "other-paintings",
+      "category": "partial"
+    },
+    {
+      "id": "positive-batch-commons-189918713",
+      "path": "positive/6aaad084dd73e04d9614e9e7-commons-189918713.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aaad084dd73e04d9614e9e7",
+      "status": "ambiguous",
+      "top1_object_id": "6aaad084dd73e04d9614e9e7",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aaad084dd73e04d9614e9e7",
+          "name": "The Fall of Man",
+          "score_rounded_3dp": 0.927
+        },
+        {
+          "object_id": "6a9dd849332abe8469d55979",
+          "name": "Venus and Adonis",
+          "score_rounded_3dp": 0.643
+        },
+        {
+          "object_id": "6a9dd80e332abe8469d55911",
+          "name": "The Meeting of Granida and Daifilo",
+          "score_rounded_3dp": 0.637
+        }
+      ],
+      "similarity_group": "other-paintings",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-105350359",
+      "path": "positive/6aaad084dd73e04d9614e9e8-commons-105350359.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aaad084dd73e04d9614e9e8",
+      "status": "ambiguous",
+      "top1_object_id": "6aaad084dd73e04d9614e9e8",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aaad084dd73e04d9614e9e8",
+          "name": "View of Itamaracá Island",
+          "score_rounded_3dp": 0.703
+        },
+        {
+          "object_id": "6a9dd83e332abe8469d55967",
+          "name": "Vergezicht over de weiden bij ’s-Graveland",
+          "score_rounded_3dp": 0.568
+        },
+        {
+          "object_id": "6a9dd7f8332abe8469d558f5",
+          "name": "Misty Sea",
+          "score_rounded_3dp": 0.53
+        }
+      ],
+      "similarity_group": "landscapes-and-seascapes",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-67086856",
+      "path": "positive/6aaad084dd73e04d9614e9e8-commons-67086856.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aaad084dd73e04d9614e9e8",
+      "status": "ambiguous",
+      "top1_object_id": "6aaad084dd73e04d9614e9e8",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aaad084dd73e04d9614e9e8",
+          "name": "View of Itamaracá Island",
+          "score_rounded_3dp": 0.758
+        },
+        {
+          "object_id": "6a9dd83e332abe8469d55967",
+          "name": "Vergezicht over de weiden bij ’s-Graveland",
+          "score_rounded_3dp": 0.582
+        },
+        {
+          "object_id": "6a9dd810332abe8469d55913",
+          "name": "The Meeting of Jacob and Rachel",
+          "score_rounded_3dp": 0.543
+        }
+      ],
+      "similarity_group": "landscapes-and-seascapes",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-67086859",
+      "path": "positive/6aaad084dd73e04d9614e9e8-commons-67086859.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aaad084dd73e04d9614e9e8",
+      "status": "ambiguous",
+      "top1_object_id": "6aaad084dd73e04d9614e9e8",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aaad084dd73e04d9614e9e8",
+          "name": "View of Itamaracá Island",
+          "score_rounded_3dp": 0.693
+        },
+        {
+          "object_id": "6a9dd83b332abe8469d55964",
+          "name": "De harddraver De Vlugge van Adriaan van der Hoop in de wei",
+          "score_rounded_3dp": 0.549
+        },
+        {
+          "object_id": "6a9dd83a332abe8469d55963",
+          "name": "De harddraver De Rot van Adriaan van der Hoop bij het koetshuis",
+          "score_rounded_3dp": 0.5
+        }
+      ],
+      "similarity_group": "landscapes-and-seascapes",
+      "category": "partial"
+    },
+    {
+      "id": "positive-batch-commons-66977547",
+      "path": "positive/6aab0dbcdd73e04d96150a00-commons-66977547.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "status": "ambiguous",
+      "top1_object_id": "6aab0dbcdd73e04d96150a00",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aab0dbcdd73e04d96150a00",
+          "name": "Officers and other civic guardsmen of District II in Amsterdam, under the command of Captain Frans Banninck Cocq and Lieutenant Willem van Ruytenburch, known as ‘The Night Watch’",
+          "score_rounded_3dp": 0.85
+        },
+        {
+          "object_id": "6a9dd4136d52c3bc396586a1",
+          "name": "The Jewish Bride",
+          "score_rounded_3dp": 0.758
+        },
+        {
+          "object_id": "6a9dd825332abe8469d5594a",
+          "name": "William III (1650-1702), Prince of Orange and since 1689, King of England",
+          "score_rounded_3dp": 0.738
+        }
+      ],
+      "similarity_group": "civic-group-portraits",
+      "category": "partial"
+    },
+    {
+      "id": "positive-batch-commons-30586019",
+      "path": "positive/6aa9a745dd73e04d96146160-commons-30586019.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aa9a745dd73e04d96146160",
+      "status": "ambiguous",
+      "top1_object_id": "6aa9a745dd73e04d96146160",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a745dd73e04d96146160",
+          "name": "The Sampling Officials of the Amsterdam Drapers’ Guild, known as ‘The Syndics’",
+          "score_rounded_3dp": 0.975
+        },
+        {
+          "object_id": "6a9dd811332abe8469d55917",
+          "name": "Mooy-Aal and her Suitors",
+          "score_rounded_3dp": 0.776
+        },
+        {
+          "object_id": "6a9dd837332abe8469d55960",
+          "name": "Portret van Jacob de Witt (1589-1674)",
+          "score_rounded_3dp": 0.734
+        }
+      ],
+      "similarity_group": "civic-group-portraits",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-66977722",
+      "path": "positive/6aab0decdd73e04d96150a13-commons-66977722.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aab0decdd73e04d96150a13",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd848332abe8469d55977",
+      "positive_top1_correct": false,
+      "positive_top3_correct": false,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd848332abe8469d55977",
+          "name": "Portrait of Jan Amos Comenius",
+          "score_rounded_3dp": 0.733
+        },
+        {
+          "object_id": "6a9dd857332abe8469d55990",
+          "name": "Dirck Graswinckel (1600-66). Rechtsgeleerde en letterkundige",
+          "score_rounded_3dp": 0.71
+        },
+        {
+          "object_id": "6a9dd852332abe8469d5598a",
+          "name": "Portret van Dominicus Baudius (1561-1613). Hoogleraar in de welsprekendheid, de geschiedenis en de rechten te Leiden",
+          "score_rounded_3dp": 0.71
+        }
+      ],
+      "similarity_group": "civic-group-portraits",
+      "category": "partial"
+    },
+    {
+      "id": "positive-batch-commons-50148689",
+      "path": "positive/6aab0decdd73e04d96150a13-commons-50148689.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aab0decdd73e04d96150a13",
+      "status": "ambiguous",
+      "top1_object_id": "6aab0decdd73e04d96150a13",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aab0decdd73e04d96150a13",
+          "name": "The Celebration of the Peace of Münster, 18 June 1648, in the Headquarters of the Crossbowmen's Civic Guard (St George Guard), Amsterdam",
+          "score_rounded_3dp": 0.94
+        },
+        {
+          "object_id": "6aa9a744dd73e04d9614615e",
+          "name": "The merry family",
+          "score_rounded_3dp": 0.731
+        },
+        {
+          "object_id": "6a9dd811332abe8469d55917",
+          "name": "Mooy-Aal and her Suitors",
+          "score_rounded_3dp": 0.727
+        }
+      ],
+      "similarity_group": "civic-group-portraits",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-50148850",
+      "path": "positive/6aaad084dd73e04d9614e9e7-commons-50148850.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aaad084dd73e04d9614e9e7",
+      "status": "ambiguous",
+      "top1_object_id": "6aaad084dd73e04d9614e9e7",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aaad084dd73e04d9614e9e7",
+          "name": "The Fall of Man",
+          "score_rounded_3dp": 0.913
+        },
+        {
+          "object_id": "6a9dd849332abe8469d55979",
+          "name": "Venus and Adonis",
+          "score_rounded_3dp": 0.641
+        },
+        {
+          "object_id": "6a9dd80e332abe8469d55911",
+          "name": "The Meeting of Granida and Daifilo",
+          "score_rounded_3dp": 0.625
+        }
+      ],
+      "similarity_group": "other-paintings",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-161498033",
+      "path": "positive/6aab0deedd73e04d96150a15-commons-161498033.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aab0deedd73e04d96150a15",
+      "status": "ambiguous",
+      "top1_object_id": "6aab0deedd73e04d96150a15",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aab0deedd73e04d96150a15",
+          "name": "Vanitas stilleven",
+          "score_rounded_3dp": 0.654
+        },
+        {
+          "object_id": "6a9dd844332abe8469d55971",
+          "name": "Travellers at Rest",
+          "score_rounded_3dp": 0.499
+        },
+        {
+          "object_id": "6a9dd849332abe8469d55979",
+          "name": "Venus and Adonis",
+          "score_rounded_3dp": 0.487
+        }
+      ],
+      "similarity_group": "other-paintings",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-161500919",
+      "path": "positive/6aab0deedd73e04d96150a15-commons-161500919.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aab0deedd73e04d96150a15",
+      "status": "ambiguous",
+      "top1_object_id": "6aab0deedd73e04d96150a15",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aab0deedd73e04d96150a15",
+          "name": "Vanitas stilleven",
+          "score_rounded_3dp": 0.464
+        }
+      ],
+      "similarity_group": "other-paintings",
+      "category": "partial"
+    },
+    {
+      "id": "positive-batch-commons-106723438",
+      "path": "positive/6aaad084dd73e04d9614e9e8-commons-106723438.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aaad084dd73e04d9614e9e8",
+      "status": "ambiguous",
+      "top1_object_id": "6aaad084dd73e04d9614e9e8",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aaad084dd73e04d9614e9e8",
+          "name": "View of Itamaracá Island",
+          "score_rounded_3dp": 0.752
+        },
+        {
+          "object_id": "6a9dd83e332abe8469d55967",
+          "name": "Vergezicht over de weiden bij ’s-Graveland",
+          "score_rounded_3dp": 0.663
+        },
+        {
+          "object_id": "6a9dd7f8332abe8469d558f5",
+          "name": "Misty Sea",
+          "score_rounded_3dp": 0.581
+        }
+      ],
+      "similarity_group": "landscapes-and-seascapes",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-67086860",
+      "path": "positive/6aaad084dd73e04d9614e9e8-commons-67086860.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aaad084dd73e04d9614e9e8",
+      "status": "ambiguous",
+      "top1_object_id": "6aaad084dd73e04d9614e9e8",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aaad084dd73e04d9614e9e8",
+          "name": "View of Itamaracá Island",
+          "score_rounded_3dp": 0.712
+        },
+        {
+          "object_id": "6a9dd83b332abe8469d55964",
+          "name": "De harddraver De Vlugge van Adriaan van der Hoop in de wei",
+          "score_rounded_3dp": 0.577
+        },
+        {
+          "object_id": "6a9dd83a332abe8469d55963",
+          "name": "De harddraver De Rot van Adriaan van der Hoop bij het koetshuis",
+          "score_rounded_3dp": 0.537
+        }
+      ],
+      "similarity_group": "landscapes-and-seascapes",
+      "category": "partial"
+    },
+    {
+      "id": "positive-batch-commons-50088024",
+      "path": "positive/6aab0dbcdd73e04d96150a00-commons-50088024.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "status": "ambiguous",
+      "top1_object_id": "6aab0dfd303f7d479a4f23e8",
+      "positive_top1_correct": false,
+      "positive_top3_correct": false,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aab0dfd303f7d479a4f23e8",
+          "name": "Rijksmuseum Night Watch Room",
+          "score_rounded_3dp": 0.703
+        },
+        {
+          "object_id": "6aab0dfd303f7d479a4f23e6",
+          "name": "Rijksmuseum Gallery of Honour",
+          "score_rounded_3dp": 0.638
+        },
+        {
+          "object_id": "6aab0defdd73e04d96150a16",
+          "name": "Lidded ewer for the Amsterdam Goldsmiths Guild",
+          "score_rounded_3dp": 0.541
+        }
+      ],
+      "similarity_group": "civic-group-portraits",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-47347484",
+      "path": "positive/6aab0dbcdd73e04d96150a00-commons-47347484.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "status": "ambiguous",
+      "top1_object_id": "6aab0dbcdd73e04d96150a00",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aab0dbcdd73e04d96150a00",
+          "name": "Officers and other civic guardsmen of District II in Amsterdam, under the command of Captain Frans Banninck Cocq and Lieutenant Willem van Ruytenburch, known as ‘The Night Watch’",
+          "score_rounded_3dp": 0.694
+        },
+        {
+          "object_id": "6aab0defdd73e04d96150a16",
+          "name": "Lidded ewer for the Amsterdam Goldsmiths Guild",
+          "score_rounded_3dp": 0.536
+        },
+        {
+          "object_id": "6a9dd81a332abe8469d5593a",
+          "name": "The Tree of Jesse",
+          "score_rounded_3dp": 0.53
+        }
+      ],
+      "similarity_group": "civic-group-portraits",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-161498270",
+      "path": "positive/6aab0deedd73e04d96150a15-commons-161498270.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aab0deedd73e04d96150a15",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd827332abe8469d5594d",
+      "positive_top1_correct": false,
+      "positive_top3_correct": false,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd827332abe8469d5594d",
+          "name": "Crucifixion",
+          "score_rounded_3dp": 0.463
+        }
+      ],
+      "similarity_group": "other-paintings",
+      "category": "partial"
+    },
+    {
+      "id": "positive-batch-commons-161498357",
+      "path": "positive/6aab0deedd73e04d96150a15-commons-161498357.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aab0deedd73e04d96150a15",
+      "status": "no_match",
+      "top1_object_id": null,
+      "positive_top1_correct": false,
+      "positive_top3_correct": false,
+      "negative_rejected": null,
+      "candidates": [],
+      "similarity_group": "other-paintings",
+      "category": "partial"
+    },
+    {
+      "id": "positive-batch-commons-168196893",
+      "path": "positive/6aa9a747dd73e04d96146163-commons-168196893.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aa9a747dd73e04d96146163",
+      "status": "ambiguous",
+      "top1_object_id": "6aa9a747dd73e04d96146163",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a747dd73e04d96146163",
+          "name": "The Threatened Swan; Interpreted later as an Allegory on Johan de Witt",
+          "score_rounded_3dp": 0.936
+        }
+      ],
+      "similarity_group": "other-paintings",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-89052026",
+      "path": "positive/6a9dd4126d52c3bc396586a0-commons-89052026.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6a9dd4126d52c3bc396586a0",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd4126d52c3bc396586a0",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd4126d52c3bc396586a0",
+          "name": "The Milkmaid",
+          "score_rounded_3dp": 0.706
+        },
+        {
+          "object_id": "6aab0dfd303f7d479a4f23e6",
+          "name": "Rijksmuseum Gallery of Honour",
+          "score_rounded_3dp": 0.493
+        },
+        {
+          "object_id": "6aab0defdd73e04d96150a16",
+          "name": "Lidded ewer for the Amsterdam Goldsmiths Guild",
+          "score_rounded_3dp": 0.48
+        }
+      ],
+      "similarity_group": "domestic-interiors",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-32182092",
+      "path": "positive/6a9dd4136d52c3bc396586a1-commons-32182092.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6a9dd4136d52c3bc396586a1",
+      "status": "ambiguous",
+      "top1_object_id": "6a9dd4136d52c3bc396586a1",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd4136d52c3bc396586a1",
+          "name": "The Jewish Bride",
+          "score_rounded_3dp": 0.774
+        },
+        {
+          "object_id": "6a9dd811332abe8469d55917",
+          "name": "Mooy-Aal and her Suitors",
+          "score_rounded_3dp": 0.631
+        },
+        {
+          "object_id": "6a9dd838332abe8469d55961",
+          "name": "Portrait of Anna van den Corput (1599-1645). Wife of Jacob de Witt",
+          "score_rounded_3dp": 0.629
+        }
+      ],
+      "similarity_group": "portraits",
+      "category": "partial"
+    },
+    {
+      "id": "positive-batch-commons-47260825",
+      "path": "positive/6aa9a745dd73e04d96146160-commons-47260825.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aa9a745dd73e04d96146160",
+      "status": "ambiguous",
+      "top1_object_id": "6aab0dfd303f7d479a4f23e6",
+      "positive_top1_correct": false,
+      "positive_top3_correct": false,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aab0dfd303f7d479a4f23e6",
+          "name": "Rijksmuseum Gallery of Honour",
+          "score_rounded_3dp": 0.653
+        },
+        {
+          "object_id": "6aab0e00303f7d479a4f23ec",
+          "name": "Rijksmuseum Room 0.1",
+          "score_rounded_3dp": 0.54
+        },
+        {
+          "object_id": "6aab0dfd303f7d479a4f23e8",
+          "name": "Rijksmuseum Night Watch Room",
+          "score_rounded_3dp": 0.514
+        }
+      ],
+      "similarity_group": "civic-group-portraits",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-57328080",
+      "path": "positive/6aab0decdd73e04d96150a13-commons-57328080.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aab0decdd73e04d96150a13",
+      "status": "ambiguous",
+      "top1_object_id": "6aab0decdd73e04d96150a13",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aab0decdd73e04d96150a13",
+          "name": "The Celebration of the Peace of Münster, 18 June 1648, in the Headquarters of the Crossbowmen's Civic Guard (St George Guard), Amsterdam",
+          "score_rounded_3dp": 0.92
+        },
+        {
+          "object_id": "6aa9a744dd73e04d9614615e",
+          "name": "The merry family",
+          "score_rounded_3dp": 0.722
+        },
+        {
+          "object_id": "6a9dd811332abe8469d55917",
+          "name": "Mooy-Aal and her Suitors",
+          "score_rounded_3dp": 0.696
+        }
+      ],
+      "similarity_group": "civic-group-portraits",
+      "category": "full"
+    },
+    {
+      "id": "positive-batch-commons-66977726",
+      "path": "positive/6aab0decdd73e04d96150a13-commons-66977726.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aab0decdd73e04d96150a13",
+      "status": "ambiguous",
+      "top1_object_id": "6aab0defdd73e04d96150a16",
+      "positive_top1_correct": false,
+      "positive_top3_correct": false,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aab0defdd73e04d96150a16",
+          "name": "Lidded ewer for the Amsterdam Goldsmiths Guild",
+          "score_rounded_3dp": 0.475
+        }
+      ],
+      "similarity_group": "civic-group-portraits",
+      "category": "partial"
+    },
+    {
+      "id": "positive-batch-commons-161500233",
+      "path": "positive/6aab0deedd73e04d96150a15-commons-161500233.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aab0deedd73e04d96150a15",
+      "status": "ambiguous",
+      "top1_object_id": "6aab0deedd73e04d96150a15",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aab0deedd73e04d96150a15",
+          "name": "Vanitas stilleven",
+          "score_rounded_3dp": 0.465
+        }
+      ],
+      "similarity_group": "other-paintings",
+      "category": "partial"
+    },
+    {
+      "id": "positive-batch-commons-161500645",
+      "path": "positive/6aab0deedd73e04d96150a15-commons-161500645.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aab0deedd73e04d96150a15",
+      "status": "ambiguous",
+      "top1_object_id": "6aab0deedd73e04d96150a15",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aab0deedd73e04d96150a15",
+          "name": "Vanitas stilleven",
+          "score_rounded_3dp": 0.748
+        }
+      ],
+      "similarity_group": "other-paintings",
+      "category": "partial"
+    },
+    {
+      "id": "positive-batch-commons-161500766",
+      "path": "positive/6aab0deedd73e04d96150a15-commons-161500766.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aab0deedd73e04d96150a15",
+      "status": "no_match",
+      "top1_object_id": null,
+      "positive_top1_correct": false,
+      "positive_top3_correct": false,
+      "negative_rejected": null,
+      "candidates": [],
+      "similarity_group": "other-paintings",
+      "category": "partial"
+    },
+    {
+      "id": "positive-batch-commons-161501207",
+      "path": "positive/6aab0deedd73e04d96150a15-commons-161501207.jpg",
+      "batch": "new_positive_batch",
+      "expected_object_id": "6aab0deedd73e04d96150a15",
+      "status": "ambiguous",
+      "top1_object_id": "6aab0deedd73e04d96150a15",
+      "positive_top1_correct": true,
+      "positive_top3_correct": true,
+      "negative_rejected": null,
+      "candidates": [
+        {
+          "object_id": "6aab0deedd73e04d96150a15",
+          "name": "Vanitas stilleven",
+          "score_rounded_3dp": 0.752
+        }
+      ],
+      "similarity_group": "other-paintings",
+      "category": "full"
+    }
+  ]
+}
