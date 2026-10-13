@@ -2,7 +2,7 @@
 
 import asyncio
 import io
-from typing import Literal
+from typing import Any, Literal
 
 from PIL import Image, ImageStat
 from pydantic import BaseModel, Field
@@ -12,7 +12,7 @@ from app.core.exceptions import ApplicationError
 from app.modules.locations.repository import LocationRepository
 from app.modules.locations.service import LocationService
 from app.modules.recognition.images import prepare_image
-from app.modules.visual.features import ImageEncoder, VisualFailure
+from app.modules.visual.features import ImageEncoder, VisualFailure, rerank_verified
 from app.modules.visual.repository import VisualRepository
 
 
@@ -28,7 +28,9 @@ class VisualCandidate(BaseModel):
 
 class VisualResponse(BaseModel):
     version: Literal["visual-pilot-v1"] = "visual-pilot-v1"
-    method: Literal["visual_embeddings"] = "visual_embeddings"
+    method: Literal["visual_embeddings", "visual_embeddings_geometry"] = (
+        "visual_embeddings"
+    )
     location_id: str
     status: Literal["ambiguous", "no_match", "unreadable"]
     ocr: None = None
@@ -41,9 +43,16 @@ class VisualResponse(BaseModel):
 
 class VisualService:
     def __init__(
-        self, repository: VisualRepository, encoder: ImageEncoder, lock: asyncio.Lock
+        self,
+        repository: VisualRepository,
+        encoder: ImageEncoder,
+        lock: asyncio.Lock,
+        verification_ids: list[str] | None = None,
+        verification_cache: dict[str, dict[str, Any]] | None = None,
     ) -> None:
         self.repository, self.encoder, self.lock = repository, encoder, lock
+        self.verification_ids = list(dict.fromkeys(verification_ids or []))
+        self.verification_cache = verification_cache
 
     async def recognize(
         self, location_id: str, data: bytes, content_type: str | None
@@ -106,6 +115,19 @@ class VisualService:
                 self.encoder.model,
                 self.encoder.preprocessing,
             )
+            if self.verification_ids:
+                async with self.lock:
+                    views = await self.repository.verification_views(
+                        location.id,
+                        records,
+                        self.verification_ids,
+                        self.verification_cache,
+                    )
+                    ranked = await asyncio.to_thread(
+                        rerank_verified, query, ranked, views, objects
+                    )
+                response.method = "visual_embeddings_geometry"
+                response.warnings.append("VISUAL_GEOMETRY_EXPERIMENTAL")
             # Revalidate evidence/location after matching and concurrent refreshes.
             active, objects = await self.repository.active_snapshot(
                 location.id,

@@ -1,4 +1,5 @@
 import { motion, signature, Stability, validateCatalog } from './recognition.mjs';
+import { drawFrame, encodeFrame } from './capture.mjs';
 
 const $ = id => document.getElementById(id);
 const video = $('camera');
@@ -64,10 +65,7 @@ function frame() {
   // Match the model's shortest-edge 256 resize then 224 center crop geometry.
   // Browser interpolation differs from Pillow bicubic: this is a new, uncalibrated
   // preprocessing identity and must be measured on the actual phone.
-  const side = Math.min(video.videoWidth, video.videoHeight) * 224 / 256;
-  context.drawImage(video, (video.videoWidth - side) / 2, (video.videoHeight - side) / 2,
-    side, side, 0, 0, 224, 224);
-  return context.getImageData(0, 0, 224, 224).data;
+  return drawFrame(context, video, video.videoWidth, video.videoHeight);
 }
 
 function showCandidate(id) {
@@ -115,7 +113,7 @@ async function nextFrame(run) {
   requestController = controller;
   timeout = setTimeout(() => controller.abort(), 8000);
   try {
-    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.9));
+    const blob = await encodeFrame(canvas);
     if (run !== generation || !running) return;
     if (!blob) throw new Error('capture');
     const query = new URLSearchParams({ location_id: catalog.location.id, reference_version: catalog.reference_version });

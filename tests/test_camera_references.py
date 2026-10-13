@@ -131,6 +131,27 @@ def atlas(tmp_path, monkeypatch):
     return AtlasCameraReferences(db, settings, tmp_path), db, sessions, settings
 
 
+def test_geometry_experiment_is_opt_in_and_changes_reference_version(atlas):
+    loader, db, _, settings = atlas
+
+    async def run():
+        baseline = await loader.get()
+        assert not baseline.geometry_rerank
+        experimental = AtlasCameraReferences(
+            db,
+            settings.model_copy(update={"live_camera_geometry_rerank": True}),
+            loader.directory,
+        )
+        updated = await experimental.get()
+        assert updated.geometry_rerank
+        assert updated.reference_version != baseline.reference_version
+        assert updated.public_catalog()["policy"]["geometry_ranking"] == (
+            "spatial-verification-v1"
+        )
+
+    asyncio.run(run())
+
+
 def test_cache_refresh_changes_metadata_but_reuses_model(atlas):
     loader, db, sessions, _ = atlas
 

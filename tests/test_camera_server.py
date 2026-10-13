@@ -183,6 +183,53 @@ def test_geometry_rejects_visual_resemblance_without_matching_details():
     assert result["automatic_identification"] is False
 
 
+def test_geometry_must_verify_the_view_that_supplies_the_embedding(monkeypatch):
+    np = pytest.importorskip("numpy")
+    vector = np.zeros((1, 384), dtype=np.float32)
+    vector[0, 0] = 1
+
+    def reference(similarity):
+        value = vector.copy()
+        value[0, 0] = similarity
+        value[0, 1] = (1 - similarity**2) ** 0.5
+        return value
+
+    class Session:
+        def run(self, *args):
+            return [vector]
+
+    engine = CameraRecognizer.__new__(CameraRecognizer)
+    engine.expires = datetime.now(UTC) + timedelta(days=1)
+    engine.reference_version = "a" * 64
+    engine.catalog = {"location": {"id": "b" * 24}}
+    engine.session = Session()
+    engine.geometry_enabled = True
+    # A room's highly similar view has no matching detail. Another room view
+    # matches a small detail but cannot verify the first view's embedding.
+    engine.views = [
+        ("room", [reference(0.95), reference(0.2)]),
+        ("artwork", [reference(0.8)]),
+    ]
+    engine.local_views = {
+        "room": [{"geometry": 0.0}, {"geometry": 0.8}],
+        "artwork": [{"geometry": 0.8}],
+    }
+    monkeypatch.setattr(
+        "app.modules.live_camera.inference.describe_local", lambda image: {}
+    )
+    monkeypatch.setattr(
+        "app.modules.live_camera.inference.geometric_score",
+        lambda query, ref: ref["geometry"],
+    )
+    result = engine.recognize(jpeg())
+    assert [candidate["id"] for candidate in result["candidates"]] == [
+        "artwork",
+        "room",
+    ]
+    assert result["candidates"][1]["score"] == pytest.approx(0.2)
+    assert result["automatic_identification"] is False
+
+
 @pytest.mark.parametrize("bad", [float("nan"), float("inf"), -1, 801])
 def test_geometry_rejects_invalid_reference_coordinates(bad):
     pytest.importorskip("numpy")

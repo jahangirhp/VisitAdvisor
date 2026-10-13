@@ -9,6 +9,7 @@ from pymongo.asynchronous.database import AsyncDatabase
 from pymongo.errors import PyMongoError
 from pymongo.operations import ReplaceOne, SearchIndexModel, UpdateOne
 
+from app.modules.live_camera.geometry import validate_local
 from app.modules.visual.features import (
     DIMENSIONS,
     REGIONAL_GLOBAL_WEIGHT,
@@ -511,6 +512,70 @@ class VisualRepository:
             if index.get("queryable") and index.get("status") == "READY"
             else "building"
         )
+
+    async def verification_views(
+        self,
+        location_id: str,
+        records: list[dict[str, Any]],
+        object_ids: list[str],
+        cache: dict[str, dict[str, Any]] | None = None,
+    ) -> list[dict[str, Any]]:
+        """Read only the explicit, freshness-checked subset, never the full corpus."""
+        selected = {r["object_id"]: r for r in records if r["object_id"] in object_ids}
+        if not 1 <= len(object_ids) <= 12 or set(selected) != set(object_ids):
+            if cache is not None:
+                cache.clear()
+            raise VisualFailure("VISUAL_VERIFICATION_REFERENCES_MISSING")
+        storage = cache if cache is not None else {}
+        expected = {oid: r["set_id"] for oid, r in selected.items()}
+        for oid in list(storage):
+            if oid not in expected or storage[oid]["set_id"] != expected[oid]:
+                del storage[oid]
+        missing = [oid for oid in object_ids if oid not in storage]
+        try:
+            # Cold descriptor loading is bounded separately from normal metadata
+            # checks. No per-frame source records or complete corpus are fetched.
+            with timeout(30):
+                loaded = (
+                    await self.references.find(
+                        {
+                            "location_id": location_id,
+                            "set_id": {"$in": [expected[oid] for oid in missing]},
+                            "object_id": {"$in": missing},
+                        },
+                        {"object_id": 1, "set_id": 1, "views.derived.local": 1},
+                    )
+                    .batch_size(1)
+                    .limit(13)
+                    .to_list()
+                    if missing
+                    else []
+                )
+        except Exception:
+            storage.clear()
+            raise VisualFailure("VISUAL_VERIFICATION_UNAVAILABLE") from None
+        result = list(storage.values()) + loaded
+        if len(result) != len(selected) or {
+            r["object_id"]: r["set_id"] for r in result
+        } != {oid: r["set_id"] for oid, r in selected.items()}:
+            storage.clear()
+            raise VisualFailure("VISUAL_REFERENCE_SET_CHANGED")
+        try:
+            for record in loaded:
+                if not 1 <= len(record["views"]) <= 4:
+                    raise ValueError("Invalid view count")
+                for view in record["views"]:
+                    local = view["derived"]["local"]
+                    # Featureless references stay unverified rather than being
+                    # invented or considered a successful geometric match.
+                    if not local["points"] and not local["descriptors"]:
+                        continue
+                    validate_local(local)
+        except Exception:
+            storage.clear()
+            raise VisualFailure("VISUAL_VERIFICATION_INVALID") from None
+        storage.update({r["object_id"]: r for r in loaded})
+        return result
 
     async def search(
         self,

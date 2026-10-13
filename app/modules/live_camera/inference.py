@@ -13,7 +13,11 @@ from typing import Any
 from PIL import Image, UnidentifiedImageError
 
 from app.modules.live_camera.geometry import describe_local, validate_local
-from app.modules.visual.features import geometric_score
+from app.modules.visual.features import (
+    geometric_evidence,
+    geometric_score,
+    verified_similarity,
+)
 
 
 class CameraFailure(Exception):
@@ -63,6 +67,13 @@ class CameraRecognizer:
         if "geometry_min_score" in policy and not self.geometry_enabled:
             raise ValueError("Invalid camera geometry policy")
         self.local_views: dict[str, list[dict[str, Any]]] = {}
+        self.object_types: dict[str, str] = {}
+        ranking = policy.get("geometry_ranking")
+        if ranking not in (None, "spatial-verification-v1") or (
+            ranking is not None and not self.geometry_enabled
+        ):
+            raise ValueError("Invalid camera geometry ranking")
+        self.geometry_rerank = ranking is not None
         ids: set[str] = set()
         for obj in self.catalog["objects"]:
             if (
@@ -73,6 +84,7 @@ class CameraRecognizer:
             ):
                 raise ValueError("Invalid camera object")
             ids.add(obj["id"])
+            self.object_types[obj["id"]] = obj.get("type", "other")
             views = []
             self.local_views[obj["id"]] = []
             for view in obj["views"]:
@@ -184,17 +196,30 @@ class CameraRecognizer:
         local = describe_local(rgb) if self.geometry_enabled else None
         candidates: list[dict[str, Any]] = []
         for object_id, views in self.views:
-            scores = [view @ vector for view in views]
-            score = max(0.75 * float(s[0]) + 0.25 * float(s.max()) for s in scores)
-            if (
-                local is not None
-                and max(
-                    geometric_score(local, reference)
-                    for reference in self.local_views[object_id]
+            score = 0.0 if local is not None else -1.0
+            for index, view in enumerate(views):
+                # Embedding and geometric evidence must describe the same view.
+                # A detail in one room view cannot verify a different, highly
+                # similar room view and let it outrank the depicted artwork.
+                if local is not None and getattr(self, "geometry_rerank", False):
+                    evidence = geometric_evidence(
+                        local, self.local_views[object_id][index]
+                    )
+                    score = max(
+                        score,
+                        verified_similarity(evidence, self.object_types[object_id]),
+                    )
+                    continue
+                if (
+                    local is not None
+                    and geometric_score(local, self.local_views[object_id][index]) < 0.4
+                ):
+                    continue
+                similarities = view @ vector
+                score = max(
+                    score,
+                    0.75 * float(similarities[0]) + 0.25 * float(similarities.max()),
                 )
-                < 0.4
-            ):
-                score = 0.0
             if not math.isfinite(score):
                 raise CameraFailure("RECOGNITION_UNAVAILABLE")
             candidates.append({"id": object_id, "score": min(1.0, score)})

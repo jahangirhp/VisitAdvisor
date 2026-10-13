@@ -25,6 +25,7 @@ POLICY = {
     "global_weight": 0.75,
     "calibrated": False,
     "geometry_min_score": 0.4,
+    "geometry_scope": "reference-view-v1",
 }
 
 
@@ -39,6 +40,9 @@ class AtlasCameraReferences:
         self.directory = directory
         self.location_id = settings.live_camera_location_id
         self.object_ids = sorted(set(settings.live_camera_object_ids))
+        self.policy = dict(POLICY)
+        if settings.live_camera_geometry_rerank:
+            self.policy["geometry_ranking"] = "spatial-verification-v1"
         if (
             not self.location_id
             or not ObjectId.is_valid(self.location_id)
@@ -143,7 +147,12 @@ class AtlasCameraReferences:
                 raise CameraFailure("REFERENCES_UNAVAILABLE")
             rows.append({"object": obj, "record": record, "sources": evidence})
         version = digest(
-            {"location": location, "rows": rows, "model": self.model, "policy": POLICY}
+            {
+                "location": location,
+                "rows": rows,
+                "model": self.model,
+                "policy": self.policy,
+            }
         )
         return version, {"id": self.location_id, "name": location["name"]}, rows
 
@@ -183,7 +192,7 @@ class AtlasCameraReferences:
             "location": location,
             "objects": objects,
             "model": self.model,
-            "policy": POLICY,
+            "policy": self.policy,
             "created_at": now.isoformat(),
             "expires_at": expires.isoformat(),
             "automatic_identification": False,

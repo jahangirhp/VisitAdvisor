@@ -61,6 +61,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         logger.info("MongoDB connection successful")
         yield
     finally:
+        app.state.visual_geometry_cache.clear()
         app.state.camera.state.references = None
         app.state.camera.state.mongodb = None
         if mongodb is not None:
@@ -71,6 +72,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 def create_app() -> FastAPI:
     application = FastAPI(title="VisitAdvisor", version="0.1.0", lifespan=lifespan)
     application.add_middleware(ImageUploadLimit)
+    application.state.visual_geometry_cache = {}
     register_exception_handlers(application)
     application.include_router(health_router)
     application.include_router(api_router)

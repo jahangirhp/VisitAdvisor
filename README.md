@@ -4,6 +4,10 @@ The camera server now reads references from **MongoDB Atlas**, with process-loca
 reuse and periodic freshness checks. See [configuration and deployment](docs/18-atlas-camera-references.md).
 The packaged-catalog instructions below describe the historical trial.
 
+Artwork/room ranking fixes, opt-in geometry experiments and reproducible regression
+commands are documented in [ticket #9 development](docs/20-artwork-room-confusion.md).
+Independent acceptance remains pending; automatic visual identification stays disabled.
+
 The current camera trial uses **server-side recognition**: selected 224 × 224 JPEG
 crops are uploaded while scanning and processed in memory, without storage. The
 phone downloads no model. See [server setup, deployment and limits](docs/17-server-camera-trial.md).

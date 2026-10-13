@@ -32,6 +32,7 @@ def main() -> None:
             "index.html",
             "camera.css",
             "camera.mjs",
+            "capture.mjs",
             "recognition.mjs",
             "MODEL_LICENSE",
             "ORT_LICENSE",

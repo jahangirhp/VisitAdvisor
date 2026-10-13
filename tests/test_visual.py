@@ -27,8 +27,10 @@ from app.modules.visual.benchmark import (
 from app.modules.visual.features import (
     REGIONAL_GLOBAL_WEIGHT,
     VisualFailure,
+    geometric_evidence,
     geometric_score,
     rank,
+    rerank_verified,
     unit_vector,
 )
 from app.modules.visual.preparation import ManualReference, prepare
@@ -625,6 +627,145 @@ def test_local_geometry_recovers_transformed_patch_and_rejects_unrelated_feature
     assert geometric_score(query, other) == 0.0
 
 
+def test_geometry_reports_the_matched_patch_not_the_whole_containing_room():
+    cv = pytest.importorskip("cv2")
+    np = pytest.importorskip("numpy")
+    rng = np.random.default_rng(81)
+    artwork = cv.GaussianBlur(
+        rng.integers(0, 256, (220, 220), dtype=np.uint8), (3, 3), 0
+    )
+    room = np.full((800, 800), 120, dtype=np.uint8)
+    room[250:470, 250:470] = artwork
+
+    def describe(image):
+        points, descriptors = cv.SIFT_create(nfeatures=800).detectAndCompute(
+            image, None
+        )
+        return {
+            "points": [list(point.pt) for point in points],
+            "descriptors": descriptors.tolist(),
+            "size": [image.shape[1], image.shape[0]],
+        }
+
+    query = describe(artwork)
+    artwork_features, room_features = describe(artwork), describe(room)
+    evidence = geometric_evidence(query, room_features)
+    assert evidence["score"] > 0.7
+    assert evidence["reference_coverage"] < 0.1
+    result = rerank_verified(
+        {"local": query},
+        [{"object_id": "room", "score": 0.95}],
+        [
+            {
+                "object_id": "artwork",
+                "views": [{"derived": {"local": artwork_features}}],
+            },
+            {"object_id": "room", "views": [{"derived": {"local": room_features}}]},
+        ],
+        {"artwork": {"type": "painting"}, "room": {"type": "building"}},
+    )
+    assert [row["object_id"] for row in result] == ["artwork"]
+
+
+def test_geometry_experiment_preserves_candidates_outside_the_explicit_subset():
+    with patch(
+        "app.modules.visual.features.geometric_evidence",
+        return_value={"score": 0.9, "query_coverage": 0.4, "reference_coverage": 0.8},
+    ):
+        result = rerank_verified(
+            features(),
+            [{"object_id": "sculpture", "score": 0.8}],
+            [{"object_id": "artwork", "views": [{"derived": features()}]}],
+            {"artwork": {"type": "painting"}},
+        )
+    assert result == [
+        {"object_id": "artwork", "score": 0.9},
+        {"object_id": "sculpture", "score": 0.8},
+    ]
+
+
+def test_verification_reads_only_active_sets_at_the_selected_location(setup):
+    db, repo, _ = setup
+    active = {"object_id": "one", "set_id": "active"}
+    rows = [{**active, "views": [{"derived": features()}]}]
+    cursor = Mock()
+    cursor.batch_size.return_value = cursor
+    cursor.limit.return_value = cursor
+    cursor.to_list = AsyncMock(return_value=rows)
+    db["visual_references"].find = Mock(return_value=cursor)
+    assert asyncio.run(repo.verification_views(L1, [active], ["one"])) == rows
+    query, projection = db["visual_references"].find.call_args.args
+    assert query == {
+        "location_id": L1,
+        "set_id": {"$in": ["active"]},
+        "object_id": {"$in": ["one"]},
+    }
+    assert projection == {"object_id": 1, "set_id": 1, "views.derived.local": 1}
+    with pytest.raises(VisualFailure, match="REFERENCES_MISSING"):
+        asyncio.run(repo.verification_views(L1, [active], ["wrong-location"]))
+    cursor.to_list = AsyncMock(return_value=[{**active, "set_id": "replaced"}])
+    with pytest.raises(VisualFailure, match="REFERENCE_SET_CHANGED"):
+        asyncio.run(repo.verification_views(L1, [active], ["one"]))
+
+
+def test_experimental_geometry_cannot_bypass_final_freshness_validation(setup):
+    db, repo, encoder = setup
+    asyncio.run(prepare_one(setup))
+    object_id = str(db["objects"].documents[0]["_id"])
+    repo.index_status = AsyncMock(return_value="ready")
+    repo.search = AsyncMock(return_value=[])
+
+    async def changed(*args):
+        db["sources"].documents[0]["raw_record"] = {"changed": True}
+        return [{"object_id": object_id, "views": [{"derived": features()}]}]
+
+    repo.verification_views = changed
+    with patch(
+        "app.modules.visual.service.rerank_verified",
+        return_value=[{"object_id": object_id, "score": 1.0}],
+    ):
+        result = asyncio.run(
+            VisualService(repo, encoder, asyncio.Lock(), [object_id]).recognize(
+                L1, picture(), "image/png"
+            )
+        )
+    assert result.status == "no_match" and result.object is None
+    assert result.method == "visual_embeddings_geometry"
+    assert "VISUAL_REFERENCE_SET_CHANGED" in result.warnings
+
+
+def test_verification_cache_reuses_only_unchanged_sets_and_clears_on_failure(setup):
+    db, repo, _ = setup
+    active = {"object_id": "one", "set_id": "old"}
+    cursor = Mock()
+    cursor.batch_size.return_value = cursor
+    cursor.limit.return_value = cursor
+    cursor.to_list = AsyncMock(
+        return_value=[{**active, "views": [{"derived": features()}]}]
+    )
+    db["visual_references"].find = Mock(return_value=cursor)
+    cache = {}
+    first = asyncio.run(repo.verification_views(L1, [active], ["one"], cache))
+    assert len(cache) == 1
+    second = asyncio.run(repo.verification_views(L1, [active], ["one"], cache))
+    assert first == second
+    assert db["visual_references"].find.call_count == 1
+    changed = {"object_id": "one", "set_id": "new"}
+    cursor.to_list = AsyncMock(
+        return_value=[{**changed, "views": [{"derived": features()}]}]
+    )
+    asyncio.run(repo.verification_views(L1, [changed], ["one"], cache))
+    assert db["visual_references"].find.call_count == 2
+    assert cache["one"]["set_id"] == "new"
+    with pytest.raises(VisualFailure, match="REFERENCES_MISSING"):
+        asyncio.run(repo.verification_views(L1, [], ["one"], cache))
+    assert cache == {}
+    cursor.to_list = AsyncMock(side_effect=OperationFailure("private details"))
+    with pytest.raises(VisualFailure, match="^VISUAL_VERIFICATION_UNAVAILABLE$"):
+        asyncio.run(repo.verification_views(L1, [active], ["one"], cache))
+    assert cache == {}
+
+
 def photo(**changes):
     return Photo(
         **{
@@ -696,6 +837,7 @@ def test_upload_visual_mode_does_not_invoke_ocr(setup):
     app.dependency_overrides[get_service] = lambda: ocr
     app.state.visual_encoder = encoder
     app.state.visual_lock = asyncio.Lock()
+    app.state.settings = SimpleNamespace(visual_geometry_object_ids=[])
     with patch("app.modules.recognition.router.get_database", return_value=repo.db):
         response = TestClient(app).post(
             "/api/v1/recognition/image",
