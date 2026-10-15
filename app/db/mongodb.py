@@ -16,6 +16,8 @@ class MongoDB:
             serverSelectionTimeoutMS=5000,
             connectTimeoutMS=5000,
             timeoutMS=5000,
+            compressors="zlib",
+            zlibCompressionLevel=1,
             tz_aware=True,
         )
         self.database = self.client[settings.mongodb_database]

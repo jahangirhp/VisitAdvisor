@@ -46,6 +46,19 @@ class Collection:
                     }
                 )
             )
+            if projection and any(key.startswith("views.") for key in projection):
+                rows[-1]["views"] = []
+                for view in row["views"]:
+                    selected = {}
+                    for section in ("reference", "derived"):
+                        selected[section] = {
+                            name: deepcopy(value)
+                            for name, value in view.get(section, {}).items()
+                            if projection.get(f"views.{section}.{name}")
+                        }
+                    if "image_hash" in view and projection.get("views.image_hash"):
+                        selected["image_hash"] = view["image_hash"]
+                    rows[-1]["views"].append(selected)
         return rows
 
     async def find_one(self, query, projection=None):
@@ -152,6 +165,33 @@ def test_geometry_experiment_is_opt_in_and_changes_reference_version(atlas):
     asyncio.run(run())
 
 
+def test_failed_descriptor_read_cancels_other_reads_and_publishes_no_snapshot(atlas):
+    loader, db, _, _ = atlas
+
+    async def run():
+        entered = asyncio.Event()
+        cancelled = []
+
+        async def read(query, projection):
+            if query["object_id"] == loader.object_ids[0]:
+                await entered.wait()
+                raise RuntimeError("private connection details")
+            entered.set()
+            try:
+                await asyncio.Event().wait()
+            finally:
+                cancelled.append(query["object_id"])
+
+        db["visual_references"].find_one = read
+        with pytest.raises(CameraFailure, match="^REFERENCES_UNAVAILABLE$"):
+            await loader.get()
+        assert cancelled == [loader.object_ids[1]]
+        assert loader.recognizer is None
+        assert loader.checked_until == 0
+
+    asyncio.run(run())
+
+
 def test_cache_refresh_changes_metadata_but_reuses_model(atlas):
     loader, db, sessions, _ = atlas
 
@@ -162,7 +202,10 @@ def test_cache_refresh_changes_metadata_but_reuses_model(atlas):
         assert sum(len(c.reads) for c in db.values()) == reads
         loader.checked_until = 0
         assert await loader.get() is first
-        full_reads = sum(p is None for _, p in db["visual_references"].reads)
+        full_reads = sum(
+            bool(p and "views.derived.regions" in p)
+            for _, p in db["visual_references"].reads
+        )
         assert full_reads == 2
         db["objects"].rows[0]["description"] = "Updated canonical description"
         loader.checked_until = 0

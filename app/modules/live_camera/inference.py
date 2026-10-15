@@ -7,6 +7,7 @@ import json
 import math
 from datetime import UTC, datetime
 from pathlib import Path
+from threading import Lock
 from time import perf_counter
 from typing import Any
 
@@ -74,6 +75,16 @@ class CameraRecognizer:
         ):
             raise ValueError("Invalid camera geometry ranking")
         self.geometry_rerank = ranking is not None
+        pipeline = policy.get("recognition_pipeline")
+        if pipeline not in (None, "object-regions-types-v5") or (
+            pipeline and self.geometry_rerank
+        ):
+            raise ValueError("Invalid camera recognition pipeline")
+        self.adaptive = pipeline is not None
+        self.warmed = False
+        self.warm_ms = 0.0
+        self._warm_gate = Lock()
+        self.reference_coverage: dict[str, dict[str, Any]] = {}
         ids: set[str] = set()
         for obj in self.catalog["objects"]:
             if (
@@ -88,7 +99,11 @@ class CameraRecognizer:
             views = []
             self.local_views[obj["id"]] = []
             for view in obj["views"]:
-                if self.geometry_enabled:
+                from app.modules.live_camera.pipeline import profile
+
+                if self.geometry_enabled and (
+                    not self.adaptive or profile(obj.get("type", "other")) == "planar"
+                ):
                     validate_local(view["local"])
                     self.local_views[obj["id"]].append(view["local"])
                 vectors = np.asarray(view["vectors"], dtype=np.float32)
@@ -104,6 +119,10 @@ class CameraRecognizer:
                     raise ValueError("Empty camera vectors")
                 views.append(vectors / norms)
             self.views.append((obj["id"], views))
+            if self.adaptive:
+                from app.modules.live_camera.pipeline import view_coverage
+
+                self.reference_coverage[obj["id"]] = view_coverage(obj)
         if session is not None:
             self.session = session
             return
@@ -119,6 +138,32 @@ class CameraRecognizer:
             str(path), sess_options=options, providers=["CPUExecutionProvider"]
         )
 
+    def warm(self) -> None:
+        """Exercise the model before enabling scanning; never create a fake match."""
+        import numpy as np
+
+        with self._warm_gate:
+            if self.warmed:
+                return
+            self.check_fresh()
+            started = perf_counter()
+            try:
+                vector = np.asarray(
+                    self.session.run(
+                        ["embedding"],
+                        {"pixel_values": np.zeros((1, 3, 224, 224), dtype=np.float32)},
+                    )[0]
+                ).reshape(-1)
+                if vector.shape != (384,) or not np.isfinite(vector).all():
+                    raise ValueError("Invalid model output")
+                if np.linalg.norm(vector) <= 0:
+                    raise ValueError("Empty model output")
+            except Exception:
+                raise CameraFailure("MODEL_WARMUP_FAILED") from None
+            self.check_fresh()
+            self.warm_ms = (perf_counter() - started) * 1000
+            self.warmed = True
+
     def check_fresh(self) -> None:
         if self.expires <= datetime.now(UTC):
             raise CameraFailure("REFERENCES_EXPIRED")
@@ -130,6 +175,7 @@ class CameraRecognizer:
             "processing": "server",
             "reference_version": self.reference_version,
             "automatic_identification": False,
+            "readiness": {"model_warmed": self.warmed, "references_current": True},
             **{
                 key: self.catalog[key]
                 for key in (
@@ -137,6 +183,7 @@ class CameraRecognizer:
                     "created_at",
                     "expires_at",
                     "policy",
+                    "reference_signature",
                     "atlas_freshness_verified",
                     "origin",
                 )
@@ -155,6 +202,8 @@ class CameraRecognizer:
                         "type",
                         "description",
                         "sources",
+                        "recognition_profile",
+                        "reference_view_coverage",
                     )
                     if key in obj
                 }
@@ -169,7 +218,10 @@ class CameraRecognizer:
         started = perf_counter()
         try:
             with Image.open(io.BytesIO(data)) as source:
-                if source.format != "JPEG" or source.size != (224, 224):
+                supported_sizes = (
+                    {(224, 224), (512, 512)} if self.adaptive else {(224, 224)}
+                )
+                if source.format != "JPEG" or source.size not in supported_sizes:
                     raise CameraFailure("INVALID_FRAME", 422)
                 rgb = source.convert("RGB")
                 pixels = np.asarray(rgb, dtype=np.float32) / 255
@@ -180,6 +232,10 @@ class CameraRecognizer:
             Image.DecompressionBombError,
         ):
             raise CameraFailure("INVALID_FRAME", 422) from None
+        if getattr(self, "adaptive", False):
+            from app.modules.live_camera.pipeline import recognize
+
+            return recognize(self, rgb, started)
         means = np.array([0.485, 0.456, 0.406], dtype=np.float32)
         stds = np.array([0.229, 0.224, 0.225], dtype=np.float32)
         tensor = np.ascontiguousarray(

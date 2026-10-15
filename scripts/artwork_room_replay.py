@@ -145,9 +145,12 @@ def abstention(row: dict[str, Any]) -> str:
     return "abstain" if row["http_status"] == 200 else "error"
 
 
-def browser_frames(manifest: ReplayManifest, root: Path, browser: str) -> list[bytes]:
+def browser_frames(
+    manifest: ReplayManifest, root: Path, browser: str, frame_size: int = 224
+) -> list[bytes]:
     request = {
         "browser": browser,
+        "frame_size": frame_size,
         "paths": [str((root / p.path).resolve()) for p in manifest.photos],
     }
     process = subprocess.run(

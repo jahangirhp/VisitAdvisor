@@ -18,6 +18,9 @@ class FakeRecognizer(CameraRecognizer):
         self.expires = datetime.now(UTC) + timedelta(days=1)
         self.calls = []
 
+    def warm(self):
+        self.warmed = True
+
     def recognize(self, data):
         self.calls.append(data)
         return {"candidates": [], "automatic_identification": False}
@@ -35,6 +38,16 @@ def jpeg(size=(224, 224)):
     out = io.BytesIO()
     Image.new("RGB", size, "white").save(out, format="JPEG")
     return out.getvalue()
+
+
+def test_readiness_warms_without_recognizing_or_writing_frames(camera, tmp_path):
+    engine, client, _ = camera
+    response = client.get("/ready")
+    assert response.status_code == 200
+    assert response.json()["status"] == "ready"
+    assert response.json()["automatic_identification"] is False
+    assert engine.warmed and engine.calls == []
+    assert list(tmp_path.iterdir()) == []
 
 
 def test_frame_reaches_engine_and_immediate_repeat_is_throttled(camera, tmp_path):
@@ -72,7 +85,7 @@ def test_rejects_invalid_requests_before_inference(camera, case, code):
     if case == "large":
         content = b"x" * (MAX_FRAME_BYTES + 1)
     if case == "chunked":
-        content = iter([b"x" * 65536, b"x" * 65536, b"x"])
+        content = iter([b"x" * (MAX_FRAME_BYTES // 2)] * 2 + [b"x"])
     if case == "empty":
         content = b""
     if case == "type":
@@ -100,6 +113,7 @@ def test_expired_reference_and_busy_engine_do_not_infer(camera):
 def test_native_decoder_rejects_invalid_or_wrong_sized_images(data):
     pytest.importorskip("numpy")
     engine = CameraRecognizer.__new__(CameraRecognizer)
+    engine.adaptive = False
     engine.expires = datetime.now(UTC) + timedelta(days=1)
     with pytest.raises(CameraFailure, match="INVALID_FRAME"):
         engine.recognize(data)
@@ -173,6 +187,7 @@ def test_geometry_rejects_visual_resemblance_without_matching_details():
     engine.catalog = {"location": {"id": "b" * 24}}
     engine.session = Session()
     engine.views = [("correct", [vector]), ("unrelated", [vector])]
+    engine.adaptive = False
     engine.geometry_enabled = True
     engine.local_views = {"correct": [reference], "unrelated": [unrelated]}
     result = engine.recognize(data.getvalue())
@@ -205,6 +220,7 @@ def test_geometry_must_verify_the_view_that_supplies_the_embedding(monkeypatch):
     engine.session = Session()
     engine.geometry_enabled = True
     # A room's highly similar view has no matching detail. Another room view
+    engine.adaptive = False
     # matches a small detail but cannot verify the first view's embedding.
     engine.views = [
         ("room", [reference(0.95), reference(0.2)]),

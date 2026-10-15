@@ -1,5 +1,11 @@
 # VisitAdvisor
 
+The [recognition reliability work](docs/22-recognition-reliability.md) records the
+latest retrieval changes, calibration data, manual selection and failed experiments.
+The [real-time recognition guide](docs/21-realtime-recognition-pipeline.md) covers
+the experimental type-aware camera pipeline, model readiness, bounded inference,
+preview calibration and measured limitations.
+
 The camera server now reads references from **MongoDB Atlas**, with process-local
 reuse and periodic freshness checks. See [configuration and deployment](docs/18-atlas-camera-references.md).
 The packaged-catalog instructions below describe the historical trial.

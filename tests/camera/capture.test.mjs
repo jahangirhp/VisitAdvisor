@@ -24,3 +24,15 @@ test('live and replay use JPEG quality 0.9', async () => {
   } };
   assert.equal(await encodeFrame(canvas), blob);
 });
+
+test('detail frames preserve the same field of view at 512 pixels', () => {
+  const calls = [];
+  const context = { drawImage: (...args) => calls.push(args), getImageData: (...args) => {
+    assert.deepEqual(args, [0, 0, 512, 512]);
+    return { data: new Uint8ClampedArray(512 * 512 * 4) };
+  } };
+  const source = {};
+  drawFrame(context, source, 640, 480, 512);
+  assert.deepEqual(calls[0], [source, 110, 30, 420, 420, 0, 0, 512, 512]);
+  assert.throws(() => drawFrame(context, source, 640, 480, 4096));
+});

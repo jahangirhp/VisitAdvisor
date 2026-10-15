@@ -20,7 +20,7 @@ from app.modules.live_camera.inference import CameraFailure, CameraRecognizer
 from app.modules.live_camera.references import AtlasCameraReferences
 
 STATIC = Path(__file__).with_name("static")
-MAX_FRAME_BYTES = 128 * 1024
+MAX_FRAME_BYTES = 256 * 1024
 
 
 def create_camera_app(
@@ -30,9 +30,27 @@ def create_camera_app(
 
     @asynccontextmanager
     async def lifespan(application: FastAPI) -> AsyncIterator[None]:
+        task: asyncio.Task[None] | None = None
         try:
+            if bundle is None and recognizer is None:
+                try:
+                    settings = Settings()
+                    if (
+                        settings.live_camera_preload
+                        and settings.live_camera_location_id
+                        and settings.live_camera_object_ids
+                    ):
+                        task = asyncio.create_task(prepare())
+                except Exception:
+                    pass  # Readiness reports a safe failure when setup is incomplete.
             yield
         finally:
+            if task is not None:
+                task.cancel()
+                try:
+                    await task
+                except asyncio.CancelledError:
+                    pass
             if application.state.owns_mongodb:
                 await application.state.mongodb.close()
             application.state.mongodb = None
@@ -113,9 +131,34 @@ def create_camera_app(
                     raise CameraFailure("RECOGNITION_UNAVAILABLE") from None
         return await references.get()
 
+    async def prepare() -> None:
+        try:
+            value = await engine()
+            await run_in_threadpool(value.warm)
+            application.state.preload_error = None
+        except Exception:
+            application.state.preload_error = "RECOGNITION_UNAVAILABLE"
+
+    application.state.prepare = prepare
+    application.state.preload_error = None
+
+    @application.get("/ready")
+    async def ready() -> Response:
+        value = await engine()
+        await run_in_threadpool(value.warm)
+        return JSONResponse(
+            {
+                "status": "ready",
+                "reference_version": value.reference_version,
+                "automatic_identification": False,
+            }
+        )
+
     @application.get("/bundle/catalog.json")
     async def catalog() -> Response:
-        return JSONResponse((await engine()).public_catalog())
+        value = await engine()
+        await run_in_threadpool(value.warm)
+        return JSONResponse(value.public_catalog())
 
     @application.get("/bundle/{filename:path}")
     async def bundle_file(filename: str) -> Response:

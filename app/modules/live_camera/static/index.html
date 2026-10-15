@@ -29,8 +29,15 @@
     <p id="phone-setup" hidden><a href="./phone-setup.html">Set up HTTPS for this local iPhone test</a></p>
     <div class="controls"><button id="start" disabled>Start live camera</button><button id="stop" class="secondary" hidden>Stop camera</button></div>
     <p class="privacy-note">While scanning, small crops from the center guide are sent to VisitAdvisor over HTTPS for recognition. Frames are processed in memory and are not saved or recorded. Stop pauses uploads. Internet access is required; no model download.</p>
+    <details id="manual" hidden>
+      <summary>Find an object by name</summary>
+      <p>If the camera cannot find a match, choose the name from the object’s label. This list contains only objects supported at this location.</p>
+      <label for="manual-object">Object name</label>
+      <select id="manual-object"><option value="">Choose an object…</option></select>
+      <button id="manual-show" class="secondary" disabled>Show selected object</button>
+    </details>
     <section id="result" class="result" hidden aria-live="polite">
-      <p class="eyebrow">POSSIBLE MATCH · PLEASE VERIFY</p>
+      <p id="result-kind" class="eyebrow">POSSIBLE MATCH · PLEASE VERIFY</p>
       <h2 id="object-name"></h2><p id="object-meta"></p><p id="object-description"></p>
       <div id="sources"></div>
     </section>

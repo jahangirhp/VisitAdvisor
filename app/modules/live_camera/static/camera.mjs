@@ -1,4 +1,4 @@
-import { motion, signature, Stability, validateCatalog } from './recognition.mjs';
+import { motion, signature, Stability, validateCatalog, validBox } from './recognition.mjs';
 import { drawFrame, encodeFrame } from './capture.mjs';
 
 const $ = id => document.getElementById(id);
@@ -50,7 +50,7 @@ function stop(message = 'Camera stopped. Start again when you are ready.') {
   stream = null;
   video.srcObject = null;
   pending = null;
-  context.clearRect(0, 0, 224, 224);
+  context.clearRect(0, 0, canvas.width, canvas.height);
   resetTracking();
   $('placeholder').hidden = false;
   $('live-label').hidden = true;
@@ -65,14 +65,15 @@ function frame() {
   // Match the model's shortest-edge 256 resize then 224 center crop geometry.
   // Browser interpolation differs from Pillow bicubic: this is a new, uncalibrated
   // preprocessing identity and must be measured on the actual phone.
-  return drawFrame(context, video, video.videoWidth, video.videoHeight);
+  return drawFrame(context, video, video.videoWidth, video.videoHeight, canvas.width);
 }
 
-function showCandidate(id) {
+function showCandidate(id, manual = false) {
   if (displayed === id) return;
   const object = catalog.objects.find(item => item.id === id);
   if (!object) return;
   displayed = id;
+  $('result-kind').textContent = manual ? 'YOU SELECTED THIS OBJECT' : 'POSSIBLE MATCH · PLEASE VERIFY';
   $('object-name').textContent = object.name;
   $('object-meta').textContent = [object.creator, object.year, object.type].filter(Boolean).join(' · ');
   $('object-description').textContent = object.description || 'No description is available in this reference snapshot.';
@@ -105,7 +106,7 @@ async function nextFrame(run) {
     timer = setTimeout(() => nextFrame(run), 250);
     return;
   }
-  const current = signature(rgba);
+  const current = signature(rgba, canvas.width);
   if (motion(previous, current) > motionLimit()) resetTracking();
   previous = current;
   pending = { id: started, signature: current, videoTime: video.currentTime };
@@ -134,7 +135,8 @@ async function nextFrame(run) {
     if (data.version !== 'camera-server-v1' || data.location_id !== catalog.location.id ||
         data.reference_version !== catalog.reference_version || data.automatic_identification !== false ||
         !Array.isArray(data.candidates) || data.candidates.length > 3 ||
-        !data.candidates.every(item => catalog.objects.some(obj => obj.id === item.id) && Number.isFinite(item.score) && item.score >= -1 && item.score <= 1)) throw new Error('response');
+        !data.candidates.every(item => catalog.objects.some(obj => obj.id === item.id) && Number.isFinite(item.score) && item.score >= -1 && item.score <= 1 &&
+          (item.bbox === undefined || validBox(item.bbox)) && (item.profile === undefined || ['planar', 'multiview'].includes(item.profile)))) throw new Error('response');
     networkErrors = 0;
     handleResult({ ...data, id: started }, run);
   } catch {
@@ -156,7 +158,7 @@ function handleResult(data, run) {
   clearTimeout(timeout);
   const duration = performance.now() - pending.id;
   const rgba = frame();
-  const moved = !rgba || motion(pending.signature, signature(rgba)) > motionLimit();
+  const moved = !rgba || motion(pending.signature, signature(rgba, canvas.width)) > motionLimit();
   const stalled = video.currentTime <= pending.videoTime;
   pending = null;
   frameCount++;
@@ -167,7 +169,8 @@ function handleResult(data, run) {
   $('p95').textContent = `${Math.round(sorted[Math.ceil(sorted.length * 0.95) - 1])} ms (last ${sorted.length})`;
   $('frames').textContent = frameCount;
   lastResult = performance.now();
-  const id = stability.observe(data.candidates, lastResult, moved || stalled || duration > 3000);
+  const candidates = data.suggestion_allowed === false ? [] : data.candidates;
+  const id = stability.observe(candidates, lastResult, moved || stalled || duration > 3000);
   if (id) {
     showCandidate(id);
     status(stability.holding ? 'Rechecking the previous possible match… hold steady.' : 'Possible match. Check the name against the object you are looking at.');
@@ -175,7 +178,11 @@ function handleResult(data, run) {
     clearResult();
     const found = stability.count > 0;
     const checked = `Checked ${frameCount} ${frameCount === 1 ? 'frame' : 'frames'}. `;
-    status(checked + (moved ? 'Move slowly, then pause on one object.' : stalled ? 'Waiting for a fresh camera frame…' : duration > 3000 ? 'Connection is too slow to show a fresh match. Hold steady or try a stronger connection.' : found ? 'Checking a possible match… hold steady.' : 'No supported match yet. Center a supported artwork and hold still.'));
+    const guidance = data.warnings?.includes('CAMERA_CALIBRATION_REQUIRED') ? 'Camera matching is not ready yet. Use Find an object by name.' :
+      data.warnings?.includes('REFERENCE_VIEW_COVERAGE_INCOMPLETE') ? 'This view is not supported reliably yet. Try another supported object.' :
+      data.decision === 'deferred' ? 'Recognition is taking longer. Hold steady while we check the next frame.' :
+      data.decision === 'unreadable' ? 'Not enough detail. Move closer or improve the lighting.' : null;
+    status(checked + (moved ? 'Move slowly, then pause on one object.' : stalled ? 'Waiting for a fresh camera frame…' : duration > 3000 ? 'Connection is too slow to show a fresh match. Hold steady or try a stronger connection.' : guidance || (found ? 'Checking a possible match… hold steady.' : 'No supported match yet. Center a supported object and hold still.')));
   }
   // No frame queue: capture the newest frame only after the previous inference.
   timer = setTimeout(() => nextFrame(run), Math.max(250, 500 - duration));
@@ -190,6 +197,7 @@ async function start() {
   networkErrors = 0;
   lastResult = 0;
   stability = new Stability(catalog.policy);
+  resetTracking();
   for (const id of ['timing', 'p95']) $(id).textContent = '—';
   $('frames').textContent = '0';
   $('start').hidden = true;
@@ -198,7 +206,7 @@ async function start() {
   try {
     const granted = await navigator.mediaDevices.getUserMedia({
       audio: false,
-      video: { facingMode: { ideal: 'environment' }, width: { ideal: 640 }, height: { ideal: 480 }, frameRate: { ideal: 15, max: 24 } },
+      video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 720 }, frameRate: { ideal: 15, max: 24 } },
     });
     if (run !== generation || !running) {
       granted.getTracks().forEach(track => track.stop());
@@ -228,13 +236,27 @@ async function start() {
 
 $('start').addEventListener('click', start);
 $('stop').addEventListener('click', () => stop());
+$('manual-object').addEventListener('change', () => {
+  $('manual-show').disabled = !catalog?.objects.some(object => object.id === $('manual-object').value);
+});
+$('manual-show').addEventListener('click', () => {
+  if (!catalog) return;
+  if (Date.now() >= Date.parse(catalog.expires_at)) {
+    loadCatalog($('location').value);
+    return;
+  }
+  const id = $('manual-object').value;
+  if (!catalog.objects.some(object => object.id === id)) return;
+  stop('Showing the object you selected. Check its name against the label.');
+  showCandidate(id, true);
+});
 document.addEventListener('visibilitychange', () => { if (document.hidden && running) stop('Camera paused when you left this page. Tap Start to resume.'); });
 window.addEventListener('pagehide', () => stop());
 for (const event of ['waiting', 'stalled', 'emptied']) video.addEventListener(event, resetTracking);
 setInterval(() => {
   if (!running || !displayed) return;
   const rgba = frame();
-  if (!rgba || motion(previous, signature(rgba)) > motionLimit() || !stability.current(performance.now())) resetTracking();
+  if (!rgba || motion(previous, signature(rgba, canvas.width)) > motionLimit() || !stability.current(performance.now())) resetTracking();
 }, 200);
 
 async function loadCatalog(key) {
@@ -242,6 +264,9 @@ async function loadCatalog(key) {
   catalog = null;
   stop('Loading museum references…');
   $('objects').replaceChildren();
+  $('manual').hidden = true;
+  $('manual-show').disabled = true;
+  $('manual-object').replaceChildren(new Option('Choose an object…', ''));
   $('reference-credits').replaceChildren();
   $('target-note').hidden = true;
   for (const id of ['snapshot', 'download-size', 'runtime', 'timing', 'p95']) $(id).textContent = '—';
@@ -252,6 +277,9 @@ async function loadCatalog(key) {
     const loaded = validateCatalog(await response.json());
     if (request !== catalogRequest) return;
     catalog = loaded;
+    canvas.width = canvas.height = loaded.policy.frame_size || 224;
+    $('manual-object').append(...loaded.objects.map(object => new Option(object.name, object.id)));
+    $('manual').hidden = false;
     const option = [...$('location').options].find(item => item.value === key);
     option.textContent = `${loaded.location.name} · ${loaded.objects.length} supported ${loaded.objects.length === 1 ? 'object' : 'objects'}`;
     $('objects').replaceChildren(...loaded.objects.map(object => {

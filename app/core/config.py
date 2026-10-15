@@ -30,6 +30,11 @@ class Settings(BaseSettings):
     live_camera_location_id: str | None = None
     live_camera_object_ids: list[str] = Field(default_factory=list, max_length=12)
     live_camera_geometry_rerank: bool = False
+    live_camera_adaptive: bool = False
+    live_camera_object_regions: bool = False
+    live_camera_preload: bool = True
+    live_camera_inference_budget_ms: int = Field(default=1500, ge=250, le=2000)
+    live_camera_calibration: Path | None = None
     live_camera_refresh_seconds: int = Field(default=30, ge=5, le=120)
     live_camera_bundle: Path = Path(".local/live-camera")
 

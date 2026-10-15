@@ -33,7 +33,7 @@ async function fakeCamera(page, { denied = false, delayed = false } = {}) {
     Object.defineProperty(HTMLVideoElement.prototype, 'videoWidth', { get: () => 640 });
     Object.defineProperty(HTMLVideoElement.prototype, 'videoHeight', { get: () => 480 });
     HTMLMediaElement.prototype.play = async () => {};
-    CanvasRenderingContext2D.prototype.drawImage = function () { this.fillStyle = window.frameColor; this.fillRect(0, 0, 224, 224); };
+    CanvasRenderingContext2D.prototype.drawImage = function () { this.fillStyle = window.frameColor; this.fillRect(0, 0, this.canvas.width, this.canvas.height); };
   }, { ids, denied, delayed });
   await page.route('**/recognize?*', async route => {
     const candidates = await page.evaluate(() => {
@@ -171,6 +171,105 @@ test('unavailable references never enable camera access', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('#status')).toContainText('Museum references are unavailable');
   await expect(page.locator('#start')).toBeDisabled();
+});
+
+test('unwarmed model never enables camera access', async ({ page }) => {
+  await fakeCamera(page);
+  await page.route('**/bundle/catalog.json', route => route.fulfill({ json: {
+    ...catalog, readiness: { model_warmed: false, references_current: true },
+  } }));
+  await page.goto('/');
+  await expect(page.locator('#start')).toBeDisabled();
+  expect(await page.evaluate(() => window.cameraRequests)).toBe(0);
+});
+
+test('adaptive camera sends bounded detail frames and still acquires stable matches', async ({ page }) => {
+  await fakeCamera(page);
+  await page.addInitScript(() => {
+    window.uploadSizes = [];
+    const originalEncode = HTMLCanvasElement.prototype.toBlob;
+    HTMLCanvasElement.prototype.toBlob = function(callback, type, quality) {
+      const width = this.width, height = this.height;
+      return originalEncode.call(this, blob => {
+        if (blob) window.uploadSizes.push([width, height, blob.size]);
+        callback(blob);
+      }, type, quality);
+    };
+  });
+  await page.route('**/bundle/catalog.json', route => route.fulfill({ json: {
+    ...catalog, policy: { ...catalog.policy, frame_size: 512,
+      recognition_pipeline: 'object-regions-types-v5', minimum_stable_ms: 600 },
+  } }));
+  await page.route('**/recognize?*', async route => {
+    await route.fulfill({ json: {
+      version: 'camera-server-v1', location_id: location, reference_version: catalog.reference_version,
+      automatic_identification: false, suggestion_allowed: true,
+      candidates: [{ id: ids[0], score: 0.9 }], inferenceMs: 10,
+    } });
+  });
+  await page.goto('/');
+  await page.locator('#start').click();
+  await expect(page.locator('#object-name')).toHaveText('Painting 1');
+  await page.locator('#stop').click();
+  const sizes = await page.evaluate(() => window.uploadSizes);
+  expect(sizes.length).toBeGreaterThanOrEqual(3);
+  expect(sizes.every(size => size[0] === 512 && size[1] === 512 && size[2] <= 256 * 1024)).toBe(true);
+});
+
+test('manual selection works without camera permission and is explicitly labeled', async ({ page }) => {
+  await fakeCamera(page, { denied: true });
+  await page.goto('/');
+  await page.locator('#manual summary').click();
+  await expect(page.locator('#manual-show')).toBeDisabled();
+  await page.locator('#manual-object').selectOption(ids[1]);
+  await page.locator('#manual-show').click();
+  await expect(page.locator('#object-name')).toHaveText('Painting 2');
+  await expect(page.locator('#result-kind')).toHaveText('YOU SELECTED THIS OBJECT');
+  expect(await page.evaluate(() => window.cameraRequests)).toBe(0);
+  expect(await page.evaluate(() => window.frameMessages)).toBe(0);
+});
+
+test('manual selection stops live uploads and ignores a delayed recognition response', async ({ page }) => {
+  await fakeCamera(page);
+  let release;
+  const held = new Promise(resolve => { release = resolve; });
+  let entered = false;
+  await page.route('**/recognize?*', async route => {
+    entered = true;
+    await held;
+    await route.fulfill({ json: {
+      version: 'camera-server-v1', location_id: location, reference_version: catalog.reference_version,
+      automatic_identification: false, candidates: [{ id: ids[0], score: 0.99 }], inferenceMs: 10,
+    } }).catch(() => {});
+  });
+  await page.goto('/');
+  await page.locator('#start').click();
+  await expect.poll(() => entered).toBe(true);
+  await page.locator('#manual summary').click();
+  await page.locator('#manual-object').selectOption(ids[1]);
+  await page.locator('#manual-show').click();
+  release();
+  await expect(page.locator('#object-name')).toHaveText('Painting 2');
+  await expect(page.locator('#result-kind')).toHaveText('YOU SELECTED THIS OBJECT');
+  await expect(page.locator('#start')).toBeVisible();
+  expect(await page.evaluate(() => window.tracksStopped)).toBe(1);
+});
+
+test('server abstention prevents strong scores from establishing a suggestion', async ({ page }) => {
+  await fakeCamera(page);
+  await page.route('**/recognize?*', async route => {
+    await page.evaluate(() => window.frameMessages++);
+    await route.fulfill({ json: {
+      version: 'camera-server-v1', location_id: location, reference_version: catalog.reference_version,
+      automatic_identification: false, suggestion_allowed: false,
+      candidates: [{ id: ids[0], score: 0.99 }], inferenceMs: 10,
+    } });
+  });
+  await page.goto('/');
+  await page.locator('#start').click();
+  await expect.poll(() => page.evaluate(() => window.frameMessages)).toBeGreaterThanOrEqual(4);
+  await expect(page.locator('#result')).toBeHidden();
+  await page.locator('#stop').click();
 });
 
 test('phone never requests model, worker, or runtime assets', async ({ page }) => {
