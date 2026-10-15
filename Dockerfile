@@ -5,9 +5,16 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-COPY pyproject.toml ./
+# The visual build pins the packages that are part of the reference-set identity,
+# so embeddings match the Atlas references (see constraints-visual.txt).
+ARG EXTRAS=camera-server
+ARG TORCH_INDEX_URL=
+ARG CONSTRAINTS=
+
+COPY pyproject.toml constraints-visual.txt ./
 COPY app ./app
-RUN pip install --no-cache-dir ".[camera-server]" \
+RUN pip install --no-cache-dir ${TORCH_INDEX_URL:+--extra-index-url $TORCH_INDEX_URL} \
+        ${CONSTRAINTS:+-c $CONSTRAINTS} ".[${EXTRAS}]" \
     && groupadd --system visitadvisor \
     && useradd --system --gid visitadvisor --no-create-home visitadvisor
 

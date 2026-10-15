@@ -33,3 +33,42 @@ services:
       timeout: 3s
       retries: 3
       start_period: 10s
+
+  # Dev-only visual evaluation UI: docker compose --profile visual up --build visual-evaluation
+  # Open http://localhost:8002/api/v1/visual-evaluation
+  visual-evaluation:
+    profiles:
+      - visual
+    build:
+      context: .
+      args:
+        EXTRAS: camera-server,visual
+        TORCH_INDEX_URL: https://download.pytorch.org/whl/cpu
+        CONSTRAINTS: constraints-visual.txt
+    env_file:
+      - .env
+    environment:
+      APP_HOST: 0.0.0.0
+      APP_PORT: 8002
+      VISUAL_ENABLED: "true"
+      VISUAL_EVALUATION_ENABLED: "true"
+      VISUAL_EVALUATION_ROOT: /data/visual
+      LIVE_CAMERA_BUNDLE: /app/.local/live-camera
+      # The model is loaded offline from the mounted Hugging Face cache.
+      HF_HOME: /hf
+    volumes:
+      - ./app:/app/app
+      - ./tests/data/visual:/data/visual:ro
+      - ${HF_CACHE_DIR:-${HOME}/.cache/huggingface}:/hf:ro
+    ports:
+      - "127.0.0.1:8002:8002"
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8002/health', timeout=2)"
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 60s

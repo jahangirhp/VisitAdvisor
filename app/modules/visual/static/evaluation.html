@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visual evaluation</title>
+<style>
+  body { font: 14px system-ui, sans-serif; margin: 0; padding: 24px; color: #1c1c1e; background: #f6f6f8; }
+  h1 { font-size: 20px; margin: 0 0 16px; }
+  h2 { font-size: 15px; margin: 0 0 10px; }
+  section { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+  .bar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  button, select { font: inherit; padding: 6px 12px; }
+  table { border-collapse: collapse; width: 100%; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #eee; vertical-align: middle; }
+  tr.click { cursor: pointer; }
+  tr.click:hover, tr.sel { background: #eef3ff; }
+  img.thumb { height: 56px; border-radius: 4px; }
+  .ok { color: #1a7f37; font-weight: 600; }
+  .bad { color: #b42318; font-weight: 600; }
+  .muted { color: #666; }
+  #msg { min-height: 1.2em; }
+  svg text { font-size: 11px; fill: #555; }
+  .legend span { margin-right: 14px; }
+  .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; }
+</style>
+</head>
+<body>
+<h1>Visual evaluation <span class="muted">(positive photos)</span></h1>
+
+<section>
+  <div class="bar">
+    <label>Dataset <select id="dataset"></select></label>
+    <button id="run">Run evaluation</button>
+    <button id="clear">Clear history</button>
+    <span id="msg" class="muted"></span>
+  </div>
+</section>
+
+<section>
+  <h2>Accuracy history <span class="muted" id="chart-title"></span></h2>
+  <div class="legend muted">
+    <span><i class="dot" style="background:#2563eb"></i>Top-1 %</span>
+    <span><i class="dot" style="background:#16a34a"></i>Top-3 %</span>
+    <span><i class="dot" style="background:#d4d4d8"></i>Photos in run</span>
+  </div>
+  <svg id="chart" width="100%" viewBox="0 0 800 260" role="img" aria-label="Accuracy history"></svg>
+</section>
+
+<section>
+  <h2>Runs</h2>
+  <table>
+    <thead><tr><th>Started</th><th>Dataset</th><th>Status</th><th>Photos</th><th>Top-1</th><th>Top-3</th><th>Model</th><th></th></tr></thead>
+    <tbody id="runs"></tbody>
+  </table>
+</section>
+
+<section id="detail" hidden>
+  <h2 id="detail-title"></h2>
+  <div id="categories" class="muted" style="margin-bottom:10px"></div>
+  <table>
+    <thead><tr><th>Photo</th><th>Type</th><th>View</th><th>Result</th><th>Rank</th><th>Top candidates</th></tr></thead>
+    <tbody id="results"></tbody>
+  </table>
+</section>
+
+<script>
+const base = "/api/v1/visual-evaluation";
+const $ = (id) => document.getElementById(id);
+let runs = [];
+let selected = null;
+let polling = null;
+
+const pct = (n, total) => (total ? Math.round((100 * n) / total) : 0);
+const el = (tag, text, cls) => {
+  const node = document.createElement(tag);
+  if (text !== undefined) node.textContent = text;
+  if (cls) node.className = cls;
+  return node;
+};
+
+async function api(path, options) {
+  const response = await fetch(base + path, options);
+  const body = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(body.error?.code || "REQUEST_FAILED");
+  return body;
+}
+
+async function loadDatasets() {
+  const select = $("dataset");
+  const rows = await api("/datasets");
+  select.replaceChildren(...rows.map((d) => {
+    const option = el("option", `${d.name} (${d.photos} photos)`);
+    option.value = d.name;
+    return option;
+  }));
+  if (!rows.length) $("msg").textContent = "No datasets found.";
+}
+
+async function loadRuns() {
+  runs = await api("/runs");
+  renderRuns();
+  renderChart();
+}
+
+function renderRuns() {
+  $("runs").replaceChildren(...runs.map((run) => {
+    const row = el("tr", undefined, "click" + (run.id === selected ? " sel" : ""));
+    const done = run.status === "done";
+    const cells = [
+      new Date(run.started_at).toLocaleString(),
+      run.dataset,
+      run.status === "failed" ? `failed (${run.error})` : run.status,
+      run.total,
+      done ? `${run.top1}/${run.count} (${pct(run.top1, run.count)}%)` : "–",
+      done ? `${run.top3}/${run.count} (${pct(run.top3, run.count)}%)` : "–",
+      run.model,
+    ];
+    row.append(...cells.map((c) => el("td", String(c))));
+    const remove = el("button", "Delete");
+    remove.disabled = run.status === "running";
+    remove.onclick = (event) => {
+      event.stopPropagation();
+      deleteRun(run);
+    };
+    const action = el("td");
+    action.append(remove);
+    row.append(action);
+    row.onclick = () => showRun(run.id);
+    return row;
+  }));
+}
+
+function renderChart() {
+  const svg = $("chart");
+  const name = $("dataset").value;
+  $("chart-title").textContent = name ? `– ${name}` : "";
+  const data = runs.filter((r) => r.dataset === name && r.status === "done").reverse();
+  svg.replaceChildren();
+  const ns = "http://www.w3.org/2000/svg";
+  const add = (tag, attrs, text) => {
+    const node = document.createElementNS(ns, tag);
+    for (const [k, v] of Object.entries(attrs)) node.setAttribute(k, v);
+    if (text !== undefined) node.textContent = text;
+    svg.append(node);
+    return node;
+  };
+  const L = 40, R = 760, T = 15, B = 220;
+  if (!data.length) {
+    add("text", { x: 400, y: 120, "text-anchor": "middle" }, "No finished runs for this dataset yet.");
+    return;
+  }
+  const maxCount = Math.max(...data.map((r) => r.count), 1);
+  const x = (i) => (data.length === 1 ? (L + R) / 2 : L + ((R - L) * i) / (data.length - 1));
+  const y = (percent) => B - ((B - T) * percent) / 100;
+  for (const tick of [0, 25, 50, 75, 100]) {
+    add("line", { x1: L, x2: R, y1: y(tick), y2: y(tick), stroke: "#eee" });
+    add("text", { x: L - 6, y: y(tick) + 4, "text-anchor": "end" }, tick + "%");
+  }
+  const barWidth = Math.min(40, (R - L) / data.length / 2);
+  data.forEach((run, i) => {
+    const height = ((B - T) * run.count) / maxCount / 3;
+    add("rect", { x: x(i) - barWidth / 2, y: B - height, width: barWidth, height, fill: "#d4d4d8" });
+    add("text", { x: x(i), y: B - height - 3, "text-anchor": "middle" }, String(run.count));
+    add("text", { x: x(i), y: B + 14, "text-anchor": "middle" },
+      new Date(run.started_at).toLocaleDateString(undefined, { month: "short", day: "numeric" }));
+  });
+  for (const [key, color] of [["top3", "#16a34a"], ["top1", "#2563eb"]]) {
+    const points = data.map((r, i) => [x(i), y(pct(r[key], r.count))]);
+    add("polyline", { points: points.map((p) => p.join(",")).join(" "), fill: "none", stroke: color, "stroke-width": 2 });
+    points.forEach(([px, py], i) => {
+      const dot = add("circle", { cx: px, cy: py, r: 4, fill: color });
+      const title = document.createElementNS(ns, "title");
+      title.textContent = `${data[i][key]}/${data[i].count} (${pct(data[i][key], data[i].count)}%)`;
+      dot.append(title);
+    });
+  }
+}
+
+async function deleteRun(run) {
+  const when = new Date(run.started_at).toLocaleString();
+  if (!confirm(`Delete the ${run.dataset} run from ${when}? This cannot be undone.`)) return;
+  try {
+    await api("/runs/" + run.id, { method: "DELETE" });
+    if (selected === run.id) {
+      selected = null;
+      $("detail").hidden = true;
+    }
+    $("msg").textContent = "Run deleted.";
+    await loadRuns();
+  } catch (error) {
+    $("msg").textContent = error.message;
+    await loadRuns().catch(() => {});
+  }
+}
+
+async function showRun(id) {
+  selected = id;
+  renderRuns();
+  const run = await api("/runs/" + id);
+  $("detail").hidden = false;
+  $("detail-title").textContent = `${run.dataset} – ${new Date(run.started_at).toLocaleString()}`;
+  const describe = (title, groups) => Object.entries(groups || {}).map(
+    ([name, c]) => `${title} ${name}: top-1 ${c.top1}/${c.count}, top-3 ${c.top3}/${c.count}`);
+  $("categories").replaceChildren(...[
+    ...describe("view", run.by_category), ...describe("type", run.by_type),
+  ].map((line) => el("div", line)));
+  $("results").replaceChildren(...(run.results || []).map((r) => {
+    const row = el("tr");
+    const photo = el("td");
+    const img = el("img", undefined, "thumb");
+    img.src = `${base}/datasets/${encodeURIComponent(run.dataset)}/photos/${r.id}/image`;
+    img.alt = r.path;
+    photo.append(img);
+    const verdict = el("td", r.top1 ? "correct" : r.top3 ? "top-3" : "wrong", r.top1 ? "ok" : "bad");
+    const candidates = r.candidates.map((c) => `${c.name} (${c.score})`).join(", ") || r.status;
+    row.append(photo, el("td", r.object_type ?? "–"), el("td", r.category), verdict, el("td", r.rank ?? "–"), el("td", candidates));
+    return row;
+  }));
+}
+
+async function poll(id) {
+  clearInterval(polling);
+  polling = setInterval(async () => {
+    try {
+      const run = await api("/runs/" + id);
+      if (run.status === "running") {
+        $("msg").textContent = `Running… ${run.done ?? 0}/${run.total}`;
+        return;
+      }
+      clearInterval(polling);
+      $("run").disabled = false;
+      $("msg").textContent = run.status === "done" ? "Finished." : `Failed: ${run.error}`;
+      await loadRuns();
+      if (run.status === "done") showRun(id);
+    } catch (error) {
+      clearInterval(polling);
+      $("run").disabled = false;
+      $("msg").textContent = error.message;
+    }
+  }, 1500);
+}
+
+$("run").onclick = async () => {
+  $("run").disabled = true;
+  $("msg").textContent = "Starting…";
+  try {
+    const { id } = await api("/runs", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ dataset: $("dataset").value }),
+    });
+    await loadRuns();
+    poll(id);
+  } catch (error) {
+    $("run").disabled = false;
+    $("msg").textContent = error.message;
+  }
+};
+$("clear").onclick = async () => {
+  if (!runs.length) {
+    $("msg").textContent = "There is no history to clear.";
+    return;
+  }
+  const warning = `WARNING: this permanently deletes ALL ${runs.length} saved evaluation run(s), `
+    + "including their per-photo results, for every dataset. The history is stored in the "
+    + "shared database, so it is removed for everyone using it. This cannot be undone.\n\n"
+    + "Clear the whole history?";
+  if (!confirm(warning)) return;
+  try {
+    const { deleted } = await api("/runs", { method: "DELETE" });
+    selected = null;
+    $("detail").hidden = true;
+    $("msg").textContent = `Deleted ${deleted} run(s).`;
+    await loadRuns();
+  } catch (error) {
+    $("msg").textContent = error.message === "RUN_IN_PROGRESS"
+      ? "Wait for the running evaluation to finish." : error.message;
+  }
+};
+$("dataset").onchange = renderChart;
+
+(async () => {
+  try {
+    await loadDatasets();
+    await loadRuns();
+    const active = runs.find((r) => r.status === "running");
+    if (active) {
+      $("run").disabled = true;
+      poll(active.id);
+    }
+  } catch (error) {
+    $("msg").textContent = error.message;
+  }
+})();
+</script>
+</body>
+</html>

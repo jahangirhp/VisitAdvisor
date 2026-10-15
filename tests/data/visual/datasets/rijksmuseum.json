@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "path": "positive/the-milkmaid.jpg",
+    "location_id": "6a9dd4106d52c3bc3965869d",
+    "expected_object_id": "6a9dd4126d52c3bc396586a0",
+    "category": "full",
+    "object_type": "painting"
+  },
+  {
+    "id": 2,
+    "path": "positive/the-jewish-bride.jpg",
+    "location_id": "6a9dd4106d52c3bc3965869d",
+    "expected_object_id": "6a9dd4136d52c3bc396586a1",
+    "category": "full",
+    "object_type": "painting"
+  }
+]

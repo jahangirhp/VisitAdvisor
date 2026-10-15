@@ -3,6 +3,7 @@
 !Dockerfile
 !.dockerignore
 !pyproject.toml
+!constraints-visual.txt
 !app/
 !app/**
 **/__pycache__/
