@@ -1,0 +1,22 @@
+VisitAdvisor positive-only Atlas diagnostic
+Started: 2026-10-05T22:30:43.773056+02:00
+Command: VISUAL_IMAGE_ONLY_NEW_POSITIVES=1 RUN_VISUAL_IMAGE_CHECK=1 VISUAL_ENABLED=true .venv/bin/pytest -s -q tests/test_visual_image_atlas.py
+
+Real photos tested: 50
+Correct: 42/50 (84%)
+Wrong: 8/50 (16%)
+Covered objects top-1: 42/50 (84%)
+Covered objects top-3: 42/50 (84%)
+Wrong results:
+  positive-batch-commons-26253448: expected=6aaad084dd73e04d9614e9e7, status=no_match, candidates=[]
+  positive-batch-commons-66977722: expected=6aab0decdd73e04d96150a13, status=ambiguous, candidates=[('6a9dd848332abe8469d55977', 'Portrait of Jan Amos Comenius', 0.733), ('6a9dd857332abe8469d55990', 'Dirck Graswinckel (1600-66). Rechtsgeleerde en letterkundige', 0.71), ('6a9dd852332abe8469d5598a', 'Portret van Dominicus Baudius (1561-1613). Hoogleraar in de welsprekendheid, de geschiedenis en de rechten te Leiden', 0.71)]
+  positive-batch-commons-50088024: expected=6aab0dbcdd73e04d96150a00, status=ambiguous, candidates=[('6aab0dfd303f7d479a4f23e8', 'Rijksmuseum Night Watch Room', 0.703), ('6aab0dfd303f7d479a4f23e6', 'Rijksmuseum Gallery of Honour', 0.638), ('6aab0defdd73e04d96150a16', 'Lidded ewer for the Amsterdam Goldsmiths Guild', 0.541)]
+  positive-batch-commons-161498270: expected=6aab0deedd73e04d96150a15, status=ambiguous, candidates=[('6a9dd827332abe8469d5594d', 'Crucifixion', 0.463)]
+  positive-batch-commons-161498357: expected=6aab0deedd73e04d96150a15, status=no_match, candidates=[]
+  positive-batch-commons-47260825: expected=6aa9a745dd73e04d96146160, status=ambiguous, candidates=[('6aab0dfd303f7d479a4f23e6', 'Rijksmuseum Gallery of Honour', 0.653), ('6aab0e00303f7d479a4f23ec', 'Rijksmuseum Room 0.1', 0.54), ('6aab0dfd303f7d479a4f23e8', 'Rijksmuseum Night Watch Room', 0.514)]
+  positive-batch-commons-66977726: expected=6aab0decdd73e04d96150a13, status=ambiguous, candidates=[('6aab0defdd73e04d96150a16', 'Lidded ewer for the Amsterdam Goldsmiths Guild', 0.475)]
+  positive-batch-commons-161500766: expected=6aab0deedd73e04d96150a15, status=no_match, candidates=[]
+.
+1 passed in 106.04s (0:01:46)
+
+Exit code: 0

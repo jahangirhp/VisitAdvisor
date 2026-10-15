@@ -1,0 +1,1841 @@
+{
+  "reference_sets": {
+    "6a9dd4106d52c3bc3965869d": {
+      "6a9dd4126d52c3bc396586a0": "189e3d6933af485fa814174a5d85a3e9",
+      "6a9dd4136d52c3bc396586a1": "caf654a4bedd4d2b9af23d530fff3b04",
+      "6a9dd7f8332abe8469d558f5": "2f365a37724c41128c5fadd9ac2d9118",
+      "6a9dd7fa332abe8469d558f7": "1de16c67e8fb429a97db6a169cec579f",
+      "6a9dd7fb332abe8469d558f8": "445d13e4b16948668496580cb2b3cc2c",
+      "6a9dd7fc332abe8469d558f9": "92dc789d5e414e89a4fb4221da2c1777",
+      "6a9dd7fd332abe8469d558fa": "59b4357f7a9041fb93d1d654a7a2c1e2",
+      "6a9dd7fe332abe8469d558fb": "5ac6623c00314acea0314720be7b4c67",
+      "6a9dd7ff332abe8469d558fc": "1d13311a8a9b4fceb1bbf47f29f1ab85",
+      "6a9dd800332abe8469d558fd": "24943a4910ec4934aa51e9d45af634ac",
+      "6a9dd802332abe8469d558ff": "361bf9067b494fae80a68562d6a1ebc3",
+      "6a9dd802332abe8469d55900": "fdb5f8f181b549118efb48ccca65fa01",
+      "6a9dd803332abe8469d55901": "04d053a611d444148b8fb7615795dce6",
+      "6a9dd804332abe8469d55902": "6156d8ed074b46de8cceba80c5657498",
+      "6a9dd806332abe8469d55906": "cfe0f0a1539f40cdb9c87272d2ea4221",
+      "6a9dd807332abe8469d55907": "b88daa1fd5f64c17b112097e2250c336",
+      "6a9dd808332abe8469d5590b": "208f6abba8574266bdd9d88255a509d6",
+      "6a9dd80b332abe8469d5590d": "ddf7b955d861458493e0e34fd154d1f0",
+      "6a9dd80c332abe8469d5590f": "e39e82f34f38456b9382345f6533e2f2",
+      "6a9dd80c332abe8469d55910": "78164bed605540f1baccd41519df3f1f",
+      "6a9dd80e332abe8469d55911": "9997b4745fdf4ab893770afef24b0362",
+      "6a9dd80f332abe8469d55912": "fc8af16578e549328f371e86789be612",
+      "6a9dd810332abe8469d55913": "2b645882dc4842f2b6299ee4adff0eb9",
+      "6a9dd811332abe8469d55917": "9d8dfddef79841738214f37d850150dc",
+      "6a9dd812332abe8469d55919": "580e8a6752134fba8d5633d66e98d843",
+      "6a9dd812332abe8469d5591a": "c7e4dbdcbf654b709122d7cbd1e514fe",
+      "6a9dd813332abe8469d5591b": "c1a168d2da3f4969a2d44c0560b361d1",
+      "6a9dd814332abe8469d5591d": "70371adfba8540e7af4267075e44fad3",
+      "6a9dd816332abe8469d55920": "e4fafb45b82c4b3fbf4aa554654611e6",
+      "6a9dd817332abe8469d55937": "49791000d0ca456a870e0450722548cf",
+      "6a9dd818332abe8469d55938": "defed78aca5a4ce6af0372dc5dc82758",
+      "6a9dd819332abe8469d55939": "206e9d5fb5bf470abe742ab7cb5493cc",
+      "6a9dd81a332abe8469d5593a": "29251ebf0d3d4675ad06bc1a6cb3dbb4",
+      "6a9dd81b332abe8469d5593b": "02b79d578a7a4df5a3a652e79323a2c5",
+      "6a9dd81c332abe8469d5593c": "0a6f30323ed549ab8f77d97461cefa4d",
+      "6a9dd81d332abe8469d5593d": "5f1fd967c24448f69f2a1277f7c76c9b",
+      "6a9dd81e332abe8469d5593e": "a8e2f9786f3f40b38d33141044466ddb",
+      "6a9dd81f332abe8469d55941": "8500728ab6f647979b3851179d4519c6",
+      "6a9dd820332abe8469d55942": "83d0f65ee8ef4f66a7a1ae3b07d2fd89",
+      "6a9dd821332abe8469d55943": "3b69c15b5bac49cfba043607c3cb6662",
+      "6a9dd823332abe8469d55946": "30fe8e5efbd84472ac2ce56d90a2407a",
+      "6a9dd825332abe8469d5594a": "b58db21e544649bbbabf16da60f805e2",
+      "6a9dd826332abe8469d5594b": "a73a05e903a045c08de59335bc9707fa",
+      "6a9dd827332abe8469d5594d": "90129b04a40d418db9c4dbc0bf1c4fcf",
+      "6a9dd829332abe8469d5594e": "689258a30bdd40e1b7263ac2d6a702d7",
+      "6a9dd829332abe8469d5594f": "80aaca3cc4d74b43b28c0a105e6282a2",
+      "6a9dd82a332abe8469d55950": "0cfa6c4c1cde4994a469f40781d91864",
+      "6a9dd82b332abe8469d55951": "44450a14e92b4d4e8d524df44f923f63",
+      "6a9dd82c332abe8469d55953": "f04cbec6203e4d95a5c9245f5fa413bd",
+      "6a9dd82d332abe8469d55954": "09d603016bcc4771999f91aefb1fda8c",
+      "6a9dd82e332abe8469d55955": "111772e04b2b47c78e588bd777a823ba",
+      "6a9dd837332abe8469d55960": "916adc80b07947fc99434a29f7091617",
+      "6a9dd838332abe8469d55961": "1346cc1a1d0d47dcbcf4fa58cc03c4ee",
+      "6a9dd839332abe8469d55962": "fb78db9873a3472bbf43ac2033f7a9eb",
+      "6a9dd83a332abe8469d55963": "ad19f7ecc6da4f438a82438d25f595ef",
+      "6a9dd83b332abe8469d55964": "0b666e586acf46dca54b4ba7d2900e82",
+      "6a9dd83c332abe8469d55965": "be03506826ca446db3bef9718bc6c7db",
+      "6a9dd83d332abe8469d55966": "801d355acdcd433a93abaad44df02379",
+      "6a9dd83e332abe8469d55967": "f1f16e7373a5485891841c025838b609",
+      "6a9dd83f332abe8469d55968": "cbc7dd4f69604af2bb02bf3a46d4b533",
+      "6a9dd840332abe8469d55969": "d8138f4339df4c8ab03a714aaa606dec",
+      "6a9dd841332abe8469d5596a": "88cb41ec84ea41ef9d6ffb49bab41b5b",
+      "6a9dd842332abe8469d5596c": "0c93061e4d9a49d7b20e9e3abca5a686",
+      "6a9dd843332abe8469d5596f": "b537fee456674237b19860833da82554",
+      "6a9dd844332abe8469d55971": "726eb6a37542451a8c1af59f66b6d6a3",
+      "6a9dd845332abe8469d55974": "1320d97481e74a9dba328d53ce39899c",
+      "6a9dd846332abe8469d55975": "c2fb0f7f64d2483298c44b7f57a9f1a8",
+      "6a9dd847332abe8469d55976": "afd5d5460f584cec8e640d25f5406883",
+      "6a9dd848332abe8469d55977": "fd3ee834bf2c4be6928555003bd5837d",
+      "6a9dd849332abe8469d55979": "9a0e7d052022489b9c67a9671422b051",
+      "6a9dd84a332abe8469d5597a": "cf789b365e8549e996203b882aa21234",
+      "6a9dd84c332abe8469d5597b": "81a7ff41670e438496b7b73afd89a166",
+      "6a9dd84d332abe8469d5597d": "24a48cd652684efb9fe642e782b714ca",
+      "6a9dd84e332abe8469d55981": "274d2004af9b468ea129a8d7eefd3eb6",
+      "6a9dd84e332abe8469d55982": "14bafda4a5a54c44b9c64cd104fccfc4",
+      "6a9dd84f332abe8469d55983": "fae998f0d14a405aa6a48b636a6812de",
+      "6a9dd850332abe8469d55985": "a92f39726b7f4288892f37df0e490d2b",
+      "6a9dd851332abe8469d55986": "8b0bc5773ec0444e8f019da07aebc4a4",
+      "6a9dd852332abe8469d55988": "9921c98eb9cc4419982e9749b255472f",
+      "6a9dd852332abe8469d5598a": "537fa830c20947b79ca31f7150ddc5ac",
+      "6a9dd853332abe8469d5598b": "6038fb3b56534a93bb0fd256df488ed7",
+      "6a9dd854332abe8469d5598c": "e782b72e27694d1d94c379a66680e477",
+      "6a9dd855332abe8469d5598d": "c5034cdaa00d492cabf3506497b65c0f",
+      "6a9dd856332abe8469d5598e": "4cd7cde851a34b8fbc6686c24ba44142",
+      "6a9dd857332abe8469d55990": "53bb16be02194fe1a94efed5f28fcc1e",
+      "6a9dd858332abe8469d55992": "c62e45754b1741c0baf5dad9ed9fbf07",
+      "6a9dd859332abe8469d55993": "495fb71bdcc94df3b46b5a839ff15151",
+      "6aa9a743dd73e04d9614615c": "f270347bb3bf4131aa5d71022055dccc",
+      "6aa9a744dd73e04d9614615e": "18bd07de2d9f4099852b38ce335f0643",
+      "6aa9a745dd73e04d96146160": "c281e6a6386342a892709194a2ca3de8",
+      "6aa9a746dd73e04d96146161": "3100c703681943ec8f082b12c4b82def",
+      "6aa9a747dd73e04d96146163": "d6569e626b09436dbfb8e5c49f4d5d39",
+      "6aa9a7fa60b7ca89b6355b9c": "9f5512451d2a4157b033173938c1ae8a",
+      "6aaad084dd73e04d9614e9e7": "37086492ff2c4fd2b1bb97382a3bca1d",
+      "6aaad084dd73e04d9614e9e8": "c2858dcb86d044eba9cdd754652e397e",
+      "6aab0dbcdd73e04d96150a00": "9751fcd54d3d4c5fb78e5734b4724c49",
+      "6aab0decdd73e04d96150a13": "66102b136de44314bb83062c6767b727",
+      "6aab0deedd73e04d96150a15": "bbd8353c370041dda01c7b653bc70eb7",
+      "6aab0defdd73e04d96150a16": "a509a1225170404198f69a5f60634a79",
+      "6aab0df0dd73e04d96150a18": "4cb0b415d947424bbe4b6f859717f453",
+      "6aab0df2dd73e04d96150a19": "2fa17b322c254df285051e246cf75784",
+      "6aab0df3dd73e04d96150a1a": "603395d9730d4b1cbc8cc3c693f4e38a",
+      "6aab0df5dd73e04d96150a1b": "3fa28e7abfb745dea7b3726c0f28d588",
+      "6aab0df6dd73e04d96150a1c": "bc2d721bcc6c4c96b017769985d4c4bb",
+      "6aab0df8dd73e04d96150a1e": "a1177e9e308d4075b1d22738ee65ccaa",
+      "6aab0dfa303f7d479a4f23e0": "bd7ba70f3f5a47e6b1a41dd87ac0decd",
+      "6aab0dfb303f7d479a4f23e2": "366251984bb84309829f11b41ea036e2",
+      "6aab0dfc303f7d479a4f23e4": "0443421e75724f5d82f8817368a2c1bc",
+      "6aab0dfd303f7d479a4f23e6": "9e18bfabe2d042cdbcc6852843752bfc",
+      "6aab0dfd303f7d479a4f23e8": "ef64ebf30067480fba086bf3477d4f41",
+      "6aab0dff303f7d479a4f23ea": "81d635e42f044801a45df78d7d8d179a",
+      "6aab0e00303f7d479a4f23ec": "b335f604b42c46af8d1bc0b5f8d712ce"
+    }
+  },
+  "reference_sets_unchanged": true,
+  "created_at": "2026-10-05T21:26:31.176454+00:00",
+  "folder": "tests/data/visual/positive2",
+  "manifest_sha256": "c5a64ee5b1be074f159e2f5927bc88ec6a653601c6764f43ae103fccc1f49381",
+  "model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056",
+  "preprocessing": "rgb-thumbnail2560-dino224-regions65-sift800-v1/4.57.6/2.14.0+cpu/4.14.0.94/12.3.0",
+  "mode": "visual",
+  "scores_are_probabilities": false,
+  "measurement": "In-process visual API uploads and live Atlas reads; full location catalog; no browser crop/tracking or mobile network",
+  "dataset": "Positive-only diagnostic; no negative rejection or confidence calibration measured. Derivatives share their source capture.",
+  "summary": {
+    "photos": 50,
+    "top1_correct": 42,
+    "top1_accuracy": 0.84,
+    "top3_correct": 45,
+    "top3_recall": 0.9,
+    "service_failures": 0,
+    "service_failure_rate": 0.0,
+    "no_candidates": 1,
+    "statuses": {
+      "ambiguous": 49,
+      "no_match": 1
+    }
+  },
+  "by_object": {
+    "6a9dd4126d52c3bc396586a0": {
+      "photos": 1,
+      "top1_correct": 1,
+      "top1_accuracy": 1.0,
+      "top3_correct": 1,
+      "top3_recall": 1.0,
+      "service_failures": 0,
+      "service_failure_rate": 0.0,
+      "no_candidates": 0,
+      "statuses": {
+        "ambiguous": 1
+      }
+    },
+    "6aa9a7fa60b7ca89b6355b9c": {
+      "photos": 40,
+      "top1_correct": 38,
+      "top1_accuracy": 0.95,
+      "top3_correct": 39,
+      "top3_recall": 0.975,
+      "service_failures": 0,
+      "service_failure_rate": 0.0,
+      "no_candidates": 1,
+      "statuses": {
+        "ambiguous": 39,
+        "no_match": 1
+      }
+    },
+    "6aab0dbcdd73e04d96150a00": {
+      "photos": 8,
+      "top1_correct": 2,
+      "top1_accuracy": 0.25,
+      "top3_correct": 4,
+      "top3_recall": 0.5,
+      "service_failures": 0,
+      "service_failure_rate": 0.0,
+      "no_candidates": 0,
+      "statuses": {
+        "ambiguous": 8
+      }
+    },
+    "6aab0dfa303f7d479a4f23e0": {
+      "photos": 1,
+      "top1_correct": 1,
+      "top1_accuracy": 1.0,
+      "top3_correct": 1,
+      "top3_recall": 1.0,
+      "service_failures": 0,
+      "service_failure_rate": 0.0,
+      "no_candidates": 0,
+      "statuses": {
+        "ambiguous": 1
+      }
+    }
+  },
+  "by_object_type": {
+    "building": {
+      "photos": 41,
+      "top1_correct": 39,
+      "top1_accuracy": 0.9512195121951219,
+      "top3_correct": 40,
+      "top3_recall": 0.975609756097561,
+      "service_failures": 0,
+      "service_failure_rate": 0.0,
+      "no_candidates": 1,
+      "statuses": {
+        "ambiguous": 40,
+        "no_match": 1
+      }
+    },
+    "painting": {
+      "photos": 9,
+      "top1_correct": 3,
+      "top1_accuracy": 0.3333333333333333,
+      "top3_correct": 5,
+      "top3_recall": 0.5555555555555556,
+      "service_failures": 0,
+      "service_failure_rate": 0.0,
+      "no_candidates": 0,
+      "statuses": {
+        "ambiguous": 9
+      }
+    }
+  },
+  "by_category": {
+    "cropped": {
+      "photos": 25,
+      "top1_correct": 23,
+      "top1_accuracy": 0.92,
+      "top3_correct": 24,
+      "top3_recall": 0.96,
+      "service_failures": 0,
+      "service_failure_rate": 0.0,
+      "no_candidates": 0,
+      "statuses": {
+        "ambiguous": 25
+      }
+    },
+    "other_view": {
+      "photos": 25,
+      "top1_correct": 19,
+      "top1_accuracy": 0.76,
+      "top3_correct": 21,
+      "top3_recall": 0.84,
+      "service_failures": 0,
+      "service_failure_rate": 0.0,
+      "no_candidates": 1,
+      "statuses": {
+        "ambiguous": 24,
+        "no_match": 1
+      }
+    }
+  },
+  "rows": [
+    {
+      "file": "6a9dd4126d52c3bc396586a0-commons-181164957.jpg",
+      "expected_object_id": "6a9dd4126d52c3bc396586a0",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Brian92828-2023-05-06",
+      "category": "cropped",
+      "object_type": "painting",
+      "photo_sha256": "bd2c7ce9b7d7d4f7d749ad26a7fc4eb0ef488b4b75732662bbc911097c91356f",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6a9dd4126d52c3bc396586a0",
+          "name": "The Milkmaid",
+          "score": 0.6871860027313232
+        },
+        {
+          "object_id": "6a9dd846332abe8469d55975",
+          "name": "A Couple in an Interior",
+          "score": 0.5585700273513794
+        },
+        {
+          "object_id": "6a9dd842332abe8469d5596c",
+          "name": "Peasants in an Interior",
+          "score": 0.49077749252319336
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": 0.12861597537994385,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 2.1065057089999755
+    },
+    {
+      "file": "6aab0dbcdd73e04d96150a00-commons-88945969.jpg",
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Vasyatka1-2017-07-28",
+      "category": "other_view",
+      "object_type": "painting",
+      "photo_sha256": "f94d20b4820cf249452cebb2887e5fa50a76bdfa29727d7610add57e9e68e1d3",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aab0dfd303f7d479a4f23e8",
+          "name": "Rijksmuseum Night Watch Room",
+          "score": 0.8570294380187988
+        },
+        {
+          "object_id": "6aab0dfd303f7d479a4f23e6",
+          "name": "Rijksmuseum Gallery of Honour",
+          "score": 0.7059664726257324
+        },
+        {
+          "object_id": "6aab0e00303f7d479a4f23ec",
+          "name": "Rijksmuseum Room 0.1",
+          "score": 0.4954394996166229
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "top_score_margin": 0.1510629653930664,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 1.1238206200005152
+    },
+    {
+      "file": "6aab0dbcdd73e04d96150a00-commons-88945971.jpg",
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Vasyatka1-2017-07-28",
+      "category": "cropped",
+      "object_type": "painting",
+      "photo_sha256": "ebde23763ed4c33d191e418e40c17a898d0ba18b97bbc5c0def66daf264dc07e",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aab0defdd73e04d96150a16",
+          "name": "Lidded ewer for the Amsterdam Goldsmiths Guild",
+          "score": 0.6644162535667419
+        },
+        {
+          "object_id": "6aab0dfd303f7d479a4f23e6",
+          "name": "Rijksmuseum Gallery of Honour",
+          "score": 0.6444856822490692
+        },
+        {
+          "object_id": "6aab0dfd303f7d479a4f23e8",
+          "name": "Rijksmuseum Night Watch Room",
+          "score": 0.6000010073184967
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "top_score_margin": 0.01993057131767273,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 1.0243343799993454
+    },
+    {
+      "file": "6aab0dbcdd73e04d96150a00-commons-88945987.jpg",
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Vasyatka1-2017-07-28",
+      "category": "other_view",
+      "object_type": "painting",
+      "photo_sha256": "f4059311b4c8d1e68e18fd990464a6aa3511b93a13f2ee0f128ce3fcebee147f",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aab0dfd303f7d479a4f23e8",
+          "name": "Rijksmuseum Night Watch Room",
+          "score": 0.7262120246887207
+        },
+        {
+          "object_id": "6aab0dfd303f7d479a4f23e6",
+          "name": "Rijksmuseum Gallery of Honour",
+          "score": 0.7063014209270477
+        },
+        {
+          "object_id": "6aab0defdd73e04d96150a16",
+          "name": "Lidded ewer for the Amsterdam Goldsmiths Guild",
+          "score": 0.579123318195343
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "top_score_margin": 0.019910603761672974,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 1.137323527999797
+    },
+    {
+      "file": "6aab0dbcdd73e04d96150a00-commons-544866.jpg",
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Maksim-2005-10-05",
+      "category": "cropped",
+      "object_type": "painting",
+      "photo_sha256": "db2e10b10137a564a24b959bbe7796dd5a404cf4ebcbc2f1b5143fd81b860073",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aab0dfd303f7d479a4f23e6",
+          "name": "Rijksmuseum Gallery of Honour",
+          "score": 0.535468339920044
+        },
+        {
+          "object_id": "6aab0dbcdd73e04d96150a00",
+          "name": "Officers and other civic guardsmen of District II in Amsterdam, under the command of Captain Frans Banninck Cocq and Lieutenant Willem van Ruytenburch, known as \u2018The Night Watch\u2019",
+          "score": 0.5140682458877563
+        },
+        {
+          "object_id": "6aab0defdd73e04d96150a16",
+          "name": "Lidded ewer for the Amsterdam Goldsmiths Guild",
+          "score": 0.48187872767448425
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": true,
+      "top_score_margin": 0.021400094032287598,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 1.087544820000403
+    },
+    {
+      "file": "6aab0dbcdd73e04d96150a00-commons-873656.jpg",
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Voytikof~commonswiki-2005-05-18",
+      "category": "other_view",
+      "object_type": "painting",
+      "photo_sha256": "1b90a2362b0129785f21b46925754b9525eb4170437a4520d0043ddb8c967543",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aab0defdd73e04d96150a16",
+          "name": "Lidded ewer for the Amsterdam Goldsmiths Guild",
+          "score": 0.5911982953548431
+        },
+        {
+          "object_id": "6aab0dfd303f7d479a4f23e6",
+          "name": "Rijksmuseum Gallery of Honour",
+          "score": 0.5580227077007294
+        },
+        {
+          "object_id": "6aab0dbcdd73e04d96150a00",
+          "name": "Officers and other civic guardsmen of District II in Amsterdam, under the command of Captain Frans Banninck Cocq and Lieutenant Willem van Ruytenburch, known as \u2018The Night Watch\u2019",
+          "score": 0.5392938852310181
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": true,
+      "top_score_margin": 0.03317558765411377,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 1.259062917000847
+    },
+    {
+      "file": "6aab0dbcdd73e04d96150a00-commons-50148922.jpg",
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Hannolans-2014-06-19",
+      "category": "cropped",
+      "object_type": "painting",
+      "photo_sha256": "2896c2cb1de25ea00b4d007c0c7388f63e9b34487d82a5dca3889e6c933d40a0",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aab0dbcdd73e04d96150a00",
+          "name": "Officers and other civic guardsmen of District II in Amsterdam, under the command of Captain Frans Banninck Cocq and Lieutenant Willem van Ruytenburch, known as \u2018The Night Watch\u2019",
+          "score": 0.722841739654541
+        },
+        {
+          "object_id": "6aa9a743dd73e04d9614615c",
+          "name": "The Battle of Waterloo",
+          "score": 0.5825464129447937
+        },
+        {
+          "object_id": "6aab0defdd73e04d96150a16",
+          "name": "Lidded ewer for the Amsterdam Goldsmiths Guild",
+          "score": 0.5266070365905762
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": 0.14029532670974731,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 1.1193700060002811
+    },
+    {
+      "file": "6aab0dbcdd73e04d96150a00-commons-83441070.jpg",
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Ciell-2019-10-26",
+      "category": "other_view",
+      "object_type": "painting",
+      "photo_sha256": "3d1ef7f8650a9e4489b345cdfbaacf052de31051ca273f894139078e0816907c",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aab0defdd73e04d96150a16",
+          "name": "Lidded ewer for the Amsterdam Goldsmiths Guild",
+          "score": 0.5772508382797241
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 1.2308340219997262
+    },
+    {
+      "file": "6aab0dbcdd73e04d96150a00-commons-78703510.jpg",
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Mariordo-2016-12-28",
+      "category": "cropped",
+      "object_type": "painting",
+      "photo_sha256": "b4b65375955cdfb1eb6bf41f8805383575ff2ab16bc0a7b6016db7f0e5f50ce3",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aab0dbcdd73e04d96150a00",
+          "name": "Officers and other civic guardsmen of District II in Amsterdam, under the command of Captain Frans Banninck Cocq and Lieutenant Willem van Ruytenburch, known as \u2018The Night Watch\u2019",
+          "score": 0.9315874576568604
+        },
+        {
+          "object_id": "6a9dd825332abe8469d5594a",
+          "name": "William III (1650-1702), Prince of Orange and since 1689, King of England",
+          "score": 0.7551064491271973
+        },
+        {
+          "object_id": "6a9dd81a332abe8469d5593a",
+          "name": "The Tree of Jesse",
+          "score": 0.7159086167812347
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": 0.17648100852966309,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.9240028859994709
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-25748830.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Mark Ahsmann-2013-04-20",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "f8258ac8ddbcfb9e8b03d6991adcccf0fb2c8f85fe96712e275777cf5d9dd6a6",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.77257239818573
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.9044262609995712
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-119213869.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Gerd Eichmann-2015-04-20",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "6b169bd131f182e634077d80de8f56fc8fb24d33c2d341392b2e543a0946f6d4",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.8199925422668457
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.9733014099992943
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-119213881.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Gerd Eichmann-2015-04-20",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "4f107b57853419c9adf4aeb064487723b0f1aca2c914b123a99382c59aa56fac",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.5717253684997559
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8616167669997594
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-119213882.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Gerd Eichmann-2015-04-20",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "6fa1e7a08102d6e5a94899462af399031b2b4bc3b194174fa6d1e0fe57db66ad",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.6728135645389557
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 1.3693011710001883
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-112209594.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Robot8A-2021-08-06",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "23c83f0dea09727c9e679b7cac1a260cd68316f68631141609558586468b03c4",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.6054680347442627
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 1.725375467000049
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-1917548.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-FlickrLickr-2005-07-03",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "f96de00b7ce67bdf6da870884b3c3bbec56d62bbdc7ebca85fc4a12bec389cbd",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.7084535360336304
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.9811227339996549
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-25891450.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Dqfn13-2013-05-02",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "59f90725c8cc38ce116f9da2f0fec415a8e7c51af116125a1d00c3bfabcf3ee3",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.6110713481903076
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8825453529998413
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-88930346.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Vasyatka1-2017-07-28",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "623ae02a6300ef73a087d4f64ce2f31930f519848c3e562430add501cab1aa31",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.5899831056594849
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8548021409997091
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-88930348.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Vasyatka1-2017-07-28",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "ac0817a31cf7ae95b4318f150e1cd64601485a579e297337d9dbd4f27ed83b92",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.5892661511898041
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.9671923699997933
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-88930347.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Vasyatka1-2017-07-28",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "02ff9b7df8f7a0680d738100585dd28313eb72e7dc1926158cdc9821aec353b1",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.5938785076141357
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8354159880000225
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-88930351.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Vasyatka1-2017-07-28",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "b18fb3561a29205b2949532e1a688c75ba3b4fb5ce9bc0d6df3d564dd69cb645",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.6598248481750488
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8055215370004589
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-88930350.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Vasyatka1-2017-07-28",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "672b32718d1119d4a47330e0dc42e0a54d9c99fbdfe59f72d3fed13efccc46b2",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.6629905700683594
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8671607729993411
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-130163329.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Charlotte Heineccius-2021-07-20",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "ab155b1b568283f0e81090284558eb24321bc723abb402c92469e1f5c3e9aa9a",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.4869078993797302
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8322759599996061
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-130163728.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Charlotte Heineccius-2021-09-22",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "d25b6efd9d703bf316ebec3aba238008ada81297fe450e28982b43f6b6bedc1d",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.7071274518966675
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8457688859998598
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-87570170.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Calips-2019-08-13",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "8a09414084eb1162c1651f6f8df810596e55565fba1313f9dbb80d0921a41790",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.6452974677085876
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8964182600002459
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-88924131.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Vasyatka1-2017-07-28",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "f1837ad4f255ca887fe3d3a0cd73e9a95a93bc1744979b77bce92c917e5c2781",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.8299052715301514
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.7678659650000554
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-88924129.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Vasyatka1-2017-07-28",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "035304675f39b781b58fef301527195f5b31af0944f27340352cc17c57ff5cef",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.8529717922210693
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.9605227289994218
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-4467032.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Vincent Steenberg-2008-07-29",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "b13f03c7e84fdb276cc6d7f769605e9b62fe77bd05d6a2a9271fe4091052053c",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.45322349667549133
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8165757980004855
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-43430251.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Dirk Schmidt-2015-06-25",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "afcf1fe45867fa9fd57603f7d110b263b23f13bf492e7fdd59b39c19935d00e1",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.6387912631034851
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.9315833569999086
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-80321146.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-OSeveno-2016-05-09",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "9fc4c73949725537354f8c02091e3d3be00f2909b2072f09c50a6bc1cb21db36",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.7577109336853027
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8081100650006192
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-63520667.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Rudolphous-2016-03-12",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "43e7b714e5aca1fbbb2e0180b33c4e73f6224ddbb3bebd42f4b088b12fe1c6a5",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.5272732377052307
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 1.0349227570004587
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-16334960.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Roberto rembrandt-2009-04-09",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "b5632db1ce57ea1eb938675772e687f0dc572f29deba16bd00f252637b37862d",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.6302550137042999
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8478172739996808
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-601326.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-SanderK-2006-02-26",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "bed37cf5028eeb205177003d5dd3a810061b8ff82dd167163dd14bda94ec7256",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.5491109192371368
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8309406340003989
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-32614561.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Balou46-2014-04-21",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "5e007ea2a228e5ca59e7eba2d323ce2842a10082a5bf34979fae8beadb798597",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.9082760810852051
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8683716320001622
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-149672829.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Oursana-2021-07-20",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "99ae804c16f54ca59c8d6bf939a9af058335f7bf93a55ec94649cbe73023cc7c",
+      "http_status": 200,
+      "status": "no_match",
+      "error_code": null,
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.9631884379996336
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-68690120.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-BugFix-2018-04-21",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "dfb4aad96e785515961693e139ec632f33cf86d3ac9d2bda145a2c2db492f1e3",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.6155109405517578
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8996856289995776
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-49601827.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Alfvanbeem-2016-06-18",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "f752f67feaf6ff867f996ea192a77b09cf7edb7e0d8b48fc4f56a1c4fd9523a0",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.6327495574951172
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8033785520001402
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-123438430.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-OnwardToThePast-2021-04-24",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "0144d988aacbfce75c4c1948c898cebe25b277ba0ce6d1c8aad2ca242b602766",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.7027616202831268
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8545448479999322
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-25748805.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-\u0427\u0430\u0445\u043e\u0432\u0456\u0447 \u0423\u043b\u0430\u0434\u0437\u0456\u0441\u043b\u0430\u045e-2013-04-20",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "09a020018087088ebca7b35e1d0bf150b4290656a9720cbbf7e357bc5f7ca1de",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.7114350199699402
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8314453749999302
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-3511401.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-uploader-BetacommandBot",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "69d8e17c7d8faa95db4963a6ac6409871191ff61d025d95ffdba4d00f08b72aa",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.6085999608039856
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.7555426600001738
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-67151888.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-uploader-Dguendel",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "d9afcf7264dbffb79eb9b2b9b03043eabec644a1fe802081d3f5232d9d16b6e5",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.6785296201705933
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8618838640004469
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-31689621.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Russavia-2013-07-07",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "1865553609bf1339fd97191b1c06574c7abbcd9e0c47d5d2eb24bc7241eddada",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.8268106579780579
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.9816228159997991
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-119213878.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Gerd Eichmann-2015-04-20",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "1315bedd946094c850b680458c7742b3bc07bd70f5a147b0cbb21b4608f6d17d",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.5474051833152771
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8426036900000327
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-119213886.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Gerd Eichmann-2015-04-20",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "619d6b52a6931fcbc54eca28ad1ed2beacfd050263a846279ec9f63f6a1bca12",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.7306289076805115
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8094202090005638
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-74057161.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Tm-2014-09-17",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "3ed4f34fd42831ebfaf4ccfaef1866be5dea63cefeb85cd301c7b5b54be11010",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.8472704887390137
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.8556687460004468
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-112209596.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Robot8A-2021-08-06",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "fc4d97af4d0700079b772c571bd235ae2bcaef0e2ac6b7d9930e57e96af3c20f",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.727085143327713
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.7713862000000518
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-25891448.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Dqfn13-2013-05-02",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "b2d260e1c8b80f9f88985ca9344498ef460d3f2f0168c82081c22ca724d86143",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aab0df8dd73e04d96150a1e",
+          "name": "Apollo",
+          "score": 0.5036273300647736
+        },
+        {
+          "object_id": "6aab0df6dd73e04d96150a1c",
+          "name": "Summer",
+          "score": 0.48075953125953674
+        },
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.45554670691490173
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": true,
+      "top_score_margin": 0.022867798805236816,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.9198610989997178
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-54306411.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Panoramio upload bot-2011-10-23",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "80445bed8ceb872fd25bec29849cd318c0fbc75b97ec003c39662adf869dd6cf",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.5665604770183563
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.9796313169999848
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-49553516.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Alfvanbeem-2016-06-18",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "32b4564dd0da932411b680975032bb63f2def09125afc9797c8e0b1228fbc803",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.8096081018447876
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.7761752369997339
+    },
+    {
+      "file": "6aa9a7fa60b7ca89b6355b9c-commons-132452833.jpg",
+      "expected_object_id": "6aa9a7fa60b7ca89b6355b9c",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Derbrauni-2023-02-08",
+      "category": "cropped",
+      "object_type": "building",
+      "photo_sha256": "487e6b217cb966e375059bc8251aeebd61e5f83611da7c95c9b0b40ea64184be",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aa9a7fa60b7ca89b6355b9c",
+          "name": "Rijksmuseum building",
+          "score": 0.9057143926620483
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.7774592030000349
+    },
+    {
+      "file": "6aab0dfa303f7d479a4f23e0-commons-153277834.jpg",
+      "expected_object_id": "6aab0dfa303f7d479a4f23e0",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "capture_group": "commons-Ibex73-2024-09-19",
+      "category": "other_view",
+      "object_type": "building",
+      "photo_sha256": "089fb386bab7f3d276af54d19b0a704c918b1a170f2fa78fbe4043a4520ab5e7",
+      "http_status": 200,
+      "status": "ambiguous",
+      "error_code": null,
+      "candidates": [
+        {
+          "object_id": "6aab0dfa303f7d479a4f23e0",
+          "name": "Rijksmuseum Atrium",
+          "score": 0.7571616768836975
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "top_score_margin": null,
+      "warnings": [
+        "VISUAL_UNCALIBRATED",
+        "SELECT_CANDIDATE_OR_RESCAN",
+        "VISUAL_REFERENCE_COVERAGE_PARTIAL"
+      ],
+      "covered_objects": 112,
+      "total_objects": 128,
+      "seconds": 0.838522385000033
+    }
+  ]
+}
