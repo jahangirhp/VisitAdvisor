@@ -1,11 +1,103 @@
 # Artwork and room confusion — ticket #9
 
-Development date: 2026-10-13. Status: implementation and development regressions;
-**independent acceptance is pending**. Ticket #9 remains open. This work stays in
-Phase 5 and does not enable automatic identification.
+Development date: 2026-10-13. Updated: 2026-10-17. Status: **current-dataset
+validation failed**. Ticket #9 remains open. This work stays in Phase 5 and does
+not enable automatic identification.
 
 Branch: `MVP-Fix-artwork-and-room-confusion-in-visual-recognition`. Git does not
 allow the spaces and square brackets in the literal issue title.
+
+## Current dataset decision and measured result — 2026-10-17
+
+The user requested stopping further photo acquisition and completing this ticket
+with the existing collection. Paid-license research and the nine remaining photo
+slots are no longer work for this ticket. The revised dataset has **21 artwork
+photos across five identities, plus 20 room-only negatives**, with artwork capture
+counts of 6, 6, 4, 2 and 3. Accuracy and false-suggestion requirements are retained.
+The original 30-positive/six-per-artwork gates remain recorded separately; they
+must not be presented as passed by these 41 photos.
+
+Both actual HTTP paths were evaluated against live Atlas using frozen references
+and the opt-in geometry experiment. Camera inputs came from the actual WebKit
+crop/JPEG code at 224 pixels. All **82 requests returned HTTP 200**.
+
+| Metric | Upload | Camera | Required |
+| --- | ---: | ---: | ---: |
+| Artwork top one | 19/21 (90.5%) | 19/21 (90.5%) | >=90% |
+| Artwork top three | 19/21 (90.5%) | 19/21 (90.5%) | >=95% |
+| Wrong static policy suggestions | 2 | 0 | 0 |
+| Room-only static policy suggestions | 2/20 | 0/20 | 0 |
+| Correct static suggestion coverage | 19/21 | 17/21 (81.0%) | Camera >=50% |
+| In-process HTTP p95, nearest rank | 2.374 s | 1.105 s | Reported |
+
+The 95% Wilson interval for 19/21 is 71.1–97.3%; camera coverage's interval is
+60.0–92.3%. Zero camera false suggestions on 20 negatives does not prove a zero
+population error rate. The first upload took **24.276 seconds**, included in the
+distribution. Camera reference preparation happened before these HTTP timings;
+two setup attempts failed and one diagnostic was interrupted. They are retained
+in [the attempt log](ticket9-current-dataset-attempts-2026-10-17.json).
+
+The complete immutable baseline, hashes, policy, reference versions, per-photo
+failures, capture groups, confusion counts and confidence intervals are in
+[the current-dataset baseline](ticket9-current-dataset-baseline-2026-10-17.json).
+Original images and commercial-use source credits remain in the ignored local
+collection described in [the collection record](ticket9-photo-collection-2026-10-16.md).
+After this evaluation these photos are development data, not an untouched holdout.
+
+Both paths miss `commons-40439977` (a distant, small Night Watch behind a crowd)
+and `commons-84845597` (the Night Watch obscured by restoration equipment).
+Camera geometric scores are zero for every candidate on those frames, so the
+current ID ordering at score zero does not represent a meaningful suggestion.
+A diagnostic using 512-pixel WebKit frames and five fixed full/regional crops
+also found no verified Night Watch match on either photo, including original
+upload pixels. Simply increasing frame size or adding those crops is therefore
+not a demonstrated fix and was not added to application code.
+
+Uploads cross the simulated display threshold for the unselected room identity
+`6aab0e00303f7d479a4f23ec` on negatives `commons-155082502` and
+`commons-86135055`. This is the known unverified embedding fallback outside the
+explicit geometry subset. These are simulated suggestions: uploads remain a
+manual candidate preview, and camera figures do not measure three-frame tracking
+or a physical phone. No automatic-identification claim follows from this run.
+
+**Completion is blocked by measured behavior, not photo acquisition.** With 21
+positives, at least 20 must rank correctly in the top three to meet 95%. A future
+fix must recover at least one missed target without introducing wrong suggestions,
+and prevent unverified room candidates from becoming upload suggestions. Retain
+these failures as regressions; do not lower thresholds or remove the difficult
+photos to manufacture a pass. Additional purchases are not needed to reproduce
+these failures.
+
+Validation: `pytest` passed (320 passed, two skipped); `ruff check .`,
+`ruff format --check .` and `mypy app` passed. Application recognition code was
+not changed during this evaluation.
+
+### Visual report and reproducibility
+
+`scripts/artwork_room_report.py` builds `results.html` in the local collection,
+showing the original photos, expected identities, both paths' ranked candidates,
+static suggestions, per-request timings and failure filters. It performs no
+inference or database writes. Run:
+
+```bash
+.venv/bin/python -m scripts.artwork_room_report
+.venv/bin/python -m http.server 8003 --bind 127.0.0.1 \
+  --directory .local/ticket9-collection-2026-10-16
+```
+
+Open `http://localhost:8003/results.html`. The generator uses `manifest-v2.json`,
+`credits-v2.json`, `result-object-names.json` and `retest-result-2026-10-17.json`
+from that directory. Their archived counterparts are the
+`ticket9-current-dataset-{manifest,credits,object-names,retest}-2026-10-17.json`
+files in this directory. Image paths are relative to the local collection, not
+`docs`; reconstruct missing originals from the credit URLs and verify their
+manifest hashes before use. Images and credentials are not committed.
+
+The repeat run reproduced all accuracy counts with 82 successful HTTP requests.
+Its measured p95 was 2.813 seconds for uploads and 1.449 seconds for camera replay;
+the slowest upload was 21.482 seconds. This is a sequential regression, not a
+concurrent-user or physical-phone test. Chromium verified all 41 images, the
+41/4/21/20 photo filters, path selection and mobile layout without browser errors.
 
 ## Findings and implementation
 
@@ -150,9 +242,44 @@ zero suggestions, failed requests or changed inputs/references cannot pass.
 The runner also rejects known historical image hashes as fresh holdout evidence;
 near-duplicate/capture-session/source review remains a human responsibility.
 
-## Remaining ticket acceptance
+## Original acceptance plan (sampling superseded on 2026-10-17)
 
-Freeze **new** independently sourced photos under the existing online acquisition
+### Ticket-focused preflight — 2026-10-15
+
+The controlled replay now audits dataset eligibility before browser encoding,
+model loading or Atlas access. An ineligible manifest marked `acceptance` cannot
+consume the evaluation images through inference. The input manifest itself is
+excluded from the historical-image archive check; previous result/reference files
+still prevent reuse of known bytes as fresh evidence. Photo identity, independence,
+licenses, Night Watch inclusion and relevant competing-room coverage still require
+the specified source/capture review; a local audit is not recognition acceptance.
+
+```bash
+.venv/bin/python -m scripts.artwork_room_replay \
+  --manifest /path/to/frozen-manifest.json --audit-only \
+  --output /tmp/ticket9-dataset-audit.json
+```
+
+Audit exit 0 means local dataset gates pass, not that recognition passed. Exit 1
+means dataset gates are incomplete; exit 2 means inputs could not be audited.
+No recognition requests are attempted in audit mode. Keep output files immutable.
+
+The current `regression-manifest.json` audit found nine artwork photos across two
+identities (one and six distinct capture groups), zero room-only negatives, and
+historical query bytes. It is deliberately ineligible. All thirty acceptance
+artwork photographs and twenty room-only negatives must be a new reviewed
+holdout; adding twenty-one photos to this regression would not make its previously
+used photos fresh. The audit is preserved in
+`artwork-room-preflight-2026-10-15.json`.
+
+The ticket replay explicitly pins the existing 224-pixel geometry-only camera
+comparison, independently of adaptive/region/calibration environment settings.
+Static suggestion simulations honor server abstention, incomplete reference
+coverage and profile-specific thresholds when supplied. The 50% suggestion
+coverage gate applies to the camera path; upload coverage is reported separately.
+The replay and geometry helper source are included in the code fingerprint.
+
+The original plan required **new** independently sourced photos under the online acquisition
 policy: at least thirty artwork-in-room captures across five artworks, six distinct
 capture groups per identity, plus twenty room-only negatives. Preserve a separate
 calibration corpus and do not tune on the release holdout. Include Night Watch and

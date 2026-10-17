@@ -1,0 +1,3102 @@
+{
+  "created_at": "2026-10-17T07:33:37.438781+00:00",
+  "purpose": "regression",
+  "manifest_sha256": "9c52345fb293aa24607ec465f5e799b0b84f7d8e2ad22b3b8c99fca5ff924079",
+  "photo_hashes": {
+    "commons-40439977": "1129982e931adf011ae8ef6da57e1236fe1a238d61e701f3b4461ec8ace349d4",
+    "commons-84845597": "b794ad74720cdc8bd9fbf6779639614009c76d8f522c8182dbbc9136799cdf61",
+    "commons-110662836": "2cb8ba101014f25264f3db40c69988ab8befe04ce7d4f725d8ce926b3c5ca51e",
+    "commons-161085542": "d2dd694f0ba6feade74e1a2a53f120eeab95cff1e55c67316ebadfaa678edeaa",
+    "commons-134444072": "e0d20945b1c07625972a0eab9fb244c85b5cc586cfe31a541f1de0a4e0f5f40d",
+    "commons-83873160": "f46af742c37d90ec82fe2c76626756cc8ca0a0d68f88b61869d627a44291b510",
+    "commons-84521974": "9e4778bcd855767ffa21b0a0d015733188cc76e099e314f78db22043731e02ca",
+    "commons-155082502": "2e4bc5c78bcf6c966477b4d3972553ec9b3e5d2a0fd71e76b29ade161030137a",
+    "commons-49553399": "d149744e824d9842335d491e25c36c78542b84d80d0c543fd5092c50eec20817",
+    "commons-38561086": "69040f88c3e0008b093c23347cbac83660f6f045d341bb5d476f824eb3467841",
+    "commons-47262917": "6e860fd3420266f7e92cd97b248361adcb4c3ed43dd416b5f5910d18cbca10ff",
+    "commons-51332305": "52db743f2983301363b5b852925b0385f85d940580f77ceebdff05a2a60de708",
+    "commons-76582846": "93c02286118418a89249ee56957e4433b17752ee14dd0e0dfd0485fa78a7948c",
+    "commons-76583099": "6b066e92ed5d545f6d5fcdc801d3865a42b760f65b720230cff7a78c35f08f42",
+    "commons-160004795": "490004c6ebad3e93c2f0efb7e7b573098460834a2c627c6a69ca13821fcbf4a2",
+    "commons-44052107": "f2002147f53c6b854044b6e59f6af9c49f0f505ded2778d1db6168f2aed03836",
+    "commons-50160172": "174511d18c3a2e3d4bc94d7430791a0271cf91dde7205acfff83be4afeba638f",
+    "commons-86135055": "57dcffd51d035fd5132a2b54234ec2cc09df11d4f2eb28c0c89d46a6ecb61d21",
+    "commons-46397172": "cbb9166c4bbcbac9b054ddad2dac96a385030edec1db8761f3e8955e13da54a4",
+    "commons-49957072": "2b6a4173391786e3d5873c32c2802d07c599a7fe47ada332bde20e6690247d8c",
+    "commons-65829193": "1488fac45125377c0fe5016bd962f7756b232ac5da8690f131daa161235553e6",
+    "commons-62136668": "bf545dddb2d3c8713fe03b596a3f01560f8bc093ae442a70363f63b8faef5f24",
+    "commons-147412835": "a3762e31780c85bc40f093a298952c3f53a257d0f12081e5e720287ec17e65b0",
+    "commons-129666295": "fa7881307ea26afe2f576c6ac3fe6dd4620c47a40d7e13acec00d2ffb231731b",
+    "commons-84250334": "92d26caab8b523771a4fa9afa590018e1bed9bf00169f8febd0de55871361a1a",
+    "flickr-13350062335": "a7c9034c0002f214d0ccc1f56c8bfc1005bc94fbcb201d78ebd0c770a47ce37c",
+    "flickr-43155122570": "8029abc4673796e53a80a945bd6109d1cd63a8b8c18804ff6502205a09519836",
+    "flickr-22586255195": "8b590af92806bd768ac303aed60fa252812c7df28722b7d917d95957d646d5b7",
+    "flickr-33483913008": "fe2f9373d4d5829cdcdd1874389c9a02652bde243c1ad8a89908f53c4f2f17f0",
+    "flickr-49184953217": "7fb70c6f6d71c190a6e6aedc79d55ef03fc04c3c351a032efa3a3839b71a43c9",
+    "flickr-27087848340": "17a1262c296d284ca244bf5955127889d25c2c35990d895f2f870551eb711707",
+    "flickr-54171046898": "2cf780c6fb5a5de4a041b484547a317883a1a4e53a7dc1ee814e876fdd2b630d",
+    "flickr-47360122341": "ce0247f926110e092b632ce8fdfbeb0cd46cc2ef83be747b7de0374b1f7b3310",
+    "flickr-26385573496": "231aafdeca04c529e7543f1a4a1a8cb045d45386fe56c1a9ce5ca63eec88c015",
+    "flickr-8152229713": "5a35458633ad28dcfd509284a8df40b78e856dd3518c6e6086e5dabbf826102a",
+    "flickr-2297618639": "5def273ff5cb2dd68cf94e79d966c81bbcd98dd2f5d587ed158cac6f9d80a81c",
+    "flickr-33484142138": "70050f2439ef51c5c779bff8508ca595e5186ff6376804d04890f3382e2f623d",
+    "flickr-12435298824": "947fcce122d78e29d06d8b01bc7cead8bf399840c0f1959284f9d458fe8761c2",
+    "flickr-8732668636": "7677b03c11ca51976a7919d6fc8c27c4feacb0e1d14a942d4d52a95864c3af4b",
+    "flickr-25808778163": "ce0116837f3787a3710caa872b2f18112c1ba8d9dac91c92ee50ab7f902bb0f5",
+    "flickr-9704471582": "c00f73a28536f344c595e05fe48a55f95d7c321e56b4ca8361363b01b6e5406f"
+  },
+  "normalized_photo_hashes": {
+    "commons-40439977": "04784439ee4692c4b57710fc2fb35968d2202e29e5f4439863e3bef9ad10c218",
+    "commons-84845597": "ae2a19102bc1e2c10a13b8023f70aac22bb684b4c65e2aeea63d390dc62a1665",
+    "commons-110662836": "766a66259ff38b86bb7eaddaea8b84809952ec9c6cc2b8fc3558f9900e1134bf",
+    "commons-161085542": "5d45dba5a7524e791a7f9a8d50c5d794827210d2e06f0953ff58932b4e6c76ee",
+    "commons-134444072": "ecfba20d8605efd0620526c585ba2a6e41298cc513a35c40cf20687ed8074928",
+    "commons-83873160": "e03ab2a2163738fd386a32327e438b45708bf98c8aa3bfe70a5dd12c50554916",
+    "commons-84521974": "ed72d02260cafd9697dcd2ff51b0f88530b87b68d4b0612afe526fcbadf46782",
+    "commons-155082502": "46a00f7997e379649a9c9eae811aa79efa60460d280fa2c02d8194c0073de55a",
+    "commons-49553399": "2c70f73c4fdd508345ed6a4ca8c1cca2bd0ca62b13d28327a8f5625f62541ff4",
+    "commons-38561086": "2648950b984c3415f6bcde3b3e8fa913253810cadfce76233881ae0481c149b6",
+    "commons-47262917": "750c8574ed7250010da760d47f74363b44610e5562064de6ac5b90ff169efab3",
+    "commons-51332305": "a2ef20d40553b01ace22ed2ee0438fbb382c07d1cf71017f7cd5726bced08105",
+    "commons-76582846": "8a6df1a62349e6d8cc3663c8f9e076005cd00ae83e375ffa2c7521f526665dcf",
+    "commons-76583099": "af640594b3a37e40b97ac6101d66be7049b70a3cc197e558e394f481936c3a0c",
+    "commons-160004795": "e7b788967909232eb7a164f0f42a5dd095e1382a34dac755572fc91b3aab1d9a",
+    "commons-44052107": "464d8b11adcf4e3d94a33df681e80978ee684ee24d98258aba0f37d69e254e92",
+    "commons-50160172": "54566c1f8bab1af7e60224539213bd59ba4908a6c58803168c62c21854f22ae1",
+    "commons-86135055": "8f83bbebe30c6440059043cdc41ecfa3c5ccb5c31d4213071596f509d6cc9498",
+    "commons-46397172": "5d76a3a87a7f7e201ceb80b645362c188c440136243f4b209ff58759fd526aae",
+    "commons-49957072": "993b2b076cf7d9d2d4272ae48904113da3ba3f7ee636c8587439ccb5593e80e7",
+    "commons-65829193": "ab930e17ac282ce5083cdac205d435827864518c556927eec9de55ee6c22a016",
+    "commons-62136668": "f4c0bd96ad60c60298b3307cec88dc6bdcb63efb465b3a70d04681ca5771c9dc",
+    "commons-147412835": "9a7d9a258e2db97de8a4a78b15146cd6605380bdc915050325ae7eb49d98037e",
+    "commons-129666295": "d63c605f53483906df641deb8ba732b9e0a15f5d241aa088924cd5d9abe2b8e6",
+    "commons-84250334": "a61437c0f97d74e5d27124e5d9d0f8d0ba44f28431120e7ac17c1fc6304d3203",
+    "flickr-13350062335": "8d86d216313c29bf633283e3c5fb827864cdf2a530662d2066c0010ff354a257",
+    "flickr-43155122570": "0cb50129555b7449a0ec240ccb6bbb96c06e8b994c756446e38c03e7f220f140",
+    "flickr-22586255195": "71421552471a50c9e51ba306718679a5660ba9de7324da5858efcb2436ce9650",
+    "flickr-33483913008": "4dfc40c9548d76c401eec8a7bc510598055a2172e4358001f3e9e42aaf07385e",
+    "flickr-49184953217": "37fbae59df61df121f06cdaac2549093502d807221ae64f9667fc9780538682e",
+    "flickr-27087848340": "8ec3ed4701335cc736e3b0a6f59d8e4f111b74933b2707234524953455b55e26",
+    "flickr-54171046898": "58171d24c419811d1d92162aea37f4c782d87c39c9604bdebf1d73eddfa43523",
+    "flickr-47360122341": "6539052849995b223687e27da8a48b982fcfb3d8e091c1a4249fdf23a7311548",
+    "flickr-26385573496": "42337c98819de670cda3f5ed3df41b9b7e2db8cbce6ba6b14cbdffc54ac8997f",
+    "flickr-8152229713": "fd0e8bcb6b65d6a50da63095aa34d654536e06546482a66c5d86d593ac656e29",
+    "flickr-2297618639": "048f23f95a04062c3e6980db30696ff3481351dcb4b05f065ee49098044000da",
+    "flickr-33484142138": "a7356776f88c98de53cd6960034b4083453a48488a5d4d1eb59f55f2747c7e39",
+    "flickr-12435298824": "6fda03718246881650cbdfe18d152f0022d3f8c8723b11f13e5eb657d30aa0e9",
+    "flickr-8732668636": "6c1eb4f62447dc3fdb5ac49fdf411e5dd0a7fd3916ed2bb388447d4d48d278b7",
+    "flickr-25808778163": "55a7fd58d13497f2077c16d087653bc853ca790fefd7443db2213af300ffeb77",
+    "flickr-9704471582": "7542119b8359f73c21da7b6a5151ce5af6ac1ba04eb64d3297c2dc8dd8d22e76"
+  },
+  "browser": "webkit",
+  "model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056",
+  "preprocessing": "rgb-thumbnail2560-dino224-regions65-sift800-v1/4.57.6/2.14.0+cpu/4.14.0.94/12.3.0",
+  "model_sha256": "d5225e26eb6f54fbf9733321947b945f5b6c15cb94e8c6a619ec1ff3fbf5a255",
+  "reference_sets": {
+    "6a9dd4126d52c3bc396586a0": "189e3d6933af485fa814174a5d85a3e9",
+    "6a9dd4136d52c3bc396586a1": "caf654a4bedd4d2b9af23d530fff3b04",
+    "6a9dd7f8332abe8469d558f5": "2f365a37724c41128c5fadd9ac2d9118",
+    "6a9dd7fa332abe8469d558f7": "1de16c67e8fb429a97db6a169cec579f",
+    "6a9dd7fb332abe8469d558f8": "445d13e4b16948668496580cb2b3cc2c",
+    "6a9dd7fc332abe8469d558f9": "92dc789d5e414e89a4fb4221da2c1777",
+    "6a9dd7fd332abe8469d558fa": "59b4357f7a9041fb93d1d654a7a2c1e2",
+    "6a9dd7fe332abe8469d558fb": "5ac6623c00314acea0314720be7b4c67",
+    "6a9dd7ff332abe8469d558fc": "1d13311a8a9b4fceb1bbf47f29f1ab85",
+    "6a9dd800332abe8469d558fd": "24943a4910ec4934aa51e9d45af634ac",
+    "6a9dd802332abe8469d558ff": "361bf9067b494fae80a68562d6a1ebc3",
+    "6a9dd802332abe8469d55900": "fdb5f8f181b549118efb48ccca65fa01",
+    "6a9dd803332abe8469d55901": "04d053a611d444148b8fb7615795dce6",
+    "6a9dd804332abe8469d55902": "6156d8ed074b46de8cceba80c5657498",
+    "6a9dd806332abe8469d55906": "cfe0f0a1539f40cdb9c87272d2ea4221",
+    "6a9dd807332abe8469d55907": "b88daa1fd5f64c17b112097e2250c336",
+    "6a9dd808332abe8469d5590b": "208f6abba8574266bdd9d88255a509d6",
+    "6a9dd80b332abe8469d5590d": "ddf7b955d861458493e0e34fd154d1f0",
+    "6a9dd80c332abe8469d5590f": "e39e82f34f38456b9382345f6533e2f2",
+    "6a9dd80c332abe8469d55910": "78164bed605540f1baccd41519df3f1f",
+    "6a9dd80e332abe8469d55911": "9997b4745fdf4ab893770afef24b0362",
+    "6a9dd80f332abe8469d55912": "fc8af16578e549328f371e86789be612",
+    "6a9dd810332abe8469d55913": "2b645882dc4842f2b6299ee4adff0eb9",
+    "6a9dd811332abe8469d55917": "9d8dfddef79841738214f37d850150dc",
+    "6a9dd812332abe8469d55919": "580e8a6752134fba8d5633d66e98d843",
+    "6a9dd812332abe8469d5591a": "c7e4dbdcbf654b709122d7cbd1e514fe",
+    "6a9dd813332abe8469d5591b": "c1a168d2da3f4969a2d44c0560b361d1",
+    "6a9dd814332abe8469d5591d": "70371adfba8540e7af4267075e44fad3",
+    "6a9dd816332abe8469d55920": "e4fafb45b82c4b3fbf4aa554654611e6",
+    "6a9dd817332abe8469d55937": "49791000d0ca456a870e0450722548cf",
+    "6a9dd818332abe8469d55938": "defed78aca5a4ce6af0372dc5dc82758",
+    "6a9dd819332abe8469d55939": "206e9d5fb5bf470abe742ab7cb5493cc",
+    "6a9dd81a332abe8469d5593a": "29251ebf0d3d4675ad06bc1a6cb3dbb4",
+    "6a9dd81b332abe8469d5593b": "02b79d578a7a4df5a3a652e79323a2c5",
+    "6a9dd81c332abe8469d5593c": "0a6f30323ed549ab8f77d97461cefa4d",
+    "6a9dd81d332abe8469d5593d": "5f1fd967c24448f69f2a1277f7c76c9b",
+    "6a9dd81e332abe8469d5593e": "a8e2f9786f3f40b38d33141044466ddb",
+    "6a9dd81f332abe8469d55941": "8500728ab6f647979b3851179d4519c6",
+    "6a9dd820332abe8469d55942": "83d0f65ee8ef4f66a7a1ae3b07d2fd89",
+    "6a9dd821332abe8469d55943": "3b69c15b5bac49cfba043607c3cb6662",
+    "6a9dd823332abe8469d55946": "30fe8e5efbd84472ac2ce56d90a2407a",
+    "6a9dd825332abe8469d5594a": "b58db21e544649bbbabf16da60f805e2",
+    "6a9dd826332abe8469d5594b": "a73a05e903a045c08de59335bc9707fa",
+    "6a9dd827332abe8469d5594d": "90129b04a40d418db9c4dbc0bf1c4fcf",
+    "6a9dd829332abe8469d5594e": "689258a30bdd40e1b7263ac2d6a702d7",
+    "6a9dd829332abe8469d5594f": "80aaca3cc4d74b43b28c0a105e6282a2",
+    "6a9dd82a332abe8469d55950": "0cfa6c4c1cde4994a469f40781d91864",
+    "6a9dd82b332abe8469d55951": "44450a14e92b4d4e8d524df44f923f63",
+    "6a9dd82c332abe8469d55953": "f04cbec6203e4d95a5c9245f5fa413bd",
+    "6a9dd82d332abe8469d55954": "09d603016bcc4771999f91aefb1fda8c",
+    "6a9dd82e332abe8469d55955": "111772e04b2b47c78e588bd777a823ba",
+    "6a9dd837332abe8469d55960": "916adc80b07947fc99434a29f7091617",
+    "6a9dd838332abe8469d55961": "1346cc1a1d0d47dcbcf4fa58cc03c4ee",
+    "6a9dd839332abe8469d55962": "fb78db9873a3472bbf43ac2033f7a9eb",
+    "6a9dd83a332abe8469d55963": "ad19f7ecc6da4f438a82438d25f595ef",
+    "6a9dd83b332abe8469d55964": "0b666e586acf46dca54b4ba7d2900e82",
+    "6a9dd83c332abe8469d55965": "be03506826ca446db3bef9718bc6c7db",
+    "6a9dd83d332abe8469d55966": "801d355acdcd433a93abaad44df02379",
+    "6a9dd83e332abe8469d55967": "f1f16e7373a5485891841c025838b609",
+    "6a9dd83f332abe8469d55968": "cbc7dd4f69604af2bb02bf3a46d4b533",
+    "6a9dd840332abe8469d55969": "d8138f4339df4c8ab03a714aaa606dec",
+    "6a9dd841332abe8469d5596a": "88cb41ec84ea41ef9d6ffb49bab41b5b",
+    "6a9dd842332abe8469d5596c": "0c93061e4d9a49d7b20e9e3abca5a686",
+    "6a9dd843332abe8469d5596f": "b537fee456674237b19860833da82554",
+    "6a9dd844332abe8469d55971": "726eb6a37542451a8c1af59f66b6d6a3",
+    "6a9dd845332abe8469d55974": "1320d97481e74a9dba328d53ce39899c",
+    "6a9dd846332abe8469d55975": "c2fb0f7f64d2483298c44b7f57a9f1a8",
+    "6a9dd847332abe8469d55976": "afd5d5460f584cec8e640d25f5406883",
+    "6a9dd848332abe8469d55977": "fd3ee834bf2c4be6928555003bd5837d",
+    "6a9dd849332abe8469d55979": "9a0e7d052022489b9c67a9671422b051",
+    "6a9dd84a332abe8469d5597a": "cf789b365e8549e996203b882aa21234",
+    "6a9dd84c332abe8469d5597b": "81a7ff41670e438496b7b73afd89a166",
+    "6a9dd84d332abe8469d5597d": "24a48cd652684efb9fe642e782b714ca",
+    "6a9dd84e332abe8469d55981": "274d2004af9b468ea129a8d7eefd3eb6",
+    "6a9dd84e332abe8469d55982": "14bafda4a5a54c44b9c64cd104fccfc4",
+    "6a9dd84f332abe8469d55983": "fae998f0d14a405aa6a48b636a6812de",
+    "6a9dd850332abe8469d55985": "a92f39726b7f4288892f37df0e490d2b",
+    "6a9dd851332abe8469d55986": "8b0bc5773ec0444e8f019da07aebc4a4",
+    "6a9dd852332abe8469d55988": "9921c98eb9cc4419982e9749b255472f",
+    "6a9dd852332abe8469d5598a": "537fa830c20947b79ca31f7150ddc5ac",
+    "6a9dd853332abe8469d5598b": "6038fb3b56534a93bb0fd256df488ed7",
+    "6a9dd854332abe8469d5598c": "e782b72e27694d1d94c379a66680e477",
+    "6a9dd855332abe8469d5598d": "c5034cdaa00d492cabf3506497b65c0f",
+    "6a9dd856332abe8469d5598e": "4cd7cde851a34b8fbc6686c24ba44142",
+    "6a9dd857332abe8469d55990": "53bb16be02194fe1a94efed5f28fcc1e",
+    "6a9dd858332abe8469d55992": "c62e45754b1741c0baf5dad9ed9fbf07",
+    "6a9dd859332abe8469d55993": "495fb71bdcc94df3b46b5a839ff15151",
+    "6aa9a743dd73e04d9614615c": "f270347bb3bf4131aa5d71022055dccc",
+    "6aa9a744dd73e04d9614615e": "18bd07de2d9f4099852b38ce335f0643",
+    "6aa9a745dd73e04d96146160": "c281e6a6386342a892709194a2ca3de8",
+    "6aa9a746dd73e04d96146161": "3100c703681943ec8f082b12c4b82def",
+    "6aa9a747dd73e04d96146163": "d6569e626b09436dbfb8e5c49f4d5d39",
+    "6aa9a7fa60b7ca89b6355b9c": "9f5512451d2a4157b033173938c1ae8a",
+    "6aaad084dd73e04d9614e9e7": "37086492ff2c4fd2b1bb97382a3bca1d",
+    "6aaad084dd73e04d9614e9e8": "c2858dcb86d044eba9cdd754652e397e",
+    "6aab0dbcdd73e04d96150a00": "9751fcd54d3d4c5fb78e5734b4724c49",
+    "6aab0decdd73e04d96150a13": "66102b136de44314bb83062c6767b727",
+    "6aab0deedd73e04d96150a15": "bbd8353c370041dda01c7b653bc70eb7",
+    "6aab0defdd73e04d96150a16": "a509a1225170404198f69a5f60634a79",
+    "6aab0df0dd73e04d96150a18": "4cb0b415d947424bbe4b6f859717f453",
+    "6aab0df2dd73e04d96150a19": "2fa17b322c254df285051e246cf75784",
+    "6aab0df3dd73e04d96150a1a": "603395d9730d4b1cbc8cc3c693f4e38a",
+    "6aab0df5dd73e04d96150a1b": "3fa28e7abfb745dea7b3726c0f28d588",
+    "6aab0df6dd73e04d96150a1c": "bc2d721bcc6c4c96b017769985d4c4bb",
+    "6aab0df8dd73e04d96150a1e": "a1177e9e308d4075b1d22738ee65ccaa",
+    "6aab0dfa303f7d479a4f23e0": "bd7ba70f3f5a47e6b1a41dd87ac0decd",
+    "6aab0dfb303f7d479a4f23e2": "366251984bb84309829f11b41ea036e2",
+    "6aab0dfc303f7d479a4f23e4": "0443421e75724f5d82f8817368a2c1bc",
+    "6aab0dfd303f7d479a4f23e6": "9e18bfabe2d042cdbcc6852843752bfc",
+    "6aab0dfd303f7d479a4f23e8": "ef64ebf30067480fba086bf3477d4f41",
+    "6aab0dff303f7d479a4f23ea": "81d635e42f044801a45df78d7d8d179a",
+    "6aab0e00303f7d479a4f23ec": "b335f604b42c46af8d1bc0b5f8d712ce"
+  },
+  "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+  "camera_policy": {
+    "calibrated": false,
+    "candidate_floor": 0.55,
+    "candidate_margin": 0.04,
+    "geometry_min_score": 0.4,
+    "geometry_ranking": "spatial-verification-v1",
+    "geometry_scope": "reference-view-v1",
+    "global_weight": 0.75,
+    "stable_frames": 3
+  },
+  "upload_policy": "bounded-geometry-v1",
+  "code_sha256": "5d630bf1678ab98ae450a951c9b1ee6b33a2be4e6407b8e33d1aa45e759936c5",
+  "dataset_gates": {
+    "new_reviewed_holdout": false,
+    "thirty_artwork_photos": false,
+    "five_artworks_six_captures_each": false,
+    "twenty_room_only_negatives": true,
+    "evaluation_only": true,
+    "positive_targets_are_artworks": true,
+    "no_historical_query_or_reference_bytes": true,
+    "references_unchanged": true,
+    "manifest_unchanged": true,
+    "code_unchanged": true,
+    "photos_unchanged": true
+  },
+  "paths": {
+    "upload": {
+      "top1": {
+        "correct": 19,
+        "total": 21,
+        "rate": 0.9047619047619048,
+        "wilson95": [
+          0.7108586092608176,
+          0.9734812325619255
+        ]
+      },
+      "top3": {
+        "correct": 19,
+        "total": 21,
+        "rate": 0.9047619047619048,
+        "wilson95": [
+          0.7108586092608176,
+          0.9734812325619255
+        ]
+      },
+      "suggestion_precision": {
+        "correct": 19,
+        "total": 21,
+        "rate": 0.9047619047619048,
+        "wilson95": [
+          0.7108586092608176,
+          0.9734812325619255
+        ]
+      },
+      "correct_suggestion_coverage": {
+        "correct": 19,
+        "total": 21,
+        "rate": 0.9047619047619048,
+        "wilson95": [
+          0.7108586092608176,
+          0.9734812325619255
+        ]
+      },
+      "wrong_static_suggestions": 2,
+      "room_only_false_suggestions": 2,
+      "room_only_count": 20,
+      "service_failures": 0,
+      "abstentions": 20,
+      "confusion": {
+        "6aab0dbcdd73e04d96150a00 -> abstain": 2,
+        "6aab0dbcdd73e04d96150a00 -> 6aab0dbcdd73e04d96150a00": 4,
+        "6a9dd4126d52c3bc396586a0 -> 6a9dd4126d52c3bc396586a0": 6,
+        "room-only -> abstain": 18,
+        "room-only -> 6aab0e00303f7d479a4f23ec": 2,
+        "6aa9a745dd73e04d96146160 -> 6aa9a745dd73e04d96146160": 4,
+        "6a9dd4136d52c3bc396586a1 -> 6a9dd4136d52c3bc396586a1": 2,
+        "6aa9a743dd73e04d9614615c -> 6aa9a743dd73e04d9614615c": 3
+      },
+      "gates": {
+        "top1_90_percent": true,
+        "top3_95_percent": false,
+        "zero_wrong_static_suggestions": false,
+        "zero_room_only_suggestions": false,
+        "all_requests_valid": true
+      }
+    },
+    "camera": {
+      "top1": {
+        "correct": 19,
+        "total": 21,
+        "rate": 0.9047619047619048,
+        "wilson95": [
+          0.7108586092608176,
+          0.9734812325619255
+        ]
+      },
+      "top3": {
+        "correct": 19,
+        "total": 21,
+        "rate": 0.9047619047619048,
+        "wilson95": [
+          0.7108586092608176,
+          0.9734812325619255
+        ]
+      },
+      "suggestion_precision": {
+        "correct": 17,
+        "total": 17,
+        "rate": 1.0,
+        "wilson95": [
+          0.8156818649911483,
+          1.0
+        ]
+      },
+      "correct_suggestion_coverage": {
+        "correct": 17,
+        "total": 21,
+        "rate": 0.8095238095238095,
+        "wilson95": [
+          0.5999943530979508,
+          0.9233243494723822
+        ]
+      },
+      "wrong_static_suggestions": 0,
+      "room_only_false_suggestions": 0,
+      "room_only_count": 20,
+      "service_failures": 0,
+      "abstentions": 24,
+      "confusion": {
+        "6aab0dbcdd73e04d96150a00 -> abstain": 3,
+        "6aab0dbcdd73e04d96150a00 -> 6aab0dbcdd73e04d96150a00": 3,
+        "6a9dd4126d52c3bc396586a0 -> abstain": 1,
+        "room-only -> abstain": 20,
+        "6a9dd4126d52c3bc396586a0 -> 6a9dd4126d52c3bc396586a0": 5,
+        "6aa9a745dd73e04d96146160 -> 6aa9a745dd73e04d96146160": 4,
+        "6a9dd4136d52c3bc396586a1 -> 6a9dd4136d52c3bc396586a1": 2,
+        "6aa9a743dd73e04d9614615c -> 6aa9a743dd73e04d9614615c": 3
+      },
+      "gates": {
+        "top1_90_percent": true,
+        "top3_95_percent": false,
+        "zero_wrong_static_suggestions": true,
+        "zero_room_only_suggestions": true,
+        "all_requests_valid": true,
+        "correct_suggestion_coverage_50_percent": true
+      }
+    }
+  },
+  "by_object": {
+    "6a9dd4126d52c3bc396586a0": {
+      "upload": {
+        "top1": {
+          "correct": 6,
+          "total": 6,
+          "rate": 1.0,
+          "wilson95": [
+            0.6096657120978346,
+            1.0
+          ]
+        },
+        "top3": {
+          "correct": 6,
+          "total": 6,
+          "rate": 1.0,
+          "wilson95": [
+            0.6096657120978346,
+            1.0
+          ]
+        },
+        "suggestion_precision": {
+          "correct": 6,
+          "total": 6,
+          "rate": 1.0,
+          "wilson95": [
+            0.6096657120978346,
+            1.0
+          ]
+        },
+        "correct_suggestion_coverage": {
+          "correct": 6,
+          "total": 6,
+          "rate": 1.0,
+          "wilson95": [
+            0.6096657120978346,
+            1.0
+          ]
+        },
+        "wrong_static_suggestions": 0,
+        "room_only_false_suggestions": 0,
+        "room_only_count": 0,
+        "service_failures": 0,
+        "abstentions": 0,
+        "confusion": {
+          "6a9dd4126d52c3bc396586a0 -> 6a9dd4126d52c3bc396586a0": 6
+        },
+        "gates": {
+          "top1_90_percent": true,
+          "top3_95_percent": true,
+          "zero_wrong_static_suggestions": true,
+          "zero_room_only_suggestions": false,
+          "all_requests_valid": true
+        }
+      },
+      "camera": {
+        "top1": {
+          "correct": 6,
+          "total": 6,
+          "rate": 1.0,
+          "wilson95": [
+            0.6096657120978346,
+            1.0
+          ]
+        },
+        "top3": {
+          "correct": 6,
+          "total": 6,
+          "rate": 1.0,
+          "wilson95": [
+            0.6096657120978346,
+            1.0
+          ]
+        },
+        "suggestion_precision": {
+          "correct": 5,
+          "total": 5,
+          "rate": 1.0,
+          "wilson95": [
+            0.5655175352168251,
+            1.0
+          ]
+        },
+        "correct_suggestion_coverage": {
+          "correct": 5,
+          "total": 6,
+          "rate": 0.8333333333333334,
+          "wilson95": [
+            0.43649717781352987,
+            0.9699466302516935
+          ]
+        },
+        "wrong_static_suggestions": 0,
+        "room_only_false_suggestions": 0,
+        "room_only_count": 0,
+        "service_failures": 0,
+        "abstentions": 1,
+        "confusion": {
+          "6a9dd4126d52c3bc396586a0 -> abstain": 1,
+          "6a9dd4126d52c3bc396586a0 -> 6a9dd4126d52c3bc396586a0": 5
+        },
+        "gates": {
+          "top1_90_percent": true,
+          "top3_95_percent": true,
+          "zero_wrong_static_suggestions": true,
+          "zero_room_only_suggestions": false,
+          "all_requests_valid": true,
+          "correct_suggestion_coverage_50_percent": true
+        }
+      }
+    },
+    "6a9dd4136d52c3bc396586a1": {
+      "upload": {
+        "top1": {
+          "correct": 2,
+          "total": 2,
+          "rate": 1.0,
+          "wilson95": [
+            0.34238022750665303,
+            1.0
+          ]
+        },
+        "top3": {
+          "correct": 2,
+          "total": 2,
+          "rate": 1.0,
+          "wilson95": [
+            0.34238022750665303,
+            1.0
+          ]
+        },
+        "suggestion_precision": {
+          "correct": 2,
+          "total": 2,
+          "rate": 1.0,
+          "wilson95": [
+            0.34238022750665303,
+            1.0
+          ]
+        },
+        "correct_suggestion_coverage": {
+          "correct": 2,
+          "total": 2,
+          "rate": 1.0,
+          "wilson95": [
+            0.34238022750665303,
+            1.0
+          ]
+        },
+        "wrong_static_suggestions": 0,
+        "room_only_false_suggestions": 0,
+        "room_only_count": 0,
+        "service_failures": 0,
+        "abstentions": 0,
+        "confusion": {
+          "6a9dd4136d52c3bc396586a1 -> 6a9dd4136d52c3bc396586a1": 2
+        },
+        "gates": {
+          "top1_90_percent": true,
+          "top3_95_percent": true,
+          "zero_wrong_static_suggestions": true,
+          "zero_room_only_suggestions": false,
+          "all_requests_valid": true
+        }
+      },
+      "camera": {
+        "top1": {
+          "correct": 2,
+          "total": 2,
+          "rate": 1.0,
+          "wilson95": [
+            0.34238022750665303,
+            1.0
+          ]
+        },
+        "top3": {
+          "correct": 2,
+          "total": 2,
+          "rate": 1.0,
+          "wilson95": [
+            0.34238022750665303,
+            1.0
+          ]
+        },
+        "suggestion_precision": {
+          "correct": 2,
+          "total": 2,
+          "rate": 1.0,
+          "wilson95": [
+            0.34238022750665303,
+            1.0
+          ]
+        },
+        "correct_suggestion_coverage": {
+          "correct": 2,
+          "total": 2,
+          "rate": 1.0,
+          "wilson95": [
+            0.34238022750665303,
+            1.0
+          ]
+        },
+        "wrong_static_suggestions": 0,
+        "room_only_false_suggestions": 0,
+        "room_only_count": 0,
+        "service_failures": 0,
+        "abstentions": 0,
+        "confusion": {
+          "6a9dd4136d52c3bc396586a1 -> 6a9dd4136d52c3bc396586a1": 2
+        },
+        "gates": {
+          "top1_90_percent": true,
+          "top3_95_percent": true,
+          "zero_wrong_static_suggestions": true,
+          "zero_room_only_suggestions": false,
+          "all_requests_valid": true,
+          "correct_suggestion_coverage_50_percent": true
+        }
+      }
+    },
+    "6aa9a743dd73e04d9614615c": {
+      "upload": {
+        "top1": {
+          "correct": 3,
+          "total": 3,
+          "rate": 1.0,
+          "wilson95": [
+            0.43850296824495455,
+            1.0
+          ]
+        },
+        "top3": {
+          "correct": 3,
+          "total": 3,
+          "rate": 1.0,
+          "wilson95": [
+            0.43850296824495455,
+            1.0
+          ]
+        },
+        "suggestion_precision": {
+          "correct": 3,
+          "total": 3,
+          "rate": 1.0,
+          "wilson95": [
+            0.43850296824495455,
+            1.0
+          ]
+        },
+        "correct_suggestion_coverage": {
+          "correct": 3,
+          "total": 3,
+          "rate": 1.0,
+          "wilson95": [
+            0.43850296824495455,
+            1.0
+          ]
+        },
+        "wrong_static_suggestions": 0,
+        "room_only_false_suggestions": 0,
+        "room_only_count": 0,
+        "service_failures": 0,
+        "abstentions": 0,
+        "confusion": {
+          "6aa9a743dd73e04d9614615c -> 6aa9a743dd73e04d9614615c": 3
+        },
+        "gates": {
+          "top1_90_percent": true,
+          "top3_95_percent": true,
+          "zero_wrong_static_suggestions": true,
+          "zero_room_only_suggestions": false,
+          "all_requests_valid": true
+        }
+      },
+      "camera": {
+        "top1": {
+          "correct": 3,
+          "total": 3,
+          "rate": 1.0,
+          "wilson95": [
+            0.43850296824495455,
+            1.0
+          ]
+        },
+        "top3": {
+          "correct": 3,
+          "total": 3,
+          "rate": 1.0,
+          "wilson95": [
+            0.43850296824495455,
+            1.0
+          ]
+        },
+        "suggestion_precision": {
+          "correct": 3,
+          "total": 3,
+          "rate": 1.0,
+          "wilson95": [
+            0.43850296824495455,
+            1.0
+          ]
+        },
+        "correct_suggestion_coverage": {
+          "correct": 3,
+          "total": 3,
+          "rate": 1.0,
+          "wilson95": [
+            0.43850296824495455,
+            1.0
+          ]
+        },
+        "wrong_static_suggestions": 0,
+        "room_only_false_suggestions": 0,
+        "room_only_count": 0,
+        "service_failures": 0,
+        "abstentions": 0,
+        "confusion": {
+          "6aa9a743dd73e04d9614615c -> 6aa9a743dd73e04d9614615c": 3
+        },
+        "gates": {
+          "top1_90_percent": true,
+          "top3_95_percent": true,
+          "zero_wrong_static_suggestions": true,
+          "zero_room_only_suggestions": false,
+          "all_requests_valid": true,
+          "correct_suggestion_coverage_50_percent": true
+        }
+      }
+    },
+    "6aa9a745dd73e04d96146160": {
+      "upload": {
+        "top1": {
+          "correct": 4,
+          "total": 4,
+          "rate": 1.0,
+          "wilson95": [
+            0.5101091635454027,
+            1.0
+          ]
+        },
+        "top3": {
+          "correct": 4,
+          "total": 4,
+          "rate": 1.0,
+          "wilson95": [
+            0.5101091635454027,
+            1.0
+          ]
+        },
+        "suggestion_precision": {
+          "correct": 4,
+          "total": 4,
+          "rate": 1.0,
+          "wilson95": [
+            0.5101091635454027,
+            1.0
+          ]
+        },
+        "correct_suggestion_coverage": {
+          "correct": 4,
+          "total": 4,
+          "rate": 1.0,
+          "wilson95": [
+            0.5101091635454027,
+            1.0
+          ]
+        },
+        "wrong_static_suggestions": 0,
+        "room_only_false_suggestions": 0,
+        "room_only_count": 0,
+        "service_failures": 0,
+        "abstentions": 0,
+        "confusion": {
+          "6aa9a745dd73e04d96146160 -> 6aa9a745dd73e04d96146160": 4
+        },
+        "gates": {
+          "top1_90_percent": true,
+          "top3_95_percent": true,
+          "zero_wrong_static_suggestions": true,
+          "zero_room_only_suggestions": false,
+          "all_requests_valid": true
+        }
+      },
+      "camera": {
+        "top1": {
+          "correct": 4,
+          "total": 4,
+          "rate": 1.0,
+          "wilson95": [
+            0.5101091635454027,
+            1.0
+          ]
+        },
+        "top3": {
+          "correct": 4,
+          "total": 4,
+          "rate": 1.0,
+          "wilson95": [
+            0.5101091635454027,
+            1.0
+          ]
+        },
+        "suggestion_precision": {
+          "correct": 4,
+          "total": 4,
+          "rate": 1.0,
+          "wilson95": [
+            0.5101091635454027,
+            1.0
+          ]
+        },
+        "correct_suggestion_coverage": {
+          "correct": 4,
+          "total": 4,
+          "rate": 1.0,
+          "wilson95": [
+            0.5101091635454027,
+            1.0
+          ]
+        },
+        "wrong_static_suggestions": 0,
+        "room_only_false_suggestions": 0,
+        "room_only_count": 0,
+        "service_failures": 0,
+        "abstentions": 0,
+        "confusion": {
+          "6aa9a745dd73e04d96146160 -> 6aa9a745dd73e04d96146160": 4
+        },
+        "gates": {
+          "top1_90_percent": true,
+          "top3_95_percent": true,
+          "zero_wrong_static_suggestions": true,
+          "zero_room_only_suggestions": false,
+          "all_requests_valid": true,
+          "correct_suggestion_coverage_50_percent": true
+        }
+      }
+    },
+    "6aab0dbcdd73e04d96150a00": {
+      "upload": {
+        "top1": {
+          "correct": 4,
+          "total": 6,
+          "rate": 0.6666666666666666,
+          "wilson95": [
+            0.299993315138392,
+            0.9032285888942195
+          ]
+        },
+        "top3": {
+          "correct": 4,
+          "total": 6,
+          "rate": 0.6666666666666666,
+          "wilson95": [
+            0.299993315138392,
+            0.9032285888942195
+          ]
+        },
+        "suggestion_precision": {
+          "correct": 4,
+          "total": 4,
+          "rate": 1.0,
+          "wilson95": [
+            0.5101091635454027,
+            1.0
+          ]
+        },
+        "correct_suggestion_coverage": {
+          "correct": 4,
+          "total": 6,
+          "rate": 0.6666666666666666,
+          "wilson95": [
+            0.299993315138392,
+            0.9032285888942195
+          ]
+        },
+        "wrong_static_suggestions": 0,
+        "room_only_false_suggestions": 0,
+        "room_only_count": 0,
+        "service_failures": 0,
+        "abstentions": 2,
+        "confusion": {
+          "6aab0dbcdd73e04d96150a00 -> abstain": 2,
+          "6aab0dbcdd73e04d96150a00 -> 6aab0dbcdd73e04d96150a00": 4
+        },
+        "gates": {
+          "top1_90_percent": false,
+          "top3_95_percent": false,
+          "zero_wrong_static_suggestions": true,
+          "zero_room_only_suggestions": false,
+          "all_requests_valid": true
+        }
+      },
+      "camera": {
+        "top1": {
+          "correct": 4,
+          "total": 6,
+          "rate": 0.6666666666666666,
+          "wilson95": [
+            0.299993315138392,
+            0.9032285888942195
+          ]
+        },
+        "top3": {
+          "correct": 4,
+          "total": 6,
+          "rate": 0.6666666666666666,
+          "wilson95": [
+            0.299993315138392,
+            0.9032285888942195
+          ]
+        },
+        "suggestion_precision": {
+          "correct": 3,
+          "total": 3,
+          "rate": 1.0,
+          "wilson95": [
+            0.43850296824495455,
+            1.0
+          ]
+        },
+        "correct_suggestion_coverage": {
+          "correct": 3,
+          "total": 6,
+          "rate": 0.5,
+          "wilson95": [
+            0.18761630648265054,
+            0.8123836935173494
+          ]
+        },
+        "wrong_static_suggestions": 0,
+        "room_only_false_suggestions": 0,
+        "room_only_count": 0,
+        "service_failures": 0,
+        "abstentions": 3,
+        "confusion": {
+          "6aab0dbcdd73e04d96150a00 -> abstain": 3,
+          "6aab0dbcdd73e04d96150a00 -> 6aab0dbcdd73e04d96150a00": 3
+        },
+        "gates": {
+          "top1_90_percent": false,
+          "top3_95_percent": false,
+          "zero_wrong_static_suggestions": true,
+          "zero_room_only_suggestions": false,
+          "all_requests_valid": true,
+          "correct_suggestion_coverage_50_percent": true
+        }
+      }
+    }
+  },
+  "acceptance_passed": false,
+  "suggestions_are_static_policy_simulations": true,
+  "tracking_measured": false,
+  "physical_phone_measured": false,
+  "automatic_identification": false,
+  "latency_scope": "In-process HTTP, browser-encoded fixture JPEG, local CPU and live Atlas; excludes physical camera/mobile network",
+  "rows": [
+    {
+      "photo_id": "commons-40439977",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "room_only": false,
+      "capture_group": "photographer-sdk16420-2013-07-16",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 24.276388768979814,
+      "inference_ms": null,
+      "request_sha256": "1129982e931adf011ae8ef6da57e1236fe1a238d61e701f3b4461ec8ace349d4"
+    },
+    {
+      "photo_id": "commons-40439977",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "room_only": false,
+      "capture_group": "photographer-sdk16420-2013-07-16",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.22280182500253431,
+      "inference_ms": 218.73,
+      "request_sha256": "1dead6a719e4ea525e23071504eda200c9529c421732e085460433753c009e30"
+    },
+    {
+      "photo_id": "commons-84845597",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "room_only": false,
+      "capture_group": "photographer-tastenlowe-2019-10-13",
+      "candidates": [
+        {
+          "id": "6aab0defdd73e04d96150a16",
+          "score": 0.5188565254211426
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.9563858439796604,
+      "inference_ms": null,
+      "request_sha256": "b794ad74720cdc8bd9fbf6779639614009c76d8f522c8182dbbc9136799cdf61"
+    },
+    {
+      "photo_id": "commons-84845597",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "room_only": false,
+      "capture_group": "photographer-tastenlowe-2019-10-13",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.28314862100523897,
+      "inference_ms": 280.2,
+      "request_sha256": "4533b93451a3569bec1ad1643bf8707b2659778d98061cee0942b586bd1dd07c"
+    },
+    {
+      "photo_id": "commons-110662836",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "room_only": false,
+      "capture_group": "photographer-haykranen-2021-10-02",
+      "candidates": [
+        {
+          "id": "6aab0dbcdd73e04d96150a00",
+          "score": 0.9152542372881356
+        },
+        {
+          "id": "6aab0defdd73e04d96150a16",
+          "score": 0.6151711940765381
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aab0dbcdd73e04d96150a00",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.9589217589818873,
+      "inference_ms": null,
+      "request_sha256": "2cb8ba101014f25264f3db40c69988ab8befe04ce7d4f725d8ce926b3c5ca51e"
+    },
+    {
+      "photo_id": "commons-110662836",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "room_only": false,
+      "capture_group": "photographer-haykranen-2021-10-02",
+      "candidates": [
+        {
+          "id": "6aab0dbcdd73e04d96150a00",
+          "score": 0.405
+        },
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.24062132398830727,
+      "inference_ms": 237.93,
+      "request_sha256": "38bb572443438bbed6d2de131a03718226b791aaa877a927605bafc5543cadc8"
+    },
+    {
+      "photo_id": "commons-161085542",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "room_only": false,
+      "capture_group": "photographer-vbena-2024-06-24",
+      "candidates": [
+        {
+          "id": "6aab0dbcdd73e04d96150a00",
+          "score": 0.9696969696969697
+        },
+        {
+          "id": "6aab0defdd73e04d96150a16",
+          "score": 0.5688357949256897
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.49211883544921875
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aab0dbcdd73e04d96150a00",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.9946454479941167,
+      "inference_ms": null,
+      "request_sha256": "d2dd694f0ba6feade74e1a2a53f120eeab95cff1e55c67316ebadfaa678edeaa"
+    },
+    {
+      "photo_id": "commons-161085542",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "room_only": false,
+      "capture_group": "photographer-vbena-2024-06-24",
+      "candidates": [
+        {
+          "id": "6aab0dbcdd73e04d96150a00",
+          "score": 0.90625
+        },
+        {
+          "id": "6aab0dfd303f7d479a4f23e8",
+          "score": 0.05282931691533879
+        },
+        {
+          "id": "6aab0dfd303f7d479a4f23e6",
+          "score": 0.018024454900914658
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aab0dbcdd73e04d96150a00",
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 1.1105426520225592,
+      "inference_ms": 263.52,
+      "request_sha256": "f033b1b877d95f77edf681f1352f69bb3cff4fae9b280634b2a738c550199c1c"
+    },
+    {
+      "photo_id": "commons-134444072",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6a9dd4126d52c3bc396586a0",
+      "room_only": false,
+      "capture_group": "photographer-rlbberlin-2023-05-01",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.6400000000000001
+        },
+        {
+          "id": "6aab0e00303f7d479a4f23ec",
+          "score": 0.5310955047607422
+        },
+        {
+          "id": "6aab0defdd73e04d96150a16",
+          "score": 0.45718884468078613
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6a9dd4126d52c3bc396586a0",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.9545211080112495,
+      "inference_ms": null,
+      "request_sha256": "e0d20945b1c07625972a0eab9fb244c85b5cc586cfe31a541f1de0a4e0f5f40d"
+    },
+    {
+      "photo_id": "commons-134444072",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6a9dd4126d52c3bc396586a0",
+      "room_only": false,
+      "capture_group": "photographer-rlbberlin-2023-05-01",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.16449306698632427,
+      "inference_ms": 162.0,
+      "request_sha256": "9e922fd3fcb6d17f340286bd80195a685242bc2c709eea51e4f3fa625ee267f4"
+    },
+    {
+      "photo_id": "commons-83873160",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-siriain-2019-11-02",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 2.236253039998701,
+      "inference_ms": null,
+      "request_sha256": "f46af742c37d90ec82fe2c76626756cc8ca0a0d68f88b61869d627a44291b510"
+    },
+    {
+      "photo_id": "commons-83873160",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-siriain-2019-11-02",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.26700188301037997,
+      "inference_ms": 265.28,
+      "request_sha256": "7d0e8fed92570890e2f089d946af1ad80f2849796e774c37483fe46ff1ed3e67"
+    },
+    {
+      "photo_id": "commons-84521974",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-kimberlimakarainen-2019-11-21",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.5080610039876774,
+      "inference_ms": null,
+      "request_sha256": "9e4778bcd855767ffa21b0a0d015733188cc76e099e314f78db22043731e02ca"
+    },
+    {
+      "photo_id": "commons-84521974",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-kimberlimakarainen-2019-11-21",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.3137429089983925,
+      "inference_ms": 310.64,
+      "request_sha256": "8da77a3066fcdc3485dfdada288d089deb0de9ff13607de35cc3ad0f259407b0"
+    },
+    {
+      "photo_id": "commons-155082502",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-oursana-2024-10-08",
+      "candidates": [
+        {
+          "id": "6aab0e00303f7d479a4f23ec",
+          "score": 0.7076120972633362
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": "6aab0e00303f7d479a4f23ec",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.9534853630175348,
+      "inference_ms": null,
+      "request_sha256": "2e4bc5c78bcf6c966477b4d3972553ec9b3e5d2a0fd71e76b29ade161030137a"
+    },
+    {
+      "photo_id": "commons-155082502",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-oursana-2024-10-08",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.1916175930236932,
+      "inference_ms": 190.06,
+      "request_sha256": "971df82156831796b1fb8d8dbb374198ea2007ce8e87235f7720123b0bfa7f3e"
+    },
+    {
+      "photo_id": "commons-49553399",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-rijksvastgoedbedrijf-2013-03-07",
+      "candidates": [
+        {
+          "id": "6aab0e00303f7d479a4f23ec",
+          "score": 0.46365225315093994
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.9431993259931915,
+      "inference_ms": null,
+      "request_sha256": "d149744e824d9842335d491e25c36c78542b84d80d0c543fd5092c50eec20817"
+    },
+    {
+      "photo_id": "commons-49553399",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-rijksvastgoedbedrijf-2013-03-07",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.17446887100231834,
+      "inference_ms": 171.59,
+      "request_sha256": "6aa131c0811d6c316c27a3442129e3cbccb71b22593df72a6fa84a727cf12140"
+    },
+    {
+      "photo_id": "commons-38561086",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-stevenlek-2013-11-26",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.2708051599911414,
+      "inference_ms": null,
+      "request_sha256": "69040f88c3e0008b093c23347cbac83660f6f045d341bb5d476f824eb3467841"
+    },
+    {
+      "photo_id": "commons-38561086",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-stevenlek-2013-11-26",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.2439859229780268,
+      "inference_ms": 241.18,
+      "request_sha256": "ff851ac21fc3156563e1fcfcc5521c7a7eb11757dc376d835ecadbc7e32ed224"
+    },
+    {
+      "photo_id": "commons-47262917",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-glanting-2012-04-03",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.5987284049915615,
+      "inference_ms": null,
+      "request_sha256": "6e860fd3420266f7e92cd97b248361adcb4c3ed43dd416b5f5910d18cbca10ff"
+    },
+    {
+      "photo_id": "commons-47262917",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-glanting-2012-04-03",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.31709992297692224,
+      "inference_ms": 313.82,
+      "request_sha256": "581f001e2dafcbbea871cc1ff5f1949ab4f93bfc943352817d724f05af6a40c0"
+    },
+    {
+      "photo_id": "commons-51332305",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-ducciomalagamba-2014-05-22",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.5724101890227757,
+      "inference_ms": null,
+      "request_sha256": "52db743f2983301363b5b852925b0385f85d940580f77ceebdff05a2a60de708"
+    },
+    {
+      "photo_id": "commons-51332305",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-ducciomalagamba-2014-05-22",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.2942025270021986,
+      "inference_ms": 291.51,
+      "request_sha256": "41ec61008d3ae6b750cf202e571d73450ff91ae294589377f83376cdd49d51f1"
+    },
+    {
+      "photo_id": "commons-76582846",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-julienchatelainfromparisfrance-2018-04-28",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.5738462550216354,
+      "inference_ms": null,
+      "request_sha256": "93c02286118418a89249ee56957e4433b17752ee14dd0e0dfd0485fa78a7948c"
+    },
+    {
+      "photo_id": "commons-76582846",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-julienchatelainfromparisfrance-2018-04-28",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.21411653101677075,
+      "inference_ms": 212.45,
+      "request_sha256": "7455e3435302d35c2f087b0990838a31fab3fee4a07668ad6dc59a5e5d0ceda9"
+    },
+    {
+      "photo_id": "commons-76583099",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-julienchatelainfromparisfrance-2018-04-30",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.9475027269800194,
+      "inference_ms": null,
+      "request_sha256": "6b066e92ed5d545f6d5fcdc801d3865a42b760f65b720230cff7a78c35f08f42"
+    },
+    {
+      "photo_id": "commons-76583099",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-julienchatelainfromparisfrance-2018-04-30",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.34251955602667294,
+      "inference_ms": 339.31,
+      "request_sha256": "9513ec58a33e343ad02acc6dd00e5224ce6b4e5fc1b263e44921f94be90c87e7"
+    },
+    {
+      "photo_id": "commons-160004795",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-pcn02wps-2024-06-05",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.774341796990484,
+      "inference_ms": null,
+      "request_sha256": "490004c6ebad3e93c2f0efb7e7b573098460834a2c627c6a69ca13821fcbf4a2"
+    },
+    {
+      "photo_id": "commons-160004795",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-pcn02wps-2024-06-05",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.30904071300756186,
+      "inference_ms": 305.2,
+      "request_sha256": "764310f5fc085e084eb5120fe7ee561cf4bdb6c644319b547daab5a89fd9065b"
+    },
+    {
+      "photo_id": "commons-44052107",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-romaine-2015-10-04",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.6139005080040079,
+      "inference_ms": null,
+      "request_sha256": "f2002147f53c6b854044b6e59f6af9c49f0f505ded2778d1db6168f2aed03836"
+    },
+    {
+      "photo_id": "commons-44052107",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-romaine-2015-10-04",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.2510622279951349,
+      "inference_ms": 247.48,
+      "request_sha256": "f1da017e5c310ae3175f3794dfd674fbb369b040a37427f243a3ed0ca867d88e"
+    },
+    {
+      "photo_id": "commons-50160172",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-ingnederlandfromnetherlands-2012-11-16",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.445601418003207,
+      "inference_ms": null,
+      "request_sha256": "174511d18c3a2e3d4bc94d7430791a0271cf91dde7205acfff83be4afeba638f"
+    },
+    {
+      "photo_id": "commons-50160172",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-ingnederlandfromnetherlands-2012-11-16",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.2235485239943955,
+      "inference_ms": 220.77,
+      "request_sha256": "ef5e9d46e9a6f34eca241e2b901530a9961736cb42b3811e4ac5deef8905fb85"
+    },
+    {
+      "photo_id": "commons-86135055",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-alfvanbeem-2019-12-14",
+      "candidates": [
+        {
+          "id": "6aab0e00303f7d479a4f23ec",
+          "score": 0.6733293533325195
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": "6aab0e00303f7d479a4f23ec",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.5503459749743342,
+      "inference_ms": null,
+      "request_sha256": "57dcffd51d035fd5132a2b54234ec2cc09df11d4f2eb28c0c89d46a6ecb61d21"
+    },
+    {
+      "photo_id": "commons-86135055",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-alfvanbeem-2019-12-14",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 1.1045372030057479,
+      "inference_ms": 216.61,
+      "request_sha256": "c326ad3f0f26af7f4a76213b9c11a99c81cff3c09c5c49c1e57bbd55ccac350e"
+    },
+    {
+      "photo_id": "commons-46397172",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-eriksw-2015-12-25",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.4740009189990815,
+      "inference_ms": null,
+      "request_sha256": "cbb9166c4bbcbac9b054ddad2dac96a385030edec1db8761f3e8955e13da54a4"
+    },
+    {
+      "photo_id": "commons-46397172",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-eriksw-2015-12-25",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.3716624549997505,
+      "inference_ms": 368.88,
+      "request_sha256": "b6a981fcd4495583bc5c4db41bfeb25d33bb39eaed2e260af732b62e7e8be636"
+    },
+    {
+      "photo_id": "commons-49957072",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-marcoalmbauer-2016-06-24",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.4559767610044219,
+      "inference_ms": null,
+      "request_sha256": "2b6a4173391786e3d5873c32c2802d07c599a7fe47ada332bde20e6690247d8c"
+    },
+    {
+      "photo_id": "commons-49957072",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-marcoalmbauer-2016-06-24",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.3273875689774286,
+      "inference_ms": 324.48,
+      "request_sha256": "1d8986ac52095e9053d80d8f290a885fd036ec100ddc6b9e2bfa93fac3259665"
+    },
+    {
+      "photo_id": "commons-65829193",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-michaeldbeckwith-2018-01-24",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.5429874830006156,
+      "inference_ms": null,
+      "request_sha256": "1488fac45125377c0fe5016bd962f7756b232ac5da8690f131daa161235553e6"
+    },
+    {
+      "photo_id": "commons-65829193",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-michaeldbeckwith-2018-01-24",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.3379335079807788,
+      "inference_ms": 334.84,
+      "request_sha256": "82dce3fa144d6b86a8cd768ad58237812201a0d59119c0195b1a3786b6791b72"
+    },
+    {
+      "photo_id": "commons-62136668",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-willvanwingerdenwillvanw-2016-05-26",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.9564975560060702,
+      "inference_ms": null,
+      "request_sha256": "bf545dddb2d3c8713fe03b596a3f01560f8bc093ae442a70363f63b8faef5f24"
+    },
+    {
+      "photo_id": "commons-62136668",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-willvanwingerdenwillvanw-2016-05-26",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.2941127330122981,
+      "inference_ms": 291.07,
+      "request_sha256": "d746d9ab54412ced0bf8be7e721f904697c207fecfa94ce4fe5ac4de80f5e410"
+    },
+    {
+      "photo_id": "commons-147412835",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-froukjewattel-2024-04-10",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.5692028120101895,
+      "inference_ms": null,
+      "request_sha256": "a3762e31780c85bc40f093a298952c3f53a257d0f12081e5e720287ec17e65b0"
+    },
+    {
+      "photo_id": "commons-147412835",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-froukjewattel-2024-04-10",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.3653029660054017,
+      "inference_ms": 362.27,
+      "request_sha256": "d697025b65bb764fc05d54bf6d18e14ff8f91198dee4f462f0d58e2b5b9cf51e"
+    },
+    {
+      "photo_id": "commons-129666295",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-jedesto-2022-08-13",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.6431943789939396,
+      "inference_ms": null,
+      "request_sha256": "fa7881307ea26afe2f576c6ac3fe6dd4620c47a40d7e13acec00d2ffb231731b"
+    },
+    {
+      "photo_id": "commons-129666295",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-jedesto-2022-08-13",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.3142779990157578,
+      "inference_ms": 311.46,
+      "request_sha256": "afa38e6d66df80c36e1cce378723927eb86aaa4552f8cd974df528a95493e6ad"
+    },
+    {
+      "photo_id": "commons-84250334",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-ciell-2019-11-21",
+      "candidates": [],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 2.37364843999967,
+      "inference_ms": null,
+      "request_sha256": "92d26caab8b523771a4fa9afa590018e1bed9bf00169f8febd0de55871361a1a"
+    },
+    {
+      "photo_id": "commons-84250334",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": null,
+      "room_only": true,
+      "capture_group": "photographer-ciell-2019-11-21",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": false,
+      "top3_correct": false,
+      "static_suggestion": null,
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.29391631798353046,
+      "inference_ms": 291.07,
+      "request_sha256": "c706ccaedb2dfcb652e953273e0f9c0c99b5606ec5e3b819d8de441af15c453e"
+    },
+    {
+      "photo_id": "flickr-13350062335",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "room_only": false,
+      "capture_group": "flickr-owner-92082510@N04-2014-03-22",
+      "candidates": [
+        {
+          "id": "6aab0dbcdd73e04d96150a00",
+          "score": 0.9891891891891892
+        },
+        {
+          "id": "6a9dd81a332abe8469d5593a",
+          "score": 0.580731600522995
+        },
+        {
+          "id": "6a9dd825332abe8469d5594a",
+          "score": 0.5738468170166016
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aab0dbcdd73e04d96150a00",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.671647737006424,
+      "inference_ms": null,
+      "request_sha256": "a7c9034c0002f214d0ccc1f56c8bfc1005bc94fbcb201d78ebd0c770a47ce37c"
+    },
+    {
+      "photo_id": "flickr-13350062335",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "room_only": false,
+      "capture_group": "flickr-owner-92082510@N04-2014-03-22",
+      "candidates": [
+        {
+          "id": "6aab0dbcdd73e04d96150a00",
+          "score": 0.9914529914529915
+        },
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aab0dbcdd73e04d96150a00",
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.3082105460052844,
+      "inference_ms": 304.95,
+      "request_sha256": "67baf6dc56b274d45a825c7a30aa2c38b0c84f0e55b6b1726fc09e4381cd4502"
+    },
+    {
+      "photo_id": "flickr-43155122570",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "room_only": false,
+      "capture_group": "flickr-owner-39698666@N00-2018-09-28",
+      "candidates": [
+        {
+          "id": "6aab0dbcdd73e04d96150a00",
+          "score": 0.9642857142857143
+        },
+        {
+          "id": "6aab0defdd73e04d96150a16",
+          "score": 0.5745681822299957
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aab0dbcdd73e04d96150a00",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 2.0716272449935786,
+      "inference_ms": null,
+      "request_sha256": "8029abc4673796e53a80a945bd6109d1cd63a8b8c18804ff6502205a09519836"
+    },
+    {
+      "photo_id": "flickr-43155122570",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6aab0dbcdd73e04d96150a00",
+      "room_only": false,
+      "capture_group": "flickr-owner-39698666@N00-2018-09-28",
+      "candidates": [
+        {
+          "id": "6aab0dbcdd73e04d96150a00",
+          "score": 1.0
+        },
+        {
+          "id": "6aab0dfd303f7d479a4f23e8",
+          "score": 0.052869396123838695
+        },
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aab0dbcdd73e04d96150a00",
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.2536051210190635,
+      "inference_ms": 250.94,
+      "request_sha256": "f3df9fb51aaad65537ae6dcd47a47d1b21ec5e15f39588d85296418b180d830b"
+    },
+    {
+      "photo_id": "flickr-22586255195",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6a9dd4126d52c3bc396586a0",
+      "room_only": false,
+      "capture_group": "flickr-owner-13731249@N02-2015-10-26",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.8222222222222222
+        },
+        {
+          "id": "6a9dd859332abe8469d55993",
+          "score": 0.6020926833152771
+        },
+        {
+          "id": "6aa9a744dd73e04d9614615e",
+          "score": 0.6009311676025391
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6a9dd4126d52c3bc396586a0",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.932125997991534,
+      "inference_ms": null,
+      "request_sha256": "8b590af92806bd768ac303aed60fa252812c7df28722b7d917d95957d646d5b7"
+    },
+    {
+      "photo_id": "flickr-22586255195",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6a9dd4126d52c3bc396586a0",
+      "room_only": false,
+      "capture_group": "flickr-owner-13731249@N02-2015-10-26",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.8717948717948718
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6a9dd4126d52c3bc396586a0",
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.28067126899259165,
+      "inference_ms": 277.98,
+      "request_sha256": "f0da20a598dcf98d262f88dbf95476d6d92366736c98ead5cb07187394d4cbe2"
+    },
+    {
+      "photo_id": "flickr-33483913008",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6a9dd4126d52c3bc396586a0",
+      "room_only": false,
+      "capture_group": "flickr-owner-43714545@N06-2019-02-23",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.9387755102040817
+        },
+        {
+          "id": "6a9dd846332abe8469d55975",
+          "score": 0.6752283573150635
+        },
+        {
+          "id": "6a9dd842332abe8469d5596c",
+          "score": 0.6539530754089355
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6a9dd4126d52c3bc396586a0",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.7868424550106283,
+      "inference_ms": null,
+      "request_sha256": "fe2f9373d4d5829cdcdd1874389c9a02652bde243c1ad8a89908f53c4f2f17f0"
+    },
+    {
+      "photo_id": "flickr-33483913008",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6a9dd4126d52c3bc396586a0",
+      "room_only": false,
+      "capture_group": "flickr-owner-43714545@N06-2019-02-23",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.9318181818181818
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6a9dd4126d52c3bc396586a0",
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.24540610998519696,
+      "inference_ms": 242.69,
+      "request_sha256": "7db580906ac9fb671606bd1ff06507083188726b11bd6b37bee40596eb27f2d9"
+    },
+    {
+      "photo_id": "flickr-49184953217",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6a9dd4126d52c3bc396586a0",
+      "room_only": false,
+      "capture_group": "flickr-owner-91994044@N00-2017-11-05",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.9230769230769231
+        },
+        {
+          "id": "6a9dd859332abe8469d55993",
+          "score": 0.5840469598770142
+        },
+        {
+          "id": "6a9dd84e332abe8469d55981",
+          "score": 0.5788817405700684
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6a9dd4126d52c3bc396586a0",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 2.1101420339837205,
+      "inference_ms": null,
+      "request_sha256": "7fb70c6f6d71c190a6e6aedc79d55ef03fc04c3c351a032efa3a3839b71a43c9"
+    },
+    {
+      "photo_id": "flickr-49184953217",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6a9dd4126d52c3bc396586a0",
+      "room_only": false,
+      "capture_group": "flickr-owner-91994044@N00-2017-11-05",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.8974358974358975
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6a9dd4126d52c3bc396586a0",
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.266058723005699,
+      "inference_ms": 263.39,
+      "request_sha256": "64bb33b4522d22010c10b72eed62f25b280f2b55f47b2748fffac38d923584ad"
+    },
+    {
+      "photo_id": "flickr-27087848340",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6a9dd4126d52c3bc396586a0",
+      "room_only": false,
+      "capture_group": "flickr-owner-7252160@N04-2016-05-29",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.9036144578313253
+        },
+        {
+          "id": "6a9dd846332abe8469d55975",
+          "score": 0.6890556812286377
+        },
+        {
+          "id": "6a9dd837332abe8469d55960",
+          "score": 0.6487131118774414
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6a9dd4126d52c3bc396586a0",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.9897914520115592,
+      "inference_ms": null,
+      "request_sha256": "17a1262c296d284ca244bf5955127889d25c2c35990d895f2f870551eb711707"
+    },
+    {
+      "photo_id": "flickr-27087848340",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6a9dd4126d52c3bc396586a0",
+      "room_only": false,
+      "capture_group": "flickr-owner-7252160@N04-2016-05-29",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.9552238805970149
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6a9dd4126d52c3bc396586a0",
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 1.2341278930252884,
+      "inference_ms": 235.96,
+      "request_sha256": "040e8c06abe142f9c266d9a4307c886b4c8f20f4bc3fc5697a5d5cfc46bda92a"
+    },
+    {
+      "photo_id": "flickr-54171046898",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6a9dd4126d52c3bc396586a0",
+      "room_only": false,
+      "capture_group": "flickr-owner-9508280@N07-2024-10-18",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.9047619047619048
+        },
+        {
+          "id": "6a9dd842332abe8469d5596c",
+          "score": 0.6122168302536011
+        },
+        {
+          "id": "6a9dd859332abe8469d55993",
+          "score": 0.5976805686950684
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6a9dd4126d52c3bc396586a0",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.7685303790203761,
+      "inference_ms": null,
+      "request_sha256": "2cf780c6fb5a5de4a041b484547a317883a1a4e53a7dc1ee814e876fdd2b630d"
+    },
+    {
+      "photo_id": "flickr-54171046898",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6a9dd4126d52c3bc396586a0",
+      "room_only": false,
+      "capture_group": "flickr-owner-9508280@N07-2024-10-18",
+      "candidates": [
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.8787878787878788
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6a9dd4126d52c3bc396586a0",
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.20662523800274357,
+      "inference_ms": 203.95,
+      "request_sha256": "223ecfaafae76466e43fc134e990f62ba1c857f4b876c2901ea1bb5f47b227dd"
+    },
+    {
+      "photo_id": "flickr-47360122341",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6aa9a745dd73e04d96146160",
+      "room_only": false,
+      "capture_group": "flickr-owner-43714545@N06-2019-02-23",
+      "candidates": [
+        {
+          "id": "6aa9a745dd73e04d96146160",
+          "score": 0.9727626459143969
+        },
+        {
+          "id": "6a9dd811332abe8469d55917",
+          "score": 0.7972427606582642
+        },
+        {
+          "id": "6a9dd81d332abe8469d5593d",
+          "score": 0.7445860505104065
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aa9a745dd73e04d96146160",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.8625624990090728,
+      "inference_ms": null,
+      "request_sha256": "ce0247f926110e092b632ce8fdfbeb0cd46cc2ef83be747b7de0374b1f7b3310"
+    },
+    {
+      "photo_id": "flickr-47360122341",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6aa9a745dd73e04d96146160",
+      "room_only": false,
+      "capture_group": "flickr-owner-43714545@N06-2019-02-23",
+      "candidates": [
+        {
+          "id": "6aa9a745dd73e04d96146160",
+          "score": 0.9864864864864865
+        },
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aa9a745dd73e04d96146160",
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.21321703199646436,
+      "inference_ms": 210.14,
+      "request_sha256": "9c054190dc69d6fde6791c6ee71aacf373d8bb65c80b70d804c20a0a5df51826"
+    },
+    {
+      "photo_id": "flickr-26385573496",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6aa9a745dd73e04d96146160",
+      "room_only": false,
+      "capture_group": "flickr-owner-23128485@N06-2015-09-25",
+      "candidates": [
+        {
+          "id": "6aa9a745dd73e04d96146160",
+          "score": 0.9754098360655737
+        },
+        {
+          "id": "6a9dd811332abe8469d55917",
+          "score": 0.7900650501251221
+        },
+        {
+          "id": "6a9dd837332abe8469d55960",
+          "score": 0.7487831115722656
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aa9a745dd73e04d96146160",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.7418365420016926,
+      "inference_ms": null,
+      "request_sha256": "231aafdeca04c529e7543f1a4a1a8cb045d45386fe56c1a9ce5ca63eec88c015"
+    },
+    {
+      "photo_id": "flickr-26385573496",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6aa9a745dd73e04d96146160",
+      "room_only": false,
+      "capture_group": "flickr-owner-23128485@N06-2015-09-25",
+      "candidates": [
+        {
+          "id": "6aa9a745dd73e04d96146160",
+          "score": 0.946236559139785
+        },
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aa9a745dd73e04d96146160",
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.2177466240245849,
+      "inference_ms": 214.84,
+      "request_sha256": "2b7c4ee1402c86e9ed56e8bff249ffd69f8dbad86dc4dbac90d500e6f57970cb"
+    },
+    {
+      "photo_id": "flickr-8152229713",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6aa9a745dd73e04d96146160",
+      "room_only": false,
+      "capture_group": "flickr-owner-47357563@N06-2012-11-03",
+      "candidates": [
+        {
+          "id": "6aa9a745dd73e04d96146160",
+          "score": 0.9403973509933775
+        },
+        {
+          "id": "6a9dd811332abe8469d55917",
+          "score": 0.7449969053268433
+        },
+        {
+          "id": "6a9dd837332abe8469d55960",
+          "score": 0.718659520149231
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aa9a745dd73e04d96146160",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 2.201731746987207,
+      "inference_ms": null,
+      "request_sha256": "5a35458633ad28dcfd509284a8df40b78e856dd3518c6e6086e5dabbf826102a"
+    },
+    {
+      "photo_id": "flickr-8152229713",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6aa9a745dd73e04d96146160",
+      "room_only": false,
+      "capture_group": "flickr-owner-47357563@N06-2012-11-03",
+      "candidates": [
+        {
+          "id": "6aa9a745dd73e04d96146160",
+          "score": 0.9464285714285714
+        },
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aa9a745dd73e04d96146160",
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.1869551770214457,
+      "inference_ms": 184.14,
+      "request_sha256": "c229cc7aba637f994b9a73dd104525768b0be2b9f205a32ac14c0d42e82260da"
+    },
+    {
+      "photo_id": "flickr-2297618639",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6aa9a745dd73e04d96146160",
+      "room_only": false,
+      "capture_group": "flickr-owner-92705627@N00-2008-02-28",
+      "candidates": [
+        {
+          "id": "6aa9a745dd73e04d96146160",
+          "score": 0.935064935064935
+        },
+        {
+          "id": "6aab0decdd73e04d96150a13",
+          "score": 0.5276990830898285
+        },
+        {
+          "id": "6a9dd811332abe8469d55917",
+          "score": 0.5246609449386597
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aa9a745dd73e04d96146160",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.8117673249798827,
+      "inference_ms": null,
+      "request_sha256": "5def273ff5cb2dd68cf94e79d966c81bbcd98dd2f5d587ed158cac6f9d80a81c"
+    },
+    {
+      "photo_id": "flickr-2297618639",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6aa9a745dd73e04d96146160",
+      "room_only": false,
+      "capture_group": "flickr-owner-92705627@N00-2008-02-28",
+      "candidates": [
+        {
+          "id": "6aa9a745dd73e04d96146160",
+          "score": 0.9375
+        },
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aa9a745dd73e04d96146160",
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.2437901580124162,
+      "inference_ms": 240.19,
+      "request_sha256": "c7299ab8e6acee23782564f6fa9eb7f718454f09f97585936a80c0aac19c7abe"
+    },
+    {
+      "photo_id": "flickr-33484142138",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6a9dd4136d52c3bc396586a1",
+      "room_only": false,
+      "capture_group": "flickr-owner-43714545@N06-2019-02-23",
+      "candidates": [
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.9583333333333334
+        },
+        {
+          "id": "6a9dd804332abe8469d55902",
+          "score": 0.7925434112548828
+        },
+        {
+          "id": "6a9dd811332abe8469d55917",
+          "score": 0.7484143972396851
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6a9dd4136d52c3bc396586a1",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 2.2570449310005642,
+      "inference_ms": null,
+      "request_sha256": "70050f2439ef51c5c779bff8508ca595e5186ff6376804d04890f3382e2f623d"
+    },
+    {
+      "photo_id": "flickr-33484142138",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6a9dd4136d52c3bc396586a1",
+      "room_only": false,
+      "capture_group": "flickr-owner-43714545@N06-2019-02-23",
+      "candidates": [
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.9647058823529412
+        },
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6a9dd4136d52c3bc396586a1",
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.22036270698299631,
+      "inference_ms": 217.37,
+      "request_sha256": "3297f4b859bdd45a7cf8a863712ada72d0798b392135eb9fe9e51a9af357e9fb"
+    },
+    {
+      "photo_id": "flickr-12435298824",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6a9dd4136d52c3bc396586a1",
+      "room_only": false,
+      "capture_group": "flickr-owner-72530635@N06-2014-02-08",
+      "candidates": [
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 1.0
+        },
+        {
+          "id": "6a9dd804332abe8469d55902",
+          "score": 0.6759456396102905
+        },
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.6712367534637451
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6a9dd4136d52c3bc396586a1",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 1.7975601860089228,
+      "inference_ms": null,
+      "request_sha256": "947fcce122d78e29d06d8b01bc7cead8bf399840c0f1959284f9d458fe8761c2"
+    },
+    {
+      "photo_id": "flickr-12435298824",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6a9dd4136d52c3bc396586a1",
+      "room_only": false,
+      "capture_group": "flickr-owner-72530635@N06-2014-02-08",
+      "candidates": [
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.9411764705882353
+        },
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6a9dd4136d52c3bc396586a1",
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.23330711299786344,
+      "inference_ms": 230.55,
+      "request_sha256": "60423d3149b8c5816df8c44a5c8c8c68e618616cad8bdb5764694c6084dfecb7"
+    },
+    {
+      "photo_id": "flickr-8732668636",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6aa9a743dd73e04d9614615c",
+      "room_only": false,
+      "capture_group": "flickr-owner-50714043@N05-2013-05-09",
+      "candidates": [
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.9966666666666667
+        },
+        {
+          "id": "6aab0dbcdd73e04d96150a00",
+          "score": 0.6511454582214355
+        },
+        {
+          "id": "6a9dd81a332abe8469d5593a",
+          "score": 0.5926491022109985
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aa9a743dd73e04d9614615c",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 2.032081790996017,
+      "inference_ms": null,
+      "request_sha256": "7677b03c11ca51976a7919d6fc8c27c4feacb0e1d14a942d4d52a95864c3af4b"
+    },
+    {
+      "photo_id": "flickr-8732668636",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6aa9a743dd73e04d9614615c",
+      "room_only": false,
+      "capture_group": "flickr-owner-50714043@N05-2013-05-09",
+      "candidates": [
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.9836065573770492
+        },
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aa9a743dd73e04d9614615c",
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.2749625080032274,
+      "inference_ms": 271.81,
+      "request_sha256": "d6afa9d35b67bb26631120fbe9db7b2204ca7fe60660980512a638f49376eae5"
+    },
+    {
+      "photo_id": "flickr-25808778163",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6aa9a743dd73e04d9614615c",
+      "room_only": false,
+      "capture_group": "flickr-owner-23128485@N06-2015-09-25",
+      "candidates": [
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 1.0
+        },
+        {
+          "id": "6aaad084dd73e04d9614e9e8",
+          "score": 0.6071635186672211
+        },
+        {
+          "id": "6aab0dbcdd73e04d96150a00",
+          "score": 0.5915670394897461
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aa9a743dd73e04d9614615c",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 2.8713595010049175,
+      "inference_ms": null,
+      "request_sha256": "ce0116837f3787a3710caa872b2f18112c1ba8d9dac91c92ee50ab7f902bb0f5"
+    },
+    {
+      "photo_id": "flickr-25808778163",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6aa9a743dd73e04d9614615c",
+      "room_only": false,
+      "capture_group": "flickr-owner-23128485@N06-2015-09-25",
+      "candidates": [
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 1.0
+        },
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aa9a743dd73e04d9614615c",
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.2726103460008744,
+      "inference_ms": 269.47,
+      "request_sha256": "ded506ab8c23399318a929a4f4a9724541aa749c4a49d7865cdf804201840427"
+    },
+    {
+      "photo_id": "flickr-9704471582",
+      "path": "upload",
+      "http_status": 200,
+      "expected_object_id": "6aa9a743dd73e04d9614615c",
+      "room_only": false,
+      "capture_group": "flickr-owner-49385583@N07-2013-09-08",
+      "candidates": [
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.988929889298893
+        },
+        {
+          "id": "6aab0dbcdd73e04d96150a00",
+          "score": 0.5880357027053833
+        },
+        {
+          "id": "6a9dd80e332abe8469d55911",
+          "score": 0.5435709953308105
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aa9a743dd73e04d9614615c",
+      "method": "visual_embeddings_geometry",
+      "reference_version": null,
+      "seconds": 2.0306891369982623,
+      "inference_ms": null,
+      "request_sha256": "c00f73a28536f344c595e05fe48a55f95d7c321e56b4ca8361363b01b6e5406f"
+    },
+    {
+      "photo_id": "flickr-9704471582",
+      "path": "camera",
+      "http_status": 200,
+      "expected_object_id": "6aa9a743dd73e04d9614615c",
+      "room_only": false,
+      "capture_group": "flickr-owner-49385583@N07-2013-09-08",
+      "candidates": [
+        {
+          "id": "6aa9a743dd73e04d9614615c",
+          "score": 0.9857142857142858
+        },
+        {
+          "id": "6a9dd4126d52c3bc396586a0",
+          "score": 0.0
+        },
+        {
+          "id": "6a9dd4136d52c3bc396586a1",
+          "score": 0.0
+        }
+      ],
+      "top1_correct": true,
+      "top3_correct": true,
+      "static_suggestion": "6aa9a743dd73e04d9614615c",
+      "method": "camera-server-v1",
+      "reference_version": "3feeaa4fa8b4608744f9d9ad8dde7b1953a6ab03ec80f221ca0e72864bb315e7",
+      "seconds": 0.2910373809863813,
+      "inference_ms": 288.35,
+      "request_sha256": "32a070b9754bbd8b60be982b837d217313476e1f8ed56b420def9f3b395482ed"
+    }
+  ]
+}

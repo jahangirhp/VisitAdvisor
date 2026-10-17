@@ -35,9 +35,11 @@ CODE_FILES = (
     "app/modules/visual/repository.py",
     "app/modules/visual/service.py",
     "app/modules/live_camera/inference.py",
+    "app/modules/live_camera/geometry.py",
     "app/modules/live_camera/references.py",
     "app/modules/live_camera/static/capture.mjs",
     "scripts/camera_frames.mjs",
+    "scripts/artwork_room_replay.py",
 )
 
 
@@ -78,7 +80,9 @@ def proportion(correct: int, total: int) -> dict[str, Any]:
     }
 
 
-def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
+def summarize(
+    rows: list[dict[str, Any]], *, require_camera_coverage: bool = True
+) -> dict[str, Any]:
     positives = [r for r in rows if r["expected_object_id"]]
     negatives = [r for r in rows if r["room_only"]]
     suggestions = [r for r in rows if r["static_suggestion"]]
@@ -113,10 +117,12 @@ def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
         "zero_wrong_static_suggestions": result["wrong_static_suggestions"] == 0,
         "zero_room_only_suggestions": len(negatives) >= 20
         and result["room_only_false_suggestions"] == 0,
-        "correct_suggestion_coverage_50_percent": bool(positives)
-        and result["correct_suggestion_coverage"]["rate"] >= 0.5,
         "all_requests_valid": bool(rows) and result["service_failures"] == 0,
     }
+    if require_camera_coverage:
+        result["gates"]["correct_suggestion_coverage_50_percent"] = (
+            bool(positives) and result["correct_suggestion_coverage"]["rate"] >= 0.5
+        )
     return result
 
 
@@ -138,6 +144,11 @@ def dataset_gates(manifest: ReplayManifest) -> dict[str, bool]:
         and all(groups[oid] >= 6 for oid in counts),
         "twenty_room_only_negatives": sum(p.room_only for p in photos) >= 20,
         "evaluation_only": all(p.split == "evaluation" for p in photos),
+        "positive_targets_are_artworks": all(
+            p.object_type.strip().lower()
+            in {"painting", "drawing", "print", "photograph"}
+            for p in positives
+        ),
     }
 
 
@@ -169,7 +180,7 @@ def browser_frames(
     return [base64.b64decode(r["jpeg"], validate=True) for r in frames]
 
 
-def historical_image_hashes() -> set[str]:
+def historical_image_hashes(*, exclude_manifest: Path | None = None) -> set[str]:
     """Reject relabelled regression/reference bytes as a fresh acceptance holdout."""
     hashes: set[str] = set()
 
@@ -199,20 +210,96 @@ def historical_image_hashes() -> set[str]:
         *Path("docs").glob("*.json"),
         *Path("tests/data/visual").rglob("*.json"),
     ]:
+        # The input manifest is frozen before evaluation. Its presence in docs
+        # does not itself mean its images have already been used for inference.
+        # Prior reports/reference manifests remain part of the history check.
+        if exclude_manifest and path.resolve() == exclude_manifest.resolve():
+            continue
         visit(json.loads(path.read_text()))
     return hashes
+
+
+def audit_manifest(path: Path) -> tuple[ReplayManifest, dict[str, Any]]:
+    """Check ticket #9 holdout eligibility without model, browser or Atlas calls."""
+    data = path.read_bytes()
+    manifest = ReplayManifest.model_validate_json(data)
+    validate_manifest(manifest.photos)
+    if len({p.location_id for p in manifest.photos}) != 1:
+        raise ValueError("Replay needs exactly one selected location")
+    if len(set(manifest.camera_object_ids)) != len(manifest.camera_object_ids):
+        raise ValueError("Duplicate competing identities")
+    if any(
+        p.expected_object_id and p.expected_object_id not in manifest.camera_object_ids
+        for p in manifest.photos
+    ):
+        raise ValueError("Expected artwork is absent from the competing catalog")
+    raw, normalized = inspect_photos(manifest.photos, path.parent)
+    if any(raw[p.id] != p.sha256 for p in manifest.photos):
+        raise ValueError("PHOTO_HASH_CHANGED")
+    gates = dataset_gates(manifest)
+    gates["no_historical_query_or_reference_bytes"] = not historical_image_hashes(
+        exclude_manifest=path
+    ).intersection(set(raw.values()) | set(normalized.values()))
+    positive_ids = sorted(
+        {p.expected_object_id for p in manifest.photos if p.expected_object_id}
+    )
+    return manifest, {
+        "purpose": manifest.purpose,
+        "manifest_sha256": hashlib.sha256(data).hexdigest(),
+        "photo_hashes": raw,
+        "normalized_photo_hashes": normalized,
+        "dataset_gates": gates,
+        "positive_photos": sum(bool(p.expected_object_id) for p in manifest.photos),
+        "room_only_negatives": sum(p.room_only for p in manifest.photos),
+        "artwork_capture_groups": {
+            oid: sorted(
+                {
+                    p.capture_group
+                    for p in manifest.photos
+                    if p.expected_object_id == oid
+                }
+            )
+            for oid in positive_ids
+        },
+        "ready_for_acceptance_run": all(gates.values()),
+        "recognition_requests_attempted": 0,
+        "acceptance_passed": False,
+    }
+
+
+def static_suggestion(
+    body: dict[str, Any],
+    candidates: list[dict[str, Any]],
+    policy: dict[str, Any],
+    status: int,
+) -> str | None:
+    """Simulate a single-frame preview, respecting explicit server abstention."""
+    if status != 200 or body.get("suggestion_allowed") is False or not candidates:
+        return None
+    first = candidates[0]
+    original = body.get("candidates", [{}])[0]
+    thresholds = policy.get("profiles", {}).get(original.get("profile"), {})
+    if (
+        thresholds.get("enabled", True) is False
+        or original.get("coverage_ready") is False
+    ):
+        return None
+    second = candidates[1]["score"] if len(candidates) > 1 else 0.0
+    if first["score"] >= thresholds.get("floor", policy["candidate_floor"]) and (
+        first["score"] - second >= thresholds.get("margin", policy["candidate_margin"])
+    ):
+        return str(first["id"])
+    return None
 
 
 async def run(
     path: Path, browser: str, verify: bool, verify_camera: bool = False
 ) -> dict[str, Any]:
-    raw_manifest = path.read_bytes()
     code_hash = digest({p: Path(p).read_text() for p in CODE_FILES})
-    manifest = ReplayManifest.model_validate_json(raw_manifest)
+    manifest, audit = audit_manifest(path)
+    if manifest.purpose == "acceptance" and not audit["ready_for_acceptance_run"]:
+        raise ValueError("ACCEPTANCE_DATASET_INCOMPLETE; run --audit-only first")
     photos = manifest.photos
-    validate_manifest(photos)
-    if len({p.location_id for p in photos}) != 1:
-        raise ValueError("Replay needs exactly one selected location")
     settings = Settings().model_copy(
         update={
             "openai_api_key": None,
@@ -221,20 +308,19 @@ async def run(
             "live_camera_object_ids": manifest.camera_object_ids,
             "live_camera_location_id": photos[0].location_id,
             "live_camera_geometry_rerank": verify_camera,
+            # This ticket's controlled comparison uses the geometry-only path,
+            # regardless of unrelated adaptive settings in the local environment.
+            "live_camera_adaptive": False,
+            "live_camera_object_regions": False,
+            "live_camera_calibration": None,
         }
     )
     # Validate configured IDs even though model_copy deliberately bypasses settings
     # construction. This also checks the selected location's covered reference set.
-    raw_hashes, normalized_hashes = inspect_photos(photos, path.parent)
-    if any(raw_hashes[p.id] != p.sha256 for p in photos):
-        raise ValueError("PHOTO_HASH_CHANGED")
-    if any(
-        p.expected_object_id and p.expected_object_id not in manifest.camera_object_ids
-        for p in photos
-    ):
-        raise ValueError(
-            "Expected artwork is missing from the competing camera catalog"
-        )
+    raw_hashes, normalized_hashes = (
+        audit["photo_hashes"],
+        audit["normalized_photo_hashes"],
+    )
     frames = await asyncio.to_thread(browser_frames, manifest, path.parent, browser)
     db = MongoDB(settings)
     try:
@@ -300,14 +386,8 @@ async def run(
                     ]
                     policy = engine.catalog["policy"]
                     first = candidates[0] if candidates else None
-                    second = candidates[1]["score"] if len(candidates) > 1 else 0.0
-                    suggestion = (
-                        first["id"]
-                        if response.status_code == 200
-                        and first
-                        and first["score"] >= policy["candidate_floor"]
-                        and first["score"] - second >= policy["candidate_margin"]
-                        else None
+                    suggestion = static_suggestion(
+                        body, candidates, policy, response.status_code
                     )
                     rows.append(
                         {
@@ -348,7 +428,7 @@ async def run(
         )
         final_version, _, _ = await references.snapshot()
         gates = dataset_gates(manifest)
-        historical = historical_image_hashes()
+        historical = historical_image_hashes(exclude_manifest=path)
         gates["no_historical_query_or_reference_bytes"] = not historical.intersection(
             set(raw_hashes.values()) | set(normalized_hashes.values())
         )
@@ -356,7 +436,9 @@ async def run(
             frozen_sets == {r["object_id"]: r["set_id"] for r in after}
             and final_version == frozen_version
         )
-        gates["manifest_unchanged"] = path.read_bytes() == raw_manifest
+        gates["manifest_unchanged"] = (
+            hashlib.sha256(path.read_bytes()).hexdigest() == audit["manifest_sha256"]
+        )
         gates["code_unchanged"] = code_hash == digest(
             {p: Path(p).read_text() for p in CODE_FILES}
         )
@@ -365,13 +447,16 @@ async def run(
             final_raw == raw_hashes and final_normalized == normalized_hashes
         )
         paths = {
-            method: summarize([r for r in rows if r["path"] == method])
+            method: summarize(
+                [r for r in rows if r["path"] == method],
+                require_camera_coverage=method == "camera",
+            )
             for method in ("upload", "camera")
         }
         return {
             "created_at": datetime.now(UTC).isoformat(),
             "purpose": manifest.purpose,
-            "manifest_sha256": hashlib.sha256(raw_manifest).hexdigest(),
+            "manifest_sha256": audit["manifest_sha256"],
             "photo_hashes": raw_hashes,
             "normalized_photo_hashes": normalized_hashes,
             "browser": browser,
@@ -394,7 +479,8 @@ async def run(
                             r
                             for r in rows
                             if r["expected_object_id"] == oid and r["path"] == method
-                        ]
+                        ],
+                        require_camera_coverage=method == "camera",
                     )
                     for method in paths
                 }
@@ -423,9 +509,19 @@ def main() -> None:
     parser.add_argument("--browser", choices=("chromium", "webkit"), default="webkit")
     parser.add_argument("--verify-upload", action="store_true")
     parser.add_argument("--verify-camera", action="store_true")
+    parser.add_argument("--audit-only", action="store_true")
     args = parser.parse_args()
     if args.output.exists():
         parser.error("Output already exists; preserve frozen evidence")
+    if args.audit_only:
+        try:
+            _, audit = audit_manifest(args.manifest)
+        except Exception:
+            print("AUDIT_FAILED: check manifest, source files and photo hashes.")
+            raise SystemExit(2) from None
+        args.output.write_text(json.dumps(audit, indent=2) + "\n")
+        print(json.dumps(audit["dataset_gates"], indent=2))
+        raise SystemExit(0 if audit["ready_for_acceptance_run"] else 1)
     try:
         report = asyncio.run(
             run(args.manifest, args.browser, args.verify_upload, args.verify_camera)
