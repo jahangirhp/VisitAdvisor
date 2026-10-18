@@ -5,27 +5,54 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Visual evaluation</title>
 <style>
-  body { font: 14px system-ui, sans-serif; margin: 0; padding: 24px; color: #1c1c1e; background: #f6f6f8; }
-  h1 { font-size: 20px; margin: 0 0 16px; }
-  h2 { font-size: 15px; margin: 0 0 10px; }
-  section { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
-  .bar { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-  button, select { font: inherit; padding: 6px 12px; }
+  * { box-sizing: border-box; }
+  body { font: 14px/1.45 system-ui, sans-serif; margin: 0; padding: 24px; color: #1c1c1e; background: #f3f4f7; }
+  .wrapper { max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 22px; margin: 0 0 20px; }
+  h2 { font-size: 15px; margin: 0 0 12px; }
+  h2 .muted { font-weight: 400; font-size: 13px; }
+  section { background: #fff; border: 1px solid #e2e4ea; border-radius: 10px; padding: 18px; margin-bottom: 18px; box-shadow: 0 1px 2px rgba(0,0,0,.04); }
+  .bar { display: flex; gap: 10px 14px; align-items: center; flex-wrap: wrap; }
+  button, select, input { font: inherit; }
+  button, select, input:not([type=file]) { padding: 6px 12px; border: 1px solid #c9ccd4; border-radius: 6px; background: #fff; }
+  button { cursor: pointer; }
+  button:hover:not(:disabled) { background: #f0f2f7; }
+  button:disabled { opacity: .5; cursor: default; }
+  #run, #ref-upload, #series-add { background: #2563eb; border-color: #2563eb; color: #fff; }
+  #run:hover:not(:disabled), #ref-upload:hover:not(:disabled), #series-add:hover:not(:disabled) { background: #1d4fd8; }
+  .scroll { max-height: 360px; overflow: auto; border: 1px solid #e2e4ea; border-radius: 8px; background: #fafbfc; padding: 10px; margin-top: 12px; }
+  .scroll:empty::before { content: "Nothing here yet."; color: #888; }
+  .gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+  .card { display: flex; flex-direction: column; gap: 6px; background: #fff; border: 1px solid #e2e4ea; border-radius: 8px; padding: 6px; min-width: 0; }
+  .card img.thumb { width: 100%; height: 90px; object-fit: cover; }
+  .card button { width: 100%; padding: 3px 6px; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .series-box { border: 1px solid #e2e4ea; border-radius: 8px; padding: 12px; margin-top: 12px; }
+  .series-box .scroll { max-height: 240px; }
+  .table-wrap { max-height: 420px; overflow: auto; border: 1px solid #e2e4ea; border-radius: 8px; }
   table { border-collapse: collapse; width: 100%; }
-  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid #eee; vertical-align: middle; }
+  th, td { text-align: left; padding: 6px 10px; border-bottom: 1px solid #eee; vertical-align: middle; }
+  th { position: sticky; top: 0; background: #f3f4f7; z-index: 1; }
   tr.click { cursor: pointer; }
   tr.click:hover, tr.sel { background: #eef3ff; }
   img.thumb { height: 56px; border-radius: 4px; }
   .ok { color: #1a7f37; font-weight: 600; }
   .bad { color: #b42318; font-weight: 600; }
   .muted { color: #666; }
-  #msg { min-height: 1.2em; }
+  #msg, #build-msg { min-height: 1.2em; overflow-wrap: anywhere; }
   svg text { font-size: 11px; fill: #555; }
   .legend span { margin-right: 14px; }
   .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; }
+  img.thumb { cursor: zoom-in; }
+  #lightbox { position: fixed; inset: 0; z-index: 100; display: flex; align-items: center; justify-content: center; background: rgba(0,0,0,.8); padding: 24px; }
+  #lightbox[hidden] { display: none; }
+  #lightbox figure { margin: 0; max-width: 100%; max-height: 100%; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  #lightbox img { max-width: 100%; max-height: calc(100vh - 100px); object-fit: contain; border-radius: 6px; background: #fff; }
+  #lightbox figcaption { color: #fff; font-size: 13px; overflow-wrap: anywhere; text-align: center; }
+  #lightbox-close { position: absolute; top: 14px; right: 18px; font-size: 22px; line-height: 1; padding: 4px 10px; }
 </style>
 </head>
 <body>
+<div class="wrapper">
 <h1>Visual evaluation <span class="muted">(test database)</span></h1>
 
 <section>
@@ -47,7 +74,7 @@
     <button id="build">Rebuild embeddings</button>
     <span id="build-msg" class="muted"></span>
   </div>
-  <div id="refs" class="bar" style="margin-top:10px"></div>
+  <div id="refs" class="scroll gallery"></div>
 </section>
 
 <section>
@@ -72,20 +99,26 @@
 
 <section>
   <h2>Runs</h2>
-  <table>
+  <div class="table-wrap"><table>
     <thead><tr><th>Started</th><th>Dataset</th><th>Status</th><th>Photos</th><th>Min score</th><th>Top-1</th><th>Top-3</th><th>Model</th><th></th></tr></thead>
     <tbody id="runs"></tbody>
-  </table>
+  </table></div>
 </section>
 
 <section id="detail" hidden>
   <h2 id="detail-title"></h2>
   <div id="categories" class="muted" style="margin-bottom:10px"></div>
-  <table>
+  <div class="table-wrap"><table>
     <thead><tr><th>Photo</th><th>Object</th><th>Type</th><th>View</th><th>Result</th><th>Rank</th><th>Top candidates</th></tr></thead>
     <tbody id="results"></tbody>
-  </table>
+  </table></div>
 </section>
+</div>
+
+<div id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Image preview">
+  <button id="lightbox-close" aria-label="Close">✕</button>
+  <figure><img id="lightbox-img" alt=""><figcaption id="lightbox-caption"></figcaption></figure>
+</div>
 
 <script>
 const base = "/api/v1/visual-evaluation";
@@ -94,6 +127,22 @@ let runs = [];
 let selected = null;
 let polling = null;
 const imageUrl = (path) => `${base}/library/image?path=${encodeURIComponent(path)}`;
+
+const lightbox = $("lightbox");
+const closeLightbox = () => { lightbox.hidden = true; $("lightbox-img").removeAttribute("src"); };
+document.addEventListener("click", (event) => {
+  const img = event.target.closest?.("img.thumb");
+  if (img) {
+    $("lightbox-img").src = img.src;
+    $("lightbox-caption").textContent = img.title || "";
+    lightbox.hidden = false;
+  } else if (event.target === lightbox || event.target.closest("#lightbox-close")) {
+    closeLightbox();
+  }
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && !lightbox.hidden) closeLightbox();
+});
 
 const pct = (n, total) => (total ? Math.round((100 * n) / total) : 0);
 const el = (tag, text, cls) => {
@@ -154,13 +203,14 @@ async function removePath(path, what, rebuild) {
 }
 
 function card(image, label, path, rebuild) {
-  const box = el("div");
+  const box = el("div", undefined, "card");
   const img = el("img", undefined, "thumb");
   img.src = imageUrl(image.path);
   img.title = image.name || image.path;
   const x = el("button", "✕ " + label);
+  x.title = label;
   x.onclick = () => removePath(path, label, rebuild);
-  box.append(img, el("br"), x);
+  box.append(img, x);
   return box;
 }
 
@@ -173,8 +223,7 @@ async function loadLibrary() {
     return box;
   }));
   $("series").replaceChildren(...lib.series.map((s) => {
-    const box = el("div");
-    box.style.cssText = "border-top:2px solid #ccc;padding:8px 0";
+    const box = el("div", undefined, "series-box");
     const head = el("div", undefined, "bar");
     const input = el("input");
     input.type = "file";
@@ -196,7 +245,7 @@ async function loadLibrary() {
     const x = el("button", "Delete series");
     x.onclick = () => removePath(`positive/${s.name}`, `series ${s.name} and all its photos`, false);
     head.append(el("strong", s.name), input, view, send, x);
-    const grid = el("div", undefined, "bar");
+    const grid = el("div", undefined, "scroll gallery");
     grid.append(...s.photos.map((p) => {
       const c = card(p, p.object ? `${p.category}: ${p.object}` : `${p.category}: any match`, p.path, false);
       return c;
