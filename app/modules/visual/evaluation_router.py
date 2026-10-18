@@ -8,19 +8,25 @@ from typing import Annotated, Any
 
 from bson import ObjectId
 from bson.errors import InvalidId
-from fastapi import APIRouter, Body, Depends, Request
+from fastapi import APIRouter, Body, Depends, File, Form, Request, UploadFile
 from fastapi.responses import FileResponse
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 from app.core.config import Settings
 from app.core.exceptions import ApplicationError
 from app.db.mongodb import get_database
 from app.modules.visual.evaluation import (
+    MAX_UPLOAD_BYTES,
     EvaluationError,
+    build_references,
+    create_series,
+    delete_path,
+    library,
     list_datasets,
     load_dataset,
-    photo_path,
+    resolve,
     run_dataset,
+    save_image,
     summarize,
 )
 
@@ -33,6 +39,10 @@ def enabled(request: Request) -> Settings:
     settings: Settings | None = getattr(request.app.state, "settings", None)
     if settings is None or not settings.visual_evaluation_enabled:
         raise ApplicationError("NOT_FOUND", "Not found.", 404)
+    if "test" not in settings.mongodb_database.lower():
+        raise ApplicationError(
+            "NOT_A_TEST_DATABASE", "MONGODB_DATABASE must contain 'test'.", 403
+        )
     return settings
 
 
@@ -47,6 +57,7 @@ Config = Annotated[Settings, Depends(enabled)]
 class RunRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
     dataset: str
+    threshold: float = Field(default=0.45, ge=0, le=1)
 
 
 def running(request: Request) -> bool:
@@ -90,6 +101,11 @@ async def page() -> FileResponse:
     return FileResponse(PAGE, media_type="text/html")
 
 
+def library_error(exc: EvaluationError) -> ApplicationError:
+    status = 404 if str(exc) in ("DATASET_NOT_FOUND",) else 422
+    return ApplicationError(str(exc), "Request cannot be used.", status)
+
+
 @router.get("/datasets")
 async def datasets(settings: Config) -> list[dict[str, Any]]:
     rows = []
@@ -102,16 +118,115 @@ async def datasets(settings: Config) -> list[dict[str, Any]]:
     return rows
 
 
-@router.get("/datasets/{name}/photos/{photo_id}/image")
-async def photo_image(name: str, photo_id: int, settings: Config) -> FileResponse:
+@router.get("/library")
+async def get_library(settings: Config) -> dict[str, Any]:
+    return library(settings.visual_evaluation_root)
+
+
+@router.get("/library/image")
+async def library_image(path: str, settings: Config) -> FileResponse:
     try:
-        photos = load_dataset(settings.visual_evaluation_root, name)
-        photo = next(p for p in photos if p.id == photo_id)
-        return FileResponse(photo_path(settings.visual_evaluation_root, photo))
+        target = resolve(settings.visual_evaluation_root, path)
     except EvaluationError as exc:
-        raise dataset_error(exc) from None
-    except StopIteration:
-        raise ApplicationError("PHOTO_NOT_FOUND", "Photo not found.", 404) from None
+        raise library_error(exc) from None
+    if not target.is_file():
+        raise ApplicationError("PHOTO_NOT_FOUND", "Photo not found.", 404)
+    return FileResponse(target)
+
+
+class SeriesRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    name: str
+
+
+@router.post("/library/series", status_code=201)
+async def add_series(body: SeriesRequest, settings: Config) -> dict[str, str]:
+    try:
+        create_series(settings.visual_evaluation_root, body.name)
+    except EvaluationError as exc:
+        raise library_error(exc) from None
+    return {"name": body.name}
+
+
+@router.post("/library/upload", status_code=201)
+async def upload(
+    settings: Config,
+    file: Annotated[UploadFile, File()],
+    kind: Annotated[str, Form()] = "other",
+    category: Annotated[str, Form()] = "full",
+    series: Annotated[str | None, Form()] = None,
+) -> dict[str, str]:
+    data = await file.read(MAX_UPLOAD_BYTES + 1)
+    try:
+        saved = save_image(
+            settings.visual_evaluation_root,
+            series=series or None,
+            kind=kind,
+            filename=file.filename or "image.jpg",
+            category=category,
+            data=data,
+        )
+    except EvaluationError as exc:
+        raise library_error(exc) from None
+    return {"saved": saved}
+
+
+@router.delete("/library")
+async def delete_library(path: str, settings: Config) -> dict[str, str]:
+    try:
+        delete_path(settings.visual_evaluation_root, path)
+    except EvaluationError as exc:
+        raise library_error(exc) from None
+    return {"deleted": path}
+
+
+def building(request: Request) -> bool:
+    task: asyncio.Task[None] | None = getattr(request.app.state, "build_task", None)
+    return task is not None and not task.done()
+
+
+@router.get("/build")
+async def build_status(request: Request) -> dict[str, Any]:
+    state = request.app.state
+    return {
+        "running": building(request),
+        **getattr(state, "build_status", {"state": "idle"}),
+    }
+
+
+@router.post("/build", status_code=202)
+async def start_build(request: Request, settings: Config) -> dict[str, str]:
+    state = request.app.state
+    encoder = getattr(state, "visual_encoder", None)
+    if encoder is None:
+        raise ApplicationError(
+            "VISUAL_NOT_CONFIGURED", "Visual recognition is not enabled.", 503
+        )
+    if building(request) or running(request):
+        raise ApplicationError("BUSY", "A build or evaluation is running.", 409)
+    database = get_database(request)
+    state.build_status = {"state": "running", "done": 0, "total": 0}
+
+    def progress(done: int, total: int) -> None:
+        state.build_status = {"state": "running", "done": done, "total": total}
+
+    async def work() -> None:
+        try:
+            report = await build_references(
+                settings.visual_evaluation_root,
+                database,
+                encoder,
+                state.visual_lock,
+                progress,
+            )
+            state.build_status = {"state": "done", "report": report}
+        except Exception as exc:
+            logger.exception("Reference build failed")
+            code = exc.code if isinstance(exc, ApplicationError) else "BUILD_FAILED"
+            state.build_status = {"state": "failed", "error": code}
+
+    state.build_task = asyncio.create_task(work())
+    return {"state": "running"}
 
 
 @router.get("/runs")
@@ -162,7 +277,7 @@ async def start_run(
         raise ApplicationError(
             "VISUAL_NOT_CONFIGURED", "Visual recognition is not enabled.", 503
         )
-    if running(request):
+    if running(request) or building(request):
         raise ApplicationError("RUN_IN_PROGRESS", "An evaluation is running.", 409)
     root = settings.visual_evaluation_root
     try:
@@ -174,6 +289,7 @@ async def start_run(
     inserted = await database[COLLECTION].insert_one(
         {
             "dataset": body.dataset,
+            "threshold": body.threshold,
             "status": "running",
             "started_at": datetime.now(UTC),
             "finished_at": None,
@@ -193,7 +309,13 @@ async def start_run(
         changes: dict[str, Any]
         try:
             results = await run_dataset(
-                root, photos, database, encoder, state.visual_lock, progress
+                root,
+                photos,
+                database,
+                encoder,
+                state.visual_lock,
+                progress,
+                body.threshold,
             )
             changes = {"status": "done", "results": results, **summarize(results)}
         except (EvaluationError, ApplicationError) as exc:

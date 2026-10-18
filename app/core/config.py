@@ -27,7 +27,7 @@ class Settings(BaseSettings):
     ocr_timeout_seconds: float = Field(default=30, ge=1, le=60)
     visual_enabled: bool = False
     visual_evaluation_enabled: bool = False
-    visual_evaluation_root: Path = Path("tests/data/visual")
+    visual_evaluation_root: Path = Path("tests/data")
     live_camera_location_id: str | None = None
     live_camera_object_ids: list[str] = Field(default_factory=list, max_length=12)
     live_camera_refresh_seconds: int = Field(default=30, ge=5, le=120)

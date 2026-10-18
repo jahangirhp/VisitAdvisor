@@ -26,15 +26,37 @@
 </style>
 </head>
 <body>
-<h1>Visual evaluation <span class="muted">(positive photos)</span></h1>
+<h1>Visual evaluation <span class="muted">(test database)</span></h1>
 
 <section>
   <div class="bar">
-    <label>Dataset <select id="dataset"></select></label>
+    <label>Series <select id="dataset"></select></label>
+    <label>Min score for unnamed photos <input id="threshold" type="number" min="0" max="1" step="0.01" value="0.45" style="width:70px"></label>
     <button id="run">Run evaluation</button>
     <button id="clear">Clear history</button>
     <span id="msg" class="muted"></span>
   </div>
+</section>
+
+<section>
+  <h2>1. Reference images <span class="muted">(each image becomes one object in the test database)</span></h2>
+  <div class="bar">
+    <input id="ref-files" type="file" multiple accept="image/jpeg,image/png,image/webp">
+    <label>Type <select id="ref-type"></select></label>
+    <button id="ref-upload">Upload references</button>
+    <button id="build">Rebuild embeddings</button>
+    <span id="build-msg" class="muted"></span>
+  </div>
+  <div id="refs" class="bar" style="margin-top:10px"></div>
+</section>
+
+<section>
+  <h2>2. Test photos <span class="muted">(name a photo like its reference to expect that object, otherwise any match above the min score passes: the-milkmaid.jpg, the-milkmaid-2.jpg, the-milkmaid.partial.jpg)</span></h2>
+  <div class="bar">
+    <input id="series-name" placeholder="new-series-name" pattern="[a-z0-9-]+">
+    <button id="series-add">Create series</button>
+  </div>
+  <div id="series"></div>
 </section>
 
 <section>
@@ -43,14 +65,15 @@
     <span><i class="dot" style="background:#2563eb"></i>Top-1 %</span>
     <span><i class="dot" style="background:#16a34a"></i>Top-3 %</span>
     <span><i class="dot" style="background:#d4d4d8"></i>Photos in run</span>
+    <span><i class="dot" style="background:#ea580c"></i>Min score threshold (0–100% = 0–1)</span>
   </div>
-  <svg id="chart" width="100%" viewBox="0 0 800 260" role="img" aria-label="Accuracy history"></svg>
+  <svg id="chart" width="100%" viewBox="0 0 800 275" role="img" aria-label="Accuracy history"></svg>
 </section>
 
 <section>
   <h2>Runs</h2>
   <table>
-    <thead><tr><th>Started</th><th>Dataset</th><th>Status</th><th>Photos</th><th>Top-1</th><th>Top-3</th><th>Model</th><th></th></tr></thead>
+    <thead><tr><th>Started</th><th>Dataset</th><th>Status</th><th>Photos</th><th>Min score</th><th>Top-1</th><th>Top-3</th><th>Model</th><th></th></tr></thead>
     <tbody id="runs"></tbody>
   </table>
 </section>
@@ -59,7 +82,7 @@
   <h2 id="detail-title"></h2>
   <div id="categories" class="muted" style="margin-bottom:10px"></div>
   <table>
-    <thead><tr><th>Photo</th><th>Type</th><th>View</th><th>Result</th><th>Rank</th><th>Top candidates</th></tr></thead>
+    <thead><tr><th>Photo</th><th>Object</th><th>Type</th><th>View</th><th>Result</th><th>Rank</th><th>Top candidates</th></tr></thead>
     <tbody id="results"></tbody>
   </table>
 </section>
@@ -70,6 +93,7 @@ const $ = (id) => document.getElementById(id);
 let runs = [];
 let selected = null;
 let polling = null;
+const imageUrl = (path) => `${base}/library/image?path=${encodeURIComponent(path)}`;
 
 const pct = (n, total) => (total ? Math.round((100 * n) / total) : 0);
 const el = (tag, text, cls) => {
@@ -94,8 +118,147 @@ async function loadDatasets() {
     option.value = d.name;
     return option;
   }));
-  if (!rows.length) $("msg").textContent = "No datasets found.";
+  if (!rows.length) $("msg").textContent = "No series with photos yet.";
 }
+
+async function upload(files, fields, status) {
+  const failed = [];
+  let done = 0;
+  for (const f of files) {
+    const form = new FormData();
+    form.append("file", f);
+    for (const [k, v] of Object.entries(fields)) form.append(k, v);
+    status.textContent = `Uploading ${++done}/${files.length}…`;
+    try {
+      await api("/library/upload", { method: "POST", body: form });
+    } catch (error) {
+      failed.push(`${f.name}: ${error.message}`);
+    }
+  }
+  status.textContent = failed.length
+    ? `${files.length - failed.length} uploaded, ${failed.length} failed – ${failed.join("; ")}`
+    : `${files.length} uploaded.`;
+  return failed.length;
+}
+
+async function removePath(path, what, rebuild) {
+  if (!confirm(`Delete ${what}? This cannot be undone.`)) return;
+  try {
+    await api("/library?path=" + encodeURIComponent(path), { method: "DELETE" });
+    await loadLibrary();
+    await loadDatasets();
+    if (rebuild) startBuild();
+  } catch (error) {
+    $("msg").textContent = error.message;
+  }
+}
+
+function card(image, label, path, rebuild) {
+  const box = el("div");
+  const img = el("img", undefined, "thumb");
+  img.src = imageUrl(image.path);
+  img.title = image.name || image.path;
+  const x = el("button", "✕ " + label);
+  x.onclick = () => removePath(path, label, rebuild);
+  box.append(img, el("br"), x);
+  return box;
+}
+
+async function loadLibrary() {
+  const lib = await api("/library");
+  const types = $("ref-type");
+  if (!types.options.length) types.append(...lib.types.map((t) => new Option(t, t)));
+  $("refs").replaceChildren(...lib.references.map((r) => {
+    const box = card(r, `${r.name} [${r.type}]`, r.path, true);
+    return box;
+  }));
+  $("series").replaceChildren(...lib.series.map((s) => {
+    const box = el("div");
+    box.style.cssText = "border-top:2px solid #ccc;padding:8px 0";
+    const head = el("div", undefined, "bar");
+    const input = el("input");
+    input.type = "file";
+    input.multiple = true;
+    input.accept = "image/jpeg,image/png,image/webp";
+    const view = el("select");
+    view.append(new Option("full view", "full"), new Option("partial view", "partial"));
+    const send = el("button", "Upload photos");
+    send.onclick = async () => {
+      if (!input.files.length) return;
+      try {
+        await upload(input.files, { series: s.name, category: view.value }, $("msg"));
+        await loadLibrary();
+        await loadDatasets();
+      } catch (error) {
+        $("msg").textContent = error.message;
+      }
+    };
+    const x = el("button", "Delete series");
+    x.onclick = () => removePath(`positive/${s.name}`, `series ${s.name} and all its photos`, false);
+    head.append(el("strong", s.name), input, view, send, x);
+    const grid = el("div", undefined, "bar");
+    grid.append(...s.photos.map((p) => {
+      const c = card(p, p.object ? `${p.category}: ${p.object}` : `${p.category}: any match`, p.path, false);
+      return c;
+    }));
+    box.append(head, grid);
+    return box;
+  }));
+}
+
+async function pollBuild() {
+  const status = await api("/build");
+  if (status.running) {
+    $("build-msg").textContent = `Embedding… ${status.done}/${status.total}`;
+    setTimeout(pollBuild, 1500);
+    return;
+  }
+  $("build").disabled = false;
+  if (status.state === "done") {
+    const r = status.report;
+    $("build-msg").textContent = `Done: ${r.prepared} built, ${r.skipped} unchanged, ${r.removed} removed; index ${r.index}.`;
+  } else if (status.state === "failed") {
+    $("build-msg").textContent = `Failed: ${status.error}`;
+  }
+}
+
+async function startBuild() {
+  $("build").disabled = true;
+  $("build-msg").textContent = "Starting…";
+  try {
+    await api("/build", { method: "POST" });
+    pollBuild();
+  } catch (error) {
+    $("build").disabled = false;
+    $("build-msg").textContent = error.message === "BUSY" ? "Busy, try again shortly." : error.message;
+  }
+}
+$("build").onclick = startBuild;
+$("ref-upload").onclick = async () => {
+  const files = $("ref-files").files;
+  if (!files.length) return;
+  try {
+    const failed = await upload(files, { kind: $("ref-type").value }, $("build-msg"));
+    $("ref-files").value = "";
+    await loadLibrary();
+    if (failed < files.length) setTimeout(startBuild, 0);
+  } catch (error) {
+    $("build-msg").textContent = error.message;
+  }
+};
+$("series-add").onclick = async () => {
+  try {
+    await api("/library/series", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: $("series-name").value }),
+    });
+    $("series-name").value = "";
+    await loadLibrary();
+  } catch (error) {
+    $("msg").textContent = error.message;
+  }
+};
 
 async function loadRuns() {
   runs = await api("/runs");
@@ -112,6 +275,7 @@ function renderRuns() {
       run.dataset,
       run.status === "failed" ? `failed (${run.error})` : run.status,
       run.total,
+      run.threshold ?? "–",
       done ? `${run.top1}/${run.count} (${pct(run.top1, run.count)}%)` : "–",
       done ? `${run.top3}/${run.count} (${pct(run.top3, run.count)}%)` : "–",
       run.model,
@@ -165,6 +329,21 @@ function renderChart() {
     add("text", { x: x(i), y: B + 14, "text-anchor": "middle" },
       new Date(run.started_at).toLocaleDateString(undefined, { month: "short", day: "numeric" }));
   });
+  data.forEach((run, i) => {
+    add("text", { x: x(i), y: B + 27, "text-anchor": "middle" },
+      run.threshold === undefined ? "" : `min ${run.threshold}`);
+  });
+  const known = data.map((r, i) => [r, i]).filter(([r]) => r.threshold !== undefined);
+  if (known.length) {
+    const pts = known.map(([r, i]) => [x(i), y(r.threshold * 100)]);
+    add("polyline", { points: pts.map((p) => p.join(",")).join(" "), fill: "none", stroke: "#ea580c", "stroke-width": 1.5, "stroke-dasharray": "5 4" });
+    pts.forEach(([px, py], j) => {
+      const dot = add("rect", { x: px - 4, y: py - 4, width: 8, height: 8, fill: "#ea580c" });
+      const title = document.createElementNS(ns, "title");
+      title.textContent = `Min score for unnamed photos: ${known[j][0].threshold}`;
+      dot.append(title);
+    });
+  }
   for (const [key, color] of [["top3", "#16a34a"], ["top1", "#2563eb"]]) {
     const points = data.map((r, i) => [x(i), y(pct(r[key], r.count))]);
     add("polyline", { points: points.map((p) => p.join(",")).join(" "), fill: "none", stroke: color, "stroke-width": 2 });
@@ -198,8 +377,9 @@ async function showRun(id) {
   selected = id;
   renderRuns();
   const run = await api("/runs/" + id);
+  const refs = Object.fromEntries((await api("/library")).references.map((r) => [r.name, r.path]));
   $("detail").hidden = false;
-  $("detail-title").textContent = `${run.dataset} – ${new Date(run.started_at).toLocaleString()}`;
+  $("detail-title").textContent = `${run.dataset} – ${new Date(run.started_at).toLocaleString()} – min score ${run.threshold ?? "n/a"}`;
   const describe = (title, groups) => Object.entries(groups || {}).map(
     ([name, c]) => `${title} ${name}: top-1 ${c.top1}/${c.count}, top-3 ${c.top3}/${c.count}`);
   $("categories").replaceChildren(...[
@@ -209,12 +389,29 @@ async function showRun(id) {
     const row = el("tr");
     const photo = el("td");
     const img = el("img", undefined, "thumb");
-    img.src = `${base}/datasets/${encodeURIComponent(run.dataset)}/photos/${r.id}/image`;
+    img.src = imageUrl(r.path);
     img.alt = r.path;
     photo.append(img);
-    const verdict = el("td", r.top1 ? "correct" : r.top3 ? "top-3" : "wrong", r.top1 ? "ok" : "bad");
-    const candidates = r.candidates.map((c) => `${c.name} (${c.score})`).join(", ") || r.status;
-    row.append(photo, el("td", r.object_type ?? "–"), el("td", r.category), verdict, el("td", r.rank ?? "–"), el("td", candidates));
+    const verdict = el("td", r.named === false ? (r.top1 ? "found" : "not found") : r.top1 ? "correct" : r.top3 ? "top-3" : "wrong", r.top1 ? "ok" : "bad");
+    const candidates = el("td");
+    const strip = el("div");
+    strip.style.cssText = "display:flex;gap:10px;flex-wrap:wrap";
+    candidates.append(strip);
+    for (const [i, c] of r.candidates.entries()) {
+      const box = el("div");
+      box.style.cssText = "text-align:center;max-width:90px" + (i === 0 ? ";outline:2px solid #2563eb;padding:2px" : "");
+      if (refs[c.name]) {
+        const ref = el("img", undefined, "thumb");
+        ref.src = imageUrl(refs[c.name]);
+        ref.alt = c.name;
+        box.append(ref, el("br"));
+      }
+      box.title = `${c.name} (${c.score})`;
+      box.append(el("span", String(c.score), "muted"));
+      strip.append(box);
+    }
+    if (!r.candidates.length) candidates.textContent = r.status;
+    row.append(photo, el("td", r.object ?? "(any match)"), el("td", r.object_type ?? "–"), el("td", r.category), verdict, el("td", r.rank ?? "–"), candidates);
     return row;
   }));
 }
@@ -248,7 +445,7 @@ $("run").onclick = async () => {
     const { id } = await api("/runs", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ dataset: $("dataset").value }),
+      body: JSON.stringify({ dataset: $("dataset").value, threshold: Number($("threshold").value) }),
     });
     await loadRuns();
     poll(id);
@@ -283,6 +480,7 @@ $("dataset").onchange = renderChart;
 (async () => {
   try {
     await loadDatasets();
+    await loadLibrary();
     await loadRuns();
     const active = runs.find((r) => r.status === "running");
     if (active) {

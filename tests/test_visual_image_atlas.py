@@ -1,5 +1,6 @@
 """Opt-in positive-photo evaluation against Atlas, without camera caching.
 
+Needs a test database (MONGODB_DATABASE contains "test") with built references.
 RUN_VISUAL_IMAGE_CHECK=1 .venv/bin/pytest -s tests/test_visual_image_atlas.py
 Set VISUAL_IMAGE_STRICT=1 as well to fail unless every photo ranks first.
 The same datasets can be run from the UI at /api/v1/visual-evaluation.
@@ -26,11 +27,12 @@ pytestmark = pytest.mark.skipif(
     reason="Explicit opt-in required for live Atlas image matching",
 )
 
-ROOT = Path(__file__).parent / "data" / "visual"
+ROOT = Path(__file__).parent / "data"
 
 
 async def evaluate(name: str) -> list[dict]:
     settings = Settings()
+    assert "test" in settings.mongodb_database.lower()
     mongodb = MongoDB(settings)
     try:
         return await run_dataset(
