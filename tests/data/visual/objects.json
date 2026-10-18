@@ -1,0 +1,1798 @@
+{
+  "snapshot_at": "2026-09-30T21:02:31.030632+00:00",
+  "count": 128,
+  "objects": [
+    {
+      "id": "6a9dd4116d52c3bc3965869f",
+      "name": "The Night Watch",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": null,
+      "external_id": null,
+      "source_ids": [
+        "6a9dd4116d52c3bc3965869e"
+      ],
+      "has_visual_reference": false,
+      "reference_set_id": null,
+      "reference_model": null
+    },
+    {
+      "id": "6a9dd4126d52c3bc396586a0",
+      "name": "The Milkmaid",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": null,
+      "external_id": null,
+      "source_ids": [
+        "6a9dd4116d52c3bc3965869e"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "189e3d6933af485fa814174a5d85a3e9",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd4136d52c3bc396586a1",
+      "name": "The Jewish Bride",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": null,
+      "external_id": null,
+      "source_ids": [
+        "6a9dd4116d52c3bc3965869e"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "caf654a4bedd4d2b9af23d530fff3b04",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd7f8332abe8469d558f5",
+      "name": "Misty Sea",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Jan Toorop",
+      "external_id": "https://id.rijksmuseum.nl/200100988",
+      "source_ids": [
+        "6a9dd7f7a93fdabf4f0b0120"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "2f365a37724c41128c5fadd9ac2d9118",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd7f9332abe8469d558f6",
+      "name": "Apen in een kooi, genaamd 'Heimwee'",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Gerrit Jacobus van Soeren",
+      "external_id": "https://id.rijksmuseum.nl/200104600",
+      "source_ids": [
+        "6a9dd7f9a93fdabf4f0b0121"
+      ],
+      "has_visual_reference": false,
+      "reference_set_id": null,
+      "reference_model": null
+    },
+    {
+      "id": "6a9dd7fa332abe8469d558f7",
+      "name": "The cat at play",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Henriëtte Ronner (mentioned on object)",
+      "external_id": "https://id.rijksmuseum.nl/200105887",
+      "source_ids": [
+        "6a9dd7faa93fdabf4f0b0122"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "1de16c67e8fb429a97db6a169cec579f",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd7fb332abe8469d558f8",
+      "name": "Pinken in de branding",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Hendrik Willem Mesdag",
+      "external_id": "https://id.rijksmuseum.nl/200105889",
+      "source_ids": [
+        "6a9dd7fba93fdabf4f0b0123"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "445d13e4b16948668496580cb2b3cc2c",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd7fc332abe8469d558f9",
+      "name": "Portret van een Surinaams meisje",
+      "type": "miniature (painting)",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200105901",
+      "source_ids": [
+        "6a9dd7fca93fdabf4f0b0124"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "92dc789d5e414e89a4fb4221da2c1777",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd7fd332abe8469d558fa",
+      "name": "Portret van Surinaams meisje",
+      "type": "miniature (painting)",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200105903",
+      "source_ids": [
+        "6a9dd7fca93fdabf4f0b0125"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "59b4357f7a9041fb93d1d654a7a2c1e2",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd7fe332abe8469d558fb",
+      "name": "Portret van een Surinaams meisje",
+      "type": "miniature (painting)",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200105905",
+      "source_ids": [
+        "6a9dd7fda93fdabf4f0b0126"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "5ac6623c00314acea0314720be7b4c67",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd7ff332abe8469d558fc",
+      "name": "Zelfportret",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Bep Rietveld",
+      "external_id": "https://id.rijksmuseum.nl/200105971",
+      "source_ids": [
+        "6a9dd7fea93fdabf4f0b0127"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "1d13311a8a9b4fceb1bbf47f29f1ab85",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd800332abe8469d558fd",
+      "name": "Landscape with Stone Bridge",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Rembrandt van Rijn",
+      "external_id": "https://id.rijksmuseum.nl/200106038",
+      "source_ids": [
+        "6a9dd7ffa93fdabf4f0b0128"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "24943a4910ec4934aa51e9d45af634ac",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd801332abe8469d558fe",
+      "name": "'Summer': Still Life with Flowers",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Adriana Johanna Haanen",
+      "external_id": "https://id.rijksmuseum.nl/200106064",
+      "source_ids": [
+        "6a9dd800a93fdabf4f0b0129"
+      ],
+      "has_visual_reference": false,
+      "reference_set_id": null,
+      "reference_model": null
+    },
+    {
+      "id": "6a9dd802332abe8469d558ff",
+      "name": "Portret van Paulus Joseph Gabriël, beeldhouwer",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Woutherus Mol (mentioned on object)",
+      "external_id": "https://id.rijksmuseum.nl/200106077",
+      "source_ids": [
+        "6a9dd801a93fdabf4f0b012a"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "361bf9067b494fae80a68562d6a1ebc3",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd802332abe8469d55900",
+      "name": "The Raampoortje in Amsterdam",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Wouter Johannes van Troostwijk",
+      "external_id": "https://id.rijksmuseum.nl/200106078",
+      "source_ids": [
+        "6a9dd802a93fdabf4f0b012b"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "fdb5f8f181b549118efb48ccca65fa01",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd803332abe8469d55901",
+      "name": "Willem Bilderdijk (1759-1831), Poet and Historian",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Charles Howard Hodges",
+      "external_id": "https://id.rijksmuseum.nl/200106079",
+      "source_ids": [
+        "6a9dd803a93fdabf4f0b012c"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "04d053a611d444148b8fb7615795dce6",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd804332abe8469d55902",
+      "name": "De Aanbidding van de koningen",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200106080",
+      "source_ids": [
+        "6a9dd804a93fdabf4f0b012d"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "6156d8ed074b46de8cceba80c5657498",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd805332abe8469d55903",
+      "name": "Willem V (1748-1806), prins van Oranje",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Guillaume de Spinny (mentioned on object)",
+      "external_id": "https://id.rijksmuseum.nl/200106084",
+      "source_ids": [
+        "6a9dd805a93fdabf4f0b012e"
+      ],
+      "has_visual_reference": false,
+      "reference_set_id": null,
+      "reference_model": null
+    },
+    {
+      "id": "6a9dd806332abe8469d55906",
+      "name": "A Young Woman Warming her Hands over a Brazier, Allegory of Winter",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Caesar van Everdingen (signed by artist)",
+      "external_id": "https://id.rijksmuseum.nl/200106086",
+      "source_ids": [
+        "6a9dd806a93fdabf4f0b012f"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "cfe0f0a1539f40cdb9c87272d2ea4221",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd807332abe8469d55907",
+      "name": "Fragment van een muurschildering",
+      "type": "mural painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200106799",
+      "source_ids": [
+        "6a9dd807a93fdabf4f0b0130"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "b88daa1fd5f64c17b112097e2250c336",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd808332abe8469d5590b",
+      "name": "Ingelijste muurschildering voorstellende Xiwangmu en dienaressen",
+      "type": "Xiwangmu",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200106839",
+      "source_ids": [
+        "6a9dd808a93fdabf4f0b0131"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "208f6abba8574266bdd9d88255a509d6",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd80b332abe8469d5590d",
+      "name": "Man met een vrouw op schoot",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200106864",
+      "source_ids": [
+        "6a9dd809a93fdabf4f0b0132"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "ddf7b955d861458493e0e34fd154d1f0",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd80c332abe8469d5590f",
+      "name": "Guardian figure",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200106865",
+      "source_ids": [
+        "6a9dd80ba93fdabf4f0b0133"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "e39e82f34f38456b9382345f6533e2f2",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd80c332abe8469d55910",
+      "name": "Waaierschildering met een rivierlandschap",
+      "type": "fan",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200107007",
+      "source_ids": [
+        "6a9dd80ca93fdabf4f0b0134"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "78164bed605540f1baccd41519df3f1f",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd80e332abe8469d55911",
+      "name": "The Meeting of Granida and Daifilo",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Jan Mijtens (signed by artist)",
+      "external_id": "https://id.rijksmuseum.nl/200107756",
+      "source_ids": [
+        "6a9dd80da93fdabf4f0b0135"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "9997b4745fdf4ab893770afef24b0362",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd80f332abe8469d55912",
+      "name": "Portrait of Govert van Slingelandt (1623-1690), with his First Wife Christina van Beveren (1632-1656) and their Two Children",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Jan Mijtens (signed by artist)",
+      "external_id": "https://id.rijksmuseum.nl/200107757",
+      "source_ids": [
+        "6a9dd80ea93fdabf4f0b0136"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "fc8af16578e549328f371e86789be612",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd810332abe8469d55913",
+      "name": "The Meeting of Jacob and Rachel",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Claes Moeyaert",
+      "external_id": "https://id.rijksmuseum.nl/200107761",
+      "source_ids": [
+        "6a9dd80fa93fdabf4f0b0137"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "2b645882dc4842f2b6299ee4adff0eb9",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd811332abe8469d55917",
+      "name": "Mooy-Aal and her Suitors",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Claes Moeyaert",
+      "external_id": "https://id.rijksmuseum.nl/200107762",
+      "source_ids": [
+        "6a9dd810a93fdabf4f0b0138"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "9d8dfddef79841738214f37d850150dc",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd812332abe8469d55919",
+      "name": "Woman Playing the Virginal",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Jan Miense Molenaer",
+      "external_id": "https://id.rijksmuseum.nl/200107763",
+      "source_ids": [
+        "6a9dd811a93fdabf4f0b0139"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "580e8a6752134fba8d5633d66e98d843",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd812332abe8469d5591a",
+      "name": "De heilige Hieronymus in zijn studeervertrek",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Lorenzo Monaco",
+      "external_id": "https://id.rijksmuseum.nl/200107764",
+      "source_ids": [
+        "6a9dd812a93fdabf4f0b013a"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "c7e4dbdcbf654b709122d7cbd1e514fe",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd813332abe8469d5591b",
+      "name": "Portrait of Anne Fernely. Wife of Sir Thomas Gresham",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Anthonis Mor",
+      "external_id": "https://id.rijksmuseum.nl/200107767",
+      "source_ids": [
+        "6a9dd812a93fdabf4f0b013b"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "c1a168d2da3f4969a2d44c0560b361d1",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd814332abe8469d5591d",
+      "name": "Portrait of Sir Thomas Gresham (1519 - 1579) Merchant and financial agent of the English crown in the Netherlands, founder of the Royal Exchange and of Gresham college, London",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Anthonis Mor",
+      "external_id": "https://id.rijksmuseum.nl/200107768",
+      "source_ids": [
+        "6a9dd813a93fdabf4f0b013c"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "70371adfba8540e7af4267075e44fad3",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd816332abe8469d55920",
+      "name": "A Shepherdess, known as ‘The beautiful Shepherdess’",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Paulus Moreelse (signed by artist)",
+      "external_id": "https://id.rijksmuseum.nl/200107770",
+      "source_ids": [
+        "6a9dd815a93fdabf4f0b013d"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "e4fafb45b82c4b3fbf4aa554654611e6",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd817332abe8469d55937",
+      "name": "Portrait of a Man, possibly Reijnier Pauw (1591-1676)",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Paulus Moreelse (signed by artist)",
+      "external_id": "https://id.rijksmuseum.nl/200107771",
+      "source_ids": [
+        "6a9dd816a93fdabf4f0b013e"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "49791000d0ca456a870e0450722548cf",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd818332abe8469d55938",
+      "name": "Portrait of a woman",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Jan Jansz Mostaert",
+      "external_id": "https://id.rijksmuseum.nl/200107772",
+      "source_ids": [
+        "6a9dd817a93fdabf4f0b013f"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "defed78aca5a4ce6af0372dc5dc82758",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd819332abe8469d55939",
+      "name": "The adoration of the Magi",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Jan Jansz Mostaert",
+      "external_id": "https://id.rijksmuseum.nl/200107773",
+      "source_ids": [
+        "6a9dd818a93fdabf4f0b0140"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "206e9d5fb5bf470abe742ab7cb5493cc",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd81a332abe8469d5593a",
+      "name": "The Tree of Jesse",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "circle of Geertgen tot Sint Jans",
+      "external_id": "https://id.rijksmuseum.nl/200107774",
+      "source_ids": [
+        "6a9dd819a93fdabf4f0b0141"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "29251ebf0d3d4675ad06bc1a6cb3dbb4",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd81b332abe8469d5593b",
+      "name": "Thomas Hees and his Servant Thomas and Nephews Jan and Andries Hees",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Michiel van Musscher",
+      "external_id": "https://id.rijksmuseum.nl/200107776",
+      "source_ids": [
+        "6a9dd81aa93fdabf4f0b0142"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "02b79d578a7a4df5a3a652e79323a2c5",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd81c332abe8469d5593c",
+      "name": "Self-Portrait",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Michiel van Musscher",
+      "external_id": "https://id.rijksmuseum.nl/200107777",
+      "source_ids": [
+        "6a9dd81ba93fdabf4f0b0143"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "0a6f30323ed549ab8f77d97461cefa4d",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd81d332abe8469d5593d",
+      "name": "Portrait of Johannes Hudde (1628-1704), burgomaster of Amsterdam",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Michiel van Musscher",
+      "external_id": "https://id.rijksmuseum.nl/200107778",
+      "source_ids": [
+        "6a9dd81ca93fdabf4f0b0144"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "5f1fd967c24448f69f2a1277f7c76c9b",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd81e332abe8469d5593e",
+      "name": "Aernout van Beeftingh (1759-1831) with his first Wife Jacoba Maria Boon (1760-1800) and their Children",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Nicolaes Muys",
+      "external_id": "https://id.rijksmuseum.nl/200107779",
+      "source_ids": [
+        "6a9dd81da93fdabf4f0b0145"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "a8e2f9786f3f40b38d33141044466ddb",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd81f332abe8469d55941",
+      "name": "Portrait of a Couple and Four Children",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200107780",
+      "source_ids": [
+        "6a9dd81ea93fdabf4f0b0146"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "8500728ab6f647979b3851179d4519c6",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd820332abe8469d55942",
+      "name": "Landscape by Moonlight",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Aert van der Neer (mentioned on object)",
+      "external_id": "https://id.rijksmuseum.nl/200107781",
+      "source_ids": [
+        "6a9dd81fa93fdabf4f0b0147"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "83d0f65ee8ef4f66a7a1ae3b07d2fd89",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd821332abe8469d55943",
+      "name": "Winter Landscape near a Town with Bare Trees",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Aert van der Neer (mentioned on object)",
+      "external_id": "https://id.rijksmuseum.nl/200107782",
+      "source_ids": [
+        "6a9dd820a93fdabf4f0b0148"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "3b69c15b5bac49cfba043607c3cb6662",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd822332abe8469d55945",
+      "name": "Portrait of Johanna Hulft (1649-98), Wife of Pieter Rendorp",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "copy after Caspar Netscher",
+      "external_id": "https://id.rijksmuseum.nl/200107783",
+      "source_ids": [
+        "6a9dd821a93fdabf4f0b0149"
+      ],
+      "has_visual_reference": false,
+      "reference_set_id": null,
+      "reference_model": null
+    },
+    {
+      "id": "6a9dd823332abe8469d55946",
+      "name": "Portrait of Willem III (1650-1702), Prince of Orange and since 1689, King of England",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Caspar Netscher",
+      "external_id": "https://id.rijksmuseum.nl/200107784",
+      "source_ids": [
+        "6a9dd822a93fdabf4f0b014a"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "30fe8e5efbd84472ac2ce56d90a2407a",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd824332abe8469d55947",
+      "name": "Portrait of Pieter Rendorp (1648-99), brewer of Amsterdam and owner of merchant ships trading with Norway and the Baltic Sea",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "copy after Caspar Netscher",
+      "external_id": "https://id.rijksmuseum.nl/200107785",
+      "source_ids": [
+        "6a9dd823a93fdabf4f0b014b"
+      ],
+      "has_visual_reference": false,
+      "reference_set_id": null,
+      "reference_model": null
+    },
+    {
+      "id": "6a9dd825332abe8469d5594a",
+      "name": "William III (1650-1702), Prince of Orange and since 1689, King of England",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "copy after Caspar Netscher",
+      "external_id": "https://id.rijksmuseum.nl/200107786",
+      "source_ids": [
+        "6a9dd824a93fdabf4f0b014c"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "b58db21e544649bbbabf16da60f805e2",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd826332abe8469d5594b",
+      "name": "Portrait of Constantijn Huygens (1596-1687)",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Caspar Netscher",
+      "external_id": "https://id.rijksmuseum.nl/200107787",
+      "source_ids": [
+        "6a9dd825a93fdabf4f0b014d"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "a73a05e903a045c08de59335bc9707fa",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd827332abe8469d5594c",
+      "name": "Portrait of Diederick Hoeufft (1610-1688) and his wife Maria Witt (1620-1681) with their children Diederick, Maria and Jacob",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Caspar Netscher",
+      "external_id": "https://id.rijksmuseum.nl/200107789",
+      "source_ids": [
+        "6a9dd826a93fdabf4f0b014e"
+      ],
+      "has_visual_reference": false,
+      "reference_set_id": null,
+      "reference_model": null
+    },
+    {
+      "id": "6a9dd827332abe8469d5594d",
+      "name": "Crucifixion",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "follower of Altichiero da Verona",
+      "external_id": "https://id.rijksmuseum.nl/200107790",
+      "source_ids": [
+        "6a9dd827a93fdabf4f0b014f"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "90129b04a40d418db9c4dbc0bf1c4fcf",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd829332abe8469d5594e",
+      "name": "Mountainous Landscape near Düsseldorf",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Gerard van Nijmegen",
+      "external_id": "https://id.rijksmuseum.nl/200107792",
+      "source_ids": [
+        "6a9dd828a93fdabf4f0b0150"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "689258a30bdd40e1b7263ac2d6a702d7",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd829332abe8469d5594f",
+      "name": "The Naval Battle near Livorno, 14 March 1653",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Reinier Nooms",
+      "external_id": "https://id.rijksmuseum.nl/200107793",
+      "source_ids": [
+        "6a9dd829a93fdabf4f0b0151"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "80aaca3cc4d74b43b28c0a105e6282a2",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd82a332abe8469d55950",
+      "name": "Portrait of Jacoba Bontemantel (1643-?)",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200107794",
+      "source_ids": [
+        "6a9dd82aa93fdabf4f0b0152"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "0cfa6c4c1cde4994a469f40781d91864",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd82b332abe8469d55951",
+      "name": "Portrait of a Boy, possibly Louis of Nassau, later Lord of Beverweerd, De Leck, Odijk and Lekkerkerk, Illegitimate Son of Maurice, Prince of Orange, and Margaretha van Mechelen",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200107795",
+      "source_ids": [
+        "6a9dd82ba93fdabf4f0b0153"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "44450a14e92b4d4e8d524df44f923f63",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd82c332abe8469d55953",
+      "name": "Portrait of Lysbeth van Duvenvoirde (?-1472)",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200107796",
+      "source_ids": [
+        "6a9dd82ba93fdabf4f0b0154"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "f04cbec6203e4d95a5c9245f5fa413bd",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd82d332abe8469d55954",
+      "name": "Portrait of Frederik Houtman (1571-1627)",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200107797",
+      "source_ids": [
+        "6a9dd82ca93fdabf4f0b0155"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "09d603016bcc4771999f91aefb1fda8c",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd82e332abe8469d55955",
+      "name": "View of Canton, China",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "workshop of Johannes Vingboons",
+      "external_id": "https://id.rijksmuseum.nl/200107798",
+      "source_ids": [
+        "6a9dd82da93fdabf4f0b0156"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "111772e04b2b47c78e588bd777a823ba",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd82f332abe8469d55956",
+      "name": "Portrait of Diederick Hoeufft (1571-1634)",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "copy after anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200107799",
+      "source_ids": [
+        "6a9dd82ea93fdabf4f0b0157"
+      ],
+      "has_visual_reference": false,
+      "reference_set_id": null,
+      "reference_model": null
+    },
+    {
+      "id": "6a9dd830332abe8469d55957",
+      "name": "Portrait of Anna Luls (1578-1655). Wife of Diederick Hoeufft",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "copy after anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200107800",
+      "source_ids": [
+        "6a9dd82fa93fdabf4f0b0158"
+      ],
+      "has_visual_reference": false,
+      "reference_set_id": null,
+      "reference_model": null
+    },
+    {
+      "id": "6a9dd831332abe8469d55959",
+      "name": "Portrait of Cornelis de Witt (1485-1537)",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "copy after anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200107801",
+      "source_ids": [
+        "6a9dd830a93fdabf4f0b0159"
+      ],
+      "has_visual_reference": false,
+      "reference_set_id": null,
+      "reference_model": null
+    },
+    {
+      "id": "6a9dd832332abe8469d5595a",
+      "name": "Portrait of Beatrix van Slingeland (1485-1555). Wife of Cornelis de Witt",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "copy after anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200107802",
+      "source_ids": [
+        "6a9dd831a93fdabf4f0b015a"
+      ],
+      "has_visual_reference": false,
+      "reference_set_id": null,
+      "reference_model": null
+    },
+    {
+      "id": "6a9dd833332abe8469d5595c",
+      "name": "Portrait of Jacob Hoeufft (1660-1700)",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200107803",
+      "source_ids": [
+        "6a9dd832a93fdabf4f0b015b"
+      ],
+      "has_visual_reference": false,
+      "reference_set_id": null,
+      "reference_model": null
+    },
+    {
+      "id": "6a9dd834332abe8469d5595e",
+      "name": "Portrait of Johanna Heymans (1547-1602). Wife of Cornelis Fransz de Witt",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200107804",
+      "source_ids": [
+        "6a9dd834a93fdabf4f0b015c"
+      ],
+      "has_visual_reference": false,
+      "reference_set_id": null,
+      "reference_model": null
+    },
+    {
+      "id": "6a9dd835332abe8469d5595f",
+      "name": "Portrait of Cornelis Fransz de Witt (1545-1622)",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200107805",
+      "source_ids": [
+        "6a9dd835a93fdabf4f0b015d"
+      ],
+      "has_visual_reference": false,
+      "reference_set_id": null,
+      "reference_model": null
+    },
+    {
+      "id": "6a9dd837332abe8469d55960",
+      "name": "Portret van Jacob de Witt (1589-1674)",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "copy after anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200107808",
+      "source_ids": [
+        "6a9dd836a93fdabf4f0b015e"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "916adc80b07947fc99434a29f7091617",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd838332abe8469d55961",
+      "name": "Portrait of Anna van den Corput (1599-1645). Wife of Jacob de Witt",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "copy after anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200107809",
+      "source_ids": [
+        "6a9dd838a93fdabf4f0b015f"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "1346cc1a1d0d47dcbcf4fa58cc03c4ee",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd839332abe8469d55962",
+      "name": "Schipbreuk op een rotsachtige kust",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Wijnand Nuijen",
+      "external_id": "https://id.rijksmuseum.nl/200107810",
+      "source_ids": [
+        "6a9dd839a93fdabf4f0b0160"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "fb78db9873a3472bbf43ac2033f7a9eb",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd83a332abe8469d55963",
+      "name": "De harddraver De Rot van Adriaan van der Hoop bij het koetshuis",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Anthony Oberman",
+      "external_id": "https://id.rijksmuseum.nl/200107811",
+      "source_ids": [
+        "6a9dd83aa93fdabf4f0b0161"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "ad19f7ecc6da4f438a82438d25f595ef",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd83b332abe8469d55964",
+      "name": "De harddraver De Vlugge van Adriaan van der Hoop in de wei",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Anthony Oberman",
+      "external_id": "https://id.rijksmuseum.nl/200107812",
+      "source_ids": [
+        "6a9dd83ba93fdabf4f0b0162"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "0b666e586acf46dca54b4ba7d2900e82",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd83c332abe8469d55965",
+      "name": "Triptych with the Virgin and Child, and Saints Mary Magdalene and Ansanus",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Andrea di Cione named Orcagna",
+      "external_id": "https://id.rijksmuseum.nl/200107815",
+      "source_ids": [
+        "6a9dd83ba93fdabf4f0b0163"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "be03506826ca446db3bef9718bc6c7db",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd83d332abe8469d55966",
+      "name": "The Virgin and Child",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "workshop of Bernard van Orley",
+      "external_id": "https://id.rijksmuseum.nl/200107816",
+      "source_ids": [
+        "6a9dd83ca93fdabf4f0b0164"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "801d355acdcd433a93abaad44df02379",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd83e332abe8469d55967",
+      "name": "Vergezicht over de weiden bij ’s-Graveland",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Pieter Gerardus van Os (mentioned on object)",
+      "external_id": "https://id.rijksmuseum.nl/200107817",
+      "source_ids": [
+        "6a9dd83da93fdabf4f0b0165"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "f1f16e7373a5485891841c025838b609",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd83f332abe8469d55968",
+      "name": "The Watercourse near 's-Graveland",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Pieter Gerardus van Os (mentioned on object)",
+      "external_id": "https://id.rijksmuseum.nl/200107818",
+      "source_ids": [
+        "6a9dd83ea93fdabf4f0b0166"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "cbc7dd4f69604af2bb02bf3a46d4b533",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd840332abe8469d55969",
+      "name": "A Lion from the Menagerie of King Louis Napoleon, 1808",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Pieter Gerardus van Os",
+      "external_id": "https://id.rijksmuseum.nl/200107819",
+      "source_ids": [
+        "6a9dd83fa93fdabf4f0b0167"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "d8138f4339df4c8ab03a714aaa606dec",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd841332abe8469d5596a",
+      "name": "Dancing Couple",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Adriaen van Ostade (mentioned on object)",
+      "external_id": "https://id.rijksmuseum.nl/200107820",
+      "source_ids": [
+        "6a9dd840a93fdabf4f0b0168"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "88cb41ec84ea41ef9d6ffb49bab41b5b",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd842332abe8469d5596c",
+      "name": "Peasants in an Interior",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Adriaen van Ostade (mentioned on object)",
+      "external_id": "https://id.rijksmuseum.nl/200107821",
+      "source_ids": [
+        "6a9dd841a93fdabf4f0b0169"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "0c93061e4d9a49d7b20e9e3abca5a686",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd843332abe8469d5596f",
+      "name": "Peasants in an Interior, known as ‘The Skaters’",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Adriaen van Ostade (mentioned on object)",
+      "external_id": "https://id.rijksmuseum.nl/200107822",
+      "source_ids": [
+        "6a9dd842a93fdabf4f0b016a"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "b537fee456674237b19860833da82554",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd844332abe8469d55971",
+      "name": "Travellers at Rest",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Adriaen van Ostade (mentioned on object)",
+      "external_id": "https://id.rijksmuseum.nl/200107823",
+      "source_ids": [
+        "6a9dd843a93fdabf4f0b016b"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "726eb6a37542451a8c1af59f66b6d6a3",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd845332abe8469d55974",
+      "name": "The Painter’s Studio",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Adriaen van Ostade",
+      "external_id": "https://id.rijksmuseum.nl/200107824",
+      "source_ids": [
+        "6a9dd845a93fdabf4f0b016c"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "1320d97481e74a9dba328d53ce39899c",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd846332abe8469d55975",
+      "name": "A Couple in an Interior",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Adriaen van Ostade (mentioned on object)",
+      "external_id": "https://id.rijksmuseum.nl/200107825",
+      "source_ids": [
+        "6a9dd846a93fdabf4f0b016d"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "c2fb0f7f64d2483298c44b7f57a9f1a8",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd847332abe8469d55976",
+      "name": "Country inn with a horse at the trough",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Isaac van Ostade",
+      "external_id": "https://id.rijksmuseum.nl/200107827",
+      "source_ids": [
+        "6a9dd847a93fdabf4f0b016e"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "afd5d5460f584cec8e640d25f5406883",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd848332abe8469d55977",
+      "name": "Portrait of Jan Amos Comenius",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Jürgen Ovens",
+      "external_id": "https://id.rijksmuseum.nl/200107828",
+      "source_ids": [
+        "6a9dd848a93fdabf4f0b016f"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "fd3ee834bf2c4be6928555003bd5837d",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd849332abe8469d55979",
+      "name": "Venus and Adonis",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Joos de Pape",
+      "external_id": "https://id.rijksmuseum.nl/200107829",
+      "source_ids": [
+        "6a9dd849a93fdabf4f0b0170"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "9a0e7d052022489b9c67a9671422b051",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd84a332abe8469d5597a",
+      "name": "Portrait of Jeremias de Decker, Poet in Amsterdam",
+      "type": "grisaille",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Arnoud van Halen",
+      "external_id": "https://id.rijksmuseum.nl/200107832",
+      "source_ids": [
+        "6a9dd84aa93fdabf4f0b0171"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "cf789b365e8549e996203b882aa21234",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd84c332abe8469d5597b",
+      "name": "Portrait of Alexander Morus, Professor at Amsterdam",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Arnoud van Halen",
+      "external_id": "https://id.rijksmuseum.nl/200107833",
+      "source_ids": [
+        "6a9dd84ba93fdabf4f0b0172"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "81a7ff41670e438496b7b73afd89a166",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd84d332abe8469d5597d",
+      "name": "Portrait of Balthasar Bekker, Clergyman and Man of Letters in Amsterdam",
+      "type": "grisaille",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Arnoud van Halen",
+      "external_id": "https://id.rijksmuseum.nl/200107834",
+      "source_ids": [
+        "6a9dd84ca93fdabf4f0b0173"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "24a48cd652684efb9fe642e782b714ca",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd84e332abe8469d55981",
+      "name": "Portrait of Matthijs Gansneb, called Tengnagel, Poet in Amsterdam",
+      "type": "grisaille",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Arnoud van Halen",
+      "external_id": "https://id.rijksmuseum.nl/200107835",
+      "source_ids": [
+        "6a9dd84da93fdabf4f0b0174"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "274d2004af9b468ea129a8d7eefd3eb6",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd84e332abe8469d55982",
+      "name": "Portrait of Petrus Bertius, Professor at Leiden",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Arnoud van Halen",
+      "external_id": "https://id.rijksmuseum.nl/200107836",
+      "source_ids": [
+        "6a9dd84ea93fdabf4f0b0175"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "14bafda4a5a54c44b9c64cd104fccfc4",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd84f332abe8469d55983",
+      "name": "Portrait of Florentius Schoonhoven, Poet in Latin, Burgomaster of Gouda",
+      "type": "grisaille",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Arnoud van Halen",
+      "external_id": "https://id.rijksmuseum.nl/200107837",
+      "source_ids": [
+        "6a9dd84ea93fdabf4f0b0176"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "fae998f0d14a405aa6a48b636a6812de",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd850332abe8469d55985",
+      "name": "Portrait of Jan Janszoon Starter, Poet in Leeuwarden and Amsterdam",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Arnoud van Halen",
+      "external_id": "https://id.rijksmuseum.nl/200107838",
+      "source_ids": [
+        "6a9dd84fa93fdabf4f0b0177"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "a92f39726b7f4288892f37df0e490d2b",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd851332abe8469d55986",
+      "name": "Portrait of Samuel Ampzing, Clergyman and Poet in Haarlem",
+      "type": "grisaille",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Arnoud van Halen",
+      "external_id": "https://id.rijksmuseum.nl/200107839",
+      "source_ids": [
+        "6a9dd850a93fdabf4f0b0178"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "8b0bc5773ec0444e8f019da07aebc4a4",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd852332abe8469d55988",
+      "name": "Portrait of Adriaen Pietersz van de Venne, Painter and Poet",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Arnoud van Halen",
+      "external_id": "https://id.rijksmuseum.nl/200107840",
+      "source_ids": [
+        "6a9dd851a93fdabf4f0b0179"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "9921c98eb9cc4419982e9749b255472f",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd852332abe8469d5598a",
+      "name": "Portret van Dominicus Baudius (1561-1613). Hoogleraar in de welsprekendheid, de geschiedenis en de rechten te Leiden",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Arnoud van Halen",
+      "external_id": "https://id.rijksmuseum.nl/200107841",
+      "source_ids": [
+        "6a9dd852a93fdabf4f0b017a"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "537fa830c20947b79ca31f7150ddc5ac",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd853332abe8469d5598b",
+      "name": "Portrait of Theodorus Rodenburgh, Diplomat and Dramatic Poet",
+      "type": "grisaille",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Arnoud van Halen",
+      "external_id": "https://id.rijksmuseum.nl/200107842",
+      "source_ids": [
+        "6a9dd852a93fdabf4f0b017b"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "6038fb3b56534a93bb0fd256df488ed7",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd854332abe8469d5598c",
+      "name": "Portrait of Petrus Baard, Physician and Poet from Leeuwarden",
+      "type": "grisaille",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Arnoud van Halen",
+      "external_id": "https://id.rijksmuseum.nl/200107843",
+      "source_ids": [
+        "6a9dd854a93fdabf4f0b017c"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "e782b72e27694d1d94c379a66680e477",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd855332abe8469d5598d",
+      "name": "Portrait of Johannes Polyander à Kerckhoven, Professor of Theology in Leiden",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Arnoud van Halen",
+      "external_id": "https://id.rijksmuseum.nl/200107844",
+      "source_ids": [
+        "6a9dd854a93fdabf4f0b017d"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "c5034cdaa00d492cabf3506497b65c0f",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd856332abe8469d5598e",
+      "name": "Jan Vos (1610-67), Amsterdam poet",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Arnoud van Halen",
+      "external_id": "https://id.rijksmuseum.nl/200107845",
+      "source_ids": [
+        "6a9dd855a93fdabf4f0b017e"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "4cd7cde851a34b8fbc6686c24ba44142",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd857332abe8469d55990",
+      "name": "Dirck Graswinckel (1600-66). Rechtsgeleerde en letterkundige",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Arnoud van Halen",
+      "external_id": "https://id.rijksmuseum.nl/200107846",
+      "source_ids": [
+        "6a9dd856a93fdabf4f0b017f"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "53bb16be02194fe1a94efed5f28fcc1e",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd858332abe8469d55992",
+      "name": "Portrait of Andries Pels, Dramatic Poet in Amsterdam",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Arnoud van Halen",
+      "external_id": "https://id.rijksmuseum.nl/200107847",
+      "source_ids": [
+        "6a9dd857a93fdabf4f0b0180"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "c62e45754b1741c0baf5dad9ed9fbf07",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd859332abe8469d55993",
+      "name": "Portrait of Jan Six, Poet and Burgomaster of Amsterdam",
+      "type": "grisaille",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Arnoud van Halen",
+      "external_id": "https://id.rijksmuseum.nl/200107848",
+      "source_ids": [
+        "6a9dd858a93fdabf4f0b0181"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "495fb71bdcc94df3b46b5a839ff15151",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6a9dd8f4332abe8469d559f6",
+      "name": "Portrait of Lidewij van Beveren (1522-1557). Wife of Frans de Witt",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "copy after anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200107806",
+      "source_ids": [
+        "6a9dd8f484cda9d166f4e9fa"
+      ],
+      "has_visual_reference": false,
+      "reference_set_id": null,
+      "reference_model": null
+    },
+    {
+      "id": "6a9dd8f5332abe8469d559f7",
+      "name": "Portrait of Frans de Witt (1516-1565)",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "copy after anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200107807",
+      "source_ids": [
+        "6a9dd8f484cda9d166f4e9fb"
+      ],
+      "has_visual_reference": false,
+      "reference_set_id": null,
+      "reference_model": null
+    },
+    {
+      "id": "6aa9a743dd73e04d9614615c",
+      "name": "The Battle of Waterloo",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Jan Willem Pieneman",
+      "external_id": "https://id.rijksmuseum.nl/200107874",
+      "source_ids": [
+        "6aa9a742658f4b405d46009c"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "f270347bb3bf4131aa5d71022055dccc",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aa9a744dd73e04d9614615e",
+      "name": "The merry family",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Jan Havicksz. Steen",
+      "external_id": "https://id.rijksmuseum.nl/200108012",
+      "source_ids": [
+        "6aa9a743658f4b405d46009d"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "18bd07de2d9f4099852b38ce335f0643",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aa9a745dd73e04d96146160",
+      "name": "The Sampling Officials of the Amsterdam Drapers’ Guild, known as ‘The Syndics’",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Rembrandt van Rijn",
+      "external_id": "https://id.rijksmuseum.nl/200107929",
+      "source_ids": [
+        "6aa9a745658f4b405d46009e"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "c281e6a6386342a892709194a2ca3de8",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aa9a746dd73e04d96146161",
+      "name": "Shiva Nataraja",
+      "type": "Shiva",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200106309",
+      "source_ids": [
+        "6aa9a746658f4b405d46009f"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "3100c703681943ec8f082b12c4b82def",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aa9a747dd73e04d96146163",
+      "name": "The Threatened Swan; Interpreted later as an Allegory on Johan de Witt",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Jan Asselijn",
+      "external_id": "https://id.rijksmuseum.nl/200108146",
+      "source_ids": [
+        "6aa9a747658f4b405d4600a0"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "d6569e626b09436dbfb8e5c49f4d5d39",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aa9a7fa60b7ca89b6355b9c",
+      "name": "Rijksmuseum building",
+      "type": "building",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": null,
+      "external_id": null,
+      "source_ids": [
+        "6aa9a7f960b7ca89b6355b9b"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "9f5512451d2a4157b033173938c1ae8a",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aaad084dd73e04d9614e9e7",
+      "name": "The Fall of Man",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Cornelis Cornelisz. van Haarlem",
+      "external_id": "https://id.rijksmuseum.nl/200109196",
+      "source_ids": [
+        "6aaad083173021d412571f90"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "37086492ff2c4fd2b1bb97382a3bca1d",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aaad084dd73e04d9614e9e8",
+      "name": "View of Itamaracá Island",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Frans Jansz Post",
+      "external_id": "https://id.rijksmuseum.nl/200110519",
+      "source_ids": [
+        "6aaad084173021d412571f91"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "c2858dcb86d044eba9cdd754652e397e",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aab0dbcdd73e04d96150a00",
+      "name": "Officers and other civic guardsmen of District II in Amsterdam, under the command of Captain Frans Banninck Cocq and Lieutenant Willem van Ruytenburch, known as ‘The Night Watch’",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Rembrandt van Rijn",
+      "external_id": "https://id.rijksmuseum.nl/200107928",
+      "source_ids": [
+        "6aab0dbafb35e84081574b05"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "9751fcd54d3d4c5fb78e5734b4724c49",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aab0decdd73e04d96150a13",
+      "name": "The Celebration of the Peace of Münster, 18 June 1648, in the Headquarters of the Crossbowmen's Civic Guard (St George Guard), Amsterdam",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Bartholomeus van der Helst",
+      "external_id": "https://id.rijksmuseum.nl/200109366",
+      "source_ids": [
+        "6aab0dec303f7d479a4f23d6"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "66102b136de44314bb83062c6767b727",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aab0deedd73e04d96150a15",
+      "name": "Vanitas stilleven",
+      "type": "painting",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Maria van Oosterwijck (signed by artist)",
+      "external_id": "https://id.rijksmuseum.nl/200164103",
+      "source_ids": [
+        "6aab0ded303f7d479a4f23d7"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "bbd8353c370041dda01c7b653bc70eb7",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aab0defdd73e04d96150a16",
+      "name": "Lidded ewer for the Amsterdam Goldsmiths Guild",
+      "type": "ewer",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Adam van Vianen (I)",
+      "external_id": "https://id.rijksmuseum.nl/200113496",
+      "source_ids": [
+        "6aab0def303f7d479a4f23d8"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "a509a1225170404198f69a5f60634a79",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aab0df0dd73e04d96150a18",
+      "name": "Crucified Christ",
+      "type": "crucifix",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "anonymous",
+      "external_id": "https://id.rijksmuseum.nl/200623363",
+      "source_ids": [
+        "6aab0df0303f7d479a4f23d9"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "4cb0b415d947424bbe4b6f859717f453",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aab0df2dd73e04d96150a19",
+      "name": "Retabel met Maria met kind tussen Hieronymus en Nicolaas van Myra",
+      "type": "retable",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "Benedetto Buglioni",
+      "external_id": "https://id.rijksmuseum.nl/200116146",
+      "source_ids": [
+        "6aab0df1303f7d479a4f23da"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "2fa17b322c254df285051e246cf75784",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aab0df3dd73e04d96150a1a",
+      "name": "Spring",
+      "type": "tuinbeeld",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "attributed to Ignatius van Logteren",
+      "external_id": "https://id.rijksmuseum.nl/200116059",
+      "source_ids": [
+        "6aab0df3303f7d479a4f23db"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "603395d9730d4b1cbc8cc3c693f4e38a",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aab0df5dd73e04d96150a1b",
+      "name": "Autumn",
+      "type": "tuinbeeld",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "attributed to Ignatius van Logteren",
+      "external_id": "https://id.rijksmuseum.nl/200116061",
+      "source_ids": [
+        "6aab0df4303f7d479a4f23dc"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "3fa28e7abfb745dea7b3726c0f28d588",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aab0df6dd73e04d96150a1c",
+      "name": "Summer",
+      "type": "tuinbeeld",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "attributed to Ignatius van Logteren",
+      "external_id": "https://id.rijksmuseum.nl/200116060",
+      "source_ids": [
+        "6aab0df5303f7d479a4f23dd"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "bc2d721bcc6c4c96b017769985d4c4bb",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aab0df8dd73e04d96150a1e",
+      "name": "Apollo",
+      "type": "tuinbeeld",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": "attributed to Jan van Logteren",
+      "external_id": "https://id.rijksmuseum.nl/200116063",
+      "source_ids": [
+        "6aab0df7303f7d479a4f23de"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "a1177e9e308d4075b1d22738ee65ccaa",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aab0dfa303f7d479a4f23e0",
+      "name": "Rijksmuseum Atrium",
+      "type": "building",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": null,
+      "external_id": "rijksmuseum-architecture:atrium",
+      "source_ids": [
+        "6aab0df9303f7d479a4f23df"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "bd7ba70f3f5a47e6b1a41dd87ac0decd",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aab0dfb303f7d479a4f23e2",
+      "name": "Rijksmuseum Passage",
+      "type": "building",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": null,
+      "external_id": "rijksmuseum-architecture:passage",
+      "source_ids": [
+        "6aab0dfb303f7d479a4f23e1"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "366251984bb84309829f11b41ea036e2",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aab0dfc303f7d479a4f23e4",
+      "name": "Rijksmuseum Great Hall",
+      "type": "building",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": null,
+      "external_id": "rijksmuseum-architecture:great-hall",
+      "source_ids": [
+        "6aab0dfb303f7d479a4f23e3"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "0443421e75724f5d82f8817368a2c1bc",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aab0dfd303f7d479a4f23e6",
+      "name": "Rijksmuseum Gallery of Honour",
+      "type": "building",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": null,
+      "external_id": "rijksmuseum-architecture:gallery-of-honour",
+      "source_ids": [
+        "6aab0dfc303f7d479a4f23e5"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "9e18bfabe2d042cdbcc6852843752bfc",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aab0dfd303f7d479a4f23e8",
+      "name": "Rijksmuseum Night Watch Room",
+      "type": "building",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": null,
+      "external_id": "rijksmuseum-architecture:night-watch-room",
+      "source_ids": [
+        "6aab0dfd303f7d479a4f23e7"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "ef64ebf30067480fba086bf3477d4f41",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aab0dff303f7d479a4f23ea",
+      "name": "Rijksmuseum Research Library",
+      "type": "building",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": null,
+      "external_id": "rijksmuseum-architecture:research-library",
+      "source_ids": [
+        "6aab0dff303f7d479a4f23e9"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "81d635e42f044801a45df78d7d8d179a",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    },
+    {
+      "id": "6aab0e00303f7d479a4f23ec",
+      "name": "Rijksmuseum Room 0.1",
+      "type": "building",
+      "location_id": "6a9dd4106d52c3bc3965869d",
+      "creator": null,
+      "external_id": "rijksmuseum-architecture:room-0-1",
+      "source_ids": [
+        "6aab0e00303f7d479a4f23eb"
+      ],
+      "has_visual_reference": true,
+      "reference_set_id": "b335f604b42c46af8d1bc0b5f8d712ce",
+      "reference_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    }
+  ]
+}

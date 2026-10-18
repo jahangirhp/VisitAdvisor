@@ -1,6 +1,7 @@
 .env
 .env.*
 !.env.example
+!.env.test.example
 .venv/
 __pycache__/
 .pytest_cache/
@@ -13,6 +14,7 @@ dist/
 .coverage
 htmlcov/
 .local/visual-public-photos/
+.local/visual-evaluation/
 .local/live-camera/
 node_modules/
 test-results/

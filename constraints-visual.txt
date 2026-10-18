@@ -1,0 +1,4 @@
+transformers==4.57.6
+torch==2.14.0+cpu
+opencv-python-headless==4.14.0.94
+pillow==12.3.0

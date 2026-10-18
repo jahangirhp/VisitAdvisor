@@ -13,12 +13,20 @@ MAX_PIXELS = 16_000_000
 MIME_FORMATS = {"image/jpeg": "JPEG", "image/png": "PNG", "image/webp": "WEBP"}
 
 
-def prepare_image(data: bytes, content_type: str | None) -> bytes:
+def prepare_image(
+    data: bytes,
+    content_type: str | None,
+    *,
+    max_bytes: int | None = None,
+    max_pixels: int | None = None,
+) -> bytes:
+    max_bytes = MAX_IMAGE_BYTES if max_bytes is None else max_bytes
+    max_pixels = MAX_PIXELS if max_pixels is None else max_pixels
     if content_type not in MIME_FORMATS:
         raise ApplicationError(
             "UNSUPPORTED_IMAGE", "Use a JPEG, PNG, or WebP image.", 415
         )
-    if len(data) > MAX_IMAGE_BYTES:
+    if len(data) > max_bytes:
         raise ApplicationError("IMAGE_TOO_LARGE", "Image exceeds 5 MiB.", 413)
     if not data:
         raise ApplicationError("INVALID_IMAGE", "Image is empty or invalid.", 422)
@@ -32,7 +40,7 @@ def prepare_image(data: bytes, content_type: str | None) -> bytes:
                         "Image bytes do not match its MIME type.",
                         415,
                     )
-                if source.width * source.height > MAX_PIXELS:
+                if source.width * source.height > max_pixels:
                     raise ApplicationError(
                         "IMAGE_TOO_LARGE", "Image exceeds 16 megapixels.", 413
                     )
