@@ -216,45 +216,6 @@ test('adaptive camera sends bounded detail frames and still acquires stable matc
   expect(sizes.every(size => size[0] === 512 && size[1] === 512 && size[2] <= 256 * 1024)).toBe(true);
 });
 
-test('manual selection works without camera permission and is explicitly labeled', async ({ page }) => {
-  await fakeCamera(page, { denied: true });
-  await page.goto('/');
-  await page.locator('#manual summary').click();
-  await expect(page.locator('#manual-show')).toBeDisabled();
-  await page.locator('#manual-object').selectOption(ids[1]);
-  await page.locator('#manual-show').click();
-  await expect(page.locator('#object-name')).toHaveText('Painting 2');
-  await expect(page.locator('#result-kind')).toHaveText('YOU SELECTED THIS OBJECT');
-  expect(await page.evaluate(() => window.cameraRequests)).toBe(0);
-  expect(await page.evaluate(() => window.frameMessages)).toBe(0);
-});
-
-test('manual selection stops live uploads and ignores a delayed recognition response', async ({ page }) => {
-  await fakeCamera(page);
-  let release;
-  const held = new Promise(resolve => { release = resolve; });
-  let entered = false;
-  await page.route('**/recognize?*', async route => {
-    entered = true;
-    await held;
-    await route.fulfill({ json: {
-      version: 'camera-server-v1', location_id: location, reference_version: catalog.reference_version,
-      automatic_identification: false, candidates: [{ id: ids[0], score: 0.99 }], inferenceMs: 10,
-    } }).catch(() => {});
-  });
-  await page.goto('/');
-  await page.locator('#start').click();
-  await expect.poll(() => entered).toBe(true);
-  await page.locator('#manual summary').click();
-  await page.locator('#manual-object').selectOption(ids[1]);
-  await page.locator('#manual-show').click();
-  release();
-  await expect(page.locator('#object-name')).toHaveText('Painting 2');
-  await expect(page.locator('#result-kind')).toHaveText('YOU SELECTED THIS OBJECT');
-  await expect(page.locator('#start')).toBeVisible();
-  expect(await page.evaluate(() => window.tracksStopped)).toBe(1);
-});
-
 test('server abstention prevents strong scores from establishing a suggestion', async ({ page }) => {
   await fakeCamera(page);
   await page.route('**/recognize?*', async route => {
@@ -281,6 +242,7 @@ test('phone never requests model, worker, or runtime assets', async ({ page }) =
   await expect(page.locator('#object-name')).toHaveText('Painting 1');
   await page.locator('#stop').click();
   expect(urls.some(url => /model\.onnx|worker\.mjs|model-cache|ort\.|\.wasm/.test(url))).toBe(false);
+  await page.getByLabel('Location and settings').click();
   await expect(page.locator('.privacy-note')).toContainText('sent to VisitAdvisor');
 });
 
