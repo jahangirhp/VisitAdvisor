@@ -24,7 +24,9 @@ MAX_FRAME_BYTES = 256 * 1024
 
 
 def create_camera_app(
-    bundle: Path | None = None, recognizer: CameraRecognizer | None = None
+    bundle: Path | None = None,
+    recognizer: CameraRecognizer | None = None,
+    configured_settings: Settings | None = None,
 ) -> FastAPI:
     directory = bundle or Path(os.getenv("LIVE_CAMERA_BUNDLE", ".local/live-camera"))
 
@@ -34,7 +36,7 @@ def create_camera_app(
         try:
             if bundle is None and recognizer is None:
                 try:
-                    settings = Settings()
+                    settings = configured_settings or Settings()
                     if (
                         settings.live_camera_preload
                         and settings.live_camera_location_id
@@ -118,7 +120,7 @@ def create_camera_app(
             )
             if references is None:
                 try:
-                    settings = Settings()
+                    settings = configured_settings or Settings()
                     directory = settings.live_camera_bundle
                     if application.state.mongodb is None:
                         application.state.mongodb = MongoDB(settings)

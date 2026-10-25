@@ -6,7 +6,7 @@ from PIL import Image, ImageDraw
 
 from app.modules.live_camera.inference import CameraFailure, CameraRecognizer
 from app.modules.live_camera.pipeline import PIPELINE_VERSION, view_coverage
-from app.modules.live_camera.regions import FULL_FRAME, overlap, proposals
+from app.modules.live_camera.regions import FULL_FRAME, crop, overlap, proposals
 
 
 def frame():
@@ -127,6 +127,28 @@ def test_duplicate_photos_or_labels_cannot_claim_multi_view_coverage(tmp_path):
     assert not view_coverage(obj)["ready"]
     obj["views"][1]["image_hash"] = "different-image"
     obj["views"][1]["viewpoint"] = "front"
+    assert not view_coverage(obj)["ready"]
+
+
+def test_unlabelled_second_image_cannot_validate_relabelled_first_image(tmp_path):
+    obj = engine(tmp_path).catalog["objects"][0]
+    first = dict(obj["views"][0])
+    duplicate = {**first, "viewpoint": "back"}
+    unlabelled = {**first, "image_hash": "new-image", "viewpoint": ""}
+    obj["views"] = [first, duplicate, unlabelled]
+    assert not view_coverage(obj)["ready"]
+
+
+def test_vectors_without_source_image_hashes_cannot_establish_3d_coverage(tmp_path):
+    obj = engine(tmp_path).catalog["objects"][0]
+    for view in obj["views"]:
+        view.pop("image_hash")
+    assert not view_coverage(obj)["ready"]
+
+
+def test_null_viewpoint_is_incomplete_coverage_not_a_server_failure(tmp_path):
+    obj = engine(tmp_path).catalog["objects"][0]
+    obj["views"][0]["viewpoint"] = None
     assert not view_coverage(obj)["ready"]
 
 
@@ -282,3 +304,24 @@ def test_region_proposals_are_bounded_and_silhouettes_are_not_identities():
     assert overlap(FULL_FRAME, FULL_FRAME) == 1
     with pytest.raises(ValueError):
         proposals(image, maximum=3)
+
+
+def test_native_camera_regions_preserve_resolution_and_crop_the_correct_area():
+    image = Image.new("RGB", (512, 512), "red")
+    ImageDraw.Draw(image).rectangle((256, 0, 511, 511), fill="blue")
+    selected = crop(image, (0.5, 0.0, 1.0, 1.0))
+    assert selected.size == (512, 512)
+    assert selected.getpixel((256, 256)) == (0, 0, 255)
+    boxes = proposals(Image.open(io.BytesIO(frame())).resize((512, 512)))
+    assert 1 <= len(boxes) <= 2
+    assert all(0 <= b[0] < b[2] <= 1 and 0 <= b[1] < b[3] <= 1 for b in boxes)
+
+
+def test_512_pixel_camera_frame_reaches_region_inference(tmp_path):
+    value = engine(tmp_path, regions=True)
+    image = Image.open(io.BytesIO(frame())).resize((512, 512))
+    data = io.BytesIO()
+    image.save(data, "JPEG")
+    result = value.recognize(data.getvalue())
+    assert result["candidates"]
+    assert 1 <= result["timings"]["model_calls"] <= 3

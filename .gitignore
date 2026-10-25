@@ -19,3 +19,4 @@ node_modules/
 test-results/
 playwright-report/
 .local/ticket9-collection-2026-10-16/
+.local/3d-object-pilot/

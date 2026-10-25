@@ -339,13 +339,23 @@ def test_file_and_atlas_inputs_preserve_recognition_scores(atlas, monkeypatch):
     assert engine.geometry_enabled
 
 
-def test_default_server_reads_atlas_without_a_catalog_file(atlas, monkeypatch):
+@pytest.mark.parametrize("explicit_settings", [False, True])
+def test_default_server_reads_atlas_without_a_catalog_file(
+    atlas, monkeypatch, explicit_settings
+):
     loader, db, _, settings = atlas
     connection = SimpleNamespace(database=db, close=AsyncMock())
     monkeypatch.setenv("LIVE_CAMERA_BUNDLE", str(loader.directory))
-    monkeypatch.setattr("app.modules.live_camera.server.Settings", lambda: settings)
+
+    def load_settings():
+        assert not explicit_settings, "Explicit preview must not reload .env settings"
+        return settings
+
+    monkeypatch.setattr("app.modules.live_camera.server.Settings", load_settings)
     monkeypatch.setattr("app.modules.live_camera.server.MongoDB", lambda _: connection)
-    with TestClient(create_camera_app()) as client:
+    with TestClient(
+        create_camera_app(configured_settings=settings if explicit_settings else None)
+    ) as client:
         response = client.get("/bundle/catalog.json")
         assert response.status_code == 200
         public = response.json()

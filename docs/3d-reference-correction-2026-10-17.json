@@ -1,0 +1,11 @@
+{
+  "object_id": "6aab0df6dd73e04d96150a1c",
+  "name": "Summer",
+  "previous_set_id": "bc2d721bcc6c4c96b017769985d4c4bb",
+  "new_set_id": "b9795a5b554d4a479df4c0bd3321466f",
+  "removed_image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7f/Rijksmuseumtuinen_32.jpg/1280px-Rijksmuseumtuinen_32.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+  "reason": "Visual source review: removed male figure with grape/basket attributes; it does not depict the selected female Summer, BK-NM-8673. The canonical reference and museum identity were not changed.",
+  "remaining_views": 1,
+  "suggestion_coverage_ready": false,
+  "note": "Do not relabel the wrong photo or count a resized copy of the remaining photo as a second viewpoint."
+}

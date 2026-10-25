@@ -1,0 +1,3405 @@
+{
+  "created_at": "2026-10-17T14:13:06.028014+00:00",
+  "purpose": "regression",
+  "phase": "replay",
+  "mode": "regions",
+  "browser": "webkit",
+  "manifest_hash": "03f1518db3f60df2e523bfb21437a8bf332e2c0308ca668413e831ea6a1401c6",
+  "photo_hashes": {
+    "commons-86203548": "f41870d2ba17b6610eb1dcc48cc5bc155c9d20a8f1f0a669fb9f29f987ee0290",
+    "commons-72919371": "c8884547c5b1169e12b96791b1345224e9938ff186927ff7677d1491105e4578",
+    "commons-72919385": "e66308c8b4fa6ae5699b388ecdf2e8bdf7982a91418fe0edcb0285dd085f9cf7",
+    "commons-72938888": "c7bffd2dce8a81c88c019d10b3d82e1ed44712bfd222a749ac326dceac6fb412",
+    "commons-72938910": "b7829fb7100fbebd1869cd697150ff1bc0943a2e5a527bac2891f606ff9c80b0",
+    "commons-72968220": "8ba5ade1a13a4f93a81a5989b4ee3a7599e5f04d81592800669bebdb78f45096",
+    "commons-72968229": "61176a092f397e841acdd884ef017811abd0626f34556cc2a11ae7f5f0e95931",
+    "commons-73006512": "c17ff5021e941247df0ec5b0e15c15702b76a3e62566d8180c358b4bffcee228",
+    "commons-73006520": "482d6d68d2f209e23c005e8fc51f9e92b92eb6fac18d1405b0592f47788a34ed",
+    "v5-shiva-143912324-full": "ced18c8c324bc237674ff3457f964fea5b1daa8d687f52cbaf2a580cc734e371",
+    "v5-shiva-143912338-partial": "0a656cbc53c284049b3d4f7454aebc380eb3a70b50af5f3db8a54f39eb751fb7",
+    "v5-shiva-144195613-partial": "18c186e8050cd20c483477ccde8886c4b030abbc74bb9b6e27a93dc9aefd4328",
+    "commons-83873160": "f46af742c37d90ec82fe2c76626756cc8ca0a0d68f88b61869d627a44291b510",
+    "commons-84521974": "9e4778bcd855767ffa21b0a0d015733188cc76e099e314f78db22043731e02ca",
+    "commons-155082502": "2e4bc5c78bcf6c966477b4d3972553ec9b3e5d2a0fd71e76b29ade161030137a",
+    "commons-49553399": "d149744e824d9842335d491e25c36c78542b84d80d0c543fd5092c50eec20817",
+    "commons-38561086": "69040f88c3e0008b093c23347cbac83660f6f045d341bb5d476f824eb3467841",
+    "commons-47262917": "6e860fd3420266f7e92cd97b248361adcb4c3ed43dd416b5f5910d18cbca10ff",
+    "commons-51332305": "52db743f2983301363b5b852925b0385f85d940580f77ceebdff05a2a60de708",
+    "commons-76582846": "93c02286118418a89249ee56957e4433b17752ee14dd0e0dfd0485fa78a7948c",
+    "commons-76583099": "6b066e92ed5d545f6d5fcdc801d3865a42b760f65b720230cff7a78c35f08f42",
+    "commons-160004795": "490004c6ebad3e93c2f0efb7e7b573098460834a2c627c6a69ca13821fcbf4a2",
+    "commons-44052107": "f2002147f53c6b854044b6e59f6af9c49f0f505ded2778d1db6168f2aed03836",
+    "commons-50160172": "174511d18c3a2e3d4bc94d7430791a0271cf91dde7205acfff83be4afeba638f",
+    "commons-86135055": "57dcffd51d035fd5132a2b54234ec2cc09df11d4f2eb28c0c89d46a6ecb61d21",
+    "commons-46397172": "cbb9166c4bbcbac9b054ddad2dac96a385030edec1db8761f3e8955e13da54a4",
+    "commons-49957072": "2b6a4173391786e3d5873c32c2802d07c599a7fe47ada332bde20e6690247d8c",
+    "commons-65829193": "1488fac45125377c0fe5016bd962f7756b232ac5da8690f131daa161235553e6",
+    "commons-62136668": "bf545dddb2d3c8713fe03b596a3f01560f8bc093ae442a70363f63b8faef5f24",
+    "commons-147412835": "a3762e31780c85bc40f093a298952c3f53a257d0f12081e5e720287ec17e65b0",
+    "commons-129666295": "fa7881307ea26afe2f576c6ac3fe6dd4620c47a40d7e13acec00d2ffb231731b",
+    "commons-84250334": "92d26caab8b523771a4fa9afa590018e1bed9bf00169f8febd0de55871361a1a"
+  },
+  "normalized_photo_hashes": {
+    "commons-86203548": "bf801d55ef84d8800fe7de8b62bec238de0784298779ce29556f27f5ec36230b",
+    "commons-72919371": "9a8d3ebcd8e14d3c83014027f04a6b3de17716b9e2c77f855eb0249ea8b85cd7",
+    "commons-72919385": "3a0c899badd7b82fc667540e02dc6e01b973091ebdd578bb8a4e07743a7bb243",
+    "commons-72938888": "3fa189935f87d798b5ad41032df71a36d5649df190a2ce5762f9ad3926962be8",
+    "commons-72938910": "a736decf30830debc6e328530182ee7df67fdfffc0228a9ec0b0ea00c5d8ecee",
+    "commons-72968220": "009672303cefb415da6bc96b950e008ebfa43f6349e1241fbe989fdc5e044d9f",
+    "commons-72968229": "951f3051802b1e112a3973c424977daa5c7230a610dafcec92c37015459a8003",
+    "commons-73006512": "65378f0fc8d602214b9100a11cf4249bed5f4123cedf97a1ad66b33e3525b8d8",
+    "commons-73006520": "efc8211b28f071c2ff95e8cdd4fa6a44a3d1c09f30c79bb01df7328607bd23d7",
+    "v5-shiva-143912324-full": "eafafb39a8f887640e6204c6ca4989c1be625a60c778fda97c55c916426b6af4",
+    "v5-shiva-143912338-partial": "640c1bb87cfe4d83537eaa881916a8a7b81cdaf9a9f7d56bc68500a666520c42",
+    "v5-shiva-144195613-partial": "6bb0a0d996aceca3375030dd27ffdba492d45647f8d49380110901229ed6c29c",
+    "commons-83873160": "e03ab2a2163738fd386a32327e438b45708bf98c8aa3bfe70a5dd12c50554916",
+    "commons-84521974": "ed72d02260cafd9697dcd2ff51b0f88530b87b68d4b0612afe526fcbadf46782",
+    "commons-155082502": "46a00f7997e379649a9c9eae811aa79efa60460d280fa2c02d8194c0073de55a",
+    "commons-49553399": "2c70f73c4fdd508345ed6a4ca8c1cca2bd0ca62b13d28327a8f5625f62541ff4",
+    "commons-38561086": "2648950b984c3415f6bcde3b3e8fa913253810cadfce76233881ae0481c149b6",
+    "commons-47262917": "750c8574ed7250010da760d47f74363b44610e5562064de6ac5b90ff169efab3",
+    "commons-51332305": "a2ef20d40553b01ace22ed2ee0438fbb382c07d1cf71017f7cd5726bced08105",
+    "commons-76582846": "8a6df1a62349e6d8cc3663c8f9e076005cd00ae83e375ffa2c7521f526665dcf",
+    "commons-76583099": "af640594b3a37e40b97ac6101d66be7049b70a3cc197e558e394f481936c3a0c",
+    "commons-160004795": "e7b788967909232eb7a164f0f42a5dd095e1382a34dac755572fc91b3aab1d9a",
+    "commons-44052107": "464d8b11adcf4e3d94a33df681e80978ee684ee24d98258aba0f37d69e254e92",
+    "commons-50160172": "54566c1f8bab1af7e60224539213bd59ba4908a6c58803168c62c21854f22ae1",
+    "commons-86135055": "8f83bbebe30c6440059043cdc41ecfa3c5ccb5c31d4213071596f509d6cc9498",
+    "commons-46397172": "5d76a3a87a7f7e201ceb80b645362c188c440136243f4b209ff58759fd526aae",
+    "commons-49957072": "993b2b076cf7d9d2d4272ae48904113da3ba3f7ee636c8587439ccb5593e80e7",
+    "commons-65829193": "ab930e17ac282ce5083cdac205d435827864518c556927eec9de55ee6c22a016",
+    "commons-62136668": "f4c0bd96ad60c60298b3307cec88dc6bdcb63efb465b3a70d04681ca5771c9dc",
+    "commons-147412835": "9a7d9a258e2db97de8a4a78b15146cd6605380bdc915050325ae7eb49d98037e",
+    "commons-129666295": "d63c605f53483906df641deb8ba732b9e0a15f5d241aa088924cd5d9abe2b8e6",
+    "commons-84250334": "a61437c0f97d74e5d27124e5d9d0f8d0ba44f28431120e7ac17c1fc6304d3203"
+  },
+  "pipeline": "object-regions-types-v5",
+  "pipeline_hash": "37c9dc2ce1cb9ace3fca39b12a9355d8c4f85c9db44415502bddc5e54c6ec992",
+  "reference_signature": "d024fb414f407f999b378dd080b22de7d775ba73cf27e4fa4484486391b12388",
+  "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020",
+  "model_sha256": "d5225e26eb6f54fbf9733321947b945f5b6c15cb94e8c6a619ec1ff3fbf5a255",
+  "policy": {
+    "calibrated": false,
+    "candidate_floor": 0.55,
+    "candidate_margin": 0.04,
+    "frame_size": 512,
+    "geometry_min_score": 0.4,
+    "geometry_scope": "reference-view-v1",
+    "global_weight": 0.75,
+    "inference_budget_ms": 1500,
+    "minimum_stable_ms": 600,
+    "object_regions": true,
+    "recognition_pipeline": "object-regions-types-v5",
+    "stable_frames": 3
+  },
+  "reference_readiness": {
+    "6aa9a746dd73e04d96146161": {
+      "profile": "multiview",
+      "distinct_images": 1,
+      "distinct_viewpoints": 0,
+      "ready": false
+    },
+    "6aab0df3dd73e04d96150a1a": {
+      "profile": "multiview",
+      "distinct_images": 2,
+      "distinct_viewpoints": 2,
+      "ready": true
+    },
+    "6aab0df5dd73e04d96150a1b": {
+      "profile": "multiview",
+      "distinct_images": 2,
+      "distinct_viewpoints": 2,
+      "ready": true
+    },
+    "6aab0df6dd73e04d96150a1c": {
+      "profile": "multiview",
+      "distinct_images": 2,
+      "distinct_viewpoints": 2,
+      "ready": true
+    },
+    "6aab0df8dd73e04d96150a1e": {
+      "profile": "multiview",
+      "distinct_images": 2,
+      "distinct_viewpoints": 2,
+      "ready": true
+    }
+  },
+  "startup_seconds": 6.493060771987075,
+  "model_warm_ms": 101.8453520082403,
+  "summary": {
+    "attempts": 32,
+    "service_failures": 0,
+    "top1": {
+      "correct": 9,
+      "total": 12,
+      "rate": 0.75,
+      "wilson95": [
+        0.4676946650664343,
+        0.9110583316059452
+      ]
+    },
+    "top3": {
+      "correct": 11,
+      "total": 12,
+      "rate": 0.9166666666666666,
+      "wilson95": [
+        0.646120088858883,
+        0.9851349055950829
+      ]
+    },
+    "suggestion_precision": {
+      "correct": 0,
+      "total": 0,
+      "rate": null,
+      "wilson95": null
+    },
+    "correct_suggestion_coverage": {
+      "correct": 0,
+      "total": 12,
+      "rate": 0.0,
+      "wilson95": [
+        2.7755575615628914e-17,
+        0.24249400665524085
+      ]
+    },
+    "negative_false_suggestions": 0,
+    "negative_count": 20,
+    "p95_request_seconds": 0.35190838601556607,
+    "budget_exceeded": 0,
+    "max_model_calls": 3,
+    "abstentions": 32
+  },
+  "rows": [
+    {
+      "photo_id": "commons-86203548",
+      "expected_object_id": "6aa9a746dd73e04d96146161",
+      "expected_profile": "multiview",
+      "object_type": "sculpture",
+      "category": "full",
+      "split": "evaluation",
+      "capture_group": "Alf-van-Beem-2018-05-11",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Shiva_Nataraja,_anoniem,_1100_-_1200.JPG",
+      "license": "https://commons.wikimedia.org/wiki/File:Shiva_Nataraja,_anoniem,_1100_-_1200.JPG |  Own work  | Public domain | Photographer/session: Alf-van-Beem-2018-05-11",
+      "http_status": 200,
+      "seconds": 0.44385992901516147,
+      "candidates": [
+        {
+          "id": "6aa9a746dd73e04d96146161",
+          "score": 0.874020516872406,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 1,
+          "coverage_ready": false,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.874020516872406
+          ]
+        },
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.3587554097175598,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.24107142857142858,
+            0.39285714285714285,
+            0.6651785714285714,
+            0.7767857142857143
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.28207220882177353,
+            0.3587554097175598
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.26298096776008606,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.20261013135313988,
+            0.26298096776008606
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": true,
+      "top3_correct": true,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED",
+        "REFERENCE_VIEW_COVERAGE_INCOMPLETE"
+      ],
+      "timings": {
+        "proposal_ms": 107.17255898634903,
+        "encoder_ms": 325.34209100413136,
+        "verification_ms": 0.03353896318003535,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 440.48,
+      "frame_sha256": "108af32d19c966ffe167446f535292b511245d50174bda86c4efe8009b0a9eff",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-72919371",
+      "expected_object_id": "6aab0df5dd73e04d96150a1b",
+      "expected_profile": "multiview",
+      "object_type": "sculpture",
+      "category": "full",
+      "split": "evaluation",
+      "capture_group": "Ceescamel-2018-08-30",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Herfst_(1).jpg",
+      "license": "https://commons.wikimedia.org/wiki/File:Herfst_(1).jpg | Own work | CC BY-SA 4.0 | Ceescamel | 2018-08-30 14:44:57",
+      "http_status": 200,
+      "seconds": 0.35190838601556607,
+      "candidates": [
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.8880545198917389,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.5044642857142857,
+            0.16071428571428573,
+            0.7901785714285714,
+            0.5982142857142857
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.8880545198917389,
+            0.7940624207258224
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.878024086356163,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.5044642857142857,
+            0.16071428571428573,
+            0.7901785714285714,
+            0.5982142857142857
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.8721383810043335,
+            0.878024086356163
+          ]
+        },
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.8415648639202118,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.5044642857142857,
+            0.16071428571428573,
+            0.7901785714285714,
+            0.5982142857142857
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.8415648639202118,
+            0.8025106340646744
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": true,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 10.88294998044148,
+        "encoder_ms": 323.19190897396766,
+        "verification_ms": 0.023033033357933164,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 347.33,
+      "frame_sha256": "f22997e23442310ec41dbf07621dd9c947eceb24dd19b0a4061a00ebf7fcf92b",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-72919385",
+      "expected_object_id": "6aab0df5dd73e04d96150a1b",
+      "expected_profile": "multiview",
+      "object_type": "sculpture",
+      "category": "partial",
+      "split": "evaluation",
+      "capture_group": "Ceescamel-2018-08-30",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Herfst_(2).jpg",
+      "license": "https://commons.wikimedia.org/wiki/File:Herfst_(2).jpg | Own work | CC BY-SA 4.0 | Ceescamel | 2018-08-30 14:45:14",
+      "http_status": 200,
+      "seconds": 0.3440700510109309,
+      "candidates": [
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.8271520435810089,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.8266793787479401,
+            0.8271520435810089
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.8122438192367554,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.3482142857142857,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.8122438192367554,
+            0.7051402777433395
+          ]
+        },
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.7818653136491776,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.7818653136491776,
+            0.7451891005039215
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": true,
+      "top3_correct": true,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 9.270762006053701,
+        "encoder_ms": 322.1887839899864,
+        "verification_ms": 0.03152096178382635,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 341.09,
+      "frame_sha256": "c03a94642a8a7db153998070bb2953fadc1299ac45bde22f4e01fed0e5fa746b",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-72938888",
+      "expected_object_id": "6aab0df6dd73e04d96150a1c",
+      "expected_profile": "multiview",
+      "object_type": "sculpture",
+      "category": "full",
+      "split": "evaluation",
+      "capture_group": "Ceescamel-2018-08-30",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Zomer_(1).jpg",
+      "license": "https://commons.wikimedia.org/wiki/File:Zomer_(1).jpg | Own work | CC BY-SA 4.0 | Ceescamel | 2018-08-30 14:45:39",
+      "http_status": 200,
+      "seconds": 0.3435200800013263,
+      "candidates": [
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.8563361167907715,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.8563361167907715,
+            0.8360060751438141
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.8346953690052032,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.8346953690052032,
+            0.7486037611961365
+          ]
+        },
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.8001222014427185,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.8001222014427185,
+            0.770162358880043
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": true,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 10.694308002712205,
+        "encoder_ms": 318.2557149848435,
+        "verification_ms": 0.025518005713820457,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 339.67,
+      "frame_sha256": "508ec931e54923b5a31aaade3ff2bd7c27810ead2f4208c7736d179bf0caf23c",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-72938910",
+      "expected_object_id": "6aab0df6dd73e04d96150a1c",
+      "expected_profile": "multiview",
+      "object_type": "sculpture",
+      "category": "partial",
+      "split": "evaluation",
+      "capture_group": "Ceescamel-2018-08-30",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Zomer_(2).jpg",
+      "license": "https://commons.wikimedia.org/wiki/File:Zomer_(2).jpg | Own work | CC BY-SA 4.0 | Ceescamel | 2018-08-30 14:45:49",
+      "http_status": 200,
+      "seconds": 0.3321272959874477,
+      "candidates": [
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.8359544575214386,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.3080357142857143,
+            0.12946428571428573,
+            0.5625,
+            0.6607142857142857
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.8359544575214386,
+            0.7470362186431885
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.8052347302436829,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.8052347302436829,
+            0.7953567653894424
+          ]
+        },
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.7853747457265854,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.7853747457265854,
+            0.7298144102096558
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": true,
+      "top3_correct": true,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 9.431554994080216,
+        "encoder_ms": 308.12339700059965,
+        "verification_ms": 0.02150796353816986,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 328.54,
+      "frame_sha256": "bffa30328c79c2b440874139dee52dbd8c8ea9afa6a43cbb9ddd30eff3d25924",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-72968220",
+      "expected_object_id": "6aab0df3dd73e04d96150a1a",
+      "expected_profile": "multiview",
+      "object_type": "sculpture",
+      "category": "full",
+      "split": "evaluation",
+      "capture_group": "Ceescamel-2018-08-30",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Lente_(1).jpg",
+      "license": "https://commons.wikimedia.org/wiki/File:Lente_(1).jpg | Own work | CC BY-SA 4.0 | Ceescamel | 2018-08-30 14:46:18",
+      "http_status": 200,
+      "seconds": 0.2276876019896008,
+      "candidates": [
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.8301219046115875,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.32589285714285715,
+            0.20089285714285715,
+            0.6339285714285714,
+            0.6830357142857143
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.8301219046115875,
+            0.8011170029640198
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.8065760433673859,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.32589285714285715,
+            0.20089285714285715,
+            0.6339285714285714,
+            0.6830357142857143
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.8065760433673859,
+            0.6885115206241608
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.7984732091426849,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.32589285714285715,
+            0.20089285714285715,
+            0.6339285714285714,
+            0.6830357142857143
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.7984732091426849,
+            0.792703241109848
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": true,
+      "top3_correct": true,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 9.946817997843027,
+        "encoder_ms": 203.9172200311441,
+        "verification_ms": 0.015088997315615416,
+        "model_calls": 2,
+        "proposals": 1
+      },
+      "budget_exceeded": false,
+      "inference_ms": 224.46,
+      "frame_sha256": "49cf7a1d34326c4e7f91eb0a12f2032ee282669bd559650fc483209f5a23d4fe",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-72968229",
+      "expected_object_id": "6aab0df3dd73e04d96150a1a",
+      "expected_profile": "multiview",
+      "object_type": "sculpture",
+      "category": "partial",
+      "split": "evaluation",
+      "capture_group": "Ceescamel-2018-08-30",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Lente_(2).jpg",
+      "license": "https://commons.wikimedia.org/wiki/File:Lente_(2).jpg | Own work | CC BY-SA 4.0 | Ceescamel | 2018-08-30 14:46:31",
+      "http_status": 200,
+      "seconds": 0.12116018900997005,
+      "candidates": [
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.8208109438419342,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.8208109438419342,
+            0.8026498854160309
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.7795271277427673,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.7795271277427673,
+            0.6681682020425797
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.7755944281816483,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.7755944281816483,
+            0.7621514350175858
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": true,
+      "top3_correct": true,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 10.172607988351956,
+        "encoder_ms": 100.39691400015727,
+        "verification_ms": 0.007255002856254578,
+        "model_calls": 1,
+        "proposals": 0
+      },
+      "budget_exceeded": false,
+      "inference_ms": 117.6,
+      "frame_sha256": "06ca19806775bef8ee54b4561f4dba59be81bb74647602386fe42b7914fe16de",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-73006512",
+      "expected_object_id": "6aab0df8dd73e04d96150a1e",
+      "expected_profile": "multiview",
+      "object_type": "sculpture",
+      "category": "full",
+      "split": "evaluation",
+      "capture_group": "Ceescamel-2018-08-30",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Apollo_Museumtuin_(1).jpg",
+      "license": "https://commons.wikimedia.org/wiki/File:Apollo_Museumtuin_(1).jpg | Own work | CC BY-SA 4.0 | Ceescamel | 2018-08-30 14:46:58",
+      "http_status": 200,
+      "seconds": 0.1132226939953398,
+      "candidates": [
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.6680350303649902,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.6680350303649902,
+            0.6489851176738739
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.6091198474168777,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.5464494079351425,
+            0.6091198474168777
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.5708073824644089,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.5683680325746536,
+            0.5708073824644089
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": true,
+      "top3_correct": true,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 4.170636006165296,
+        "encoder_ms": 99.07838198705576,
+        "verification_ms": 0.00720098614692688,
+        "model_calls": 1,
+        "proposals": 0
+      },
+      "budget_exceeded": false,
+      "inference_ms": 110.1,
+      "frame_sha256": "0132cf376aa169bceaa8a64abb93eb7b74d83f1db3b51845ccc356ad6bf662c5",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-73006520",
+      "expected_object_id": "6aab0df8dd73e04d96150a1e",
+      "expected_profile": "multiview",
+      "object_type": "sculpture",
+      "category": "partial",
+      "split": "evaluation",
+      "capture_group": "Ceescamel-2018-08-30",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Apollo_Museumtuin_(2).jpg",
+      "license": "https://commons.wikimedia.org/wiki/File:Apollo_Museumtuin_(2).jpg | Own work | CC BY-SA 4.0 | Ceescamel | 2018-08-30 14:47:10",
+      "http_status": 200,
+      "seconds": 0.21543638699222356,
+      "candidates": [
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.7561168670654297,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.7561168670654297,
+            0.7163959890604019
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.6941911578178406,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.6479413509368896,
+            0.6941911578178406
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.6419356167316437,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.6419356167316437,
+            0.6390117853879929
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": true,
+      "top3_correct": true,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 3.5299349983688444,
+        "encoder_ms": 200.65018700552173,
+        "verification_ms": 0.013731012586504221,
+        "model_calls": 2,
+        "proposals": 1
+      },
+      "budget_exceeded": false,
+      "inference_ms": 212.26,
+      "frame_sha256": "f8600005096ac3025b3d93413ebcc4a0c906cdefc7229fe901b130a2153838d0",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "v5-shiva-143912324-full",
+      "expected_object_id": "6aa9a746dd73e04d96146161",
+      "expected_profile": "multiview",
+      "object_type": "sculpture",
+      "category": "full",
+      "split": "evaluation",
+      "capture_group": "commons-page-143912324",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Beeld_van_Shiva_Nataraja_met_links_daarvan_een_klein_beeld_in_een_vitrine,_HA-0013764.jpg",
+      "license": "https://commons.wikimedia.org/wiki/File:Beeld_van_Shiva_Nataraja_met_links_daarvan_een_klein_beeld_in_een_vitrine,_HA-0013764.jpg | http://hdl.handle.net/10934/RM0001.HARCHIEF.13764 | CC0",
+      "http_status": 200,
+      "seconds": 0.1198761870036833,
+      "candidates": [
+        {
+          "id": "6aa9a746dd73e04d96146161",
+          "score": 0.6830295920372009,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 1,
+          "coverage_ready": false,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.6830295920372009
+          ]
+        },
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.29374852031469345,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.15440097451210022,
+            0.29374852031469345
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.15961875393986702,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.10653414577245712,
+            0.15961875393986702
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": true,
+      "top3_correct": true,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED",
+        "REFERENCE_VIEW_COVERAGE_INCOMPLETE"
+      ],
+      "timings": {
+        "proposal_ms": 9.193108999170363,
+        "encoder_ms": 100.85215800791048,
+        "verification_ms": 0.006952002877369523,
+        "model_calls": 1,
+        "proposals": 0
+      },
+      "budget_exceeded": false,
+      "inference_ms": 116.1,
+      "frame_sha256": "29ed4d31d4938980ab4a3dd605abbc6476d0ac698db39a89094a704508fc89ad",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "v5-shiva-143912338-partial",
+      "expected_object_id": "6aa9a746dd73e04d96146161",
+      "expected_profile": "multiview",
+      "object_type": "sculpture",
+      "category": "partial",
+      "split": "evaluation",
+      "capture_group": "commons-page-143912338",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Beeld_van_Shiva_Nataraja_met_rechts_daarvan_een_klein_beeld,_HA-0013765.jpg",
+      "license": "https://commons.wikimedia.org/wiki/File:Beeld_van_Shiva_Nataraja_met_rechts_daarvan_een_klein_beeld,_HA-0013765.jpg | http://hdl.handle.net/10934/RM0001.HARCHIEF.13765 | CC0 | evaluation crop: 66% source frame",
+      "http_status": 200,
+      "seconds": 0.10548590999678709,
+      "candidates": [
+        {
+          "id": "6aa9a746dd73e04d96146161",
+          "score": 0.8788554668426514,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 1,
+          "coverage_ready": false,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.8788554668426514
+          ]
+        },
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.28188008069992065,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.2489876039326191,
+            0.28188008069992065
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.2743018567562103,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.25049059092998505,
+            0.2743018567562103
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": true,
+      "top3_correct": true,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED",
+        "REFERENCE_VIEW_COVERAGE_INCOMPLETE"
+      ],
+      "timings": {
+        "proposal_ms": 3.7507719825953245,
+        "encoder_ms": 97.23795100580901,
+        "verification_ms": 0.007808004738762975,
+        "model_calls": 1,
+        "proposals": 0
+      },
+      "budget_exceeded": false,
+      "inference_ms": 103.96,
+      "frame_sha256": "25bdc20912c26952387f16022bc17f8743465ddc51d5750372c7174ee9f7d7f6",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "v5-shiva-144195613-partial",
+      "expected_object_id": "6aa9a746dd73e04d96146161",
+      "expected_profile": "multiview",
+      "object_type": "sculpture",
+      "category": "partial",
+      "split": "evaluation",
+      "capture_group": "commons-page-144195613",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Man_en_vrouw_met_een_auditour_bekijken_het_beeldhouwwerk_Shiva_Nataraja_in_het_Aziatisch_Paviljoen,_HA-0027954.jpg",
+      "license": "https://commons.wikimedia.org/wiki/File:Man_en_vrouw_met_een_auditour_bekijken_het_beeldhouwwerk_Shiva_Nataraja_in_het_Aziatisch_Paviljoen,_HA-0027954.jpg | http://hdl.handle.net/10934/RM0001.HARCHIEF.27954 | CC0 | evaluation crop: 66% source frame",
+      "http_status": 200,
+      "seconds": 0.32047856799908914,
+      "candidates": [
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.2677840404212475,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.044642857142857144,
+            0.0,
+            1.0,
+            0.6473214285714286
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.2293258048593998,
+            0.2677840404212475
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.22282662242650986,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.044642857142857144,
+            0.0,
+            1.0,
+            0.6473214285714286
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.19136467203497887,
+            0.22282662242650986
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.2104274071753025,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.044642857142857144,
+            0.0,
+            1.0,
+            0.6473214285714286
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.202961016446352,
+            0.2104274071753025
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 3.439659019932151,
+        "encoder_ms": 302.1932010015007,
+        "verification_ms": 0.02465402940288186,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 316.77,
+      "frame_sha256": "5bc0f24646510845c67101fb6d5fd3fcea2517e51e63b70e3c1340c8c7cc269e",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-83873160",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-siriain-2019-11-02",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Museumnacht_Rijksmuseum_Bovengrondse_3_(02-11-2019).jpg",
+      "license": "CC BY-SA 4.0 | https://creativecommons.org/licenses/by-sa/4.0",
+      "http_status": 200,
+      "seconds": 0.3266543280042242,
+      "candidates": [
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.07124684005975723,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.03890397399663925,
+            0.07124684005975723
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.061513807624578476,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.038841922767460346,
+            0.061513807624578476
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.030832926742732525,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.030832926742732525,
+            0.030661385506391525
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 3.633618005551398,
+        "encoder_ms": 308.7706269870978,
+        "verification_ms": 0.028398993890732527,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 323.17,
+      "frame_sha256": "123d838e70077e8a098e30816577f3786a4a53924f752d0deaf3a64451731dc0",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-84521974",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-kimberlimakarainen-2019-11-21",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:WikiTechstorm_Rijksmuseum_NOV2019_Library.jpg",
+      "license": "CC BY-SA 4.0 | https://creativecommons.org/licenses/by-sa/4.0",
+      "http_status": 200,
+      "seconds": 0.22364095100783743,
+      "candidates": [
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.05889681354165077,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.04027976095676422,
+            0.05889681354165077
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.057260897010564804,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.057260897010564804,
+            0.049629103392362595
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.01858971919864416,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.84375,
+            0.9776785714285714,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.01858971919864416,
+            0.008604224771261215
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 8.860218978952616,
+        "encoder_ms": 202.56123700528406,
+        "verification_ms": 0.015811994671821594,
+        "model_calls": 2,
+        "proposals": 1
+      },
+      "budget_exceeded": false,
+      "inference_ms": 220.06,
+      "frame_sha256": "e867921bcd28f7c202d150c0f2ba7d7b7777f73e8b4590ec3b8627dbaf9731e6",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-155082502",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-oursana-2024-10-08",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Rijksmuseum_Amsterdam_-_Room_0.4_2.jpg",
+      "license": "CC0 | http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "http_status": 200,
+      "seconds": 0.3518720490101259,
+      "candidates": [
+        {
+          "id": "6aa9a746dd73e04d96146161",
+          "score": 0.16669483855366707,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 1,
+          "coverage_ready": false,
+          "bbox": [
+            0.0,
+            0.32142857142857145,
+            0.9642857142857143,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.16669483855366707
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.0840209387242794,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.11160714285714286,
+            0.049107142857142856,
+            0.9330357142857143,
+            0.7053571428571429
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.0840209387242794,
+            0.0771043673157692
+          ]
+        },
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.07653798349201679,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.11160714285714286,
+            0.049107142857142856,
+            0.9330357142857143,
+            0.7053571428571429
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.07164974138140678,
+            0.07653798349201679
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED",
+        "REFERENCE_VIEW_COVERAGE_INCOMPLETE"
+      ],
+      "timings": {
+        "proposal_ms": 8.685351989697665,
+        "encoder_ms": 327.41065695881844,
+        "verification_ms": 0.02761298674158752,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 348.09,
+      "frame_sha256": "04d3ee88ab7d8ccac41a6aad259acfb0a5a9088e0002bbfe92a3e5bbd91b5110",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-49553399",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-rijksvastgoedbedrijf-2013-03-07",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Verlichting_Rijksmuseum_met_light_racks.jpg",
+      "license": "CC0 | http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "http_status": 200,
+      "seconds": 0.11352811701362953,
+      "candidates": [
+        {
+          "id": "6aa9a746dd73e04d96146161",
+          "score": 0.0,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 1,
+          "coverage_ready": false,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            -0.03293271432630718
+          ]
+        },
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.0,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            -0.03358230413869023,
+            -0.030920885037630796
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.0,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            -0.03260374069213867,
+            -0.03510821331292391
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED",
+        "REFERENCE_VIEW_COVERAGE_INCOMPLETE"
+      ],
+      "timings": {
+        "proposal_ms": 2.764108998235315,
+        "encoder_ms": 100.84413998993114,
+        "verification_ms": 0.006823014700785279,
+        "model_calls": 1,
+        "proposals": 0
+      },
+      "budget_exceeded": false,
+      "inference_ms": 109.73,
+      "frame_sha256": "cafdbf33021834408b03d854a8fc25e8d4aea2fc05f4d61442717d2c9d314191",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-38561086",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-stevenlek-2013-11-26",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Atrium_Rijksmuseum_Amsterdam.JPG",
+      "license": "CC BY-SA 4.0 | https://creativecommons.org/licenses/by-sa/4.0",
+      "http_status": 200,
+      "seconds": 0.3356294379918836,
+      "candidates": [
+        {
+          "id": "6aa9a746dd73e04d96146161",
+          "score": 0.0662339674308896,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 1,
+          "coverage_ready": false,
+          "bbox": [
+            0.0,
+            0.5401785714285714,
+            0.9598214285714286,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.0662339674308896
+          ]
+        },
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.041880909353494644,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.030160891357809305,
+            0.041880909353494644
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.01659394893795252,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.009262205567210913,
+            0.01659394893795252
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED",
+        "REFERENCE_VIEW_COVERAGE_INCOMPLETE"
+      ],
+      "timings": {
+        "proposal_ms": 4.137759999139234,
+        "encoder_ms": 317.9474569915328,
+        "verification_ms": 0.024683016818016768,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 332.79,
+      "frame_sha256": "1d7ef7cc5c090254b09cde336c416ea50540e81187b5c73157a70b0ce2fd36f8",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-47262917",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-glanting-2012-04-03",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Interieur_Rijksmuseum_DSCF9647.JPG",
+      "license": "CC BY-SA 4.0 | https://creativecommons.org/licenses/by-sa/4.0",
+      "http_status": 200,
+      "seconds": 0.3413552459969651,
+      "candidates": [
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.0577556611970067,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.16071428571428573,
+            0.3705357142857143,
+            0.53125,
+            0.7544642857142857
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.04362515825778246,
+            0.0577556611970067
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.035783007740974426,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.035783007740974426,
+            0.008037454448640347
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.02188125252723694,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.021745947189629078,
+            0.02188125252723694
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 9.272244991734624,
+        "encoder_ms": 317.5536920025479,
+        "verification_ms": 0.027175992727279663,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 336.89,
+      "frame_sha256": "86d06824ddcdc2651c833c6cb46fa5ae4e80e091529ea09a0a72b1fed047307c",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-51332305",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-ducciomalagamba-2014-05-22",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:RIJKSMUSEUM,_Cruz_y_Ortiz,_foto-_Duccio_Malagamba_(14057445128).jpg",
+      "license": "CC BY 2.0 | https://creativecommons.org/licenses/by/2.0",
+      "http_status": 200,
+      "seconds": 0.11945915201795287,
+      "candidates": [
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.05111103504896164,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.05111103504896164,
+            0.00702253682538867
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.030679907649755478,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.030679907649755478,
+            0.005270712077617645
+          ]
+        },
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.026237057987600565,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.026237057987600565,
+            0.007741327863186598
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 7.9146529897116125,
+        "encoder_ms": 102.98535198671743,
+        "verification_ms": 0.00781498965807259,
+        "model_calls": 1,
+        "proposals": 0
+      },
+      "budget_exceeded": false,
+      "inference_ms": 116.82,
+      "frame_sha256": "5182d7d5fb863c75a38fec2fbfbb493561bd20d3a4e2272bdc560649d826cd09",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-76582846",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-julienchatelainfromparisfrance-2018-04-28",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Rijksmuseum_(40757649660).jpg",
+      "license": "CC BY-SA 2.0 | https://creativecommons.org/licenses/by-sa/2.0",
+      "http_status": 200,
+      "seconds": 0.3277785709942691,
+      "candidates": [
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.08844918385148048,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.11160714285714286,
+            0.42857142857142855,
+            1.0,
+            0.7857142857142857
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            -0.016781930346041918,
+            0.08844918385148048
+          ]
+        },
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.08108524233102798,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.11160714285714286,
+            0.42857142857142855,
+            1.0,
+            0.7857142857142857
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.051605500280857086,
+            0.08108524233102798
+          ]
+        },
+        {
+          "id": "6aa9a746dd73e04d96146161",
+          "score": 0.07611851952970028,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 1,
+          "coverage_ready": false,
+          "bbox": [
+            0.11160714285714286,
+            0.42857142857142855,
+            1.0,
+            0.7857142857142857
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.07611851952970028
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 8.35130299674347,
+        "encoder_ms": 306.7845770274289,
+        "verification_ms": 0.04893599543720484,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 324.61,
+      "frame_sha256": "66f755188f028d0a46ab9d45ad148af6fe1552224e967f7863f27d8aab31add1",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-76583099",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-julienchatelainfromparisfrance-2018-04-30",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Rijksmuseum_(42658630192).jpg",
+      "license": "CC BY-SA 2.0 | https://creativecommons.org/licenses/by-sa/2.0",
+      "http_status": 200,
+      "seconds": 0.2188879229943268,
+      "candidates": [
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.03531504422426224,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.049107142857142856,
+            0.49107142857142855,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.03531504422426224,
+            0.0021931943483650684
+          ]
+        },
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.02020444395020604,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.049107142857142856,
+            0.49107142857142855,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.02020444395020604,
+            0.005553402937948704
+          ]
+        },
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.016814541071653366,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            -0.0024289072025567293,
+            0.016814541071653366
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 3.4571800206322223,
+        "encoder_ms": 202.3665810120292,
+        "verification_ms": 0.019619008526206017,
+        "model_calls": 2,
+        "proposals": 1
+      },
+      "budget_exceeded": false,
+      "inference_ms": 214.91,
+      "frame_sha256": "243c2f1c28b58fb652772021fc1b2e92f9b3e3438e54bf4d5d3f66a3ea0ee5f2",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-160004795",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-pcn02wps-2024-06-05",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Rijksmuseum_interior,_June_2024.jpg",
+      "license": "CC BY-SA 4.0 | https://creativecommons.org/licenses/by-sa/4.0",
+      "http_status": 200,
+      "seconds": 0.22476552502484992,
+      "candidates": [
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.0598040446639061,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.0598040446639061,
+            0.03156943526118994
+          ]
+        },
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.0477159321308136,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.03295718226581812,
+            0.0477159321308136
+          ]
+        },
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.03950576763600111,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.017959618475288153,
+            0.03950576763600111
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 9.578119992511347,
+        "encoder_ms": 203.8649630267173,
+        "verification_ms": 0.01629398320801556,
+        "model_calls": 2,
+        "proposals": 1
+      },
+      "budget_exceeded": false,
+      "inference_ms": 221.69,
+      "frame_sha256": "fcbd8106cb1ee6ae612fb82aeb71e996aaaaa707303d10b77662b3c1f02663b6",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-44052107",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-romaine-2015-10-04",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Vogelen_in_het_Rijksmuseum-Rondleiding_langs_vogels_(1).jpg",
+      "license": "CC0 | http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "http_status": 200,
+      "seconds": 0.3360143309982959,
+      "candidates": [
+        {
+          "id": "6aa9a746dd73e04d96146161",
+          "score": 0.03899806831032038,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 1,
+          "coverage_ready": false,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.03899806831032038
+          ]
+        },
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.028734900522977114,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.022073191590607166,
+            0.028734900522977114
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.016591240651905537,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            -0.01726767048239708,
+            0.016591240651905537
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED",
+        "REFERENCE_VIEW_COVERAGE_INCOMPLETE"
+      ],
+      "timings": {
+        "proposal_ms": 8.969918999355286,
+        "encoder_ms": 312.5524059869349,
+        "verification_ms": 0.027407979359850287,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 332.08,
+      "frame_sha256": "453e8207294c786d5d46d2db701e1c6a45625c3a3f577e5449082791f39292a1",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-50160172",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-ingnederlandfromnetherlands-2012-11-16",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Wim_Pijbes_-_Rijksmuseum_(1)_(8190878932).jpg",
+      "license": "CC BY-SA 2.0 | https://creativecommons.org/licenses/by-sa/2.0",
+      "http_status": 200,
+      "seconds": 0.3384826109977439,
+      "candidates": [
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.06736279372125864,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.7098214285714286,
+            0.0,
+            1.0,
+            0.5491071428571429
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.06736279372125864,
+            0.05517157353460789
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.05662190355360508,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.7098214285714286,
+            0.0,
+            1.0,
+            0.5491071428571429
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.05662190355360508,
+            0.025854953099042177
+          ]
+        },
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.05573434103280306,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.7098214285714286,
+            0.0,
+            1.0,
+            0.5491071428571429
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.05573434103280306,
+            0.05461331643164158
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 9.186522976960987,
+        "encoder_ms": 314.8636260011699,
+        "verification_ms": 0.030230003176257014,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 334.83,
+      "frame_sha256": "1f2d337032037d9bd7d1d0b7cfc520b8d5a06ea89e54e02f42bf281d505db649",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-86135055",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-alfvanbeem-2019-12-14",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Interior_of_the_Rijksmuseum_Amsterdam_pic13.jpg",
+      "license": "Public domain | None",
+      "http_status": 200,
+      "seconds": 0.11968007701216266,
+      "candidates": [
+        {
+          "id": "6aa9a746dd73e04d96146161",
+          "score": 0.15938733518123627,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 1,
+          "coverage_ready": false,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.15938733518123627
+          ]
+        },
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.08588366210460663,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.047313421964645386,
+            0.08588366210460663
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.049099369905889034,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.019425461068749428,
+            0.049099369905889034
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED",
+        "REFERENCE_VIEW_COVERAGE_INCOMPLETE"
+      ],
+      "timings": {
+        "proposal_ms": 8.70737200602889,
+        "encoder_ms": 100.64617099124007,
+        "verification_ms": 0.01295199035666883,
+        "model_calls": 1,
+        "proposals": 0
+      },
+      "budget_exceeded": false,
+      "inference_ms": 115.9,
+      "frame_sha256": "d761cee5241a6bd938796c43e4c669d381506782a73267f3a7d9ebcd83ea4729",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-46397172",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-eriksw-2015-12-25",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Bibliotheek_Rijksmuseum_Amsterdam.JPG",
+      "license": "CC BY-SA 4.0 | https://creativecommons.org/licenses/by-sa/4.0",
+      "http_status": 200,
+      "seconds": 0.33272798798861913,
+      "candidates": [
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.05706975981593132,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            0.6026785714285714
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.05706975981593132,
+            0.05467120744287968
+          ]
+        },
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.05664697848260403,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.49107142857142855,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.03456425806507468,
+            0.05664697848260403
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.02519685262814164,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            0.6026785714285714
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.02519685262814164,
+            0.022946655750274658
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 9.715367981698364,
+        "encoder_ms": 309.42921701353043,
+        "verification_ms": 0.028606969863176346,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 329.15,
+      "frame_sha256": "a1d95bbf04f781c73eff2784a78ccbcf1bf82af19748105548d3805e4da68d67",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-49957072",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-marcoalmbauer-2016-06-24",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Bibliothek_im_Rijksmuseum_Amsterdam.jpg",
+      "license": "Public domain | None",
+      "http_status": 200,
+      "seconds": 0.1197857029910665,
+      "candidates": [
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.03881246596574783,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.01935664936900139,
+            0.03881246596574783
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.016848715487867594,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.016848715487867594,
+            0.0017438450595363975
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.0013097827322781086,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.0013097827322781086,
+            -0.020989084150642157
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 8.492301014484838,
+        "encoder_ms": 100.54957598913461,
+        "verification_ms": 0.007121998351067305,
+        "model_calls": 1,
+        "proposals": 0
+      },
+      "budget_exceeded": false,
+      "inference_ms": 116.21,
+      "frame_sha256": "7bf95b07deab28a908344ba396dbc272a66afc2a5d4e08a5a9da1d1616027c19",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-65829193",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-michaeldbeckwith-2018-01-24",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Rijks_Museum_Library.jpg",
+      "license": "CC0 | http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "http_status": 200,
+      "seconds": 0.3218299460131675,
+      "candidates": [
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.03068847395479679,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.00959095824509859,
+            0.03068847395479679
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.009294048883020878,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.009294048883020878,
+            -0.0064100653398782015
+          ]
+        },
+        {
+          "id": "6aa9a746dd73e04d96146161",
+          "score": 0.0,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 1,
+          "coverage_ready": false,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            -0.0409160740673542
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 3.405565017601475,
+        "encoder_ms": 307.279252941953,
+        "verification_ms": 0.02377698547206819,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 317.72,
+      "frame_sha256": "e8907827c4cf0ecc40161491993aa358122745fcb0121e8eb5b063127181666c",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-62136668",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-willvanwingerdenwillvanw-2016-05-26",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Rijksmuseum,_Amsterdam,_Netherlands_(Unsplash).jpg",
+      "license": "CC0 | http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "http_status": 200,
+      "seconds": 0.33006334101082757,
+      "candidates": [
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.07964321225881577,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.06572103500366211,
+            0.07964321225881577
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.06709297001361847,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.06709297001361847,
+            0.04121981468051672
+          ]
+        },
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.05038196220993996,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.021550077944993973,
+            0.05038196220993996
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 7.360185001743957,
+        "encoder_ms": 309.8036029841751,
+        "verification_ms": 0.030638999305665493,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 327.35,
+      "frame_sha256": "4514c5f805c19e2f04258d308ca5dff80c5a61b46396c0ca6fa937dbb65d88fc",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-147412835",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-froukjewattel-2024-04-10",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Rijksmuseum_Amsterdam_Library.png",
+      "license": "CC0 | http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "http_status": 200,
+      "seconds": 0.33687351501430385,
+      "candidates": [
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.04085291549563408,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.7366071428571429,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            -0.001523556187748909,
+            0.04085291549563408
+          ]
+        },
+        {
+          "id": "6aa9a746dd73e04d96146161",
+          "score": 0.030779417138546705,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 1,
+          "coverage_ready": false,
+          "bbox": [
+            0.0,
+            0.7366071428571429,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.030779417138546705
+          ]
+        },
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.024043568409979343,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.7366071428571429,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.006731681525707245,
+            0.024043568409979343
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 8.025182003621012,
+        "encoder_ms": 314.72514395136386,
+        "verification_ms": 0.026204012101516128,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 334.11,
+      "frame_sha256": "0ae3d1505fee1ce7c5bb1a9c1e19d497c766a85117860a19d813a5b3d5816011",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-129666295",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-jedesto-2022-08-13",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Rijksmuseum_Research_Library_Pano_01.jpg",
+      "license": "CC BY-SA 4.0 | https://creativecommons.org/licenses/by-sa/4.0",
+      "http_status": 200,
+      "seconds": 0.3350885289837606,
+      "candidates": [
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.032419655472040176,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            0.6785714285714286
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.015040203928947449,
+            0.032419655472040176
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.02217826247215271,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            0.6785714285714286
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.02217826247215271,
+            0.008416848722845316
+          ]
+        },
+        {
+          "id": "6aab0df6dd73e04d96150a1c",
+          "score": 0.0033291326835751534,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            0.6785714285714286
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.0033291326835751534,
+            -0.015436134301126003
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 8.950697985710576,
+        "encoder_ms": 310.2849860151764,
+        "verification_ms": 0.02494300133548677,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 331.52,
+      "frame_sha256": "5c02db498f571cf3a9b2bb55c6231165a519e0d333f978c089b4eb116ec4bd1b",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    },
+    {
+      "photo_id": "commons-84250334",
+      "expected_object_id": null,
+      "expected_profile": null,
+      "object_type": "building",
+      "category": "uninformative",
+      "split": "evaluation",
+      "capture_group": "photographer-ciell-2019-11-21",
+      "independent": true,
+      "source_page": "https://commons.wikimedia.org/wiki/File:Techstorm_at_the_Rijksmuseum_2.jpg",
+      "license": "CC BY-SA 4.0 | https://creativecommons.org/licenses/by-sa/4.0",
+      "http_status": 200,
+      "seconds": 0.33361591800348833,
+      "candidates": [
+        {
+          "id": "6aab0df3dd73e04d96150a1a",
+          "score": 0.051279082894325256,
+          "profile": "multiview",
+          "view_index": 1,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.026631318032741547,
+            0.051279082894325256
+          ]
+        },
+        {
+          "id": "6aab0df8dd73e04d96150a1e",
+          "score": 0.02376422705128789,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.3169642857142857,
+            0.25,
+            0.7589285714285714,
+            0.4955357142857143
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.02376422705128789,
+            -0.024440744193270802
+          ]
+        },
+        {
+          "id": "6aab0df5dd73e04d96150a1b",
+          "score": 0.021987207233905792,
+          "profile": "multiview",
+          "view_index": 0,
+          "reference_views": 2,
+          "coverage_ready": true,
+          "bbox": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "verification": "multiview_embeddings",
+          "view_scores": [
+            0.021987207233905792,
+            0.002381844911724329
+          ]
+        }
+      ],
+      "suggestion": null,
+      "top1_correct": false,
+      "top3_correct": false,
+      "warnings": [
+        "ADAPTIVE_PIPELINE_EXPERIMENTAL",
+        "CAMERA_CALIBRATION_REQUIRED"
+      ],
+      "timings": {
+        "proposal_ms": 3.6240759945940226,
+        "encoder_ms": 319.2724089603871,
+        "verification_ms": 0.021731044398620725,
+        "model_calls": 3,
+        "proposals": 2
+      },
+      "budget_exceeded": false,
+      "inference_ms": 330.21,
+      "frame_sha256": "161cd8ee7decf49a0a7c7a61ebda52c8633095573463056d10a7b628bc2b4967",
+      "reference_version": "2f740c1ae5a5bf527abaf971c7445837255dec21b7603ec3542692b8b21c1020"
+    }
+  ],
+  "integrity_gates": {
+    "references_unchanged": true,
+    "code_unchanged": true,
+    "manifest_unchanged": true,
+    "photos_unchanged": true,
+    "all_requests_valid": true
+  },
+  "by_type": {
+    "building": {
+      "attempts": 20,
+      "service_failures": 0,
+      "top1": {
+        "correct": 0,
+        "total": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "top3": {
+        "correct": 0,
+        "total": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "suggestion_precision": {
+        "correct": 0,
+        "total": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "correct_suggestion_coverage": {
+        "correct": 0,
+        "total": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "negative_false_suggestions": 0,
+      "negative_count": 20,
+      "p95_request_seconds": 0.3413552459969651,
+      "budget_exceeded": 0,
+      "max_model_calls": 3,
+      "abstentions": 20
+    },
+    "sculpture": {
+      "attempts": 12,
+      "service_failures": 0,
+      "top1": {
+        "correct": 9,
+        "total": 12,
+        "rate": 0.75,
+        "wilson95": [
+          0.4676946650664343,
+          0.9110583316059452
+        ]
+      },
+      "top3": {
+        "correct": 11,
+        "total": 12,
+        "rate": 0.9166666666666666,
+        "wilson95": [
+          0.646120088858883,
+          0.9851349055950829
+        ]
+      },
+      "suggestion_precision": {
+        "correct": 0,
+        "total": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "correct_suggestion_coverage": {
+        "correct": 0,
+        "total": 12,
+        "rate": 0.0,
+        "wilson95": [
+          2.7755575615628914e-17,
+          0.24249400665524085
+        ]
+      },
+      "negative_false_suggestions": 0,
+      "negative_count": 0,
+      "p95_request_seconds": 0.44385992901516147,
+      "budget_exceeded": 0,
+      "max_model_calls": 3,
+      "abstentions": 12
+    }
+  },
+  "by_object": {
+    "6aa9a746dd73e04d96146161": {
+      "attempts": 4,
+      "service_failures": 0,
+      "top1": {
+        "correct": 3,
+        "total": 4,
+        "rate": 0.75,
+        "wilson95": [
+          0.30064184258240184,
+          0.9544127391902995
+        ]
+      },
+      "top3": {
+        "correct": 3,
+        "total": 4,
+        "rate": 0.75,
+        "wilson95": [
+          0.30064184258240184,
+          0.9544127391902995
+        ]
+      },
+      "suggestion_precision": {
+        "correct": 0,
+        "total": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "correct_suggestion_coverage": {
+        "correct": 0,
+        "total": 4,
+        "rate": 0.0,
+        "wilson95": [
+          0.0,
+          0.4898908364545973
+        ]
+      },
+      "negative_false_suggestions": 0,
+      "negative_count": 0,
+      "p95_request_seconds": 0.44385992901516147,
+      "budget_exceeded": 0,
+      "max_model_calls": 3,
+      "abstentions": 4
+    },
+    "6aab0df3dd73e04d96150a1a": {
+      "attempts": 2,
+      "service_failures": 0,
+      "top1": {
+        "correct": 2,
+        "total": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750665303,
+          1.0
+        ]
+      },
+      "top3": {
+        "correct": 2,
+        "total": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750665303,
+          1.0
+        ]
+      },
+      "suggestion_precision": {
+        "correct": 0,
+        "total": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "correct_suggestion_coverage": {
+        "correct": 0,
+        "total": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0.0,
+          0.6576197724933469
+        ]
+      },
+      "negative_false_suggestions": 0,
+      "negative_count": 0,
+      "p95_request_seconds": 0.2276876019896008,
+      "budget_exceeded": 0,
+      "max_model_calls": 2,
+      "abstentions": 2
+    },
+    "6aab0df5dd73e04d96150a1b": {
+      "attempts": 2,
+      "service_failures": 0,
+      "top1": {
+        "correct": 1,
+        "total": 2,
+        "rate": 0.5,
+        "wilson95": [
+          0.09453120573423074,
+          0.9054687942657693
+        ]
+      },
+      "top3": {
+        "correct": 2,
+        "total": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750665303,
+          1.0
+        ]
+      },
+      "suggestion_precision": {
+        "correct": 0,
+        "total": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "correct_suggestion_coverage": {
+        "correct": 0,
+        "total": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0.0,
+          0.6576197724933469
+        ]
+      },
+      "negative_false_suggestions": 0,
+      "negative_count": 0,
+      "p95_request_seconds": 0.35190838601556607,
+      "budget_exceeded": 0,
+      "max_model_calls": 3,
+      "abstentions": 2
+    },
+    "6aab0df6dd73e04d96150a1c": {
+      "attempts": 2,
+      "service_failures": 0,
+      "top1": {
+        "correct": 1,
+        "total": 2,
+        "rate": 0.5,
+        "wilson95": [
+          0.09453120573423074,
+          0.9054687942657693
+        ]
+      },
+      "top3": {
+        "correct": 2,
+        "total": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750665303,
+          1.0
+        ]
+      },
+      "suggestion_precision": {
+        "correct": 0,
+        "total": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "correct_suggestion_coverage": {
+        "correct": 0,
+        "total": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0.0,
+          0.6576197724933469
+        ]
+      },
+      "negative_false_suggestions": 0,
+      "negative_count": 0,
+      "p95_request_seconds": 0.3435200800013263,
+      "budget_exceeded": 0,
+      "max_model_calls": 3,
+      "abstentions": 2
+    },
+    "6aab0df8dd73e04d96150a1e": {
+      "attempts": 2,
+      "service_failures": 0,
+      "top1": {
+        "correct": 2,
+        "total": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750665303,
+          1.0
+        ]
+      },
+      "top3": {
+        "correct": 2,
+        "total": 2,
+        "rate": 1.0,
+        "wilson95": [
+          0.34238022750665303,
+          1.0
+        ]
+      },
+      "suggestion_precision": {
+        "correct": 0,
+        "total": 0,
+        "rate": null,
+        "wilson95": null
+      },
+      "correct_suggestion_coverage": {
+        "correct": 0,
+        "total": 2,
+        "rate": 0.0,
+        "wilson95": [
+          0.0,
+          0.6576197724933469
+        ]
+      },
+      "negative_false_suggestions": 0,
+      "negative_count": 0,
+      "p95_request_seconds": 0.21543638699222356,
+      "budget_exceeded": 0,
+      "max_model_calls": 2,
+      "abstentions": 2
+    }
+  },
+  "suggestions_are_static_simulations": true,
+  "tracking_measured": false,
+  "physical_phone_measured": false,
+  "automatic_identification": false,
+  "release_gates": {
+    "new_reviewed_holdout": false,
+    "representative_types": false,
+    "twenty_positive_identities": false,
+    "full_view_top3_90_percent": false,
+    "partial_view_top3_80_percent": false,
+    "reference_view_coverage": false,
+    "suggestion_precision_98_percent": false,
+    "correct_suggestion_coverage_50_percent": false,
+    "zero_unknown_false_suggestions": false,
+    "warm_request_p95_two_seconds": true,
+    "bounded_model_calls": true,
+    "physical_phone_and_tracking": false
+  },
+  "release_ready": false
+}

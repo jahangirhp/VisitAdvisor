@@ -20,12 +20,15 @@ def proposals(image: Image.Image, maximum: int = 2) -> list[tuple[float, ...]]:
     import cv2
     import numpy as np
 
-    if not 0 <= maximum <= 2 or image.size != (224, 224):
+    if not 0 <= maximum <= 2 or image.size not in {(224, 224), (512, 512)}:
         raise ValueError("Invalid proposal bounds")
     if not maximum:
         return []
     cv2.setNumThreads(1)
-    rgb = np.asarray(image.convert("RGB"))
+    # Proposals use a fixed cheap working size; boxes remain normalized so the
+    # crop can preserve the detail of the actual 512-pixel camera frame.
+    working = image.convert("RGB").resize((224, 224), Image.Resampling.BILINEAR)
+    rgb = np.asarray(working)
     gray = cv2.cvtColor(rgb, cv2.COLOR_RGB2GRAY)
     gray = cv2.GaussianBlur(gray, (3, 3), 0)
     edges = cv2.Canny(gray, 40, 120)
@@ -77,5 +80,7 @@ def proposals(image: Image.Image, maximum: int = 2) -> list[tuple[float, ...]]:
 
 
 def crop(image: Image.Image, box: tuple[float, ...]) -> Image.Image:
-    pixels: Any = tuple(round(value * 224) for value in box)
-    return image.crop(pixels).resize((224, 224), Image.Resampling.BICUBIC)
+    pixels: Any = tuple(
+        round(value * image.size[index % 2]) for index, value in enumerate(box)
+    )
+    return image.crop(pixels).resize(image.size, Image.Resampling.BICUBIC)

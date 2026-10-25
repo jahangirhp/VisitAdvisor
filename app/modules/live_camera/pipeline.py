@@ -31,13 +31,21 @@ def view_coverage(obj: dict[str, Any]) -> dict[str, Any]:
         if view.get("viewpoint")
     }
     kind = profile(obj.get("type", "other"))
+    labelled_views = [
+        (view.get("image_hash"), (view.get("viewpoint") or "").strip().lower())
+        for view in views
+        if view.get("image_hash") and (view.get("viewpoint") or "").strip()
+    ]
+    distinct_labelled_views = any(
+        image_a != image_b and label_a != label_b
+        for image_a, label_a in labelled_views
+        for image_b, label_b in labelled_views
+    )
     return {
         "profile": kind,
         "distinct_images": len(hashes),
         "distinct_viewpoints": len(labels),
-        "ready": bool(hashes)
-        if kind == "planar"
-        else len(hashes) >= 2 and len(labels) >= 2,
+        "ready": bool(hashes) if kind == "planar" else distinct_labelled_views,
     }
 
 

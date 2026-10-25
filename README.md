@@ -6,6 +6,10 @@ The [real-time recognition guide](docs/21-realtime-recognition-pipeline.md) cove
 the experimental type-aware camera pipeline, model readiness, bounded inference,
 preview calibration and measured limitations.
 
+The [internet-only 3D pilot](docs/23-3d-object-pilot.md) adds a sculpture photo lab
+and visual evaluation report. It remains a candidate preview: measured 3D
+reliability fails acceptance, and its fitted suggestion policy is not enabled.
+
 The camera server now reads references from **MongoDB Atlas**, with process-local
 reuse and periodic freshness checks. See [configuration and deployment](docs/18-atlas-camera-references.md).
 The packaged-catalog instructions below describe the historical trial.

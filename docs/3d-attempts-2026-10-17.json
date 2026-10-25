@@ -1,0 +1,34 @@
+{
+  "reference_preparation_attempts": [
+    {
+      "object": "Shiva",
+      "attempt": 1,
+      "result": "NetworkTimeout before reference publication"
+    },
+    {
+      "object": "Shiva",
+      "attempt": 2,
+      "result": "Published three reviewed views with bounded preparation timeout"
+    }
+  ],
+  "region_replay_attempts": [
+    {
+      "attempt": 1,
+      "result": "Setup failed"
+    },
+    {
+      "attempt": 2,
+      "result": "Setup failed"
+    },
+    {
+      "attempt": 3,
+      "result": "Diagnostic exposed AttributeError from a null viewpoint introduced during this work; fixed and regression-tested."
+    },
+    {
+      "attempt": 4,
+      "result": "32/32 HTTP 200; report in 3d-region-results-2026-10-17.json"
+    }
+  ],
+  "evaluation_result": "34/34 HTTP 200; validation failed; fitted policy not enabled in the preview.",
+  "source_acquisition": "95 Commons candidates downloaded and visually reviewed; three Flickr photos downloaded and visually reviewed. Candidate count is not accepted-photo count. Source/HTTP lookup failures and rejected or ambiguous photos remain outside the frozen dataset."
+}
