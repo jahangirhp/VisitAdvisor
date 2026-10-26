@@ -1,5 +1,9 @@
 # VisitAdvisor
 
+The [persistent camera result update](docs/25-persistent-object-results.md) keeps
+last-seen information visible during movement and reacquisition. Physical-phone
+acceptance remains pending.
+
 The [camera content integration](docs/24-camera-prepared-content.md) connects
 tentative camera results to source-cited prepared visitor content. Real-content,
 staging and physical-phone validation remain pending.

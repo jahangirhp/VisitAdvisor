@@ -29,13 +29,20 @@ function status(message) { $('status').textContent = message; }
 function clearResult() {
   clearExperience();
   displayed = null;
+  delete $('result').dataset.state;
   $('result').hidden = true;
   $('object-name').textContent = '';
   $('object-description').textContent = '';
   $('object-meta').textContent = '';
   $('sources').replaceChildren();
 }
-function resetTracking() { stability?.reset(); previous = null; clearResult(); }
+function resultState(state) {
+  if ($('result').dataset.state === state) return;
+  $('result').dataset.state = state;
+  $('result-kind').textContent = state === 'live' ? 'POSSIBLE MATCH · PLEASE VERIFY' : 'LAST SEEN · CAMERA RECHECKING';
+}
+function lastSeen() { if (displayed) resultState('last-seen'); }
+function resetTracking() { stability?.reset(); previous = null; lastSeen(); }
 // After acquisition, tolerate hand jitter while fresh recognition verifies identity.
 function motionLimit() { return stability?.confirmed ? 0.22 : 0.09; }
 
@@ -52,6 +59,7 @@ function stop(message = 'Camera stopped.') {
   pending = null;
   context.clearRect(0, 0, canvas.width, canvas.height);
   resetTracking();
+  clearResult();
   $('placeholder').hidden = false;
   $('live-label').hidden = true;
   $('stop').hidden = true;
@@ -69,11 +77,11 @@ function frame() {
 }
 
 function showCandidate(id) {
-  if (displayed === id) return;
   const object = catalog.objects.find(item => item.id === id);
   if (!object) return;
+  resultState('live');
+  if (displayed === id) return;
   displayed = id;
-  $('result-kind').textContent = 'POSSIBLE MATCH · PLEASE VERIFY';
   $('object-name').textContent = object.name;
   $('object-meta').textContent = [object.creator, object.year, object.type].filter(Boolean).join(' · ');
   $('object-description').textContent = object.description || 'No description is available in this reference snapshot.';
@@ -125,7 +133,7 @@ async function nextFrame(run) {
     if (run !== generation || !running) return;
     if (!response.ok) {
       const error = await response.json().catch(() => ({}));
-      if (response.status === 409 || error.error === 'REFERENCES_EXPIRED') {
+      if (response.status === 409 || ['REFERENCES_EXPIRED', 'REFERENCES_UNAVAILABLE'].includes(error.error)) {
         await loadCatalog($('location').value);
         return;
       }
@@ -166,10 +174,11 @@ function handleResult(data, run) {
   const candidates = data.suggestion_allowed === false ? [] : data.candidates;
   const id = stability.observe(candidates, lastResult, moved || stalled || duration > 3000);
   if (id) {
-    showCandidate(id);
+    if (stability.holding) lastSeen();
+    else showCandidate(id);
     status(stability.holding ? 'Rechecking the previous possible match… hold steady.' : 'Possible match. Check the name against the object you are looking at.');
   } else {
-    clearResult();
+    lastSeen();
     const found = stability.count > 0;
     const guidance = data.warnings?.includes('CAMERA_CALIBRATION_REQUIRED') ? 'Camera matching is not ready yet.' :
       data.warnings?.includes('REFERENCE_VIEW_COVERAGE_INCOMPLETE') ? 'This view is not supported reliably yet. Try another supported object.' :
@@ -255,8 +264,17 @@ window.addEventListener('pagehide', () => stop());
 for (const event of ['waiting', 'stalled', 'emptied']) video.addEventListener(event, resetTracking);
 setInterval(() => {
   if (!running || !displayed) return;
+  if (Date.now() >= Date.parse(catalog.expires_at)) {
+    loadCatalog($('location').value);
+    return;
+  }
   const rgba = frame();
-  if (!rgba || motion(previous, signature(rgba, canvas.width)) > motionLimit() || !stability.current(performance.now())) resetTracking();
+  if (!rgba || motion(previous, signature(rgba, canvas.width)) > motionLimit()) resetTracking();
+  else if (!stability.current(performance.now())) {
+    // Retaining a reading card must not reset an acquisition in progress.
+    if (stability.confirmed) resetTracking();
+    else lastSeen();
+  }
 }, 200);
 
 async function loadCatalog(key) {

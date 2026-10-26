@@ -1,5 +1,8 @@
 # Camera-to-prepared-content integration — ticket #15
 
+The follow-up in [persistent results](25-persistent-object-results.md) supersedes
+transient tracking-loss clearing and same-object reacquisition refetching below.
+
 Development date: 2026-10-26. Branch: `MVP-15-camera-prepared-content`,
 based on `MVP-8-mobile-visitor-ui` at `63d5cec`.
 

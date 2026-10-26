@@ -38,6 +38,7 @@ async function fakeCamera(page, { denied = false, delayed = false } = {}) {
   await page.route('**/recognize?*', async route => {
     const candidates = await page.evaluate(() => {
       window.frameMessages++;
+      if (window.testSequence?.length) return window.testSequence.shift();
       return window.testCandidates ?? (window.testCandidate ? [{ id: window.testCandidate, score: 0.9 }] : []);
     });
     await route.fulfill({ json: {
@@ -62,7 +63,8 @@ test('live loop posts bounded crops, switches candidates and stops uploads', asy
   await page.evaluate(id => { window.testCandidate = id; }, ids[1]);
   await expect(page.locator('#object-name')).toHaveText('Painting 2');
   await page.evaluate(() => { window.testCandidate = null; });
-  await expect(page.locator('#result')).toBeHidden();
+  await expect(page.locator('#result-kind')).toHaveText('LAST SEEN · CAMERA RECHECKING');
+  await expect(page.locator('#object-name')).toHaveText('Painting 2');
   await expect(page.locator('#status')).toContainText('No supported match yet');
   await page.locator('#stop').click();
   expect(await page.evaluate(() => window.tracksStopped)).toBe(1);
@@ -79,7 +81,7 @@ test('live loop posts bounded crops, switches candidates and stops uploads', asy
   expect(await page.evaluate(() => window.tracksStopped)).toBe(2);
 });
 
-test('small movement keeps a match but large scene changes clear it', async ({ page }) => {
+test('movement preserves the reading card and marks lost tracking last-seen', async ({ page }) => {
   await fakeCamera(page);
   await page.goto('/');
   await page.locator('#start').click();
@@ -98,7 +100,9 @@ test('small movement keeps a match but large scene changes clear it', async ({ p
   await expect(page.locator('#status')).toContainText('Possible match. Check');
   expect(await page.evaluate(() => window.resultWasCleared)).toBe(false);
   await page.evaluate(() => { window.frameColor = '#ffffff'; window.testCandidate = null; });
-  await expect(page.locator('#result')).toBeHidden();
+  await expect(page.locator('#result-kind')).toHaveText('LAST SEEN · CAMERA RECHECKING');
+  await expect(page.locator('#object-name')).toHaveText('Painting 1');
+  expect(await page.evaluate(() => window.resultWasCleared)).toBe(false);
   await page.locator('#stop').click();
 });
 
@@ -266,7 +270,9 @@ test('zero-score ordering does not flicker a verified second painting', async ({
   await expect(page.locator('#status')).toContainText('Possible match. Check');
   expect(await page.evaluate(() => window.resultWasCleared)).toBe(false);
   await page.evaluate(ids => { window.testCandidates = ids.map(id => ({ id, score: 0 })); }, ids);
-  await expect(page.locator('#result')).toBeHidden({ timeout: 2500 });
+  await expect(page.locator('#result-kind')).toHaveText('LAST SEEN · CAMERA RECHECKING');
+  await page.waitForTimeout(1700);
+  await expect(page.locator('#object-name')).toHaveText('Painting 2');
   await page.locator('#stop').click();
 });
 
@@ -303,9 +309,9 @@ function preparedResponse(object, selectedCatalog = catalog) {
   };
 }
 
-async function contentCamera(page, count = 2) {
+async function contentCamera(page, count = 2, overrides = {}) {
   await fakeCamera(page);
-  const fixture = { ...catalog, objects: Array.from({ length: count }, (_, index) => ({
+  const fixture = { ...catalog, ...overrides, objects: Array.from({ length: count }, (_, index) => ({
     id: (index + 1).toString(16).padStart(24, '0'), location_id: location,
     name: `Exhibit ${index + 1}`, sources: [{ id: 'source', title: 'Museum record', url: 'https://example.com/evidence' }],
   })) };
@@ -427,4 +433,190 @@ test('sparse prepared content shows missing sections and treats text as text', a
   await expect(page.locator('#experience img')).toHaveCount(0);
   await expect(page.locator('.content-missing')).toHaveCount(4);
   await page.locator('#stop').click();
+});
+
+test('30 seconds of jitter and lost views retain content without refetching', async ({ page }) => {
+  test.setTimeout(45000);
+  let contentReads = 0;
+  page.on('request', request => { if (request.url().includes('/experience?')) contentReads++; });
+  const fixture = await contentCamera(page);
+  await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+  await page.evaluate(() => {
+    window.cardHidden = false;
+    window.originalContent = document.querySelector('#experience h3');
+    new MutationObserver(() => {
+      if (document.getElementById('result').hidden) window.cardHidden = true;
+    }).observe(document.getElementById('result'), { attributes: true });
+    window.testCandidate = null;
+    let bright = false;
+    window.jitter = setInterval(() => {
+      bright = !bright;
+      window.frameColor = bright ? '#708090' : '#506070';
+    }, 170);
+  });
+  await page.waitForTimeout(30000);
+  await expect(page.locator('#result-kind')).toHaveText('LAST SEEN · CAMERA RECHECKING');
+  await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+  expect(await page.evaluate(() => window.cardHidden)).toBe(false);
+  expect(contentReads).toBe(1);
+  await page.evaluate(id => {
+    clearInterval(window.jitter);
+    window.testCandidate = id;
+  }, fixture.objects[0].id);
+  await expect(page.locator('#result')).toHaveAttribute('data-state', 'live');
+  expect(await page.evaluate(() => window.originalContent === document.querySelector('#experience h3'))).toBe(true);
+  expect(contentReads).toBe(1);
+  await page.locator('#stop').click();
+  await expect(page.locator('#result')).toBeHidden();
+});
+
+test('one competing frame and tied objects cannot replace a retained card', async ({ page }) => {
+  const fixture = await contentCamera(page);
+  await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+  const before = await page.evaluate(() => window.frameMessages);
+  await page.evaluate(ids => {
+    window.testCandidate = null;
+    window.testSequence = [
+      [{ id: ids[1], score: 0.9 }],
+      [{ id: ids[0], score: 0.60 }, { id: ids[1], score: 0.59 }],
+      [{ id: ids[1], score: 0 }, { id: ids[0], score: 0 }],
+    ];
+  }, fixture.objects.map(object => object.id));
+  await expect.poll(() => page.evaluate(() => window.frameMessages)).toBeGreaterThanOrEqual(before + 5);
+  await expect(page.locator('#object-name')).toHaveText('Exhibit 1');
+  await expect(page.locator('#result')).toHaveAttribute('data-state', 'last-seen');
+  await page.evaluate(id => { window.testCandidate = id; }, fixture.objects[1].id);
+  await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 2');
+  await expect(page.locator('#result')).toHaveAttribute('data-state', 'live');
+  await page.locator('#stop').click();
+});
+
+for (const event of ['waiting', 'stalled', 'emptied']) {
+  test(`${event} retains the card and allows fresh acquisition`, async ({ page }) => {
+    const fixture = await contentCamera(page);
+    await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+    await page.evaluate(event => {
+      window.testCandidate = null;
+      document.getElementById('camera').dispatchEvent(new Event(event));
+    }, event);
+    await expect(page.locator('#result')).toHaveAttribute('data-state', 'last-seen');
+    await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+    await page.evaluate(id => { window.testCandidate = id; }, fixture.objects[1].id);
+    await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 2');
+    await page.locator('#stop').click();
+  });
+}
+
+for (const status of [429, 503]) {
+  test(`transient ${status} keeps last-seen content and recovery does not refetch`, async ({ page }) => {
+    let contentReads = 0;
+    page.on('request', request => { if (request.url().includes('/experience?')) contentReads++; });
+    const fixture = await contentCamera(page);
+    await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+    let fail = true;
+    await page.route('**/recognize?*', route => fail ? route.fulfill({ status, json: { error: 'RECOGNITION_BUSY' } }) : route.fulfill({ json: {
+      version: 'camera-server-v1', location_id: location, reference_version: catalog.reference_version,
+      automatic_identification: false, candidates: [{ id: fixture.objects[0].id, score: 0.9 }],
+    } }));
+    await expect(page.locator('#status')).toContainText('Retrying');
+    await expect(page.locator('#result')).toHaveAttribute('data-state', 'last-seen');
+    await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+    fail = false;
+    await expect(page.locator('#result')).toHaveAttribute('data-state', 'live');
+    expect(contentReads).toBe(1);
+    await page.locator('#stop').click();
+  });
+}
+
+test('persistent transport failures end the session and clear retained content', async ({ page }) => {
+  await contentCamera(page);
+  await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+  await page.route('**/recognize?*', route => route.fulfill({ status: 503, json: { error: 'RECOGNITION_BUSY' } }));
+  await expect(page.locator('#result')).toHaveAttribute('data-state', 'last-seen');
+  await expect(page.locator('#start')).toBeVisible({ timeout: 8000 });
+  await expect(page.locator('#result')).toBeHidden();
+  await expect(page.locator('#experience')).toBeHidden();
+});
+
+test('reference invalidation clears retained content and disables scanning', async ({ page }) => {
+  await contentCamera(page);
+  await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+  await page.route('**/bundle/catalog.json', route => route.fulfill({ status: 503, json: { error: 'REFERENCES_UNAVAILABLE' } }));
+  await page.route('**/recognize?*', route => route.fulfill({ status: 503, json: { error: 'REFERENCES_UNAVAILABLE' } }));
+  await expect(page.locator('#result')).toBeHidden();
+  await expect(page.locator('#start')).toBeDisabled();
+});
+
+test('expired references clear a last-seen card even when no useful frame arrives', async ({ page }) => {
+  await contentCamera(page, 2, { expires_at: new Date(Date.now() + 6000).toISOString() });
+  await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+  await page.evaluate(() => {
+    window.testCandidate = null;
+    Object.defineProperty(document.getElementById('camera'), 'videoWidth', { get: () => 0 });
+  });
+  await expect(page.locator('#result')).toHaveAttribute('data-state', 'last-seen');
+  await expect(page.locator('#result')).toBeHidden({ timeout: 8000 });
+  await expect(page.locator('#start')).toBeDisabled();
+});
+
+test('content can finish loading during tracking loss without changing last-seen state', async ({ page }) => {
+  const fixture = await contentCamera(page);
+  let release;
+  const held = new Promise(resolve => { release = resolve; });
+  let entered = false;
+  await page.route('**/objects/*/experience?*', async route => {
+    entered = true;
+    await held;
+    await route.fulfill({ json: preparedResponse(fixture.objects[0], fixture) }).catch(() => {});
+  });
+  await expect.poll(() => entered).toBe(true);
+  await page.evaluate(() => {
+    window.testCandidate = null;
+    document.getElementById('camera').dispatchEvent(new Event('waiting'));
+  });
+  await expect(page.locator('#result')).toHaveAttribute('data-state', 'last-seen');
+  release();
+  await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+  await expect(page.locator('#result')).toHaveAttribute('data-state', 'last-seen');
+  await page.locator('#stop').click();
+});
+
+for (const candidates of [
+  [{ id: ids[0], score: 0.60 }, { id: ids[1], score: 0.59 }],
+  [{ id: ids[0], score: 0.50 }],
+]) {
+  test(`initial uncertain scores ${candidates.map(c => c.score).join('/')} cannot create a card`, async ({ page }) => {
+    await fakeCamera(page);
+    await page.addInitScript(candidates => { window.testCandidates = candidates; }, candidates);
+    await page.goto('/');
+    await page.locator('#start').click();
+    await expect.poll(() => page.evaluate(() => window.frameMessages)).toBeGreaterThanOrEqual(4);
+    await expect(page.locator('#result')).toBeHidden();
+    await page.locator('#stop').click();
+  });
+}
+
+test('wrong-location candidate IDs cannot create a result and retained controls work by keyboard', async ({ page }) => {
+  await fakeCamera(page);
+  await page.addInitScript(() => { window.testCandidates = [{ id: 'f'.repeat(24), score: 0.99 }]; });
+  await page.goto('/');
+  const preview = page.getByRole('button', { name: 'Expand camera preview' });
+  await preview.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('button', { name: 'Shrink camera preview' })).toBeFocused();
+  await page.keyboard.press('Space');
+  await expect(preview).toBeFocused();
+  const menu = page.getByLabel('Location and settings');
+  await menu.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#location')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(menu).toBeFocused();
+  await page.locator('#start').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#status')).toContainText('Retrying');
+  await expect(page.locator('#result')).toBeHidden();
+  await page.locator('#stop').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#start')).toBeVisible();
 });
