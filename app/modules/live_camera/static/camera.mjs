@@ -1,5 +1,6 @@
 import { motion, signature, Stability, validateCatalog, validBox } from './recognition.mjs';
 import { drawFrame, encodeFrame } from './capture.mjs';
+import { clearExperience, showExperience } from './experience.mjs';
 
 const $ = id => document.getElementById(id);
 const video = $('camera');
@@ -26,6 +27,7 @@ const catalogs = {
 
 function status(message) { $('status').textContent = message; }
 function clearResult() {
+  clearExperience();
   displayed = null;
   $('result').hidden = true;
   $('object-name').textContent = '';
@@ -89,6 +91,7 @@ function showCandidate(id) {
     } catch { /* A source without a public URL remains in the reference bundle. */ }
   }
   $('result').hidden = false;
+  showExperience(object, catalog);
 }
 
 async function nextFrame(run) {

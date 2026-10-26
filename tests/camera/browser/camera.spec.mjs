@@ -292,3 +292,139 @@ test('changed references reload metadata and require a new camera start', async 
   expect(await page.evaluate(() => window.tracksStopped)).toBe(1);
   expect(await page.evaluate(() => window.cameraRequests)).toBe(1);
 });
+
+function preparedResponse(object, selectedCatalog = catalog) {
+  const text = value => ({ text: value, citations: [{ source_id: 'source', quote: 'Canonical evidence' }] });
+  return {
+    object_id: object.id, location_id: selectedCatalog.location.id,
+    reference_version: selectedCatalog.reference_version, source_ids: ['source'], review_status: 'unreviewed',
+    content: { introduction: text(`Introduction for ${object.name}`), facts: [text(`Fact for ${object.name}`)],
+      story: text(`Story for ${object.name}`), history: text(`History for ${object.name}`), interesting_fact: null },
+  };
+}
+
+async function contentCamera(page, count = 2) {
+  await fakeCamera(page);
+  const fixture = { ...catalog, objects: Array.from({ length: count }, (_, index) => ({
+    id: (index + 1).toString(16).padStart(24, '0'), location_id: location,
+    name: `Exhibit ${index + 1}`, sources: [{ id: 'source', title: 'Museum record', url: 'https://example.com/evidence' }],
+  })) };
+  await page.route('**/bundle/catalog.json', route => route.fulfill({ json: fixture }));
+  await page.route('**/objects/*/experience?*', route => {
+    const id = new URL(route.request().url()).pathname.split('/').at(-2);
+    const object = fixture.objects.find(object => object.id === id);
+    return route.fulfill({ json: preparedResponse(object, fixture) });
+  });
+  await page.goto('/');
+  await page.evaluate(id => { window.testCandidate = id; }, fixture.objects[0].id);
+  await page.locator('#start').click();
+  return fixture;
+}
+
+test('ten camera objects load their own prepared content and source citations at 320px', async ({ page }) => {
+  test.setTimeout(60000);
+  await page.setViewportSize({ width: 320, height: 740 });
+  const fixture = await contentCamera(page, 10);
+  for (const object of fixture.objects) {
+    await page.evaluate(id => { window.testCandidate = id; }, object.id);
+    await expect(page.locator('#object-name')).toHaveText(object.name);
+    for (const section of ['Introduction', 'Fact', 'Story', 'History']) {
+      await expect(page.locator('#experience')).toContainText(`${section} for ${object.name}`);
+    }
+    await expect(page.locator('#experience')).toContainText('Not yet fact-checked');
+    await expect(page.locator('#result-kind')).toHaveText('POSSIBLE MATCH · PLEASE VERIFY');
+    await expect(page.locator('#experience')).toContainText('Not available for this object.');
+  }
+  await page.locator('#experience summary').first().click();
+  await expect(page.locator('#experience blockquote').first()).toHaveText('Canonical evidence');
+  await expect(page.locator('#experience a').first()).toHaveAttribute('href', 'https://example.com/evidence');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.screenshot({ path: test.info().outputPath('prepared-content-320.png'), fullPage: true });
+  await page.locator('#stop').click();
+  await expect(page.locator('#experience')).toBeHidden();
+});
+
+for (const [error, status, expected] of [
+  ['CONTENT_NOT_PREPARED', 404, 'has not been prepared'],
+  ['CONTENT_OUTDATED', 409, 'needs a source update'],
+  ['CONTENT_UNAVAILABLE', 503, 'is unavailable'],
+]) {
+  test(`${error} has an honest fallback without breaking scanning`, async ({ page }) => {
+    const fixture = await contentCamera(page);
+    await page.route('**/objects/*/experience?*', route => route.fulfill({ status, json: { error } }));
+    await expect(page.locator('#experience')).toContainText(expected);
+    await expect(page.locator('#object-name')).toHaveText(fixture.objects[0].name);
+    await expect(page.locator('#stop')).toBeVisible();
+    await page.locator('#stop').click();
+  });
+}
+
+for (const action of ['switch', 'stop', 'background', 'location']) {
+  test(`late content cannot return after ${action}`, async ({ page }) => {
+    const fixture = await contentCamera(page);
+    let release;
+    const held = new Promise(resolve => { release = resolve; });
+    let entered = false;
+    await page.route('**/objects/*/experience?*', async route => {
+      const object = fixture.objects[0];
+      if (route.request().url().includes(object.id)) {
+        entered = true;
+        await held;
+        await route.fulfill({ json: preparedResponse(object, fixture) }).catch(() => {});
+      } else {
+        await route.fulfill({ json: preparedResponse(fixture.objects[1], fixture) });
+      }
+    });
+    await expect.poll(() => entered).toBe(true);
+    if (action === 'switch') {
+      await page.evaluate(id => { window.testCandidate = id; }, fixture.objects[1].id);
+      await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 2');
+    } else if (action === 'stop') {
+      await page.locator('#stop').click();
+    } else if (action === 'background') {
+      await page.evaluate(() => {
+        Object.defineProperty(document, 'hidden', { configurable: true, get: () => true });
+        document.dispatchEvent(new Event('visibilitychange'));
+      });
+    } else {
+      await page.locator('#menu summary').first().click();
+      await page.locator('#location').dispatchEvent('change');
+    }
+    release();
+    await page.waitForTimeout(300);
+    await expect(page.locator('#experience')).not.toContainText('Introduction for Exhibit 1');
+    if (action !== 'switch') await expect(page.locator('#result')).toBeHidden();
+  });
+}
+
+for (const invalid of ['identity', 'location', 'version', 'citation']) {
+  test(`mismatched ${invalid} content is never rendered`, async ({ page }) => {
+    const fixture = await contentCamera(page);
+    await page.route('**/objects/*/experience?*', route => {
+      const data = preparedResponse(fixture.objects[0], fixture);
+      if (invalid === 'identity') data.object_id = fixture.objects[1].id;
+      if (invalid === 'location') data.location_id = 'f'.repeat(24);
+      if (invalid === 'version') data.reference_version = 'f'.repeat(64);
+      if (invalid === 'citation') data.content.introduction.citations[0].source_id = 'foreign';
+      return route.fulfill({ json: data });
+    });
+    await expect(page.locator('#experience')).toContainText('could not load');
+    await expect(page.locator('#experience')).not.toContainText('Introduction for');
+    await page.locator('#stop').click();
+  });
+}
+
+test('sparse prepared content shows missing sections and treats text as text', async ({ page }) => {
+  const fixture = await contentCamera(page);
+  await page.route('**/objects/*/experience?*', route => {
+    const data = preparedResponse(fixture.objects[0], fixture);
+    data.content.facts = [];
+    data.content.story = data.content.history = null;
+    data.content.introduction.text = '<img src=x onerror=alert(1)>';
+    return route.fulfill({ json: data });
+  });
+  await expect(page.locator('#experience')).toContainText('<img src=x onerror=alert(1)>');
+  await expect(page.locator('#experience img')).toHaveCount(0);
+  await expect(page.locator('.content-missing')).toHaveCount(4);
+  await page.locator('#stop').click();
+});

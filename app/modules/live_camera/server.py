@@ -16,6 +16,7 @@ from starlette.middleware.base import RequestResponseEndpoint
 
 from app.core.config import Settings
 from app.db.mongodb import MongoDB
+from app.modules.live_camera.experience import read_experience
 from app.modules.live_camera.inference import CameraFailure, CameraRecognizer
 from app.modules.live_camera.references import AtlasCameraReferences
 
@@ -161,6 +162,57 @@ def create_camera_app(
         value = await engine()
         await run_in_threadpool(value.warm)
         return JSONResponse(value.public_catalog())
+
+    @application.get("/objects/{object_id}/experience")
+    async def experience(object_id: str, request: Request) -> Response:
+        service = await engine()
+        service.check_fresh()
+        location_id = service.catalog["location"]["id"]
+        if request.query_params.get("location_id") != location_id:
+            raise CameraFailure("WRONG_LOCATION", 409)
+        version = service.reference_version
+        if request.query_params.get("reference_version") != version:
+            raise CameraFailure("REFERENCES_CHANGED", 409)
+        obj = next(
+            (o for o in service.catalog.get("objects", []) if o["id"] == object_id),
+            None,
+        )
+        if obj is None:
+            raise CameraFailure("OBJECT_NOT_FOUND", 404)
+        # Historical file replays have no canonical database/content fallback.
+        database = (
+            application.state.mongodb.database
+            if application.state.mongodb is not None
+            else None
+        )
+        if database is None:
+            raise CameraFailure("CONTENT_UNAVAILABLE", 503)
+        try:
+            async with asyncio.timeout(8):
+                prepared = await read_experience(
+                    database,
+                    object_id,
+                    location_id,
+                    {s["id"] for s in obj["sources"]},
+                )
+                current = await engine()
+                current.check_fresh()
+                if current.reference_version != version:
+                    raise CameraFailure("REFERENCES_CHANGED", 409)
+        except CameraFailure:
+            raise
+        except Exception:
+            raise CameraFailure("CONTENT_UNAVAILABLE", 503) from None
+        return JSONResponse(
+            {
+                "object_id": object_id,
+                "location_id": location_id,
+                "reference_version": version,
+                "content": prepared.content.model_dump(mode="json"),
+                "source_ids": prepared.source_ids,
+                "review_status": prepared.review_status,
+            }
+        )
 
     @application.get("/bundle/{filename:path}")
     async def bundle_file(filename: str) -> Response:

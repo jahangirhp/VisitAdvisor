@@ -1,5 +1,9 @@
 # VisitAdvisor
 
+The [camera content integration](docs/24-camera-prepared-content.md) connects
+tentative camera results to source-cited prepared visitor content. Real-content,
+staging and physical-phone validation remain pending.
+
 The [recognition reliability work](docs/22-recognition-reliability.md) records the
 latest retrieval changes, calibration data, manual selection and failed experiments.
 The [real-time recognition guide](docs/21-realtime-recognition-pipeline.md) covers
