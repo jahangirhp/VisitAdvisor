@@ -33,3 +33,45 @@ services:
       timeout: 3s
       retries: 3
       start_period: 10s
+
+  # Visual test service: a copy of the app with its own env file and test database.
+  # docker compose --profile visual up --build visual-test
+  # Open http://localhost:8003/api/v1/visual-evaluation
+  visual-test:
+    profiles:
+      - visual
+    build:
+      context: .
+      args:
+        EXTRAS: camera-server,visual
+        TORCH_INDEX_URL: https://download.pytorch.org/whl/cpu
+        CONSTRAINTS: constraints-visual.txt
+    # Run as the host user so uploads to ./tests/data are writable.
+    user: "${HOST_UID:-1000}:${HOST_GID:-1000}"
+    env_file:
+      - .env.test
+    environment:
+      APP_HOST: 0.0.0.0
+      APP_PORT: 8003
+      VISUAL_ENABLED: "true"
+      VISUAL_EVALUATION_ENABLED: "true"
+      VISUAL_EVALUATION_ROOT: /data
+      LIVE_CAMERA_BUNDLE: /app/.local/live-camera
+      # The model is loaded offline from the mounted Hugging Face cache.
+      HF_HOME: /hf
+    volumes:
+      - ./app:/app/app
+      - ./tests/data:/data
+      - ${HF_CACHE_DIR:-${HOME}/.cache/huggingface}:/hf:ro
+    ports:
+      - "127.0.0.1:8003:8003"
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8003/health', timeout=2)"
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 60s
