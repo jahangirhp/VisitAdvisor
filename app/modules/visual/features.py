@@ -136,10 +136,13 @@ class DinoEncoder:
             raise VisualFailure("VISUAL_ENCODING_FAILED") from None
 
 
-def geometric_score(query: dict[str, Any], reference: dict[str, Any]) -> float:
+def geometric_evidence(
+    query: dict[str, Any], reference: dict[str, Any]
+) -> dict[str, float]:
     """SIFT ratio test and planar RANSAC baseline; not a 3D identity proof."""
+    empty = {"score": 0.0, "query_coverage": 0.0, "reference_coverage": 0.0}
     if min(len(query["descriptors"]), len(reference["descriptors"])) < 8:
-        return 0.0
+        return empty
     cv = importlib.import_module("cv2")
     np = importlib.import_module("numpy")
     matches = cv.BFMatcher().knnMatch(
@@ -156,15 +159,77 @@ def geometric_score(query: dict[str, Any], reference: dict[str, Any]) -> float:
     distinct = {m.trainIdx: m for m in sorted(good, key=lambda m: -m.distance)}
     good = list(distinct.values())
     if len(good) < 8:
-        return 0.0
+        return empty
     src = np.float32([query["points"][m.queryIdx] for m in good]).reshape(-1, 1, 2)
     dst = np.float32([reference["points"][m.trainIdx] for m in good]).reshape(-1, 1, 2)
     cv.setRNGSeed(0)
     matrix, mask = cv.findHomography(src, dst, cv.RANSAC, 4.0)
     if matrix is None or mask is None or not np.isfinite(matrix).all():
-        return 0.0
+        return empty
     inliers = int(mask.sum())
-    return float(inliers / len(good) * min(inliers / 20, 1.0)) if inliers >= 8 else 0.0
+    if inliers < 8:
+        return empty
+    selected = mask.ravel().astype(bool)
+
+    def coverage(points: Any, size: list[int] | None) -> float:
+        if size is None:
+            return 0.0
+        area = float(cv.contourArea(cv.convexHull(points[selected])))
+        return min(1.0, max(0.0, area / (size[0] * size[1])))
+
+    return {
+        "score": float(inliers / len(good) * min(inliers / 20, 1.0)),
+        "query_coverage": coverage(src, query.get("size")),
+        "reference_coverage": coverage(dst, reference.get("size")),
+    }
+
+
+def geometric_score(query: dict[str, Any], reference: dict[str, Any]) -> float:
+    """Keep the established geometry gate independent of spatial diagnostics."""
+    return geometric_evidence(query, reference)["score"]
+
+
+def verified_similarity(evidence: dict[str, float], object_type: str) -> float:
+    """Experimental spatial support, not a calibrated identity probability."""
+    if evidence["score"] < 0.4:
+        return 0.0
+    if object_type == "building":
+        return evidence["score"] * math.sqrt(evidence["reference_coverage"])
+    return evidence["score"]
+
+
+def rerank_verified(
+    query: dict[str, Any],
+    ranked: list[dict[str, Any]],
+    records: list[dict[str, Any]],
+    objects: dict[str, dict[str, Any]],
+) -> list[dict[str, Any]]:
+    """Experimental bounded planar verification, never automatic identification.
+
+    Artwork references can recover exact details even when room context dominates
+    the embedding. For a building/room reference, geometry confined to a small
+    patch supports that patch, not identification of the containing space.
+    Unverified objects retain their original embedding scores and remain eligible.
+    """
+    candidates = {c["object_id"]: dict(c) for c in ranked}
+    for record in records:
+        object_id = record["object_id"]
+        obj = objects[object_id]
+        score = 0.0
+        for view in record["views"]:
+            evidence = geometric_evidence(query["local"], view["derived"]["local"])
+            # This score is a geometric similarity, not a probability. Weight
+            # scene evidence by its support across the reference, rather than
+            # letting one painting embedded in a room identify the room.
+            similarity = verified_similarity(evidence, obj["type"])
+            score = max(score, similarity)
+        if score >= 0.45:
+            candidates[object_id] = {"object_id": object_id, "score": score}
+        elif obj["type"] == "building" and object_id in candidates:
+            # The explicit verified subset uses geometry for its room candidates.
+            # The rest of the location catalog remains embedding-ranked.
+            del candidates[object_id]
+    return sorted(candidates.values(), key=lambda c: (-c["score"], c["object_id"]))[:3]
 
 
 def rank(

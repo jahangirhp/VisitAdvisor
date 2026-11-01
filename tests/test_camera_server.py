@@ -18,6 +18,9 @@ class FakeRecognizer(CameraRecognizer):
         self.expires = datetime.now(UTC) + timedelta(days=1)
         self.calls = []
 
+    def warm(self):
+        self.warmed = True
+
     def recognize(self, data):
         self.calls.append(data)
         return {"candidates": [], "automatic_identification": False}
@@ -35,6 +38,16 @@ def jpeg(size=(224, 224)):
     out = io.BytesIO()
     Image.new("RGB", size, "white").save(out, format="JPEG")
     return out.getvalue()
+
+
+def test_readiness_warms_without_recognizing_or_writing_frames(camera, tmp_path):
+    engine, client, _ = camera
+    response = client.get("/ready")
+    assert response.status_code == 200
+    assert response.json()["status"] == "ready"
+    assert response.json()["automatic_identification"] is False
+    assert engine.warmed and engine.calls == []
+    assert list(tmp_path.iterdir()) == []
 
 
 def test_frame_reaches_engine_and_immediate_repeat_is_throttled(camera, tmp_path):
@@ -72,7 +85,7 @@ def test_rejects_invalid_requests_before_inference(camera, case, code):
     if case == "large":
         content = b"x" * (MAX_FRAME_BYTES + 1)
     if case == "chunked":
-        content = iter([b"x" * 65536, b"x" * 65536, b"x"])
+        content = iter([b"x" * (MAX_FRAME_BYTES // 2)] * 2 + [b"x"])
     if case == "empty":
         content = b""
     if case == "type":
@@ -100,6 +113,7 @@ def test_expired_reference_and_busy_engine_do_not_infer(camera):
 def test_native_decoder_rejects_invalid_or_wrong_sized_images(data):
     pytest.importorskip("numpy")
     engine = CameraRecognizer.__new__(CameraRecognizer)
+    engine.adaptive = False
     engine.expires = datetime.now(UTC) + timedelta(days=1)
     with pytest.raises(CameraFailure, match="INVALID_FRAME"):
         engine.recognize(data)
@@ -173,6 +187,7 @@ def test_geometry_rejects_visual_resemblance_without_matching_details():
     engine.catalog = {"location": {"id": "b" * 24}}
     engine.session = Session()
     engine.views = [("correct", [vector]), ("unrelated", [vector])]
+    engine.adaptive = False
     engine.geometry_enabled = True
     engine.local_views = {"correct": [reference], "unrelated": [unrelated]}
     result = engine.recognize(data.getvalue())
@@ -180,6 +195,54 @@ def test_geometry_rejects_visual_resemblance_without_matching_details():
         {"id": "correct", "score": 1.0},
         {"id": "unrelated", "score": 0.0},
     ]
+    assert result["automatic_identification"] is False
+
+
+def test_geometry_must_verify_the_view_that_supplies_the_embedding(monkeypatch):
+    np = pytest.importorskip("numpy")
+    vector = np.zeros((1, 384), dtype=np.float32)
+    vector[0, 0] = 1
+
+    def reference(similarity):
+        value = vector.copy()
+        value[0, 0] = similarity
+        value[0, 1] = (1 - similarity**2) ** 0.5
+        return value
+
+    class Session:
+        def run(self, *args):
+            return [vector]
+
+    engine = CameraRecognizer.__new__(CameraRecognizer)
+    engine.expires = datetime.now(UTC) + timedelta(days=1)
+    engine.reference_version = "a" * 64
+    engine.catalog = {"location": {"id": "b" * 24}}
+    engine.session = Session()
+    engine.geometry_enabled = True
+    # A room's highly similar view has no matching detail. Another room view
+    engine.adaptive = False
+    # matches a small detail but cannot verify the first view's embedding.
+    engine.views = [
+        ("room", [reference(0.95), reference(0.2)]),
+        ("artwork", [reference(0.8)]),
+    ]
+    engine.local_views = {
+        "room": [{"geometry": 0.0}, {"geometry": 0.8}],
+        "artwork": [{"geometry": 0.8}],
+    }
+    monkeypatch.setattr(
+        "app.modules.live_camera.inference.describe_local", lambda image: {}
+    )
+    monkeypatch.setattr(
+        "app.modules.live_camera.inference.geometric_score",
+        lambda query, ref: ref["geometry"],
+    )
+    result = engine.recognize(jpeg())
+    assert [candidate["id"] for candidate in result["candidates"]] == [
+        "artwork",
+        "room",
+    ]
+    assert result["candidates"][1]["score"] == pytest.approx(0.2)
     assert result["automatic_identification"] is False
 
 

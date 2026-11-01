@@ -1,0 +1,350 @@
+"""Operator-reviewed reference photos, separate from visitor frames and content."""
+
+import asyncio
+import hashlib
+from datetime import UTC, datetime
+from typing import Any
+from uuid import uuid4
+
+from bson import ObjectId
+from pymongo.asynchronous.database import AsyncDatabase
+from pymongo.errors import DuplicateKeyError
+
+from app.core.domain import validate_id
+from app.core.exceptions import ApplicationError
+from app.modules.live_camera.pipeline import profile
+from app.modules.recognition.images import prepare_image
+from app.modules.visual.features import ImageEncoder, VisualFailure, digest
+from app.modules.visual.references import MAX_VIEWS
+from app.modules.visual.repository import VisualRepository, evidence_hash
+
+PHOTO_FIELDS = {
+    key: 1
+    for key in (
+        "object_id",
+        "location_id",
+        "viewpoint",
+        "photographer",
+        "capture_group",
+        "rights",
+        "source_id",
+        "sha256",
+        "normalized_sha256",
+        "created_at",
+        "slot",
+    )
+}
+REFERENCE_FIELDS = {
+    key: 1
+    for key in (
+        "object_id",
+        "evidence_hash",
+        "model",
+        "preprocessing",
+        "set_id",
+        "views.reference",
+        "views.image_hash",
+        "views.normalized_image_hash",
+    )
+}
+
+
+class PhotoService:
+    def __init__(
+        self,
+        database: AsyncDatabase[dict[str, Any]],
+        planar_target: int = 3,
+        multiview_target: int = 4,
+    ) -> None:
+        self.targets = (planar_target, multiview_target)
+        self.db = database
+        self.photos = database["admin_reference_photos"]
+        self.visual = VisualRepository(database)
+
+    async def object(self, location_id: str, object_id: str) -> dict[str, Any]:
+        location_id, object_id = validate_id(location_id), validate_id(object_id)
+        obj = await self.db["objects"].find_one(
+            {"_id": ObjectId(object_id), "location_id": location_id}
+        )
+        if obj is None:
+            raise ApplicationError(
+                "OBJECT_NOT_FOUND", "Object not found in this venue.", 404
+            )
+        return obj
+
+    async def venue(self, location_id: str) -> None:
+        if not await self.db["locations"].find_one(
+            {"_id": ObjectId(validate_id(location_id))}, {"_id": 1}
+        ):
+            raise ApplicationError("LOCATION_NOT_FOUND", "Venue not found.", 404)
+
+    def coverage(
+        self,
+        obj: dict[str, Any],
+        record: dict[str, Any] | None,
+        photos: list[dict[str, Any]],
+    ) -> dict[str, Any]:
+        views = (record or {}).get("views", [])
+        active = {v["image_hash"] for v in views if v.get("image_hash")}
+        normalized = {v.get("normalized_image_hash") for v in views}
+        pending = [
+            p
+            for p in photos
+            if p["sha256"] not in active and p["normalized_sha256"] not in normalized
+        ]
+        target = self.targets[0 if profile(obj["type"]) == "planar" else 1]
+        return {
+            "id": str(obj["_id"]),
+            "name": obj["name"],
+            "type": obj["type"],
+            "target": target,
+            "prepared": len(active),
+            "pending": len(pending),
+            "missing": max(0, target - len(active) - len(pending)),
+            "needs_photos": len(active) + len(pending) < target,
+        }
+
+    async def inventory(
+        self, location_id: str, offset: int, limit: int
+    ) -> dict[str, Any]:
+        await self.venue(location_id)
+        objects = (
+            await self.db["objects"]
+            .find(
+                {"location_id": location_id},
+                {
+                    "name": 1,
+                    "type": 1,
+                    "source_ids": 1,
+                    "location_id": 1,
+                    "external_id": 1,
+                },
+            )
+            .sort("_id", 1)
+            .skip(offset)
+            .limit(limit)
+            .to_list()
+        )
+        ids = [str(obj["_id"]) for obj in objects]
+        records = await self.visual.references.find(
+            {"location_id": location_id, "object_id": {"$in": ids}}, REFERENCE_FIELDS
+        ).to_list()
+        photos = await self.photos.find(
+            {"location_id": location_id, "object_id": {"$in": ids}}, PHOTO_FIELDS
+        ).to_list()
+        source_ids = {sid for obj in objects for sid in obj.get("source_ids", [])}
+        sources = (
+            await self.db["sources"]
+            .find(
+                {
+                    "location_id": location_id,
+                    "_id": {"$in": [ObjectId(sid) for sid in source_ids]},
+                }
+            )
+            .to_list()
+        )
+        by_source = {str(source["_id"]): source for source in sources}
+        rows = []
+        for obj in objects:
+            record = next(
+                (r for r in records if r["object_id"] == str(obj["_id"])), None
+            )
+            evidence = [
+                by_source[sid] for sid in obj.get("source_ids", []) if sid in by_source
+            ]
+            if record and (
+                not evidence
+                or len(evidence) != len(obj.get("source_ids", []))
+                or record["evidence_hash"] != evidence_hash(obj, evidence)
+            ):
+                record = None
+            rows.append(
+                self.coverage(
+                    obj,
+                    record,
+                    [p for p in photos if p["object_id"] == str(obj["_id"])],
+                )
+            )
+        return {"objects": rows, "offset": offset, "limit": limit}
+
+    async def detail(self, location_id: str, object_id: str) -> dict[str, Any]:
+        obj = await self.object(location_id, object_id)
+        sources = await self.visual.sources(obj) if obj.get("source_ids") else []
+        record = await self.visual.references.find_one(
+            {"location_id": location_id, "object_id": object_id}, REFERENCE_FIELDS
+        )
+        stale = bool(record and record["evidence_hash"] != evidence_hash(obj, sources))
+        photos = (
+            await self.photos.find(
+                {"location_id": location_id, "object_id": object_id}, PHOTO_FIELDS
+            )
+            .sort("created_at", 1)
+            .to_list()
+        )
+        return {
+            **self.coverage(obj, None if stale else record, photos),
+            "stale": stale,
+            "sources": [{"id": str(s["_id"]), "title": s["title"]} for s in sources],
+            "photos": [
+                {**p, "_id": str(p["_id"]), "created_at": p["created_at"].isoformat()}
+                for p in photos
+            ],
+            "views": [
+                {
+                    "viewpoint": v.get("reference", {}).get("viewpoint")
+                    or "Unlabelled",
+                    "rights_status": v.get("reference", {}).get(
+                        "rights_status", "unknown"
+                    ),
+                }
+                for v in (record or {}).get("views", [])
+            ],
+        }
+
+    async def upload(
+        self,
+        location_id: str,
+        object_id: str,
+        data: bytes,
+        content_type: str | None,
+        metadata: dict[str, str],
+    ) -> str:
+        obj = await self.object(location_id, object_id)
+        sources = await self.visual.sources(obj) if obj.get("source_ids") else []
+        if metadata["source_id"] not in {str(s["_id"]) for s in sources}:
+            raise ApplicationError(
+                "SOURCE_MISMATCH", "Select this object's source.", 422
+            )
+        normalized = await asyncio.to_thread(prepare_image, data, content_type)
+        sha = hashlib.sha256(data).hexdigest()
+        clean_sha = hashlib.sha256(normalized).hexdigest()
+        details = await self.detail(location_id, object_id)
+        current = await self.visual.current(location_id, object_id)
+        if any(
+            v.get("image_hash") == sha or v.get("normalized_image_hash") == clean_sha
+            for v in (current or {}).get("views", [])
+        ):
+            raise ApplicationError(
+                "DUPLICATE_PHOTO", "This photo is already a reference.", 409
+            )
+        if details["prepared"] + details["pending"] >= MAX_VIEWS:
+            raise ApplicationError(
+                "PHOTO_LIMIT", "The pilot supports four views per object.", 409
+            )
+        used = {p["slot"] for p in details["photos"]}
+        slot = next((i for i in range(MAX_VIEWS) if i not in used), None)
+        if slot is None:
+            raise ApplicationError(
+                "PHOTO_LIMIT", "Four uploads already exist for this object.", 409
+            )
+        try:
+            result = await self.photos.insert_one(
+                {
+                    "location_id": location_id,
+                    "object_id": object_id,
+                    "slot": slot,
+                    **metadata,
+                    "sha256": sha,
+                    "normalized_sha256": clean_sha,
+                    "data": data,
+                    "content_type": content_type,
+                    "created_at": datetime.now(UTC),
+                }
+            )
+        except DuplicateKeyError:
+            raise ApplicationError(
+                "PHOTO_CONFLICT", "Duplicate photo or concurrent upload; refresh.", 409
+            ) from None
+        return str(result.inserted_id)
+
+    async def publish(
+        self, location_id: str, object_id: str, encoder: ImageEncoder
+    ) -> dict[str, Any]:
+        obj = await self.object(location_id, object_id)
+        sources = await self.visual.sources(obj) if obj.get("source_ids") else []
+        previous = await self.visual.current(location_id, object_id)
+        current_hash = evidence_hash(obj, sources)
+        if previous and (
+            previous["evidence_hash"] != current_hash
+            or previous["model"] != encoder.model
+            or previous["preprocessing"] != encoder.preprocessing
+        ):
+            raise ApplicationError(
+                "REFERENCES_INCOMPATIBLE",
+                "Prepare existing references with the current model and sources first.",
+                409,
+            )
+        views = list((previous or {}).get("views", []))
+        photos = (
+            await self.photos.find({"location_id": location_id, "object_id": object_id})
+            .sort("slot", 1)
+            .limit(MAX_VIEWS)
+            .to_list()
+        )
+        source_ids = {str(s["_id"]) for s in sources}
+        for photo in photos:
+            if any(
+                v["image_hash"] == photo["sha256"]
+                or v.get("normalized_image_hash") == photo["normalized_sha256"]
+                for v in views
+            ):
+                continue
+            if photo["source_id"] not in source_ids:
+                raise ApplicationError(
+                    "SOURCE_MISMATCH", "Photo source no longer belongs to object.", 409
+                )
+            if len(views) >= MAX_VIEWS:
+                raise ApplicationError(
+                    "PHOTO_LIMIT", "Publishing would exceed four reference views.", 409
+                )
+            reference = {
+                "source_ids": [photo["source_id"]],
+                "image_url": f"admin-upload:{photo['_id']}",
+                "viewpoint": photo["viewpoint"],
+                "rights_status": "recorded",
+                "evidence": {
+                    "upload_id": str(photo["_id"]),
+                    **{
+                        key: photo[key]
+                        for key in ("photographer", "capture_group", "rights", "sha256")
+                    },
+                },
+            }
+            image = await asyncio.to_thread(
+                prepare_image, bytes(photo["data"]), photo["content_type"]
+            )
+            derived = await asyncio.to_thread(encoder.describe, image, regions=True)
+            views.append(
+                {
+                    "reference": reference,
+                    "metadata_hash": digest(reference),
+                    "image_hash": photo["sha256"],
+                    "normalized_image_hash": photo["normalized_sha256"],
+                    "derived": derived,
+                }
+            )
+        if not views or len(views) == len((previous or {}).get("views", [])):
+            raise ApplicationError(
+                "NO_PENDING_PHOTOS", "No new photos to prepare.", 409
+            )
+        record = {
+            "location_id": location_id,
+            "object_id": object_id,
+            "model": encoder.model,
+            "preprocessing": encoder.preprocessing,
+            "evidence_hash": current_hash,
+            "set_id": uuid4().hex,
+            "views": views,
+            "vector_count": sum(len(v["derived"]["regions"]) for v in views),
+            "warnings": list((previous or {}).get("warnings", [])),
+            "fetched_at": datetime.now(UTC),
+        }
+        try:
+            await self.visual.publish(record, previous)
+        except VisualFailure as exc:
+            raise ApplicationError(
+                "PREPARATION_CONFLICT",
+                "References changed or exceeded limits; refresh and retry.",
+                409,
+            ) from exc
+        return {"set_id": record["set_id"], "prepared": len(views)}

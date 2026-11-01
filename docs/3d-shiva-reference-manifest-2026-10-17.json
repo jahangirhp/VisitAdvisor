@@ -1,0 +1,361 @@
+[
+  {
+    "object_id": "6aa9a746dd73e04d96146161",
+    "source_ids": [
+      "6aa9a746658f4b405d46009f"
+    ],
+    "image_url": "https://iiif.micr.io/LAXcK/full/800,/0/default.jpg",
+    "viewpoint": "front-right studio view",
+    "rights_status": "recorded",
+    "evidence": {
+      "visual": {
+        "@context": "https://linked.art/ns/v1/linked-art.json",
+        "id": "https://id.rijksmuseum.nl/202106309",
+        "type": "VisualItem",
+        "subject_to": [
+          {
+            "type": "Right",
+            "identified_by": [
+              {
+                "type": "Name",
+                "content": "Public Domain",
+                "language": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300388277",
+                    "type": "Language",
+                    "_label": "English"
+                  }
+                ]
+              },
+              {
+                "type": "Name",
+                "content": "Publieke domein",
+                "language": [
+                  {
+                    "id": "http://vocab.getty.edu/aat/300388256",
+                    "type": "Language",
+                    "_label": "Dutch"
+                  }
+                ]
+              }
+            ],
+            "classified_as": [
+              {
+                "id": "https://creativecommons.org/publicdomain/mark/1.0/",
+                "type": "Type",
+                "_label": "Public Domain"
+              }
+            ]
+          }
+        ],
+        "subject_of": [
+          {
+            "id": "https://data.rijksmuseum.nl/202106309",
+            "type": "LinguisticObject",
+            "subject_to": [
+              {
+                "type": "Right",
+                "classified_as": [
+                  {
+                    "id": "https://creativecommons.org/publicdomain/zero/1.0/",
+                    "type": "Type"
+                  }
+                ]
+              }
+            ],
+            "classified_as": [
+              {
+                "id": "http://vocab.getty.edu/aat/300379475",
+                "type": "Type"
+              }
+            ]
+          }
+        ],
+        "represents": [
+          {
+            "id": "https://id.rijksmuseum.nl/21096574",
+            "type": "Actor",
+            "equivalent": [
+              {
+                "id": "http://www.wikidata.org/entity/Q11378",
+                "type": "Actor"
+              },
+              {
+                "id": "http://viaf.org/viaf/105148570582824311471",
+                "type": "Actor"
+              }
+            ]
+          }
+        ],
+        "represents_instance_of_type": [
+          {
+            "id": "https://id.rijksmuseum.nl/22153",
+            "type": "Type",
+            "equivalent": [
+              {
+                "id": "https://iconclass.org/12H13%28SHIVA%2951",
+                "type": "Type"
+              }
+            ]
+          }
+        ],
+        "classified_as": [
+          {
+            "id": "https://id.rijksmuseum.nl/2208281",
+            "type": "Type",
+            "classified_as": [
+              {
+                "id": "http://vocab.getty.edu/aat/300435443",
+                "type": "Type",
+                "_label": "Type of Work"
+              },
+              {
+                "id": "http://vocab.getty.edu/aat/300015646",
+                "type": "Type",
+                "_label": "Style"
+              }
+            ],
+            "notation": [
+              {
+                "@language": "en",
+                "@value": "Chola dynasty"
+              },
+              {
+                "@language": "nl",
+                "@value": "Chola"
+              }
+            ],
+            "equivalent": [
+              {
+                "id": "http://vocab.getty.edu/aat/300018913",
+                "type": "Type"
+              },
+              {
+                "id": "http://www.wikidata.org/entity/Q151148",
+                "type": "Type"
+              }
+            ]
+          }
+        ],
+        "shown_by": [
+          {
+            "id": "https://id.rijksmuseum.nl/200106309",
+            "type": "HumanMadeObject",
+            "equivalent": [
+              {
+                "id": "http://hdl.handle.net/10934/RM0001.COLLECT.677",
+                "type": "HumanMadeObject"
+              }
+            ]
+          }
+        ],
+        "digitally_shown_by": [
+          {
+            "id": "https://id.rijksmuseum.nl/500825574841011177170",
+            "type": "DigitalObject"
+          }
+        ]
+      },
+      "digital": {
+        "@context": "https://linked.art/ns/v1/linked-art.json",
+        "id": "https://id.rijksmuseum.nl/500825574841011177170",
+        "type": "DigitalObject",
+        "referred_to_by": [
+          {
+            "type": "LinguisticObject",
+            "content": "downloadbaar",
+            "classified_as": [
+              {
+                "id": "http://vocab.getty.edu/aat/300435434",
+                "type": "Type"
+              }
+            ]
+          },
+          {
+            "type": "LinguisticObject",
+            "content": "zichtbaar",
+            "classified_as": [
+              {
+                "id": "http://vocab.getty.edu/aat/300435434",
+                "type": "Type"
+              }
+            ]
+          }
+        ],
+        "access_point": [
+          {
+            "id": "https://iiif.micr.io/LAXcK/full/max/0/default.jpg",
+            "type": "DigitalObject"
+          }
+        ],
+        "digitally_shows": [
+          {
+            "id": "https://id.rijksmuseum.nl/202106309",
+            "type": "VisualItem"
+          }
+        ]
+      },
+      "manifest": {
+        "@context": "http://iiif.io/api/presentation/3/context.json",
+        "id": "https://iiif.micr.io/LAXcK/manifest",
+        "type": "Manifest",
+        "label": {
+          "en": [
+            "AK-MAK-187-Original-Cropped.jpg"
+          ]
+        },
+        "thumbnail": [
+          {
+            "id": "https://iiif.micr.io/LAXcK/full/80,100/0/default.jpg",
+            "type": "Image",
+            "format": "image/jpeg",
+            "service": [
+              {
+                "id": "https://iiif.micr.io/LAXcK",
+                "type": "ImageService3",
+                "profile": "level1"
+              }
+            ]
+          }
+        ],
+        "provider": [
+          {
+            "type": "Agent",
+            "label": {
+              "en": [
+                "Rijks Collectie"
+              ]
+            },
+            "id": "https://micr.io/"
+          }
+        ],
+        "items": [
+          {
+            "id": "https://iiif.micr.io/LAXcK/canvas",
+            "type": "Canvas",
+            "label": {
+              "en": [
+                "AK-MAK-187-Original-Cropped.jpg"
+              ]
+            },
+            "width": 4864,
+            "height": 6830,
+            "items": [
+              {
+                "id": "https://iiif.micr.io/LAXcK/annotation-page",
+                "type": "AnnotationPage",
+                "items": [
+                  {
+                    "id": "https://iiif.micr.io/LAXcK/annotation",
+                    "type": "Annotation",
+                    "motivation": "painting",
+                    "body": {
+                      "id": "https://iiif.micr.io/LAXcK/full/1024,/0/default.jpg",
+                      "type": "Image",
+                      "format": "image/jpeg",
+                      "width": 4864,
+                      "height": 6830,
+                      "service": [
+                        {
+                          "id": "https://iiif.micr.io/LAXcK",
+                          "type": "ImageService3",
+                          "protocol": "http://iiif.io/api/image",
+                          "profile": "level2",
+                          "qualities": [
+                            "default",
+                            "gray",
+                            "color"
+                          ],
+                          "formats": [
+                            "jpg",
+                            "png",
+                            "webp"
+                          ],
+                          "tiles": [
+                            {
+                              "scaleFactors": [
+                                1,
+                                2,
+                                4,
+                                8
+                              ],
+                              "width": 1024,
+                              "height": 1024
+                            }
+                          ],
+                          "width": 4864,
+                          "height": 6830,
+                          "viewsWH": false,
+                          "tileBasePath": "https://micrio.rijksmuseum.nl/",
+                          "label": {
+                            "en": [
+                              "AK-MAK-187-Original-Cropped.jpg"
+                            ]
+                          },
+                          "maxArea": 17550000,
+                          "extraFeatures": [
+                            "baseUriRedirect",
+                            "cors",
+                            "jsonldMediaType",
+                            "regionByPct",
+                            "regionByPx",
+                            "regionSquare",
+                            "rotationBy90s",
+                            "sizeByConfinedWh",
+                            "sizeByH",
+                            "sizeByPct",
+                            "sizeByW",
+                            "sizeByWh",
+                            "sizeUpscaling"
+                          ]
+                        }
+                      ]
+                    },
+                    "target": "https://iiif.micr.io/LAXcK/canvas"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "rights_review": "Canonical VisualItem subject_to explicitly records Public Domain; source evidence retained unchanged."
+    }
+  },
+  {
+    "object_id": "6aa9a746dd73e04d96146161",
+    "source_ids": [
+      "6aa9a746658f4b405d46009f"
+    ],
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Shiva_Nataraja%2C_anoniem%2C_1100_-_1200.JPG/960px-Shiva_Nataraja%2C_anoniem%2C_1100_-_1200.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "viewpoint": "front oblique visitor view",
+    "rights_status": "recorded",
+    "evidence": {
+      "source_page": "https://commons.wikimedia.org/wiki/File:Shiva_Nataraja,_anoniem,_1100_-_1200.JPG",
+      "photographer": "Alf van Beem",
+      "capture_date": "2018-05-11",
+      "capture_group": "Alf-van-Beem-2018-05-11",
+      "license": "Public domain",
+      "license_url": null,
+      "selection": "Historical calibration capture promoted to reference; retire entire capture group from subsequent calibration/evaluation."
+    }
+  },
+  {
+    "object_id": "6aa9a746dd73e04d96146161",
+    "source_ids": [
+      "6aa9a746658f4b405d46009f"
+    ],
+    "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Shiva_%2826940489611%29.jpg/960px-Shiva_%2826940489611%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "viewpoint": "front-left gallery view",
+    "rights_status": "recorded",
+    "evidence": {
+      "source_page": "https://commons.wikimedia.org/wiki/File:Shiva_(26940489611).jpg",
+      "photographer": "Eric de Redelijkheid from Utrecht, Netherlands",
+      "capture_date": "2016-05-11 11:48",
+      "license": "CC BY-SA 2.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/2.0",
+      "capture_group": "Eric-de-Redelijkheid-2016-05-11",
+      "identity_review": "Matches canonical AK-MAK-187 bronze: flame halo, hair, arm arrangement, lifted foot and pedestal; photographed physical object, not a replica."
+    }
+  }
+]

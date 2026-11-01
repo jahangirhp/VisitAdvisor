@@ -1,4 +1,6 @@
-import { motion, signature, Stability, validateCatalog } from './recognition.mjs';
+import { motion, signature, Stability, validateCatalog, validBox } from './recognition.mjs';
+import { drawFrame, encodeFrame } from './capture.mjs';
+import { clearExperience, showExperience } from './experience.mjs';
 
 const $ = id => document.getElementById(id);
 const video = $('camera');
@@ -18,8 +20,6 @@ let stability;
 let previous;
 let lastResult = 0;
 let displayed;
-let timings = [];
-let frameCount = 0;
 let catalogRequest = 0;
 const catalogs = {
   rijksmuseum: { file: 'catalog.json', label: 'Supported location' },
@@ -27,18 +27,26 @@ const catalogs = {
 
 function status(message) { $('status').textContent = message; }
 function clearResult() {
+  clearExperience();
   displayed = null;
+  delete $('result').dataset.state;
   $('result').hidden = true;
   $('object-name').textContent = '';
   $('object-description').textContent = '';
   $('object-meta').textContent = '';
   $('sources').replaceChildren();
 }
-function resetTracking() { stability?.reset(); previous = null; clearResult(); }
+function resultState(state) {
+  if ($('result').dataset.state === state) return;
+  $('result').dataset.state = state;
+  $('result-kind').textContent = state === 'live' ? 'POSSIBLE MATCH · PLEASE VERIFY' : 'LAST SEEN · CAMERA RECHECKING';
+}
+function lastSeen() { if (displayed) resultState('last-seen'); }
+function resetTracking() { stability?.reset(); previous = null; lastSeen(); }
 // After acquisition, tolerate hand jitter while fresh recognition verifies identity.
 function motionLimit() { return stability?.confirmed ? 0.22 : 0.09; }
 
-function stop(message = 'Camera stopped. Start again when you are ready.') {
+function stop(message = 'Camera stopped.') {
   running = false;
   generation++;
   clearTimeout(timer);
@@ -49,8 +57,9 @@ function stop(message = 'Camera stopped. Start again when you are ready.') {
   stream = null;
   video.srcObject = null;
   pending = null;
-  context.clearRect(0, 0, 224, 224);
+  context.clearRect(0, 0, canvas.width, canvas.height);
   resetTracking();
+  clearResult();
   $('placeholder').hidden = false;
   $('live-label').hidden = true;
   $('stop').hidden = true;
@@ -64,16 +73,14 @@ function frame() {
   // Match the model's shortest-edge 256 resize then 224 center crop geometry.
   // Browser interpolation differs from Pillow bicubic: this is a new, uncalibrated
   // preprocessing identity and must be measured on the actual phone.
-  const side = Math.min(video.videoWidth, video.videoHeight) * 224 / 256;
-  context.drawImage(video, (video.videoWidth - side) / 2, (video.videoHeight - side) / 2,
-    side, side, 0, 0, 224, 224);
-  return context.getImageData(0, 0, 224, 224).data;
+  return drawFrame(context, video, video.videoWidth, video.videoHeight, canvas.width);
 }
 
 function showCandidate(id) {
-  if (displayed === id) return;
   const object = catalog.objects.find(item => item.id === id);
   if (!object) return;
+  resultState('live');
+  if (displayed === id) return;
   displayed = id;
   $('object-name').textContent = object.name;
   $('object-meta').textContent = [object.creator, object.year, object.type].filter(Boolean).join(' · ');
@@ -92,6 +99,7 @@ function showCandidate(id) {
     } catch { /* A source without a public URL remains in the reference bundle. */ }
   }
   $('result').hidden = false;
+  showExperience(object, catalog);
 }
 
 async function nextFrame(run) {
@@ -107,7 +115,7 @@ async function nextFrame(run) {
     timer = setTimeout(() => nextFrame(run), 250);
     return;
   }
-  const current = signature(rgba);
+  const current = signature(rgba, canvas.width);
   if (motion(previous, current) > motionLimit()) resetTracking();
   previous = current;
   pending = { id: started, signature: current, videoTime: video.currentTime };
@@ -115,7 +123,7 @@ async function nextFrame(run) {
   requestController = controller;
   timeout = setTimeout(() => controller.abort(), 8000);
   try {
-    const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/jpeg', 0.9));
+    const blob = await encodeFrame(canvas);
     if (run !== generation || !running) return;
     if (!blob) throw new Error('capture');
     const query = new URLSearchParams({ location_id: catalog.location.id, reference_version: catalog.reference_version });
@@ -125,7 +133,7 @@ async function nextFrame(run) {
     if (run !== generation || !running) return;
     if (!response.ok) {
       const error = await response.json().catch(() => ({}));
-      if (response.status === 409 || error.error === 'REFERENCES_EXPIRED') {
+      if (response.status === 409 || ['REFERENCES_EXPIRED', 'REFERENCES_UNAVAILABLE'].includes(error.error)) {
         await loadCatalog($('location').value);
         return;
       }
@@ -136,7 +144,8 @@ async function nextFrame(run) {
     if (data.version !== 'camera-server-v1' || data.location_id !== catalog.location.id ||
         data.reference_version !== catalog.reference_version || data.automatic_identification !== false ||
         !Array.isArray(data.candidates) || data.candidates.length > 3 ||
-        !data.candidates.every(item => catalog.objects.some(obj => obj.id === item.id) && Number.isFinite(item.score) && item.score >= -1 && item.score <= 1)) throw new Error('response');
+        !data.candidates.every(item => catalog.objects.some(obj => obj.id === item.id) && Number.isFinite(item.score) && item.score >= -1 && item.score <= 1 &&
+          (item.bbox === undefined || validBox(item.bbox)) && (item.profile === undefined || ['planar', 'multiview'].includes(item.profile)))) throw new Error('response');
     networkErrors = 0;
     handleResult({ ...data, id: started }, run);
   } catch {
@@ -158,26 +167,24 @@ function handleResult(data, run) {
   clearTimeout(timeout);
   const duration = performance.now() - pending.id;
   const rgba = frame();
-  const moved = !rgba || motion(pending.signature, signature(rgba)) > motionLimit();
+  const moved = !rgba || motion(pending.signature, signature(rgba, canvas.width)) > motionLimit();
   const stalled = video.currentTime <= pending.videoTime;
   pending = null;
-  frameCount++;
-  timings.push(duration);
-  if (timings.length > 300) timings.shift();
-  const sorted = [...timings].sort((a, b) => a - b);
-  $('timing').textContent = `${Math.round(duration)} ms`;
-  $('p95').textContent = `${Math.round(sorted[Math.ceil(sorted.length * 0.95) - 1])} ms (last ${sorted.length})`;
-  $('frames').textContent = frameCount;
   lastResult = performance.now();
-  const id = stability.observe(data.candidates, lastResult, moved || stalled || duration > 3000);
+  const candidates = data.suggestion_allowed === false ? [] : data.candidates;
+  const id = stability.observe(candidates, lastResult, moved || stalled || duration > 3000);
   if (id) {
-    showCandidate(id);
+    if (stability.holding) lastSeen();
+    else showCandidate(id);
     status(stability.holding ? 'Rechecking the previous possible match… hold steady.' : 'Possible match. Check the name against the object you are looking at.');
   } else {
-    clearResult();
+    lastSeen();
     const found = stability.count > 0;
-    const checked = `Checked ${frameCount} ${frameCount === 1 ? 'frame' : 'frames'}. `;
-    status(checked + (moved ? 'Move slowly, then pause on one object.' : stalled ? 'Waiting for a fresh camera frame…' : duration > 3000 ? 'Connection is too slow to show a fresh match. Hold steady or try a stronger connection.' : found ? 'Checking a possible match… hold steady.' : 'No supported match yet. Center a supported artwork and hold still.'));
+    const guidance = data.warnings?.includes('CAMERA_CALIBRATION_REQUIRED') ? 'Camera matching is not ready yet.' :
+      data.warnings?.includes('REFERENCE_VIEW_COVERAGE_INCOMPLETE') ? 'This view is not supported reliably yet. Try another supported object.' :
+      data.decision === 'deferred' ? 'Recognition is taking longer. Hold steady while we check the next frame.' :
+      data.decision === 'unreadable' ? 'Not enough detail. Move closer or improve the lighting.' : null;
+    status((moved ? 'Move slowly, then pause on one object.' : stalled ? 'Waiting for a fresh camera frame…' : duration > 3000 ? 'Connection is too slow to show a fresh match. Hold steady or try a stronger connection.' : guidance || (found ? 'Checking a possible match… hold steady.' : 'No supported match yet. Center a supported object and hold still.')));
   }
   // No frame queue: capture the newest frame only after the previous inference.
   timer = setTimeout(() => nextFrame(run), Math.max(250, 500 - duration));
@@ -187,20 +194,17 @@ async function start() {
   if (running || !catalog) return;
   running = true;
   const run = ++generation;
-  timings = [];
-  frameCount = 0;
   networkErrors = 0;
   lastResult = 0;
   stability = new Stability(catalog.policy);
-  for (const id of ['timing', 'p95']) $(id).textContent = '—';
-  $('frames').textContent = '0';
+  resetTracking();
   $('start').hidden = true;
   $('stop').hidden = false;
-  status('Allow camera access to start exploring.');
+  status('Allow camera access.');
   try {
     const granted = await navigator.mediaDevices.getUserMedia({
       audio: false,
-      video: { facingMode: { ideal: 'environment' }, width: { ideal: 640 }, height: { ideal: 480 }, frameRate: { ideal: 15, max: 24 } },
+      video: { facingMode: { ideal: 'environment' }, width: { ideal: 1280 }, height: { ideal: 720 }, frameRate: { ideal: 15, max: 24 } },
     });
     if (run !== generation || !running) {
       granted.getTracks().forEach(track => track.stop());
@@ -215,7 +219,7 @@ async function start() {
     if (run !== generation) return;
     $('placeholder').hidden = true;
     $('live-label').hidden = false;
-    status('Point at a supported object and pause briefly. Sending small camera crops for server recognition.');
+    status('Scanning… Hold steady on an object.');
     nextFrame(run);
   } catch (error) {
     if (run !== generation) return;
@@ -228,6 +232,31 @@ async function start() {
   }
 }
 
+document.addEventListener('click', event => {
+  if (!$('menu').contains(event.target)) $('menu').open = false;
+});
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape' && $('menu').open) {
+    $('menu').open = false;
+    $('menu').querySelector('summary').focus();
+  }
+});
+
+const viewer = document.querySelector('.viewer');
+function togglePreview() {
+  const expanded = viewer.getAttribute('aria-expanded') !== 'true';
+  viewer.setAttribute('aria-expanded', String(expanded));
+  viewer.setAttribute('aria-label', expanded ? 'Shrink camera preview' : 'Expand camera preview');
+  document.querySelector('.capture-bar').classList.toggle('expanded', expanded);
+}
+viewer.addEventListener('click', togglePreview);
+viewer.addEventListener('keydown', event => {
+  if (event.key === 'Enter' || event.key === ' ') {
+    event.preventDefault();
+    togglePreview();
+  }
+});
+
 $('start').addEventListener('click', start);
 $('stop').addEventListener('click', () => stop());
 document.addEventListener('visibilitychange', () => { if (document.hidden && running) stop('Camera paused when you left this page. Tap Start to resume.'); });
@@ -235,66 +264,37 @@ window.addEventListener('pagehide', () => stop());
 for (const event of ['waiting', 'stalled', 'emptied']) video.addEventListener(event, resetTracking);
 setInterval(() => {
   if (!running || !displayed) return;
+  if (Date.now() >= Date.parse(catalog.expires_at)) {
+    loadCatalog($('location').value);
+    return;
+  }
   const rgba = frame();
-  if (!rgba || motion(previous, signature(rgba)) > motionLimit() || !stability.current(performance.now())) resetTracking();
+  if (!rgba || motion(previous, signature(rgba, canvas.width)) > motionLimit()) resetTracking();
+  else if (!stability.current(performance.now())) {
+    // Retaining a reading card must not reset an acquisition in progress.
+    if (stability.confirmed) resetTracking();
+    else lastSeen();
+  }
 }, 200);
 
 async function loadCatalog(key) {
   const request = ++catalogRequest;
   catalog = null;
   stop('Loading museum references…');
-  $('objects').replaceChildren();
-  $('reference-credits').replaceChildren();
   $('target-note').hidden = true;
-  for (const id of ['snapshot', 'download-size', 'runtime', 'timing', 'p95']) $(id).textContent = '—';
-  $('frames').textContent = '0';
   try {
     const response = await fetch(`./bundle/${catalogs[key].file}`, { cache: 'no-store' });
     if (!response.ok) throw new Error('Museum references are unavailable. Try reloading shortly.');
     const loaded = validateCatalog(await response.json());
     if (request !== catalogRequest) return;
     catalog = loaded;
+    canvas.width = canvas.height = loaded.policy.frame_size || 224;
     const option = [...$('location').options].find(item => item.value === key);
     option.textContent = `${loaded.location.name} · ${loaded.objects.length} supported ${loaded.objects.length === 1 ? 'object' : 'objects'}`;
-    $('objects').replaceChildren(...loaded.objects.map(object => {
-      const item = document.createElement('li');
-      item.textContent = object.name;
-      return item;
-    }));
     $('target-note').hidden = loaded.test_mode !== 'single-target';
     $('target-note').textContent = 'Single-object test: the Justice Panel only. Other exhibits are not supported. A possible match still needs your confirmation.';
-    for (const credit of loaded.credits || []) {
-      const line = document.createElement('p');
-      const link = document.createElement('a');
-      try {
-        const url = new URL(credit.source_page);
-        if (url.protocol !== 'https:' || url.username || url.password) continue;
-        link.href = url.href;
-      } catch { continue; }
-      link.textContent = `${credit.title} — ${credit.credit} · ${credit.license}`;
-      link.target = '_blank';
-      link.rel = 'noopener noreferrer';
-      line.append(link);
-      if (credit.license_url) {
-        try {
-          const url = new URL(credit.license_url);
-          if (url.protocol === 'https:' && !url.username && !url.password) {
-            const license = document.createElement('a');
-            license.href = url.href;
-            license.textContent = ' · License';
-            license.target = '_blank';
-            license.rel = 'noopener noreferrer';
-            line.append(license);
-          }
-        } catch { /* Source link still supplies the credit record. */ }
-      }
-      $('reference-credits').append(line);
-    }
-    $('snapshot').textContent = `${new Date(loaded.created_at).toLocaleDateString()}${loaded.atlas_freshness_verified === false ? ' · recorded-source demo; Atlas freshness unverified' : ''}`;
-    $('download-size').textContent = 'None — model runs on the server';
-    $('runtime').textContent = 'Server · internet required';
     $('start').disabled = false;
-    status('Ready when you are. Camera access starts only when you tap the button.');
+    status('Ready to scan.');
   } catch (error) {
     if (request === catalogRequest) status(error.message || 'Museum references could not load. Reload to try again.');
   }
@@ -328,6 +328,7 @@ async function init() {
     const url = new URL(window.location.href);
     url.searchParams.set('location', key);
     history.replaceState(null, '', url);
+    $('menu').open = false;
     loadCatalog(key);
   });
   await loadCatalog(key);

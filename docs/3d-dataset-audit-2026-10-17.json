@@ -1,0 +1,23 @@
+{
+  "purpose": "data_only_leakage_audit",
+  "reference_sets": {
+    "6aa9a746dd73e04d96146161": "d2035b2bfa9c481aaa0374a489f38137",
+    "6aab0df3dd73e04d96150a1a": "603395d9730d4b1cbc8cc3c693f4e38a",
+    "6aab0df5dd73e04d96150a1b": "3fa28e7abfb745dea7b3726c0f28d588",
+    "6aab0df6dd73e04d96150a1c": "b9795a5b554d4a479df4c0bd3321466f",
+    "6aab0df8dd73e04d96150a1e": "a1177e9e308d4075b1d22738ee65ccaa"
+  },
+  "positive_photo_counts": {
+    "calibration": 10,
+    "evaluation": 11
+  },
+  "gates": {
+    "no_raw_or_normalized_reference_byte_overlap": true,
+    "no_calibration_evaluation_group_overlap": true,
+    "no_explicit_reference_capture_group_overlap": true
+  },
+  "reference_group_metadata_complete": false,
+  "note": "Older canonical and Hanno references do not all have explicit capture_group fields; those sources and known photographer/date aliases were additionally reviewed manually. Hash exclusion alone does not prove independence.",
+  "recognition_requests_attempted": 0,
+  "prior_attempt": "One metadata read timed out at the normal five-second client deadline; this offline-only rerun uses a 30-second read bound."
+}

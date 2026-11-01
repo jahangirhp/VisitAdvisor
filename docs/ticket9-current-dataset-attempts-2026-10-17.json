@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-17",
+  "attempts": [
+    {
+      "attempt": 1,
+      "outcome": "setup_failed",
+      "recognition_results_saved": false,
+      "details": "Runner returned safe REPLAY_FAILED; cause not recorded."
+    },
+    {
+      "attempt": 2,
+      "outcome": "interrupted_diagnostic",
+      "completed_requests": 2,
+      "details": "Both first-photo paths returned HTTP 200; interrupted before full run to preserve complete report on subsequent run."
+    },
+    {
+      "attempt": 3,
+      "outcome": "setup_failed",
+      "stage": "AtlasCameraReferences.get",
+      "error_code": "REFERENCES_UNAVAILABLE",
+      "recognition_requests": 0
+    },
+    {
+      "attempt": 4,
+      "outcome": "completed",
+      "report": "ticket9-current-dataset-baseline-2026-10-17.json",
+      "http_200_requests": 82
+    }
+  ],
+  "note": "Do not count setup failures or interrupted diagnostics as successful acceptance runs."
+}

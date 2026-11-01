@@ -1,8 +1,30 @@
 # VisitAdvisor
 
+The [persistent camera result update](docs/25-persistent-object-results.md) keeps
+last-seen information visible during movement and reacquisition. Physical-phone
+acceptance remains pending.
+
+The [camera content integration](docs/24-camera-prepared-content.md) connects
+tentative camera results to source-cited prepared visitor content. Real-content,
+staging and physical-phone validation remain pending.
+
+The [recognition reliability work](docs/22-recognition-reliability.md) records the
+latest retrieval changes, calibration data, manual selection and failed experiments.
+The [real-time recognition guide](docs/21-realtime-recognition-pipeline.md) covers
+the experimental type-aware camera pipeline, model readiness, bounded inference,
+preview calibration and measured limitations.
+
+The [internet-only 3D pilot](docs/23-3d-object-pilot.md) adds a sculpture photo lab
+and visual evaluation report. It remains a candidate preview: measured 3D
+reliability fails acceptance, and its fitted suggestion policy is not enabled.
+
 The camera server now reads references from **MongoDB Atlas**, with process-local
 reuse and periodic freshness checks. See [configuration and deployment](docs/18-atlas-camera-references.md).
 The packaged-catalog instructions below describe the historical trial.
+
+Artwork/room ranking fixes, opt-in geometry experiments and reproducible regression
+commands are documented in [ticket #9 development](docs/20-artwork-room-confusion.md).
+Independent acceptance remains pending; automatic visual identification stays disabled.
 
 The current camera trial uses **server-side recognition**: selected 224 × 224 JPEG
 crops are uploaded while scanning and processed in memory, without storage. The
@@ -573,3 +595,14 @@ regional method reaches only 85.3% automatic precision and makes four false
 automatic selections on negatives. Automatic identification therefore remains
 disabled; the next iteration must improve ranking and references before another
 unseen validation run.
+
+## Reference-photo admin panel
+
+Run the main API and open `/admin/` to select a venue and fill per-object reference
+photo gaps. Set a private `ADMIN_TOKEN` in your runtime environment before logging
+in; the API is disabled until configured. Uploaded photos remain private in Atlas.
+Saving and preparing references are separate actions, and preparation requires the
+existing local visual dependencies/model. Default collection targets (3 planar,
+4 multiview) are configurable and do not establish recognition quality.
+See [admin reference photos](docs/26-admin-reference-photos.md) for setup, data
+storage, publication, validation and the four-view pilot limit.

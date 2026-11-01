@@ -8,6 +8,7 @@ from time import monotonic
 from typing import Any
 
 from bson import ObjectId
+from pymongo import timeout as mongo_timeout
 from pymongo.asynchronous.database import AsyncDatabase
 from starlette.concurrency import run_in_threadpool
 
@@ -15,6 +16,7 @@ from app.core.config import Settings
 from app.modules.live_camera.export import catalog_object
 from app.modules.live_camera.geometry import validate_local
 from app.modules.live_camera.inference import CameraFailure, CameraRecognizer
+from app.modules.live_camera.pipeline import PIPELINE_VERSION, profile, view_coverage
 from app.modules.visual.features import digest
 from app.modules.visual.repository import evidence_hash
 
@@ -25,6 +27,7 @@ POLICY = {
     "global_weight": 0.75,
     "calibrated": False,
     "geometry_min_score": 0.4,
+    "geometry_scope": "reference-view-v1",
 }
 
 
@@ -39,6 +42,25 @@ class AtlasCameraReferences:
         self.directory = directory
         self.location_id = settings.live_camera_location_id
         self.object_ids = sorted(set(settings.live_camera_object_ids))
+        self.policy: dict[str, Any] = dict(POLICY)
+        if settings.live_camera_geometry_rerank:
+            self.policy["geometry_ranking"] = "spatial-verification-v1"
+        self.adaptive = settings.live_camera_adaptive
+        self.calibration_path = settings.live_camera_calibration
+        if self.calibration_path and not self.adaptive:
+            raise ValueError("Camera calibration requires the adaptive pipeline")
+        if self.adaptive:
+            if settings.live_camera_geometry_rerank:
+                raise ValueError("Choose either adaptive or geometry-only ranking")
+            self.policy.update(
+                {
+                    "recognition_pipeline": PIPELINE_VERSION,
+                    "frame_size": 512,
+                    "object_regions": settings.live_camera_object_regions,
+                    "inference_budget_ms": settings.live_camera_inference_budget_ms,
+                    "minimum_stable_ms": 600,
+                }
+            )
         if (
             not self.location_id
             or not ObjectId.is_valid(self.location_id)
@@ -142,8 +164,32 @@ class AtlasCameraReferences:
             ):
                 raise CameraFailure("REFERENCES_UNAVAILABLE")
             rows.append({"object": obj, "record": record, "sources": evidence})
+        self.reference_signature = digest(
+            {"location": location, "rows": rows, "model": self.model}
+        )
+        if self.calibration_path is not None:
+            from app.modules.live_camera.policy import CameraCalibration
+
+            calibration = CameraCalibration.model_validate_json(
+                self.calibration_path.read_bytes()
+            )
+            calibration.check_binding(
+                self.reference_signature,
+                self.model["sha256"],
+                self.policy["object_regions"],
+                self.policy["inference_budget_ms"],
+            )
+            self.policy["profiles"] = {
+                key: value.model_dump() for key, value in calibration.profiles.items()
+            }
+            self.policy["calibration_hash"] = calibration.artifact_hash
         version = digest(
-            {"location": location, "rows": rows, "model": self.model, "policy": POLICY}
+            {
+                "location": location,
+                "rows": rows,
+                "model": self.model,
+                "policy": self.policy,
+            }
         )
         return version, {"id": self.location_id, "name": location["name"]}, rows
 
@@ -155,15 +201,46 @@ class AtlasCameraReferences:
             self.recognizer.expires = expires
             self.recognizer.catalog["expires_at"] = expires.isoformat()
             return self.recognizer
+        # Descriptor reads are independent and immutable-set constrained. Bound
+        # concurrency so startup does not pay one network round trip per object.
+        reads = asyncio.Semaphore(3)
+
+        async def fetch(row: dict[str, Any]) -> Any:
+            projection = {
+                "object_id": 1,
+                "location_id": 1,
+                "set_id": 1,
+                "evidence_hash": 1,
+                "views.reference.source_ids": 1,
+                "views.reference.image_url": 1,
+                "views.reference.viewpoint": 1,
+                "views.reference.rights_status": 1,
+                "views.derived.regions": 1,
+                "views.image_hash": 1,
+            }
+            if (
+                not self.adaptive
+                or profile(row["object"].get("type", "other")) == "planar"
+            ):
+                projection["views.derived.local"] = 1
+            async with reads:
+                # Larger immutable descriptor transfers need more time than a
+                # metadata poll. The complete cold/refresh deadline still applies.
+                with mongo_timeout(10):
+                    return await self.db["visual_references"].find_one(
+                        {
+                            "location_id": self.location_id,
+                            "object_id": str(row["object"]["_id"]),
+                            "set_id": row["record"]["set_id"],
+                        },
+                        projection,
+                    )
+
+        async with asyncio.TaskGroup() as group:
+            tasks = [group.create_task(fetch(row)) for row in rows]
         objects = []
-        for row in rows:
-            record = await self.db["visual_references"].find_one(
-                {
-                    "location_id": self.location_id,
-                    "object_id": str(row["object"]["_id"]),
-                    "set_id": row["record"]["set_id"],
-                }
-            )
+        for row, task in zip(rows, tasks, strict=True):
+            record = task.result()
             if record is None:
                 raise CameraFailure("REFERENCES_CHANGED", 409)
             obj = catalog_object(row["object"], row["sources"], record)
@@ -173,17 +250,23 @@ class AtlasCameraReferences:
                     row["object"]["source_ids"]
                 ):
                     raise CameraFailure("REFERENCES_UNAVAILABLE")
-                local = original["derived"]["local"]
-                validate_local(local)
-                view["local"] = local
+                if not self.adaptive or profile(obj.get("type", "other")) == "planar":
+                    local = original["derived"]["local"]
+                    validate_local(local)
+                    view["local"] = local
+                view["image_hash"] = original.get("image_hash")
+            if self.adaptive:
+                obj["recognition_profile"] = profile(obj.get("type", "other"))
+                obj["reference_view_coverage"] = view_coverage(obj)
             objects.append(obj)
         catalog = {
             "version": "live-camera-v1",
             "reference_version": version,
+            "reference_signature": self.reference_signature,
             "location": location,
             "objects": objects,
             "model": self.model,
-            "policy": POLICY,
+            "policy": self.policy,
             "created_at": now.isoformat(),
             "expires_at": expires.isoformat(),
             "automatic_identification": False,
@@ -193,6 +276,7 @@ class AtlasCameraReferences:
         candidate = await run_in_threadpool(
             CameraRecognizer, self.directory, catalog, self.session
         )
+        await run_in_threadpool(candidate.warm)
         # Do not publish references assembled across a concurrent source/set update.
         if (await self.snapshot())[0] != version:
             raise CameraFailure("REFERENCES_CHANGED", 409)
@@ -206,8 +290,10 @@ class AtlasCameraReferences:
             if monotonic() < self.retry_after:
                 raise CameraFailure("REFERENCES_UNAVAILABLE")
             try:
-                # Covers the complete refresh, not just each individual DB operation.
-                async with asyncio.timeout(20):
+                # Cold preparation includes large descriptor transfers and model
+                # warm-up. Ordinary metadata refresh keeps the shorter bound.
+                # Scanning remains disabled until preparation has completed.
+                async with asyncio.timeout(60 if self.recognizer is None else 20):
                     candidate = await self.load()
                 self.recognizer = candidate
                 self.checked_until = monotonic() + self.interval

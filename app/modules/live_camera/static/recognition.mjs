@@ -20,14 +20,17 @@ export function rank(vector, objects, policy) {
 
 export class Stability {
   constructor(policy) { this.policy = policy; this.reset(); }
-  reset() { this.id = null; this.count = 0; this.lastAt = 0; this.confirmed = null; this.lastConfirmedAt = 0; this.holding = false; }
+  reset() { this.id = null; this.count = 0; this.lastAt = 0; this.firstAt = 0; this.confirmed = null; this.lastConfirmedAt = 0; this.holding = false; this.box = null; this.views = new Set(); }
   current(now) {
     return this.confirmed && now - this.lastConfirmedAt <= (this.holding ? 1500 : 3000) ? this.confirmed : null;
   }
   observe(candidates, now, moving = false) {
     const [first, second] = candidates;
-    const strong = first && first.score >= this.policy.candidate_floor &&
-      first.score - (second?.score ?? 0) >= this.policy.candidate_margin;
+    const thresholds = first && this.policy.profiles?.[first.profile];
+    const strong = first && first.coverage_ready !== false && thresholds?.enabled !== false &&
+      first.score >= (thresholds?.floor ?? this.policy.candidate_floor) &&
+      first.score - (second?.score ?? 0) >= (thresholds?.margin ?? this.policy.candidate_margin);
+    if (strong && this.box && first.bbox && !sameRegion(this.box, first.bbox)) this.reset();
     // Rejected/tied candidates have no reliable identity. Their ordering must not
     // clear an established match, nor refresh the last verified timestamp.
     if (moving || (this.confirmed && (!this.current(now) || (strong && first.id !== this.confirmed)))) this.reset();
@@ -40,12 +43,18 @@ export class Stability {
       this.reset();
       return null;
     }
-    if (this.id !== first.id || now - this.lastAt > 3000) this.count = 0;
+    if (this.id !== first.id || now - this.lastAt > 3000) {
+      this.count = 0;
+      this.firstAt = now;
+      this.views.clear();
+    }
     this.id = first.id;
     this.lastAt = now;
     this.count++;
+    this.box = first.bbox ?? null;
+    if (Number.isInteger(first.view_index)) this.views.add(first.view_index);
     this.holding = false;
-    if (this.count >= this.policy.stable_frames) {
+    if (this.count >= this.policy.stable_frames && now - this.firstAt >= (this.policy.minimum_stable_ms ?? 0)) {
       this.confirmed = first.id;
       this.lastConfirmedAt = now;
     }
@@ -53,12 +62,30 @@ export class Stability {
   }
 }
 
-export function signature(rgba) {
+export function validBox(box) {
+  return Array.isArray(box) && box.length === 4 && box.every(v => Number.isFinite(v) && v >= 0 && v <= 1) && box[0] < box[2] && box[1] < box[3];
+}
+
+export function sameRegion(a, b) {
+  if (!validBox(a) || !validBox(b)) return false;
+  const area = box => (box[2] - box[0]) * (box[3] - box[1]);
+  // Full-frame fallback is not evidence of a new physical object.
+  if (area(a) > 0.95 || area(b) > 0.95) return true;
+  const intersection = Math.max(0, Math.min(a[2], b[2]) - Math.max(a[0], b[0])) *
+    Math.max(0, Math.min(a[3], b[3]) - Math.max(a[1], b[1]));
+  const iou = intersection / (area(a) + area(b) - intersection);
+  const distance = Math.hypot((a[0] + a[2] - b[0] - b[2]) / 2, (a[1] + a[3] - b[1] - b[3]) / 2);
+  return iou >= 0.2 || distance <= 0.15;
+}
+
+export function signature(rgba, size = 224) {
   const values = [];
   // Regular samples from the whole crop, not only its first scanline.
-  for (let y = 7; y < 224; y += 14) {
-    for (let x = 7; x < 224; x += 14) {
-      const i = (y * 224 + x) * 4;
+  for (let row = 0; row < 16; row++) {
+    for (let column = 0; column < 16; column++) {
+      const y = Math.floor((row + 0.5) * size / 16);
+      const x = Math.floor((column + 0.5) * size / 16);
+      const i = (y * size + x) * 4;
       values.push((rgba[i] + rgba[i + 1] + rgba[i + 2]) / (3 * 255));
     }
   }
@@ -93,6 +120,17 @@ export function validateCatalog(catalog, now = Date.now()) {
       !Number.isFinite(policy.candidate_floor) || policy.candidate_floor < 0.45 || policy.candidate_floor > 1 ||
       !Number.isFinite(policy.candidate_margin) || policy.candidate_margin < 0.02 || policy.candidate_margin > 1 ||
       !Number.isInteger(policy.stable_frames) || policy.stable_frames < 3 || policy.stable_frames > 10) fail();
+  if (catalog.readiness && (catalog.readiness.model_warmed !== true || catalog.readiness.references_current !== true)) fail();
+  if (policy.recognition_pipeline && policy.recognition_pipeline !== 'object-regions-types-v5') fail();
+  if (policy.frame_size !== undefined && ![224, 512].includes(policy.frame_size)) fail();
+  if (policy.minimum_stable_ms !== undefined && (!Number.isFinite(policy.minimum_stable_ms) || policy.minimum_stable_ms < 0 || policy.minimum_stable_ms > 3000)) fail();
+  if (policy.profiles) {
+    if (!Object.hasOwn(policy.profiles, 'planar') || !Object.hasOwn(policy.profiles, 'multiview')) fail();
+    for (const threshold of Object.values(policy.profiles)) {
+      if (typeof threshold.enabled !== 'boolean' || !Number.isFinite(threshold.floor) || threshold.floor < 0.45 || threshold.floor > 1 ||
+          !Number.isFinite(threshold.margin) || threshold.margin < 0.02 || threshold.margin > 1) fail();
+    }
+  }
   const ids = new Set();
   for (const object of catalog.objects) {
     if (object.location_id !== catalog.location.id || !/^[a-f0-9]{24}$/.test(object.id) ||

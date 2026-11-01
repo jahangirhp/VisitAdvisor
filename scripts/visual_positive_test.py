@@ -92,11 +92,17 @@ def summarize(rows: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-async def run(folder: Path) -> dict[str, Any]:
+async def run(
+    folder: Path, verification_ids: list[str] | None = None
+) -> dict[str, Any]:
     photos, manifest_hash = load_inputs(folder)
     # Override settings for this in-process API only; no provider key is used.
     settings = Settings().model_copy(
-        update={"openai_api_key": None, "visual_enabled": True}
+        update={
+            "openai_api_key": None,
+            "visual_enabled": True,
+            "visual_geometry_object_ids": verification_ids or [],
+        }
     )
     mongodb = MongoDB(settings)
     rows: list[dict[str, Any]] = []
@@ -167,6 +173,7 @@ async def run(folder: Path) -> dict[str, Any]:
                     "photo_sha256": photo.sha256,
                     "http_status": http_status,
                     "status": body.get("status", "error"),
+                    "method": body.get("method"),
                     "error_code": error_code,
                     "candidates": [
                         {k: c[k] for k in ("object_id", "name", "score")}
@@ -195,6 +202,10 @@ async def run(folder: Path) -> dict[str, Any]:
             "preprocessing": encoder.preprocessing,
             "mode": "visual",
             "scores_are_probabilities": False,
+            "verification_object_ids": settings.visual_geometry_object_ids,
+            "ranking_policy": "bounded-geometry-v1"
+            if settings.visual_geometry_object_ids
+            else "regional-embeddings-v1",
             "measurement": "In-process visual API uploads and live Atlas reads; "
             "full location catalog; no browser crop/tracking or mobile network",
             "dataset": "Positive-only diagnostic; no negative rejection or "
@@ -227,13 +238,23 @@ def main() -> None:
     )
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument(
+        "--verification-object-id",
+        action="append",
+        default=[],
+        help="Opt-in geometry subset; repeat for up to 12 artworks and rooms",
+    )
+    parser.add_argument(
         "--strict", action="store_true", help="Fail for any wrong top-1 result"
     )
     args = parser.parse_args()
     if args.output.exists():
         parser.error("Output already exists; choose a new report path")
+    if len(args.verification_object_id) > 12:
+        parser.error("Verification is bounded to 12 objects")
+    for object_id in args.verification_object_id:
+        validate_id(object_id)
     try:
-        report = asyncio.run(run(args.folder))
+        report = asyncio.run(run(args.folder, args.verification_object_id))
         args.output.write_text(json.dumps(report, indent=2) + "\n")
     except Exception:
         print("POSITIVE_TEST_FAILED: check labels, cached model and Atlas readiness.")

@@ -14,6 +14,10 @@ class Settings(BaseSettings):
         hide_input_in_errors=True,
     )
 
+    admin_token: SecretStr | None = None
+    admin_planar_photo_target: int = Field(default=3, ge=1, le=4)
+    admin_multiview_photo_target: int = Field(default=4, ge=2, le=4)
+
     app_env: str = Field(default="development", min_length=1)
     app_host: str = Field(default="0.0.0.0", min_length=1)
     app_port: int = Field(default=8001, ge=1, le=65535)
@@ -26,10 +30,17 @@ class Settings(BaseSettings):
     ocr_model: str = Field(default="gpt-4.1-mini-2025-04-14", min_length=1)
     ocr_timeout_seconds: float = Field(default=30, ge=1, le=60)
     visual_enabled: bool = False
+    visual_geometry_object_ids: list[str] = Field(default_factory=list, max_length=12)
     visual_evaluation_enabled: bool = False
     visual_evaluation_root: Path = Path("tests/data")
     live_camera_location_id: str | None = None
     live_camera_object_ids: list[str] = Field(default_factory=list, max_length=12)
+    live_camera_geometry_rerank: bool = False
+    live_camera_adaptive: bool = False
+    live_camera_object_regions: bool = False
+    live_camera_preload: bool = True
+    live_camera_inference_budget_ms: int = Field(default=1500, ge=250, le=2000)
+    live_camera_calibration: Path | None = None
     live_camera_refresh_seconds: int = Field(default=30, ge=5, le=120)
     live_camera_bundle: Path = Path(".local/live-camera")
 

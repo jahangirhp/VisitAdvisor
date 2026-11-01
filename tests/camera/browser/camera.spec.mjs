@@ -33,11 +33,12 @@ async function fakeCamera(page, { denied = false, delayed = false } = {}) {
     Object.defineProperty(HTMLVideoElement.prototype, 'videoWidth', { get: () => 640 });
     Object.defineProperty(HTMLVideoElement.prototype, 'videoHeight', { get: () => 480 });
     HTMLMediaElement.prototype.play = async () => {};
-    CanvasRenderingContext2D.prototype.drawImage = function () { this.fillStyle = window.frameColor; this.fillRect(0, 0, 224, 224); };
+    CanvasRenderingContext2D.prototype.drawImage = function () { this.fillStyle = window.frameColor; this.fillRect(0, 0, this.canvas.width, this.canvas.height); };
   }, { ids, denied, delayed });
   await page.route('**/recognize?*', async route => {
     const candidates = await page.evaluate(() => {
       window.frameMessages++;
+      if (window.testSequence?.length) return window.testSequence.shift();
       return window.testCandidates ?? (window.testCandidate ? [{ id: window.testCandidate, score: 0.9 }] : []);
     });
     await route.fulfill({ json: {
@@ -62,7 +63,8 @@ test('live loop posts bounded crops, switches candidates and stops uploads', asy
   await page.evaluate(id => { window.testCandidate = id; }, ids[1]);
   await expect(page.locator('#object-name')).toHaveText('Painting 2');
   await page.evaluate(() => { window.testCandidate = null; });
-  await expect(page.locator('#result')).toBeHidden();
+  await expect(page.locator('#result-kind')).toHaveText('LAST SEEN · CAMERA RECHECKING');
+  await expect(page.locator('#object-name')).toHaveText('Painting 2');
   await expect(page.locator('#status')).toContainText('No supported match yet');
   await page.locator('#stop').click();
   expect(await page.evaluate(() => window.tracksStopped)).toBe(1);
@@ -79,7 +81,7 @@ test('live loop posts bounded crops, switches candidates and stops uploads', asy
   expect(await page.evaluate(() => window.tracksStopped)).toBe(2);
 });
 
-test('small movement keeps a match but large scene changes clear it', async ({ page }) => {
+test('movement preserves the reading card and marks lost tracking last-seen', async ({ page }) => {
   await fakeCamera(page);
   await page.goto('/');
   await page.locator('#start').click();
@@ -98,7 +100,9 @@ test('small movement keeps a match but large scene changes clear it', async ({ p
   await expect(page.locator('#status')).toContainText('Possible match. Check');
   expect(await page.evaluate(() => window.resultWasCleared)).toBe(false);
   await page.evaluate(() => { window.frameColor = '#ffffff'; window.testCandidate = null; });
-  await expect(page.locator('#result')).toBeHidden();
+  await expect(page.locator('#result-kind')).toHaveText('LAST SEEN · CAMERA RECHECKING');
+  await expect(page.locator('#object-name')).toHaveText('Painting 1');
+  expect(await page.evaluate(() => window.resultWasCleared)).toBe(false);
   await page.locator('#stop').click();
 });
 
@@ -173,6 +177,66 @@ test('unavailable references never enable camera access', async ({ page }) => {
   await expect(page.locator('#start')).toBeDisabled();
 });
 
+test('unwarmed model never enables camera access', async ({ page }) => {
+  await fakeCamera(page);
+  await page.route('**/bundle/catalog.json', route => route.fulfill({ json: {
+    ...catalog, readiness: { model_warmed: false, references_current: true },
+  } }));
+  await page.goto('/');
+  await expect(page.locator('#start')).toBeDisabled();
+  expect(await page.evaluate(() => window.cameraRequests)).toBe(0);
+});
+
+test('adaptive camera sends bounded detail frames and still acquires stable matches', async ({ page }) => {
+  await fakeCamera(page);
+  await page.addInitScript(() => {
+    window.uploadSizes = [];
+    const originalEncode = HTMLCanvasElement.prototype.toBlob;
+    HTMLCanvasElement.prototype.toBlob = function(callback, type, quality) {
+      const width = this.width, height = this.height;
+      return originalEncode.call(this, blob => {
+        if (blob) window.uploadSizes.push([width, height, blob.size]);
+        callback(blob);
+      }, type, quality);
+    };
+  });
+  await page.route('**/bundle/catalog.json', route => route.fulfill({ json: {
+    ...catalog, policy: { ...catalog.policy, frame_size: 512,
+      recognition_pipeline: 'object-regions-types-v5', minimum_stable_ms: 600 },
+  } }));
+  await page.route('**/recognize?*', async route => {
+    await route.fulfill({ json: {
+      version: 'camera-server-v1', location_id: location, reference_version: catalog.reference_version,
+      automatic_identification: false, suggestion_allowed: true,
+      candidates: [{ id: ids[0], score: 0.9 }], inferenceMs: 10,
+    } });
+  });
+  await page.goto('/');
+  await page.locator('#start').click();
+  await expect(page.locator('#object-name')).toHaveText('Painting 1');
+  await page.locator('#stop').click();
+  const sizes = await page.evaluate(() => window.uploadSizes);
+  expect(sizes.length).toBeGreaterThanOrEqual(3);
+  expect(sizes.every(size => size[0] === 512 && size[1] === 512 && size[2] <= 256 * 1024)).toBe(true);
+});
+
+test('server abstention prevents strong scores from establishing a suggestion', async ({ page }) => {
+  await fakeCamera(page);
+  await page.route('**/recognize?*', async route => {
+    await page.evaluate(() => window.frameMessages++);
+    await route.fulfill({ json: {
+      version: 'camera-server-v1', location_id: location, reference_version: catalog.reference_version,
+      automatic_identification: false, suggestion_allowed: false,
+      candidates: [{ id: ids[0], score: 0.99 }], inferenceMs: 10,
+    } });
+  });
+  await page.goto('/');
+  await page.locator('#start').click();
+  await expect.poll(() => page.evaluate(() => window.frameMessages)).toBeGreaterThanOrEqual(4);
+  await expect(page.locator('#result')).toBeHidden();
+  await page.locator('#stop').click();
+});
+
 test('phone never requests model, worker, or runtime assets', async ({ page }) => {
   await fakeCamera(page);
   const urls = [];
@@ -182,6 +246,7 @@ test('phone never requests model, worker, or runtime assets', async ({ page }) =
   await expect(page.locator('#object-name')).toHaveText('Painting 1');
   await page.locator('#stop').click();
   expect(urls.some(url => /model\.onnx|worker\.mjs|model-cache|ort\.|\.wasm/.test(url))).toBe(false);
+  await page.getByLabel('Location and settings').click();
   await expect(page.locator('.privacy-note')).toContainText('sent to VisitAdvisor');
 });
 
@@ -205,7 +270,9 @@ test('zero-score ordering does not flicker a verified second painting', async ({
   await expect(page.locator('#status')).toContainText('Possible match. Check');
   expect(await page.evaluate(() => window.resultWasCleared)).toBe(false);
   await page.evaluate(ids => { window.testCandidates = ids.map(id => ({ id, score: 0 })); }, ids);
-  await expect(page.locator('#result')).toBeHidden({ timeout: 2500 });
+  await expect(page.locator('#result-kind')).toHaveText('LAST SEEN · CAMERA RECHECKING');
+  await page.waitForTimeout(1700);
+  await expect(page.locator('#object-name')).toHaveText('Painting 2');
   await page.locator('#stop').click();
 });
 
@@ -230,4 +297,326 @@ test('changed references reload metadata and require a new camera start', async 
   await expect(page.locator('#result')).toBeHidden();
   expect(await page.evaluate(() => window.tracksStopped)).toBe(1);
   expect(await page.evaluate(() => window.cameraRequests)).toBe(1);
+});
+
+function preparedResponse(object, selectedCatalog = catalog) {
+  const text = value => ({ text: value, citations: [{ source_id: 'source', quote: 'Canonical evidence' }] });
+  return {
+    object_id: object.id, location_id: selectedCatalog.location.id,
+    reference_version: selectedCatalog.reference_version, source_ids: ['source'], review_status: 'unreviewed',
+    content: { introduction: text(`Introduction for ${object.name}`), facts: [text(`Fact for ${object.name}`)],
+      story: text(`Story for ${object.name}`), history: text(`History for ${object.name}`), interesting_fact: null },
+  };
+}
+
+async function contentCamera(page, count = 2, overrides = {}) {
+  await fakeCamera(page);
+  const fixture = { ...catalog, ...overrides, objects: Array.from({ length: count }, (_, index) => ({
+    id: (index + 1).toString(16).padStart(24, '0'), location_id: location,
+    name: `Exhibit ${index + 1}`, sources: [{ id: 'source', title: 'Museum record', url: 'https://example.com/evidence' }],
+  })) };
+  await page.route('**/bundle/catalog.json', route => route.fulfill({ json: fixture }));
+  await page.route('**/objects/*/experience?*', route => {
+    const id = new URL(route.request().url()).pathname.split('/').at(-2);
+    const object = fixture.objects.find(object => object.id === id);
+    return route.fulfill({ json: preparedResponse(object, fixture) });
+  });
+  await page.goto('/');
+  await page.evaluate(id => { window.testCandidate = id; }, fixture.objects[0].id);
+  await page.locator('#start').click();
+  return fixture;
+}
+
+test('ten camera objects load their own prepared content and source citations at 320px', async ({ page }) => {
+  test.setTimeout(60000);
+  await page.setViewportSize({ width: 320, height: 740 });
+  const fixture = await contentCamera(page, 10);
+  for (const object of fixture.objects) {
+    await page.evaluate(id => { window.testCandidate = id; }, object.id);
+    await expect(page.locator('#object-name')).toHaveText(object.name);
+    for (const section of ['Introduction', 'Fact', 'Story', 'History']) {
+      await expect(page.locator('#experience')).toContainText(`${section} for ${object.name}`);
+    }
+    await expect(page.locator('#experience')).toContainText('Not yet fact-checked');
+    await expect(page.locator('#result-kind')).toHaveText('POSSIBLE MATCH · PLEASE VERIFY');
+    await expect(page.locator('#experience')).toContainText('Not available for this object.');
+  }
+  await page.locator('#experience summary').first().click();
+  await expect(page.locator('#experience blockquote').first()).toHaveText('Canonical evidence');
+  await expect(page.locator('#experience a').first()).toHaveAttribute('href', 'https://example.com/evidence');
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await page.screenshot({ path: test.info().outputPath('prepared-content-320.png'), fullPage: true });
+  await page.locator('#stop').click();
+  await expect(page.locator('#experience')).toBeHidden();
+});
+
+for (const [error, status, expected] of [
+  ['CONTENT_NOT_PREPARED', 404, 'has not been prepared'],
+  ['CONTENT_OUTDATED', 409, 'needs a source update'],
+  ['CONTENT_UNAVAILABLE', 503, 'is unavailable'],
+]) {
+  test(`${error} has an honest fallback without breaking scanning`, async ({ page }) => {
+    const fixture = await contentCamera(page);
+    await page.route('**/objects/*/experience?*', route => route.fulfill({ status, json: { error } }));
+    await expect(page.locator('#experience')).toContainText(expected);
+    await expect(page.locator('#object-name')).toHaveText(fixture.objects[0].name);
+    await expect(page.locator('#stop')).toBeVisible();
+    await page.locator('#stop').click();
+  });
+}
+
+for (const action of ['switch', 'stop', 'background', 'location']) {
+  test(`late content cannot return after ${action}`, async ({ page }) => {
+    const fixture = await contentCamera(page);
+    let release;
+    const held = new Promise(resolve => { release = resolve; });
+    let entered = false;
+    await page.route('**/objects/*/experience?*', async route => {
+      const object = fixture.objects[0];
+      if (route.request().url().includes(object.id)) {
+        entered = true;
+        await held;
+        await route.fulfill({ json: preparedResponse(object, fixture) }).catch(() => {});
+      } else {
+        await route.fulfill({ json: preparedResponse(fixture.objects[1], fixture) });
+      }
+    });
+    await expect.poll(() => entered).toBe(true);
+    if (action === 'switch') {
+      await page.evaluate(id => { window.testCandidate = id; }, fixture.objects[1].id);
+      await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 2');
+    } else if (action === 'stop') {
+      await page.locator('#stop').click();
+    } else if (action === 'background') {
+      await page.evaluate(() => {
+        Object.defineProperty(document, 'hidden', { configurable: true, get: () => true });
+        document.dispatchEvent(new Event('visibilitychange'));
+      });
+    } else {
+      await page.locator('#menu summary').first().click();
+      await page.locator('#location').dispatchEvent('change');
+    }
+    release();
+    await page.waitForTimeout(300);
+    await expect(page.locator('#experience')).not.toContainText('Introduction for Exhibit 1');
+    if (action !== 'switch') await expect(page.locator('#result')).toBeHidden();
+  });
+}
+
+for (const invalid of ['identity', 'location', 'version', 'citation']) {
+  test(`mismatched ${invalid} content is never rendered`, async ({ page }) => {
+    const fixture = await contentCamera(page);
+    await page.route('**/objects/*/experience?*', route => {
+      const data = preparedResponse(fixture.objects[0], fixture);
+      if (invalid === 'identity') data.object_id = fixture.objects[1].id;
+      if (invalid === 'location') data.location_id = 'f'.repeat(24);
+      if (invalid === 'version') data.reference_version = 'f'.repeat(64);
+      if (invalid === 'citation') data.content.introduction.citations[0].source_id = 'foreign';
+      return route.fulfill({ json: data });
+    });
+    await expect(page.locator('#experience')).toContainText('could not load');
+    await expect(page.locator('#experience')).not.toContainText('Introduction for');
+    await page.locator('#stop').click();
+  });
+}
+
+test('sparse prepared content shows missing sections and treats text as text', async ({ page }) => {
+  const fixture = await contentCamera(page);
+  await page.route('**/objects/*/experience?*', route => {
+    const data = preparedResponse(fixture.objects[0], fixture);
+    data.content.facts = [];
+    data.content.story = data.content.history = null;
+    data.content.introduction.text = '<img src=x onerror=alert(1)>';
+    return route.fulfill({ json: data });
+  });
+  await expect(page.locator('#experience')).toContainText('<img src=x onerror=alert(1)>');
+  await expect(page.locator('#experience img')).toHaveCount(0);
+  await expect(page.locator('.content-missing')).toHaveCount(4);
+  await page.locator('#stop').click();
+});
+
+test('30 seconds of jitter and lost views retain content without refetching', async ({ page }) => {
+  test.setTimeout(45000);
+  let contentReads = 0;
+  page.on('request', request => { if (request.url().includes('/experience?')) contentReads++; });
+  const fixture = await contentCamera(page);
+  await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+  await page.evaluate(() => {
+    window.cardHidden = false;
+    window.originalContent = document.querySelector('#experience h3');
+    new MutationObserver(() => {
+      if (document.getElementById('result').hidden) window.cardHidden = true;
+    }).observe(document.getElementById('result'), { attributes: true });
+    window.testCandidate = null;
+    let bright = false;
+    window.jitter = setInterval(() => {
+      bright = !bright;
+      window.frameColor = bright ? '#708090' : '#506070';
+    }, 170);
+  });
+  await page.waitForTimeout(30000);
+  await expect(page.locator('#result-kind')).toHaveText('LAST SEEN · CAMERA RECHECKING');
+  await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+  expect(await page.evaluate(() => window.cardHidden)).toBe(false);
+  expect(contentReads).toBe(1);
+  await page.evaluate(id => {
+    clearInterval(window.jitter);
+    window.testCandidate = id;
+  }, fixture.objects[0].id);
+  await expect(page.locator('#result')).toHaveAttribute('data-state', 'live');
+  expect(await page.evaluate(() => window.originalContent === document.querySelector('#experience h3'))).toBe(true);
+  expect(contentReads).toBe(1);
+  await page.locator('#stop').click();
+  await expect(page.locator('#result')).toBeHidden();
+});
+
+test('one competing frame and tied objects cannot replace a retained card', async ({ page }) => {
+  const fixture = await contentCamera(page);
+  await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+  const before = await page.evaluate(() => window.frameMessages);
+  await page.evaluate(ids => {
+    window.testCandidate = null;
+    window.testSequence = [
+      [{ id: ids[1], score: 0.9 }],
+      [{ id: ids[0], score: 0.60 }, { id: ids[1], score: 0.59 }],
+      [{ id: ids[1], score: 0 }, { id: ids[0], score: 0 }],
+    ];
+  }, fixture.objects.map(object => object.id));
+  await expect.poll(() => page.evaluate(() => window.frameMessages)).toBeGreaterThanOrEqual(before + 5);
+  await expect(page.locator('#object-name')).toHaveText('Exhibit 1');
+  await expect(page.locator('#result')).toHaveAttribute('data-state', 'last-seen');
+  await page.evaluate(id => { window.testCandidate = id; }, fixture.objects[1].id);
+  await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 2');
+  await expect(page.locator('#result')).toHaveAttribute('data-state', 'live');
+  await page.locator('#stop').click();
+});
+
+for (const event of ['waiting', 'stalled', 'emptied']) {
+  test(`${event} retains the card and allows fresh acquisition`, async ({ page }) => {
+    const fixture = await contentCamera(page);
+    await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+    await page.evaluate(event => {
+      window.testCandidate = null;
+      document.getElementById('camera').dispatchEvent(new Event(event));
+    }, event);
+    await expect(page.locator('#result')).toHaveAttribute('data-state', 'last-seen');
+    await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+    await page.evaluate(id => { window.testCandidate = id; }, fixture.objects[1].id);
+    await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 2');
+    await page.locator('#stop').click();
+  });
+}
+
+for (const status of [429, 503]) {
+  test(`transient ${status} keeps last-seen content and recovery does not refetch`, async ({ page }) => {
+    let contentReads = 0;
+    page.on('request', request => { if (request.url().includes('/experience?')) contentReads++; });
+    const fixture = await contentCamera(page);
+    await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+    let fail = true;
+    await page.route('**/recognize?*', route => fail ? route.fulfill({ status, json: { error: 'RECOGNITION_BUSY' } }) : route.fulfill({ json: {
+      version: 'camera-server-v1', location_id: location, reference_version: catalog.reference_version,
+      automatic_identification: false, candidates: [{ id: fixture.objects[0].id, score: 0.9 }],
+    } }));
+    await expect(page.locator('#status')).toContainText('Retrying');
+    await expect(page.locator('#result')).toHaveAttribute('data-state', 'last-seen');
+    await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+    fail = false;
+    await expect(page.locator('#result')).toHaveAttribute('data-state', 'live');
+    expect(contentReads).toBe(1);
+    await page.locator('#stop').click();
+  });
+}
+
+test('persistent transport failures end the session and clear retained content', async ({ page }) => {
+  await contentCamera(page);
+  await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+  await page.route('**/recognize?*', route => route.fulfill({ status: 503, json: { error: 'RECOGNITION_BUSY' } }));
+  await expect(page.locator('#result')).toHaveAttribute('data-state', 'last-seen');
+  await expect(page.locator('#start')).toBeVisible({ timeout: 8000 });
+  await expect(page.locator('#result')).toBeHidden();
+  await expect(page.locator('#experience')).toBeHidden();
+});
+
+test('reference invalidation clears retained content and disables scanning', async ({ page }) => {
+  await contentCamera(page);
+  await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+  await page.route('**/bundle/catalog.json', route => route.fulfill({ status: 503, json: { error: 'REFERENCES_UNAVAILABLE' } }));
+  await page.route('**/recognize?*', route => route.fulfill({ status: 503, json: { error: 'REFERENCES_UNAVAILABLE' } }));
+  await expect(page.locator('#result')).toBeHidden();
+  await expect(page.locator('#start')).toBeDisabled();
+});
+
+test('expired references clear a last-seen card even when no useful frame arrives', async ({ page }) => {
+  await contentCamera(page, 2, { expires_at: new Date(Date.now() + 6000).toISOString() });
+  await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+  await page.evaluate(() => {
+    window.testCandidate = null;
+    Object.defineProperty(document.getElementById('camera'), 'videoWidth', { get: () => 0 });
+  });
+  await expect(page.locator('#result')).toHaveAttribute('data-state', 'last-seen');
+  await expect(page.locator('#result')).toBeHidden({ timeout: 8000 });
+  await expect(page.locator('#start')).toBeDisabled();
+});
+
+test('content can finish loading during tracking loss without changing last-seen state', async ({ page }) => {
+  const fixture = await contentCamera(page);
+  let release;
+  const held = new Promise(resolve => { release = resolve; });
+  let entered = false;
+  await page.route('**/objects/*/experience?*', async route => {
+    entered = true;
+    await held;
+    await route.fulfill({ json: preparedResponse(fixture.objects[0], fixture) }).catch(() => {});
+  });
+  await expect.poll(() => entered).toBe(true);
+  await page.evaluate(() => {
+    window.testCandidate = null;
+    document.getElementById('camera').dispatchEvent(new Event('waiting'));
+  });
+  await expect(page.locator('#result')).toHaveAttribute('data-state', 'last-seen');
+  release();
+  await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
+  await expect(page.locator('#result')).toHaveAttribute('data-state', 'last-seen');
+  await page.locator('#stop').click();
+});
+
+for (const candidates of [
+  [{ id: ids[0], score: 0.60 }, { id: ids[1], score: 0.59 }],
+  [{ id: ids[0], score: 0.50 }],
+]) {
+  test(`initial uncertain scores ${candidates.map(c => c.score).join('/')} cannot create a card`, async ({ page }) => {
+    await fakeCamera(page);
+    await page.addInitScript(candidates => { window.testCandidates = candidates; }, candidates);
+    await page.goto('/');
+    await page.locator('#start').click();
+    await expect.poll(() => page.evaluate(() => window.frameMessages)).toBeGreaterThanOrEqual(4);
+    await expect(page.locator('#result')).toBeHidden();
+    await page.locator('#stop').click();
+  });
+}
+
+test('wrong-location candidate IDs cannot create a result and retained controls work by keyboard', async ({ page }) => {
+  await fakeCamera(page);
+  await page.addInitScript(() => { window.testCandidates = [{ id: 'f'.repeat(24), score: 0.99 }]; });
+  await page.goto('/');
+  const preview = page.getByRole('button', { name: 'Expand camera preview' });
+  await preview.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.getByRole('button', { name: 'Shrink camera preview' })).toBeFocused();
+  await page.keyboard.press('Space');
+  await expect(preview).toBeFocused();
+  const menu = page.getByLabel('Location and settings');
+  await menu.focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#location')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(menu).toBeFocused();
+  await page.locator('#start').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#status')).toContainText('Retrying');
+  await expect(page.locator('#result')).toBeHidden();
+  await page.locator('#stop').focus();
+  await page.keyboard.press('Enter');
+  await expect(page.locator('#start')).toBeVisible();
 });

@@ -1,0 +1,203 @@
+{
+  "created_at": "2026-10-17T14:40:31.609095+00:00",
+  "purpose": "3d_reference_inventory",
+  "location": {
+    "id": "6a9dd4106d52c3bc3965869d",
+    "name": "Rijksmuseum"
+  },
+  "reference_version": "087b3883defc614d5a6c725fbfcbf3b6fd5d5475e3ca366f2789a7ec8a1acc77",
+  "objects": [
+    {
+      "object_id": "6aa9a746dd73e04d96146161",
+      "name": "Shiva Nataraja",
+      "type": "Shiva",
+      "canonical_object_uri": "https://id.rijksmuseum.nl/200106309",
+      "set_id": "d2035b2bfa9c481aaa0374a489f38137",
+      "reference_count": 3,
+      "distinct_images": 3,
+      "distinct_viewpoint_labels": 3,
+      "structural_multiview_minimum_met": true,
+      "angle_coverage_verified": false,
+      "gaps": [],
+      "views": [
+        {
+          "image_sha256": "54b834f8ccf5295f3091e043061024f8173e77e73b7d74ed70603826184cf75b",
+          "valid_image_hash": true,
+          "viewpoint": "front-right studio view",
+          "source_ids": [
+            "6aa9a746658f4b405d46009f"
+          ],
+          "image_url": "https://iiif.micr.io/LAXcK/full/800,/0/default.jpg",
+          "rights_status": "recorded"
+        },
+        {
+          "image_sha256": "626d6f4bfb813f8b79c43823abd2dbc54359ebc93f1c76175213e31470abcc9f",
+          "valid_image_hash": true,
+          "viewpoint": "front oblique visitor view",
+          "source_ids": [
+            "6aa9a746658f4b405d46009f"
+          ],
+          "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Shiva_Nataraja%2C_anoniem%2C_1100_-_1200.JPG/960px-Shiva_Nataraja%2C_anoniem%2C_1100_-_1200.JPG?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "rights_status": "recorded"
+        },
+        {
+          "image_sha256": "8017705789c81cd18f4f789f3daaef2fcc8234e9c01564b2eadd295fee4d45cf",
+          "valid_image_hash": true,
+          "viewpoint": "front-left gallery view",
+          "source_ids": [
+            "6aa9a746658f4b405d46009f"
+          ],
+          "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d6/Shiva_%2826940489611%29.jpg/960px-Shiva_%2826940489611%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "rights_status": "recorded"
+        }
+      ]
+    },
+    {
+      "object_id": "6aab0df3dd73e04d96150a1a",
+      "name": "Spring",
+      "type": "tuinbeeld",
+      "canonical_object_uri": "https://id.rijksmuseum.nl/200116059",
+      "set_id": "603395d9730d4b1cbc8cc3c693f4e38a",
+      "reference_count": 2,
+      "distinct_images": 2,
+      "distinct_viewpoint_labels": 2,
+      "structural_multiview_minimum_met": true,
+      "angle_coverage_verified": false,
+      "gaps": [
+        "rights_metadata_needs_review"
+      ],
+      "views": [
+        {
+          "image_sha256": "ea4132b6a84797185c2ae9f4728d71950c1b52fa5d1481e53b219ab4e28aeabe",
+          "valid_image_hash": true,
+          "viewpoint": "canonical front/full view",
+          "source_ids": [
+            "6aab0df3303f7d479a4f23db"
+          ],
+          "image_url": "https://iiif.micr.io/zoYmn/full/800,/0/default.jpg",
+          "rights_status": "unknown"
+        },
+        {
+          "image_sha256": "5b34d881bafda5917abc73bf7648b893989ca8f9f73a8b7937b926fd88965c64",
+          "valid_image_hash": true,
+          "viewpoint": "v4 development capture; closer or oblique view",
+          "source_ids": [
+            "6aab0df3303f7d479a4f23db"
+          ],
+          "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Rijksmuseumtuinen_30.jpg/1280px-Rijksmuseumtuinen_30.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "rights_status": "recorded"
+        }
+      ]
+    },
+    {
+      "object_id": "6aab0df5dd73e04d96150a1b",
+      "name": "Autumn",
+      "type": "tuinbeeld",
+      "canonical_object_uri": "https://id.rijksmuseum.nl/200116061",
+      "set_id": "3fa28e7abfb745dea7b3726c0f28d588",
+      "reference_count": 2,
+      "distinct_images": 2,
+      "distinct_viewpoint_labels": 2,
+      "structural_multiview_minimum_met": true,
+      "angle_coverage_verified": false,
+      "gaps": [
+        "rights_metadata_needs_review"
+      ],
+      "views": [
+        {
+          "image_sha256": "a1a46b022499667a589599b2094b65f38f5cb3cbc84f6aedb2b75d6f4bcaeca5",
+          "valid_image_hash": true,
+          "viewpoint": "canonical front/full view",
+          "source_ids": [
+            "6aab0df4303f7d479a4f23dc"
+          ],
+          "image_url": "https://iiif.micr.io/OYOCo/full/800,/0/default.jpg",
+          "rights_status": "unknown"
+        },
+        {
+          "image_sha256": "2dcc8495aca30509ec66173ae9688fe44b67d69541027c839b4186482c2014d3",
+          "valid_image_hash": true,
+          "viewpoint": "v4 development capture; closer or oblique view",
+          "source_ids": [
+            "6aab0df4303f7d479a4f23dc"
+          ],
+          "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Rijksmuseumtuinen_31.jpg/1280px-Rijksmuseumtuinen_31.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "rights_status": "recorded"
+        }
+      ]
+    },
+    {
+      "object_id": "6aab0df6dd73e04d96150a1c",
+      "name": "Summer",
+      "type": "tuinbeeld",
+      "canonical_object_uri": "https://id.rijksmuseum.nl/200116060",
+      "set_id": "b9795a5b554d4a479df4c0bd3321466f",
+      "reference_count": 1,
+      "distinct_images": 1,
+      "distinct_viewpoint_labels": 1,
+      "structural_multiview_minimum_met": false,
+      "angle_coverage_verified": false,
+      "gaps": [
+        "fewer_than_two_distinct_images",
+        "fewer_than_two_distinct_labelled_views",
+        "rights_metadata_needs_review"
+      ],
+      "views": [
+        {
+          "image_sha256": "7f3c6bbc1e74422ada0c6d849e6391f08d0233b7a6679641fed5fb5432bab9a1",
+          "valid_image_hash": true,
+          "viewpoint": "canonical front/full view",
+          "source_ids": [
+            "6aab0df5303f7d479a4f23dd"
+          ],
+          "image_url": "https://iiif.micr.io/vrYfF/full/800,/0/default.jpg",
+          "rights_status": "unknown"
+        }
+      ]
+    },
+    {
+      "object_id": "6aab0df8dd73e04d96150a1e",
+      "name": "Apollo",
+      "type": "tuinbeeld",
+      "canonical_object_uri": "https://id.rijksmuseum.nl/200116063",
+      "set_id": "a1177e9e308d4075b1d22738ee65ccaa",
+      "reference_count": 2,
+      "distinct_images": 2,
+      "distinct_viewpoint_labels": 2,
+      "structural_multiview_minimum_met": true,
+      "angle_coverage_verified": false,
+      "gaps": [
+        "rights_metadata_needs_review"
+      ],
+      "views": [
+        {
+          "image_sha256": "666a382a793db33e5e88faa4abac13d8e7d681f19441db38424571e9c1da671f",
+          "valid_image_hash": true,
+          "viewpoint": "canonical front/full view",
+          "source_ids": [
+            "6aab0df7303f7d479a4f23de"
+          ],
+          "image_url": "https://iiif.micr.io/ZepOf/full/800,/0/default.jpg",
+          "rights_status": "unknown"
+        },
+        {
+          "image_sha256": "fbbc357d785bb8e7cc8c4e65aa6741c429ce5b2086d8f3800e278fc5303f9dae",
+          "valid_image_hash": true,
+          "viewpoint": "v4 development capture; closer or oblique view",
+          "source_ids": [
+            "6aab0df7303f7d479a4f23de"
+          ],
+          "image_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Rijksmuseumtuinen_13.jpg/1280px-Rijksmuseumtuinen_13.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "rights_status": "recorded"
+        }
+      ]
+    }
+  ],
+  "structural_minimum_met_count": 4,
+  "recognition_requests_attempted": 0,
+  "database_writes": 0,
+  "accuracy_measured": false,
+  "all_angle_coverage_claimed": false,
+  "ready_for_release": false,
+  "note": "Structural labels are not verified camera angles. Review identity, rights, capture groups and independent test photos before calibration. This inventory does not establish recognition accuracy."
+}

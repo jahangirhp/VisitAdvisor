@@ -3,45 +3,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#172a24">
-  <title>VisitAdvisor · Live camera</title>
+  <meta name="theme-color" content="#f5f6f8">
+  <title>VisitAdvisor</title>
   <link rel="stylesheet" href="./camera.css">
   <script type="module" src="./camera.mjs"></script>
 </head>
 <body>
   <main>
-    <header><a class="brand" href="./">VisitAdvisor<span>FIELD PROTOTYPE</span></a><span class="privacy">Server recognition</span></header>
-    <section class="intro">
-      <p class="eyebrow">LOOK CLOSER</p>
-      <h1>A little context.<br>A new way to look.</h1>
-      <p>Move your camera between supported objects. Pause briefly to see a possible match.</p>
+    <header>
+      <a class="brand" href="./">VisitAdvisor</a>
+      <details class="menu" id="menu">
+        <summary aria-label="Location and settings"><span aria-hidden="true">☰</span></summary>
+        <div class="menu-panel">
+          <label for="location">Location</label>
+          <select id="location" disabled><option>Loading…</option></select>
+          <p id="target-note" hidden></p>
+          <p class="privacy-note">Camera crops are sent to VisitAdvisor while scanning. Images are not saved.</p>
+        </div>
+      </details>
+    </header>
+    <section class="capture-bar" aria-label="Camera controls">
+      <div class="viewer" role="button" tabindex="0" aria-label="Expand camera preview" aria-expanded="false">
+        <video id="camera" autoplay playsinline muted></video>
+        <div id="placeholder"><span class="camera-icon" aria-hidden="true">◎</span></div>
+        <div class="guide" aria-hidden="true"></div>
+        <span id="live-label" hidden>LIVE</span>
+      </div>
+      <div class="controls">
+        <button id="start" disabled>Start</button>
+        <button id="stop" class="secondary" hidden>Stop</button>
+        <span class="capture-hint">Point at an object</span>
+      </div>
     </section>
-    <label for="location">Your location</label>
-    <select id="location" disabled><option>Loading museum references…</option></select>
-    <p id="target-note" hidden></p>
-    <section class="viewer" aria-label="Live camera preview">
-      <video id="camera" autoplay playsinline muted></video>
-      <div id="placeholder"><span class="camera-icon" aria-hidden="true">◎</span><p>The discovery starts here</p><small>Use your rear camera to explore.</small></div>
-      <div class="guide" aria-hidden="true"></div>
-      <span id="live-label" hidden>LIVE · SERVER</span>
+    <section class="detection" aria-label="Detection">
+      <h1>Detection</h1>
+      <p id="status" role="status" aria-live="polite">Loading…</p>
+      <p id="phone-setup" hidden><a href="./phone-setup.html">Set up camera access</a></p>
+      <section id="result" class="result" hidden aria-live="polite">
+        <p id="result-kind" class="eyebrow">POSSIBLE MATCH · PLEASE VERIFY</p>
+        <h2 id="object-name"></h2><p id="object-meta"></p><p id="object-description"></p>
+        <div id="sources"></div>
+        <div id="experience" hidden></div>
+      </section>
     </section>
-    <p id="status" role="status" aria-live="polite">Preparing the camera prototype…</p>
-    <p id="phone-setup" hidden><a href="./phone-setup.html">Set up HTTPS for this local iPhone test</a></p>
-    <div class="controls"><button id="start" disabled>Start live camera</button><button id="stop" class="secondary" hidden>Stop camera</button></div>
-    <p class="privacy-note">While scanning, small crops from the center guide are sent to VisitAdvisor over HTTPS for recognition. Frames are processed in memory and are not saved or recorded. Stop pauses uploads. Internet access is required; no model download.</p>
-    <section id="result" class="result" hidden aria-live="polite">
-      <p class="eyebrow">POSSIBLE MATCH · PLEASE VERIFY</p>
-      <h2 id="object-name"></h2><p id="object-meta"></p><p id="object-description"></p>
-      <div id="sources"></div>
-    </section>
-    <details><summary>Supported objects & test details</summary>
-      <p>This is an experimental candidate preview, not a verified identification. Keep one object inside the guide. Unknown objects may resemble supported ones.</p>
-      <ul id="objects"></ul>
-      <div id="reference-credits"></div>
-      <dl><dt>Model download</dt><dd id="download-size">—</dd><dt>Reference snapshot</dt><dd id="snapshot">—</dd><dt>Runtime</dt><dd id="runtime">—</dd><dt>Last request round trip</dt><dd id="timing">—</dd><dt>Session p95 analysis</dt><dd id="p95">—</dd><dt>Analyzed frames</dt><dd id="frames">0</dd></dl>
-      <p>Timings stay in this page and include frame preparation, upload, server recognition and the response. They exclude page startup and are not an accuracy measurement.</p>
-    </details>
-    <footer>Made for looking, not recording.</footer>
   </main>
 </body>
 </html>

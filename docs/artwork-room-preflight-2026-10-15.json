@@ -1,0 +1,53 @@
+{
+  "purpose": "regression",
+  "manifest_sha256": "334c7a39a6935a6f4f2e62d6a3be2b0161b576e7da666962c9ad354564c9e186",
+  "photo_hashes": {
+    "6a9dd4126d52c3bc396586a0-commons-181164957.jpg": "bd2c7ce9b7d7d4f7d749ad26a7fc4eb0ef488b4b75732662bbc911097c91356f",
+    "6aab0dbcdd73e04d96150a00-commons-88945969.jpg": "f94d20b4820cf249452cebb2887e5fa50a76bdfa29727d7610add57e9e68e1d3",
+    "6aab0dbcdd73e04d96150a00-commons-88945971.jpg": "ebde23763ed4c33d191e418e40c17a898d0ba18b97bbc5c0def66daf264dc07e",
+    "6aab0dbcdd73e04d96150a00-commons-88945987.jpg": "f4059311b4c8d1e68e18fd990464a6aa3511b93a13f2ee0f128ce3fcebee147f",
+    "6aab0dbcdd73e04d96150a00-commons-544866.jpg": "db2e10b10137a564a24b959bbe7796dd5a404cf4ebcbc2f1b5143fd81b860073",
+    "6aab0dbcdd73e04d96150a00-commons-873656.jpg": "1b90a2362b0129785f21b46925754b9525eb4170437a4520d0043ddb8c967543",
+    "6aab0dbcdd73e04d96150a00-commons-50148922.jpg": "2896c2cb1de25ea00b4d007c0c7388f63e9b34487d82a5dca3889e6c933d40a0",
+    "6aab0dbcdd73e04d96150a00-commons-83441070.jpg": "3d1ef7f8650a9e4489b345cdfbaacf052de31051ca273f894139078e0816907c",
+    "6aab0dbcdd73e04d96150a00-commons-78703510.jpg": "b4b65375955cdfb1eb6bf41f8805383575ff2ab16bc0a7b6016db7f0e5f50ce3"
+  },
+  "normalized_photo_hashes": {
+    "6a9dd4126d52c3bc396586a0-commons-181164957.jpg": "bae63537ee63176546a55a048b5c5b00dd93c63732b2aa1c1439d59640c60aea",
+    "6aab0dbcdd73e04d96150a00-commons-88945969.jpg": "2734aee46e697458b43b5ef4bd41f28925accd0d3912479c971d1db371da194b",
+    "6aab0dbcdd73e04d96150a00-commons-88945971.jpg": "2a394b9c21110de2ad04f5d4b911f4b3dfa59b5138d2c9462ad4b784b224fb5b",
+    "6aab0dbcdd73e04d96150a00-commons-88945987.jpg": "73e92d2ececb1eca75cafcd5dd8d42b5441a811ea9858c9f826dfaf6fb1651b4",
+    "6aab0dbcdd73e04d96150a00-commons-544866.jpg": "99cb3636d3c3b2928e36969e008037702c7f1bf5f6eac4bd4e2326adff416288",
+    "6aab0dbcdd73e04d96150a00-commons-873656.jpg": "bc1bf34d77048a2a585653345d2025c76f7b44328a931bd1068821bc61d89dbd",
+    "6aab0dbcdd73e04d96150a00-commons-50148922.jpg": "53e0450c1ffc9949c9f7e431a3366261cfc98a13ce3c3827b62f9d4e0ccdcb7b",
+    "6aab0dbcdd73e04d96150a00-commons-83441070.jpg": "10851eac22a0d053890c2d6224dfed4acfd419c702979c05f3d6965b04989839",
+    "6aab0dbcdd73e04d96150a00-commons-78703510.jpg": "9335061efdae6b1fabc9761bcd389fd81001d985a01fec17173ee23b9034e79f"
+  },
+  "dataset_gates": {
+    "new_reviewed_holdout": false,
+    "thirty_artwork_photos": false,
+    "five_artworks_six_captures_each": false,
+    "twenty_room_only_negatives": false,
+    "evaluation_only": true,
+    "positive_targets_are_artworks": true,
+    "no_historical_query_or_reference_bytes": false
+  },
+  "positive_photos": 9,
+  "room_only_negatives": 0,
+  "artwork_capture_groups": {
+    "6a9dd4126d52c3bc396586a0": [
+      "commons-Brian92828-2023-05-06"
+    ],
+    "6aab0dbcdd73e04d96150a00": [
+      "commons-Ciell-2019-10-26",
+      "commons-Hannolans-2014-06-19",
+      "commons-Maksim-2005-10-05",
+      "commons-Mariordo-2016-12-28",
+      "commons-Vasyatka1-2017-07-28",
+      "commons-Voytikof~commonswiki-2005-05-18"
+    ]
+  },
+  "ready_for_acceptance_run": false,
+  "recognition_requests_attempted": 0,
+  "acceptance_passed": false
+}

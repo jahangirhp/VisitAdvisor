@@ -16,23 +16,44 @@ from starlette.middleware.base import RequestResponseEndpoint
 
 from app.core.config import Settings
 from app.db.mongodb import MongoDB
+from app.modules.live_camera.experience import read_experience
 from app.modules.live_camera.inference import CameraFailure, CameraRecognizer
 from app.modules.live_camera.references import AtlasCameraReferences
 
 STATIC = Path(__file__).with_name("static")
-MAX_FRAME_BYTES = 128 * 1024
+MAX_FRAME_BYTES = 256 * 1024
 
 
 def create_camera_app(
-    bundle: Path | None = None, recognizer: CameraRecognizer | None = None
+    bundle: Path | None = None,
+    recognizer: CameraRecognizer | None = None,
+    configured_settings: Settings | None = None,
 ) -> FastAPI:
     directory = bundle or Path(os.getenv("LIVE_CAMERA_BUNDLE", ".local/live-camera"))
 
     @asynccontextmanager
     async def lifespan(application: FastAPI) -> AsyncIterator[None]:
+        task: asyncio.Task[None] | None = None
         try:
+            if bundle is None and recognizer is None:
+                try:
+                    settings = configured_settings or Settings()
+                    if (
+                        settings.live_camera_preload
+                        and settings.live_camera_location_id
+                        and settings.live_camera_object_ids
+                    ):
+                        task = asyncio.create_task(prepare())
+                except Exception:
+                    pass  # Readiness reports a safe failure when setup is incomplete.
             yield
         finally:
+            if task is not None:
+                task.cancel()
+                try:
+                    await task
+                except asyncio.CancelledError:
+                    pass
             if application.state.owns_mongodb:
                 await application.state.mongodb.close()
             application.state.mongodb = None
@@ -100,7 +121,7 @@ def create_camera_app(
             )
             if references is None:
                 try:
-                    settings = Settings()
+                    settings = configured_settings or Settings()
                     directory = settings.live_camera_bundle
                     if application.state.mongodb is None:
                         application.state.mongodb = MongoDB(settings)
@@ -113,9 +134,85 @@ def create_camera_app(
                     raise CameraFailure("RECOGNITION_UNAVAILABLE") from None
         return await references.get()
 
+    async def prepare() -> None:
+        try:
+            value = await engine()
+            await run_in_threadpool(value.warm)
+            application.state.preload_error = None
+        except Exception:
+            application.state.preload_error = "RECOGNITION_UNAVAILABLE"
+
+    application.state.prepare = prepare
+    application.state.preload_error = None
+
+    @application.get("/ready")
+    async def ready() -> Response:
+        value = await engine()
+        await run_in_threadpool(value.warm)
+        return JSONResponse(
+            {
+                "status": "ready",
+                "reference_version": value.reference_version,
+                "automatic_identification": False,
+            }
+        )
+
     @application.get("/bundle/catalog.json")
     async def catalog() -> Response:
-        return JSONResponse((await engine()).public_catalog())
+        value = await engine()
+        await run_in_threadpool(value.warm)
+        return JSONResponse(value.public_catalog())
+
+    @application.get("/objects/{object_id}/experience")
+    async def experience(object_id: str, request: Request) -> Response:
+        service = await engine()
+        service.check_fresh()
+        location_id = service.catalog["location"]["id"]
+        if request.query_params.get("location_id") != location_id:
+            raise CameraFailure("WRONG_LOCATION", 409)
+        version = service.reference_version
+        if request.query_params.get("reference_version") != version:
+            raise CameraFailure("REFERENCES_CHANGED", 409)
+        obj = next(
+            (o for o in service.catalog.get("objects", []) if o["id"] == object_id),
+            None,
+        )
+        if obj is None:
+            raise CameraFailure("OBJECT_NOT_FOUND", 404)
+        # Historical file replays have no canonical database/content fallback.
+        database = (
+            application.state.mongodb.database
+            if application.state.mongodb is not None
+            else None
+        )
+        if database is None:
+            raise CameraFailure("CONTENT_UNAVAILABLE", 503)
+        try:
+            async with asyncio.timeout(8):
+                prepared = await read_experience(
+                    database,
+                    object_id,
+                    location_id,
+                    {s["id"] for s in obj["sources"]},
+                )
+                current = await engine()
+                current.check_fresh()
+                if current.reference_version != version:
+                    raise CameraFailure("REFERENCES_CHANGED", 409)
+        except CameraFailure:
+            raise
+        except Exception:
+            raise CameraFailure("CONTENT_UNAVAILABLE", 503) from None
+        return JSONResponse(
+            {
+                "object_id": object_id,
+                "location_id": location_id,
+                "reference_version": version,
+                "content": prepared.content.model_dump(mode="json"),
+                "source_ids": prepared.source_ids,
+                "review_status": prepared.review_status,
+            }
+        )
 
     @application.get("/bundle/{filename:path}")
     async def bundle_file(filename: str) -> Response:

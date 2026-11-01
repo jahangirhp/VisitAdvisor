@@ -2,9 +2,11 @@ import asyncio
 import logging
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 import uvicorn
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from pydantic import ValidationError
 
 from app.api.router import router as api_router
@@ -31,6 +33,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         raise RuntimeError(f"Invalid application configuration: {fields}") from None
 
     mongodb: MongoDB | None = None
+    camera_preload: asyncio.Task[None] | None = None
     try:
         try:
             mongodb = MongoDB(settings)
@@ -48,6 +51,12 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         # Mounted applications do not receive a separate ASGI lifespan. Share
         # the parent client, whose shutdown is owned by this lifespan.
         app.state.camera.state.mongodb = mongodb
+        if (
+            settings.live_camera_preload
+            and settings.live_camera_location_id
+            and settings.live_camera_object_ids
+        ):
+            camera_preload = asyncio.create_task(app.state.camera.state.prepare())
         if settings.visual_enabled:
             from app.modules.visual.features import DinoEncoder, VisualFailure
 
@@ -61,6 +70,13 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         logger.info("MongoDB connection successful")
         yield
     finally:
+        if camera_preload is not None:
+            camera_preload.cancel()
+            try:
+                await camera_preload
+            except asyncio.CancelledError:
+                pass
+        app.state.visual_geometry_cache.clear()
         app.state.camera.state.references = None
         app.state.camera.state.mongodb = None
         if mongodb is not None:
@@ -71,11 +87,20 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 def create_app() -> FastAPI:
     application = FastAPI(title="VisitAdvisor", version="0.1.0", lifespan=lifespan)
     application.add_middleware(ImageUploadLimit)
+    application.state.admin_preparation_lock = asyncio.Lock()
+    application.state.visual_geometry_cache = {}
     register_exception_handlers(application)
     application.include_router(health_router)
     application.include_router(api_router)
     application.state.camera = create_camera_app()
     application.mount("/live", application.state.camera)
+    application.mount(
+        "/admin",
+        StaticFiles(
+            directory=Path(__file__).parent / "modules/admin/static", html=True
+        ),
+        name="admin",
+    )
     return application
 
 

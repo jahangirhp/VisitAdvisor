@@ -58,6 +58,8 @@ async def recognize_image(
                 VisualRepository(get_database(request)),
                 request.app.state.visual_encoder,
                 request.app.state.visual_lock,
+                request.app.state.settings.visual_geometry_object_ids,
+                request.app.state.visual_geometry_cache,
             )
             return await visual.recognize(location_id, data, image.content_type)
         return await service.recognize(location_id, data, image.content_type)
