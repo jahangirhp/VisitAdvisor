@@ -7,6 +7,17 @@
 <section id="login"><p class="eyebrow">REFERENCE LIBRARY</p><h1>Better photos.<br>Better recognition.</h1><p>Manage the reference photos that help visitors discover objects at your venues.</p><form id="loginForm"><label for="token">Admin token</label><input id="token" type="password" autocomplete="off" required><button type="submit">Unlock library</button></form></section>
 <div id="workspace" hidden>
 <div class="intro"><div><p class="eyebrow">REFERENCE LIBRARY</p><h1>Fill the gaps in your collection</h1><p>Choose a venue, find objects needing photos, and add a new perspective.</p></div><a href="/live/">Visitor camera ↗</a></div>
+<details class="detail"><summary>Add a venue</summary>
+<form id="venueForm">
+<label>Venue name<input name="name" maxlength="300" required></label>
+<label>Unique slug<input name="slug" maxlength="200" pattern="[a-z0-9]+(-[a-z0-9]+)*" placeholder="e.g. city-museum" required></label>
+<label for="venueType">Venue type</label><select id="venueType" name="type"><option value="museum">Museum</option><option value="historical_site">Historical site</option><option value="landmark">Landmark</option><option value="gallery">Gallery</option><option value="exhibition">Exhibition</option><option value="public_space">Public space</option><option value="attraction">Attraction</option><option value="other">Other</option></select>
+<label>City<input name="city" maxlength="300" required></label>
+<label>Country<input name="country" maxlength="300" required></label>
+<label>Official website (optional)<input name="official_website" type="url" placeholder="https://example.org"></label>
+<button type="submit">Create venue</button>
+<p class="small muted">Creates an empty venue. Objects and their source evidence must be added through the existing catalog API before reference photos can be uploaded.</p>
+</form></details>
 <section class="toolbar" aria-label="Collection filters"><label>Venue<select id="venue"></select></label><label>Find an object<input id="search" type="search" placeholder="Search name or type"></label><label class="check"><input id="gaps" type="checkbox" checked> Only objects needing photos</label><button id="refresh">Refresh</button></section>
 <div class="layout"><section aria-label="Venue objects"><p id="summary" class="muted"></p><div id="objects" class="objectList"></div><nav class="pagination" aria-label="Object pages"><button id="previous">Previous</button><span id="page"></span><button id="next">Next</button></nav><nav class="pagination" aria-label="Venue pages"><button id="previousVenues">Previous venues</button><button id="nextVenues">More venues</button></nav></section>
 <section class="detail" id="detail"><p class="eyebrow">OBJECT DETAILS</p><h2>Select an object</h2><p>See its reference coverage and upload an additional photo.</p></section></div>

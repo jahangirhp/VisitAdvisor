@@ -377,3 +377,37 @@ def test_unpublished_upload_can_be_removed_but_published_cannot(setup):
     db["visual_references"].rows.clear()
     assert client.delete(path, headers=HEADERS).status_code == 204
     assert db["admin_reference_photos"].rows == []
+
+
+def test_admin_create_venue_requires_auth_and_validates_catalog_fields(setup):
+    client, _, db, *_ = setup
+    data = {
+        "name": "New museum",
+        "slug": "new-museum",
+        "type": "museum",
+        "city": "Amsterdam",
+        "country": "Netherlands",
+    }
+    assert client.post("/api/v1/admin/venues", json=data).status_code == 401
+    assert len(db["locations"].rows) == 1
+    assert (
+        client.post(
+            "/api/v1/admin/venues", headers=HEADERS, json={**data, "slug": "bad slug"}
+        ).status_code
+        == 422
+    )
+    db["locations"].rows.clear()
+    response = client.post("/api/v1/admin/venues", headers=HEADERS, json=data)
+    assert response.status_code == 201, response.text
+    venue = response.json()
+    assert venue["name"] == data["name"]
+    assert venue["id"] == str(db["locations"].rows[0]["_id"])
+    assert (
+        client.get("/api/v1/admin/venues", headers=HEADERS).json()[0]["id"]
+        == venue["id"]
+    )
+    db["locations"].insert_error = DuplicateKeyError("duplicate")
+    assert (
+        client.post("/api/v1/admin/venues", headers=HEADERS, json=data).status_code
+        == 409
+    )

@@ -86,3 +86,11 @@ npx playwright test -c playwright.admin.config.mjs
 
 These tests mock Atlas and image descriptors. They do not write production photo
 records, establish recognition accuracy or demonstrate physical-phone performance.
+
+## Venue creation
+
+Authenticated administrators can use **Add a venue** to create a location with
+name, unique slug, type, city, country and optional official website. The protected
+`POST /api/v1/admin/venues` reuses catalog validation and duplicate-slug handling.
+The new empty venue is selected immediately. Populate objects and source evidence
+through the existing catalog API; material ingestion is not performed by this form.

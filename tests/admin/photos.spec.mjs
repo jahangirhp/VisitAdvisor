@@ -71,3 +71,27 @@ test('mobile layout, search and rejected credentials', async ({ page }) => {
   await page.getByRole('button', { name: /Painting & sculpture/ }).click();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
 });
+
+test('admin creates and selects an empty venue', async ({ page }) => {
+  await mock(page);
+  await login(page);
+  const id = '4'.repeat(24);
+  await page.route('**/api/v1/admin/venues', async route => {
+    expect(route.request().method()).toBe('POST');
+    expect(route.request().headers().authorization).toBe('Bearer demo-token');
+    const data = route.request().postDataJSON();
+    expect(data).toEqual({ name: 'New gallery', slug: 'new-gallery', type: 'gallery', city: 'Utrecht', country: 'Netherlands' });
+    await route.fulfill({ status: 201, json: { ...data, id } });
+  });
+  await page.route(`**/api/v1/admin/venues/${id}/objects?**`, route => route.fulfill({ json: { objects: [] } }));
+  await page.getByText('Add a venue', { exact: true }).click();
+  await page.getByLabel('Venue name', { exact: true }).fill('New gallery');
+  await page.getByLabel('Unique slug').fill('new-gallery');
+  await page.getByLabel('Venue type', { exact: true }).selectOption('gallery');
+  await page.getByLabel('City', { exact: true }).fill('Utrecht');
+  await page.getByLabel('Country', { exact: true }).fill('Netherlands');
+  await page.getByRole('button', { name: 'Create venue', exact: true }).click();
+  await expect(page.getByRole('status')).toContainText('Venue created');
+  await expect(page.locator('#venue')).toHaveValue(id);
+  await expect(page.locator('#objects')).toContainText('No objects match');
+});

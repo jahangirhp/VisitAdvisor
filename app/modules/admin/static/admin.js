@@ -11,7 +11,7 @@ function lock() {
 }
 async function api(path, options = {}) {
   const response = await fetch(`/api/v1/admin${path}`, {
-    ...options, headers: { Authorization: `Bearer ${token}` }, cache: "no-store"
+    ...options, headers: { ...options.headers, Authorization: `Bearer ${token}` }, cache: "no-store"
   });
   if (!response.ok) {
     const data = await response.json().catch(() => ({}));
@@ -152,3 +152,20 @@ $("previous").addEventListener("click", () => action(async () => { offset = Math
 $("next").addEventListener("click", () => action(async () => { offset += 50; await inventory(); }));
 $("previousVenues").addEventListener("click", () => action(async () => { venueOffset = Math.max(0, venueOffset - 100); await venues(); }));
 $("nextVenues").addEventListener("click", () => action(async () => { venueOffset += 100; await venues(); }));
+
+$("venueForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const data = Object.fromEntries(new FormData(event.target));
+  if (!data.official_website) delete data.official_website;
+  action(async () => {
+    const venue = await api("/venues", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+    const option = document.createElement("option");
+    option.value = venue.id; option.textContent = `${venue.name} · ${venue.city}`;
+    $("venue").append(option); $("venue").value = venue.id;
+    locationId = venue.id; offset = 0;
+    $("search").value = "";
+    await inventory();
+    $("venueForm").reset();
+    status("Venue created. Add objects and source evidence through the catalog API to start collecting reference photos.");
+  });
+});

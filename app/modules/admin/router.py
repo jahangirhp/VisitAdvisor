@@ -14,6 +14,9 @@ from app.core.domain import validate_id
 from app.core.exceptions import ApplicationError
 from app.db.mongodb import get_database
 from app.modules.admin.service import PhotoService
+from app.modules.locations.models import Location, LocationCreate
+from app.modules.locations.repository import LocationRepository
+from app.modules.locations.service import LocationService
 from app.modules.recognition.images import MAX_IMAGE_BYTES
 from app.modules.visual.features import DinoEncoder, ImageEncoder, VisualFailure
 
@@ -55,6 +58,11 @@ class PhotoMetadata(BaseModel):
     capture_group: str = Field(min_length=1, max_length=200)
     rights: str = Field(min_length=1, max_length=1000)
     source_id: str
+
+
+@router.post("/venues", status_code=201)
+async def create_venue(data: LocationCreate, database: Database) -> Location:
+    return await LocationService(LocationRepository(database)).create(data)
 
 
 @router.get("/venues")
