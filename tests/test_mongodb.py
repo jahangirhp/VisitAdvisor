@@ -9,7 +9,13 @@ def test_indexes_are_repeated_without_dropping_data():
     with patch("app.db.mongodb.AsyncMongoClient") as factory:
         collections = {
             name: AsyncMock()
-            for name in ("locations", "objects", "sources", "knowledge_chunks")
+            for name in (
+                "locations",
+                "objects",
+                "sources",
+                "knowledge_chunks",
+                "admin_reference_photos",
+            )
         }
         factory.return_value.__getitem__.return_value = collections
         database = MongoDB(Settings(mongodb_uri="mongodb://localhost:27017"))
@@ -26,6 +32,10 @@ def test_indexes_are_repeated_without_dropping_data():
                     "external_id": {"$type": "string"},
                 },
                 name="unique_import_identity",
+            )
+        for field in ("normalized_sha256", "slot"):
+            collections["admin_reference_photos"].create_index.assert_any_await(
+                [("location_id", 1), ("object_id", 1), (field, 1)], unique=True
             )
         assert collections["locations"].create_index.await_count == 2
         for name in ("objects", "sources"):

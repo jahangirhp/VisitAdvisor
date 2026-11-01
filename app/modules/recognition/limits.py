@@ -14,7 +14,13 @@ class ImageUploadLimit:
         if (
             scope["type"] != "http"
             or scope["method"] != "POST"
-            or scope["path"].rstrip("/") != "/api/v1/recognition/image"
+            or not (
+                scope["path"].rstrip("/") == "/api/v1/recognition/image"
+                or (
+                    scope["path"].startswith("/api/v1/admin/venues/")
+                    and scope["path"].rstrip("/").endswith("/photos")
+                )
+            )
         ):
             await self.app(scope, receive, send)
             return

@@ -14,6 +14,10 @@ class Settings(BaseSettings):
         hide_input_in_errors=True,
     )
 
+    admin_token: SecretStr | None = None
+    admin_planar_photo_target: int = Field(default=3, ge=1, le=4)
+    admin_multiview_photo_target: int = Field(default=4, ge=2, le=4)
+
     app_env: str = Field(default="development", min_length=1)
     app_host: str = Field(default="0.0.0.0", min_length=1)
     app_port: int = Field(default=8001, ge=1, le=65535)

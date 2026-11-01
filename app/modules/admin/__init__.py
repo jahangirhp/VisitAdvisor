@@ -1,0 +1,1 @@
+"""Protected reference-photo administration."""

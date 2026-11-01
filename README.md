@@ -595,3 +595,14 @@ regional method reaches only 85.3% automatic precision and makes four false
 automatic selections on negatives. Automatic identification therefore remains
 disabled; the next iteration must improve ranking and references before another
 unseen validation run.
+
+## Reference-photo admin panel
+
+Run the main API and open `/admin/` to select a venue and fill per-object reference
+photo gaps. Set a private `ADMIN_TOKEN` in your runtime environment before logging
+in; the API is disabled until configured. Uploaded photos remain private in Atlas.
+Saving and preparing references are separate actions, and preparation requires the
+existing local visual dependencies/model. Default collection targets (3 planar,
+4 multiview) are configurable and do not establish recognition quality.
+See [admin reference photos](docs/26-admin-reference-photos.md) for setup, data
+storage, publication, validation and the four-view pilot limit.

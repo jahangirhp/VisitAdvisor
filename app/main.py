@@ -2,9 +2,11 @@ import asyncio
 import logging
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 import uvicorn
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from pydantic import ValidationError
 
 from app.api.router import router as api_router
@@ -85,12 +87,20 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 def create_app() -> FastAPI:
     application = FastAPI(title="VisitAdvisor", version="0.1.0", lifespan=lifespan)
     application.add_middleware(ImageUploadLimit)
+    application.state.admin_preparation_lock = asyncio.Lock()
     application.state.visual_geometry_cache = {}
     register_exception_handlers(application)
     application.include_router(health_router)
     application.include_router(api_router)
     application.state.camera = create_camera_app()
     application.mount("/live", application.state.camera)
+    application.mount(
+        "/admin",
+        StaticFiles(
+            directory=Path(__file__).parent / "modules/admin/static", html=True
+        ),
+        name="admin",
+    )
     return application
 
 

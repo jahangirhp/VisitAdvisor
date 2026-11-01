@@ -26,6 +26,7 @@ camera = ["onnx>=1.17,<2", "onnxruntime>=1.20,<2"]
 
 [tool.setuptools.package-data]
 "app.modules.live_camera" = ["static/*"]
+"app.modules.admin" = ["static/*"]
 
 [tool.setuptools.packages.find]
 include = ["app*"]

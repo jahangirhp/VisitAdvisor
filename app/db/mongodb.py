@@ -23,6 +23,10 @@ class MongoDB:
         self.database = self.client[settings.mongodb_database]
 
     async def ensure_indexes(self) -> None:
+        for field in ("normalized_sha256", "slot"):
+            await self.database["admin_reference_photos"].create_index(
+                [("location_id", 1), ("object_id", 1), (field, 1)], unique=True
+            )
         await self.database["locations"].create_index("slug", unique=True)
         await self.database["objects"].create_index("location_id")
         await self.database["sources"].create_index("location_id")
