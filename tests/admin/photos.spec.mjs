@@ -85,7 +85,7 @@ test('admin creates and selects an empty venue', async ({ page }) => {
     await route.fulfill({ status: 201, json: { ...data, id } });
   });
   await page.route(`**/api/v1/admin/venues/${id}/objects?**`, route => route.fulfill({ json: { objects: [] } }));
-  await page.getByText('Add a venue', { exact: true }).click();
+  await page.getByRole('button', { name: 'Add a venue', exact: true }).click();
   await page.getByLabel('Venue name', { exact: true }).fill('New gallery');
   await page.getByLabel('Unique slug').fill('new-gallery');
   await page.getByLabel('Venue type', { exact: true }).selectOption('gallery');
@@ -105,7 +105,7 @@ for (const newVenue of [false, true]) {
     if (newVenue) {
       await page.route('**/api/v1/admin/venues', route => route.fulfill({ status: 201, json: { id: venueId, name: 'New gallery', city: 'Utrecht' } }));
       await page.route(`**/api/v1/admin/venues/${venueId}/objects?**`, route => route.fulfill({ json: { objects: [] } }));
-      await page.getByText('Add a venue', { exact: true }).click();
+      await page.getByRole('button', { name: 'Add a venue', exact: true }).click();
       await page.getByLabel('Venue name', { exact: true }).fill('New gallery');
       await page.getByLabel('Unique slug').fill('new-gallery');
       await page.getByLabel('City', { exact: true }).fill('Utrecht');
@@ -126,13 +126,14 @@ for (const newVenue of [false, true]) {
       sources: [], photos: [], views: [], stale: false,
     } }));
     await selectCapturePhotos(page, ['red']);
+    await page.getByRole('button', { name: 'Next', exact: true }).click();
     await page.getByLabel('Object name', { exact: true }).fill('New sculpture');
     await page.getByLabel('Object type', { exact: true }).selectOption('sculpture');
     await page.getByLabel('Your name', { exact: true }).fill('Jane Smith');
     await page.getByLabel(/I checked this object's identity/).check();
     await page.getByText('More details (optional)', { exact: true }).click();
     await page.getByLabel('Year or period (optional)', { exact: true }).fill('17th century');
-    await page.getByRole('button', { name: 'Save object & 1 photo', exact: true }).click();
+    await page.getByRole('button', { name: 'Save object', exact: true }).click();
     await expect(page.locator('#status')).toContainText('New sculpture saved with 1 photo');
     await expect(page.getByRole('heading', { name: 'New sculpture', exact: true })).toBeVisible();
     await expect(page.getByLabel('Object name', { exact: true })).toHaveValue('');
@@ -141,6 +142,7 @@ for (const newVenue of [false, true]) {
 }
 
 async function selectCapturePhotos(page, colors, expectedCount = colors.length, size = [100, 80]) {
+  if (await page.locator('#addObject').isHidden()) await page.getByRole('button', { name: 'Add object', exact: true }).click();
   const files = [];
   for (const color of colors) {
     const data = await page.evaluate(([color, width, height]) => {
@@ -190,17 +192,19 @@ for (const lostResponse of [false, true]) {
     await selectCapturePhotos(page, ['red', 'blue']);
     await expect(page.locator('#cameraInput')).toHaveAttribute('capture', 'environment');
     await page.getByLabel('Photo 2 angle', { exact: true }).selectOption('left');
+    await page.screenshot({ path: 'test-results/photo-step-mobile.png' });
+    await page.getByRole('button', { name: 'Next', exact: true }).click();
     await page.getByLabel('Object name', { exact: true }).fill('Museum statue');
     await page.getByLabel('Object type', { exact: true }).selectOption('sculpture');
     await page.getByLabel('Your name', { exact: true }).fill('Jane Smith');
     await page.getByLabel(/I checked this object's identity/).check();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
     await page.screenshot({ path: `test-results/photo-first-${lostResponse ? 'retry' : 'mobile'}.png`, fullPage: true });
-    await page.getByRole('button', { name: 'Save object & 2 photos', exact: true }).click();
-    await expect(page.getByRole('button', { name: 'Retry remaining photos' })).toBeEnabled();
+    await page.getByRole('button', { name: 'Save object', exact: true }).click();
+    await expect(page.getByRole('button', { name: 'Retry upload' })).toBeEnabled();
     await expect(page.locator('#captureProgress')).toContainText('completed uploads are saved');
     await expect(page.locator('#venue')).toBeDisabled();
-    await page.getByRole('button', { name: 'Retry remaining photos' }).click();
+    await page.getByRole('button', { name: 'Retry upload' }).click();
     await expect(page.locator('#status')).toContainText('Museum statue saved with 2 photos');
     expect(creates).toBe(1); expect(photos.length).toBe(2);
     expect(uploads).toBe(lostResponse ? 2 : 3);
@@ -223,6 +227,7 @@ test('photo selection rejects duplicates, enforces four slots and supports remov
   await page.locator('#libraryInput').setInputFiles({ name: 'bad.heic', mimeType: 'image/heic', buffer: Buffer.from('not an image') });
   await expect(page.locator('#captureProgress')).toContainText("Couldn't open this photo");
   await expect(page.locator('.capturePhoto')).toHaveCount(3);
+  await page.getByRole('button', { name: 'Back to collection' }).click();
   await page.getByRole('button', { name: 'Lock panel' }).click();
   await expect(page.locator('.capturePhoto')).toHaveCount(0);
   await expect(page.locator('#captureObserver')).toHaveValue('');
@@ -235,4 +240,28 @@ test('phone-size images are resized locally and desktop layout stays within view
   expect(dimensions).toEqual({ width: 1800, height: 1350 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
   await page.screenshot({ path: 'test-results/photo-first-desktop.png', fullPage: true });
+});
+
+test('two-step creation keeps details on Back and validates before saving', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const requests = await mock(page); await login(page);
+  await page.screenshot({ path: 'test-results/collection-mobile.png' });
+  await page.getByRole('button', { name: 'Add object', exact: true }).click();
+  await expect(page.getByLabel('Object name', { exact: true })).toBeHidden();
+  await expect(page.locator('#nextCapture')).toBeDisabled();
+  await page.screenshot({ path: 'test-results/photo-empty-mobile.png' });
+  await selectCapturePhotos(page, ['red']);
+  await page.locator('#nextCapture').click();
+  await expect(page.locator('#photoStep')).toBeHidden();
+  await page.getByRole('button', { name: 'Save object', exact: true }).click();
+  expect(requests.some(request => request.method() === 'POST')).toBeFalsy();
+  await page.getByLabel('Object name', { exact: true }).fill('Draft statue');
+  await page.getByRole('button', { name: 'Back', exact: true }).click();
+  await expect(page.locator('.capturePhoto')).toHaveCount(1);
+  await page.locator('#nextCapture').click();
+  await expect(page.getByLabel('Object name', { exact: true })).toHaveValue('Draft statue');
+  await page.getByRole('button', { name: 'Back to collection' }).click();
+  await expect(page.locator('#collection')).toBeVisible();
+  await page.getByRole('button', { name: 'Add object', exact: true }).click();
+  await expect(page.getByLabel('Object name', { exact: true })).toHaveValue('Draft statue');
 });

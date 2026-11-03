@@ -2,11 +2,11 @@
 const $ = id => document.getElementById(id);
 let token = "", locationId = "", objectId = "", offset = 0, venueOffset = 0, venueCount = 0, rows = [], generation = 0;
 let previewUrl = "", photoUrls = [], busy = false;
-let capturePhotos = [], captureDraft = null, captureReading = false;
+let capturePhotos = [], captureDraft = null, captureReading = false, captureStep = 1;
 function status(message) { $("status").textContent = message; }
 function lock() {
   token = ""; generation++; objectId = ""; locationId = "";
-  resetCapture(); $("captureObserver").value = "";
+  resetCapture(); showCollection(); $("venueDialog").close(); $("captureObserver").value = "";
   clearImages(); $("detail").replaceChildren(); $("objects").replaceChildren();
   $("login").hidden = false; $("workspace").hidden = true; $("logout").hidden = true;
   $("token").value = ""; $("token").focus();
@@ -32,10 +32,14 @@ function objectVenue() {
   document.querySelectorAll("#objectForm input, #objectForm select, #objectForm textarea, #venue, #venueForm button").forEach(el => { el.disabled = busy || captureReading || !!captureDraft; });
   $("createObject").disabled = busy || captureReading || !locationId || !capturePhotos.length;
   $("takePhoto").disabled = $("choosePhotos").disabled = busy || captureReading || !!captureDraft || !locationId || capturePhotos.length >= 4;
-  $("createObject").textContent = captureDraft ? "Retry remaining photos" : `Save object & ${capturePhotos.length || ""} photo${capturePhotos.length === 1 ? "" : "s"}`;
+  $("createObject").textContent = captureDraft ? "Retry upload" : "Save object";
+  $("nextCapture").disabled = busy || captureReading || !locationId || !capturePhotos.length;
+  $("captureBack").disabled = busy || !!captureDraft;
+  $("openCapture").disabled = busy;
+  $("openVenue").disabled = busy || !!captureDraft;
   $("objectVenue").textContent = locationId
-    ? `Adding to: ${$("venue").selectedOptions[0].textContent}`
-    : "Choose a venue above first.";
+    ? `Venue: ${$("venue").selectedOptions[0].textContent}`
+    : "Choose a venue in your collection first.";
 }
 async function venues() {
   const items = await api(`/venues?offset=${venueOffset}`);
@@ -68,7 +72,7 @@ async function inventory(keepObject = false) {
 function renderObjects() {
   const query = $("search").value.toLowerCase();
   const visible = rows.filter(row => (!$("gaps").checked || row.needs_photos) && `${row.name} ${row.type}`.toLowerCase().includes(query));
-  $("summary").textContent = `${visible.length} shown · ${rows.filter(row => row.needs_photos).length} need photos on this page. Targets are collection goals, not tested accuracy.`;
+  $("summary").textContent = `${visible.length} objects · ${rows.filter(row => row.needs_photos).length} need photos`;
   $("objects").replaceChildren();
   for (const row of visible) {
     const button = document.createElement("button"); button.className = "objectCard";
@@ -152,7 +156,7 @@ async function action(work) {
     $("previous").disabled = offset === 0; $("next").disabled = rows.length < 50;
     $("previousVenues").disabled = !!captureDraft || venueOffset === 0; $("nextVenues").disabled = !!captureDraft || venueCount < 100;
     if (captureDraft) {
-      $("captureProgress").textContent = "Some photos could not be uploaded. Your object and completed uploads are saved. Tap Retry remaining photos.";
+      $("captureProgress").textContent = "Some photos could not be uploaded. Your object and completed uploads are saved. Tap Retry upload.";
       $("finishLater").hidden = false;
       document.querySelectorAll("#objectForm input, #objectForm select, #objectForm textarea, #venue, #venueForm button").forEach(el => { el.disabled = true; });
     }
@@ -185,12 +189,58 @@ $("venueForm").addEventListener("submit", event => {
     $("search").value = "";
     await inventory();
     $("venueForm").reset();
-    $("addObject").scrollIntoView({ behavior: "smooth", block: "start" });
-    status("Venue created. Add its first object below.");
+    $("venueDialog").close(); openCapture();
+    status("Venue created. Add its first object.");
   });
 });
 
+function showCollection() {
+  $("addObject").hidden = true; document.body.classList.remove("wizardOpen"); $("collection").hidden = false; $("collection").inert = false; $("siteHeader").inert = false;
+  if (token && !busy) $("openCapture").focus({ preventScroll: true });
+}
+function openCapture() {
+  status("");
+  if (!locationId) { $("venueDialog").showModal(); return; }
+  $("addObject").hidden = false; document.body.classList.add("wizardOpen"); $("collection").hidden = true; $("collection").inert = true; $("siteHeader").inert = true;
+  showCaptureStep(captureDraft ? 2 : captureStep);
+  $("addObject").scrollTop = 0;
+}
+function showCaptureStep(step) {
+  if (captureDraft && step === 1) return;
+  captureStep = step;
+  $("photoStep").hidden = step !== 1; $("detailsStep").hidden = step !== 2;
+  $("nextCapture").hidden = step !== 1; $("createObject").hidden = step !== 2;
+  $("captureBack").textContent = step === 1 ? "Cancel" : "Back";
+  $("stepCount").textContent = `${step} of 2`;
+  $("detailsProgress").classList.toggle("active", step === 2);
+  if (step === 2) {
+    const summary = $("detailsPhotoSummary"); summary.replaceChildren();
+    if (capturePhotos.length) {
+      const image = document.createElement("img"); image.src = capturePhotos[0].url; image.alt = "Object photo";
+      const text = document.createElement("span"); text.textContent = `${capturePhotos.length} photo${capturePhotos.length === 1 ? "" : "s"} selected`;
+      const edit = document.createElement("button"); edit.type = "button"; edit.className = "textButton"; edit.textContent = "Edit"; edit.disabled = !!captureDraft;
+      edit.addEventListener("click", () => showCaptureStep(1));
+      summary.append(image, text, edit);
+    }
+  }
+  $("addObject").scrollTop = 0;
+  objectVenue();
+  $(step === 1 ? "captureTitle" : "detailsTitle").focus({ preventScroll: true });
+}
+function nextCaptureStep() {
+  if (captureReading || !capturePhotos.length) return;
+  for (const select of $("capturePhotos").querySelectorAll("select")) if (!select.reportValidity()) return;
+  showCaptureStep(2);
+}
+$("openCapture").addEventListener("click", openCapture);
+$("closeCapture").addEventListener("click", showCollection);
+document.addEventListener("keydown", event => { if (event.key === "Escape" && !busy && !$("addObject").hidden) showCollection(); });
+$("captureBack").addEventListener("click", () => { if (captureStep === 1) showCollection(); else showCaptureStep(1); });
+$("nextCapture").addEventListener("click", nextCaptureStep);
+$("openVenue").addEventListener("click", () => $("venueDialog").showModal());
+$("closeVenue").addEventListener("click", () => $("venueDialog").close());
 function resetCapture() {
+  captureStep = 1;
   $("finishLater").hidden = true;
   capturePhotos.forEach(photo => URL.revokeObjectURL(photo.url));
   capturePhotos = []; captureDraft = null;
@@ -201,11 +251,13 @@ function resetCapture() {
 }
 function renderCapture() {
   $("captureEmpty").hidden = capturePhotos.length > 0;
+  $("capturePhotos").classList.toggle("single", capturePhotos.length === 1);
+  document.querySelector(".captureActions").classList.toggle("compact", capturePhotos.length > 0);
   $("capturePhotos").replaceChildren();
   capturePhotos.forEach((photo, index) => {
     const card = document.createElement("div"); card.className = "capturePhoto";
     const image = document.createElement("img"); image.src = photo.url; image.alt = `Selected photo ${index + 1}`;
-    const label = document.createElement("label"); label.textContent = `Photo ${index + 1} angle`;
+    const label = document.createElement("label"); label.textContent = "";
     const select = document.createElement("select"); select.required = true; select.setAttribute("aria-label", `Photo ${index + 1} angle`);
     for (const [value, text] of [["", "Choose angle"], ["front", "Front"], ["left", "Left side"], ["right", "Right side"], ["back", "Back"], ["detail", "Close-up"], ["other", "Other view"]]) {
       const option = document.createElement("option"); option.value = value; option.textContent = text; select.append(option);
@@ -215,7 +267,7 @@ function renderCapture() {
     select.addEventListener("change", () => { photo.viewpoint = select.value; });
     label.append(select);
     const remove = document.createElement("button"); remove.type = "button"; remove.className = "removeCapture";
-    remove.textContent = photo.saved ? "Uploaded" : "Remove";
+    remove.textContent = photo.saved ? "Saved" : "\u00d7";
     remove.setAttribute("aria-label", photo.saved ? `Photo ${index + 1} uploaded` : `Remove photo ${index + 1}`);
     remove.disabled = busy || !!captureDraft;
     remove.addEventListener("click", () => {
@@ -223,7 +275,7 @@ function renderCapture() {
     });
     card.append(image, label, remove); $("capturePhotos").append(card);
   });
-  $("captureCount").textContent = `${capturePhotos.length} of 4 photos - Photos are optimized on your device.`;
+  $("captureCount").textContent = capturePhotos.length ? `${capturePhotos.length} of 4 photos added` : "No photos added yet";
   objectVenue();
 }
 async function optimizePhoto(file) {
@@ -277,6 +329,8 @@ for (const id of ["cameraInput", "libraryInput"]) $(id).addEventListener("change
 });
 $("objectForm").addEventListener("submit", event => {
   event.preventDefault();
+  if (captureStep === 1) { nextCaptureStep(); return; }
+  if (!captureDraft && !event.target.reportValidity()) return;
   if (!locationId || !capturePhotos.length || captureReading) return;
   const fields = Object.fromEntries([...new FormData(event.target)].map(([key, value]) => [key, value.trim()]).filter(([, value]) => value));
   const observer = $("captureObserver").value.trim(), rights = $("captureRights").value.trim();
@@ -306,9 +360,9 @@ $("objectForm").addEventListener("submit", event => {
     }
     const count = capturePhotos.length, name = draft.object.name;
     const lastType = $("objectForm").elements.type.value;
-    resetCapture(); $("objectForm").elements.type.value = lastType; $("captureObserver").value = observer; $("captureRights").value = rights;
+    resetCapture(); showCaptureStep(1); $("objectForm").elements.type.value = lastType; $("captureObserver").value = observer; $("captureRights").value = rights;
     $("search").value = ""; $("gaps").checked = false;
-    await inventory(); await showObject(draft.object.id);
+    showCollection(); await inventory(); await showObject(draft.object.id);
     const message = `${name} saved with ${count} photo${count === 1 ? "" : "s"}. Ready to add the next object.`;
     $("captureProgress").textContent = message; status(message);
   });
@@ -320,7 +374,7 @@ $("finishLater").addEventListener("click", () => {
   action(async () => {
     const observer = draft.observer;
     resetCapture(); $("captureObserver").value = observer;
-    await inventory(); await showObject(draft.object.id);
+    showCollection(); await inventory(); await showObject(draft.object.id);
     status("Object and uploaded photos kept. You can add more photos from its details later.");
   });
 });

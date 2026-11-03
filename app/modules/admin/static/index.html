@@ -1,36 +1,34 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Reference library · VisitAdvisor</title><link rel="stylesheet" href="./admin.css"><script src="./admin.js" defer></script></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Objects | VisitAdvisor</title><link rel="stylesheet" href="./admin.css"><script src="./admin.js" defer></script></head>
 <body>
-<header><a class="brand" href="/admin/">VisitAdvisor <span>Admin</span></a><button id="logout" hidden>Lock panel</button></header>
+<header id="siteHeader"><a class="brand" href="/admin/">VisitAdvisor<span>Collections</span></a><nav><a href="/live/">Visitor camera</a><button id="logout" hidden>Lock panel</button></nav></header>
 <main>
-<section id="login"><p class="eyebrow">REFERENCE LIBRARY</p><h1>Better photos.<br>Better recognition.</h1><p>Manage the reference photos that help visitors discover objects at your venues.</p><form id="loginForm"><label for="token">Admin token</label><input id="token" type="password" autocomplete="off" required><button type="submit">Unlock library</button></form></section>
+<section id="login"><div class="loginMark">V</div><h1>Your collection,<br>one object at a time.</h1><p>Sign in to add objects and manage your photos.</p><form id="loginForm"><label for="token">Admin token</label><input id="token" type="password" autocomplete="off" required><button type="submit" class="primary">Unlock library</button></form></section>
 <div id="workspace" hidden>
-<div class="intro"><div><p class="eyebrow">REFERENCE LIBRARY</p><h1>Add objects with photos</h1><p>Choose a venue, take a few photos, and save.</p></div><a href="/live/">Visitor camera ↗</a></div>
-<section class="venuePicker" aria-label="Selected venue"><label>Venue<select id="venue"></select></label></section>
-<details class="detail venueCreate"><summary>Add a venue</summary>
-<form id="venueForm">
-<label>Venue name<input name="name" maxlength="300" required></label>
-<label>Unique slug<input name="slug" maxlength="200" pattern="[a-z0-9]+(-[a-z0-9]+)*" placeholder="e.g. city-museum" required></label>
-<label for="venueType">Venue type</label><select id="venueType" name="type"><option value="museum">Museum</option><option value="historical_site">Historical site</option><option value="landmark">Landmark</option><option value="gallery">Gallery</option><option value="exhibition">Exhibition</option><option value="public_space">Public space</option><option value="attraction">Attraction</option><option value="other">Other</option></select>
-<label>City<input name="city" maxlength="300" required></label>
-<label>Country<input name="country" maxlength="300" required></label>
-<label>Official website (optional)<input name="official_website" type="url" placeholder="https://example.org"></label>
-<button type="submit">Create venue</button>
-<p class="small muted">Creates an empty venue and selects it so you can add objects below.</p>
-</form></details>
-
-<section class="capturePanel" id="addObject" aria-labelledby="captureTitle">
-<div class="captureHeading"><div><p class="eyebrow">QUICK ADD</p><h2 id="captureTitle">Photos first. Details second.</h2><p id="objectVenue" class="muted">Choose a venue above first.</p></div><span class="captureStep">1 Capture &nbsp; / &nbsp; 2 Name &nbsp; / &nbsp; 3 Save</span></div>
-<form id="objectForm">
-<div class="captureLayout"><div class="captureArea">
-<div class="captureActions"><button id="takePhoto" type="button" class="cameraButton"><svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 6h4l2-3h4l2 3h4a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z"/><circle cx="12" cy="12" r="4"/></svg> Take a photo</button><button id="choosePhotos" type="button">Choose photos</button></div>
-<input id="cameraInput" type="file" accept="image/*" capture="environment" hidden>
-<input id="libraryInput" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple hidden>
-<div id="captureEmpty" class="captureEmpty"><span aria-hidden="true"><svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 6h4l2-3h4l2 3h4a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z"/><circle cx="12" cy="12" r="4"/></svg></span><strong>Start with the whole object</strong><p>Then add a different angle or a close-up.<br>Take photos now or choose up to 4 from your phone.</p></div>
+<section id="collection">
+<div class="collectionHeading"><div><p class="eyebrow">YOUR COLLECTION</p><h1>Objects</h1></div><button id="openCapture" class="primary addObjectButton"><span aria-hidden="true">+</span> Add object</button></div>
+<div class="venueRow"><label for="venue">Venue</label><select id="venue" aria-label="Venue"></select><button id="openVenue" class="textButton">Add a venue</button></div>
+<section class="toolbar" aria-label="Collection filters"><label class="searchLabel"><span class="srOnly">Find an object</span><input id="search" type="search" placeholder="Search objects"></label><label class="check"><input id="gaps" type="checkbox" checked> Needs photos</label><button id="refresh" class="textButton">Refresh</button></section>
+<div class="layout"><section aria-label="Venue objects"><p id="summary" class="muted small"></p><div id="objects" class="objectList"></div><nav class="pagination" aria-label="Object pages"><button id="previous">Previous</button><span id="page"></span><button id="next">Next</button></nav><nav class="pagination" aria-label="Venue pages"><button id="previousVenues">Previous venues</button><button id="nextVenues">More venues</button></nav></section>
+<section class="detail" id="detail"><div class="detailPlaceholder"><p>Select an object to manage its photos.</p></div></section></div>
+</section>
+<section class="wizard" id="addObject" hidden role="dialog" aria-modal="true" aria-label="New object">
+<div class="wizardHeader"><button id="closeCapture" class="iconButton" aria-label="Back to collection">&times;</button><strong>New object</strong><span id="stepCount">1 of 2</span></div>
+<form id="objectForm" novalidate>
+<div class="wizardContent">
+<p id="objectVenue" class="venueContext"></p>
+<section id="photoStep" aria-labelledby="captureTitle">
+<h1 id="captureTitle" tabindex="-1">Add photos of<br>your object</h1><p class="stepDescription">Start with one photo. Add up to four different views.</p>
 <div id="capturePhotos" class="capturePhotos" aria-label="Selected object photos"></div>
-<p id="captureCount" class="small muted">0 of 4 photos &middot; Photos are optimized on your device.</p>
-</div><div class="captureDetails">
+<div id="captureEmpty" class="captureEmpty"><div class="photoIllustration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h4l2-3h4l2 3h4a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z"/><circle cx="12" cy="12" r="4"/></svg></div></div>
+<div class="captureActions"><button id="choosePhotos" type="button"><span aria-hidden="true">+</span> Choose photos</button><button id="takePhoto" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h4l2-3h4l2 3h4a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z"/><circle cx="12" cy="12" r="4"/></svg> Take a photo</button></div>
+<input id="cameraInput" type="file" accept="image/*" capture="environment" hidden><input id="libraryInput" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple hidden>
+<p id="captureCount" class="small muted">No photos added yet</p>
+</section>
+<section id="detailsStep" hidden aria-labelledby="detailsTitle">
+<h1 id="detailsTitle" tabindex="-1">Give it a name</h1><p class="stepDescription">Just the essentials. You can add more details below.</p>
+<div id="detailsPhotoSummary" class="detailsPhotoSummary"></div>
 <label>Object name<input id="newObjectName" name="name" maxlength="300" placeholder="Name on the label" required></label>
 <label>Object type<select id="newObjectType" name="type" aria-label="Object type" required><option value="">Choose a type</option><option value="painting">Painting</option><option value="sculpture">Sculpture / statue</option><option value="artifact">Artifact / exhibit</option><option value="building">Building / architecture</option><option value="room">Room / interior</option><option value="other">Other object</option></select></label>
 <label>Your name<input id="captureObserver" maxlength="200" autocomplete="name" placeholder="Photographer / observer" required></label>
@@ -40,18 +38,25 @@
 <label>Description (optional)<textarea name="description" maxlength="10000"></textarea></label>
 <label>Photo permission details<input id="captureRights" maxlength="1000" value="My own photos; I permit use as recognition references."></label>
 </details>
-<label class="check captureReview"><input id="captureReviewed" type="checkbox" required> I checked this object's identity against its label or venue record, and I have permission to use these photos.</label>
-<p class="small muted">Your confirmation is recorded as an on-site observation. Photos are stored privately. Prepare references separately when ready.</p>
-<button id="createObject" type="submit" class="saveCapture" disabled>Save object &amp; photos</button>
-<p id="captureProgress" role="status" class="small muted" aria-live="polite"></p><button id="finishLater" type="button" hidden>Keep saved photos &amp; finish later</button>
-</div></div>
+<label class="check captureReview"><input id="captureReviewed" type="checkbox" required> I checked this object's identity and have permission to use these photos.</label><p class="small muted">Saved privately with your name as the observer.</p>
+</section>
+<p id="captureProgress" role="status" class="captureProgress" aria-live="polite"></p><button id="finishLater" type="button" class="textButton" hidden>Keep saved photos &amp; finish later</button>
+</div>
+<footer class="wizardFooter"><div class="stepProgress" aria-hidden="true"><span id="photoProgress" class="active"></span><span id="detailsProgress"></span></div><div class="footerInner"><button id="captureBack" type="button" class="textButton">Cancel</button><button id="nextCapture" type="button" class="primary" disabled>Next</button><button id="createObject" type="submit" class="primary" hidden disabled>Save object</button></div></footer>
 </form></section>
-<section class="toolbar" aria-label="Collection filters"><label>Find an object<input id="search" type="search" placeholder="Search name or type"></label><label class="check"><input id="gaps" type="checkbox" checked> Only objects needing photos</label><button id="refresh">Refresh</button></section>
-<div class="layout"><section aria-label="Venue objects"><p id="summary" class="muted"></p><div id="objects" class="objectList"></div><nav class="pagination" aria-label="Object pages"><button id="previous">Previous</button><span id="page"></span><button id="next">Next</button></nav><nav class="pagination" aria-label="Venue pages"><button id="previousVenues">Previous venues</button><button id="nextVenues">More venues</button></nav></section>
-<section class="detail" id="detail"><p class="eyebrow">OBJECT DETAILS</p><h2>Select an object</h2><p>See its reference coverage and upload an additional photo.</p></section></div>
 </div>
 <p id="status" role="status" aria-live="polite"></p>
 </main>
+<dialog id="venueDialog" aria-labelledby="venueDialogTitle"><div class="dialogHeader"><h2 id="venueDialogTitle">Add a venue</h2><button id="closeVenue" class="iconButton" aria-label="Close venue form">&times;</button></div><form id="venueForm">
+<label>Venue name<input name="name" maxlength="300" required></label>
+<label>Unique slug<input name="slug" maxlength="200" pattern="[a-z0-9]+(-[a-z0-9]+)*" placeholder="e.g. city-museum" required></label>
+<label for="venueType">Venue type</label><select id="venueType" name="type"><option value="museum">Museum</option><option value="historical_site">Historical site</option><option value="landmark">Landmark</option><option value="gallery">Gallery</option><option value="exhibition">Exhibition</option><option value="public_space">Public space</option><option value="attraction">Attraction</option><option value="other">Other</option></select>
+<label>City<input name="city" maxlength="300" required></label>
+<label>Country<input name="country" maxlength="300" required></label>
+<label>Official website (optional)<input name="official_website" type="url" placeholder="https://example.org"></label>
+<button type="submit">Create venue</button>
+<p class="small muted">Creates an empty venue and selects it so you can add objects below.</p>
+</form></dialog>
 <template id="detailTemplate"><p class="eyebrow">OBJECT DETAILS</p><h2 id="objectName"></h2><p id="coverage"></p><p id="stale" class="notice" hidden>Stored references are stale. Prepare them again with current source evidence before adding uploads.</p><h3>Stored reference views</h3><ul id="views"></ul><h3>Admin uploads</h3><div id="photos" class="photos"></div><button id="prepare">Prepare references</button><p class="muted small">Preparing adds saved photos to the recognition database. It preserves existing views. A new reference set requires calibration before recognition quality can be claimed.</p><hr><h3>Add a reference photo</h3>
 <form id="uploadForm">
 <label>Photo<input name="image" id="image" type="file" accept="image/jpeg,image/png,image/webp" required></label><p class="small muted">JPEG, PNG or WebP · up to 5 MiB and 16 megapixels</p><img id="preview" alt="Selected reference photo" hidden>

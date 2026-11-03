@@ -97,8 +97,8 @@ The new empty venue is selected immediately and **Add an object** opens below it
 
 ## Photo-first object creation
 
-Choose an existing venue or create one, then use the always-visible **Quick add**
-panel. **Take a photo** opens the native file/camera picker with
+Choose an existing venue or create one, then tap **Add object** from the collection. A two-step full-screen editor
+separates photos from object details, with fixed bottom Back/Next/Save controls. **Take a photo** opens the native file/camera picker with
 `capture="environment"`; **Choose photos** accepts multiple gallery images. Camera
 behavior depends on the device/browser. Up to four photos can be previewed,
 removed, and assigned an angle before saving. The first defaults to Front;
@@ -140,3 +140,21 @@ uploads; a lost response to the initial object creation itself requires checking
 the inventory before trying again. Saved photos remain private, pending separate
 reference preparation; this flow does not enable automatic identification or
 expand the configured live-camera cohort.
+
+
+## Creation editor design
+
+The editor follows the photo-upload and title-entry pattern shown in Airbnb's
+host onboarding: [visual reference](https://medium.com/@ava30528/belonging-everywhere-with-airbnb-957eac9d8c02)
+and [official photo-management workflow](https://www.airbnb.com/help/article/477).
+VisitAdvisor retains its own name and content. It uses a white background, black
+primary buttons, a centered narrow column, thumbnail removal controls and a fixed
+bottom step indicator/action bar. No external scripts, fonts or brand assets load
+in the application.
+
+The collection has a single Add object action; creation hides the collection and
+makes it inert. Step 1 handles photos and viewpoint validation. Next shows Step 2
+with a photo summary, name/type/observer and consent. Back and Edit preserve the
+in-memory draft. Closing returns to the collection; reopening resumes the draft.
+No object or image writes occur until Save object. A successful save returns to
+the selected object's collection detail. Venue creation uses a native dialog.
