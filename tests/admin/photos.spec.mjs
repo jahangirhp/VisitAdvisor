@@ -95,3 +95,44 @@ test('admin creates and selects an empty venue', async ({ page }) => {
   await expect(page.locator('#venue')).toHaveValue(id);
   await expect(page.locator('#objects')).toContainText('No objects match');
 });
+
+for (const newVenue of [false, true]) {
+  test(`admin adds an object to ${newVenue ? 'a newly created' : 'an existing'} venue`, async ({ page }) => {
+    await mock(page);
+    await login(page);
+    const venueId = newVenue ? '4'.repeat(24) : location;
+    if (newVenue) {
+      await page.route('**/api/v1/admin/venues', route => route.fulfill({ status: 201, json: { id: venueId, name: 'New gallery', city: 'Utrecht' } }));
+      await page.route(`**/api/v1/admin/venues/${venueId}/objects?**`, route => route.fulfill({ json: { objects: [] } }));
+      await page.getByText('Add a venue', { exact: true }).click();
+      await page.getByLabel('Venue name', { exact: true }).fill('New gallery');
+      await page.getByLabel('Unique slug').fill('new-gallery');
+      await page.getByLabel('City', { exact: true }).fill('Utrecht');
+      await page.getByLabel('Country', { exact: true }).fill('Netherlands');
+      await page.getByRole('button', { name: 'Create venue', exact: true }).click();
+      await expect(page.locator('#venue')).toHaveValue(venueId);
+    } else {
+      await page.getByText('Add an object', { exact: true }).click();
+    }
+    await expect(page.locator('#objectVenue')).toContainText(newVenue ? 'New gallery' : 'Museum');
+    const id = '5'.repeat(24);
+    await page.route(`**/api/v1/admin/venues/${venueId}/objects`, async route => {
+      expect(route.request().method()).toBe('POST');
+      expect(route.request().headers().authorization).toBe('Bearer demo-token');
+      expect(route.request().postDataJSON()).toEqual({ name: 'New sculpture', type: 'sculpture', year: '17th century' });
+      await route.fulfill({ status: 201, json: { id, location_id: venueId } });
+    });
+    await page.route(`**/api/v1/admin/venues/${venueId}/objects/${id}`, route => route.fulfill({ json: {
+      id, name: 'New sculpture', type: 'sculpture', prepared: 0, pending: 0, target: 4,
+      sources: [], photos: [], views: [], stale: false,
+    } }));
+    await page.getByLabel('Object name', { exact: true }).fill('New sculpture');
+    await page.getByLabel('Object type', { exact: true }).fill('sculpture');
+    await page.getByLabel('Year or period (optional)', { exact: true }).fill('17th century');
+    await page.getByRole('button', { name: 'Create object', exact: true }).click();
+    await expect(page.getByRole('status')).toContainText('Object created');
+    await expect(page.getByRole('heading', { name: 'New sculpture', exact: true })).toBeVisible();
+    await expect(page.getByLabel('Object name', { exact: true })).toHaveValue('');
+    await expect(page.locator('#venue')).toHaveValue(venueId);
+  });
+}

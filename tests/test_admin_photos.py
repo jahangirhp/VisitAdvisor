@@ -4,6 +4,7 @@ import asyncio
 import hashlib
 import io
 from copy import deepcopy
+from datetime import UTC, datetime
 from types import SimpleNamespace
 from unittest.mock import AsyncMock
 
@@ -84,10 +85,13 @@ class Collection:
         rows = await self.find(query, projection).to_list()
         return rows[0] if rows else None
 
+    async def count_documents(self, query):
+        return len(await self.find(query).to_list())
+
     async def insert_one(self, row):
         if self.insert_error:
             raise self.insert_error
-        if any(
+        if row.get("normalized_sha256") is not None and any(
             r.get("normalized_sha256") == row.get("normalized_sha256")
             for r in self.rows
         ):
@@ -411,3 +415,80 @@ def test_admin_create_venue_requires_auth_and_validates_catalog_fields(setup):
         client.post("/api/v1/admin/venues", headers=HEADERS, json=data).status_code
         == 409
     )
+
+
+@pytest.mark.parametrize("new_venue", [False, True])
+def test_admin_creates_object_in_existing_or_new_venue(setup, new_venue):
+    client, _, db, *_ = setup
+    venue = {
+        "name": "Museum",
+        "slug": "museum",
+        "type": "museum",
+        "city": "Amsterdam",
+        "country": "Netherlands",
+    }
+    if new_venue:
+        db["locations"].rows.clear()
+        response = client.post("/api/v1/admin/venues", headers=HEADERS, json=venue)
+        assert response.status_code == 201
+        venue_id = response.json()["id"]
+    else:
+        venue_id = LOCATION
+        db["locations"].rows[0].update(
+            **venue, created_at=datetime.now(UTC), updated_at=datetime.now(UTC)
+        )
+    path = f"/api/v1/admin/venues/{venue_id}/objects"
+    data = {"name": "New sculpture", "type": "sculpture", "year": "17th century"}
+    before = len(db["objects"].rows)
+    assert client.post(path, json=data).status_code == 401
+    assert (
+        client.post(path, headers=HEADERS, json={**data, "name": " "}).status_code
+        == 422
+    )
+    assert (
+        client.post(
+            path, headers=HEADERS, json={**data, "location_id": OTHER_LOCATION}
+        ).status_code
+        == 422
+    )
+    assert len(db["objects"].rows) == before
+    response = client.post(path, headers=HEADERS, json=data)
+    assert response.status_code == 201, response.text
+    record = response.json()
+    assert record["location_id"] == venue_id
+    assert record["name"] == data["name"]
+    assert record["source_ids"] == []
+    assert len(db["objects"].rows) == before + 1
+    assert db["objects"].rows[-1]["location_id"] == venue_id
+    detail = client.get(path + "/" + record["id"], headers=HEADERS)
+    assert detail.status_code == 200
+    assert detail.json()["name"] == data["name"]
+
+
+def test_admin_object_creation_rejects_missing_venue_and_foreign_sources(setup):
+    client, _, db, *_ = setup
+    data = {"name": "Object", "type": "painting"}
+    path = f"/api/v1/admin/venues/{OTHER_LOCATION}/objects"
+    assert client.post(path, headers=HEADERS, json=data).status_code == 404
+    assert (
+        client.post(
+            "/api/v1/admin/venues/invalid/objects", headers=HEADERS, json=data
+        ).status_code
+        == 422
+    )
+    db["locations"].rows[0].update(
+        slug="museum",
+        type="museum",
+        city="Amsterdam",
+        country="Netherlands",
+        created_at=datetime.now(UTC),
+        updated_at=datetime.now(UTC),
+    )
+    db["sources"].rows[0]["location_id"] = OTHER_LOCATION
+    response = client.post(
+        f"/api/v1/admin/venues/{LOCATION}/objects",
+        headers=HEADERS,
+        json={**data, "source_ids": [SOURCE]},
+    )
+    assert response.status_code == 422
+    assert len(db["objects"].rows) == 1

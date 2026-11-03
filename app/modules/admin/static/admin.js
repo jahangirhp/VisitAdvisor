@@ -26,6 +26,12 @@ function clearImages() {
   previewUrl = "";
   photoUrls.forEach(url => URL.revokeObjectURL(url)); photoUrls = [];
 }
+function objectVenue() {
+  $("createObject").disabled = !locationId;
+  $("objectVenue").textContent = locationId
+    ? `Adding to: ${$("venue").selectedOptions[0].textContent}`
+    : "Choose a venue above first.";
+}
 async function venues() {
   const items = await api(`/venues?offset=${venueOffset}`);
   venueCount = items.length;
@@ -36,10 +42,12 @@ async function venues() {
   $("previousVenues").disabled = venueOffset === 0;
   $("nextVenues").disabled = items.length < 100;
   locationId = items[0]?.id || ""; offset = 0;
+  objectVenue();
   if (!locationId) { $("objects").textContent = "No venues on this page."; return; }
   await inventory();
 }
 async function inventory(keepObject = false) {
+  objectVenue();
   if (!locationId) return;
   const current = ++generation;
   const data = await api(`/venues/${locationId}/objects?offset=${offset}&limit=50`);
@@ -138,6 +146,7 @@ async function action(work) {
     controls.forEach(([el, disabled]) => { if (el.isConnected) el.disabled = disabled; });
     $("previous").disabled = offset === 0; $("next").disabled = rows.length < 50;
     $("previousVenues").disabled = venueOffset === 0; $("nextVenues").disabled = venueCount < 100;
+    objectVenue();
   }
 }
 $("loginForm").addEventListener("submit", event => {
@@ -166,6 +175,22 @@ $("venueForm").addEventListener("submit", event => {
     $("search").value = "";
     await inventory();
     $("venueForm").reset();
-    status("Venue created. Add objects and source evidence through the catalog API to start collecting reference photos.");
+    $("addObject").open = true;
+    status("Venue created. Add its first object below.");
+  });
+});
+
+$("objectForm").addEventListener("submit", event => {
+  event.preventDefault();
+  if (!locationId) { status("Choose or create a venue first."); return; }
+  const venueId = locationId;
+  const data = Object.fromEntries([...new FormData(event.target)].map(([key, value]) => [key, value.trim()]).filter(([, value]) => value));
+  action(async () => {
+    const object = await api(`/venues/${venueId}/objects`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+    $("search").value = ""; $("gaps").checked = false;
+    await inventory();
+    await showObject(object.id);
+    $("objectForm").reset();
+    status("Object created in the selected venue. Link canonical source evidence before adding reference photos.");
   });
 });

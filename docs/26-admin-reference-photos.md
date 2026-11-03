@@ -92,5 +92,14 @@ records, establish recognition accuracy or demonstrate physical-phone performanc
 Authenticated administrators can use **Add a venue** to create a location with
 name, unique slug, type, city, country and optional official website. The protected
 `POST /api/v1/admin/venues` reuses catalog validation and duplicate-slug handling.
-The new empty venue is selected immediately. Populate objects and source evidence
-through the existing catalog API; material ingestion is not performed by this form.
+The new empty venue is selected immediately and **Add an object** opens below it.
+
+## Object creation
+
+Choose an existing venue or create a venue, then use **Add an object**. The form
+shows the selected venue and accepts name, type, and optional creator, year/period
+and description. The protected `POST /api/v1/admin/venues/{location_id}/objects`
+reuses catalog validation, including venue existence and source isolation. The
+created object is selected immediately, even when it falls outside the current
+inventory page. It does not create source evidence or publish recognition data.
+Link canonical sources through the catalog before uploading reference photos.

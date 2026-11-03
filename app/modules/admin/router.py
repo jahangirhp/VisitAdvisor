@@ -17,7 +17,11 @@ from app.modules.admin.service import PhotoService
 from app.modules.locations.models import Location, LocationCreate
 from app.modules.locations.repository import LocationRepository
 from app.modules.locations.service import LocationService
+from app.modules.objects.models import Object, ObjectCreate
+from app.modules.objects.repository import ObjectRepository
+from app.modules.objects.service import ObjectService
 from app.modules.recognition.images import MAX_IMAGE_BYTES
+from app.modules.sources.repository import SourceRepository
 from app.modules.visual.features import DinoEncoder, ImageEncoder, VisualFailure
 
 
@@ -91,6 +95,17 @@ async def objects(
     limit: Annotated[int, Query(ge=1, le=50)] = 50,
 ) -> dict[str, Any]:
     return await service.inventory(validate_id(location_id), offset, limit)
+
+
+@router.post("/venues/{location_id}/objects", status_code=201)
+async def create_object(
+    location_id: str, data: ObjectCreate, database: Database
+) -> Object:
+    return await ObjectService(
+        ObjectRepository(database),
+        LocationService(LocationRepository(database)),
+        SourceRepository(database),
+    ).create(location_id, data)
 
 
 @router.get("/venues/{location_id}/objects/{object_id}")

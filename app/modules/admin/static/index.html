@@ -16,9 +16,20 @@
 <label>Country<input name="country" maxlength="300" required></label>
 <label>Official website (optional)<input name="official_website" type="url" placeholder="https://example.org"></label>
 <button type="submit">Create venue</button>
-<p class="small muted">Creates an empty venue. Objects and their source evidence must be added through the existing catalog API before reference photos can be uploaded.</p>
+<p class="small muted">Creates an empty venue and selects it so you can add objects below.</p>
 </form></details>
 <section class="toolbar" aria-label="Collection filters"><label>Venue<select id="venue"></select></label><label>Find an object<input id="search" type="search" placeholder="Search name or type"></label><label class="check"><input id="gaps" type="checkbox" checked> Only objects needing photos</label><button id="refresh">Refresh</button></section>
+<details class="detail" id="addObject"><summary>Add an object</summary>
+<p id="objectVenue" class="muted">Choose a venue above first.</p>
+<form id="objectForm">
+<label>Object name<input name="name" maxlength="300" required></label>
+<label>Object type<input name="type" maxlength="300" placeholder="e.g. painting, sculpture, artifact" required></label>
+<label>Creator (optional)<input name="creator" maxlength="300"></label>
+<label>Year or period (optional)<input name="year" maxlength="300" placeholder="e.g. 1658 or 17th century"></label>
+<label>Description (optional)<textarea name="description" maxlength="10000"></textarea></label>
+<button id="createObject" type="submit" disabled>Create object</button>
+<p class="small muted">Saves this object in the selected venue. Canonical source evidence must be linked through the catalog before reference photos can be uploaded.</p>
+</form></details>
 <div class="layout"><section aria-label="Venue objects"><p id="summary" class="muted"></p><div id="objects" class="objectList"></div><nav class="pagination" aria-label="Object pages"><button id="previous">Previous</button><span id="page"></span><button id="next">Next</button></nav><nav class="pagination" aria-label="Venue pages"><button id="previousVenues">Previous venues</button><button id="nextVenues">More venues</button></nav></section>
 <section class="detail" id="detail"><p class="eyebrow">OBJECT DETAILS</p><h2>Select an object</h2><p>See its reference coverage and upload an additional photo.</p></section></div>
 </div>
