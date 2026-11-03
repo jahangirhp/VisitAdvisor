@@ -30,8 +30,9 @@ held-out testing; never count reference derivatives as independent tests.
 
 An upload requires an existing venue/object, a source already linked to the object,
 viewpoint, photographer/owner, capture-session ID, photo-rights evidence, and an
-explicit identity/permission confirmation. An object without source evidence must
-first receive canonical source membership through the existing catalog workflow.
+explicit identity/permission confirmation. The photo-first creation form records the reviewed identification as a named manual
+on-site source and links it to the new object. For objects created by other flows,
+source membership must already exist before uploads.
 The source membership establishes the object association; photo permission is the
 operator's recorded assertion, not proof supplied by the museum's source record.
 JPEG, PNG and WebP uploads use the existing 5 MiB, 16-megapixel and single-still
@@ -94,12 +95,48 @@ name, unique slug, type, city, country and optional official website. The protec
 `POST /api/v1/admin/venues` reuses catalog validation and duplicate-slug handling.
 The new empty venue is selected immediately and **Add an object** opens below it.
 
-## Object creation
+## Photo-first object creation
 
-Choose an existing venue or create a venue, then use **Add an object**. The form
-shows the selected venue and accepts name, type, and optional creator, year/period
-and description. The protected `POST /api/v1/admin/venues/{location_id}/objects`
-reuses catalog validation, including venue existence and source isolation. The
-created object is selected immediately, even when it falls outside the current
-inventory page. It does not create source evidence or publish recognition data.
-Link canonical sources through the catalog before uploading reference photos.
+Choose an existing venue or create one, then use the always-visible **Quick add**
+panel. **Take a photo** opens the native file/camera picker with
+`capture="environment"`; **Choose photos** accepts multiple gallery images. Camera
+behavior depends on the device/browser. Up to four photos can be previewed,
+removed, and assigned an angle before saving. The first defaults to Front;
+additional angles need explicit selection. A browser may fall back to a file
+picker, and HEIC support depends on its decoder. Unsupported files produce a
+recoverable message without clearing other selections.
+
+The browser decodes and orients photos, composites transparency over white, and
+encodes JPEG at up to 1800 pixels on the longest side before upload. Files over
+40 MiB or decoded images over 64 megapixels are rejected locally. The server
+still enforces its existing image and request limits. This flow stores the
+optimized JPEG, not the original phone file; EXIF/GPS is not sent. The original
+single-photo upload form continues to retain its uploaded original privately.
+
+Only object name, type, observer name and identity/permission confirmation are
+required alongside the photos. Creator, year/period, description and photo
+permission details live under More details. Observer name, last object type and
+permission text are reused in memory for the next object, while the identity
+confirmation resets. Locking the panel clears the draft photos and observer.
+Neither token nor photos are stored in localStorage or sent before Save.
+
+The protected `POST /api/v1/admin/venues/{location_id}/objects` accepts an optional
+`observation: {observer, reviewed: true}`. It records a `manual` source titled
+On-site identification with the named observer as publisher, then links it using
+the existing catalog validation. It does not label this assertion as official
+museum evidence, fetch sources, or generate knowledge. Existing API clients can
+still create objects without observations. If a later database write fails, a
+standalone manual source can remain; it is not published as object knowledge.
+
+**Save object & photos** creates the object and uploads the selected photos
+sequentially with one shared capture-session ID. It reports upload progress and
+reuses the created object and successful uploads when retrying a partial failure.
+Before retry, it reconciles photo hashes and capture-session IDs to handle a lost
+upload response. Draft fields and venue selection stay fixed during retries.
+**Keep saved photos & finish later** keeps the object and completed uploads and
+opens its detail panel. Unsaved photos stay only in the current browser tab and
+are lost on reload or lock. Object creation is not an atomic batch with photo
+uploads; a lost response to the initial object creation itself requires checking
+the inventory before trying again. Saved photos remain private, pending separate
+reference preparation; this flow does not enable automatic identification or
+expand the configured live-camera cohort.

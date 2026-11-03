@@ -2,12 +2,12 @@
 
 import asyncio
 import secrets
-from typing import Annotated, Any, cast
+from typing import Annotated, Any, Literal, cast
 
 from bson import ObjectId
 from fastapi import APIRouter, Depends, File, Form, Header, Query, Request, UploadFile
 from fastapi.responses import Response
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 from pymongo.asynchronous.database import AsyncDatabase
 
 from app.core.domain import validate_id
@@ -21,6 +21,7 @@ from app.modules.objects.models import Object, ObjectCreate
 from app.modules.objects.repository import ObjectRepository
 from app.modules.objects.service import ObjectService
 from app.modules.recognition.images import MAX_IMAGE_BYTES
+from app.modules.sources.models import SourceCreate
 from app.modules.sources.repository import SourceRepository
 from app.modules.visual.features import DinoEncoder, ImageEncoder, VisualFailure
 
@@ -64,6 +65,16 @@ class PhotoMetadata(BaseModel):
     source_id: str
 
 
+class ObjectObservation(BaseModel):
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+    observer: str = Field(min_length=1, max_length=200)
+    reviewed: Literal[True]
+
+
+class AdminObjectCreate(ObjectCreate):
+    observation: ObjectObservation | None = None
+
+
 @router.post("/venues", status_code=201)
 async def create_venue(data: LocationCreate, database: Database) -> Location:
     return await LocationService(LocationRepository(database)).create(data)
@@ -99,13 +110,37 @@ async def objects(
 
 @router.post("/venues/{location_id}/objects", status_code=201)
 async def create_object(
-    location_id: str, data: ObjectCreate, database: Database
+    location_id: str, data: AdminObjectCreate, database: Database
 ) -> Object:
+    locations = LocationService(LocationRepository(database))
+    sources = SourceRepository(database)
+    catalog_data = ObjectCreate.model_validate(data.model_dump(exclude={"observation"}))
+    # A manual observation is the operator's assertion, never an official museum
+    # or generated source. Existing catalog validation still checks every link.
+    location = await locations.get(location_id)
+    if data.observation is not None:
+        ids = list({validate_id(value) for value in catalog_data.source_ids})
+        if ids and await sources.count_for_location(ids, location.id) != len(ids):
+            raise ApplicationError(
+                "INVALID_SOURCE_REFERENCE", "Sources must belong to this venue.", 422
+            )
+        observer = data.observation.observer.strip()
+        if not observer:
+            raise ApplicationError("REVIEW_REQUIRED", "Enter your name.", 422)
+        observation = await sources.create(
+            SourceCreate(
+                title=f"On-site identification: {data.name}",
+                type="manual",
+                publisher=observer,
+            ),
+            location.id,
+        )
+        catalog_data.source_ids = [*ids, observation.id]
     return await ObjectService(
         ObjectRepository(database),
-        LocationService(LocationRepository(database)),
-        SourceRepository(database),
-    ).create(location_id, data)
+        locations,
+        sources,
+    ).create(location.id, catalog_data)
 
 
 @router.get("/venues/{location_id}/objects/{object_id}")

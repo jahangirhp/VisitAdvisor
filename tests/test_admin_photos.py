@@ -492,3 +492,74 @@ def test_admin_object_creation_rejects_missing_venue_and_foreign_sources(setup):
     )
     assert response.status_code == 422
     assert len(db["objects"].rows) == 1
+
+
+def test_photo_first_creation_records_manual_provenance_and_accepts_photos(setup):
+    client, _, db, *_ = setup
+    db["locations"].rows[0].update(
+        slug="museum",
+        type="museum",
+        city="Amsterdam",
+        country="Netherlands",
+        created_at=datetime.now(UTC),
+        updated_at=datetime.now(UTC),
+    )
+    response = client.post(
+        f"/api/v1/admin/venues/{LOCATION}/objects",
+        headers=HEADERS,
+        json={
+            "name": "Bronze statue",
+            "type": "sculpture",
+            "observation": {"observer": "  Jane Smith  ", "reviewed": True},
+        },
+    )
+    assert response.status_code == 201, response.text
+    obj = response.json()
+    assert "observation" not in obj
+    source_id = obj["source_ids"][0]
+    source = next(row for row in db["sources"].rows if str(row["_id"]) == source_id)
+    assert source["type"] == "manual"
+    assert source["publisher"] == "Jane Smith"
+    assert source["title"] == "On-site identification: Bronze statue"
+    assert source["location_id"] == LOCATION
+    assert source["url"] is None
+    photo_path = f"/api/v1/admin/venues/{LOCATION}/objects/{obj['id']}/photos"
+    for color, viewpoint in [("red", "front"), ("blue", "left")]:
+        uploaded = client.post(
+            photo_path,
+            headers=HEADERS,
+            files={"image": ("reference.jpg", jpeg(color), "image/jpeg")},
+            data={
+                **METADATA,
+                "source_id": source_id,
+                "viewpoint": viewpoint,
+                "reviewed": "true",
+            },
+        )
+        assert uploaded.status_code == 201, uploaded.text
+    assert len(db["admin_reference_photos"].rows) == 2
+    assert db["visual_references"].rows == []
+
+
+@pytest.mark.parametrize(
+    "observation",
+    [
+        {"observer": "Jane", "reviewed": False},
+        {"observer": "Jane"},
+        {"observer": " ", "reviewed": True},
+        {"observer": "x" * 201, "reviewed": True},
+        {"observer": "Jane", "reviewed": True, "type": "official_api"},
+    ],
+)
+def test_manual_observation_needs_explicit_review_and_named_observer(
+    setup, observation
+):
+    client, _, db, *_ = setup
+    response = client.post(
+        f"/api/v1/admin/venues/{LOCATION}/objects",
+        headers=HEADERS,
+        json={"name": "Object", "type": "painting", "observation": observation},
+    )
+    assert response.status_code == 422
+    assert len(db["objects"].rows) == 1
+    assert len(db["sources"].rows) == 1
