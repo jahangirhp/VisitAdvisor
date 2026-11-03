@@ -78,6 +78,25 @@ class PhotoService:
         ):
             raise ApplicationError("LOCATION_NOT_FOUND", "Venue not found.", 404)
 
+    async def delete_object(self, location_id: str, object_id: str) -> None:
+        location_id, object_id = validate_id(location_id), validate_id(object_id)
+        await self.object(location_id, object_id)
+        scope = {"location_id": location_id, "object_id": object_id}
+        for collection in (
+            "admin_reference_photos",
+            "visual_vectors",
+            "visual_references",
+            "knowledge_chunks",
+        ):
+            await self.db[collection].delete_many(scope)
+        result = await self.db["objects"].delete_one(
+            {"_id": ObjectId(object_id), "location_id": location_id}
+        )
+        if not result.deleted_count:
+            raise ApplicationError(
+                "OBJECT_NOT_FOUND", "Object not found in this venue.", 404
+            )
+
     def coverage(
         self,
         obj: dict[str, Any],

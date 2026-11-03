@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 const location = '1'.repeat(24), object = '2'.repeat(24), source = '3'.repeat(24);
 const base = `/api/v1/admin/venues/${location}/objects/${object}`;
 async function mock(page) {
-  let saved = false, prepared = false;
+  let saved = false, prepared = false, sourceCreated = false, deleted = false;
   const requests = [];
   await page.route('**/api/v1/admin/**', async route => {
     const request = route.request(), path = new URL(request.url()).pathname;
@@ -13,8 +13,27 @@ async function mock(page) {
     const row = { id: object, name: '<Painting & sculpture>', type: 'painting', target: 3,
       prepared: prepared ? 1 : 0, pending: saved && !prepared ? 1 : 0,
       missing: saved ? 2 : 3, needs_photos: true };
-    if (path.endsWith('/venues')) return route.fulfill({ json: [{ id: location, name: 'Museum', city: 'Amsterdam' }] });
-    if (path.endsWith('/objects')) return route.fulfill({ json: { objects: [row] } });
+    if (path.endsWith('/venues') && request.method() === 'GET') return route.fulfill({ json: [{ id: location, name: 'Museum', city: 'Amsterdam' }] });
+    if (path.endsWith('/sources') && request.method() === 'GET') {
+      return route.fulfill({ json: sourceCreated ? [{ id: source, title: 'Official museum record', type: 'official_website' }] : [] });
+    }
+    if (path.endsWith('/sources') && request.method() === 'POST') {
+      sourceCreated = true;
+      return route.fulfill({ status: 201, json: { id: source, title: 'Official museum record', type: 'official_website' } });
+    }
+    if (path.endsWith('/objects') && request.method() === 'POST') {
+      return route.fulfill({ status: 201, json: { id: '5'.repeat(24), name: 'New object' } });
+    }
+    if (path.endsWith(`/objects/${object}`) && request.method() === 'DELETE') {
+      deleted = true;
+      return route.fulfill({ status: 204 });
+    }
+    if (path.endsWith(`/sources/${source}`) && request.method() === 'DELETE') {
+      return route.fulfill({ status: 409, json: { error: { message: 'This source is linked to catalog objects and cannot be deleted.' } } });
+    }
+    if (path.endsWith('/objects') && request.method() === 'GET') {
+      return route.fulfill({ json: { objects: deleted ? [] : [row] } });
+    }
     if (path.endsWith('/photos')) {
       saved = true;
       expect(request.postDataBuffer().toString()).toContain('front');
@@ -94,4 +113,56 @@ test('admin creates and selects an empty venue', async ({ page }) => {
   await expect(page.getByRole('status')).toContainText('Venue created');
   await expect(page.locator('#venue')).toHaveValue(id);
   await expect(page.locator('#objects')).toContainText('No objects match');
+});
+
+test('admin creates a source inline and links it to a new object', async ({ page }) => {
+  const requests = await mock(page);
+  await login(page);
+  await expect(page.getByText('New objects and their sources will be assigned to this venue.')).toBeVisible();
+  await page.getByText('Add an object', { exact: true }).click();
+  await page.getByLabel('Object name').fill('New object');
+  await page.getByLabel('Object type').fill('sculpture');
+  await page.getByLabel('Creator (optional)').fill('Artist');
+  await page.getByText('Define a new source for this venue', { exact: true }).click();
+  await page.getByLabel('Source title').fill('Official collection record');
+  await page.getByLabel('Source type').selectOption('official_website');
+  await page.getByLabel('URL (optional)').fill('https://museum.example/object');
+  await page.getByRole('button', { name: 'Create and select source' }).click();
+  await expect(page.locator('#objectSource')).toHaveValue(source);
+  await page.getByRole('button', { name: 'Create object' }).click();
+  await expect(page.getByRole('status')).toContainText('Object created and linked');
+
+  const sourceRequest = requests.find(request => request.url().endsWith(`/venues/${location}/sources`) && request.method() === 'POST');
+  expect(sourceRequest.postDataJSON()).toMatchObject({
+    title: 'Official collection record',
+    type: 'official_website',
+    url: 'https://museum.example/object'
+  });
+  const objectRequest = requests.find(request => request.url().endsWith(`/venues/${location}/objects`) && request.method() === 'POST');
+  expect(objectRequest.postDataJSON()).toMatchObject({
+    name: 'New object',
+    type: 'sculpture',
+    creator: 'Artist',
+    source_ids: [source]
+  });
+});
+
+test('admin confirms object deletion and sees a safe source-delete conflict', async ({ page }) => {
+  await mock(page);
+  await login(page);
+  await page.getByRole('button', { name: /Painting & sculpture/ }).click();
+  page.once('dialog', dialog => dialog.accept());
+  await page.getByRole('button', { name: 'Delete object and all its data' }).click();
+  await expect(page.getByRole('status')).toContainText('Object and its photos');
+  await expect(page.locator('#objects')).toContainText('No objects match');
+
+  await page.getByText('Add an object', { exact: true }).click();
+  await page.getByText('Define a new source for this venue', { exact: true }).click();
+  await page.getByLabel('Source title').fill('Official collection record');
+  await page.getByRole('button', { name: 'Create and select source' }).click();
+  await page.getByText('Delete an unused source', { exact: true }).click();
+  await page.locator('#sourceToDelete').selectOption(source);
+  page.once('dialog', dialog => dialog.accept());
+  await page.getByRole('button', { name: 'Delete source' }).click();
+  await expect(page.getByRole('status')).toContainText('linked to catalog objects');
 });

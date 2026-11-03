@@ -21,6 +21,25 @@ async function api(path, options = {}) {
   return response.status === 204 ? null : response.json();
 }
 function base() { return `/venues/${locationId}/objects/${objectId}`; }
+async function loadSources() {
+  const currentLocation = locationId;
+  const selects = [$("objectSource"), $("sourceToDelete")];
+  for (const select of selects) select.replaceChildren(new Option("Select a source", ""));
+  if (!currentLocation) return;
+  const items = [];
+  for (let offset = 0; currentLocation === locationId; offset += 100) {
+    const page = await api(`/venues/${currentLocation}/sources?limit=100&offset=${offset}`);
+    if (currentLocation !== locationId) return;
+    items.push(...page);
+    if (page.length < 100) break;
+  }
+  for (const source of items) {
+    for (const select of selects) {
+      select.append(new Option(`${source.title} · ${source.type}`, source.id));
+    }
+  }
+  $("deleteSource").disabled = items.length === 0;
+}
 function clearImages() {
   if (previewUrl) URL.revokeObjectURL(previewUrl);
   previewUrl = "";
@@ -36,7 +55,8 @@ async function venues() {
   $("previousVenues").disabled = venueOffset === 0;
   $("nextVenues").disabled = items.length < 100;
   locationId = items[0]?.id || ""; offset = 0;
-  if (!locationId) { $("objects").textContent = "No venues on this page."; return; }
+  if (!locationId) { $("objects").textContent = "No venues on this page."; await loadSources(); return; }
+  await loadSources();
   await inventory();
 }
 async function inventory(keepObject = false) {
@@ -80,6 +100,17 @@ async function showObject(id) {
   $("objectName").textContent = data.name;
   $("coverage").textContent = `${data.prepared} prepared · ${data.pending} saved · collection target ${data.target}`;
   $("stale").hidden = !data.stale;
+  $("deleteObject").addEventListener("click", () => {
+    if (!window.confirm(`Delete "${data.name}" and all its saved photos and prepared references? This cannot be undone.`)) return;
+    action(async () => {
+      await api(path, { method: "DELETE" });
+      objectId = "";
+      clearImages();
+      offset = 0;
+      await inventory();
+      status("Object and its photos and prepared references were deleted.");
+    });
+  });
   for (const view of data.views) {
     const item = document.createElement("li"); item.textContent = `${view.viewpoint} · rights ${view.rights_status}`; $("views").append(item);
   }
@@ -136,6 +167,7 @@ async function action(work) {
   finally {
     busy = false;
     controls.forEach(([el, disabled]) => { if (el.isConnected) el.disabled = disabled; });
+    $("deleteSource").disabled = $("sourceToDelete").options.length <= 1;
     $("previous").disabled = offset === 0; $("next").disabled = rows.length < 50;
     $("previousVenues").disabled = venueOffset === 0; $("nextVenues").disabled = venueCount < 100;
   }
@@ -145,7 +177,10 @@ $("loginForm").addEventListener("submit", event => {
   action(async () => { await venues(); $("login").hidden = true; $("workspace").hidden = false; $("logout").hidden = false; status(""); });
 });
 $("logout").addEventListener("click", () => { lock(); status("Panel locked."); });
-$("venue").addEventListener("change", () => { locationId = $("venue").value; offset = 0; inventory().catch(error => status(error.message)); });
+$("venue").addEventListener("change", () => {
+  locationId = $("venue").value; offset = 0;
+  action(async () => { await loadSources(); await inventory(); });
+});
 $("search").addEventListener("input", renderObjects); $("gaps").addEventListener("change", renderObjects);
 $("refresh").addEventListener("click", () => action(() => inventory()));
 $("previous").addEventListener("click", () => action(async () => { offset = Math.max(0, offset - 50); await inventory(); }));
@@ -164,8 +199,73 @@ $("venueForm").addEventListener("submit", event => {
     $("venue").append(option); $("venue").value = venue.id;
     locationId = venue.id; offset = 0;
     $("search").value = "";
+    await loadSources();
     await inventory();
     $("venueForm").reset();
-    status("Venue created. Add objects and source evidence through the catalog API to start collecting reference photos.");
+    status("Venue created. Add a source and object here to start collecting reference photos.");
+  });
+});
+
+$("sourceForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const form = event.target;
+  const data = Object.fromEntries(new FormData(form));
+  for (const key of ["url", "publisher", "external_id", "language"]) {
+    if (!data[key]?.trim()) delete data[key];
+    else data[key] = data[key].trim();
+  }
+  data.title = data.title.trim();
+  action(async () => {
+    if (!locationId) throw new Error("Select or create a venue first.");
+    const source = await api(`/venues/${locationId}/sources`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+    for (const select of [$("objectSource"), $("sourceToDelete")]) {
+      select.append(new Option(`${source.title} · ${source.type}`, source.id));
+    }
+    $("objectSource").value = source.id;
+    form.reset();
+    status("Source created and selected for the new object.");
+  });
+});
+
+$("deleteSource").addEventListener("click", () => {
+  const sourceId = $("sourceToDelete").value;
+  if (!sourceId) return;
+  if (!window.confirm("Delete this source? Sources linked to objects cannot be deleted.")) return;
+  action(async () => {
+    await api(`/venues/${locationId}/sources/${sourceId}`, { method: "DELETE" });
+    await loadSources();
+    status("Source deleted.");
+  });
+});
+
+$("objectForm").addEventListener("submit", event => {
+  event.preventDefault();
+  const form = event.target;
+  const data = Object.fromEntries(new FormData(form));
+  const sourceId = data.source_id;
+  delete data.source_id;
+  data.source_ids = [sourceId];
+  for (const key of ["creator", "year", "description"]) {
+    if (!data[key]?.trim()) delete data[key];
+    else data[key] = data[key].trim();
+  }
+  data.name = data.name.trim();
+  data.type = data.type.trim();
+  action(async () => {
+    if (!locationId) throw new Error("Select or create a venue first.");
+    const object = await api(`/venues/${locationId}/objects`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+    form.reset();
+    offset = 0;
+    await inventory();
+    await showObject(object.id);
+    status("Object created and linked to its canonical source.");
   });
 });

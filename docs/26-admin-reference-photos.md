@@ -92,5 +92,32 @@ records, establish recognition accuracy or demonstrate physical-phone performanc
 Authenticated administrators can use **Add a venue** to create a location with
 name, unique slug, type, city, country and optional official website. The protected
 `POST /api/v1/admin/venues` reuses catalog validation and duplicate-slug handling.
-The new empty venue is selected immediately. Populate objects and source evidence
-through the existing catalog API; material ingestion is not performed by this form.
+The new empty venue is selected immediately.
+
+## Object and source creation
+
+Authenticated administrators can use **Add an object** for the selected venue.
+Choose the venue in the **Selected venue** control above the creation forms;
+both the new object and any source created from its form are assigned to that
+venue. A source must belong to the same venue as an object that uses it.
+Choose an existing canonical source, or expand **Define a new source for this
+venue** to create one and select it automatically. Sources require a title and
+one of the catalog source types; URL, publisher, external ID and language are
+optional. The object form requires a name, free-form type and source, with
+optional creator, year and description. Source and object writes use the existing
+catalog validation, including venue-scoped source membership. These forms store
+source references only; they do not fetch source content, ingest records or
+generate object knowledge. The new object is opened immediately after creation.
+
+## Deletion
+
+The object details panel offers **Delete object and all its data** after a
+browser confirmation. It permanently removes the object, its private admin photo
+uploads, prepared visual references and vectors, and retrieval chunks. The active
+visual preparation lock prevents deleting while references are being published;
+the in-process camera reference cache is invalidated after deletion.
+
+The source form includes **Delete an unused source**. A source may be deleted
+only when no object or retrieval chunk refers to it; otherwise the API returns a
+conflict and leaves it in place. Both delete actions require admin authentication,
+are scoped to the selected venue, and cannot be undone.

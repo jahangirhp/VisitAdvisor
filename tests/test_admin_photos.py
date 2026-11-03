@@ -4,6 +4,7 @@ import asyncio
 import hashlib
 import io
 from copy import deepcopy
+from datetime import UTC, datetime
 from types import SimpleNamespace
 from unittest.mock import AsyncMock
 
@@ -63,7 +64,11 @@ class Collection:
             r
             for r in self.rows
             if all(
-                r.get(k) in v["$in"] if isinstance(v, dict) else r.get(k) == v
+                r.get(k) in v["$in"]
+                if isinstance(v, dict)
+                else v in r.get(k, [])
+                if isinstance(r.get(k), list)
+                else r.get(k) == v
                 for k, v in query.items()
             )
         ]
@@ -84,12 +89,14 @@ class Collection:
         rows = await self.find(query, projection).to_list()
         return rows[0] if rows else None
 
+    async def count_documents(self, query):
+        return len(await self.find(query).to_list())
+
     async def insert_one(self, row):
         if self.insert_error:
             raise self.insert_error
-        if any(
-            r.get("normalized_sha256") == row.get("normalized_sha256")
-            for r in self.rows
+        if row.get("normalized_sha256") is not None and any(
+            r.get("normalized_sha256") == row["normalized_sha256"] for r in self.rows
         ):
             raise DuplicateKeyError("duplicate")
         row = {"_id": ObjectId(), **row}
@@ -97,6 +104,11 @@ class Collection:
         return SimpleNamespace(inserted_id=row["_id"])
 
     async def delete_one(self, query):
+        rows = await self.find(query).to_list()
+        self.rows = [r for r in self.rows if r not in rows]
+        return SimpleNamespace(deleted_count=len(rows))
+
+    async def delete_many(self, query):
         rows = await self.find(query).to_list()
         self.rows = [r for r in self.rows if r not in rows]
         return SimpleNamespace(deleted_count=len(rows))
@@ -115,7 +127,14 @@ def setup():
         "_id": ObjectId(SOURCE),
         "location_id": LOCATION,
         "title": "Museum record",
+        "type": "manual",
+        "url": None,
+        "publisher": None,
+        "external_id": None,
+        "language": None,
         "raw_record": {"identity": "canonical"},
+        "created_at": datetime.now(UTC),
+        "updated_at": datetime.now(UTC),
     }
     db = {
         name: Collection(rows)
@@ -125,7 +144,19 @@ def setup():
             "visual_references": [],
             "visual_vectors": [],
             "admin_reference_photos": [],
-            "locations": [{"_id": ObjectId(LOCATION), "name": "Museum"}],
+            "knowledge_chunks": [],
+            "locations": [
+                {
+                    "_id": ObjectId(LOCATION),
+                    "name": "Museum",
+                    "slug": "museum",
+                    "type": "museum",
+                    "city": "Amsterdam",
+                    "country": "Netherlands",
+                    "created_at": datetime.now(UTC),
+                    "updated_at": datetime.now(UTC),
+                }
+            ],
         }.items()
     }
     service = PhotoService(db)
@@ -173,6 +204,97 @@ def test_admin_requires_auth_and_defaults_disabled(setup):
     assert client.get("/api/v1/admin/venues", headers=HEADERS).status_code == 503
     assert client.get("/admin/").status_code == 200
     assert "test-token" not in client.get("/admin/").text
+
+
+def test_admin_creates_sources_and_source_linked_objects(setup):
+    client, _, _, *_ = setup
+    assert client.get(
+        f"/api/v1/admin/venues/{LOCATION}/sources", headers=HEADERS
+    ).json() == [{"id": SOURCE, "title": "Museum record", "type": "manual"}]
+
+    source_response = client.post(
+        f"/api/v1/admin/venues/{LOCATION}/sources",
+        headers=HEADERS,
+        json={
+            "title": "Official collection record",
+            "type": "official_website",
+            "url": "https://museum.example/objects/1",
+            "publisher": "Example Museum",
+        },
+    )
+    assert source_response.status_code == 201
+    source = source_response.json()
+
+    object_response = client.post(
+        f"/api/v1/admin/venues/{LOCATION}/objects",
+        headers=HEADERS,
+        json={
+            "name": "New painting",
+            "type": "painting",
+            "creator": "Artist",
+            "source_ids": [source["id"]],
+        },
+    )
+    assert object_response.status_code == 201
+    assert object_response.json()["source_ids"] == [source["id"]]
+
+    missing_source = client.post(
+        f"/api/v1/admin/venues/{LOCATION}/objects",
+        headers=HEADERS,
+        json={"name": "Unlinked object", "type": "painting"},
+    )
+    assert missing_source.status_code == 422
+    assert missing_source.json()["error"]["code"] == "SOURCE_REQUIRED"
+
+    unauthorized = client.post(
+        f"/api/v1/admin/venues/{LOCATION}/sources",
+        json={"title": "No auth", "type": "manual"},
+    )
+    assert unauthorized.status_code == 401
+
+
+def test_admin_source_deletion_blocks_linked_sources_and_deletes_unused_sources(setup):
+    client, _, db, *_ = setup
+    linked_path = f"/api/v1/admin/venues/{LOCATION}/sources/{SOURCE}"
+    assert client.delete(linked_path, headers=HEADERS).status_code == 409
+    assert len(db["sources"].rows) == 1
+
+    created = client.post(
+        f"/api/v1/admin/venues/{LOCATION}/sources",
+        headers=HEADERS,
+        json={"title": "Unused source", "type": "manual"},
+    ).json()
+    unused_path = f"/api/v1/admin/venues/{LOCATION}/sources/{created['id']}"
+    assert client.delete(unused_path, headers=HEADERS).status_code == 204
+    assert len(db["sources"].rows) == 1
+    assert client.delete(unused_path, headers=HEADERS).status_code == 404
+    assert client.delete(linked_path).status_code == 401
+
+
+def test_admin_object_deletion_cascades_private_and_prepared_data(setup):
+    client, _, db, *_ = setup
+    path = PATH
+    photo_id = upload(client).json()["id"]
+    db["visual_references"].rows.append(
+        {"location_id": LOCATION, "object_id": OBJECT, "set_id": "set-1"}
+    )
+    db["visual_vectors"].rows.append(
+        {"location_id": LOCATION, "object_id": OBJECT, "set_id": "set-1"}
+    )
+    db["knowledge_chunks"].rows.append(
+        {"location_id": LOCATION, "object_id": OBJECT, "source_ids": [SOURCE]}
+    )
+
+    assert client.delete(path).status_code == 401
+    response = client.delete(path, headers=HEADERS)
+    assert response.status_code == 204
+    assert db["objects"].rows == []
+    assert db["admin_reference_photos"].rows == []
+    assert db["visual_references"].rows == []
+    assert db["visual_vectors"].rows == []
+    assert db["knowledge_chunks"].rows == []
+    assert client.get(path, headers=HEADERS).status_code == 404
+    assert photo_id
 
 
 def test_saved_upload_is_private_and_not_yet_a_reference(setup):

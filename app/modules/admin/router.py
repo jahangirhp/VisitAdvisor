@@ -17,7 +17,13 @@ from app.modules.admin.service import PhotoService
 from app.modules.locations.models import Location, LocationCreate
 from app.modules.locations.repository import LocationRepository
 from app.modules.locations.service import LocationService
+from app.modules.objects.models import Object, ObjectCreate
+from app.modules.objects.repository import ObjectRepository
+from app.modules.objects.service import ObjectService
 from app.modules.recognition.images import MAX_IMAGE_BYTES
+from app.modules.sources.models import Source, SourceCreate
+from app.modules.sources.repository import SourceRepository
+from app.modules.sources.service import SourceService
 from app.modules.visual.features import DinoEncoder, ImageEncoder, VisualFailure
 
 
@@ -63,6 +69,54 @@ class PhotoMetadata(BaseModel):
 @router.post("/venues", status_code=201)
 async def create_venue(data: LocationCreate, database: Database) -> Location:
     return await LocationService(LocationRepository(database)).create(data)
+
+
+@router.get("/venues/{location_id}/sources")
+async def sources(
+    location_id: str,
+    database: Database,
+    limit: Annotated[int, Query(ge=1, le=100)] = 100,
+    offset: Annotated[int, Query(ge=0)] = 0,
+) -> list[dict[str, str]]:
+    location = await LocationService(LocationRepository(database)).get(
+        validate_id(location_id)
+    )
+    rows = (
+        await database["sources"]
+        .find({"location_id": location.id}, {"title": 1, "type": 1})
+        .sort("_id", 1)
+        .skip(offset)
+        .limit(limit)
+        .to_list()
+    )
+    return [
+        {"id": str(row["_id"]), "title": row["title"], "type": row["type"]}
+        for row in rows
+    ]
+
+
+@router.post("/venues/{location_id}/sources", status_code=201)
+async def create_source(
+    location_id: str, data: SourceCreate, database: Database
+) -> Source:
+    return await SourceService(
+        SourceRepository(database), LocationService(LocationRepository(database))
+    ).create(validate_id(location_id), data)
+
+
+@router.post("/venues/{location_id}/objects", status_code=201)
+async def create_object(
+    location_id: str, data: ObjectCreate, database: Database
+) -> Object:
+    if not data.source_ids:
+        raise ApplicationError(
+            "SOURCE_REQUIRED", "Select at least one canonical source.", 422
+        )
+    return await ObjectService(
+        ObjectRepository(database),
+        LocationService(LocationRepository(database)),
+        SourceRepository(database),
+    ).create(validate_id(location_id), data)
 
 
 @router.get("/venues")
@@ -231,3 +285,54 @@ async def prepare(
                 "Install visual dependencies and cached model weights first.",
                 503,
             ) from None
+
+
+@router.delete("/venues/{location_id}/objects/{object_id}", status_code=204)
+async def delete_object(
+    location_id: str, object_id: str, request: Request, service: Service
+) -> Response:
+    lock = request.app.state.admin_preparation_lock
+    if lock.locked():
+        raise ApplicationError(
+            "PREPARATION_BUSY", "Preparation is running; retry shortly.", 409
+        )
+    async with lock:
+        await service.delete_object(validate_id(location_id), validate_id(object_id))
+    request.app.state.visual_geometry_cache.clear()
+    references = getattr(request.app.state.camera.state, "references", None)
+    if references is not None:
+        async with references.lock:
+            references.recognizer = None
+            references.checked_until = 0
+    return Response(status_code=204)
+
+
+@router.delete("/venues/{location_id}/sources/{source_id}", status_code=204)
+async def delete_source(
+    location_id: str, source_id: str, database: Database
+) -> Response:
+    location_id, source_id = validate_id(location_id), validate_id(source_id)
+    location = await LocationService(LocationRepository(database)).get(location_id)
+    source = await database["sources"].find_one(
+        {"_id": ObjectId(source_id), "location_id": location.id}, {"_id": 1}
+    )
+    if source is None:
+        raise ApplicationError("SOURCE_NOT_FOUND", "Source was not found.", 404)
+    linked_object = await database["objects"].find_one(
+        {"location_id": location.id, "source_ids": source_id}, {"_id": 1}
+    )
+    linked_chunk = await database["knowledge_chunks"].find_one(
+        {"location_id": location.id, "source_ids": source_id}, {"_id": 1}
+    )
+    if linked_object is not None or linked_chunk is not None:
+        raise ApplicationError(
+            "SOURCE_IN_USE",
+            "This source is linked to catalog objects and cannot be deleted.",
+            409,
+        )
+    result = await database["sources"].delete_one(
+        {"_id": ObjectId(source_id), "location_id": location.id}
+    )
+    if not result.deleted_count:
+        raise ApplicationError("SOURCE_NOT_FOUND", "Source was not found.", 404)
+    return Response(status_code=204)
