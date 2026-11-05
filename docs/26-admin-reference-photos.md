@@ -91,8 +91,10 @@ records, establish recognition accuracy or demonstrate physical-phone performanc
 ## Venue creation
 
 Authenticated administrators can use **Add a venue** to create a location with
-name, unique slug, type, city, country and optional official website. The protected
-`POST /api/v1/admin/venues` reuses catalog validation and duplicate-slug handling.
+only its name. The protected `POST /api/v1/admin/venues` generates a unique
+internal slug, uses type `other`, and leaves city, country and website unset.
+Existing full-detail API requests retain catalog validation and duplicate-slug
+handling; the public location-creation API still requires city and country.
 The new empty venue is selected immediately and **Add an object** opens below it.
 
 ## Photo-first object creation

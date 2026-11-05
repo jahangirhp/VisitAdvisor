@@ -10,11 +10,11 @@ from fastapi.responses import Response
 from pydantic import BaseModel, ConfigDict, Field
 from pymongo.asynchronous.database import AsyncDatabase
 
-from app.core.domain import validate_id
+from app.core.domain import NonBlank, validate_id
 from app.core.exceptions import ApplicationError
 from app.db.mongodb import get_database
 from app.modules.admin.service import PhotoService
-from app.modules.locations.models import Location, LocationCreate
+from app.modules.locations.models import Location, LocationCreate, LocationData
 from app.modules.locations.repository import LocationRepository
 from app.modules.locations.service import LocationService
 from app.modules.objects.models import Object, ObjectCreate
@@ -75,9 +75,21 @@ class AdminObjectCreate(ObjectCreate):
     observation: ObjectObservation | None = None
 
 
+class AdminVenueCreate(BaseModel):
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+    name: NonBlank = Field(max_length=300)
+
+
 @router.post("/venues", status_code=201)
-async def create_venue(data: LocationCreate, database: Database) -> Location:
-    return await LocationService(LocationRepository(database)).create(data)
+async def create_venue(
+    data: LocationCreate | AdminVenueCreate, database: Database
+) -> Location:
+    repository = LocationRepository(database)
+    if isinstance(data, LocationCreate):
+        return await LocationService(repository).create(data)
+    return await repository.create(
+        LocationData(name=data.name, slug=f"venue-{ObjectId()}", type="other")
+    )
 
 
 @router.get("/venues")

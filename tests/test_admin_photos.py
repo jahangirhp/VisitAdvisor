@@ -598,3 +598,27 @@ def test_admin_test_upload_does_not_require_confirmation(setup):
     )
     assert response.status_code == 201, response.text
     assert len(db["admin_reference_photos"].rows) == 1
+
+
+def test_admin_creates_venue_with_only_name(setup):
+    client, _, db, *_ = setup
+    for name in ("  New venue  ", "New venue", "????"):
+        response = client.post(
+            "/api/v1/admin/venues", headers=HEADERS, json={"name": name}
+        )
+        assert response.status_code == 201, response.text
+        venue = response.json()
+        assert venue["name"] == name.strip()
+        assert venue["type"] == "other"
+        assert venue["city"] is None and venue["country"] is None
+        assert venue["official_website"] is None
+        assert venue["slug"].startswith("venue-")
+        assert client.get(f"/api/v1/locations/{venue['id']}").status_code == 200
+    slugs = [row.get("slug") for row in db["locations"].rows]
+    assert len(slugs) == len(set(slugs))
+    assert (
+        client.post(
+            "/api/v1/admin/venues", headers=HEADERS, json={"name": "   "}
+        ).status_code
+        == 422
+    )

@@ -173,11 +173,10 @@ $("nextVenues").addEventListener("click", () => action(async () => { venueOffset
 $("venueForm").addEventListener("submit", event => {
   event.preventDefault();
   const data = Object.fromEntries(new FormData(event.target));
-  if (!data.official_website) delete data.official_website;
   action(async () => {
     const venue = await api("/venues", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
     const option = document.createElement("option");
-    option.value = venue.id; option.textContent = `${venue.name} · ${venue.city}`;
+    option.value = venue.id; option.textContent = venue.name;
     $("venue").append(option); $("venue").value = venue.id;
     locationId = venue.id; offset = 0;
     $("search").value = "";

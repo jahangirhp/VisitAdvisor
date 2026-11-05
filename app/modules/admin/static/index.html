@@ -49,11 +49,6 @@
 </main>
 <dialog id="venueDialog" aria-labelledby="venueDialogTitle"><div class="dialogHeader"><h2 id="venueDialogTitle">Add a venue</h2><button id="closeVenue" class="iconButton" aria-label="Close venue form">&times;</button></div><form id="venueForm">
 <label>Venue name<input name="name" maxlength="300" required></label>
-<label>Unique slug<input name="slug" maxlength="200" pattern="[a-z0-9]+(-[a-z0-9]+)*" placeholder="e.g. city-museum" required></label>
-<label for="venueType">Venue type</label><select id="venueType" name="type"><option value="museum">Museum</option><option value="historical_site">Historical site</option><option value="landmark">Landmark</option><option value="gallery">Gallery</option><option value="exhibition">Exhibition</option><option value="public_space">Public space</option><option value="attraction">Attraction</option><option value="other">Other</option></select>
-<label>City<input name="city" maxlength="300" required></label>
-<label>Country<input name="country" maxlength="300" required></label>
-<label>Official website (optional)<input name="official_website" type="url" placeholder="https://example.org"></label>
 <button type="submit">Create venue</button>
 <p class="small muted">Creates an empty venue and selects it so you can add objects below.</p>
 </form></dialog>

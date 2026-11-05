@@ -83,16 +83,12 @@ test('admin creates and selects an empty venue', async ({ page }) => {
     expect(route.request().method()).toBe('POST');
     expect(route.request().headers().authorization).toBe('Bearer demo-token');
     const data = route.request().postDataJSON();
-    expect(data).toEqual({ name: 'New gallery', slug: 'new-gallery', type: 'gallery', city: 'Utrecht', country: 'Netherlands' });
+    expect(data).toEqual({ name: 'New gallery' });
     await route.fulfill({ status: 201, json: { ...data, id } });
   });
   await page.route(`**/api/v1/admin/venues/${id}/objects?**`, route => route.fulfill({ json: { objects: [] } }));
   await page.getByRole('button', { name: 'Add a venue', exact: true }).click();
   await page.getByLabel('Venue name', { exact: true }).fill('New gallery');
-  await page.getByLabel('Unique slug').fill('new-gallery');
-  await page.getByLabel('Venue type', { exact: true }).selectOption('gallery');
-  await page.getByLabel('City', { exact: true }).fill('Utrecht');
-  await page.getByLabel('Country', { exact: true }).fill('Netherlands');
   await page.getByRole('button', { name: 'Create venue', exact: true }).click();
   await expect(page.locator('#status')).toContainText('Venue created');
   await expect(page.locator('#venue')).toHaveValue(id);
@@ -109,9 +105,6 @@ for (const newVenue of [false, true]) {
       await page.route(`**/api/v1/admin/venues/${venueId}/objects?**`, route => route.fulfill({ json: { objects: [] } }));
       await page.getByRole('button', { name: 'Add a venue', exact: true }).click();
       await page.getByLabel('Venue name', { exact: true }).fill('New gallery');
-      await page.getByLabel('Unique slug').fill('new-gallery');
-      await page.getByLabel('City', { exact: true }).fill('Utrecht');
-      await page.getByLabel('Country', { exact: true }).fill('Netherlands');
       await page.getByRole('button', { name: 'Create venue', exact: true }).click();
       await expect(page.locator('#venue')).toHaveValue(venueId);
     }
