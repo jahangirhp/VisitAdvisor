@@ -258,3 +258,38 @@ test('two-step creation keeps details on Back and validates before saving', asyn
   await page.getByRole('button', { name: 'Add object', exact: true }).click();
   await expect(page.getByLabel('Object name', { exact: true })).toHaveValue('Draft statue');
 });
+
+
+test('admin stays signed in after refresh and locking clears the tab session', async ({ page }) => {
+  await mock(page); await login(page);
+  await page.reload();
+  await expect(page.locator('#workspace')).toBeVisible();
+  await expect(page.locator('#login')).toBeHidden();
+  expect(await page.evaluate(() => Object.keys(localStorage))).toEqual([]);
+  await page.getByRole('button', { name: 'Lock panel' }).click();
+  await page.reload();
+  await expect(page.locator('#login')).toBeVisible();
+  await expect(page.locator('#workspace')).toBeHidden();
+  expect(await page.evaluate(() => sessionStorage.getItem('visitadvisor.adminToken'))).toBeNull();
+});
+
+test('a rejected saved token is cleared on refresh', async ({ page }) => {
+  await mock(page); await login(page);
+  await page.route('**/api/v1/admin/**', route => route.fulfill({
+    status: 401, json: { error: { message: 'Enter a valid admin token.' } },
+  }));
+  await page.reload();
+  await expect(page.locator('#login')).toBeVisible();
+  await expect(page.locator('#workspace')).toBeHidden();
+  await expect(page.locator('#status')).toContainText('valid admin token');
+  expect(await page.evaluate(() => sessionStorage.getItem('visitadvisor.adminToken'))).toBeNull();
+});
+
+test('admin login still works when tab storage is unavailable', async ({ page }) => {
+  await page.addInitScript(() => Object.defineProperty(window, 'sessionStorage', {
+    get() { throw new DOMException('Storage unavailable', 'SecurityError'); },
+  }));
+  await mock(page); await login(page);
+  await page.getByRole('button', { name: 'Lock panel' }).click();
+  await expect(page.locator('#login')).toBeVisible();
+});

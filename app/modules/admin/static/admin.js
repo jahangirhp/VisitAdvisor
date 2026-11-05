@@ -3,8 +3,19 @@ const $ = id => document.getElementById(id);
 let token = "", locationId = "", objectId = "", offset = 0, venueOffset = 0, venueCount = 0, rows = [], generation = 0;
 let previewUrl = "", photoUrls = [], busy = false;
 let capturePhotos = [], captureDraft = null, captureReading = false, captureStep = 1;
+const tokenStorageKey = "visitadvisor.adminToken";
+function storedToken() {
+  try { return sessionStorage.getItem(tokenStorageKey) || ""; } catch { return ""; }
+}
+function rememberToken(value) {
+  try {
+    if (value) sessionStorage.setItem(tokenStorageKey, value);
+    else sessionStorage.removeItem(tokenStorageKey);
+  } catch { /* Login still works when browser storage is unavailable. */ }
+}
 function status(message) { $("status").textContent = message; }
 function lock() {
+  rememberToken("");
   token = ""; generation++; objectId = ""; locationId = "";
   resetCapture(); showCollection(); $("venueDialog").close();
   clearImages(); $("detail").replaceChildren(); $("objects").replaceChildren();
@@ -156,9 +167,15 @@ async function action(work) {
     objectVenue();
   }
 }
+async function unlock() {
+  await venues();
+  rememberToken(token);
+  $("login").hidden = true; $("workspace").hidden = false; $("logout").hidden = false;
+  status("");
+}
 $("loginForm").addEventListener("submit", event => {
   event.preventDefault(); token = $("token").value.trim(); $("token").value = "";
-  action(async () => { await venues(); $("login").hidden = true; $("workspace").hidden = false; $("logout").hidden = false; status(""); });
+  action(unlock);
 });
 $("logout").addEventListener("click", () => { lock(); status("Panel locked."); });
 $("venue").addEventListener("change", () => { if (captureDraft) { $("venue").value = locationId; status("Finish uploading this object before changing venues."); return; } locationId = $("venue").value; offset = 0; inventory().catch(error => status(error.message)); });
@@ -367,3 +384,7 @@ $("finishLater").addEventListener("click", () => {
     status("Object and uploaded photos kept. You can add more photos from its details later.");
   });
 });
+
+// Revalidate the tab's saved token before showing the collection after a reload.
+token = storedToken();
+if (token) action(unlock);

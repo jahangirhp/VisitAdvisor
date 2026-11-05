@@ -2,8 +2,11 @@
 
 The existing FastAPI application now serves `/admin/`. Set `ADMIN_TOKEN` in the
 ignored runtime environment to enable its protected API at `/api/v1/admin`.
-The page requests the token at login and holds it in memory only. It never embeds
-application credentials or stores the token in browser storage. Use HTTPS when
+The page requests the token at login and retains it in tab-scoped sessionStorage
+to survive refreshes. Each reload revalidates it against the protected API before
+showing the collection. Lock panel and HTTP 401 clear the saved token. It is never
+embedded in application assets or stored in localStorage. If browser storage is
+unavailable, login works for the current page without refresh persistence. Use HTTPS when
 accessing it outside localhost. The standalone camera/photo-lab launcher is not
 the main API and does not serve this admin panel.
 
@@ -120,8 +123,7 @@ More details contains only year/period and description. Creator, photo-permissio
 text and the identity/permission checkbox have been removed. Photo rights are
 stored as details not supplied; no permission or review is inferred.
 The last object type is reused in memory for the next object.
-Locking the panel clears the draft photos. Neither token nor photos
-are stored in localStorage or sent before Save.
+Locking the panel clears the draft photos. The token is kept in tab-scoped sessionStorage; photos remain in memory until Save.
 
 The protected `POST /api/v1/admin/venues/{location_id}/objects` accepts
 `observation: {observer}` and records a manual source titled Admin object entry.
