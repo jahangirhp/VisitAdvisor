@@ -21,9 +21,7 @@ let previous;
 let lastResult = 0;
 let displayed;
 let catalogRequest = 0;
-const catalogs = {
-  rijksmuseum: { file: 'catalog.json', label: 'Supported location' },
-};
+let venues = [];
 
 function status(message) { $('status').textContent = message; }
 function clearResult() {
@@ -280,13 +278,21 @@ setInterval(() => {
 async function loadCatalog(key) {
   const request = ++catalogRequest;
   catalog = null;
-  stop('Loading museum references…');
+  stop('Loading venue references…');
   $('target-note').hidden = true;
   try {
-    const response = await fetch(`./bundle/${catalogs[key].file}`, { cache: 'no-store' });
-    if (!response.ok) throw new Error('Museum references are unavailable. Try reloading shortly.');
+    const response = await fetch(`./bundle/catalog.json?${new URLSearchParams({ location_id: key })}`, { cache: 'no-store' });
+    if (!response.ok) {
+      const data = await response.json().catch(() => ({}));
+      const messages = {
+        NO_PREPARED_REFERENCES: 'This venue has no prepared photo references yet. Prepare reference photos in admin, then reselect this venue.',
+        CAMERA_OBJECT_LIMIT: 'This venue exceeds the current camera limit of 12 prepared objects.',
+      };
+      throw new Error(messages[data.error] || 'Venue references are unavailable. Try reloading shortly.');
+    }
     const loaded = validateCatalog(await response.json());
     if (request !== catalogRequest) return;
+    if (loaded.location.id !== key) throw new Error("References belong to a different venue.");
     catalog = loaded;
     canvas.width = canvas.height = loaded.policy.frame_size || 224;
     const option = [...$('location').options].find(item => item.value === key);
@@ -296,7 +302,7 @@ async function loadCatalog(key) {
     $('start').disabled = false;
     status('Ready to scan.');
   } catch (error) {
-    if (request === catalogRequest) status(error.message || 'Museum references could not load. Reload to try again.');
+    if (request === catalogRequest) status(error.message || 'Venue references could not load. Reload to try again.');
   }
 }
 
@@ -313,14 +319,24 @@ async function init() {
     status('This browser cannot send camera frames. Try an updated browser.');
     return;
   }
+  try {
+    for (let offset = 0; ; offset += 100) {
+      const response = await fetch(`./venues?offset=${offset}`, { cache: 'no-store' });
+      if (!response.ok) throw new Error('Venues could not load. Reload to try again.');
+      const batch = await response.json();
+      if (!Array.isArray(batch) || !batch.every(venue => /^[a-f0-9]{24}$/.test(venue.id) && typeof venue.name === 'string')) throw new Error('Invalid venue list.');
+      venues.push(...batch);
+      if (batch.length < 100) break;
+    }
+  } catch (error) { status(error.message); return; }
+  if (!venues.length) {
+    $('location').replaceChildren(new Option('No venues yet', ''));
+    status('Add a venue in admin to get started.');
+    return;
+  }
   const requested = new URLSearchParams(window.location.search).get('location');
-  const key = Object.hasOwn(catalogs, requested) ? requested : 'rijksmuseum';
-  $('location').replaceChildren(...Object.entries(catalogs).map(([value, entry]) => {
-    const option = document.createElement('option');
-    option.value = value;
-    option.textContent = entry.label;
-    return option;
-  }));
+  const key = venues.find(venue => venue.id === requested || venue.slug === requested)?.id || venues[0].id;
+  $('location').replaceChildren(...venues.map(venue => new Option(venue.name, venue.id)));
   $('location').value = key;
   $('location').disabled = false;
   $('location').addEventListener('change', () => {

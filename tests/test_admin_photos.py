@@ -563,3 +563,38 @@ def test_manual_observation_needs_explicit_review_and_named_observer(
     assert response.status_code == 422
     assert len(db["objects"].rows) == 1
     assert len(db["sources"].rows) == 1
+
+
+def test_upload_automatically_uses_linked_source(setup):
+    client, _, db, *_ = setup
+    response = upload(client, source_id="")
+    assert response.status_code == 201, response.text
+    assert db["admin_reference_photos"].rows[0]["source_id"] == SOURCE
+
+
+def test_upload_records_manual_test_association_when_no_source(setup):
+    client, _, db, obj, _ = setup
+    obj["source_ids"] = []
+
+    async def link_source(query, update):
+        obj["source_ids"].append(update["$addToSet"]["source_ids"])
+
+    db["objects"].update_one = AsyncMock(side_effect=link_source)
+    response = upload(client, source_id="")
+    assert response.status_code == 201, response.text
+    source = db["sources"].rows[-1]
+    assert source["type"] == "manual"
+    assert source["title"] == "Admin test photo association: Painting"
+    assert db["admin_reference_photos"].rows[0]["source_id"] in obj["source_ids"]
+
+
+def test_admin_test_upload_does_not_require_confirmation(setup):
+    client, _, db, *_ = setup
+    response = client.post(
+        PATH + "/photos",
+        headers=HEADERS,
+        files={"image": ("photo.jpg", jpeg(), "image/jpeg")},
+        data={key: value for key, value in METADATA.items() if key != "source_id"},
+    )
+    assert response.status_code == 201, response.text
+    assert len(db["admin_reference_photos"].rows) == 1

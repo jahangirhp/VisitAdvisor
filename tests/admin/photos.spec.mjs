@@ -42,15 +42,17 @@ test('admin can find an object, upload a reviewed photo, then prepare it', async
   await page.locator('#image').setInputFiles({ name: 'front.png', mimeType: 'image/png',
     buffer: Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aL1sAAAAASUVORK5CYII=', 'base64') });
   await page.getByLabel('Viewpoint', { exact: true }).fill('front');
-  await page.getByLabel('Photographer / owner').fill('Museum team');
-  await page.getByLabel('Capture session').fill('visit-1');
-  await page.getByLabel('Photo rights / permission').fill('Own photo, reference use permitted');
-  await page.getByRole('checkbox', { name: /I checked that this photo/ }).check();
+  await expect(page.getByLabel('Photographer / owner')).toHaveCount(0);
+  await expect(page.getByLabel('Capture session')).toHaveCount(0);
+  await expect(page.getByLabel('Object source')).toHaveCount(0);
+  await expect(page.getByLabel('Photo rights / permission')).toHaveCount(0);
+  await expect(page.getByRole('checkbox', { name: /I checked that this photo/ })).toHaveCount(0);
   await page.getByRole('button', { name: 'Save photo', exact: true }).click();
-  await expect(page.locator('#status')).toContainText('Photo saved privately');
-  await expect(page.locator('#coverage')).toContainText('1 saved');
+  await expect(page.locator('#status')).toContainText('Photo saved.');
+  await expect(page.locator('#coverage')).toHaveCount(0);
+  await expect(page.getByRole('heading', {name:'Stored reference views'})).toHaveCount(0);
   await page.getByRole('button', { name: 'Prepare references' }).click();
-  await expect(page.locator('#coverage')).toContainText('1 prepared');
+  await expect(page.getByRole('button', { name: 'Prepare references' })).toBeDisabled();
   expect(requests.some(r => r.url().includes(base + '/photos') && r.method() === 'POST')).toBeTruthy();
   await page.getByRole('button', { name: 'Lock panel' }).click();
   await expect(page.getByLabel('Admin token')).toHaveValue('');

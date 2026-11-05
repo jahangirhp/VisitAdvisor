@@ -8,7 +8,8 @@ from pathlib import Path
 from time import monotonic
 from typing import cast
 
-from fastapi import FastAPI, Request
+from bson import ObjectId
+from fastapi import FastAPI, Query, Request
 from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from starlette.concurrency import run_in_threadpool
@@ -58,6 +59,7 @@ def create_camera_app(
                 await application.state.mongodb.close()
             application.state.mongodb = None
             application.state.references = None
+            application.state.venue_references = None
             application.state.recognizer = None
 
     application = FastAPI(
@@ -65,6 +67,7 @@ def create_camera_app(
     )
     application.state.recognizer = recognizer
     application.state.references = None
+    application.state.venue_references = None
     application.state.mongodb = None
     application.state.owns_mongodb = False
     init_gate = asyncio.Lock()
@@ -101,7 +104,7 @@ def create_camera_app(
         )
         return response
 
-    async def engine() -> CameraRecognizer:
+    async def engine(location_id: str | None = None) -> CameraRecognizer:
         nonlocal directory
         async with init_gate:
             value = cast(CameraRecognizer | None, application.state.recognizer)
@@ -116,22 +119,69 @@ def create_camera_app(
                     raise CameraFailure("RECOGNITION_UNAVAILABLE") from None
                 application.state.recognizer = value
                 return value
-            references = cast(
-                AtlasCameraReferences | None, application.state.references
-            )
-            if references is None:
-                try:
-                    settings = configured_settings or Settings()
-                    directory = settings.live_camera_bundle
+            if location_id:
+                settings = configured_settings or Settings()
+                if not ObjectId.is_valid(location_id):
+                    raise CameraFailure("WRONG_LOCATION", 409)
+                current_references = application.state.references
+                if location_id != settings.live_camera_location_id and (
+                    current_references is None
+                    or location_id != current_references.location_id
+                ):
                     if application.state.mongodb is None:
                         application.state.mongodb = MongoDB(settings)
                         application.state.owns_mongodb = True
-                    references = AtlasCameraReferences(
-                        application.state.mongodb.database, settings, directory
-                    )
-                    application.state.references = references
-                except Exception:
-                    raise CameraFailure("RECOGNITION_UNAVAILABLE") from None
+                    selected = application.state.venue_references
+                    if selected is None or selected.location_id != location_id:
+                        venue = await application.state.mongodb.database[
+                            "locations"
+                        ].find_one(
+                            {"_id": ObjectId(location_id), "status": "active"},
+                            {"_id": 1},
+                        )
+                        if venue is None:
+                            raise CameraFailure("WRONG_LOCATION", 409)
+                        selected = AtlasCameraReferences(
+                            application.state.mongodb.database,
+                            settings.model_copy(
+                                update={
+                                    "live_camera_location_id": location_id,
+                                    "live_camera_object_ids": [],
+                                    "live_camera_calibration": None,
+                                }
+                            ),
+                            settings.live_camera_bundle,
+                            discover_objects=True,
+                        )
+                        previous = (
+                            application.state.venue_references
+                            or application.state.references
+                        )
+                        if previous is not None:
+                            selected.session = previous.session
+                        application.state.venue_references = selected
+                    references = selected
+                else:
+                    references = None
+            else:
+                references = None
+            if references is None:
+                references = cast(
+                    AtlasCameraReferences | None, application.state.references
+                )
+                if references is None:
+                    try:
+                        settings = configured_settings or Settings()
+                        directory = settings.live_camera_bundle
+                        if application.state.mongodb is None:
+                            application.state.mongodb = MongoDB(settings)
+                            application.state.owns_mongodb = True
+                        references = AtlasCameraReferences(
+                            application.state.mongodb.database, settings, directory
+                        )
+                        application.state.references = references
+                    except Exception:
+                        raise CameraFailure("RECOGNITION_UNAVAILABLE") from None
         return await references.get()
 
     async def prepare() -> None:
@@ -145,9 +195,42 @@ def create_camera_app(
     application.state.prepare = prepare
     application.state.preload_error = None
 
+    @application.get("/venues")
+    async def venues(offset: int = Query(default=0, ge=0)) -> Response:
+        if bundle is not None or recognizer is not None:
+            value = await engine()
+            return JSONResponse([value.catalog["location"]] if offset == 0 else [])
+        try:
+            async with init_gate:
+                if application.state.mongodb is None:
+                    application.state.mongodb = MongoDB(
+                        configured_settings or Settings()
+                    )
+                    application.state.owns_mongodb = True
+            rows = await (
+                application.state.mongodb.database["locations"]
+                .find({"status": "active"}, {"name": 1, "slug": 1})
+                .sort("_id", 1)
+                .skip(offset)
+                .limit(100)
+                .to_list(length=100)
+            )
+            return JSONResponse(
+                [
+                    {
+                        "id": str(row["_id"]),
+                        "name": row["name"],
+                        "slug": row.get("slug"),
+                    }
+                    for row in rows
+                ]
+            )
+        except Exception:
+            raise CameraFailure("VENUES_UNAVAILABLE") from None
+
     @application.get("/ready")
-    async def ready() -> Response:
-        value = await engine()
+    async def ready(location_id: str | None = None) -> Response:
+        value = await engine(location_id)
         await run_in_threadpool(value.warm)
         return JSONResponse(
             {
@@ -158,14 +241,14 @@ def create_camera_app(
         )
 
     @application.get("/bundle/catalog.json")
-    async def catalog() -> Response:
-        value = await engine()
+    async def catalog(location_id: str | None = None) -> Response:
+        value = await engine(location_id)
         await run_in_threadpool(value.warm)
         return JSONResponse(value.public_catalog())
 
     @application.get("/objects/{object_id}/experience")
     async def experience(object_id: str, request: Request) -> Response:
-        service = await engine()
+        service = await engine(request.query_params.get("location_id"))
         service.check_fresh()
         location_id = service.catalog["location"]["id"]
         if request.query_params.get("location_id") != location_id:
@@ -195,7 +278,7 @@ def create_camera_app(
                     location_id,
                     {s["id"] for s in obj["sources"]},
                 )
-                current = await engine()
+                current = await engine(request.query_params.get("location_id"))
                 current.check_fresh()
                 if current.reference_version != version:
                     raise CameraFailure("REFERENCES_CHANGED", 409)
@@ -232,7 +315,7 @@ def create_camera_app(
         # Browsers cannot invoke this JPEG route across origins without preflight.
         if request.headers.get("sec-fetch-site") == "cross-site":
             raise CameraFailure("SAME_ORIGIN_REQUIRED", 403)
-        service = await engine()
+        service = await engine(request.query_params.get("location_id"))
         service.check_fresh()
         if request.query_params.get("location_id") != service.catalog["location"]["id"]:
             raise CameraFailure("WRONG_LOCATION", 409)
@@ -254,12 +337,12 @@ def create_camera_app(
                         body.extend(chunk)
                 if not body:
                     raise CameraFailure("INVALID_FRAME", 422)
-                current = await engine()
+                current = await engine(request.query_params.get("location_id"))
                 if current.reference_version != service.reference_version:
                     raise CameraFailure("REFERENCES_CHANGED", 409)
                 last_scan = monotonic()
                 result = await run_in_threadpool(service.recognize, bytes(body))
-                current = await engine()
+                current = await engine(request.query_params.get("location_id"))
                 if current.reference_version != service.reference_version:
                     raise CameraFailure("REFERENCES_CHANGED", 409)
                 return JSONResponse(result)

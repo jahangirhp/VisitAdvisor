@@ -158,3 +158,13 @@ with a photo summary, name/type/observer and consent. Back and Edit preserve the
 in-memory draft. Closing returns to the collection; reopening resumes the draft.
 No object or image writes occur until Save object. A successful save returns to
 the selected object's collection detail. Venue creation uses a native dialog.
+
+## Simplified admin testing upload
+
+The existing-object test photo form asks only for the image and viewpoint.
+No identity/permission confirmation is collected or inferred in this form.
+Photographer, capture session, source selection and rights text are removed from
+this form. Uploads use explicit admin-test metadata and an automatically generated
+capture ID. The server reuses a linked source; if none exists, it records a manual
+admin-test association, without claiming official identity evidence. Photo rights
+are recorded as details not supplied. The photo-first creation editor is unchanged.

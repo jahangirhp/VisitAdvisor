@@ -158,17 +158,17 @@ async def upload(
     photographer: Annotated[str, Form(min_length=1, max_length=200)],
     capture_group: Annotated[str, Form(min_length=1, max_length=200)],
     rights: Annotated[str, Form(min_length=1, max_length=1000)],
-    source_id: Annotated[str, Form()],
-    reviewed: Annotated[bool, Form()],
+    reviewed: Annotated[bool | None, Form()] = None,
+    source_id: Annotated[str, Form()] = "",
 ) -> dict[str, str]:
     try:
-        if not reviewed or any(
+        if reviewed is False or any(
             not value.strip()
             for value in (viewpoint, photographer, capture_group, rights)
         ):
             raise ApplicationError(
                 "REVIEW_REQUIRED",
-                "Confirm object identity and permission, and complete photo details.",
+                "Complete the photo details or retry the upload.",
                 422,
             )
         data = await image.read(MAX_IMAGE_BYTES + 1)
@@ -177,7 +177,7 @@ async def upload(
             photographer=photographer.strip(),
             capture_group=capture_group.strip(),
             rights=rights.strip(),
-            source_id=validate_id(source_id),
+            source_id=validate_id(source_id) if source_id else "",
         )
         photo_id = await service.upload(
             validate_id(location_id),

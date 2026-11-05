@@ -19,6 +19,26 @@ from tests.test_camera_server import jpeg
 from tests.test_live_camera import export_fixture
 
 
+class Cursor:
+    def __init__(self, rows):
+        self.rows = rows
+
+    def sort(self, key, direction):
+        self.rows.sort(key=lambda row: row[key], reverse=direction < 0)
+        return self
+
+    def skip(self, offset):
+        self.rows = self.rows[offset:]
+        return self
+
+    def limit(self, limit):
+        self.rows = self.rows[:limit]
+        return self
+
+    async def to_list(self, length):
+        return self.rows[:length]
+
+
 class Collection:
     def __init__(self, rows):
         self.rows = rows
@@ -67,9 +87,7 @@ class Collection:
 
     def find(self, query, projection=None):
         rows = self.matching(query, projection)
-        return SimpleNamespace(
-            to_list=AsyncMock(side_effect=lambda length: rows[:length])
-        )
+        return Cursor(rows)
 
 
 @pytest.fixture
@@ -417,3 +435,102 @@ def test_api_outage_is_sanitized_after_freshness_lease(atlas, monkeypatch):
         response = client.get("/bundle/catalog.json")
         assert response.status_code == 503
         assert response.json() == {"error": "REFERENCES_UNAVAILABLE"}
+
+
+def test_public_venue_list_includes_new_venues_and_paginates(atlas):
+    loader, db, _, settings = atlas
+    new_id = ObjectId()
+    db["locations"].rows.append(
+        {"_id": new_id, "name": "New test venue", "status": "active"}
+    )
+    db["locations"].rows.append(
+        {"_id": ObjectId(), "name": "Archived venue", "status": "archived"}
+    )
+    app = create_camera_app(configured_settings=settings)
+    app.state.mongodb = SimpleNamespace(database=db)
+    with TestClient(app) as client:
+        response = client.get("/venues")
+        assert response.status_code == 200
+        assert {row["name"] for row in response.json()} == {"Museum", "New test venue"}
+        assert client.get("/venues?offset=1").json() == response.json()[1:]
+        assert client.get("/venues?offset=-1").status_code == 422
+        result = client.get(f"/bundle/catalog.json?location_id={new_id}")
+        assert result.status_code == 503
+        assert result.json() == {"error": "NO_PREPARED_REFERENCES"}
+        assert loader.recognizer is None
+
+
+def test_dynamic_selection_is_scoped_supports_one_object_and_refreshes(atlas):
+    loader, db, _, settings = atlas
+    new_location = str(ObjectId())
+    db["locations"].rows.append(
+        {"_id": ObjectId(new_location), "name": "New venue", "status": "active"}
+    )
+    obj = deepcopy(db["objects"].rows[0])
+    obj["_id"] = ObjectId()
+    obj["location_id"] = new_location
+    obj["name"] = "New venue object"
+    source = deepcopy(db["sources"].rows[0])
+    source["_id"] = ObjectId()
+    source["location_id"] = new_location
+    obj["source_ids"] = [str(source["_id"])]
+    record = deepcopy(db["visual_references"].rows[0])
+    record.update(location_id=new_location, object_id=str(obj["_id"]))
+    record["views"][0]["reference"]["source_ids"] = obj["source_ids"]
+    from app.modules.visual.repository import evidence_hash
+
+    record["evidence_hash"] = evidence_hash(obj, [source])
+    db["objects"].rows.append(obj)
+    db["sources"].rows.append(source)
+    db["visual_references"].rows.append(record)
+    app = create_camera_app(configured_settings=settings)
+    app.state.references = loader
+    app.state.mongodb = SimpleNamespace(database=db)
+    with TestClient(app) as client:
+        first = client.get("/bundle/catalog.json").json()
+        response = client.get(f"/bundle/catalog.json?location_id={new_location}")
+        assert response.status_code == 200, response.text
+        selected = response.json()
+        assert selected["location"]["id"] == new_location
+        assert [o["id"] for o in selected["objects"]] == [str(obj["_id"])]
+        wrong = client.post(
+            f"/recognize?location_id={new_location}&reference_version={first['reference_version']}",
+            content=jpeg(),
+            headers={"Content-Type": "image/jpeg"},
+        )
+        assert wrong.status_code == 409
+        assert (
+            client.get("/bundle/catalog.json").json()["location"] == first["location"]
+        )
+        db["visual_references"].rows.remove(record)
+        app.state.venue_references.checked_until = 0
+        assert client.get(
+            f"/bundle/catalog.json?location_id={new_location}"
+        ).json() == {"error": "NO_PREPARED_REFERENCES"}
+
+
+def test_dynamic_selection_rejects_unknown_and_invalid_venues(atlas):
+    loader, db, _, settings = atlas
+    app = create_camera_app(configured_settings=settings)
+    app.state.references = loader
+    app.state.mongodb = SimpleNamespace(database=db)
+    with TestClient(app) as client:
+        for location in ["invalid", str(ObjectId())]:
+            assert (
+                client.get(f"/bundle/catalog.json?location_id={location}").status_code
+                == 409
+            )
+
+
+def test_dynamic_selection_does_not_silently_truncate_objects(atlas):
+    loader, db, _, settings = atlas
+    db["visual_references"].rows.extend(
+        {"location_id": settings.live_camera_location_id, "object_id": str(ObjectId())}
+        for _ in range(11)
+    )
+    dynamic = AtlasCameraReferences(
+        db, settings, loader.directory, discover_objects=True
+    )
+    with pytest.raises(CameraFailure) as failure:
+        asyncio.run(dynamic.get())
+    assert failure.value.code == "CAMERA_OBJECT_LIMIT"

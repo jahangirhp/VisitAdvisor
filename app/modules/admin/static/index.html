@@ -57,15 +57,10 @@
 <button type="submit">Create venue</button>
 <p class="small muted">Creates an empty venue and selects it so you can add objects below.</p>
 </form></dialog>
-<template id="detailTemplate"><p class="eyebrow">OBJECT DETAILS</p><h2 id="objectName"></h2><p id="coverage"></p><p id="stale" class="notice" hidden>Stored references are stale. Prepare them again with current source evidence before adding uploads.</p><h3>Stored reference views</h3><ul id="views"></ul><h3>Admin uploads</h3><div id="photos" class="photos"></div><button id="prepare">Prepare references</button><p class="muted small">Preparing adds saved photos to the recognition database. It preserves existing views. A new reference set requires calibration before recognition quality can be claimed.</p><hr><h3>Add a reference photo</h3>
+<template id="detailTemplate"><p class="eyebrow">OBJECT DETAILS</p><h2 id="objectName"></h2><p id="stale" class="notice" hidden>Stored references are stale. Prepare them again with current source evidence before adding uploads.</p><h3>Photos</h3><div id="photos" class="photos"></div><button id="prepare">Prepare references</button><hr><h3>Add a reference photo</h3>
 <form id="uploadForm">
 <label>Photo<input name="image" id="image" type="file" accept="image/jpeg,image/png,image/webp" required></label><p class="small muted">JPEG, PNG or WebP · up to 5 MiB and 16 megapixels</p><img id="preview" alt="Selected reference photo" hidden>
 <label>Viewpoint<input name="viewpoint" maxlength="300" placeholder="e.g. Front, left side, back" required></label>
-<label>Photographer / owner<input name="photographer" maxlength="200" required></label>
-<label>Capture session<input name="capture_group" maxlength="200" placeholder="e.g. jane-2026-11-01-visit1" required></label>
-<label>Object source<select name="source_id" id="source" required></select></label>
-<label>Photo rights / permission<textarea name="rights" maxlength="1000" placeholder="Owner's permission or license and source URL" required></textarea></label>
-<label class="check"><input name="reviewed" type="checkbox" value="true" required> I checked that this photo shows this exact object and that we have permission to use it as a recognition reference.</label>
-<button type="submit">Save photo</button><p class="small muted">Originals are stored privately for reference preparation. Separate capture sessions must be kept for recognition testing. Duplicate crops do not add viewpoint coverage.</p>
+<button type="submit">Save photo</button>
 </form></template>
 </body></html>

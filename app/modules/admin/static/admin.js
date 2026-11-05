@@ -95,16 +95,7 @@ async function showObject(id) {
   clearImages(); renderObjects();
   $("detail").replaceChildren($("detailTemplate").content.cloneNode(true));
   $("objectName").textContent = data.name;
-  $("coverage").textContent = `${data.prepared} prepared · ${data.pending} saved · collection target ${data.target}`;
   $("stale").hidden = !data.stale;
-  for (const view of data.views) {
-    const item = document.createElement("li"); item.textContent = `${view.viewpoint} · rights ${view.rights_status}`; $("views").append(item);
-  }
-  if (!data.views.length) $("views").textContent = "No prepared references yet.";
-  for (const source of data.sources) {
-    const option = document.createElement("option"); option.value = source.id; option.textContent = source.title; $("source").append(option);
-  }
-  if (!data.sources.length) status("Link a canonical source to this object before adding reference photos.");
   for (const photo of data.photos) {
     const card = document.createElement("div"); card.className = "photo";
     const img = document.createElement("img"); img.alt = photo.viewpoint;
@@ -126,7 +117,7 @@ async function showObject(id) {
   $("prepare").addEventListener("click", () => action(async () => {
     status("Preparing local image descriptors. Please keep this page open…");
     await api(`${path}/prepare`, { method: "POST" });
-    await inventory(true); await showObject(id); status("References prepared. Revalidate recognition before relying on this reference set.");
+    await inventory(true); await showObject(id); status("Photos prepared.");
   }));
   $("image").addEventListener("change", () => {
     if (previewUrl) URL.revokeObjectURL(previewUrl);
@@ -136,11 +127,14 @@ async function showObject(id) {
   $("uploadForm").addEventListener("submit", event => {
     event.preventDefault();
     const body = new FormData(event.target);
+    body.set("photographer", "Admin test upload");
+    body.set("capture_group", `admin-test-${crypto.randomUUID()}`);
+    body.set("rights", "Admin test upload; rights details not recorded.");
     const file = body.get("image");
     if (!file || file.size > 5 * 1024 * 1024) { status("Select a photo up to 5 MiB."); return; }
     action(async () => {
       await api(`${path}/photos`, { method: "POST", body });
-      await inventory(true); await showObject(id); status("Photo saved privately. Use Prepare references to add it to recognition.");
+      await inventory(true); await showObject(id); status("Photo saved.");
     });
   });
 }

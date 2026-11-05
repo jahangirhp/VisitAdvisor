@@ -60,7 +60,7 @@ class CameraRecognizer:
             or not 0.45 <= policy["candidate_floor"] <= 1
             or not 0.02 <= policy["candidate_margin"] <= 1
             or not 3 <= policy["stable_frames"] <= 10
-            or not 2 <= len(self.catalog["objects"]) <= 12
+            or not 1 <= len(self.catalog["objects"]) <= 12
         ):
             raise ValueError("Invalid camera references")
         self.views: list[tuple[str, list[Any]]] = []

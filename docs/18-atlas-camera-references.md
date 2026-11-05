@@ -176,3 +176,27 @@ Public traffic remains 100% on `visitadvisor-00011-boj`. Do not promote the prev
 until Atlas connectivity and public browser/frame checks pass. The temporary
 diagnostic job was removed. The preview URL is:
 https://atlas-preview---visitadvisor-t4ckjib5aq-ez.a.run.app
+
+
+## Camera venue selection ? 2026-11-05
+
+The camera dropdown now reads all active venues from Atlas through the read-only,
+paginated `GET /venues` endpoint (100 per page). Newly added venues appear after
+reloading the camera page. Select a venue by ID with `?location=<id>`; existing
+slug links still resolve through the venue list.
+
+Catalog, readiness, recognition and content requests use `location_id`. The
+configured venue retains its explicit object selection. Other venues discover
+objects from their saved visual reference records, refreshed on the existing
+freshness interval. One to twelve prepared objects are supported per venue;
+exceeding the limit produces a clear unavailable message rather than truncating
+objects. Empty or unprepared venues remain selectable, with scanning disabled
+and a message explaining that reference photos must be prepared in admin.
+Stale or incompatible references continue to fail the existing evidence checks.
+Uploading a photo alone does not prepare its recognition descriptors.
+
+Changing venues stops the camera, clears the previous result/content and requires
+a new Start. The server retains the configured loader and only one alternate
+venue loader, reusing the ONNX session when available. Source evidence, transient
+frame handling and tentative-match behavior remain unchanged. No deployment or
+reference publication is performed by venue selection.

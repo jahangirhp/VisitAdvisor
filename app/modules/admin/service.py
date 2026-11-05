@@ -14,6 +14,8 @@ from app.core.domain import validate_id
 from app.core.exceptions import ApplicationError
 from app.modules.live_camera.pipeline import profile
 from app.modules.recognition.images import prepare_image
+from app.modules.sources.models import SourceCreate
+from app.modules.sources.repository import SourceRepository
 from app.modules.visual.features import ImageEncoder, VisualFailure, digest
 from app.modules.visual.references import MAX_VIEWS
 from app.modules.visual.repository import VisualRepository, evidence_hash
@@ -211,11 +213,32 @@ class PhotoService:
     ) -> str:
         obj = await self.object(location_id, object_id)
         sources = await self.visual.sources(obj) if obj.get("source_ids") else []
+        normalized = await asyncio.to_thread(prepare_image, data, content_type)
+        if not metadata["source_id"]:
+            if sources:
+                metadata["source_id"] = str(sources[0]["_id"])
+            else:
+                # Record the test association explicitly, without claiming official
+                # evidence or inventing photographer/permission information.
+                source = await SourceRepository(self.db).create(
+                    SourceCreate(
+                        title=f"Admin test photo association: {obj['name']}",
+                        type="manual",
+                        publisher="Admin test upload",
+                    ),
+                    location_id,
+                )
+                await self.db["objects"].update_one(
+                    {"_id": obj["_id"], "location_id": location_id},
+                    {"$addToSet": {"source_ids": source.id}},
+                )
+                metadata["source_id"] = source.id
+                obj = await self.object(location_id, object_id)
+                sources = await self.visual.sources(obj)
         if metadata["source_id"] not in {str(s["_id"]) for s in sources}:
             raise ApplicationError(
                 "SOURCE_MISMATCH", "Select this object's source.", 422
             )
-        normalized = await asyncio.to_thread(prepare_image, data, content_type)
         sha = hashlib.sha256(data).hexdigest()
         clean_sha = hashlib.sha256(normalized).hexdigest()
         details = await self.detail(location_id, object_id)

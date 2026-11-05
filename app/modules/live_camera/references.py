@@ -37,8 +37,10 @@ class AtlasCameraReferences:
         database: AsyncDatabase[dict[str, Any]],
         settings: Settings,
         directory: Path,
+        discover_objects: bool = False,
     ) -> None:
         self.db = database
+        self.discover_objects = discover_objects
         self.directory = directory
         self.location_id = settings.live_camera_location_id
         self.object_ids = sorted(set(settings.live_camera_object_ids))
@@ -64,7 +66,7 @@ class AtlasCameraReferences:
         if (
             not self.location_id
             or not ObjectId.is_valid(self.location_id)
-            or not 2 <= len(self.object_ids) <= 12
+            or (not discover_objects and not 2 <= len(self.object_ids) <= 12)
             or not all(ObjectId.is_valid(oid) for oid in self.object_ids)
         ):
             raise ValueError(
@@ -81,6 +83,17 @@ class AtlasCameraReferences:
 
     async def snapshot(self) -> tuple[str, dict[str, Any], list[dict[str, Any]]]:
         """Poll metadata/evidence only; descriptors move only on a version change."""
+        if self.discover_objects:
+            records = (
+                await self.db["visual_references"]
+                .find({"location_id": self.location_id}, {"object_id": 1})
+                .to_list(length=13)
+            )
+            if not records:
+                raise CameraFailure("NO_PREPARED_REFERENCES")
+            if len(records) > 12:
+                raise CameraFailure("CAMERA_OBJECT_LIMIT")
+            self.object_ids = sorted({record["object_id"] for record in records})
         location = await self.db["locations"].find_one(
             {"_id": ObjectId(self.location_id), "status": "active"}, {"name": 1}
         )
@@ -298,9 +311,14 @@ class AtlasCameraReferences:
                 self.recognizer = candidate
                 self.checked_until = monotonic() + self.interval
                 return candidate
-            except Exception:
+            except Exception as error:
                 # Never fall back to cached data after a failed freshness check.
                 self.recognizer = None
                 self.checked_until = 0
                 self.retry_after = monotonic() + 2
+                if isinstance(error, CameraFailure) and error.code in {
+                    "NO_PREPARED_REFERENCES",
+                    "CAMERA_OBJECT_LIMIT",
+                }:
+                    raise
                 raise CameraFailure("REFERENCES_UNAVAILABLE") from None
