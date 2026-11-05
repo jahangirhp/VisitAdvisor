@@ -12,6 +12,7 @@ from pymongo.errors import DuplicateKeyError
 
 from app.core.domain import validate_id
 from app.core.exceptions import ApplicationError
+from app.modules.admin.capture import prepare_foreground_mask
 from app.modules.live_camera.pipeline import profile
 from app.modules.recognition.images import prepare_image
 from app.modules.sources.models import SourceCreate
@@ -28,6 +29,8 @@ PHOTO_FIELDS = {
         "viewpoint",
         "photographer",
         "capture_group",
+        "capture_metadata",
+        "foreground_mask",
         "rights",
         "source_id",
         "sha256",
@@ -209,11 +212,29 @@ class PhotoService:
         object_id: str,
         data: bytes,
         content_type: str | None,
-        metadata: dict[str, str],
+        metadata: dict[str, Any],
+        *,
+        foreground_mask: bytes | None = None,
+        mask_content_type: str | None = None,
     ) -> str:
         obj = await self.object(location_id, object_id)
         sources = await self.visual.sources(obj) if obj.get("source_ids") else []
         normalized = await asyncio.to_thread(prepare_image, data, content_type)
+        mask_fields: dict[str, Any] = {}
+        if foreground_mask is not None:
+            if not metadata.get("capture_metadata"):
+                raise ApplicationError(
+                    "INVALID_CAPTURE_METADATA",
+                    "A foreground mask requires capture details.",
+                    422,
+                )
+            mask_data, mask_metadata = await asyncio.to_thread(
+                prepare_foreground_mask, foreground_mask, mask_content_type, normalized
+            )
+            mask_fields = {
+                "foreground_mask": mask_metadata,
+                "foreground_mask_data": mask_data,
+            }
         if not metadata["source_id"]:
             if sources:
                 metadata["source_id"] = str(sources[0]["_id"])
@@ -267,6 +288,7 @@ class PhotoService:
                     "object_id": object_id,
                     "slot": slot,
                     **metadata,
+                    **mask_fields,
                     "sha256": sha,
                     "normalized_sha256": clean_sha,
                     "data": data,
@@ -320,10 +342,16 @@ class PhotoService:
                 raise ApplicationError(
                     "PHOTO_LIMIT", "Publishing would exceed four reference views.", 409
                 )
-            reference = {
+            capture_metadata = photo.get("capture_metadata")
+            reference: dict[str, Any] = {
                 "source_ids": [photo["source_id"]],
                 "image_url": f"admin-upload:{photo['_id']}",
-                "viewpoint": photo["viewpoint"],
+                "viewpoint": (
+                    None
+                    if capture_metadata
+                    and not capture_metadata.get("viewpoint_verified")
+                    else photo["viewpoint"]
+                ),
                 "rights_status": "recorded",
                 "evidence": {
                     "upload_id": str(photo["_id"]),
@@ -333,6 +361,10 @@ class PhotoService:
                     },
                 },
             }
+            if capture_metadata:
+                reference["evidence"]["capture_metadata"] = capture_metadata
+            if photo.get("foreground_mask"):
+                reference["evidence"]["foreground_mask"] = photo["foreground_mask"]
             image = await asyncio.to_thread(
                 prepare_image, bytes(photo["data"]), photo["content_type"]
             )

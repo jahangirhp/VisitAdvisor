@@ -13,6 +13,8 @@ ARG CONSTRAINTS=
 
 COPY pyproject.toml constraints-visual.txt ./
 COPY app ./app
+COPY scripts/prepare_guided_capture.py ./scripts/prepare_guided_capture.py
+RUN python scripts/prepare_guided_capture.py
 RUN pip install --no-cache-dir ${TORCH_INDEX_URL:+--extra-index-url $TORCH_INDEX_URL} \
         ${CONSTRAINTS:+-c $CONSTRAINTS} ".[${EXTRAS}]" \
     && groupadd --system visitadvisor \

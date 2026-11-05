@@ -90,7 +90,8 @@ test('admin creates and selects an empty venue', async ({ page }) => {
   await page.getByRole('button', { name: 'Add a venue', exact: true }).click();
   await page.getByLabel('Venue name', { exact: true }).fill('New gallery');
   await page.getByRole('button', { name: 'Create venue', exact: true }).click();
-  await expect(page.locator('#status')).toContainText('Venue created');
+  await expect(page.locator('#guidedDialog')).toBeVisible();
+  await expect(page.locator('#guidedSetup')).toBeVisible();
   await expect(page.locator('#venue')).toHaveValue(id);
   await expect(page.locator('#objects')).toContainText('No objects match');
 });
@@ -121,7 +122,8 @@ for (const newVenue of [false, true]) {
       sources: [], photos: [], views: [], stale: false,
     } }));
     await selectCapturePhotos(page, ['red']);
-    await page.getByRole('button', { name: 'Next', exact: true }).click();
+    await expect(page.locator('#detailsStep')).toBeVisible();
+    await expect(page.locator('#guidedDialog')).not.toBeVisible();
     await page.getByLabel('Object name', { exact: true }).fill('New sculpture');
     await page.getByLabel('Object type', { exact: true }).selectOption('sculpture');
     await expect(page.locator('#captureObserver, #captureRights, #captureReviewed, input[name=creator]')).toHaveCount(0);
@@ -136,7 +138,12 @@ for (const newVenue of [false, true]) {
 }
 
 async function selectCapturePhotos(page, colors, expectedCount = colors.length, size = [100, 80]) {
-  if (await page.locator('#addObject').isHidden()) await page.getByRole('button', { name: 'Add object', exact: true }).click();
+  const previousCount = await page.locator('.capturePhoto').count();
+  if (!await page.locator('#guidedDialog').isVisible()) {
+    if (await page.locator('#addObject').isHidden()) await page.getByRole('button', { name: 'Add object', exact: true }).click();
+    else await page.getByRole('button', { name: 'Add more photos', exact: true }).click();
+  }
+  await expect(page.locator('#guidedSetup')).toBeVisible();
   const files = [];
   for (const color of colors) {
     const data = await page.evaluate(([color, width, height]) => {
@@ -146,9 +153,18 @@ async function selectCapturePhotos(page, colors, expectedCount = colors.length, 
     }, [color, ...size]);
     files.push({ name: `${color}.png`, mimeType: 'image/png', buffer: Buffer.from(data, 'base64') });
   }
-  await page.locator('#libraryInput').setInputFiles(files);
+  const [chooser] = await Promise.all([
+    page.waitForEvent('filechooser'),
+    page.getByRole('button', { name: 'Choose photos', exact: true }).click(),
+  ]);
+  await expect(page.locator('#guidedDialog')).not.toBeVisible();
+  await chooser.setFiles(files);
   await expect(page.locator('.capturePhoto')).toHaveCount(expectedCount);
-  if (expectedCount < 4) await expect(page.locator('#choosePhotos')).toBeEnabled();
+  if (expectedCount > previousCount) {
+    await expect(page.locator('#guidedDialog')).not.toBeVisible();
+    await expect(page.locator('#detailsStep')).toBeVisible();
+  }
+  if (expectedCount < 4) await expect(page.locator('#guidedCapture')).toBeEnabled();
 }
 
 for (const lostResponse of [false, true]) {
@@ -187,8 +203,6 @@ for (const lostResponse of [false, true]) {
     await selectCapturePhotos(page, ['red', 'blue']);
     await expect(page.locator('#cameraInput')).toHaveAttribute('capture', 'environment');
     await page.getByLabel('Photo 2 angle', { exact: true }).selectOption('left');
-    await page.screenshot({ path: 'test-results/photo-step-mobile.png' });
-    await page.getByRole('button', { name: 'Next', exact: true }).click();
     await page.getByLabel('Object name', { exact: true }).fill('Museum statue');
     await page.getByLabel('Object type', { exact: true }).selectOption('sculpture');
     await expect(page.locator('#captureObserver, #captureRights, #captureReviewed, input[name=creator]')).toHaveCount(0);
@@ -198,6 +212,12 @@ for (const lostResponse of [false, true]) {
     await expect(page.getByRole('button', { name: 'Retry upload' })).toBeEnabled();
     await expect(page.locator('#captureProgress')).toContainText('completed uploads are saved');
     await expect(page.locator('#venue')).toBeDisabled();
+    await page.getByRole('button', { name: 'Back to collection', exact: true }).click();
+    await expect(page.locator('#collection')).toBeVisible();
+    await page.getByRole('button', { name: 'Add object', exact: true }).click();
+    await expect(page.locator('#guidedDialog')).not.toBeVisible();
+    await expect(page.locator('#detailsStep')).toBeVisible();
+    await expect(page.getByRole('button', { name: 'Retry upload', exact: true })).toBeEnabled();
     await page.getByRole('button', { name: 'Retry upload' }).click();
     await expect(page.locator('#status')).toContainText('Museum statue saved with 2 photos');
     expect(creates).toBe(1); expect(photos.length).toBe(2);
@@ -211,15 +231,16 @@ for (const lostResponse of [false, true]) {
 test('photo selection rejects duplicates, enforces four slots and supports removing photos', async ({ page }) => {
   await mock(page); await login(page);
   await selectCapturePhotos(page, ['red', 'blue', 'green', 'yellow']);
-  await expect(page.locator('#takePhoto')).toBeDisabled();
+  await expect(page.locator('#guidedCapture')).toBeDisabled();
   await page.getByRole('button', { name: 'Remove photo 4', exact: true }).click();
   await expect(page.locator('.capturePhoto')).toHaveCount(3);
-  await expect(page.locator('#takePhoto')).toBeEnabled();
+  await expect(page.locator('#guidedCapture')).toBeEnabled();
   await selectCapturePhotos(page, ['red'], 3);
   await expect(page.locator('#captureProgress')).toContainText('already selected');
   await page.locator('#libraryInput').setInputFiles({ name: 'bad.heic', mimeType: 'image/heic', buffer: Buffer.from('not an image') });
   await expect(page.locator('#captureProgress')).toContainText("Couldn't open this photo");
   await expect(page.locator('.capturePhoto')).toHaveCount(3);
+  if (await page.locator('#guidedDialog').isVisible()) await page.locator('#guidedClose').click();
   await page.getByRole('button', { name: 'Back to collection' }).click();
   await page.getByRole('button', { name: 'Lock panel' }).click();
   await expect(page.locator('.capturePhoto')).toHaveCount(0);
@@ -235,25 +256,32 @@ test('phone-size images are resized locally and desktop layout stays within view
   await page.screenshot({ path: 'test-results/photo-first-desktop.png', fullPage: true });
 });
 
-test('two-step creation keeps details on Back and validates before saving', async ({ page }) => {
+test('direct capture uses the fallback, validates the name, and preserves cancelled draft edits', async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   const requests = await mock(page); await login(page);
   await page.screenshot({ path: 'test-results/collection-mobile.png' });
   await page.getByRole('button', { name: 'Add object', exact: true }).click();
-  await expect(page.getByLabel('Object name', { exact: true })).toBeHidden();
-  await expect(page.locator('#nextCapture')).toBeDisabled();
-  await page.screenshot({ path: 'test-results/photo-empty-mobile.png' });
+  await expect(page.locator('#guidedDialog')).toBeVisible();
+  await expect(page.locator('#guidedSetup')).toBeVisible();
+  await expect(page.locator('#photoStep, #captureEmpty, #nextCapture, #captureTitle, #detailsPhotoSummary')).toHaveCount(0);
+  await expect(page.locator('#choosePhotos')).toBeVisible();
+  await page.screenshot({ path: 'test-results/capture-setup-mobile.png' });
   await selectCapturePhotos(page, ['red']);
-  await page.locator('#nextCapture').click();
-  await expect(page.locator('#photoStep')).toBeHidden();
+  await expect(page.locator('#guidedDialog')).not.toBeVisible();
+  await expect(page.locator('#detailsStep')).toBeVisible();
   await page.getByRole('button', { name: 'Save object', exact: true }).click();
   expect(requests.some(request => request.method() === 'POST')).toBeFalsy();
   await page.getByLabel('Object name', { exact: true }).fill('Draft statue');
-  await page.getByRole('button', { name: 'Back', exact: true }).click();
+  await page.screenshot({ path: 'test-results/capture-name-mobile.png', fullPage: true });
+  await page.getByLabel('Photo 1 angle', { exact: true }).evaluate(select => select.scrollIntoView({ block: 'center' }));
+  await page.screenshot({ path: 'test-results/capture-name-mobile-photos.png' });
+  await page.getByRole('button', { name: 'Add more photos', exact: true }).click();
+  await expect(page.locator('#guidedSetup')).toBeVisible();
+  await page.locator('#guidedClose').click();
+  await expect(page.locator('#detailsStep')).toBeVisible();
   await expect(page.locator('.capturePhoto')).toHaveCount(1);
-  await page.locator('#nextCapture').click();
   await expect(page.getByLabel('Object name', { exact: true })).toHaveValue('Draft statue');
-  await page.getByRole('button', { name: 'Back to collection' }).click();
+  await page.getByRole('button', { name: 'Cancel', exact: true }).click();
   await expect(page.locator('#collection')).toBeVisible();
   await page.getByRole('button', { name: 'Add object', exact: true }).click();
   await expect(page.getByLabel('Object name', { exact: true })).toHaveValue('Draft statue');

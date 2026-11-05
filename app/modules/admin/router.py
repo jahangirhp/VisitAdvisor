@@ -13,6 +13,11 @@ from pymongo.asynchronous.database import AsyncDatabase
 from app.core.domain import NonBlank, validate_id
 from app.core.exceptions import ApplicationError
 from app.db.mongodb import get_database
+from app.modules.admin.capture import (
+    MAX_FOREGROUND_MASK_BYTES,
+    GuidedCaptureMetadata,
+    parse_capture_metadata,
+)
 from app.modules.admin.service import PhotoService
 from app.modules.locations.models import Location, LocationCreate, LocationData
 from app.modules.locations.repository import LocationRepository
@@ -63,6 +68,7 @@ class PhotoMetadata(BaseModel):
     capture_group: str = Field(min_length=1, max_length=200)
     rights: str = Field(min_length=1, max_length=1000)
     source_id: str
+    capture_metadata: GuidedCaptureMetadata | None = None
 
 
 class ObjectObservation(BaseModel):
@@ -176,6 +182,8 @@ async def upload(
     photographer: Annotated[str, Form(min_length=1, max_length=200)] = "Not supplied",
     reviewed: Annotated[bool | None, Form()] = None,
     source_id: Annotated[str, Form()] = "",
+    capture_metadata: Annotated[str | None, Form(max_length=32768)] = None,
+    foreground_mask: Annotated[UploadFile | None, File()] = None,
 ) -> dict[str, str]:
     try:
         if reviewed is False or any(
@@ -194,17 +202,28 @@ async def upload(
             capture_group=capture_group.strip(),
             rights=rights.strip(),
             source_id=validate_id(source_id) if source_id else "",
+            capture_metadata=parse_capture_metadata(capture_metadata),
         )
         photo_id = await service.upload(
             validate_id(location_id),
             validate_id(object_id),
             data,
             image.content_type,
-            metadata.model_dump(),
+            metadata.model_dump(mode="json", exclude_none=True),
+            foreground_mask=(
+                await foreground_mask.read(MAX_FOREGROUND_MASK_BYTES + 1)
+                if foreground_mask is not None
+                else None
+            ),
+            mask_content_type=(
+                foreground_mask.content_type if foreground_mask is not None else None
+            ),
         )
         return {"id": photo_id, "status": "saved_for_preparation"}
     finally:
         await image.close()
+        if foreground_mask is not None:
+            await foreground_mask.close()
 
 
 @router.get("/venues/{location_id}/objects/{object_id}/photos/{photo_id}")
@@ -229,6 +248,27 @@ async def photo(
     return Response(
         image,
         media_type="image/jpeg",
+        headers={"Cache-Control": "no-store", "X-Content-Type-Options": "nosniff"},
+    )
+
+
+@router.get("/venues/{location_id}/objects/{object_id}/photos/{photo_id}/mask")
+async def foreground_mask(
+    location_id: str, object_id: str, photo_id: str, service: Service
+) -> Response:
+    row = await service.photos.find_one(
+        {
+            "_id": ObjectId(validate_id(photo_id)),
+            "location_id": validate_id(location_id),
+            "object_id": validate_id(object_id),
+        },
+        {"foreground_mask_data": 1},
+    )
+    if row is None or not row.get("foreground_mask_data"):
+        raise ApplicationError("MASK_NOT_FOUND", "Foreground mask not found.", 404)
+    return Response(
+        bytes(row["foreground_mask_data"]),
+        media_type="image/png",
         headers={"Cache-Control": "no-store", "X-Content-Type-Options": "nosniff"},
     )
 

@@ -2,16 +2,20 @@
 
 Date: 2026-11-05. Branch: `feat/guided-reference-capture`.
 
-Status: design and offline selection spike. The guided camera, object detector,
-segmenter and any external-provider integration are **not implemented**. Existing
-admin/visitor behavior, reference sets and live deployment are unchanged.
+Design-stage status (superseded by the local implementation in
+[doc 28](28-guided-capture-implementation.md)): guided camera and segmentation were
+not implemented when the offline selection spike below was written. Existing
+admin/visitor behavior, reference sets and live deployment were unchanged at that
+design stage. Implementation and release details are in doc 28.
 
 ## Goal and scope
 
 An administrator opens the camera, selects the target object, and moves around it
 while the application gives simple guidance. The application selects clear,
 usefully different frames and offers up to four photos for review and saving.
-The goal is better source photographs for the current recognition-accuracy MVP.
+The required output is a reliable reference-photo set that supports later visitor
+recognition of the same object across most intended, observable viewing scenarios.
+Visual attractiveness, sharpness alone and reaching a photo count are insufficient.
 Visitor knowledge generation, narration, general 3D reconstruction and a new
 recognition model are outside this change.
 
@@ -19,6 +23,34 @@ This is an explicit administrator-capture extension to the historical online-onl
 photo-acquisition constraint in docs/11 and docs/13. It does not ask ordinary
 visitors to collect validation data. A capture session's selected references must
 not also be counted as independent accuracy-test photographs.
+
+## Output requirement: references that work during later visits
+
+Deliver a set of genuine, correctly associated object photos with complementary
+coverage, preserved source hashes and any crop/mask derivatives linked explicitly.
+Keep acquisition quality, view coverage and measured recognition readiness as
+separate states. A successful capture is not automatically a validated reference set.
+
+"Most scenarios" means the agreed visitor-condition matrix: accessible viewing
+angles, ordinary distance/framing changes, expected venue lighting, informative
+partial views, modest handheld movement, changing backgrounds and nearby people.
+Test similar objects and unsupported objects as competing/negative cases. Report
+each condition and object type separately so a high overall average cannot hide
+failure from a common viewing position. Distinguish insufficient visible evidence
+from a wrong identification; unknown/ambiguous views should permit abstention.
+
+Validation uses separately captured visitor-style photos or phone sessions after
+references and decision settings are frozen. Apply the existing recognition gates,
+including correct-suggestion coverage, precision, false suggestions and latency.
+Do not use the admin sweep itself, its crops or adjacent frames as the independent
+evidence that the chosen photos will work during a later visit.
+
+The output includes the selected photos, observed coverage and remaining gaps.
+When a common intended scenario fails, ask for the missing genuine view or revise
+the recognition pipeline and rerun validation. Save incomplete sets as drafts
+without claiming they are ready. The current four-photo software limit is a
+baseline constraint, not permission to weaken this reliability requirement; if
+four views are inadequate, evaluate additional active views and their runtime cost.
 
 ## Requirement interpretation
 
@@ -319,6 +351,9 @@ Proposed initial targets, subject to pilot agreement:
 - No recognition-precision regression. Apply existing recognition gates to the
   final frozen reference/query experiment, including unknown false suggestions,
   coverage and inference latency. Do not lower gates to make masking look helpful.
+- The selected reference set must pass the agreed later-visitor condition matrix,
+  using independent captures. Record per-condition failures and coverage gaps;
+  four sharp photos or successful segmentation alone cannot satisfy this gate.
 - External cost stays within a pre-agreed session cap; record actual requests,
   failures and bytes, not only successful calls.
 

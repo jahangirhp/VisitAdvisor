@@ -18,27 +18,21 @@
 <form id="objectForm" novalidate>
 <div class="wizardContent">
 <p id="objectVenue" class="venueContext"></p>
-<section id="photoStep" aria-labelledby="captureTitle">
-<h1 id="captureTitle" tabindex="-1">Add photos of<br>your object</h1><p class="stepDescription">Start with one photo. Add up to four different views.</p>
-<div id="capturePhotos" class="capturePhotos" aria-label="Selected object photos"></div>
-<div id="captureEmpty" class="captureEmpty"><div class="photoIllustration"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h4l2-3h4l2 3h4a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z"/><circle cx="12" cy="12" r="4"/></svg></div></div>
-<div class="captureActions"><button id="choosePhotos" type="button"><span aria-hidden="true">+</span> Choose photos</button><button id="takePhoto" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M4 6h4l2-3h4l2 3h4a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1Z"/><circle cx="12" cy="12" r="4"/></svg> Take a photo</button></div>
-<input id="cameraInput" type="file" accept="image/*" capture="environment" hidden><input id="libraryInput" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple hidden>
-<p id="captureCount" class="small muted">No photos added yet</p>
-</section>
-<section id="detailsStep" hidden aria-labelledby="detailsTitle">
-<h1 id="detailsTitle" tabindex="-1">Give it a name</h1><p class="stepDescription">Just the essentials. You can add more details below.</p>
-<div id="detailsPhotoSummary" class="detailsPhotoSummary"></div>
+<section id="detailsStep" aria-labelledby="detailsTitle">
+<h1 id="detailsTitle" tabindex="-1">Give it a name</h1><p class="stepDescription">Name the object and confirm the angles of your selected photos.</p>
 <label>Object name<input id="newObjectName" name="name" maxlength="300" placeholder="Name on the label" required></label>
 <label>Object type<select id="newObjectType" name="type" aria-label="Object type" required><option value="">Choose a type</option><option value="painting">Painting</option><option value="sculpture">Sculpture / statue</option><option value="artifact">Artifact / exhibit</option><option value="building">Building / architecture</option><option value="room">Room / interior</option><option value="other">Other object</option></select></label>
 <details class="optionalDetails"><summary>More details (optional)</summary>
 <label>Year or period (optional)<input name="year" maxlength="300" placeholder="e.g. 1658 or 17th century"></label>
 <label>Description (optional)<textarea name="description" maxlength="10000"></textarea></label>
 </details>
+<div class="selectedPhotoHeading"><h2>Selected photos</h2><button id="guidedCapture" type="button" class="textButton">Add more photos</button></div>
+<div id="capturePhotos" class="capturePhotos" aria-label="Selected object photos"></div>
+<p id="captureCount" class="small muted">No photos added yet</p>
 </section>
 <p id="captureProgress" role="status" class="captureProgress" aria-live="polite"></p><button id="finishLater" type="button" class="textButton" hidden>Keep saved photos &amp; finish later</button>
 </div>
-<footer class="wizardFooter"><div class="stepProgress" aria-hidden="true"><span id="photoProgress" class="active"></span><span id="detailsProgress"></span></div><div class="footerInner"><button id="captureBack" type="button" class="textButton">Cancel</button><button id="nextCapture" type="button" class="primary" disabled>Next</button><button id="createObject" type="submit" class="primary" hidden disabled>Save object</button></div></footer>
+<footer class="wizardFooter"><div class="stepProgress" aria-hidden="true"><span id="photoProgress" class="active"></span><span id="detailsProgress" class="active"></span></div><div class="footerInner"><button id="captureBack" type="button" class="textButton">Cancel</button><button id="createObject" type="submit" class="primary" disabled>Save object</button></div></footer>
 </form></section>
 </div>
 <p id="status" role="status" aria-live="polite"></p>
@@ -48,6 +42,12 @@
 <button type="submit">Create venue</button>
 <p class="small muted">Creates an empty venue and selects it so you can add objects below.</p>
 </form></dialog>
+<dialog id="guidedDialog" class="guidedDialog" aria-labelledby="guidedTitle">
+<div class="dialogHeader"><h2 id="guidedTitle">Capture reference photos</h2><button id="guidedClose" type="button" class="iconButton" aria-label="Close guided capture">&times;</button></div>
+<div id="guidedSetup"><label>What are you photographing?<select id="guidedProfile"><option value="multiview">Walk-around object</option><option value="planar">Flat artwork</option><option value="front-only">Object visible from the front only</option><option value="scene">Building or room</option></select></label><p>Keep the whole object visible. Tap it to select the target. Move around it when prompted, and wait if someone covers it.</p><p class="small muted">Camera frames are analyzed on your device. Only photos you review and save are uploaded. First use downloads a local segmentation model (about 6 MB).</p><button id="guidedStart" type="button" class="primary">Start camera</button><div class="guidedFallback"><p class="small muted">Or use an existing photo or your phone's camera.</p><button id="choosePhotos" type="button" class="textButton">Choose photos</button><button id="takePhoto" type="button" class="textButton">Take a photo</button></div><p id="guidedUploadStatus" class="small muted" role="status" aria-live="polite"></p><input id="cameraInput" type="file" accept="image/*" capture="environment" hidden><input id="libraryInput" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple hidden></div>
+<div id="guidedLive" hidden><p id="guidedPrompt" class="guidedPrompt"></p><div id="guidedStage" class="guidedStage"><video id="guidedVideo" muted playsinline autoplay aria-label="Live object camera"></video><button id="guidedTarget" type="button" aria-label="Select object in camera preview"></button></div><figure id="guidedAnalyzed" class="guidedAnalyzed" hidden><figcaption>Last analyzed frame: check the target outline</figcaption><canvas id="guidedOverlay" aria-label="Last analyzed target mask"></canvas></figure><p id="guidedStatus" role="status" aria-live="polite"></p><p class="small muted">Tap the object to confirm it. If the outline includes a person or misses part of the object, tap again or retake. View labels are suggestions; review each angle before saving.</p><div class="guidedControls"><button id="guidedBlocked" type="button">View blocked / select again</button><button id="guidedNext" type="button" disabled>Next view</button><button id="guidedFinish" type="button" disabled>Review photos</button></div></div>
+<div id="guidedReview" hidden><p>Review the original and isolated target. Masks can miss fine details. Remove incorrect selections; only your chosen originals and separate masks will be saved.</p><div id="guidedPhotos" class="guidedPhotos"></div><p id="guidedGaps" class="small muted"></p><button id="guidedUse" type="button" class="primary">Use selected photos</button></div>
+</dialog>
 <template id="detailTemplate"><p class="eyebrow">OBJECT DETAILS</p><h2 id="objectName"></h2><p id="stale" class="notice" hidden>Stored references are stale. Prepare them again with current source evidence before adding uploads.</p><h3>Photos</h3><div id="photos" class="photos"></div><button id="prepare">Prepare references</button><hr><h3>Add a reference photo</h3>
 <form id="uploadForm">
 <label>Photo<input name="image" id="image" type="file" accept="image/jpeg,image/png,image/webp" required></label><p class="small muted">JPEG, PNG or WebP · up to 5 MiB and 16 megapixels</p><img id="preview" alt="Selected reference photo" hidden>

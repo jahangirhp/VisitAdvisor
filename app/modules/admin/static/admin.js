@@ -2,7 +2,8 @@
 const $ = id => document.getElementById(id);
 let token = "", locationId = "", objectId = "", offset = 0, venueOffset = 0, venueCount = 0, rows = [], generation = 0;
 let previewUrl = "", photoUrls = [], busy = false;
-let capturePhotos = [], captureDraft = null, captureReading = false, captureStep = 1;
+let capturePhotos = [], captureDraft = null, captureReading = false, captureContext = 0, pendingPicker = null;
+let guidedCapture = null, guidedLaunching = false;
 const tokenStorageKey = "visitadvisor.adminToken";
 function storedToken() {
   try { return sessionStorage.getItem(tokenStorageKey) || ""; } catch { return ""; }
@@ -43,10 +44,11 @@ function objectVenue() {
   document.querySelectorAll("#objectForm input, #objectForm select, #objectForm textarea, #venue, #venueForm button").forEach(el => { el.disabled = busy || captureReading || !!captureDraft; });
   $("createObject").disabled = busy || captureReading || !locationId || !capturePhotos.length;
   $("takePhoto").disabled = $("choosePhotos").disabled = busy || captureReading || !!captureDraft || !locationId || capturePhotos.length >= 4;
+  $("guidedCapture").disabled = $("takePhoto").disabled;
+  $("cameraInput").disabled = $("libraryInput").disabled = $("takePhoto").disabled;
   $("createObject").textContent = captureDraft ? "Retry upload" : "Save object";
-  $("nextCapture").disabled = busy || captureReading || !locationId || !capturePhotos.length;
   $("captureBack").disabled = busy || !!captureDraft;
-  $("openCapture").disabled = busy;
+  $("openCapture").disabled = busy || captureReading;
   $("openVenue").disabled = busy || !!captureDraft;
   $("objectVenue").textContent = locationId
     ? `Venue: ${$("venue").selectedOptions[0].textContent}`
@@ -117,6 +119,26 @@ async function showObject(id) {
       await inventory(true); await showObject(id); status("Unpublished photo removed.");
     }));
     card.append(img, text, remove); $("photos").append(card);
+    if (photo.foreground_mask) {
+      const mask = document.createElement("img"); mask.alt = "Saved binary target mask"; mask.hidden = true;
+      const toggle = document.createElement("button"); toggle.type = "button"; toggle.textContent = "Show target mask";
+      toggle.addEventListener("click", async () => {
+        toggle.disabled = true;
+        try {
+          if (!mask.src) {
+            const response = await fetch(`/api/v1/admin${path}/photos/${photo._id}/mask`, { headers: { Authorization: `Bearer ${token}` }, cache: "no-store" });
+            if (response.status === 401) lock();
+            if (!response.ok) throw new Error("Target mask unavailable.");
+            const blob = await response.blob();
+            if (current !== generation) return;
+            const url = URL.createObjectURL(blob); photoUrls.push(url); mask.src = url;
+          }
+          mask.hidden = !mask.hidden; toggle.textContent = mask.hidden ? "Show target mask" : "Hide target mask";
+        } catch (error) { status(error.message); }
+        finally { toggle.disabled = false; }
+      });
+      card.append(toggle, mask);
+    }
     fetch(`/api/v1/admin${path}/photos/${photo._id}`, { headers: { Authorization: `Bearer ${token}` }, cache: "no-store" }).then(async response => {
       if (!response.ok) throw new Error("Photo preview unavailable.");
       const blob = await response.blob();
@@ -198,60 +220,42 @@ $("venueForm").addEventListener("submit", event => {
     $("search").value = "";
     await inventory();
     $("venueForm").reset();
-    $("venueDialog").close(); openCapture();
+    $("venueDialog").close(); setTimeout(openCapture, 0);
     status("Venue created. Add its first object.");
   });
 });
 
 function showCollection() {
+  captureContext++; pendingPicker = null;
+  guidedCapture?.close();
   $("addObject").hidden = true; document.body.classList.remove("wizardOpen"); $("collection").hidden = false; $("collection").inert = false; $("siteHeader").inert = false;
   if (token && !busy) $("openCapture").focus({ preventScroll: true });
 }
 function openCapture() {
+  if (!token || busy || captureReading) return;
   status("");
   if (!locationId) { $("venueDialog").showModal(); return; }
-  $("addObject").hidden = false; document.body.classList.add("wizardOpen"); $("collection").hidden = true; $("collection").inert = true; $("siteHeader").inert = true;
-  showCaptureStep(captureDraft ? 2 : captureStep);
-  $("addObject").scrollTop = 0;
+  if (!captureDraft && !capturePhotos.length) { launchGuidedCapture(); return; }
+  showCaptureDetails();
 }
-function showCaptureStep(step) {
-  if (captureDraft && step === 1) return;
-  captureStep = step;
-  $("photoStep").hidden = step !== 1; $("detailsStep").hidden = step !== 2;
-  $("nextCapture").hidden = step !== 1; $("createObject").hidden = step !== 2;
-  $("captureBack").textContent = step === 1 ? "Cancel" : "Back";
-  $("stepCount").textContent = `${step} of 2`;
-  $("detailsProgress").classList.toggle("active", step === 2);
-  if (step === 2) {
-    const summary = $("detailsPhotoSummary"); summary.replaceChildren();
-    if (capturePhotos.length) {
-      const image = document.createElement("img"); image.src = capturePhotos[0].url; image.alt = "Object photo";
-      const text = document.createElement("span"); text.textContent = `${capturePhotos.length} photo${capturePhotos.length === 1 ? "" : "s"} selected`;
-      const edit = document.createElement("button"); edit.type = "button"; edit.className = "textButton"; edit.textContent = "Edit"; edit.disabled = !!captureDraft;
-      edit.addEventListener("click", () => showCaptureStep(1));
-      summary.append(image, text, edit);
-    }
-  }
+function showCaptureDetails() {
+  $("addObject").hidden = false; document.body.classList.add("wizardOpen"); $("collection").hidden = true; $("collection").inert = true; $("siteHeader").inert = true;
+  $("stepCount").textContent = "2 of 2";
   $("addObject").scrollTop = 0;
   objectVenue();
-  $(step === 1 ? "captureTitle" : "detailsTitle").focus({ preventScroll: true });
-}
-function nextCaptureStep() {
-  if (captureReading || !capturePhotos.length) return;
-  for (const select of $("capturePhotos").querySelectorAll("select")) if (!select.reportValidity()) return;
-  showCaptureStep(2);
+  $("detailsTitle").focus({ preventScroll: true });
 }
 $("openCapture").addEventListener("click", openCapture);
 $("closeCapture").addEventListener("click", showCollection);
-document.addEventListener("keydown", event => { if (event.key === "Escape" && !busy && !$("addObject").hidden) showCollection(); });
-$("captureBack").addEventListener("click", () => { if (captureStep === 1) showCollection(); else showCaptureStep(1); });
-$("nextCapture").addEventListener("click", nextCaptureStep);
+document.addEventListener("keydown", event => { if (event.key === "Escape" && !busy && !$("guidedDialog").open && !$("addObject").hidden) showCollection(); });
+$("captureBack").addEventListener("click", showCollection);
 $("openVenue").addEventListener("click", () => $("venueDialog").showModal());
 $("closeVenue").addEventListener("click", () => $("venueDialog").close());
 function resetCapture() {
-  captureStep = 1;
+  guidedCapture?.close();
+  captureContext++; pendingPicker = null;
   $("finishLater").hidden = true;
-  capturePhotos.forEach(photo => URL.revokeObjectURL(photo.url));
+  capturePhotos.forEach(photo => { URL.revokeObjectURL(photo.url); if (photo.maskUrl) URL.revokeObjectURL(photo.maskUrl); });
   capturePhotos = []; captureDraft = null;
   $("objectForm").reset();
   document.querySelectorAll("#objectForm input, #objectForm select, #objectForm textarea, #venue, #venueForm button").forEach(el => { el.disabled = busy; });
@@ -259,9 +263,7 @@ function resetCapture() {
   renderCapture();
 }
 function renderCapture() {
-  $("captureEmpty").hidden = capturePhotos.length > 0;
   $("capturePhotos").classList.toggle("single", capturePhotos.length === 1);
-  document.querySelector(".captureActions").classList.toggle("compact", capturePhotos.length > 0);
   $("capturePhotos").replaceChildren();
   capturePhotos.forEach((photo, index) => {
     const card = document.createElement("div"); card.className = "capturePhoto";
@@ -273,16 +275,25 @@ function renderCapture() {
     }
     select.value = photo.viewpoint;
     select.disabled = busy || photo.saved;
-    select.addEventListener("change", () => { photo.viewpoint = select.value; });
+    select.addEventListener("change", () => { photo.viewpoint = select.value; if (photo.captureMetadata) photo.captureMetadata.viewpoint_verified = !!select.value; });
     label.append(select);
     const remove = document.createElement("button"); remove.type = "button"; remove.className = "removeCapture";
     remove.textContent = photo.saved ? "Saved" : "\u00d7";
     remove.setAttribute("aria-label", photo.saved ? `Photo ${index + 1} uploaded` : `Remove photo ${index + 1}`);
     remove.disabled = busy || !!captureDraft;
     remove.addEventListener("click", () => {
-      URL.revokeObjectURL(photo.url); capturePhotos = capturePhotos.filter(item => item !== photo); renderCapture();
+      URL.revokeObjectURL(photo.url); if (photo.maskUrl) URL.revokeObjectURL(photo.maskUrl); capturePhotos = capturePhotos.filter(item => item !== photo); renderCapture();
     });
-    card.append(image, label, remove); $("capturePhotos").append(card);
+    card.append(image, label, remove);
+    if (photo.captureMetadata) {
+      card.classList.add("guidedSource");
+      const hint = document.createElement("span"); hint.className = "guidedHint"; hint.textContent = `Suggested: ${photo.captureMetadata.requested_view}. Choose the actual angle.`; card.append(hint);
+      if (photo.maskUrl) {
+        const toggle = document.createElement("button"); toggle.type = "button"; toggle.className = "maskReview"; toggle.textContent = "Show isolated target";
+        toggle.addEventListener("click", () => { const original = image.src === photo.url; image.src = original ? photo.maskUrl : photo.url; toggle.textContent = original ? "Show original photo" : "Show isolated target"; }); card.append(toggle);
+      }
+    }
+    $("capturePhotos").append(card);
   });
   $("captureCount").textContent = capturePhotos.length ? `${capturePhotos.length} of 4 photos added` : "No photos added yet";
   objectVenue();
@@ -311,7 +322,7 @@ async function optimizePhoto(file) {
 async function addCapturePhotos(files) {
   if (busy || captureReading || captureDraft) return;
   captureReading = true; objectVenue();
-  const session = generation;
+  const session = generation, context = captureContext;
   let message = "";
   try {
     for (const file of files) {
@@ -321,7 +332,7 @@ async function addCapturePhotos(files) {
         const optimized = await optimizePhoto(file);
         const digest = await crypto.subtle.digest("SHA-256", await optimized.arrayBuffer());
         const sha = [...new Uint8Array(digest)].map(value => value.toString(16).padStart(2, "0")).join("");
-        if (session !== generation) break;
+        if (session !== generation || context !== captureContext || !token) break;
         if (capturePhotos.some(photo => photo.sha === sha)) { message = "That photo is already selected. Try another angle."; continue; }
         capturePhotos.push({ file: optimized, url: URL.createObjectURL(optimized), sha, viewpoint: capturePhotos.length ? "" : "front", saved: false });
       } catch (error) { message = error.message; }
@@ -330,15 +341,82 @@ async function addCapturePhotos(files) {
     captureReading = false; $("captureProgress").textContent = message;
     renderCapture();
   }
+  return message;
 }
-$("takePhoto").addEventListener("click", () => $("cameraInput").click());
-$("choosePhotos").addEventListener("click", () => $("libraryInput").click());
-for (const id of ["cameraInput", "libraryInput"]) $(id).addEventListener("change", event => {
-  const files = [...event.target.files]; event.target.value = ""; addCapturePhotos(files);
-});
+function pickCapturePhotos(inputId) {
+  if (busy || captureReading || captureDraft || !locationId || capturePhotos.length >= 4) return;
+  pendingPicker = { inputId, context: captureContext, venueId: locationId };
+  guidedCapture?.close();
+  $("guidedDialog").close();
+  $(inputId).click();
+}
+$("takePhoto").addEventListener("click", () => pickCapturePhotos("cameraInput"));
+$("choosePhotos").addEventListener("click", () => pickCapturePhotos("libraryInput"));
+async function launchGuidedCapture(message = "") {
+  if (guidedLaunching || busy || captureReading || captureDraft || !locationId || capturePhotos.length >= 4) return;
+  guidedLaunching = true;
+  const launchContext = ++captureContext, venueId = locationId;
+  try {
+    if (!guidedCapture) {
+      const { GuidedCapture } = await import('./guided-capture.mjs');
+      guidedCapture = new GuidedCapture({ capacity: () => 4 - capturePhotos.length,
+        onCancel: () => { captureContext++; if (capturePhotos.length || captureDraft) showCaptureDetails(); else showCollection(); },
+        onComplete: showCaptureDetails,
+        onUse: async (entries, isCurrent) => {
+        const context = generation, captureSession = captureContext, venue = locationId;
+        const staged = [];
+        for (const entry of entries) {
+          const digest = await crypto.subtle.digest("SHA-256", await entry.file.arrayBuffer());
+          if (!isCurrent() || context !== generation || captureSession !== captureContext || venue !== locationId || captureDraft || !token) return;
+          const sha = [...new Uint8Array(digest)].map(value => value.toString(16).padStart(2, "0")).join("");
+          staged.push({ entry, sha });
+        }
+        if (!isCurrent() || context !== generation || captureSession !== captureContext || venue !== locationId || captureDraft || !token) return;
+        for (const { entry, sha } of staged) {
+          if (capturePhotos.length >= 4 || capturePhotos.some(photo => photo.sha === sha)) continue;
+          capturePhotos.push({ file: entry.file, url: URL.createObjectURL(entry.file), maskUrl: URL.createObjectURL(entry.isolatedBlob),
+            foregroundMask: entry.foregroundMask, captureMetadata: structuredClone(entry.captureMetadata), sha, viewpoint: "", saved: false });
+        }
+        $("captureProgress").textContent = "Confirm each photo's actual angle before saving."; renderCapture();
+      } });
+    }
+    if (launchContext !== captureContext || venueId !== locationId || busy || captureReading || captureDraft || !token) return;
+    const type = $("newObjectType").value;
+    guidedCapture.open(["painting", "drawing", "print", "photograph"].includes(type) ? "planar" : ["building", "room"].includes(type) ? "scene" : "multiview");
+    $("guidedUploadStatus").textContent = message;
+  } catch {
+    if (launchContext !== captureContext || venueId !== locationId || !token) return;
+    $("guidedDialog").showModal();
+    $("guidedStart").disabled = true;
+    $("guidedUploadStatus").textContent = [message, "Guided camera couldn't load. Choose photos or use your phone's camera."].filter(Boolean).join(" ");
+  }
+  finally { guidedLaunching = false; }
+}
+$("guidedCapture").addEventListener("click", () => launchGuidedCapture());
+// Keep cancellation available even if the guided module itself could not load.
+$("guidedClose").addEventListener("click", () => { if (!guidedCapture) { $("guidedDialog").close(); if (!capturePhotos.length) showCollection(); } });
+for (const id of ["cameraInput", "libraryInput"]) {
+  $(id).addEventListener("change", async event => {
+    const files = [...event.target.files]; event.target.value = "";
+    const picker = pendingPicker; pendingPicker = null;
+    if (!files.length || !token || (picker && (picker.inputId !== id || picker.context !== captureContext || picker.venueId !== locationId))) return;
+    const context = captureContext, venue = locationId;
+    guidedCapture?.close(); $("guidedDialog").close();
+    status("Optimizing photos on your device...");
+    const message = await addCapturePhotos(files);
+    if (context !== captureContext || venue !== locationId || !token) return;
+    status(message || "");
+    if (capturePhotos.length) showCaptureDetails();
+    else launchGuidedCapture(message);
+  });
+  $(id).addEventListener("cancel", () => {
+    const picker = pendingPicker; pendingPicker = null;
+    if (!picker || picker.inputId !== id || picker.context !== captureContext || picker.venueId !== locationId || !token) return;
+    if (capturePhotos.length) showCaptureDetails(); else launchGuidedCapture();
+  });
+}
 $("objectForm").addEventListener("submit", event => {
   event.preventDefault();
-  if (captureStep === 1) { nextCaptureStep(); return; }
   if (!captureDraft && !event.target.reportValidity()) return;
   if (!locationId || !capturePhotos.length || captureReading) return;
   const fields = Object.fromEntries([...new FormData(event.target)].map(([key, value]) => [key, value.trim()]).filter(([, value]) => value));
@@ -362,12 +440,14 @@ $("objectForm").addEventListener("submit", event => {
       body.set("image", photo.file); body.set("viewpoint", photo.viewpoint);
       body.set("rights", "Photo rights details not supplied.");
       body.set("source_id", draft.object.source_ids.at(-1) || ""); body.set("capture_group", draft.captureGroup);
+      if (photo.captureMetadata) body.set("capture_metadata", JSON.stringify(photo.captureMetadata));
+      if (photo.foregroundMask) body.set("foreground_mask", photo.foregroundMask, "foreground-mask.png");
       await api(`${path}/photos`, { method: "POST", body });
       photo.saved = true;
     }
     const count = capturePhotos.length, name = draft.object.name;
     const lastType = $("objectForm").elements.type.value;
-    resetCapture(); showCaptureStep(1); $("objectForm").elements.type.value = lastType;
+    resetCapture(); $("objectForm").elements.type.value = lastType;
     $("search").value = ""; $("gaps").checked = false;
     showCollection(); await inventory(); await showObject(draft.object.id);
     const message = `${name} saved with ${count} photo${count === 1 ? "" : "s"}. Ready to add the next object.`;

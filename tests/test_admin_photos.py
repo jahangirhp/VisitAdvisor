@@ -3,6 +3,7 @@
 import asyncio
 import hashlib
 import io
+import json
 from copy import deepcopy
 from datetime import UTC, datetime
 from types import SimpleNamespace
@@ -11,15 +12,20 @@ from unittest.mock import AsyncMock
 import pytest
 from bson import ObjectId
 from fastapi.testclient import TestClient
-from PIL import Image
+from PIL import Image, ImageDraw
 from pymongo.errors import DuplicateKeyError
 
 from app.core.config import Settings
 from app.core.exceptions import ApplicationError
 from app.db.mongodb import get_database
 from app.main import create_app
+from app.modules.admin.capture import (
+    MAX_CAPTURE_METADATA_BYTES,
+    MAX_FOREGROUND_MASK_BYTES,
+)
 from app.modules.admin.router import service as get_photo_service
 from app.modules.admin.service import PhotoService
+from app.modules.live_camera.pipeline import view_coverage
 from app.modules.recognition.images import MAX_REQUEST_BYTES, prepare_image
 from app.modules.visual.features import VisualFailure
 from app.modules.visual.repository import evidence_hash
@@ -153,6 +159,21 @@ METADATA = {
     "rights": "Own photograph; permitted reference use",
     "source_id": SOURCE,
 }
+CAPTURE_METADATA = {
+    "version": "guided-capture-v1",
+    "session_id": "guided-session-1",
+    "frame_id": "frame-1",
+    "profile": "multiview",
+    "requested_view": "front",
+    "viewpoint_verified": False,
+    "target_box": [0.1, 0.2, 0.8, 0.9],
+    "quality": {
+        "sharpness": 120.0,
+        "clipped_fraction": 0.01,
+        "target_fraction": 0.49,
+    },
+    "segmentation": {"model": "test-segmenter", "model_hash": "a" * 64},
+}
 
 
 def upload(client, image=None, **overrides):
@@ -224,7 +245,17 @@ def test_invalid_image_and_oversized_chunked_body_rejected(setup):
     response = client.post(
         PATH + "/photos",
         headers=HEADERS,
-        content=iter([b"x" * (MAX_REQUEST_BYTES + 1)]),
+        content=iter(
+            [
+                b"x"
+                * (
+                    MAX_REQUEST_BYTES
+                    + MAX_CAPTURE_METADATA_BYTES
+                    + MAX_FOREGROUND_MASK_BYTES
+                    + 1
+                )
+            ]
+        ),
     )
     assert response.status_code == 413
     assert db["admin_reference_photos"].rows == []
@@ -659,3 +690,278 @@ def test_photo_upload_does_not_require_photographer_name(setup):
     )
     assert response.status_code == 201, response.text
     assert db["admin_reference_photos"].rows[-1]["photographer"] == "Not supplied"
+
+
+@pytest.mark.parametrize(
+    "capture",
+    [
+        "not json",
+        "[]",
+        json.dumps({**CAPTURE_METADATA, "version": "guided-capture-v2"}),
+        json.dumps({**CAPTURE_METADATA, "official_source": "invented"}),
+        json.dumps({**CAPTURE_METADATA, "session_id": "x" * 101}),
+        json.dumps({**CAPTURE_METADATA, "frame_id": "bad/id"}),
+        json.dumps({**CAPTURE_METADATA, "profile": "unknown"}),
+        json.dumps({**CAPTURE_METADATA, "requested_view": "360-degrees"}),
+        json.dumps({**CAPTURE_METADATA, "viewpoint_verified": "true"}),
+        json.dumps({**CAPTURE_METADATA, "target_box": [-0.1, 0.2, 0.8, 0.9]}),
+        json.dumps({**CAPTURE_METADATA, "target_box": [0.8, 0.2, 0.1, 0.9]}),
+        json.dumps({**CAPTURE_METADATA, "target_box": [0.1, 0.2, 0.8, 0.2]}),
+        json.dumps({**CAPTURE_METADATA, "target_box": [0.1, 0.2, 0.8]}),
+        json.dumps(
+            {
+                **CAPTURE_METADATA,
+                "quality": {**CAPTURE_METADATA["quality"], "sharpness": float("nan")},
+            }
+        ),
+        json.dumps(
+            {
+                **CAPTURE_METADATA,
+                "quality": {
+                    **CAPTURE_METADATA["quality"],
+                    "clipped_fraction": float("inf"),
+                },
+            }
+        ),
+        json.dumps(
+            {
+                **CAPTURE_METADATA,
+                "quality": {**CAPTURE_METADATA["quality"], "target_fraction": 1.1},
+            }
+        ),
+        json.dumps(
+            {
+                **CAPTURE_METADATA,
+                "segmentation": {"model": "test-segmenter", "model_hash": "bad"},
+            }
+        ),
+        json.dumps(
+            {
+                **CAPTURE_METADATA,
+                "segmentation": {"model": "test-segmenter", "mask": "unvalidated"},
+            }
+        ),
+        json.dumps(
+            {**CAPTURE_METADATA, "untrusted": "\u20ac" * 11000}, ensure_ascii=False
+        ),
+    ],
+)
+def test_guided_capture_rejects_invalid_unbounded_or_invented_metadata(setup, capture):
+    client, _, db, *_ = setup
+    response = upload(client, capture_metadata=capture)
+    assert response.status_code == 422, response.text
+    assert response.json()["error"]["code"] == "INVALID_CAPTURE_METADATA"
+    assert db["admin_reference_photos"].rows == []
+
+
+def test_guided_metadata_preserves_original_and_stays_private_until_preparation(setup):
+    client, service, db, obj, source = setup
+    image = jpeg()
+    assert (
+        upload(client, image, capture_metadata=json.dumps(CAPTURE_METADATA)).status_code
+        == 201
+    )
+    photo = db["admin_reference_photos"].rows[0]
+    assert photo["data"] == image
+    assert photo["sha256"] == hashlib.sha256(image).hexdigest()
+    assert photo["capture_metadata"] == CAPTURE_METADATA
+    details = client.get(PATH, headers=HEADERS).json()
+    assert details["photos"][0]["capture_metadata"] == CAPTURE_METADATA
+    describe = AsyncMock()
+    # Descriptors run in a synchronous encoder thread, never on a crop or mask.
+    inputs = []
+    encoder = SimpleNamespace(
+        model="local-model",
+        preprocessing="local-preprocess",
+        describe=lambda image, **_kw: inputs.append(image) or {"regions": []},
+    )
+    service.visual.publish = describe
+    asyncio.run(service.publish(LOCATION, OBJECT, encoder))
+    reference = describe.await_args.args[0]["views"][0]["reference"]
+    assert reference["evidence"]["capture_metadata"] == CAPTURE_METADATA
+    assert reference["evidence"]["sha256"] == hashlib.sha256(image).hexdigest()
+    assert reference["source_ids"] == [SOURCE]
+    assert inputs == [prepare_image(image, "image/jpeg")]
+    assert db["objects"].rows == [obj]
+    assert db["sources"].rows == [source]
+
+
+@pytest.mark.parametrize("confirmed", [False, True])
+def test_requested_guided_angles_require_explicit_operator_review_for_coverage(
+    setup, confirmed
+):
+    client, service, _, obj, _ = setup
+    obj["type"] = "sculpture"
+    for index, (color, angle) in enumerate([("red", "front"), ("blue", "back")]):
+        capture = {
+            **CAPTURE_METADATA,
+            "frame_id": f"frame-{index}",
+            "requested_view": angle,
+        }
+        if confirmed:
+            capture["viewpoint_verified"] = True
+        else:
+            capture.pop("viewpoint_verified")
+        response = upload(
+            client, jpeg(color), viewpoint=angle, capture_metadata=json.dumps(capture)
+        )
+        assert response.status_code == 201, response.text
+    encoder = SimpleNamespace(
+        model="local-model",
+        preprocessing="local-preprocess",
+        describe=lambda *_a, **_kw: {"regions": []},
+    )
+    service.visual.publish = AsyncMock()
+    asyncio.run(service.publish(LOCATION, OBJECT, encoder))
+    views = service.visual.publish.await_args.args[0]["views"]
+    coverage = view_coverage(
+        {
+            "type": "sculpture",
+            "views": [
+                {
+                    "image_hash": v["image_hash"],
+                    "viewpoint": v["reference"]["viewpoint"],
+                }
+                for v in views
+            ],
+        }
+    )
+    assert coverage["distinct_images"] == 2
+    assert coverage["ready"] is confirmed
+    assert coverage["distinct_viewpoints"] == (2 if confirmed else 0)
+    assert [
+        v["reference"]["evidence"]["capture_metadata"]["requested_view"] for v in views
+    ] == ["front", "back"]
+
+
+def png_mask(mode="L", size=(64, 64), foreground=255):
+    image = Image.new(mode, size, (0, 0, 0, 255) if mode == "RGBA" else 0)
+    ImageDraw.Draw(image).rectangle((16, 16, 47, 47), fill=foreground)
+    output = io.BytesIO()
+    image.save(output, "PNG")
+    return output.getvalue()
+
+
+def upload_mask(client, mask, capture=CAPTURE_METADATA, content_type="image/png"):
+    return client.post(
+        PATH + "/photos",
+        headers=HEADERS,
+        files={
+            "image": ("photo.jpg", jpeg(), "image/jpeg"),
+            "foreground_mask": ("mask.png", mask, content_type),
+        },
+        data={
+            **METADATA,
+            **(
+                {"capture_metadata": json.dumps(capture)} if capture is not None else {}
+            ),
+        },
+    )
+
+
+def test_foreground_mask_is_private_source_linked_and_excluded_from_descriptors(setup):
+    client, service, db, *_ = setup
+    response = upload_mask(client, png_mask())
+    assert response.status_code == 201, response.text
+    photo_id = response.json()["id"]
+    photo = db["admin_reference_photos"].rows[0]
+    assert photo["data"] == jpeg()
+    assert (
+        photo["foreground_mask"]["sha256"]
+        == hashlib.sha256(photo["foreground_mask_data"]).hexdigest()
+    )
+    details = client.get(PATH, headers=HEADERS)
+    assert details.status_code == 200
+    assert details.json()["photos"][0]["foreground_mask"] == photo["foreground_mask"]
+    assert "foreground_mask_data" not in details.text
+    path = PATH + f"/photos/{photo_id}/mask"
+    assert client.get(path).status_code == 401
+    preview = client.get(path, headers=HEADERS)
+    assert preview.status_code == 200
+    assert preview.content == photo["foreground_mask_data"]
+    assert preview.headers["content-type"] == "image/png"
+    assert preview.headers["cache-control"] == "no-store"
+    assert (
+        client.get(path.replace(LOCATION, OTHER_LOCATION), headers=HEADERS).status_code
+        == 404
+    )
+    inputs = []
+    encoder = SimpleNamespace(
+        model="local-model",
+        preprocessing="local-preprocess",
+        describe=lambda image, **_kw: inputs.append(image) or {"regions": []},
+    )
+    service.visual.publish = AsyncMock()
+    asyncio.run(service.publish(LOCATION, OBJECT, encoder))
+    evidence = service.visual.publish.await_args.args[0]["views"][0]["reference"][
+        "evidence"
+    ]
+    assert evidence["foreground_mask"] == photo["foreground_mask"]
+    assert inputs == [prepare_image(jpeg(), "image/jpeg")]
+
+
+@pytest.mark.parametrize(
+    "mode,foreground",
+    [
+        ("1", 255),
+        ("L", 255),
+        ("RGB", (255, 255, 255)),
+        ("RGBA", (255, 255, 255, 255)),
+    ],
+)
+def test_binary_masks_accept_grayscale_and_opaque_canvas_pngs(setup, mode, foreground):
+    client, _, db, *_ = setup
+    response = upload_mask(client, png_mask(mode=mode, foreground=foreground))
+    assert response.status_code == 201, response.text
+    stored = db["admin_reference_photos"].rows[0]
+    with Image.open(io.BytesIO(stored["foreground_mask_data"])) as mask:
+        assert mask.mode == "L"
+        assert mask.size == (64, 64)
+        assert mask.info == {}
+        assert mask.getextrema() == (0, 255)
+
+
+@pytest.mark.parametrize(
+    "mask,content_type,capture,status",
+    [
+        (b"not png", "image/png", CAPTURE_METADATA, 422),
+        (png_mask(), "image/jpeg", CAPTURE_METADATA, 415),
+        (png_mask(size=(32, 32)), "image/png", CAPTURE_METADATA, 422),
+        (png_mask(foreground=128), "image/png", CAPTURE_METADATA, 422),
+        (png_mask(foreground=0), "image/png", CAPTURE_METADATA, 422),
+        (
+            png_mask(mode="RGB", foreground=(255, 0, 0)),
+            "image/png",
+            CAPTURE_METADATA,
+            422,
+        ),
+        (
+            png_mask(mode="RGBA", foreground=(255, 255, 255, 128)),
+            "image/png",
+            CAPTURE_METADATA,
+            422,
+        ),
+        (b"x" * (512 * 1024 + 1), "image/png", CAPTURE_METADATA, 413),
+        (png_mask(), "image/png", None, 422),
+    ],
+)
+def test_invalid_masks_are_rejected_without_saving_source(
+    setup, mask, content_type, capture, status
+):
+    client, _, db, *_ = setup
+    response = upload_mask(client, mask, capture, content_type)
+    assert response.status_code == status, response.text
+    assert db["admin_reference_photos"].rows == []
+
+
+def test_manual_photos_have_no_mask_or_capture_metadata(setup):
+    client, _, db, *_ = setup
+    response = upload(client)
+    assert response.status_code == 201
+    photo_id = response.json()["id"]
+    assert "capture_metadata" not in db["admin_reference_photos"].rows[0]
+    assert "foreground_mask" not in db["admin_reference_photos"].rows[0]
+    assert (
+        client.get(PATH + f"/photos/{photo_id}/mask", headers=HEADERS).status_code
+        == 404
+    )

@@ -15,6 +15,7 @@ from app.core.config import Settings
 from app.core.exceptions import register_exception_handlers
 from app.core.logging import configure_logging
 from app.db.mongodb import MongoDB
+from app.modules.admin.assets import router as capture_assets_router
 from app.modules.live_camera.server import create_camera_app
 from app.modules.recognition.limits import ImageUploadLimit
 
@@ -92,6 +93,7 @@ def create_app() -> FastAPI:
     register_exception_handlers(application)
     application.include_router(health_router)
     application.include_router(api_router)
+    application.include_router(capture_assets_router)
     application.state.camera = create_camera_app()
     application.mount("/live", application.state.camera)
     application.mount(

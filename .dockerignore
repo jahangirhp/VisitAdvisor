@@ -6,6 +6,8 @@
 !constraints-visual.txt
 !app/
 !app/**
+!scripts/
+!scripts/prepare_guided_capture.py
 **/__pycache__/
 **/*.py[cod]
 **/.env

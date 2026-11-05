@@ -606,3 +606,9 @@ existing local visual dependencies/model. Default collection targets (3 planar,
 4 multiview) are configurable and do not establish recognition quality.
 See [admin reference photos](docs/26-admin-reference-photos.md) for setup, data
 storage, publication, validation and the four-view pilot limit.
+
+**Add object** opens guided camera capture directly. Review the selected photos,
+then name the object and confirm its photo angles before saving. Gallery/native
+camera fallbacks are available inside capture. See the
+[guided capture implementation](docs/28-guided-capture-implementation.md) for local
+model setup, privacy, review requirements and remaining field-test limits.

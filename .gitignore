@@ -16,6 +16,7 @@ htmlcov/
 .local/visual-public-photos/
 .local/visual-evaluation/
 .local/live-camera/
+.local/guided-capture/
 node_modules/
 test-results/
 playwright-report/
