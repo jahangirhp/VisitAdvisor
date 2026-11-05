@@ -326,14 +326,14 @@ $("objectForm").addEventListener("submit", event => {
   if (!captureDraft && !event.target.reportValidity()) return;
   if (!locationId || !capturePhotos.length || captureReading) return;
   const fields = Object.fromEntries([...new FormData(event.target)].map(([key, value]) => [key, value.trim()]).filter(([, value]) => value));
-  const observer = $("captureObserver").value.trim(), rights = $("captureRights").value.trim();
-  if (!observer || !rights || !$("captureReviewed").checked) { status("Enter your name, photo permission and confirm the object's identity."); return; }
+  const observer = $("captureObserver").value.trim();
+  if (!observer) { status("Enter your name."); return; }
   const venueId = captureDraft?.venueId || locationId;
   action(async () => {
     if (!captureDraft) {
       $("captureProgress").textContent = "Saving object...";
-      const object = await api(`/venues/${venueId}/objects`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...fields, observation: { observer, reviewed: true } }) });
-      captureDraft = { venueId, object, observer, rights, captureGroup: `admin-${crypto.randomUUID()}` };
+      const object = await api(`/venues/${venueId}/objects`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...fields, observation: { observer } }) });
+      captureDraft = { venueId, object, observer, captureGroup: `admin-${crypto.randomUUID()}` };
     }
     const draft = captureDraft, path = `/venues/${draft.venueId}/objects/${draft.object.id}`;
     // Reconcile a response lost after a successful upload before retrying it.
@@ -346,14 +346,14 @@ $("objectForm").addEventListener("submit", event => {
       $("captureProgress").textContent = progress; status(progress);
       const body = new FormData();
       body.set("image", photo.file); body.set("viewpoint", photo.viewpoint);
-      body.set("photographer", draft.observer); body.set("rights", draft.rights);
-      body.set("source_id", draft.object.source_ids.at(-1)); body.set("capture_group", draft.captureGroup); body.set("reviewed", "true");
+      body.set("photographer", draft.observer); body.set("rights", "Photo rights details not supplied.");
+      body.set("source_id", draft.object.source_ids.at(-1)); body.set("capture_group", draft.captureGroup);
       await api(`${path}/photos`, { method: "POST", body });
       photo.saved = true;
     }
     const count = capturePhotos.length, name = draft.object.name;
     const lastType = $("objectForm").elements.type.value;
-    resetCapture(); showCaptureStep(1); $("objectForm").elements.type.value = lastType; $("captureObserver").value = observer; $("captureRights").value = rights;
+    resetCapture(); showCaptureStep(1); $("objectForm").elements.type.value = lastType; $("captureObserver").value = observer;
     $("search").value = ""; $("gaps").checked = false;
     showCollection(); await inventory(); await showObject(draft.object.id);
     const message = `${name} saved with ${count} photo${count === 1 ? "" : "s"}. Ready to add the next object.`;

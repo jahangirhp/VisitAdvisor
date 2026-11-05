@@ -68,7 +68,7 @@ class PhotoMetadata(BaseModel):
 class ObjectObservation(BaseModel):
     model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
     observer: str = Field(min_length=1, max_length=200)
-    reviewed: Literal[True]
+    reviewed: Literal[True] | None = None
 
 
 class AdminObjectCreate(ObjectCreate):
@@ -141,7 +141,11 @@ async def create_object(
             raise ApplicationError("REVIEW_REQUIRED", "Enter your name.", 422)
         observation = await sources.create(
             SourceCreate(
-                title=f"On-site identification: {data.name}",
+                title=(
+                    f"On-site identification: {data.name}"
+                    if data.observation.reviewed
+                    else f"Admin object entry: {data.name}"
+                ),
                 type="manual",
                 publisher=observer,
             ),

@@ -545,15 +545,12 @@ def test_photo_first_creation_records_manual_provenance_and_accepts_photos(setup
     "observation",
     [
         {"observer": "Jane", "reviewed": False},
-        {"observer": "Jane"},
         {"observer": " ", "reviewed": True},
         {"observer": "x" * 201, "reviewed": True},
         {"observer": "Jane", "reviewed": True, "type": "official_api"},
     ],
 )
-def test_manual_observation_needs_explicit_review_and_named_observer(
-    setup, observation
-):
+def test_manual_observation_rejects_invalid_review_and_observer(setup, observation):
     client, _, db, *_ = setup
     response = client.post(
         f"/api/v1/admin/venues/{LOCATION}/objects",
@@ -622,3 +619,30 @@ def test_admin_creates_venue_with_only_name(setup):
         ).status_code
         == 422
     )
+
+
+def test_admin_object_entry_does_not_require_or_infer_review(setup):
+    client, _, db, *_ = setup
+    db["locations"].rows[0].update(
+        name="Museum",
+        slug="museum",
+        type="museum",
+        city="Amsterdam",
+        country="Netherlands",
+        created_at=datetime.now(UTC),
+        updated_at=datetime.now(UTC),
+    )
+    response = client.post(
+        f"/api/v1/admin/venues/{LOCATION}/objects",
+        headers=HEADERS,
+        json={
+            "name": "Statue",
+            "type": "sculpture",
+            "observation": {"observer": "Jane"},
+        },
+    )
+    assert response.status_code == 201, response.text
+    source = db["sources"].rows[-1]
+    assert source["title"] == "Admin object entry: Statue"
+    assert source["type"] == "manual"
+    assert source["publisher"] == "Jane"

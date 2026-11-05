@@ -115,20 +115,21 @@ still enforces its existing image and request limits. This flow stores the
 optimized JPEG, not the original phone file; EXIF/GPS is not sent. The original
 single-photo upload form continues to retain its uploaded original privately.
 
-Only object name, type, observer name and identity/permission confirmation are
-required alongside the photos. Creator, year/period, description and photo
-permission details live under More details. Observer name, last object type and
-permission text are reused in memory for the next object, while the identity
-confirmation resets. Locking the panel clears the draft photos and observer.
-Neither token nor photos are stored in localStorage or sent before Save.
+Object creation requires object name, type and observer name alongside photos.
+More details contains only year/period and description. Creator, photo-permission
+text and the identity/permission checkbox have been removed. Photo rights are
+stored as details not supplied; no permission or review is inferred.
+Observer name and last object type are reused in memory for the next object.
+Locking the panel clears the draft photos and observer. Neither token nor photos
+are stored in localStorage or sent before Save.
 
-The protected `POST /api/v1/admin/venues/{location_id}/objects` accepts an optional
-`observation: {observer, reviewed: true}`. It records a `manual` source titled
-On-site identification with the named observer as publisher, then links it using
-the existing catalog validation. It does not label this assertion as official
-museum evidence, fetch sources, or generate knowledge. Existing API clients can
-still create objects without observations. If a later database write fails, a
-standalone manual source can remain; it is not published as object knowledge.
+The protected `POST /api/v1/admin/venues/{location_id}/objects` accepts
+`observation: {observer}` and records a manual source titled Admin object entry.
+Legacy explicit `reviewed: true` requests retain their On-site identification
+source title. Neither flow labels the assertion as official museum evidence,
+fetches sources or generates knowledge. Existing API clients can still create
+objects without observations. If a later database write fails, a standalone
+manual source can remain; it is not published as object knowledge.
 
 **Save object & photos** creates the object and uploads the selected photos
 sequentially with one shared capture-session ID. It reports upload progress and

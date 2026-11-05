@@ -113,7 +113,7 @@ for (const newVenue of [false, true]) {
     await page.route(`**/api/v1/admin/venues/${venueId}/objects`, async route => {
       expect(route.request().method()).toBe('POST');
       expect(route.request().headers().authorization).toBe('Bearer demo-token');
-      expect(route.request().postDataJSON()).toEqual({ name: 'New sculpture', type: 'sculpture', year: '17th century', observation: { observer: 'Jane Smith', reviewed: true } });
+      expect(route.request().postDataJSON()).toEqual({ name: 'New sculpture', type: 'sculpture', year: '17th century', observation: { observer: 'Jane Smith' } });
       await route.fulfill({ status: 201, json: { id, name: 'New sculpture', source_ids: [source], location_id: venueId } });
     });
     await page.route(`**/api/v1/admin/venues/${venueId}/objects/${id}`, route => route.fulfill({ json: {
@@ -124,8 +124,8 @@ for (const newVenue of [false, true]) {
     await page.getByRole('button', { name: 'Next', exact: true }).click();
     await page.getByLabel('Object name', { exact: true }).fill('New sculpture');
     await page.getByLabel('Object type', { exact: true }).selectOption('sculpture');
+    await expect(page.locator('#captureRights, #captureReviewed, input[name=creator]')).toHaveCount(0);
     await page.getByLabel('Your name', { exact: true }).fill('Jane Smith');
-    await page.getByLabel(/I checked this object's identity/).check();
     await page.getByText('More details (optional)', { exact: true }).click();
     await page.getByLabel('Year or period (optional)', { exact: true }).fill('17th century');
     await page.getByRole('button', { name: 'Save object', exact: true }).click();
@@ -174,7 +174,8 @@ for (const lostResponse of [false, true]) {
       expect(file.type).toBe('image/jpeg');
       expect(form.get('source_id')).toBe(source);
       expect(form.get('photographer')).toBe('Jane Smith');
-      expect(form.get('reviewed')).toBe('true');
+      expect(form.has('reviewed')).toBe(false);
+      expect(form.get('rights')).toBe('Photo rights details not supplied.');
       const saved = { sha256: createHash('sha256').update(Buffer.from(await file.arrayBuffer())).digest('hex'), capture_group: form.get('capture_group') };
       if (!interrupted && uploads === 2) {
         interrupted = true;
@@ -191,8 +192,8 @@ for (const lostResponse of [false, true]) {
     await page.getByRole('button', { name: 'Next', exact: true }).click();
     await page.getByLabel('Object name', { exact: true }).fill('Museum statue');
     await page.getByLabel('Object type', { exact: true }).selectOption('sculpture');
+    await expect(page.locator('#captureRights, #captureReviewed, input[name=creator]')).toHaveCount(0);
     await page.getByLabel('Your name', { exact: true }).fill('Jane Smith');
-    await page.getByLabel(/I checked this object's identity/).check();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
     await page.screenshot({ path: `test-results/photo-first-${lostResponse ? 'retry' : 'mobile'}.png`, fullPage: true });
     await page.getByRole('button', { name: 'Save object', exact: true }).click();

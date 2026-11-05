@@ -33,12 +33,10 @@
 <label>Object type<select id="newObjectType" name="type" aria-label="Object type" required><option value="">Choose a type</option><option value="painting">Painting</option><option value="sculpture">Sculpture / statue</option><option value="artifact">Artifact / exhibit</option><option value="building">Building / architecture</option><option value="room">Room / interior</option><option value="other">Other object</option></select></label>
 <label>Your name<input id="captureObserver" maxlength="200" autocomplete="name" placeholder="Photographer / observer" required></label>
 <details class="optionalDetails"><summary>More details (optional)</summary>
-<label>Creator (optional)<input name="creator" maxlength="300"></label>
 <label>Year or period (optional)<input name="year" maxlength="300" placeholder="e.g. 1658 or 17th century"></label>
 <label>Description (optional)<textarea name="description" maxlength="10000"></textarea></label>
-<label>Photo permission details<input id="captureRights" maxlength="1000" value="My own photos; I permit use as recognition references."></label>
 </details>
-<label class="check captureReview"><input id="captureReviewed" type="checkbox" required> I checked this object's identity and have permission to use these photos.</label><p class="small muted">Saved privately with your name as the observer.</p>
+<p class="small muted">Saved privately with your name as the observer.</p>
 </section>
 <p id="captureProgress" role="status" class="captureProgress" aria-live="polite"></p><button id="finishLater" type="button" class="textButton" hidden>Keep saved photos &amp; finish later</button>
 </div>
