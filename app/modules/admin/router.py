@@ -171,9 +171,9 @@ async def upload(
     service: Service,
     image: Annotated[UploadFile, File()],
     viewpoint: Annotated[str, Form(min_length=1, max_length=300)],
-    photographer: Annotated[str, Form(min_length=1, max_length=200)],
     capture_group: Annotated[str, Form(min_length=1, max_length=200)],
     rights: Annotated[str, Form(min_length=1, max_length=1000)],
+    photographer: Annotated[str, Form(min_length=1, max_length=200)] = "Not supplied",
     reviewed: Annotated[bool | None, Form()] = None,
     source_id: Annotated[str, Form()] = "",
 ) -> dict[str, str]:

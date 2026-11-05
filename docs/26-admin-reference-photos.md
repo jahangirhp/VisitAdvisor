@@ -115,12 +115,12 @@ still enforces its existing image and request limits. This flow stores the
 optimized JPEG, not the original phone file; EXIF/GPS is not sent. The original
 single-photo upload form continues to retain its uploaded original privately.
 
-Object creation requires object name, type and observer name alongside photos.
+Object creation requires object name and type alongside photos.
 More details contains only year/period and description. Creator, photo-permission
 text and the identity/permission checkbox have been removed. Photo rights are
 stored as details not supplied; no permission or review is inferred.
-Observer name and last object type are reused in memory for the next object.
-Locking the panel clears the draft photos and observer. Neither token nor photos
+The last object type is reused in memory for the next object.
+Locking the panel clears the draft photos. Neither token nor photos
 are stored in localStorage or sent before Save.
 
 The protected `POST /api/v1/admin/venues/{location_id}/objects` accepts
@@ -171,3 +171,13 @@ this form. Uploads use explicit admin-test metadata and an automatically generat
 capture ID. The server reuses a linked source; if none exists, it records a manual
 admin-test association, without claiming official identity evidence. Photo rights
 are recorded as details not supplied. The photo-first creation editor is unchanged.
+
+
+## Photographer-name removal
+
+Object creation no longer collects or requires a photographer/observer name.
+It sends no named observation. Photo uploads may omit `photographer`; the API
+records `Not supplied` rather than inventing a name. Existing linked sources
+are reused, or the existing manual admin-upload association is created. Capture
+IDs and photo hashes still support upload retries. Historical attribution stays
+in stored records, while the photo list shows the viewpoint without the name.

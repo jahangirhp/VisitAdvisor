@@ -31,12 +31,10 @@
 <div id="detailsPhotoSummary" class="detailsPhotoSummary"></div>
 <label>Object name<input id="newObjectName" name="name" maxlength="300" placeholder="Name on the label" required></label>
 <label>Object type<select id="newObjectType" name="type" aria-label="Object type" required><option value="">Choose a type</option><option value="painting">Painting</option><option value="sculpture">Sculpture / statue</option><option value="artifact">Artifact / exhibit</option><option value="building">Building / architecture</option><option value="room">Room / interior</option><option value="other">Other object</option></select></label>
-<label>Your name<input id="captureObserver" maxlength="200" autocomplete="name" placeholder="Photographer / observer" required></label>
 <details class="optionalDetails"><summary>More details (optional)</summary>
 <label>Year or period (optional)<input name="year" maxlength="300" placeholder="e.g. 1658 or 17th century"></label>
 <label>Description (optional)<textarea name="description" maxlength="10000"></textarea></label>
 </details>
-<p class="small muted">Saved privately with your name as the observer.</p>
 </section>
 <p id="captureProgress" role="status" class="captureProgress" aria-live="polite"></p><button id="finishLater" type="button" class="textButton" hidden>Keep saved photos &amp; finish later</button>
 </div>

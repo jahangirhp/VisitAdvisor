@@ -646,3 +646,16 @@ def test_admin_object_entry_does_not_require_or_infer_review(setup):
     assert source["title"] == "Admin object entry: Statue"
     assert source["type"] == "manual"
     assert source["publisher"] == "Jane"
+
+
+def test_photo_upload_does_not_require_photographer_name(setup):
+    client, _, db, *_ = setup
+    data = {key: value for key, value in METADATA.items() if key != "photographer"}
+    response = client.post(
+        PATH + "/photos",
+        headers=HEADERS,
+        data=data,
+        files={"image": ("photo.jpg", jpeg(), "image/jpeg")},
+    )
+    assert response.status_code == 201, response.text
+    assert db["admin_reference_photos"].rows[-1]["photographer"] == "Not supplied"

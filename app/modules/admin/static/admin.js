@@ -6,7 +6,7 @@ let capturePhotos = [], captureDraft = null, captureReading = false, captureStep
 function status(message) { $("status").textContent = message; }
 function lock() {
   token = ""; generation++; objectId = ""; locationId = "";
-  resetCapture(); showCollection(); $("venueDialog").close(); $("captureObserver").value = "";
+  resetCapture(); showCollection(); $("venueDialog").close();
   clearImages(); $("detail").replaceChildren(); $("objects").replaceChildren();
   $("login").hidden = false; $("workspace").hidden = true; $("logout").hidden = true;
   $("token").value = ""; $("token").focus();
@@ -99,7 +99,7 @@ async function showObject(id) {
   for (const photo of data.photos) {
     const card = document.createElement("div"); card.className = "photo";
     const img = document.createElement("img"); img.alt = photo.viewpoint;
-    const text = document.createElement("p"); text.textContent = `${photo.viewpoint} · ${photo.photographer} · ${photo.capture_group}`;
+    const text = document.createElement("p"); text.textContent = photo.viewpoint;
     const remove = document.createElement("button"); remove.type = "button"; remove.textContent = "Remove unpublished upload";
     remove.addEventListener("click", () => action(async () => {
       await api(`${path}/photos/${photo._id}`, { method: "DELETE" });
@@ -127,7 +127,6 @@ async function showObject(id) {
   $("uploadForm").addEventListener("submit", event => {
     event.preventDefault();
     const body = new FormData(event.target);
-    body.set("photographer", "Admin test upload");
     body.set("capture_group", `admin-test-${crypto.randomUUID()}`);
     body.set("rights", "Admin test upload; rights details not recorded.");
     const file = body.get("image");
@@ -326,14 +325,12 @@ $("objectForm").addEventListener("submit", event => {
   if (!captureDraft && !event.target.reportValidity()) return;
   if (!locationId || !capturePhotos.length || captureReading) return;
   const fields = Object.fromEntries([...new FormData(event.target)].map(([key, value]) => [key, value.trim()]).filter(([, value]) => value));
-  const observer = $("captureObserver").value.trim();
-  if (!observer) { status("Enter your name."); return; }
   const venueId = captureDraft?.venueId || locationId;
   action(async () => {
     if (!captureDraft) {
       $("captureProgress").textContent = "Saving object...";
-      const object = await api(`/venues/${venueId}/objects`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ ...fields, observation: { observer } }) });
-      captureDraft = { venueId, object, observer, captureGroup: `admin-${crypto.randomUUID()}` };
+      const object = await api(`/venues/${venueId}/objects`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(fields) });
+      captureDraft = { venueId, object, captureGroup: `admin-${crypto.randomUUID()}` };
     }
     const draft = captureDraft, path = `/venues/${draft.venueId}/objects/${draft.object.id}`;
     // Reconcile a response lost after a successful upload before retrying it.
@@ -346,14 +343,14 @@ $("objectForm").addEventListener("submit", event => {
       $("captureProgress").textContent = progress; status(progress);
       const body = new FormData();
       body.set("image", photo.file); body.set("viewpoint", photo.viewpoint);
-      body.set("photographer", draft.observer); body.set("rights", "Photo rights details not supplied.");
-      body.set("source_id", draft.object.source_ids.at(-1)); body.set("capture_group", draft.captureGroup);
+      body.set("rights", "Photo rights details not supplied.");
+      body.set("source_id", draft.object.source_ids.at(-1) || ""); body.set("capture_group", draft.captureGroup);
       await api(`${path}/photos`, { method: "POST", body });
       photo.saved = true;
     }
     const count = capturePhotos.length, name = draft.object.name;
     const lastType = $("objectForm").elements.type.value;
-    resetCapture(); showCaptureStep(1); $("objectForm").elements.type.value = lastType; $("captureObserver").value = observer;
+    resetCapture(); showCaptureStep(1); $("objectForm").elements.type.value = lastType;
     $("search").value = ""; $("gaps").checked = false;
     showCollection(); await inventory(); await showObject(draft.object.id);
     const message = `${name} saved with ${count} photo${count === 1 ? "" : "s"}. Ready to add the next object.`;
@@ -365,8 +362,7 @@ $("finishLater").addEventListener("click", () => {
   if (!captureDraft) return;
   const draft = captureDraft;
   action(async () => {
-    const observer = draft.observer;
-    resetCapture(); $("captureObserver").value = observer;
+    resetCapture();
     showCollection(); await inventory(); await showObject(draft.object.id);
     status("Object and uploaded photos kept. You can add more photos from its details later.");
   });
