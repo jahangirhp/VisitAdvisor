@@ -60,3 +60,24 @@ instance were verified. The catalog retains all 115 objects and reference versio
 
 Previous revision `visitadvisor-api-polish-da3d4cb98e3e` remains available for
 traffic rollback. No catalog or reference migration was required.
+
+## Mobile field focus follow-up
+
+Commit `68655a2` raises the venue, search and photo-angle controls from 12–14px
+to 16px on narrow or coarse-pointer screens, addressing iOS focus zoom. Other
+text-entry controls already use 16px. The viewport continues to allow manual
+zoom. The coordinated asset version is `mobile-20261108-1`.
+
+Required checks passed again: 528 Python tests (two opt-in skips), Ruff lint and
+format, and mypy. Twelve focused admin browser checks passed across Chromium,
+WebKit and iPhone emulation. Local, hosted preview and production inspections at
+320px, 390px and 768px confirmed 16px fields across login, collection, venue,
+photo upload, camera identity and object details; pages and camera dialogs fit
+without horizontal overflow. These are browser inspections, not a physical-phone
+keyboard test.
+
+Revision `visitadvisor-api-mobile-68655a2f9d79` now serves 100% of traffic with
+image digest `sha256:2568d217f575894ea87b7f8fc129cbd3f013493bb95f2b08a14aed9ead603cd8`.
+Production health, database, assets, runtime configuration and all 115 catalog
+objects were verified. Recognition code, prepared references and model assets are
+unchanged. The preceding combined revision remains available for rollback.
