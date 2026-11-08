@@ -2,10 +2,27 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 
 // Import the pure seed validation without starting a browser worker or model.
+let handleMessage;
 globalThis.self = { fetch, location: new URL('http://localhost/admin/worker.mjs'),
-  addEventListener() {} };
+  addEventListener(type, handler) { if (type === 'message') handleMessage = handler; } };
 const { seedIsForeground } = await import('../../app/modules/admin/static/guided-segmenter.worker.mjs');
 delete globalThis.self;
+
+test('2D-only worker canvas fails before loading a model that cannot process images', async () => {
+  const previousCanvas = globalThis.OffscreenCanvas;
+  const messages = [];
+  globalThis.self = { postMessage(message) { messages.push(message); } };
+  globalThis.OffscreenCanvas = class { getContext() { return null; } };
+  try {
+    await handleMessage({ data: { type: 'init', id: 7 } });
+    assert.deepEqual(messages, [{ type: 'error', id: 7,
+      message: 'The local segmentation model could not start. Use photo upload instead.' }]);
+  } finally {
+    if (previousCanvas === undefined) delete globalThis.OffscreenCanvas;
+    else globalThis.OffscreenCanvas = previousCanvas;
+    delete globalThis.self;
+  }
+});
 
 test('reject a confident mask belonging to a distant object', () => {
   const mask = new Uint8Array(100 * 100);

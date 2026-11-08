@@ -1,0 +1,457 @@
+{
+  "date": "2026-11-07",
+  "scope": "Diagnostic development regression; four preserved source photos and marked blur derivatives; not independent phone or recognition acceptance.",
+  "quality_implementation_sha256": "70139637f98d29307acf1b92763a1566c0762fa8c1563559211428c06ff576de",
+  "timing_note": "Includes segmentation, quality measurements and overlay rendering/encoding; not isolated model inference or phone latency.",
+  "model": {
+    "name": "mediapipe-magic-touch-legacy-float32-1",
+    "sha256": "e24338a717c1b7ad8d159666677ef400babb7f33b8ad60c4d96db4ecf694cd25"
+  },
+  "external_requests": [],
+  "frames": [
+    {
+      "type": "result",
+      "id": "shiva-front",
+      "width": 640,
+      "height": 427,
+      "bbox": [
+        0.278125,
+        0.08899297423887588,
+        0.509375,
+        0.6978922716627635
+      ],
+      "confidence": 0.9751905818356932,
+      "foregroundFraction": 0.03589358899297424,
+      "source": ".local/3d-object-pilot/images/candidate-57997345.jpg",
+      "quality": {
+        "valid": true,
+        "reasons": [],
+        "box": [
+          0.278125,
+          0.08899297423887588,
+          0.509375,
+          0.6978922716627635
+        ],
+        "sharpness": 1000.4765769841313,
+        "clippedFraction": 0.08863542668682149,
+        "targetFraction": 0.035966759906543744,
+        "fingerprint": "010011011001100000110010011001101100110111001111000011010011001",
+        "score": 6.2968281497966485
+      },
+      "point": [
+        0.4,
+        0.4
+      ],
+      "source_sha256": "e9851a47e18d6ca001cd07d02fc994a4b9315a8155c583c57cd7c559e389f3a7",
+      "derived_blur_pixels": 0,
+      "diagnostic_processing_ms": 236
+    },
+    {
+      "type": "result",
+      "id": "shiva-front",
+      "width": 640,
+      "height": 427,
+      "bbox": [
+        0.2046875,
+        0.053864168618266976,
+        1,
+        0.775175644028103
+      ],
+      "confidence": 0.9772393382417728,
+      "foregroundFraction": 0.18390661592505855,
+      "source": ".local/3d-object-pilot/images/candidate-57997345.jpg",
+      "quality": {
+        "valid": true,
+        "reasons": [],
+        "box": [
+          0.2046875,
+          0.053864168618266976,
+          1,
+          0.775175644028103
+        ],
+        "sharpness": 212.19953356160784,
+        "clippedFraction": 0.004265449856165063,
+        "targetFraction": 0.1832759488820399,
+        "fingerprint": "000110011100000111100010001111100001110000111100011101100111001",
+        "score": 5.33935618768875
+      },
+      "point": [
+        0.4,
+        0.4
+      ],
+      "source_sha256": "e9851a47e18d6ca001cd07d02fc994a4b9315a8155c583c57cd7c559e389f3a7",
+      "derived_blur_pixels": 2,
+      "diagnostic_processing_ms": 150.70000000298023
+    },
+    {
+      "type": "result",
+      "id": "shiva-front",
+      "width": 640,
+      "height": 427,
+      "bbox": [
+        0.2046875,
+        0.0585480093676815,
+        0.6203125,
+        0.7892271662763466
+      ],
+      "confidence": 0.9942473490931498,
+      "foregroundFraction": 0.2179230093676815,
+      "source": ".local/3d-object-pilot/images/candidate-57997345.jpg",
+      "quality": {
+        "valid": true,
+        "reasons": [],
+        "box": [
+          0.2046875,
+          0.0585480093676815,
+          0.6203125,
+          0.7892271662763466
+        ],
+        "sharpness": 3.890131179450464,
+        "clippedFraction": 0,
+        "targetFraction": 0.21787344372744022,
+        "fingerprint": "001001101101110110010001001100101100100100100110011111001101100",
+        "score": 1.5872191291904578
+      },
+      "point": [
+        0.4,
+        0.4
+      ],
+      "source_sha256": "e9851a47e18d6ca001cd07d02fc994a4b9315a8155c583c57cd7c559e389f3a7",
+      "derived_blur_pixels": 4,
+      "diagnostic_processing_ms": 153.29999999701977
+    },
+    {
+      "type": "result",
+      "id": "shiva-side",
+      "width": 640,
+      "height": 416,
+      "bbox": [
+        0.0640625,
+        0.22115384615384615,
+        0.2125,
+        0.7451923076923077
+      ],
+      "confidence": 0.9833151383345746,
+      "foregroundFraction": 0.039310396634615385,
+      "source": ".local/3d-object-pilot/images/candidate-143912474.jpg",
+      "quality": {
+        "valid": true,
+        "reasons": [],
+        "box": [
+          0.0640625,
+          0.22115384615384615,
+          0.2125,
+          0.7451923076923077
+        ],
+        "sharpness": 1054.1271481777515,
+        "clippedFraction": 0,
+        "targetFraction": 0.03922989080240438,
+        "fingerprint": "011000000110111110011111110000011011100001110100100001100100101",
+        "score": 6.961416558248028
+      },
+      "point": [
+        0.12,
+        0.47
+      ],
+      "source_sha256": "84308e0699e2f0bc790d78d14042d95fc29359caff4bf5030b57360f515d0bba",
+      "derived_blur_pixels": 0,
+      "diagnostic_processing_ms": 165.59999999776483
+    },
+    {
+      "type": "result",
+      "id": "shiva-side",
+      "width": 640,
+      "height": 416,
+      "bbox": [
+        0.0484375,
+        0.22115384615384615,
+        0.2125,
+        0.7860576923076923
+      ],
+      "confidence": 0.9754385204920853,
+      "foregroundFraction": 0.04420823317307692,
+      "source": ".local/3d-object-pilot/images/candidate-143912474.jpg",
+      "quality": {
+        "valid": true,
+        "reasons": [],
+        "box": [
+          0.0484375,
+          0.22115384615384615,
+          0.2125,
+          0.7860576923076923
+        ],
+        "sharpness": 11.317773044153741,
+        "clippedFraction": 0,
+        "targetFraction": 0.04416124058155878,
+        "fingerprint": "011000100110110100111111100001111000100000110010010011010001111",
+        "score": 2.5110431823633186
+      },
+      "point": [
+        0.12,
+        0.47
+      ],
+      "source_sha256": "84308e0699e2f0bc790d78d14042d95fc29359caff4bf5030b57360f515d0bba",
+      "derived_blur_pixels": 2,
+      "diagnostic_processing_ms": 149
+    },
+    {
+      "type": "result",
+      "id": "shiva-side",
+      "width": 640,
+      "height": 416,
+      "bbox": [
+        0.046875,
+        0.22355769230769232,
+        0.2109375,
+        0.8028846153846154
+      ],
+      "confidence": 0.9738754495871703,
+      "foregroundFraction": 0.04093299278846154,
+      "source": ".local/3d-object-pilot/images/candidate-143912474.jpg",
+      "quality": {
+        "valid": true,
+        "reasons": [],
+        "box": [
+          0.046875,
+          0.22355769230769232,
+          0.2109375,
+          0.8028846153846154
+        ],
+        "sharpness": 0.9621061149011928,
+        "clippedFraction": 0,
+        "targetFraction": 0.04088972623531635,
+        "fingerprint": "111000100110010000111111100100111000100001110000011011110001110",
+        "score": 0.6740184447474937
+      },
+      "point": [
+        0.12,
+        0.47
+      ],
+      "source_sha256": "84308e0699e2f0bc790d78d14042d95fc29359caff4bf5030b57360f515d0bba",
+      "derived_blur_pixels": 4,
+      "diagnostic_processing_ms": 151
+    },
+    {
+      "type": "result",
+      "id": "summer-smooth",
+      "width": 360,
+      "height": 640,
+      "bbox": [
+        0.25,
+        0.0484375,
+        0.5833333333333334,
+        0.978125
+      ],
+      "confidence": 0.9492809193681747,
+      "foregroundFraction": 0.14258246527777776,
+      "source": ".local/3d-object-pilot/images/candidate-72938910.jpg",
+      "quality": {
+        "valid": true,
+        "reasons": [],
+        "box": [
+          0.25,
+          0.0484375,
+          0.5833333333333334,
+          0.978125
+        ],
+        "sharpness": 1711.2922588172553,
+        "clippedFraction": 0,
+        "targetFraction": 0.14267965463491586,
+        "fingerprint": "001011110010011010010110100100011001000011111001110010110010011",
+        "score": 7.445588254058031
+      },
+      "point": [
+        0.43,
+        0.3
+      ],
+      "source_sha256": "670d28657213673c6e1c98de2b1a706d7ae6cf6694b69d5ae70f1beabdbf0d4c",
+      "derived_blur_pixels": 0,
+      "diagnostic_processing_ms": 165.5
+    },
+    {
+      "type": "result",
+      "id": "summer-smooth",
+      "width": 360,
+      "height": 640,
+      "bbox": [
+        0.25277777777777777,
+        0.053125,
+        0.6111111111111112,
+        0.975
+      ],
+      "confidence": 0.962688749838808,
+      "foregroundFraction": 0.16887586805555554,
+      "source": ".local/3d-object-pilot/images/candidate-72938910.jpg",
+      "quality": {
+        "valid": true,
+        "reasons": [],
+        "box": [
+          0.25277777777777777,
+          0.053125,
+          0.6111111111111112,
+          0.975
+        ],
+        "sharpness": 56.735433187076374,
+        "clippedFraction": 0,
+        "targetFraction": 0.16857957385835196,
+        "fingerprint": "001101110010010011000011100110111101001011011001110000010010101",
+        "score": 4.0558710783994245
+      },
+      "point": [
+        0.43,
+        0.3
+      ],
+      "source_sha256": "670d28657213673c6e1c98de2b1a706d7ae6cf6694b69d5ae70f1beabdbf0d4c",
+      "derived_blur_pixels": 2,
+      "diagnostic_processing_ms": 149.30000000074506
+    },
+    {
+      "type": "result",
+      "id": "summer-smooth",
+      "width": 360,
+      "height": 640,
+      "bbox": [
+        0.25277777777777777,
+        0.1265625,
+        0.6472222222222223,
+        0.8453125
+      ],
+      "confidence": 0.9642446255165986,
+      "foregroundFraction": 0.14485677083333334,
+      "source": ".local/3d-object-pilot/images/candidate-72938910.jpg",
+      "quality": {
+        "valid": true,
+        "reasons": [],
+        "box": [
+          0.25277777777777777,
+          0.1265625,
+          0.6472222222222223,
+          0.8453125
+        ],
+        "sharpness": 3.5777421352887187,
+        "clippedFraction": 0,
+        "targetFraction": 0.1442907920869594,
+        "fingerprint": "001111100011011111000001110010001101101011000101001011011001000",
+        "score": 1.5212058930083308
+      },
+      "point": [
+        0.43,
+        0.3
+      ],
+      "source_sha256": "670d28657213673c6e1c98de2b1a706d7ae6cf6694b69d5ae70f1beabdbf0d4c",
+      "derived_blur_pixels": 4,
+      "diagnostic_processing_ms": 150.89999999850988
+    },
+    {
+      "type": "result",
+      "id": "milkmaid-artwork",
+      "width": 565,
+      "height": 640,
+      "bbox": [
+        0.2884955752212389,
+        0.1515625,
+        0.7486725663716814,
+        1
+      ],
+      "confidence": 0.9940167596962112,
+      "foregroundFraction": 0.2059983407079646,
+      "source": "tests/data/the-milkmaid.jpg",
+      "quality": {
+        "valid": true,
+        "reasons": [],
+        "box": [
+          0.2884955752212389,
+          0.1515625,
+          0.7486725663716814,
+          1
+        ],
+        "sharpness": 1489.4644210030685,
+        "clippedFraction": 0.0005351170568561873,
+        "targetFraction": 0.20608995694103444,
+        "fingerprint": "101101010010101100100110110001001110010100100101001011010110110",
+        "score": 7.302933025978312
+      },
+      "point": [
+        0.51,
+        0.46
+      ],
+      "source_sha256": "ff31295c07ef25207ce7c012317d0aa1a0b1f5238da978b5cf13fc0dbcf9d393",
+      "derived_blur_pixels": 0,
+      "diagnostic_processing_ms": 183.89999999850988
+    },
+    {
+      "type": "result",
+      "id": "milkmaid-artwork",
+      "width": 565,
+      "height": 640,
+      "bbox": [
+        0.2867256637168142,
+        0.1515625,
+        0.7486725663716814,
+        0.99375
+      ],
+      "confidence": 0.9930050921570266,
+      "foregroundFraction": 0.20316095132743364,
+      "source": "tests/data/the-milkmaid.jpg",
+      "quality": {
+        "valid": true,
+        "reasons": [],
+        "box": [
+          0.2867256637168142,
+          0.1515625,
+          0.7486725663716814,
+          0.99375
+        ],
+        "sharpness": 76.70619254739827,
+        "clippedFraction": 6.741724533135576e-05,
+        "targetFraction": 0.2033961023782071,
+        "fingerprint": "101101010010101100100110110001001110010100100101011010010110110",
+        "score": 4.352641489478991
+      },
+      "point": [
+        0.51,
+        0.46
+      ],
+      "source_sha256": "ff31295c07ef25207ce7c012317d0aa1a0b1f5238da978b5cf13fc0dbcf9d393",
+      "derived_blur_pixels": 2,
+      "diagnostic_processing_ms": 157.89999999850988
+    },
+    {
+      "type": "result",
+      "id": "milkmaid-artwork",
+      "width": 565,
+      "height": 640,
+      "bbox": [
+        0.2849557522123894,
+        0.1515625,
+        0.7486725663716814,
+        0.984375
+      ],
+      "confidence": 0.9893217656026815,
+      "foregroundFraction": 0.18665099557522125,
+      "source": "tests/data/the-milkmaid.jpg",
+      "quality": {
+        "valid": true,
+        "reasons": [],
+        "box": [
+          0.2849557522123894,
+          0.1515625,
+          0.7486725663716814,
+          0.984375
+        ],
+        "sharpness": 11.2171272228663,
+        "clippedFraction": 0,
+        "targetFraction": 0.1866892224963017,
+        "fingerprint": "101101010011101100101010110001000110010100100101110010010110110",
+        "score": 2.5028388379607525
+      },
+      "point": [
+        0.51,
+        0.46
+      ],
+      "source_sha256": "ff31295c07ef25207ce7c012317d0aa1a0b1f5238da978b5cf13fc0dbcf9d393",
+      "derived_blur_pixels": 4,
+      "diagnostic_processing_ms": 150.5
+    }
+  ]
+}

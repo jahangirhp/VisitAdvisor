@@ -32,6 +32,35 @@ function texture(x, y, seed = 0) { return 32 + (x * 17 + y * 29 + x * y * 3 + se
 function sharp(seed = 0) { return paint(frame(), BOX, (x, y) => texture(x, y, seed)); }
 function candidate(stepId, quality, id = stepId) { return { stepId, quality, id }; }
 
+test('sharp sub-256-pixel targets are not blurred by analysis upsampling', () => {
+  for (const size of [100, 200, 300]) {
+    const targetWidth = Math.round((BOX[2] - BOX[0]) * size);
+    const image = paint(frame(size), BOX, x => x < targetWidth / 2 ? 70 : 190);
+    const quality = analyzeTarget(image, BOX);
+    assert.equal(quality.valid, true);
+    assert.ok(quality.sharpness >= DEFAULT_QUALITY_THRESHOLDS.minSharpness,
+      `Preserve a sharp edge in a ${targetWidth}-pixel target`);
+    const selected = new ReferenceShortlist(['front']);
+    assert.equal(selected.consider(candidate('front', quality), confirmed).reason, 'selected');
+  }
+});
+
+test('native-size analysis keeps blurred and smooth targets out of automatic selection', () => {
+  for (const size of [100, 200, 300]) {
+    const targetWidth = Math.round((BOX[2] - BOX[0]) * size);
+    // A sharp step convolved horizontally with a 20-pixel box becomes a ramp.
+    const blurred = x => 70 + 120 * Math.max(0, Math.min(1, (x - targetWidth / 2 + 10) / 20));
+    const smooth = (x, y) => 110 + Math.sin(x / 12) * 8 + Math.cos(y / 15) * 8;
+    for (const pixels of [blurred, smooth, () => 120]) {
+      const quality = analyzeTarget(paint(frame(size), BOX, pixels), BOX);
+      assert.equal(quality.valid, true);
+      const selected = new ReferenceShortlist(['front']);
+      assert.equal(selected.consider(candidate('front', quality), confirmed).reason, 'hold_steady');
+      assert.equal(selected.entries().length, 0);
+    }
+  }
+});
+
 test('target interior quality rejects a blurred target even with a sharp background', () => {
   const crisp = analyzeTarget(sharp(), BOX);
   const distracted = paint(frame(), [0, 0, 1, 1], texture);
@@ -173,6 +202,35 @@ test('appearance continuity follows a small translation and rejects replacement/
   assert.equal(trackTarget(sharp(17), template).found, false);
   assert.equal(trackTarget(paint(sharp(), [0.2, 0.2, 0.8, 0.65], () => 120), template).found, false);
   assert.equal(trackTarget(frame(), template).found, false);
+});
+
+test('pixel-sized camera jitter keeps the target without accepting replacement or occlusion', () => {
+  const template = createTargetTemplate(sharp(), BOX);
+  for (let pixels = 1; pixels <= 5; pixels++) {
+    for (const [dx, dy] of [[pixels, 0], [0, pixels], [pixels, -pixels]]) {
+      const movedBox = [BOX[0] + dx / 100, BOX[1] + dy / 100,
+        BOX[2] + dx / 100, BOX[3] + dy / 100];
+      const moved = paint(frame(), movedBox, texture);
+      const result = trackTarget(moved, template);
+      assert.equal(result.found, true, `Retain the target after ${dx}, ${dy} pixels of motion`);
+      assert.ok(result.confidence > 0.99);
+      result.box.forEach((value, index) => assert.ok(Math.abs(value - movedBox[index]) < 0.001));
+      const replacement = paint(frame(), movedBox, (x, y) => texture(x, y, 17));
+      assert.equal(trackTarget(replacement, template).found, false);
+      paint(moved, [movedBox[0], movedBox[1], movedBox[2], movedBox[1] + 0.45], () => 120);
+      assert.equal(trackTarget(moved, template).found, false);
+    }
+  }
+});
+
+test('pixel refinement stays inside the configured search range', () => {
+  const template = createTargetTemplate(sharp(), BOX);
+  const moved = paint(frame(), [0.21, 0.2, 0.81, 0.8], texture);
+  assert.equal(trackTarget(moved, template, BOX, { searchFraction: 0 }).found, false);
+  const limited = trackTarget(moved, template, BOX, { searchFraction: 0.01 });
+  assert.ok(Math.abs((limited.box[0] + limited.box[2]) / 2 - 0.5) <= 0.006001);
+  assert.ok(Math.abs((limited.box[1] + limited.box[3]) / 2 - 0.5) <= 0.006001);
+  assert.equal(trackTarget(moved, template).found, true);
 });
 
 test('low-texture templates do not invent a tracking lock', () => {

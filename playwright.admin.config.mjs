@@ -1,4 +1,4 @@
-import { defineConfig } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests/admin',
   testMatch: '**/*.spec.mjs',
@@ -8,6 +8,7 @@ export default defineConfig({
   projects: [
     { name: 'chromium', use: { browserName: 'chromium' } },
     { name: 'webkit', use: { browserName: 'webkit' } },
+    { name: 'iphone-12', use: { ...devices['iPhone 12'], browserName: 'webkit' } },
   ],
   webServer: {
     command: `${process.env.PYTHON || (process.platform === 'win32' ? 'python' : '.venv/bin/python')} -m http.server 8006 --bind 127.0.0.1 --directory app/modules/admin/static`,

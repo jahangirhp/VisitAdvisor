@@ -6,16 +6,17 @@ from pathlib import Path
 
 import uvicorn
 from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
 from pydantic import ValidationError
 
 from app.api.router import router as api_router
 from app.api.routes.health import router as health_router
 from app.core.config import Settings
-from app.core.exceptions import register_exception_handlers
+from app.core.exceptions import ApplicationError, register_exception_handlers
 from app.core.logging import configure_logging
 from app.db.mongodb import MongoDB
+from app.modules.admin.assets import AdminStaticFiles
 from app.modules.admin.assets import router as capture_assets_router
+from app.modules.admin.server_capture import CaptureAnalyzer
 from app.modules.live_camera.server import create_camera_app
 from app.modules.recognition.limits import ImageUploadLimit
 
@@ -68,9 +69,24 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
                 raise RuntimeError(
                     "Visual model unavailable; run visual model setup"
                 ) from None
+        if settings.admin_capture_server_enabled:
+            capture_analyzer = CaptureAnalyzer(settings.admin_capture_model_directory)
+            app.state.admin_capture_analyzer = capture_analyzer
+            try:
+                # Cloud Run startup CPU is available here. Keep only model
+                # weights resident afterward, so taking a photo avoids imports.
+                await capture_analyzer.prepare()
+            except ApplicationError:
+                logger.warning(
+                    "Capture model warmup unavailable; photo capture remains available"
+                )
         logger.info("MongoDB connection successful")
         yield
     finally:
+        analyzer = getattr(app.state, "admin_capture_analyzer", None)
+        if analyzer is not None:
+            analyzer.close()
+            app.state.admin_capture_analyzer = None
         if camera_preload is not None:
             camera_preload.cancel()
             try:
@@ -98,7 +114,7 @@ def create_app() -> FastAPI:
     application.mount("/live", application.state.camera)
     application.mount(
         "/admin",
-        StaticFiles(
+        AdminStaticFiles(
             directory=Path(__file__).parent / "modules/admin/static", html=True
         ),
         name="admin",

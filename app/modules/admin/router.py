@@ -18,6 +18,12 @@ from app.modules.admin.capture import (
     GuidedCaptureMetadata,
     parse_capture_metadata,
 )
+from app.modules.admin.server_capture import (
+    AnalysisPrompt,
+    AnalysisResult,
+    CaptureAnalyzer,
+    failure,
+)
 from app.modules.admin.service import PhotoService
 from app.modules.locations.models import Location, LocationCreate, LocationData
 from app.modules.locations.repository import LocationRepository
@@ -60,6 +66,25 @@ def service(request: Request, database: Database) -> PhotoService:
 
 
 Service = Annotated[PhotoService, Depends(service)]
+
+
+@router.post("/capture/analyze", response_model=AnalysisResult)
+async def analyze_capture(
+    request: Request, prompt: Annotated[AnalysisPrompt, Query()]
+) -> Response:
+    settings = request.app.state.settings
+    if not settings.admin_capture_server_enabled:
+        raise failure("DISABLED", "Server photo analysis is not enabled.", 503)
+    analyzer = getattr(request.app.state, "admin_capture_analyzer", None)
+    if analyzer is None:
+        analyzer = CaptureAnalyzer(settings.admin_capture_model_directory)
+        request.app.state.admin_capture_analyzer = analyzer
+    result = await analyzer.analyze(prompt, request)
+    return Response(
+        result.model_dump_json(),
+        media_type="application/json",
+        headers={"Cache-Control": "no-store", "X-Content-Type-Options": "nosniff"},
+    )
 
 
 class PhotoMetadata(BaseModel):
@@ -310,6 +335,7 @@ async def remove_photo(
         return Response(status_code=204)
 
 
+@router.post("/venues/{location_id}/objects/{object_id}/save")
 @router.post("/venues/{location_id}/objects/{object_id}/prepare")
 async def prepare(
     location_id: str, object_id: str, request: Request, service: Service
@@ -330,6 +356,7 @@ async def prepare(
                 validate_id(location_id),
                 validate_id(object_id),
                 cast(ImageEncoder, encoder),
+                allow_existing=request.url.path.endswith("/save"),
             )
         except VisualFailure:
             raise ApplicationError(

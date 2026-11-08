@@ -8,6 +8,7 @@
 !app/**
 !scripts/
 !scripts/prepare_guided_capture.py
+!scripts/prepare_server_capture.py
 **/__pycache__/
 **/*.py[cod]
 **/.env

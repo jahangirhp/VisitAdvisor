@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Objects | VisitAdvisor</title><link rel="stylesheet" href="./admin.css"><script src="./admin.js" defer></script></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Objects | VisitAdvisor</title><link rel="stylesheet" href="./admin.css?v=save-20261108-1"><script src="./admin.js?v=save-20261108-1" defer></script></head>
 <body>
 <header id="siteHeader"><a class="brand" href="/admin/">VisitAdvisor<span>Collections</span></a><nav><a href="/live/">Visitor camera</a><button id="logout" hidden>Lock panel</button></nav></header>
 <main>
+<p id="status" class="srOnly" role="status" aria-live="polite"></p>
 <section id="login"><div class="loginMark">V</div><h1>Your collection,<br>one object at a time.</h1><p>Sign in to add objects and manage your photos.</p><form id="loginForm"><label for="token">Admin token</label><input id="token" type="password" autocomplete="off" required><button type="submit" class="primary">Unlock library</button></form></section>
 <div id="workspace" hidden>
 <section id="collection">
@@ -19,9 +20,10 @@
 <div class="wizardContent">
 <p id="objectVenue" class="venueContext"></p>
 <section id="detailsStep" aria-labelledby="detailsTitle">
-<h1 id="detailsTitle" tabindex="-1">Give it a name</h1><p class="stepDescription">Name the object and confirm the angles of your selected photos.</p>
-<label>Object name<input id="newObjectName" name="name" maxlength="300" placeholder="Name on the label" required></label>
-<label>Object type<select id="newObjectType" name="type" aria-label="Object type" required><option value="">Choose a type</option><option value="painting">Painting</option><option value="sculpture">Sculpture / statue</option><option value="artifact">Artifact / exhibit</option><option value="building">Building / architecture</option><option value="room">Room / interior</option><option value="other">Other object</option></select></label>
+<h1 id="detailsTitle" tabindex="-1">Give it a name</h1><p class="stepDescription">Name the object to save your photos.</p>
+<div id="captureIdentityHome"><div id="captureIdentity"><label>Object name<input id="newObjectName" form="objectForm" name="name" maxlength="300" placeholder="Name on the label" required></label>
+<label>Object type<select id="newObjectType" form="objectForm" name="type" aria-label="Object type" required><option value="">Choose a type</option><option value="painting">Painting</option><option value="sculpture">Sculpture / statue</option><option value="artifact">Artifact / exhibit</option><option value="building">Building / architecture</option><option value="room">Room / interior</option><option value="other">Other object</option></select></label>
+</div></div>
 <details class="optionalDetails"><summary>More details (optional)</summary>
 <label>Year or period (optional)<input name="year" maxlength="300" placeholder="e.g. 1658 or 17th century"></label>
 <label>Description (optional)<textarea name="description" maxlength="10000"></textarea></label>
@@ -35,7 +37,7 @@
 <footer class="wizardFooter"><div class="stepProgress" aria-hidden="true"><span id="photoProgress" class="active"></span><span id="detailsProgress" class="active"></span></div><div class="footerInner"><button id="captureBack" type="button" class="textButton">Cancel</button><button id="createObject" type="submit" class="primary" disabled>Save object</button></div></footer>
 </form></section>
 </div>
-<p id="status" role="status" aria-live="polite"></p>
+
 </main>
 <dialog id="venueDialog" aria-labelledby="venueDialogTitle"><div class="dialogHeader"><h2 id="venueDialogTitle">Add a venue</h2><button id="closeVenue" class="iconButton" aria-label="Close venue form">&times;</button></div><form id="venueForm">
 <label>Venue name<input name="name" maxlength="300" required></label>
@@ -43,12 +45,20 @@
 <p class="small muted">Creates an empty venue and selects it so you can add objects below.</p>
 </form></dialog>
 <dialog id="guidedDialog" class="guidedDialog" aria-labelledby="guidedTitle">
-<div class="dialogHeader"><h2 id="guidedTitle">Capture reference photos</h2><button id="guidedClose" type="button" class="iconButton" aria-label="Close guided capture">&times;</button></div>
-<div id="guidedSetup"><label>What are you photographing?<select id="guidedProfile"><option value="multiview">Walk-around object</option><option value="planar">Flat artwork</option><option value="front-only">Object visible from the front only</option><option value="scene">Building or room</option></select></label><p>Keep the whole object visible. Tap it to select the target. Move around it when prompted, and wait if someone covers it.</p><p class="small muted">Camera frames are analyzed on your device. Only photos you review and save are uploaded. First use downloads a local segmentation model (about 6 MB).</p><button id="guidedStart" type="button" class="primary">Start camera</button><div class="guidedFallback"><p class="small muted">Or use an existing photo or your phone's camera.</p><button id="choosePhotos" type="button" class="textButton">Choose photos</button><button id="takePhoto" type="button" class="textButton">Take a photo</button></div><p id="guidedUploadStatus" class="small muted" role="status" aria-live="polite"></p><input id="cameraInput" type="file" accept="image/*" capture="environment" hidden><input id="libraryInput" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple hidden></div>
-<div id="guidedLive" hidden><p id="guidedPrompt" class="guidedPrompt"></p><div id="guidedStage" class="guidedStage"><video id="guidedVideo" muted playsinline autoplay aria-label="Live object camera"></video><button id="guidedTarget" type="button" aria-label="Select object in camera preview"></button></div><figure id="guidedAnalyzed" class="guidedAnalyzed" hidden><figcaption>Last analyzed frame: check the target outline</figcaption><canvas id="guidedOverlay" aria-label="Last analyzed target mask"></canvas></figure><p id="guidedStatus" role="status" aria-live="polite"></p><p class="small muted">Tap the object to confirm it. If the outline includes a person or misses part of the object, tap again or retake. View labels are suggestions; review each angle before saving.</p><div class="guidedControls"><button id="guidedBlocked" type="button">View blocked / select again</button><button id="guidedNext" type="button" disabled>Next view</button><button id="guidedFinish" type="button" disabled>Review photos</button></div></div>
-<div id="guidedReview" hidden><p>Review the original and isolated target. Masks can miss fine details. Remove incorrect selections; only your chosen originals and separate masks will be saved.</p><div id="guidedPhotos" class="guidedPhotos"></div><p id="guidedGaps" class="small muted"></p><button id="guidedUse" type="button" class="primary">Use selected photos</button></div>
+<div class="dialogHeader"><h2 id="guidedTitle">Take object photos</h2><button id="guidedClose" type="button" class="iconButton" aria-label="Close guided capture">&times;</button></div>
+<div id="quickCapture">
+<div id="quickCamera"><p class="quickInstruction">Keep the whole object in view.</p>
+<div id="quickStage" class="guidedStage quickStage"><video id="quickVideo" muted playsinline autoplay aria-label="Live object camera"></video><button id="quickTarget" type="button" aria-label="Change target in camera preview"></button><span id="quickAim" class="quickAim" aria-hidden="true"></span></div>
+<div id="guidedSetup" hidden><button id="guidedStart" type="button">Retry camera</button></div>
+<p id="quickStatus" class="small muted" role="status" aria-live="polite"></p>
+<div id="quickPhotos" class="quickPhotos" aria-label="Captured photos"></div><div id="quickDetails"></div>
+<div class="quickActions"><span id="quickCount" class="small muted">0 of 4 photos</span><button id="quickShutter" type="button" class="primary" disabled>Take photo</button><button id="quickDone" type="button" disabled>Save</button></div>
+<p class="quickPrivacy small muted">Photos are analyzed on our server. Live video stays on your device.</p></div>
+<div id="quickInspector" hidden><button id="quickBack" type="button" class="textButton">Back to camera</button><canvas id="quickSnapshot" aria-label="Photo: drag to adjust the object area"></canvas><p id="quickInspectionStatus" class="small muted" role="status"></p><div class="guidedControls"><button id="quickApplyBox" type="button" disabled>Keep this area</button><button id="quickFullPhoto" type="button">Keep full photo</button><button id="quickRemove" type="button">Remove photo</button></div></div>
+</div>
+<div id="guidedFallback" class="guidedFallback"><button id="choosePhotos" type="button" class="textButton">Choose photos</button><button id="takePhoto" type="button" class="textButton">Use phone camera</button></div><p id="guidedUploadStatus" class="small muted" role="status" aria-live="polite"></p><input id="cameraInput" type="file" accept="image/*" capture="environment" hidden><input id="libraryInput" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple hidden>
 </dialog>
-<template id="detailTemplate"><p class="eyebrow">OBJECT DETAILS</p><h2 id="objectName"></h2><p id="stale" class="notice" hidden>Stored references are stale. Prepare them again with current source evidence before adding uploads.</p><h3>Photos</h3><div id="photos" class="photos"></div><button id="prepare">Prepare references</button><hr><h3>Add a reference photo</h3>
+<template id="detailTemplate"><p class="eyebrow">OBJECT DETAILS</p><h2 id="objectName"></h2><p id="stale" class="notice" hidden>Source information changed. Refresh the existing photos before adding more.</p><h3>Photos</h3><div id="photos" class="photos"></div><button id="saveCollection" hidden>Save photos</button><hr><h3>Add a reference photo</h3>
 <form id="uploadForm">
 <label>Photo<input name="image" id="image" type="file" accept="image/jpeg,image/png,image/webp" required></label><p class="small muted">JPEG, PNG or WebP · up to 5 MiB and 16 megapixels</p><img id="preview" alt="Selected reference photo" hidden>
 <label>Viewpoint<input name="viewpoint" maxlength="300" placeholder="e.g. Front, left side, back" required></label>

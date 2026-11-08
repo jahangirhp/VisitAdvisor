@@ -53,9 +53,10 @@ remove EXIF/GPS metadata, and disable caching. Originals can contain metadata an
 remain private database data; include this collection in access and backup policies.
 Uploaded bytes do not appear in public object/source responses or visitor frames.
 
-Saving a photo does not yet change recognition. **Prepare references** runs the
-existing cached local DINOv2 encoder (install the `visual` extra and cached model
-using the existing model setup command) and publishes through `VisualRepository`.
+Saving photos now embeds and publishes them automatically using the existing
+cached local DINOv2 encoder and `VisualRepository`; see the current
+[capture workflow](28-guided-capture-implementation.md). Install the `visual`
+extra and cached model using the existing model setup command.
 No OpenAI calls, content generation, training or model download occurs. It retains
 all existing views, stages the full new vector set, rechecks canonical source
 membership, then uses the existing atomic set replacement. Failure keeps the prior
@@ -142,9 +143,10 @@ upload response. Draft fields and venue selection stay fixed during retries.
 opens its detail panel. Unsaved photos stay only in the current browser tab and
 are lost on reload or lock. Object creation is not an atomic batch with photo
 uploads; a lost response to the initial object creation itself requires checking
-the inventory before trying again. Saved photos remain private, pending separate
-reference preparation; this flow does not enable automatic identification or
-expand the configured live-camera cohort.
+the inventory before trying again. A successful Save also embeds every pending
+photo and publishes the reference set. Embedding failures retain uploads for Retry save without duplicate uploads.
+This flow does not enable automatic identification or expand the configured
+live-camera cohort.
 
 
 ## Creation editor design

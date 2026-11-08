@@ -1,8 +1,10 @@
 import { test, expect } from '@playwright/test';
 import { createHash } from 'node:crypto';
+import { captureSubmittedForms, submittedForm } from './submitted-form.mjs';
 const location = '1'.repeat(24), object = '2'.repeat(24), source = '3'.repeat(24);
 const base = `/api/v1/admin/venues/${location}/objects/${object}`;
 async function mock(page) {
+  await captureSubmittedForms(page);
   let saved = false, prepared = false;
   const requests = [];
   await page.route('**/api/v1/admin/**', async route => {
@@ -21,7 +23,7 @@ async function mock(page) {
       expect(request.postDataBuffer().toString()).toContain('front');
       return route.fulfill({ status: 201, json: { id: 'photo', status: 'saved_for_preparation' } });
     }
-    if (path.endsWith('/prepare')) { prepared = true; return route.fulfill({ json: { prepared: 1 } }); }
+    if (path.endsWith('/save')) { prepared = true; return route.fulfill({ json: { prepared: 1 } }); }
     return route.fulfill({ json: { ...row, sources: [{ id: source, title: 'Official museum record' }], photos: [], views: [], stale: false } });
   });
   return requests;
@@ -32,13 +34,13 @@ async function login(page) {
   await page.getByRole('button', { name: 'Unlock library' }).click();
   await expect(page.getByRole('button', { name: /Painting & sculpture/ })).toBeVisible();
 }
-test('admin can find an object, upload a reviewed photo, then prepare it', async ({ page }) => {
+test('saving a photo embeds it without a preparation action', async ({ page }) => {
   const requests = await mock(page);
   await login(page);
   await expect(page.getByRole('button', { name: 'Next', exact: true })).toBeDisabled();
   await page.getByRole('button', { name: /Painting & sculpture/ }).click();
   await expect(page.getByRole('heading', { name: '<Painting & sculpture>' })).toBeVisible();
-  await expect(page.getByRole('button', { name: 'Prepare references' })).toBeDisabled();
+  await expect(page.getByRole('button', { name: 'Prepare references' })).toHaveCount(0);
   await page.locator('#image').setInputFiles({ name: 'front.png', mimeType: 'image/png',
     buffer: Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aL1sAAAAASUVORK5CYII=', 'base64') });
   await page.getByLabel('Viewpoint', { exact: true }).fill('front');
@@ -48,11 +50,13 @@ test('admin can find an object, upload a reviewed photo, then prepare it', async
   await expect(page.getByLabel('Photo rights / permission')).toHaveCount(0);
   await expect(page.getByRole('checkbox', { name: /I checked that this photo/ })).toHaveCount(0);
   await page.getByRole('button', { name: 'Save photo', exact: true }).click();
-  await expect(page.locator('#status')).toContainText('Photo saved.');
+  await expect(page.locator('#status')).toContainText('Photos saved.');
+  expect(await page.locator('#status').evaluate(el => getComputedStyle(el).position)).not.toBe('fixed');
+  expect(await page.locator('#status').evaluate(el => el.getBoundingClientRect().width)).toBeLessThanOrEqual(1);
   await expect(page.locator('#coverage')).toHaveCount(0);
   await expect(page.getByRole('heading', {name:'Stored reference views'})).toHaveCount(0);
-  await page.getByRole('button', { name: 'Prepare references' }).click();
-  await expect(page.getByRole('button', { name: 'Prepare references' })).toBeDisabled();
+  expect(requests.filter(r => r.url().endsWith('/save') && r.method() === 'POST')).toHaveLength(1);
+  await expect(page.getByRole('button', { name: 'Prepare references' })).toHaveCount(0);
   expect(requests.some(r => r.url().includes(base + '/photos') && r.method() === 'POST')).toBeTruthy();
   await page.getByRole('button', { name: 'Lock panel' }).click();
   await expect(page.getByLabel('Admin token')).toHaveValue('');
@@ -65,6 +69,8 @@ test('mobile layout, search and rejected credentials', async ({ page }) => {
   await page.getByLabel('Admin token').fill('wrong');
   await page.getByRole('button', { name: 'Unlock library' }).click();
   await expect(page.locator('#status')).toContainText('valid admin token');
+  await expect(page.locator('#status')).toBeVisible();
+  expect(await page.locator('#status').evaluate(el => getComputedStyle(el).position)).not.toBe('fixed');
   await page.getByLabel('Admin token').fill('demo-token');
   await page.getByRole('button', { name: 'Unlock library' }).click();
   await expect(page.getByRole('button', { name: /Painting & sculpture/ })).toBeVisible();
@@ -74,6 +80,72 @@ test('mobile layout, search and rejected credentials', async ({ page }) => {
   await page.getByRole('button', { name: /Painting & sculpture/ }).click();
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
 });
+
+test('an existing photo collection retries embedding without uploading again', async ({ page }) => {
+  const requests = await mock(page); await login(page);
+  let saves = 0;
+  await page.route(`**${base}/save`, async route => {
+    if (++saves === 1) return route.fulfill({ status: 503, json: { error: { message: 'Please retry saving.' } } });
+    return route.fallback();
+  });
+  await page.getByRole('button', { name: /Painting & sculpture/ }).click();
+  await page.locator('#image').setInputFiles({ name: 'front.png', mimeType: 'image/png',
+    buffer: Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aL1sAAAAASUVORK5CYII=', 'base64') });
+  await page.getByLabel('Viewpoint', { exact: true }).fill('front');
+  await page.getByRole('button', { name: 'Save photo', exact: true }).click();
+  await expect(page.locator('#status')).toContainText('Please retry saving.');
+  await page.getByRole('button', { name: 'Save photos', exact: true }).click();
+  await expect(page.locator('#status')).toContainText('Photos saved.');
+  await expect(page.locator('#saveCollection')).toBeHidden();
+  expect(saves).toBe(2);
+  expect(requests.filter(r => r.url().endsWith('/photos') && r.method() === 'POST')).toHaveLength(1);
+});
+
+for (const lostResponse of [false, true]) {
+  test(`new collection retries ${lostResponse ? 'a lost embedding response' : 'failed embedding'} without duplicate uploads`, async ({ page }) => {
+    await mock(page); await login(page);
+    const id = '8'.repeat(24), path = `/api/v1/admin/venues/${location}/objects/${id}`;
+    let creates = 0, uploads = 0, saves = 0, published = false;
+    const photos = [];
+    await page.route(`**/api/v1/admin/venues/${location}/objects`, async route => {
+      creates++;
+      await route.fulfill({ status: 201, json: { id, name: 'Museum statue', source_ids: [source] } });
+    });
+    await page.route(`**${path}`, route => route.fulfill({ json: {
+      id, name: 'Museum statue', type: 'sculpture', target: 4,
+      pending: published ? 0 : photos.length, prepared: published ? photos.length : 0,
+      sources: [{ id: source }], photos, views: [], stale: false,
+    } }));
+    await page.route(`**${path}/photos`, async route => {
+      uploads++;
+      const form = await submittedForm(page, route.request());
+      photos.push({ sha256: createHash('sha256').update(Buffer.from(await form.get('image').arrayBuffer())).digest('hex'), capture_group: form.get('capture_group') });
+      await route.fulfill({ status: 201, json: { id: String(uploads) } });
+    });
+    await page.route(`**${path}/save`, async route => {
+      saves++;
+      expect(photos).toHaveLength(2);
+      if (saves === 1) {
+        published = lostResponse;
+        if (lostResponse) return route.abort('failed');
+        return route.fulfill({ status: 503, json: { error: { message: 'Please retry saving.' } } });
+      }
+      published = true;
+      await route.fulfill({ json: { prepared: 2, set_id: 'saved-set' } });
+    });
+    await selectCapturePhotos(page, ['red', 'blue']);
+    await page.getByLabel('Photo 2 angle', { exact: true }).selectOption('left');
+    await page.getByLabel('Object name', { exact: true }).fill('Museum statue');
+    await page.getByLabel('Object type', { exact: true }).selectOption('sculpture');
+    await page.getByRole('button', { name: 'Save object', exact: true }).click();
+    await expect(page.locator('#captureProgress')).toContainText('Your uploaded photos are kept.');
+    await expect(page.locator('#detailsStep')).toBeVisible();
+    await page.getByRole('button', { name: 'Retry save', exact: true }).click();
+    await expect(page.locator('#status')).toContainText('Museum statue saved with 2 photos');
+    expect(creates).toBe(1); expect(uploads).toBe(2); expect(saves).toBe(2);
+    await expect(page.locator('#saveCollection')).toBeHidden();
+  });
+}
 
 test('admin creates and selects an empty venue', async ({ page }) => {
   await mock(page);
@@ -91,7 +163,7 @@ test('admin creates and selects an empty venue', async ({ page }) => {
   await page.getByLabel('Venue name', { exact: true }).fill('New gallery');
   await page.getByRole('button', { name: 'Create venue', exact: true }).click();
   await expect(page.locator('#guidedDialog')).toBeVisible();
-  await expect(page.locator('#guidedSetup')).toBeVisible();
+  await expect(page.locator('#guidedDialog')).toBeVisible();
   await expect(page.locator('#venue')).toHaveValue(id);
   await expect(page.locator('#objects')).toContainText('No objects match');
 });
@@ -108,6 +180,7 @@ for (const newVenue of [false, true]) {
       await page.getByLabel('Venue name', { exact: true }).fill('New gallery');
       await page.getByRole('button', { name: 'Create venue', exact: true }).click();
       await expect(page.locator('#venue')).toHaveValue(venueId);
+      await expect(page.locator('#guidedDialog')).toBeVisible();
     }
     await expect(page.locator('#objectVenue')).toContainText(newVenue ? 'New gallery' : 'Museum');
     const id = '5'.repeat(24);
@@ -143,7 +216,7 @@ async function selectCapturePhotos(page, colors, expectedCount = colors.length, 
     if (await page.locator('#addObject').isHidden()) await page.getByRole('button', { name: 'Add object', exact: true }).click();
     else await page.getByRole('button', { name: 'Add more photos', exact: true }).click();
   }
-  await expect(page.locator('#guidedSetup')).toBeVisible();
+  await expect(page.locator('#guidedDialog')).toBeVisible();
   const files = [];
   for (const color of colors) {
     const data = await page.evaluate(([color, width, height]) => {
@@ -184,7 +257,7 @@ for (const lostResponse of [false, true]) {
     } }));
     await page.route(`**${path}/photos`, async route => {
       uploads++;
-      const form = await new Request(route.request().url(), { method: 'POST', body: route.request().postDataBuffer(), headers: route.request().headers() }).formData();
+      const form = await submittedForm(page, route.request());
       const file = form.get('image');
       expect(file.type).toBe('image/jpeg');
       expect(form.get('source_id')).toBe(source);
@@ -209,7 +282,7 @@ for (const lostResponse of [false, true]) {
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBeTruthy();
     await page.screenshot({ path: `test-results/photo-first-${lostResponse ? 'retry' : 'mobile'}.png`, fullPage: true });
     await page.getByRole('button', { name: 'Save object', exact: true }).click();
-    await expect(page.getByRole('button', { name: 'Retry upload' })).toBeEnabled();
+    await expect(page.getByRole('button', { name: 'Retry save' })).toBeEnabled();
     await expect(page.locator('#captureProgress')).toContainText('completed uploads are saved');
     await expect(page.locator('#venue')).toBeDisabled();
     await page.getByRole('button', { name: 'Back to collection', exact: true }).click();
@@ -217,8 +290,8 @@ for (const lostResponse of [false, true]) {
     await page.getByRole('button', { name: 'Add object', exact: true }).click();
     await expect(page.locator('#guidedDialog')).not.toBeVisible();
     await expect(page.locator('#detailsStep')).toBeVisible();
-    await expect(page.getByRole('button', { name: 'Retry upload', exact: true })).toBeEnabled();
-    await page.getByRole('button', { name: 'Retry upload' }).click();
+    await expect(page.getByRole('button', { name: 'Retry save', exact: true })).toBeEnabled();
+    await page.getByRole('button', { name: 'Retry save' }).click();
     await expect(page.locator('#status')).toContainText('Museum statue saved with 2 photos');
     expect(creates).toBe(1); expect(photos.length).toBe(2);
     expect(uploads).toBe(lostResponse ? 2 : 3);
@@ -262,7 +335,7 @@ test('direct capture uses the fallback, validates the name, and preserves cancel
   await page.screenshot({ path: 'test-results/collection-mobile.png' });
   await page.getByRole('button', { name: 'Add object', exact: true }).click();
   await expect(page.locator('#guidedDialog')).toBeVisible();
-  await expect(page.locator('#guidedSetup')).toBeVisible();
+  await expect(page.locator('#guidedDialog')).toBeVisible();
   await expect(page.locator('#photoStep, #captureEmpty, #nextCapture, #captureTitle, #detailsPhotoSummary')).toHaveCount(0);
   await expect(page.locator('#choosePhotos')).toBeVisible();
   await page.screenshot({ path: 'test-results/capture-setup-mobile.png' });
@@ -276,7 +349,7 @@ test('direct capture uses the fallback, validates the name, and preserves cancel
   await page.getByLabel('Photo 1 angle', { exact: true }).evaluate(select => select.scrollIntoView({ block: 'center' }));
   await page.screenshot({ path: 'test-results/capture-name-mobile-photos.png' });
   await page.getByRole('button', { name: 'Add more photos', exact: true }).click();
-  await expect(page.locator('#guidedSetup')).toBeVisible();
+  await expect(page.locator('#guidedDialog')).toBeVisible();
   await page.locator('#guidedClose').click();
   await expect(page.locator('#detailsStep')).toBeVisible();
   await expect(page.locator('.capturePhoto')).toHaveCount(1);
@@ -310,6 +383,8 @@ test('a rejected saved token is cleared on refresh', async ({ page }) => {
   await expect(page.locator('#login')).toBeVisible();
   await expect(page.locator('#workspace')).toBeHidden();
   await expect(page.locator('#status')).toContainText('valid admin token');
+  await expect(page.locator('#status')).toBeVisible();
+  expect(await page.locator('#status').evaluate(el => getComputedStyle(el).position)).not.toBe('fixed');
   expect(await page.evaluate(() => sessionStorage.getItem('visitadvisor.adminToken'))).toBeNull();
 });
 

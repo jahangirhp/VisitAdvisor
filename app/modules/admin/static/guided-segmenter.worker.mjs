@@ -42,6 +42,12 @@ async function initialize() {
   if (typeof OffscreenCanvas === 'undefined' || !globalThis.crypto?.subtle) {
     throw new Error('unsupported');
   }
+  // Even CPU inference uploads ImageBitmap input through a WebGL texture.
+  // Some browsers expose OffscreenCanvas in workers with only 2D support.
+  const canvas = new OffscreenCanvas(1, 1);
+  if (!canvas.getContext('webgl2') && !canvas.getContext('webgl')) {
+    throw new Error('unsupported');
+  }
   const { FilesetResolver, InteractiveSegmenterLegacy } = await import(
     `${ASSET_BASE}vision_bundle.mjs`
   );
@@ -58,7 +64,7 @@ async function initialize() {
   // the pinned legacy CPU model measured ~115ms warm on the same input.
   segmenter = await InteractiveSegmenterLegacy.createFromOptions(fileset, {
     baseOptions: { modelAssetBuffer: new Uint8Array(bytes), delegate: 'CPU' },
-    canvas: new OffscreenCanvas(1, 1),
+    canvas,
     outputConfidenceMasks: true,
     outputCategoryMask: false,
   });

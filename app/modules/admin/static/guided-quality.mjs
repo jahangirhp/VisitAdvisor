@@ -133,7 +133,9 @@ export function analyzeTarget(image, box, mask = null) {
   const sourceWidth = (box[2] - box[0]) * image.width;
   const sourceHeight = (box[3] - box[1]) * image.height;
   if (Math.min(sourceWidth, sourceHeight) < 8) return emptyQuality(box, 'insufficient_target');
-  const scale = WORK_SIZE / Math.max(sourceWidth, sourceHeight);
+  // Upsampling invents smooth pixels and makes a sharp small crop look blurred.
+  // Reduce large crops to the working limit, preserving smaller crops' pixels.
+  const scale = Math.min(1, WORK_SIZE / Math.max(sourceWidth, sourceHeight));
   const width = Math.max(1, Math.round(sourceWidth * scale));
   const height = Math.max(1, Math.round(sourceHeight * scale));
   const { gray, visible } = sample(image, box, width, height, mask);
@@ -288,6 +290,23 @@ export function trackTarget(image, template, previousBox = template?.box, option
   const centerX = (previousBox[0] + previousBox[2]) / 2;
   const centerY = (previousBox[1] + previousBox[3]) / 2;
   let best = { confidence: -1, box: [...previousBox] };
+  const consider = box => {
+    if (box[0] < 0 || box[1] < 0 || box[2] > 1 || box[3] > 1) return;
+    const { gray } = sample(image, box, TRACK_SIZE, TRACK_SIZE);
+    let sum = 0;
+    for (let index = 0; index < gray.length; index++) if (template.visible[index]) sum += gray[index];
+    const mean = sum / template.count;
+    let energy = 0;
+    let product = 0;
+    for (let index = 0; index < gray.length; index++) {
+      if (!template.visible[index]) continue;
+      const value = gray[index] - mean;
+      energy += value * value;
+      product += value * (template.gray[index] - template.mean);
+    }
+    const confidence = energy > 0 ? product / Math.sqrt(energy * template.energy) : 0;
+    if (confidence > best.confidence) best = { confidence, box };
+  };
   for (const scale of [1, 0.92, 1.08]) {
     for (const offsetY of [0, -0.5, 0.5, -1, 1]) {
       for (const offsetX of [0, -0.5, 0.5, -1, 1]) {
@@ -295,22 +314,21 @@ export function trackTarget(image, template, previousBox = template?.box, option
         const y = centerY + offsetY * searchFraction * height;
         const box = [x - width * scale / 2, y - height * scale / 2,
           x + width * scale / 2, y + height * scale / 2];
-        if (box[0] < 0 || box[1] < 0 || box[2] > 1 || box[3] > 1) continue;
-        const { gray } = sample(image, box, TRACK_SIZE, TRACK_SIZE);
-        let sum = 0;
-        for (let index = 0; index < gray.length; index++) if (template.visible[index]) sum += gray[index];
-        const mean = sum / template.count;
-        let energy = 0;
-        let product = 0;
-        for (let index = 0; index < gray.length; index++) {
-          if (!template.visible[index]) continue;
-          const value = gray[index] - mean;
-          energy += value * value;
-          product += value * (template.gray[index] - template.mean);
-        }
-        const confidence = energy > 0 ? product / Math.sqrt(energy * template.energy) : 0;
-        if (confidence > best.confidence) best = { confidence, box };
+        consider(box);
       }
+    }
+  }
+  // The coarse grid can step over a strong match after tiny camera movement.
+  // Search around the last confirmed position at pixel resolution as well;
+  // never exceed the configured range or add more than 120 candidates.
+  const radiusX = Math.min(5, Math.floor(searchFraction * width * image.width));
+  const radiusY = Math.min(5, Math.floor(searchFraction * height * image.height));
+  for (let offsetY = -radiusY; offsetY <= radiusY; offsetY++) {
+    for (let offsetX = -radiusX; offsetX <= radiusX; offsetX++) {
+      if (offsetX === 0 && offsetY === 0) continue;
+      const x = offsetX / image.width, y = offsetY / image.height;
+      consider([previousBox[0] + x, previousBox[1] + y,
+        previousBox[2] + x, previousBox[3] + y]);
     }
   }
   const confidence = Math.max(0, Math.min(1, best.confidence));

@@ -10,7 +10,7 @@ const MESSAGES = {
   hold_steady: 'Hold still. The object needs a sharper photo.',
   change_lighting: 'Try a position with less glare or more even light.',
   move_closer: 'Move closer, keeping the whole object inside the frame.',
-  duplicate_view: 'This looks similar to a selected view. Change your position around the object.',
+  duplicate_view: 'Object detected, but this looks similar to a selected view. Move to a different angle, then tap the object again.',
   keep_previous: 'A clearer photo is already selected for this view.',
   target_lost: 'Target uncertain. Tap the same object again when it is clearly visible.',
   wait_for_clear_view: 'Wait until the entire object is visible, then tap it again.',
@@ -24,7 +24,10 @@ export class GuidedCapture {
     this.onUse = onUse; this.onCancel = onCancel; this.onComplete = onComplete; this.capacity = capacity; this.epoch = 0; this.pending = new Map(); this.requestId = 0; this.urls = [];
     $('guidedStart').addEventListener('click', () => this.start());
     $('guidedClose').addEventListener('click', () => this.cancel());
-    $('guidedDialog').addEventListener('cancel', event => { event.preventDefault(); this.cancel(); });
+    $('guidedDialog').addEventListener('cancel', event => {
+      if (event.target !== $('guidedDialog')) return;
+      event.preventDefault(); this.cancel();
+    });
     $('guidedTarget').addEventListener('click', event => this.select(event));
     $('guidedBlocked').addEventListener('click', () => this.unlock('Wait for a clear view, then tap the same object again.'));
     $('guidedNext').addEventListener('click', () => this.next());
@@ -38,6 +41,7 @@ export class GuidedCapture {
     $('guidedError')?.remove();
     $('guidedProfile').value = PLANS[profile] ? profile : 'multiview';
     $('guidedSetup').hidden = false; $('guidedLive').hidden = true; $('guidedReview').hidden = true;
+    $('guidedFallback').hidden = false;
     $('guidedStart').disabled = false; $('guidedStart').textContent = 'Start camera';
     $('guidedDialog').showModal();
   }
@@ -49,7 +53,7 @@ export class GuidedCapture {
         this.pending.delete(id); this.worker?.terminate(); this.worker = null;
         const error = new Error('Analysis took too long. Retry the camera or choose photos.'); error.name = 'TimeoutError'; reject(error);
       }, timeout);
-      this.pending.set(id, { resolve, reject, timer });
+      this.pending.set(id, { resolve, reject, timer, type });
       try { this.worker.postMessage({ type, id, ...data }, transfer); }
       catch { clearTimeout(timer); this.pending.delete(id); reject(new Error('Camera analysis is unavailable in this browser.')); }
     });
@@ -65,14 +69,16 @@ export class GuidedCapture {
     this.say('Starting camera and loading the segmentation model…'); this.update();
     try {
       if (!window.isSecureContext || !navigator.mediaDevices?.getUserMedia || !window.Worker || !window.OffscreenCanvas || !window.createImageBitmap || !globalThis.crypto?.randomUUID || !globalThis.crypto?.subtle) {
-        throw new Error('Guided capture needs a supported browser and HTTPS. Open this page in Safari or Chrome, or use Take a photo.');
+        throw new Error('Guided capture needs a supported browser and HTTPS. Use Take a photo or Choose photos.');
       }
       this.sessionId = crypto.randomUUID();
       this.worker = new Worker(new URL('./guided-segmenter.worker.mjs', import.meta.url), { type: 'module' });
       this.worker.onmessage = ({ data }) => {
         const pending = this.pending.get(data.id); if (!pending) return;
         clearTimeout(pending.timer); this.pending.delete(data.id);
-        if (data.type === 'error') pending.reject(new Error('Segmentation unavailable. Retry, or use Take a photo.'));
+        if (data.type === 'error') pending.reject(new Error(pending.type === 'segment'
+          ? 'The target could not be isolated. Tap it again or use Take a photo.'
+          : 'Segmentation unavailable. Retry, or use Take a photo.'));
         else pending.resolve(data);
       };
       this.worker.onerror = () => {
@@ -114,7 +120,7 @@ export class GuidedCapture {
     $('guidedFinish').disabled = entries.length === 0;
   }
   select(event) {
-    if (!this.running || this.processing) return;
+    if (!this.running) return;
     const video = $('guidedVideo'), rect = $('guidedStage').getBoundingClientRect();
     const scale = Math.min(rect.width / video.videoWidth, rect.height / video.videoHeight);
     const width = video.videoWidth * scale, height = video.videoHeight * scale;
@@ -122,20 +128,35 @@ export class GuidedCapture {
     const y = (event.clientY - rect.top - (rect.height - height) / 2) / height;
     if (x < 0 || x > 1 || y < 0 || y > 1) return;
     this.targetVersion = (this.targetVersion || 0) + 1; this.point = { x, y }; this.template = null; this.box = null; this.seed = null; this.referenceArea = null;
+    this.trackingMisses = 0;
+    // Bind the tap to the pixels the administrator actually selected, even if
+    // another analysis is finishing or the phone moves before the next tick.
+    this.selectedFrame = this.captureFrame();
+    $('guidedAnalyzed').hidden = true;
     this.say('Finding the selected object…');
+    if (!this.processing) void this.analyze(this.epoch);
   }
   unlock(message) {
     this.targetVersion = (this.targetVersion || 0) + 1; this.point = null; this.template = null; this.box = null; this.seed = null; this.referenceArea = null;
+    this.trackingMisses = 0;
+    this.selectedFrame = null;
     const canvas = $('guidedOverlay'); canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);
     $('guidedAnalyzed').hidden = true;
     this.say(message);
+  }
+  captureFrame() {
+    const video = $('guidedVideo');
+    const source = document.createElement('canvas'), scale = Math.min(1, 1600 / Math.max(video.videoWidth, video.videoHeight));
+    source.width = Math.round(video.videoWidth * scale); source.height = Math.round(video.videoHeight * scale);
+    source.getContext('2d').drawImage(video, 0, 0, source.width, source.height);
+    return source;
   }
   schedule(epoch) {
     if (!this.running || epoch !== this.epoch) return;
     this.timer = setTimeout(async () => {
       if (!this.running || epoch !== this.epoch) return;
       const video = $('guidedVideo');
-      if (this.point && video.readyState >= 2 && video.currentTime !== this.lastFrameTime) {
+      if (this.point && video.readyState >= 2 && (this.selectedFrame || video.currentTime !== this.lastFrameTime)) {
         this.lastFrameTime = video.currentTime;
         await this.analyze(epoch);
       }
@@ -148,10 +169,8 @@ export class GuidedCapture {
     const version = this.targetVersion, stepId = this.plan[this.step][0];
     const fresh = () => epoch === this.epoch && version === this.targetVersion && this.running;
     try {
-      const video = $('guidedVideo');
-      const source = document.createElement('canvas'), scale = Math.min(1, 1600 / Math.max(video.videoWidth, video.videoHeight));
-      source.width = Math.round(video.videoWidth * scale); source.height = Math.round(video.videoHeight * scale);
-      source.getContext('2d').drawImage(video, 0, 0, source.width, source.height);
+      const source = this.selectedFrame || this.captureFrame();
+      this.selectedFrame = null;
       const sample = document.createElement('canvas'), ratio = Math.min(1, 640 / Math.max(source.width, source.height));
       sample.width = Math.round(source.width * ratio); sample.height = Math.round(source.height * ratio);
       const context = sample.getContext('2d', { willReadFrequently: true }); context.drawImage(source, 0, 0, sample.width, sample.height);
@@ -159,7 +178,18 @@ export class GuidedCapture {
       let point = this.point;
       if (this.template) {
         const tracked = trackTarget(pixels, this.template, this.box);
-        if (!tracked.found) { this.unlock(MESSAGES.target_lost); return; }
+        if (!tracked.found) {
+          // Skip uncertain frames without throwing away a confirmed selection
+          // after one moment of handheld blur. Never segment at the old tap.
+          this.trackingMisses++;
+          if (this.trackingMisses <= 2) {
+            this.say('Hold still for a moment. Checking the selected object again…');
+            return;
+          }
+          this.unlock('The view changed too much to follow. Keep the object still in view and tap it, or use Take a photo.');
+          return;
+        }
+        this.trackingMisses = 0;
         point = { x: tracked.box[0] + this.seed.x * (tracked.box[2] - tracked.box[0]), y: tracked.box[1] + this.seed.y * (tracked.box[3] - tracked.box[1]) };
       }
       const bitmap = await createImageBitmap(sample);
@@ -183,7 +213,17 @@ export class GuidedCapture {
       const preview = new ReferenceShortlist(this.plan.map(([id]) => id));
       for (const entry of this.shortlist.entries()) preview.consider(entry, { targetConfirmed: true, occluded: false });
       const trial = preview.consider(candidate, { targetConfirmed: true, occluded: false });
-      if (!trial.accepted) { this.say(MESSAGES[trial.reason] || 'Check the target outline and hold still.'); this.update(); return; }
+      if (!trial.accepted) {
+        let message = MESSAGES[trial.reason] || 'Check the target outline and hold still.';
+        if (trial.reason === 'duplicate_view' || trial.reason === 'keep_previous') this.point = null;
+        else if (!this.template.usable) {
+          // A featureless/blurred target cannot safely be tracked into a new
+          // frame. Keep the actual quality guidance and offer explicit capture.
+          this.point = null;
+          message += ' Tap the object when the view is clearer, or use Take a photo.';
+        }
+        this.say(message); this.update(); return;
+      }
       const file = new File([await blobFrom(source, 'image/jpeg', .88)], 'guided-reference.jpg', { type: 'image/jpeg' });
       if (!fresh()) return;
       if (file.size > 5 * 1024 * 1024) throw new Error('Photo too large. Try a lower camera resolution.');
@@ -208,9 +248,14 @@ export class GuidedCapture {
         quality: { sharpness: quality.sharpness, clipped_fraction: quality.clippedFraction, target_fraction: quality.targetFraction },
         segmentation: { model: this.model.name, model_hash: this.model.sha256 },
       } }, { targetConfirmed: true, occluded: false });
-      this.say('Clear photo selected. Check the outline, then move to the next view or review photos.'); this.update();
+      // Keep the saved frame and its message stable while moving to the next
+      // view. A new tap can explicitly retry this view without losing the photo.
+      this.point = null;
+      this.say('Clear photo selected. Check the outline, then choose Next view or review photos. Tap again to retry this view.'); this.update();
     } catch (error) {
-      if (fresh()) {
+      // A timed-out RPC terminates the shared worker. Recover this session even
+      // if a newer tap invalidated that RPC's target selection.
+      if (fresh() || (error.name === 'TimeoutError' && epoch === this.epoch && this.running)) {
         this.unlock(error.message || 'Analysis failed. Tap the object again.');
         if (error.name === 'TimeoutError') {
           this.stopCamera(); $('guidedSetup').hidden = false; $('guidedLive').hidden = true;
@@ -238,6 +283,7 @@ export class GuidedCapture {
   }
   renderReview() {
     this.clearUrls(); $('guidedLive').hidden = true; $('guidedReview').hidden = false;
+    $('guidedFallback').hidden = true;
     const entries = this.shortlist.entries().filter(entry => entry.file); $('guidedPhotos').replaceChildren();
     for (const entry of entries) {
       const card = document.createElement('div'); card.className = 'guidedPhoto';
@@ -253,6 +299,9 @@ export class GuidedCapture {
     $('guidedUse').disabled = !entries.length;
     $('guidedGaps').textContent = `${entries.length} of ${this.plan.length} requested views captured. Check that the whole object is visible in each photo. You can add missing views later.`;
   }
+  selectedPhotos() {
+    return (this.shortlist?.entries() || []).filter(entry => entry.file && !this.removed.has(entry.stepId));
+  }
   async use() {
     const entries = this.shortlist.entries().filter(entry => entry.file && !this.removed.has(entry.stepId));
     if (!entries.length) return;
@@ -264,6 +313,7 @@ export class GuidedCapture {
   }
   stopCamera() {
     this.running = false; this.starting = false; this.epoch++; clearTimeout(this.timer);
+    this.selectedFrame = null;
     this.stream?.getTracks().forEach(track => track.stop()); this.stream = null;
     $('guidedVideo').pause(); $('guidedVideo').srcObject = null;
     this.worker?.terminate(); this.worker = null;

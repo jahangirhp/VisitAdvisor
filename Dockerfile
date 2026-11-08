@@ -10,13 +10,18 @@ WORKDIR /app
 ARG EXTRAS=camera-server
 ARG TORCH_INDEX_URL=
 ARG CONSTRAINTS=
+ARG PREPARE_SERVER_CAPTURE=0
 
 COPY pyproject.toml constraints-visual.txt ./
 COPY app ./app
 COPY scripts/prepare_guided_capture.py ./scripts/prepare_guided_capture.py
+COPY scripts/prepare_server_capture.py ./scripts/prepare_server_capture.py
 RUN python scripts/prepare_guided_capture.py
 RUN pip install --no-cache-dir ${TORCH_INDEX_URL:+--extra-index-url $TORCH_INDEX_URL} \
         ${CONSTRAINTS:+-c $CONSTRAINTS} ".[${EXTRAS}]" \
+    && if [ "$PREPARE_SERVER_CAPTURE" = "1" ]; then \
+         python -m scripts.prepare_server_capture --destination /app/server-capture; \
+       fi \
     && groupadd --system visitadvisor \
     && useradd --system --gid visitadvisor --no-create-home visitadvisor
 

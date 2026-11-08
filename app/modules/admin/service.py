@@ -12,7 +12,7 @@ from pymongo.errors import DuplicateKeyError
 
 from app.core.domain import validate_id
 from app.core.exceptions import ApplicationError
-from app.modules.admin.capture import prepare_foreground_mask
+from app.modules.admin.capture import prepare_foreground_mask, validate_capture_source
 from app.modules.live_camera.pipeline import profile
 from app.modules.recognition.images import prepare_image
 from app.modules.sources.models import SourceCreate
@@ -217,6 +217,7 @@ class PhotoService:
         foreground_mask: bytes | None = None,
         mask_content_type: str | None = None,
     ) -> str:
+        validate_capture_source(metadata, data, foreground_mask)
         obj = await self.object(location_id, object_id)
         sources = await self.visual.sources(obj) if obj.get("source_ids") else []
         normalized = await asyncio.to_thread(prepare_image, data, content_type)
@@ -303,7 +304,12 @@ class PhotoService:
         return str(result.inserted_id)
 
     async def publish(
-        self, location_id: str, object_id: str, encoder: ImageEncoder
+        self,
+        location_id: str,
+        object_id: str,
+        encoder: ImageEncoder,
+        *,
+        allow_existing: bool = False,
     ) -> dict[str, Any]:
         obj = await self.object(location_id, object_id)
         sources = await self.visual.sources(obj) if obj.get("source_ids") else []
@@ -378,6 +384,13 @@ class PhotoService:
                     "derived": derived,
                 }
             )
+        if (
+            allow_existing
+            and previous
+            and views
+            and len(views) == len(previous.get("views", []))
+        ):
+            return {"set_id": previous["set_id"], "prepared": len(views)}
         if not views or len(views) == len((previous or {}).get("views", [])):
             raise ApplicationError(
                 "NO_PENDING_PHOTOS", "No new photos to prepare.", 409

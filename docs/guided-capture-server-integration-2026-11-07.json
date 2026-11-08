@@ -1,0 +1,155 @@
+{
+  "one_cpu": true,
+  "camera_warmed": true,
+  "dino_encoder_warmed": true,
+  "peak_combined_rss_kib": 1741452,
+  "frames": [
+    {
+      "id": "shiva-front",
+      "source_sha256": "7923e80bd4ceef9b679c26729edcb545a0f851efeceb89473fd834c6048c8035",
+      "size": [
+        960,
+        640
+      ],
+      "bytes": 135328,
+      "latency_ms": 5981.992676999653,
+      "inference_ms": 3634.1964899984305,
+      "candidates": 3
+    },
+    {
+      "id": "milkmaid",
+      "source_sha256": "e6e0538d2d3d43be87e9042605ee0196492467fe58e5d3a7dab67c9684c8133d",
+      "size": [
+        809,
+        917
+      ],
+      "bytes": 183984,
+      "latency_ms": 4198.948712000856,
+      "inference_ms": 4175.624520001293,
+      "candidates": 3
+    },
+    {
+      "id": "summer",
+      "source_sha256": "a8a65b30ffee9073b02801be0d7eb0bba4efcd706405e0f9a662436403e44d10",
+      "size": [
+        900,
+        1600
+      ],
+      "bytes": 510086,
+      "latency_ms": 4230.692942001042,
+      "inference_ms": 4208.296654000151,
+      "candidates": 3
+    }
+  ],
+  "version": "server-capture-integration-v1",
+  "date": "2026-11-07",
+  "model": "facebook/sam2.1-hiera-tiny",
+  "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+  "limitations": [
+    "Three diagnostic photos, not an accuracy benchmark.",
+    "Local single-core affinity and RSS sampling, not hosted cgroup memory.",
+    "Candidate masks require human correction/review; painting point prompts still select a depicted person.",
+    "Browser profiles are emulated; physical iPhone acceptance remains open."
+  ],
+  "browser_http_checks": [
+    {
+      "browser": "chromium",
+      "candidates": 3,
+      "http_status": 200,
+      "elapsed_ms": 6318
+    },
+    {
+      "browser": "iphone-12-webkit",
+      "candidates": 3,
+      "http_status": 200,
+      "elapsed_ms": 7051
+    }
+  ],
+  "descriptor_dependency_check": {
+    "source": "tests/data/the-milkmaid.jpg",
+    "source_sha256": "ff31295c07ef25207ce7c012317d0aa1a0b1f5238da978b5cf13fc0dbcf9d393",
+    "baseline_and_updated_descriptor_sha256": "4d622628bf417676b3d7ef63fa592d7417e97b2049016b18c1506da4b94c96f3",
+    "equal": true,
+    "regions": true,
+    "scope": "One original-image regression; visual preprocessing and model unchanged."
+  },
+  "hosted_preview": {
+    "revision": "visitadvisor-api-server-b033d7e2a76d",
+    "image_digest": "sha256:99c2389d95ca58a9c9e14e5f27efcc8b60577f85cb28d90e2ec0ad93dddf0cea",
+    "cpu": 1,
+    "memory": "3Gi",
+    "health": "ok",
+    "database": "connected",
+    "public_asset_hashes_verified": true,
+    "capture_regression_cases_passed": 4,
+    "actual_model_checks": [
+      {
+        "browser": "chromium",
+        "status": 200,
+        "candidates": 3,
+        "elapsed_ms": 16927
+      },
+      {
+        "browser": "iphone-12-webkit",
+        "status": 200,
+        "candidates": 3,
+        "elapsed_ms": 8279
+      }
+    ],
+    "review_selection": "full-frame painting correction",
+    "production_catalog_writes": false
+  },
+  "production": {
+    "revision": "visitadvisor-api-server-b033d7e2a76d",
+    "traffic_percent": 100,
+    "health": "ok",
+    "database": "connected",
+    "analysis_status": 200,
+    "candidates": 3,
+    "analysis_latency_ms": 7497,
+    "production_catalog_writes": false
+  },
+  "startup_deadline_followup": {
+    "baseline_production_status": 504,
+    "baseline_total_deadline_seconds": 20,
+    "startup_deadline_seconds": 45,
+    "inference_deadline_seconds": 20,
+    "browser_deadline_seconds": 80,
+    "preview_revision": "visitadvisor-api-startup-2b90c835edbe",
+    "requests": [
+      {
+        "attempt": 0,
+        "status": 200,
+        "latency_ms": 35578,
+        "candidates": 3,
+        "inference_ms": 10453.040634999994
+      },
+      {
+        "attempt": 1,
+        "status": 200,
+        "latency_ms": 8053,
+        "candidates": 3,
+        "inference_ms": 7518.863105999998
+      }
+    ],
+    "phase_timings_seconds": {
+      "spawn_and_artifact_verification": 6.56,
+      "dependency_import": 17.46,
+      "model_load_after_dependencies": 0.3
+    },
+    "images_logged": false,
+    "production_catalog_writes": false,
+    "production": {
+      "revision": "visitadvisor-api-startup-2b90c835edbe",
+      "traffic_percent": 100,
+      "status": 200,
+      "candidates": 3,
+      "latency_ms": 31030,
+      "health": "ok",
+      "database": "connected",
+      "asset_hashes_verified": true,
+      "cache_policy_verified": true,
+      "catalog_records_created": false
+    }
+  }
+}

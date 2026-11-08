@@ -965,3 +965,240 @@ def test_manual_photos_have_no_mask_or_capture_metadata(setup):
         client.get(PATH + f"/photos/{photo_id}/mask", headers=HEADERS).status_code
         == 404
     )
+
+
+def reviewed_capture(method="manual-box"):
+    capture = deepcopy(CAPTURE_METADATA)
+    capture.update(
+        version="guided-capture-v2",
+        selection={
+            "method": method,
+            "reviewed": True,
+            "source_sha256": hashlib.sha256(jpeg()).hexdigest(),
+        },
+    )
+    capture.pop("segmentation")
+    if method == "full-frame":
+        capture["target_box"] = [0, 0, 1, 1]
+    else:
+        capture["selection"]["mask_sha256"] = hashlib.sha256(png_mask()).hexdigest()
+    return capture
+
+
+@pytest.mark.parametrize("method", ["manual-box", "full-frame", "server-mask"])
+def test_reviewed_selection_preserves_source_and_truthful_derivative_provenance(
+    setup, method
+):
+    client, service, db, *_ = setup
+    capture = reviewed_capture(method)
+    if method == "server-mask":
+        identity = {"model": "test-sam2", "revision": "pinned-revision"}
+        capture["segmentation"] = identity
+        capture["analysis"] = {
+            **identity,
+            "source_sha256": capture["selection"]["source_sha256"],
+            "prompt_point": [0.4, 0.5],
+            "prompt_box": [0.1, 0.2, 0.8, 0.9],
+        }
+        capture["selection"].update(
+            candidate_id="mask-2",
+            mask_sha256=hashlib.sha256(png_mask()).hexdigest(),
+        )
+    response = (
+        upload(client, capture_metadata=json.dumps(capture))
+        if method == "full-frame"
+        else upload_mask(client, png_mask(), capture)
+    )
+    assert response.status_code == 201, response.text
+    photo = db["admin_reference_photos"].rows[0]
+    assert photo["data"] == jpeg()
+    assert photo["capture_metadata"] == capture
+    inputs = []
+    encoder = SimpleNamespace(
+        model="local-model",
+        preprocessing="local-preprocess",
+        describe=lambda image, **_kw: inputs.append(image) or {"regions": []},
+    )
+    service.visual.publish = AsyncMock()
+    asyncio.run(service.publish(LOCATION, OBJECT, encoder))
+    assert inputs == [prepare_image(photo["data"], "image/jpeg")]
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"reviewed": False},
+        {"source_sha256": "b" * 64},
+        {"mask_sha256": "c" * 64},
+        {"candidate_id": "invented-model-candidate"},
+    ],
+)
+def test_reviewed_selection_rejects_unreviewed_or_mismatched_derivatives(setup, change):
+    client, _, db, *_ = setup
+    capture = reviewed_capture()
+    capture["selection"].update(change)
+    response = upload_mask(client, png_mask(), capture)
+    assert response.status_code == 422, response.text
+    assert response.json()["error"]["code"] == "INVALID_CAPTURE_METADATA"
+    assert db["admin_reference_photos"].rows == []
+
+
+def test_reviewed_box_cannot_be_uploaded_without_its_mask(setup):
+    client, _, db, *_ = setup
+    response = upload(client, capture_metadata=json.dumps(reviewed_capture()))
+    assert response.status_code == 422
+    assert db["admin_reference_photos"].rows == []
+
+
+def quick_capture(status="pending"):
+    capture = reviewed_capture("full-frame")
+    capture.update(
+        version="guided-capture-v3",
+        quality_region="full-frame",
+        detection_status=status,
+    )
+    capture.pop("requested_view")
+    capture["selection"]["reviewed"] = False
+    if status == "suggested":
+        identity = {
+            "model": "test-sam2",
+            "revision": "pinned-revision",
+            "model_hash": "a" * 64,
+        }
+        capture["segmentation"] = identity
+        capture["analysis"] = {
+            **identity,
+            "source_sha256": capture["selection"]["source_sha256"],
+            "prompt_point": [0.5, 0.5],
+        }
+        capture["target_box"] = [0.1, 0.2, 0.8, 0.9]
+        capture["selection"].update(
+            method="server-suggestion",
+            candidate_id="mask-0",
+            mask_sha256=hashlib.sha256(png_mask()).hexdigest(),
+        )
+    return capture
+
+
+@pytest.mark.parametrize("status", ["pending", "suggested", "unavailable", "skipped"])
+def test_quick_capture_keeps_original_and_leaves_angle_unverified(setup, status):
+    client, service, db, *_ = setup
+    capture = quick_capture(status)
+    if status == "suggested":
+        response = upload_mask(client, png_mask(), capture)
+    else:
+        response = upload(
+            client, viewpoint="unknown", capture_metadata=json.dumps(capture)
+        )
+    assert response.status_code == 201, response.text
+    photo = db["admin_reference_photos"].rows[0]
+    assert photo["data"] == jpeg()
+    assert photo["capture_metadata"] == capture
+    assert photo["capture_metadata"]["selection"]["reviewed"] is False
+    inputs = []
+    encoder = SimpleNamespace(
+        model="local-model",
+        preprocessing="local-preprocess",
+        describe=lambda image, **_kw: inputs.append(image) or {"regions": []},
+    )
+    service.visual.publish = AsyncMock()
+    asyncio.run(service.publish(LOCATION, OBJECT, encoder))
+    reference = service.visual.publish.await_args.args[0]["views"][0]["reference"]
+    assert reference["viewpoint"] is None
+    assert reference["evidence"]["capture_metadata"] == capture
+    assert inputs == [prepare_image(photo["data"], "image/jpeg")]
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"source_sha256": "b" * 64},
+        {"mask_sha256": "c" * 64},
+        {"candidate_id": None},
+    ],
+)
+def test_quick_suggestion_rejects_missing_or_mismatched_provenance(setup, change):
+    client, _, db, *_ = setup
+    capture = quick_capture("suggested")
+    capture["selection"].update(change)
+    response = upload_mask(client, png_mask(), capture)
+    assert response.status_code == 422, response.text
+    assert db["admin_reference_photos"].rows == []
+
+
+@pytest.mark.parametrize("missing", ["model_hash", "revision"])
+def test_quick_suggestion_requires_pinned_model_identity(setup, missing):
+    client, _, db, *_ = setup
+    capture = quick_capture("suggested")
+    capture["segmentation"].pop(missing)
+    capture["analysis"].pop(missing)
+    response = upload_mask(client, png_mask(), capture)
+    assert response.status_code == 422
+    assert db["admin_reference_photos"].rows == []
+
+
+def test_quick_full_frame_still_checks_source_hash(setup):
+    client, _, db, *_ = setup
+    capture = quick_capture()
+    capture["selection"]["source_sha256"] = "b" * 64
+    response = upload(client, capture_metadata=json.dumps(capture))
+    assert response.status_code == 422
+    assert db["admin_reference_photos"].rows == []
+
+
+def test_collection_save_embeds_every_photo_and_retry_reuses_the_published_set(setup):
+    client, service, db, *_ = setup
+    for color in ("red", "blue", "green", "yellow"):
+        assert upload(client, jpeg(color)).status_code == 201
+    inputs = []
+    client.app.state.admin_encoder = SimpleNamespace(
+        model="local-model",
+        preprocessing="local-preprocess",
+        describe=lambda image, **kwargs: (
+            inputs.append(image) or {"regions": [{"embedding": [1.0] + [0.0] * 383}]}
+        ),
+    )
+
+    async def publish(record, previous):
+        db["visual_references"].rows = [deepcopy(record)]
+
+    service.visual.publish = AsyncMock(side_effect=publish)
+    assert client.post(PATH + "/save").status_code == 401
+    response = client.post(PATH + "/save", headers=HEADERS)
+    assert response.status_code == 200, response.text
+    assert response.json()["prepared"] == 4
+    assert len(inputs) == 4
+    assert {hashlib.sha256(image).hexdigest() for image in inputs} == {
+        p["normalized_sha256"] for p in db["admin_reference_photos"].rows
+    }
+    record = db["visual_references"].rows[0]
+    assert len(record["views"]) == record["vector_count"] == 4
+    assert client.get(PATH, headers=HEADERS).json()["pending"] == 0
+    retry = client.post(PATH + "/save", headers=HEADERS)
+    assert retry.json() == response.json()
+    assert len(inputs) == 4
+    assert service.visual.publish.await_count == 1
+    assert len(db["admin_reference_photos"].rows) == 4
+    # Preserve the old explicit API's no-pending response for existing clients.
+    assert client.post(PATH + "/prepare", headers=HEADERS).status_code == 409
+
+
+def test_collection_save_failure_keeps_photos_and_allows_retry_without_reupload(setup):
+    client, service, db, *_ = setup
+    assert upload(client).status_code == 201
+
+    def unavailable(*args, **kwargs):
+        raise VisualFailure("VISUAL_MODEL_UNAVAILABLE")
+
+    client.app.state.admin_encoder = SimpleNamespace(
+        model="local-model", preprocessing="local-preprocess", describe=unavailable
+    )
+    response = client.post(PATH + "/save", headers=HEADERS)
+    assert response.status_code == 503
+    assert response.json()["error"]["code"] == "MODEL_UNAVAILABLE"
+    assert len(db["admin_reference_photos"].rows) == 1
+    assert db["visual_references"].rows == []
+    client.app.state.admin_encoder.describe = lambda *args, **kwargs: {"regions": []}
+    service.visual.publish = AsyncMock()
+    assert client.post(PATH + "/save", headers=HEADERS).json()["prepared"] == 1
+    assert len(db["admin_reference_photos"].rows) == 1
