@@ -17,6 +17,8 @@ class Settings(BaseSettings):
     admin_token: SecretStr | None = None
     admin_planar_photo_target: int = Field(default=3, ge=1, le=4)
     admin_multiview_photo_target: int = Field(default=4, ge=2, le=4)
+    admin_capture_server_enabled: bool = False
+    admin_capture_model_directory: Path = Path(".local/server-capture")
 
     app_env: str = Field(default="development", min_length=1)
     app_host: str = Field(default="0.0.0.0", min_length=1)

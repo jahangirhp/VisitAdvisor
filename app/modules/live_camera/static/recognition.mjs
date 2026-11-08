@@ -114,7 +114,7 @@ export function validateCatalog(catalog, now = Date.now()) {
       !Number.isFinite(Date.parse(catalog.expires_at)) || Date.parse(catalog.expires_at) <= now ||
       !/^[a-f0-9]{64}$/.test(catalog.reference_version) ||
       !/^[a-f0-9]{24}$/.test(catalog.location?.id) ||
-      !Array.isArray(catalog.objects) || catalog.objects.length < 2 || catalog.objects.length > 12) fail();
+      !Array.isArray(catalog.objects) || catalog.objects.length < 1 || catalog.objects.length > 12) fail();
   const policy = catalog.policy;
   if (!policy || policy.calibrated !== false || policy.global_weight !== 0.75 ||
       !Number.isFinite(policy.candidate_floor) || policy.candidate_floor < 0.45 || policy.candidate_floor > 1 ||

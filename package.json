@@ -3,10 +3,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tests/camera/*.test.mjs",
+    "test": "node --test tests/camera/*.test.mjs tests/admin/*.test.mjs",
     "test:browser": "playwright test",
-    "camera:vendor": "node scripts/camera_vendor.mjs"
+    "test:admin": "playwright test -c playwright.admin.config.mjs",
+    "camera:vendor": "node scripts/camera_vendor.mjs",
+    "capture:assets": "python -m scripts.prepare_guided_capture"
   },
-  "dependencies": { "onnxruntime-web": "1.30.0" },
-  "devDependencies": { "@playwright/test": "1.63.0" }
+  "dependencies": {
+    "@mediapipe/tasks-vision": "1.2.2",
+    "onnxruntime-web": "1.30.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0"
+  }
 }

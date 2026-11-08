@@ -1,0 +1,34 @@
+{
+  "scope": "synthetic target-box oracle; no detection/segmentation model tested",
+  "fixtures": {
+    "sharp": {
+      "target_sharpness": 9989.166753263235,
+      "full_frame_sharpness": 774.1730284706475,
+      "decision": "selected"
+    },
+    "blurred_target": {
+      "target_sharpness": 1.2643035252229722,
+      "full_frame_sharpness": 0.4257999496094734,
+      "decision": "hold_steady"
+    },
+    "sharp_background": {
+      "target_sharpness": 1.2643035252229722,
+      "full_frame_sharpness": 4078.2184260408153,
+      "decision": "hold_steady"
+    }
+  },
+  "jpeg_fingerprint_distance": 2,
+  "quality_measurement_ms": {
+    "p50": 1.6973000019788742,
+    "p95": 2.0197450096020475,
+    "samples": 50,
+    "scope": "local host target-quality function only; no network/model"
+  },
+  "historical_photo_diagnostic": {
+    "path": "tests\\data\\the-milkmaid.jpg",
+    "sha256": "ff31295c07ef25207ce7c012317d0aa1a0b1f5238da978b5cf13fc0dbcf9d393",
+    "original_sharpness": 760.0929770345616,
+    "blurred_derivative_sharpness": 7.334196061753977,
+    "scope": "existing single image, not independent accuracy evidence"
+  }
+}

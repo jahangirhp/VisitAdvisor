@@ -4,14 +4,14 @@ from typing import Any
 from bson import ObjectId
 from pymongo.asynchronous.database import AsyncDatabase
 
-from app.modules.locations.models import Location, LocationCreate
+from app.modules.locations.models import Location, LocationData
 
 
 class LocationRepository:
     def __init__(self, database: AsyncDatabase[dict[str, Any]]) -> None:
         self.collection = database["locations"]
 
-    async def create(self, data: LocationCreate) -> Location:
+    async def create(self, data: LocationData) -> Location:
         now = datetime.now(UTC)
         now = now.replace(microsecond=(now.microsecond // 1000) * 1000)
         document = data.model_dump(mode="json")

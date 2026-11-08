@@ -2,22 +2,38 @@
 
 import asyncio
 import secrets
-from typing import Annotated, Any, cast
+from typing import Annotated, Any, Literal, cast
 
 from bson import ObjectId
 from fastapi import APIRouter, Depends, File, Form, Header, Query, Request, UploadFile
 from fastapi.responses import Response
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 from pymongo.asynchronous.database import AsyncDatabase
 
-from app.core.domain import validate_id
+from app.core.domain import NonBlank, validate_id
 from app.core.exceptions import ApplicationError
 from app.db.mongodb import get_database
+from app.modules.admin.capture import (
+    MAX_FOREGROUND_MASK_BYTES,
+    GuidedCaptureMetadata,
+    parse_capture_metadata,
+)
+from app.modules.admin.server_capture import (
+    AnalysisPrompt,
+    AnalysisResult,
+    CaptureAnalyzer,
+    failure,
+)
 from app.modules.admin.service import PhotoService
-from app.modules.locations.models import Location, LocationCreate
+from app.modules.locations.models import Location, LocationCreate, LocationData
 from app.modules.locations.repository import LocationRepository
 from app.modules.locations.service import LocationService
+from app.modules.objects.models import Object, ObjectCreate
+from app.modules.objects.repository import ObjectRepository
+from app.modules.objects.service import ObjectService
 from app.modules.recognition.images import MAX_IMAGE_BYTES
+from app.modules.sources.models import SourceCreate
+from app.modules.sources.repository import SourceRepository
 from app.modules.visual.features import DinoEncoder, ImageEncoder, VisualFailure
 
 
@@ -52,17 +68,59 @@ def service(request: Request, database: Database) -> PhotoService:
 Service = Annotated[PhotoService, Depends(service)]
 
 
+@router.post("/capture/analyze", response_model=AnalysisResult)
+async def analyze_capture(
+    request: Request, prompt: Annotated[AnalysisPrompt, Query()]
+) -> Response:
+    settings = request.app.state.settings
+    if not settings.admin_capture_server_enabled:
+        raise failure("DISABLED", "Server photo analysis is not enabled.", 503)
+    analyzer = getattr(request.app.state, "admin_capture_analyzer", None)
+    if analyzer is None:
+        analyzer = CaptureAnalyzer(settings.admin_capture_model_directory)
+        request.app.state.admin_capture_analyzer = analyzer
+    result = await analyzer.analyze(prompt, request)
+    return Response(
+        result.model_dump_json(),
+        media_type="application/json",
+        headers={"Cache-Control": "no-store", "X-Content-Type-Options": "nosniff"},
+    )
+
+
 class PhotoMetadata(BaseModel):
     viewpoint: str = Field(min_length=1, max_length=300)
     photographer: str = Field(min_length=1, max_length=200)
     capture_group: str = Field(min_length=1, max_length=200)
     rights: str = Field(min_length=1, max_length=1000)
     source_id: str
+    capture_metadata: GuidedCaptureMetadata | None = None
+
+
+class ObjectObservation(BaseModel):
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+    observer: str = Field(min_length=1, max_length=200)
+    reviewed: Literal[True] | None = None
+
+
+class AdminObjectCreate(ObjectCreate):
+    observation: ObjectObservation | None = None
+
+
+class AdminVenueCreate(BaseModel):
+    model_config = ConfigDict(extra="forbid", str_strip_whitespace=True)
+    name: NonBlank = Field(max_length=300)
 
 
 @router.post("/venues", status_code=201)
-async def create_venue(data: LocationCreate, database: Database) -> Location:
-    return await LocationService(LocationRepository(database)).create(data)
+async def create_venue(
+    data: LocationCreate | AdminVenueCreate, database: Database
+) -> Location:
+    repository = LocationRepository(database)
+    if isinstance(data, LocationCreate):
+        return await LocationService(repository).create(data)
+    return await repository.create(
+        LocationData(name=data.name, slug=f"venue-{ObjectId()}", type="other")
+    )
 
 
 @router.get("/venues")
@@ -93,6 +151,45 @@ async def objects(
     return await service.inventory(validate_id(location_id), offset, limit)
 
 
+@router.post("/venues/{location_id}/objects", status_code=201)
+async def create_object(
+    location_id: str, data: AdminObjectCreate, database: Database
+) -> Object:
+    locations = LocationService(LocationRepository(database))
+    sources = SourceRepository(database)
+    catalog_data = ObjectCreate.model_validate(data.model_dump(exclude={"observation"}))
+    # A manual observation is the operator's assertion, never an official museum
+    # or generated source. Existing catalog validation still checks every link.
+    location = await locations.get(location_id)
+    if data.observation is not None:
+        ids = list({validate_id(value) for value in catalog_data.source_ids})
+        if ids and await sources.count_for_location(ids, location.id) != len(ids):
+            raise ApplicationError(
+                "INVALID_SOURCE_REFERENCE", "Sources must belong to this venue.", 422
+            )
+        observer = data.observation.observer.strip()
+        if not observer:
+            raise ApplicationError("REVIEW_REQUIRED", "Enter your name.", 422)
+        observation = await sources.create(
+            SourceCreate(
+                title=(
+                    f"On-site identification: {data.name}"
+                    if data.observation.reviewed
+                    else f"Admin object entry: {data.name}"
+                ),
+                type="manual",
+                publisher=observer,
+            ),
+            location.id,
+        )
+        catalog_data.source_ids = [*ids, observation.id]
+    return await ObjectService(
+        ObjectRepository(database),
+        locations,
+        sources,
+    ).create(location.id, catalog_data)
+
+
 @router.get("/venues/{location_id}/objects/{object_id}")
 async def detail(location_id: str, object_id: str, service: Service) -> dict[str, Any]:
     return await service.detail(validate_id(location_id), validate_id(object_id))
@@ -105,20 +202,22 @@ async def upload(
     service: Service,
     image: Annotated[UploadFile, File()],
     viewpoint: Annotated[str, Form(min_length=1, max_length=300)],
-    photographer: Annotated[str, Form(min_length=1, max_length=200)],
     capture_group: Annotated[str, Form(min_length=1, max_length=200)],
     rights: Annotated[str, Form(min_length=1, max_length=1000)],
-    source_id: Annotated[str, Form()],
-    reviewed: Annotated[bool, Form()],
+    photographer: Annotated[str, Form(min_length=1, max_length=200)] = "Not supplied",
+    reviewed: Annotated[bool | None, Form()] = None,
+    source_id: Annotated[str, Form()] = "",
+    capture_metadata: Annotated[str | None, Form(max_length=32768)] = None,
+    foreground_mask: Annotated[UploadFile | None, File()] = None,
 ) -> dict[str, str]:
     try:
-        if not reviewed or any(
+        if reviewed is False or any(
             not value.strip()
             for value in (viewpoint, photographer, capture_group, rights)
         ):
             raise ApplicationError(
                 "REVIEW_REQUIRED",
-                "Confirm object identity and permission, and complete photo details.",
+                "Complete the photo details or retry the upload.",
                 422,
             )
         data = await image.read(MAX_IMAGE_BYTES + 1)
@@ -127,18 +226,29 @@ async def upload(
             photographer=photographer.strip(),
             capture_group=capture_group.strip(),
             rights=rights.strip(),
-            source_id=validate_id(source_id),
+            source_id=validate_id(source_id) if source_id else "",
+            capture_metadata=parse_capture_metadata(capture_metadata),
         )
         photo_id = await service.upload(
             validate_id(location_id),
             validate_id(object_id),
             data,
             image.content_type,
-            metadata.model_dump(),
+            metadata.model_dump(mode="json", exclude_none=True),
+            foreground_mask=(
+                await foreground_mask.read(MAX_FOREGROUND_MASK_BYTES + 1)
+                if foreground_mask is not None
+                else None
+            ),
+            mask_content_type=(
+                foreground_mask.content_type if foreground_mask is not None else None
+            ),
         )
         return {"id": photo_id, "status": "saved_for_preparation"}
     finally:
         await image.close()
+        if foreground_mask is not None:
+            await foreground_mask.close()
 
 
 @router.get("/venues/{location_id}/objects/{object_id}/photos/{photo_id}")
@@ -163,6 +273,27 @@ async def photo(
     return Response(
         image,
         media_type="image/jpeg",
+        headers={"Cache-Control": "no-store", "X-Content-Type-Options": "nosniff"},
+    )
+
+
+@router.get("/venues/{location_id}/objects/{object_id}/photos/{photo_id}/mask")
+async def foreground_mask(
+    location_id: str, object_id: str, photo_id: str, service: Service
+) -> Response:
+    row = await service.photos.find_one(
+        {
+            "_id": ObjectId(validate_id(photo_id)),
+            "location_id": validate_id(location_id),
+            "object_id": validate_id(object_id),
+        },
+        {"foreground_mask_data": 1},
+    )
+    if row is None or not row.get("foreground_mask_data"):
+        raise ApplicationError("MASK_NOT_FOUND", "Foreground mask not found.", 404)
+    return Response(
+        bytes(row["foreground_mask_data"]),
+        media_type="image/png",
         headers={"Cache-Control": "no-store", "X-Content-Type-Options": "nosniff"},
     )
 
@@ -204,6 +335,7 @@ async def remove_photo(
         return Response(status_code=204)
 
 
+@router.post("/venues/{location_id}/objects/{object_id}/save")
 @router.post("/venues/{location_id}/objects/{object_id}/prepare")
 async def prepare(
     location_id: str, object_id: str, request: Request, service: Service
@@ -224,6 +356,7 @@ async def prepare(
                 validate_id(location_id),
                 validate_id(object_id),
                 cast(ImageEncoder, encoder),
+                allow_existing=request.url.path.endswith("/save"),
             )
         except VisualFailure:
             raise ApplicationError(

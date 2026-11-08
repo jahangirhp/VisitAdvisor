@@ -12,8 +12,11 @@ from pymongo.errors import DuplicateKeyError
 
 from app.core.domain import validate_id
 from app.core.exceptions import ApplicationError
+from app.modules.admin.capture import prepare_foreground_mask, validate_capture_source
 from app.modules.live_camera.pipeline import profile
 from app.modules.recognition.images import prepare_image
+from app.modules.sources.models import SourceCreate
+from app.modules.sources.repository import SourceRepository
 from app.modules.visual.features import ImageEncoder, VisualFailure, digest
 from app.modules.visual.references import MAX_VIEWS
 from app.modules.visual.repository import VisualRepository, evidence_hash
@@ -26,6 +29,8 @@ PHOTO_FIELDS = {
         "viewpoint",
         "photographer",
         "capture_group",
+        "capture_metadata",
+        "foreground_mask",
         "rights",
         "source_id",
         "sha256",
@@ -207,15 +212,55 @@ class PhotoService:
         object_id: str,
         data: bytes,
         content_type: str | None,
-        metadata: dict[str, str],
+        metadata: dict[str, Any],
+        *,
+        foreground_mask: bytes | None = None,
+        mask_content_type: str | None = None,
     ) -> str:
+        validate_capture_source(metadata, data, foreground_mask)
         obj = await self.object(location_id, object_id)
         sources = await self.visual.sources(obj) if obj.get("source_ids") else []
+        normalized = await asyncio.to_thread(prepare_image, data, content_type)
+        mask_fields: dict[str, Any] = {}
+        if foreground_mask is not None:
+            if not metadata.get("capture_metadata"):
+                raise ApplicationError(
+                    "INVALID_CAPTURE_METADATA",
+                    "A foreground mask requires capture details.",
+                    422,
+                )
+            mask_data, mask_metadata = await asyncio.to_thread(
+                prepare_foreground_mask, foreground_mask, mask_content_type, normalized
+            )
+            mask_fields = {
+                "foreground_mask": mask_metadata,
+                "foreground_mask_data": mask_data,
+            }
+        if not metadata["source_id"]:
+            if sources:
+                metadata["source_id"] = str(sources[0]["_id"])
+            else:
+                # Record the test association explicitly, without claiming official
+                # evidence or inventing photographer/permission information.
+                source = await SourceRepository(self.db).create(
+                    SourceCreate(
+                        title=f"Admin test photo association: {obj['name']}",
+                        type="manual",
+                        publisher="Admin test upload",
+                    ),
+                    location_id,
+                )
+                await self.db["objects"].update_one(
+                    {"_id": obj["_id"], "location_id": location_id},
+                    {"$addToSet": {"source_ids": source.id}},
+                )
+                metadata["source_id"] = source.id
+                obj = await self.object(location_id, object_id)
+                sources = await self.visual.sources(obj)
         if metadata["source_id"] not in {str(s["_id"]) for s in sources}:
             raise ApplicationError(
                 "SOURCE_MISMATCH", "Select this object's source.", 422
             )
-        normalized = await asyncio.to_thread(prepare_image, data, content_type)
         sha = hashlib.sha256(data).hexdigest()
         clean_sha = hashlib.sha256(normalized).hexdigest()
         details = await self.detail(location_id, object_id)
@@ -244,6 +289,7 @@ class PhotoService:
                     "object_id": object_id,
                     "slot": slot,
                     **metadata,
+                    **mask_fields,
                     "sha256": sha,
                     "normalized_sha256": clean_sha,
                     "data": data,
@@ -258,7 +304,12 @@ class PhotoService:
         return str(result.inserted_id)
 
     async def publish(
-        self, location_id: str, object_id: str, encoder: ImageEncoder
+        self,
+        location_id: str,
+        object_id: str,
+        encoder: ImageEncoder,
+        *,
+        allow_existing: bool = False,
     ) -> dict[str, Any]:
         obj = await self.object(location_id, object_id)
         sources = await self.visual.sources(obj) if obj.get("source_ids") else []
@@ -297,10 +348,16 @@ class PhotoService:
                 raise ApplicationError(
                     "PHOTO_LIMIT", "Publishing would exceed four reference views.", 409
                 )
-            reference = {
+            capture_metadata = photo.get("capture_metadata")
+            reference: dict[str, Any] = {
                 "source_ids": [photo["source_id"]],
                 "image_url": f"admin-upload:{photo['_id']}",
-                "viewpoint": photo["viewpoint"],
+                "viewpoint": (
+                    None
+                    if capture_metadata
+                    and not capture_metadata.get("viewpoint_verified")
+                    else photo["viewpoint"]
+                ),
                 "rights_status": "recorded",
                 "evidence": {
                     "upload_id": str(photo["_id"]),
@@ -310,6 +367,10 @@ class PhotoService:
                     },
                 },
             }
+            if capture_metadata:
+                reference["evidence"]["capture_metadata"] = capture_metadata
+            if photo.get("foreground_mask"):
+                reference["evidence"]["foreground_mask"] = photo["foreground_mask"]
             image = await asyncio.to_thread(
                 prepare_image, bytes(photo["data"]), photo["content_type"]
             )
@@ -323,6 +384,13 @@ class PhotoService:
                     "derived": derived,
                 }
             )
+        if (
+            allow_existing
+            and previous
+            and views
+            and len(views) == len(previous.get("views", []))
+        ):
+            return {"set_id": previous["set_id"], "prepared": len(views)}
         if not views or len(views) == len((previous or {}).get("views", [])):
             raise ApplicationError(
                 "NO_PENDING_PHOTOS", "No new photos to prepare.", 409

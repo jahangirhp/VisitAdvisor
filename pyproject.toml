@@ -23,6 +23,7 @@ dev = ["pytest>=8,<10", "ruff>=0.9,<1", "mypy>=1.13,<2"]
 visual = ["torch>=2.6,<3", "transformers>=4.57,<5", "opencv-python-headless>=4.10,<5"]
 camera-server = ["onnxruntime>=1.20,<2", "numpy>=2,<3", "opencv-python-headless>=4.10,<5"]
 camera = ["onnx>=1.17,<2", "onnxruntime>=1.20,<2"]
+capture-server = ["torch>=2.6,<3", "torchvision>=0.21,<1", "transformers>=4.57,<5"]
 
 [tool.setuptools.package-data]
 "app.modules.live_camera" = ["static/*"]

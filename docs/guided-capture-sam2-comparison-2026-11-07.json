@@ -1,0 +1,413 @@
+{
+  "model": "facebook/sam2.1-hiera-tiny",
+  "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+  "transformer_version": "4.57.6",
+  "torch_version": "2.14.0+cpu",
+  "device": "cpu",
+  "dtype": "torch.float32",
+  "threads": 4,
+  "load_seconds": 173.80174085799808,
+  "rss_after_load_kib": 432556,
+  "parameter_count": 31440721,
+  "internal_input_size": {
+    "height": 1024,
+    "width": 1024
+  },
+  "frames": [
+    {
+      "id": "shiva-front",
+      "source": ".local/3d-object-pilot/images/candidate-57997345.jpg",
+      "source_sha256": "e9851a47e18d6ca001cd07d02fc994a4b9315a8155c583c57cd7c559e389f3a7",
+      "size": [
+        640,
+        427
+      ],
+      "point": [
+        0.4,
+        0.4
+      ],
+      "preprocess_ms": 20.789109999896027,
+      "forward_ms": [
+        1137.3403539982974,
+        1108.308525999746
+      ],
+      "postprocess_ms": 0.5221350002102554,
+      "peak_rss_kib": 1091820,
+      "highest_score_index": 2,
+      "candidates": [
+        {
+          "index": 0,
+          "predicted_iou": 0.17069675028324127,
+          "foreground_fraction": 0.14715676229508196,
+          "seed_foreground": true,
+          "bbox": [
+            0.1375,
+            0.0468384074941452,
+            0.615625,
+            0.9508196721311475
+          ]
+        },
+        {
+          "index": 1,
+          "predicted_iou": 0.19603022933006287,
+          "foreground_fraction": 0.004797277517564403,
+          "seed_foreground": true,
+          "bbox": [
+            0.359375,
+            0.22950819672131148,
+            0.4390625,
+            0.639344262295082
+          ]
+        },
+        {
+          "index": 2,
+          "predicted_iou": 0.4259059727191925,
+          "foreground_fraction": 0.0265259074941452,
+          "seed_foreground": true,
+          "bbox": [
+            0.2625,
+            0.12646370023419204,
+            0.50625,
+            0.7049180327868853
+          ]
+        }
+      ]
+    },
+    {
+      "id": "shiva-side",
+      "source": ".local/3d-object-pilot/images/candidate-143912474.jpg",
+      "source_sha256": "84308e0699e2f0bc790d78d14042d95fc29359caff4bf5030b57360f515d0bba",
+      "size": [
+        640,
+        416
+      ],
+      "point": [
+        0.12,
+        0.47
+      ],
+      "preprocess_ms": 4.842749000090407,
+      "forward_ms": [
+        1113.8286599998537,
+        1263.6797730010585
+      ],
+      "postprocess_ms": 0.7337189999816474,
+      "peak_rss_kib": 1091972,
+      "highest_score_index": 2,
+      "candidates": [
+        {
+          "index": 0,
+          "predicted_iou": 0.4608209729194641,
+          "foreground_fraction": 0.03429987980769231,
+          "seed_foreground": true,
+          "bbox": [
+            0.0640625,
+            0.21875,
+            0.2140625,
+            0.7427884615384616
+          ]
+        },
+        {
+          "index": 1,
+          "predicted_iou": 0.2731964588165283,
+          "foreground_fraction": 0.006832181490384615,
+          "seed_foreground": true,
+          "bbox": [
+            0.0875,
+            0.40865384615384615,
+            0.19375,
+            0.65625
+          ]
+        },
+        {
+          "index": 2,
+          "predicted_iou": 0.4672141671180725,
+          "foreground_fraction": 0.012800480769230769,
+          "seed_foreground": true,
+          "bbox": [
+            0.0875,
+            0.40384615384615385,
+            0.2109375,
+            0.7235576923076923
+          ]
+        }
+      ]
+    },
+    {
+      "id": "milkmaid-artwork",
+      "source": "tests/data/the-milkmaid.jpg",
+      "source_sha256": "ff31295c07ef25207ce7c012317d0aa1a0b1f5238da978b5cf13fc0dbcf9d393",
+      "size": [
+        565,
+        640
+      ],
+      "point": [
+        0.51,
+        0.46
+      ],
+      "preprocess_ms": 5.2439350001805,
+      "forward_ms": [
+        1584.1205679971608,
+        1640.5506959999911
+      ],
+      "postprocess_ms": 0.9614689988666214,
+      "peak_rss_kib": 1100372,
+      "highest_score_index": 2,
+      "candidates": [
+        {
+          "index": 0,
+          "predicted_iou": 0.30695363879203796,
+          "foreground_fraction": 0.18280143805309734,
+          "seed_foreground": true,
+          "bbox": [
+            0.2938053097345133,
+            0.1546875,
+            0.7486725663716814,
+            0.990625
+          ]
+        },
+        {
+          "index": 1,
+          "predicted_iou": 0.668310284614563,
+          "foreground_fraction": 0.0426216814159292,
+          "seed_foreground": true,
+          "bbox": [
+            0.3929203539823009,
+            0.3,
+            0.7327433628318584,
+            0.525
+          ]
+        },
+        {
+          "index": 2,
+          "predicted_iou": 0.7393930554389954,
+          "foreground_fraction": 0.05356194690265487,
+          "seed_foreground": true,
+          "bbox": [
+            0.38761061946902653,
+            0.18125,
+            0.7327433628318584,
+            0.5609375
+          ]
+        }
+      ]
+    },
+    {
+      "id": "summer-smooth",
+      "source": ".local/3d-object-pilot/images/candidate-72938910.jpg",
+      "source_sha256": "670d28657213673c6e1c98de2b1a706d7ae6cf6694b69d5ae70f1beabdbf0d4c",
+      "size": [
+        360,
+        640
+      ],
+      "point": [
+        0.43,
+        0.3
+      ],
+      "preprocess_ms": 6.843713999842294,
+      "forward_ms": [
+        1650.53224499934,
+        1647.3639600008028
+      ],
+      "postprocess_ms": 0.5752079996454995,
+      "peak_rss_kib": 1116664,
+      "highest_score_index": 0,
+      "candidates": [
+        {
+          "index": 0,
+          "predicted_iou": 0.9457629323005676,
+          "foreground_fraction": 0.11403645833333333,
+          "seed_foreground": true,
+          "bbox": [
+            0.25277777777777777,
+            0.0515625,
+            0.5833333333333334,
+            0.58125
+          ]
+        },
+        {
+          "index": 1,
+          "predicted_iou": 0.31170809268951416,
+          "foreground_fraction": 0.043155381944444446,
+          "seed_foreground": true,
+          "bbox": [
+            0.30277777777777776,
+            0.134375,
+            0.5805555555555556,
+            0.5421875
+          ]
+        },
+        {
+          "index": 2,
+          "predicted_iou": 0.8920483589172363,
+          "foreground_fraction": 0.11019097222222222,
+          "seed_foreground": true,
+          "bbox": [
+            0.25277777777777777,
+            0.0515625,
+            0.5833333333333334,
+            0.578125
+          ]
+        }
+      ]
+    }
+  ],
+  "scope": "Local four-source diagnostic, all candidate masks retained; no human-mask IoU or physical-phone acceptance.",
+  "weights_validation_and_one_thread": {
+    "loading_info": {
+      "missing_keys": [],
+      "unexpected_keys": [],
+      "mismatched_keys": [],
+      "error_msgs": []
+    },
+    "threads": 1,
+    "peak_rss_after_load_kib": 432556,
+    "source": "shiva-front",
+    "forward_ms": [
+      3202.5593589969503,
+      3112.330796000606
+    ],
+    "peak_rss_kib": 1096764,
+    "iou_scores": [
+      0.17069675028324127,
+      0.19603006541728973,
+      0.4259055256843567
+    ]
+  },
+  "human_supplied_box_trial": {
+    "model": "facebook/sam2.1-hiera-tiny",
+    "revision": "de431c4043854a71d8101e17995dfe596bf101a5",
+    "threads": 4,
+    "device": "cpu",
+    "dtype": "float32",
+    "frames": [
+      {
+        "id": "shiva-front",
+        "prompt_box_origin": "human-supplied diagnostic, not automatically detected",
+        "normalized_input_box": [
+          0.19,
+          0.02,
+          0.65,
+          0.98
+        ],
+        "normalized_input_point": [
+          0.4,
+          0.4
+        ],
+        "size": [
+          640,
+          427
+        ],
+        "preprocess_ms": 11.2279889981437,
+        "forward_ms": [
+          1078.2099720017868,
+          1095.8426170000166
+        ],
+        "postprocess_ms": 0.46253199980128556,
+        "peak_rss_kib": 1049588,
+        "highest_score_index": 0,
+        "candidates": [
+          {
+            "index": 0,
+            "predicted_iou": 0.9144474864006042,
+            "foreground_fraction": 0.21846457845433256,
+            "seed_foreground": true,
+            "bbox": [
+              0.203125,
+              0.03981264637002342,
+              0.621875,
+              0.9976580796252927
+            ]
+          },
+          {
+            "index": 1,
+            "predicted_iou": 0.8046605587005615,
+            "foreground_fraction": 0.13396516393442623,
+            "seed_foreground": true,
+            "bbox": [
+              0.2140625,
+              0.05152224824355972,
+              0.61875,
+              0.9531615925058547
+            ]
+          },
+          {
+            "index": 2,
+            "predicted_iou": 0.8877331614494324,
+            "foreground_fraction": 0.1742791276346604,
+            "seed_foreground": true,
+            "bbox": [
+              0.20625,
+              0.04449648711943794,
+              0.6203125,
+              0.9953161592505855
+            ]
+          }
+        ]
+      },
+      {
+        "id": "milkmaid-artwork",
+        "prompt_box_origin": "human-supplied diagnostic, not automatically detected",
+        "normalized_input_box": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "normalized_input_point": [
+          0.51,
+          0.46
+        ],
+        "size": [
+          565,
+          640
+        ],
+        "preprocess_ms": 5.426302999694599,
+        "forward_ms": [
+          1081.4665680009057,
+          1614.5108879973122
+        ],
+        "postprocess_ms": 0.9011830006784294,
+        "peak_rss_kib": 1086624,
+        "highest_score_index": 2,
+        "candidates": [
+          {
+            "index": 0,
+            "predicted_iou": 0.9080517292022705,
+            "foreground_fraction": 0.5769275442477876,
+            "seed_foreground": true,
+            "bbox": [
+              0.0,
+              0.0,
+              1.0,
+              0.9921875
+            ]
+          },
+          {
+            "index": 1,
+            "predicted_iou": 0.847712516784668,
+            "foreground_fraction": 0.11716814159292036,
+            "seed_foreground": true,
+            "bbox": [
+              0.1504424778761062,
+              0.046875,
+              0.984070796460177,
+              0.9875
+            ]
+          },
+          {
+            "index": 2,
+            "predicted_iou": 0.9318176507949829,
+            "foreground_fraction": 0.46176991150442476,
+            "seed_foreground": true,
+            "bbox": [
+              0.0,
+              0.0,
+              1.0,
+              0.9921875
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

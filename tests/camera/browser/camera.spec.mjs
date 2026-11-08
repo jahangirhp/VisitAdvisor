@@ -10,6 +10,10 @@ const catalog = {
   objects: ids.map((id, index) => ({ id, location_id: location, name: `Painting ${index + 1}`, sources: [], views: [{ vectors: [Array.from({ length: 384 }, (_, i) => i === index ? 1 : 0)] }] })),
 };
 
+test.beforeEach(async ({ page }) => {
+  await page.route('**/venues?*', route => route.fulfill({ json: [{ id: location, name: 'Test museum' }] }));
+});
+
 async function fakeCamera(page, { denied = false, delayed = false } = {}) {
   await page.addInitScript(({ ids, denied, delayed }) => {
     window.cameraRequests = 0;
@@ -46,7 +50,7 @@ async function fakeCamera(page, { denied = false, delayed = false } = {}) {
       automatic_identification: false, candidates, inferenceMs: 10,
     } });
   });
-  await page.route('**/bundle/catalog.json', route => route.fulfill({ json: catalog }));
+  await page.route('**/bundle/catalog.json*', route => route.fulfill({ json: catalog }));
 }
 
 test('live loop posts bounded crops, switches candidates and stops uploads', async ({ page }) => {
@@ -171,15 +175,15 @@ test('stopping while permission is pending closes the late stream', async ({ pag
 });
 
 test('unavailable references never enable camera access', async ({ page }) => {
-  await page.route('**/bundle/catalog.json', route => route.fulfill({ status: 503, json: { error: 'RECOGNITION_UNAVAILABLE' } }));
+  await page.route('**/bundle/catalog.json*', route => route.fulfill({ status: 503, json: { error: 'RECOGNITION_UNAVAILABLE' } }));
   await page.goto('/');
-  await expect(page.locator('#status')).toContainText('Museum references are unavailable');
+  await expect(page.locator('#status')).toContainText('Venue references are unavailable');
   await expect(page.locator('#start')).toBeDisabled();
 });
 
 test('unwarmed model never enables camera access', async ({ page }) => {
   await fakeCamera(page);
-  await page.route('**/bundle/catalog.json', route => route.fulfill({ json: {
+  await page.route('**/bundle/catalog.json*', route => route.fulfill({ json: {
     ...catalog, readiness: { model_warmed: false, references_current: true },
   } }));
   await page.goto('/');
@@ -200,7 +204,7 @@ test('adaptive camera sends bounded detail frames and still acquires stable matc
       }, type, quality);
     };
   });
-  await page.route('**/bundle/catalog.json', route => route.fulfill({ json: {
+  await page.route('**/bundle/catalog.json*', route => route.fulfill({ json: {
     ...catalog, policy: { ...catalog.policy, frame_size: 512,
       recognition_pipeline: 'object-regions-types-v5', minimum_stable_ms: 600 },
   } }));
@@ -279,7 +283,7 @@ test('zero-score ordering does not flicker a verified second painting', async ({
 test('changed references reload metadata and require a new camera start', async ({ page }) => {
   await fakeCamera(page);
   let catalogReads = 0;
-  await page.route('**/bundle/catalog.json', route => {
+  await page.route('**/bundle/catalog.json*', route => {
     catalogReads++;
     return route.fulfill({ json: {
       ...catalog,
@@ -315,7 +319,7 @@ async function contentCamera(page, count = 2, overrides = {}) {
     id: (index + 1).toString(16).padStart(24, '0'), location_id: location,
     name: `Exhibit ${index + 1}`, sources: [{ id: 'source', title: 'Museum record', url: 'https://example.com/evidence' }],
   })) };
-  await page.route('**/bundle/catalog.json', route => route.fulfill({ json: fixture }));
+  await page.route('**/bundle/catalog.json*', route => route.fulfill({ json: fixture }));
   await page.route('**/objects/*/experience?*', route => {
     const id = new URL(route.request().url()).pathname.split('/').at(-2);
     const object = fixture.objects.find(object => object.id === id);
@@ -541,7 +545,7 @@ test('persistent transport failures end the session and clear retained content',
 test('reference invalidation clears retained content and disables scanning', async ({ page }) => {
   await contentCamera(page);
   await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
-  await page.route('**/bundle/catalog.json', route => route.fulfill({ status: 503, json: { error: 'REFERENCES_UNAVAILABLE' } }));
+  await page.route('**/bundle/catalog.json*', route => route.fulfill({ status: 503, json: { error: 'REFERENCES_UNAVAILABLE' } }));
   await page.route('**/recognize?*', route => route.fulfill({ status: 503, json: { error: 'REFERENCES_UNAVAILABLE' } }));
   await expect(page.locator('#result')).toBeHidden();
   await expect(page.locator('#start')).toBeDisabled();
@@ -619,4 +623,33 @@ test('wrong-location candidate IDs cannot create a result and retained controls 
   await page.locator('#stop').focus();
   await page.keyboard.press('Enter');
   await expect(page.locator('#start')).toBeVisible();
+});
+
+
+test('all saved venues are selectable and an unprepared venue clears scanning', async ({ page }) => {
+  await fakeCamera(page);
+  const other = 'd'.repeat(24);
+  await page.route('**/venues?*', route => route.fulfill({ json: [
+    { id: location, name: 'Test museum' }, { id: other, name: 'New venue' },
+  ] }));
+  await page.route('**/bundle/catalog.json*', route => {
+    const selected = new URL(route.request().url()).searchParams.get('location_id');
+    return selected === other
+      ? route.fulfill({ status: 503, json: { error: 'NO_PREPARED_REFERENCES' } })
+      : route.fulfill({ json: catalog });
+  });
+  await page.goto('/');
+  await expect(page.locator('#start')).toBeEnabled();
+  await page.locator('#start').click();
+  await expect(page.locator('#object-name')).toHaveText('Painting 1');
+  await page.locator('#menu summary').click();
+  await page.locator('#location').selectOption(other);
+  await expect(page.locator('#status')).toContainText('no prepared photo references');
+  await expect(page.locator('#start')).toBeDisabled();
+  await expect(page.locator('#result')).toBeHidden();
+  expect(await page.evaluate(() => window.tracksStopped)).toBe(1);
+  await page.locator('#menu summary').click();
+  await expect(page.locator('#location')).toBeEnabled();
+  await page.locator('#location').selectOption(location);
+  await expect(page.locator('#start')).toBeEnabled();
 });
