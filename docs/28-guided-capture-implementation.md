@@ -17,8 +17,10 @@ form for an existing object also embeds automatically after upload.
 
 The authenticated `POST /api/v1/admin/venues/{location_id}/objects/{object_id}/save`
 uses the existing cached local DINO encoder, foreground lock and atomic reference
-set publisher. Existing views are preserved and only pending originals are
-encoded. A repeated successful save returns the existing compatible set without
+set publisher. The merged recognition work applies source-linked object-focused
+preparation when a selected mask or box exists; see
+[33](33-object-focused-admin-references.md). Original uploads remain unchanged.
+Existing views are preserved and only pending or changed preparations are encoded. A repeated successful save returns the existing compatible set without
 encoding again. The legacy `/prepare` endpoint remains for existing API clients,
 with its previous behavior, but the admin page does not call it.
 

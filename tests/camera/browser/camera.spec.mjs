@@ -522,7 +522,7 @@ for (const status of [429, 503]) {
       version: 'camera-server-v1', location_id: location, reference_version: catalog.reference_version,
       automatic_identification: false, candidates: [{ id: fixture.objects[0].id, score: 0.9 }],
     } }));
-    await expect(page.locator('#status')).toContainText('Retrying');
+    await expect(page.locator('#status')).toContainText(status === 429 ? 'Checking the object' : 'Retrying');
     await expect(page.locator('#result')).toHaveAttribute('data-state', 'last-seen');
     await expect(page.locator('#experience')).toContainText('Introduction for Exhibit 1');
     fail = false;
