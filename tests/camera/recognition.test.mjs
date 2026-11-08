@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { motion, normalize, rank, Stability, toTensor, validateCatalog } from '../../app/modules/live_camera/static/recognition.mjs';
+import { motion, normalize, rank, signature, Stability, toTensor, validateCatalog } from '../../app/modules/live_camera/static/recognition.mjs';
 
 const vector = (x = 1, y = 0) => [x, y, ...Array(382).fill(0)];
 const policy = { candidate_floor: 0.55, candidate_margin: 0.04, stable_frames: 3, global_weight: 0.75, calibrated: false };
@@ -80,6 +80,13 @@ test('catalog refuses expired references, cross-location identities and automati
     objects: ['b', 'c'].map(id => ({ id: id.repeat(24), location_id: 'a'.repeat(24), name: id, sources: [], views: [{ vectors: [vector()] }] })),
   };
   assert.equal(validateCatalog(structuredClone(catalog)).objects.length, 2);
+  const fullVenue = structuredClone(catalog);
+  fullVenue.objects = Array.from({length: 500}, (_, index) => ({
+    ...structuredClone(catalog.objects[0]), id: index.toString(16).padStart(24, '0'),
+  }));
+  assert.equal(validateCatalog(fullVenue).objects.length, 500);
+  fullVenue.objects.push({...fullVenue.objects[0], id: 'f'.repeat(24)});
+  assert.throws(() => validateCatalog(fullVenue));
   for (const alter of [
     c => { c.expires_at = '2000-01-01'; },
     c => { c.objects[0].location_id = 'd'.repeat(24); },
@@ -87,4 +94,42 @@ test('catalog refuses expired references, cross-location identities and automati
     c => { c.reference_version = 'invalid'; },
     c => { c.policy.candidate_floor = -1; },
   ]) { const copy = structuredClone(catalog); alter(copy); assert.throws(() => validateCatalog(copy)); }
+});
+
+
+function texturedObject(shift = 0) {
+  const size = 224, rgba = new Uint8ClampedArray(size * size * 4);
+  for (let y = 0; y < size; y++) {
+    for (let x = 0; x < size; x++) {
+      const sx = x - shift;
+      const inside = sx >= 35 && sx < 189 && y >= 35 && y < 189;
+      const value = inside ? (((sx >> 2) + (y >> 2)) % 2 ? 250 : 90) : 20;
+      const i = (y * size + x) * 4;
+      rgba[i] = rgba[i + 1] = rgba[i + 2] = value;
+      rgba[i + 3] = 255;
+    }
+  }
+  return rgba;
+}
+
+test('small hand movement on a detailed object permits three-frame acquisition', () => {
+  const frames = [0, 6, 0, 6].map(shift => signature(texturedObject(shift)));
+  const state = new Stability(policy);
+  let result;
+  for (let index = 0; index < frames.length; index++) {
+    const moved = index > 0 && motion(frames[index - 1], frames[index]) > 0.09;
+    result = state.observe([{id: 'santa', score: 0.9}], 100 + index * 500, moved);
+  }
+  assert.equal(result, 'santa');
+});
+
+test('movement away from a textured object still resets acquisition', () => {
+  const before = signature(texturedObject());
+  const after = signature(texturedObject(80));
+  assert.ok(motion(before, after) > 0.09);
+  const state = new Stability(policy);
+  state.observe([{id: 'santa', score: 0.9}], 100);
+  state.observe([{id: 'santa', score: 0.9}], 600);
+  assert.equal(state.observe([{id: 'santa', score: 0.9}], 1100, true), null);
+  assert.equal(state.count, 0);
 });

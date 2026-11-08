@@ -42,7 +42,6 @@ def create_camera_app(
                     if (
                         settings.live_camera_preload
                         and settings.live_camera_location_id
-                        and settings.live_camera_object_ids
                     ):
                         task = asyncio.create_task(prepare())
                 except Exception:
@@ -177,7 +176,10 @@ def create_camera_app(
                             application.state.mongodb = MongoDB(settings)
                             application.state.owns_mongodb = True
                         references = AtlasCameraReferences(
-                            application.state.mongodb.database, settings, directory
+                            application.state.mongodb.database,
+                            settings,
+                            directory,
+                            discover_objects=True,
                         )
                         application.state.references = references
                     except Exception:

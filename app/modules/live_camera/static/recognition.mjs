@@ -80,13 +80,20 @@ export function sameRegion(a, b) {
 
 export function signature(rgba, size = 224) {
   const values = [];
-  // Regular samples from the whole crop, not only its first scanline.
+  // Average small regions: single pixels react to texture, reflections and
+  // ordinary hand jitter even when the same object remains in view.
   for (let row = 0; row < 16; row++) {
+    const y0 = Math.floor(row * size / 16), y1 = Math.floor((row + 1) * size / 16);
     for (let column = 0; column < 16; column++) {
-      const y = Math.floor((row + 0.5) * size / 16);
-      const x = Math.floor((column + 0.5) * size / 16);
-      const i = (y * size + x) * 4;
-      values.push((rgba[i] + rgba[i + 1] + rgba[i + 2]) / (3 * 255));
+      const x0 = Math.floor(column * size / 16), x1 = Math.floor((column + 1) * size / 16);
+      let sum = 0;
+      for (let y = y0; y < y1; y++) {
+        for (let x = x0; x < x1; x++) {
+          const i = (y * size + x) * 4;
+          sum += rgba[i] + rgba[i + 1] + rgba[i + 2];
+        }
+      }
+      values.push(sum / (3 * 255 * (x1 - x0) * (y1 - y0)));
     }
   }
   return values;
@@ -114,7 +121,7 @@ export function validateCatalog(catalog, now = Date.now()) {
       !Number.isFinite(Date.parse(catalog.expires_at)) || Date.parse(catalog.expires_at) <= now ||
       !/^[a-f0-9]{64}$/.test(catalog.reference_version) ||
       !/^[a-f0-9]{24}$/.test(catalog.location?.id) ||
-      !Array.isArray(catalog.objects) || catalog.objects.length < 1 || catalog.objects.length > 12) fail();
+      !Array.isArray(catalog.objects) || catalog.objects.length < 1 || catalog.objects.length > 500) fail();
   const policy = catalog.policy;
   if (!policy || policy.calibrated !== false || policy.global_weight !== 0.75 ||
       !Number.isFinite(policy.candidate_floor) || policy.candidate_floor < 0.45 || policy.candidate_floor > 1 ||

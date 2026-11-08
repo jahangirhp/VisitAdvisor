@@ -12,7 +12,11 @@ from bson import ObjectId
 from fastapi.testclient import TestClient
 
 from app.core.config import Settings
-from app.modules.live_camera.inference import CameraFailure, CameraRecognizer
+from app.modules.live_camera.inference import (
+    MAX_CAMERA_OBJECTS,
+    CameraFailure,
+    CameraRecognizer,
+)
 from app.modules.live_camera.references import AtlasCameraReferences
 from app.modules.live_camera.server import create_camera_app
 from tests.test_camera_server import jpeg
@@ -349,7 +353,8 @@ def test_file_and_atlas_inputs_preserve_recognition_scores(atlas, monkeypatch):
         "app.modules.live_camera.inference.geometric_score", lambda *args: 0.5
     )
     monkeypatch.setattr(
-        "app.modules.live_camera.inference.describe_local", lambda *args: {}
+        "app.modules.live_camera.inference.describe_local",
+        lambda *args: {"points": [], "descriptors": [], "size": [224, 224]},
     )
     assert (
         engine.recognize(jpeg())["candidates"] == replay.recognize(jpeg())["candidates"]
@@ -526,7 +531,7 @@ def test_dynamic_selection_does_not_silently_truncate_objects(atlas):
     loader, db, _, settings = atlas
     db["visual_references"].rows.extend(
         {"location_id": settings.live_camera_location_id, "object_id": str(ObjectId())}
-        for _ in range(11)
+        for _ in range(MAX_CAMERA_OBJECTS - 1)
     )
     dynamic = AtlasCameraReferences(
         db, settings, loader.directory, discover_objects=True
@@ -534,3 +539,136 @@ def test_dynamic_selection_does_not_silently_truncate_objects(atlas):
     with pytest.raises(CameraFailure) as failure:
         asyncio.run(dynamic.get())
     assert failure.value.code == "CAMERA_OBJECT_LIMIT"
+
+
+def add_prepared_object(db, name):
+    from app.modules.visual.repository import evidence_hash
+
+    obj = deepcopy(db["objects"].rows[0])
+    obj["_id"] = ObjectId()
+    obj["name"] = name
+    source = deepcopy(db["sources"].rows[0])
+    source["_id"] = ObjectId()
+    obj["source_ids"] = [str(source["_id"])]
+    record = deepcopy(db["visual_references"].rows[0])
+    record.update(object_id=str(obj["_id"]), evidence_hash=evidence_hash(obj, [source]))
+    record["views"][0]["reference"]["source_ids"] = obj["source_ids"]
+    db["objects"].rows.append(obj)
+    db["sources"].rows.append(source)
+    db["visual_references"].rows.append(record)
+    return str(obj["_id"]), record
+
+
+def test_default_venue_discovers_new_prepared_objects_and_reuses_model(atlas):
+    loader, db, sessions, settings = atlas
+    for index in range(13):
+        add_prepared_object(db, f"Prepared object {index}")
+    app = create_camera_app(configured_settings=settings)
+    app.state.mongodb = SimpleNamespace(database=db)
+    with TestClient(app) as client:
+        first = client.get("/bundle/catalog.json")
+        assert first.status_code == 200, first.text
+        assert len(first.json()["objects"]) == 15
+        santa_id, _ = add_prepared_object(db, "Santa train")
+        app.state.references.checked_until = 0
+        updated = client.get("/bundle/catalog.json").json()
+        assert len(updated["objects"]) == 16
+        assert santa_id in {obj["id"] for obj in updated["objects"]}
+        assert updated["reference_version"] != first.json()["reference_version"]
+        assert len(sessions) == 1
+
+
+def test_discovery_excludes_stale_incompatible_moved_and_missing_sources(atlas):
+    loader, db, _, settings = atlas
+    _, stale = add_prepared_object(db, "Stale")
+    stale["evidence_hash"] = "old"
+    _, incompatible = add_prepared_object(db, "Other model")
+    incompatible["model"] = "incompatible"
+    add_prepared_object(db, "Moved")
+    db["objects"].rows[-1]["location_id"] = str(ObjectId())
+    add_prepared_object(db, "Missing evidence")
+    db["sources"].rows.pop()
+    dynamic = AtlasCameraReferences(
+        db, settings, loader.directory, discover_objects=True
+    )
+    result = asyncio.run(dynamic.get())
+    assert {obj["id"] for obj in result.catalog["objects"]} == set(
+        settings.live_camera_object_ids
+    )
+
+
+def test_legacy_sift_ties_are_bounded_without_changing_stored_references(atlas):
+    loader, db, _, settings = atlas
+    local = db["visual_references"].rows[0]["views"][0]["derived"]["local"]
+    local["points"] = [[1, 1]] * 801
+    local["descriptors"] = [[0.0] * 128] * 801
+    dynamic = AtlasCameraReferences(
+        db, settings, loader.directory, discover_objects=True
+    )
+    result = asyncio.run(dynamic.get())
+    assert (
+        len(
+            result.local_views[db["visual_references"].rows[0]["object_id"]][0][
+                "points"
+            ]
+        )
+        == 800
+    )
+    assert len(local["points"]) == 801
+    assert len(local["descriptors"]) == 801
+
+
+def test_prepared_3d_object_does_not_need_planar_keypoints(atlas):
+    from app.modules.visual.repository import evidence_hash
+
+    loader, db, _, settings = atlas
+    obj = db["objects"].rows[0]
+    obj["type"] = "sculpture"
+    record = db["visual_references"].rows[0]
+    record["evidence_hash"] = evidence_hash(obj, db["sources"].rows)
+    for view in record["views"]:
+        del view["derived"]["local"]
+    dynamic = AtlasCameraReferences(
+        db, settings, loader.directory, discover_objects=True
+    )
+    result = asyncio.run(dynamic.get())
+    assert result.local_views[str(obj["_id"])] == []
+    assert result.catalog["policy"]["geometry_scope"] == "planar-and-scene-v2"
+    stored = next(o for o in result.catalog["objects"] if o["id"] == str(obj["_id"]))
+    assert all("local" not in view for view in stored["views"])
+
+
+def test_selected_object_references_exclude_legacy_scene_fallbacks(atlas):
+    loader, db, _, _ = atlas
+    record = db["visual_references"].rows[0]
+    focused = record["views"][0]
+    focused["image_hash"] = "a" * 64
+    focused["derived"]["preparation"] = {
+        "version": "object-focus-v1",
+        "source_sha256": focused["image_hash"],
+    }
+    fallback = deepcopy(focused)
+    fallback["image_hash"] = "b" * 64
+    del fallback["derived"]["preparation"]
+    record["views"].append(fallback)
+    engine = asyncio.run(loader.get())
+    target = next(
+        o for o in engine.catalog["objects"] if o["id"] == record["object_id"]
+    )
+    assert len(target["views"]) == 1
+    assert target["views"][0]["image_hash"] == "a" * 64
+    # The source record and its fallback remain intact in Atlas.
+    assert len(record["views"]) == 2
+    assert "preparation" not in json.dumps(engine.public_catalog())
+
+
+def test_focused_reference_with_mismatched_source_is_rejected(atlas):
+    loader, db, _, _ = atlas
+    view = db["visual_references"].rows[0]["views"][0]
+    view["image_hash"] = "a" * 64
+    view["derived"]["preparation"] = {
+        "version": "object-focus-v1",
+        "source_sha256": "b" * 64,
+    }
+    with pytest.raises(CameraFailure, match="REFERENCES_UNAVAILABLE"):
+        asyncio.run(loader.get())

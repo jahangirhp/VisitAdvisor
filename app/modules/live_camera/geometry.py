@@ -5,6 +5,30 @@ from typing import Any
 
 from PIL import Image
 
+# Unknown source categories and scenes retain the existing geometry check.
+MULTIVIEW_TYPES = {
+    "sculpture",
+    "statue",
+    "artifact",
+    "artefact",
+    "figurine",
+    "rock",
+    "stone",
+    "toy",
+}
+
+
+def requires_geometry(object_type: str, policy: dict[str, Any]) -> bool:
+    if policy.get("recognition_pipeline"):
+        from app.modules.live_camera.pipeline import profile
+
+        return profile(object_type) == "planar"
+    return (
+        policy.get("geometry_scope") != "planar-and-scene-v2"
+        or policy.get("geometry_ranking") == "spatial-verification-v1"
+        or object_type.lower().strip() not in MULTIVIEW_TYPES
+    )
+
 
 def validate_local(value: dict[str, Any]) -> None:
     import numpy as np
