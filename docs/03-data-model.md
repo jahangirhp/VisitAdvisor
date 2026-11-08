@@ -34,6 +34,10 @@ the following decisions supersede conflicting examples:
 - No delete/update routes exist, so parent/source relationship checks need no
   deletion coordination yet. Future deletion must preserve these relationships.
 
+The later [admin object deletion extension](35-admin-object-deletion.md) adds
+transactional cleanup while retaining shared source records. The no-delete
+statement above describes the original Phase 1 scope.
+
 ## Phase 2 ingestion additions
 
 Phase 2 implements a bounded Rijksmuseum CLI importer with the existing three

@@ -67,7 +67,9 @@ Preparation runs in the foreground, with one operation at a time per application
 process; no worker queue is added. For this bounded admin MVP use one API worker.
 The same process lock prevents pending-upload removal during publication. External
 CLI writers still use the publisher's compare-and-swap source/set checks. Saved
-unpublished photos can be removed; published uploads cannot be deleted by this UI.
+unpublished photos can be removed individually; published uploads cannot be
+removed individually. The [whole-object deletion action](35-admin-object-deletion.md)
+removes the object and all its photos, published references and embeddings.
 Private image references use opaque `admin-upload:` identifiers; public catalog
 export strips these non-HTTP identifiers rather than exposing private originals.
 

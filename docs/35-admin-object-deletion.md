@@ -52,3 +52,29 @@ Existing application records were not modified.
 Deleting a partially uploaded object also clears its pending browser capture
 draft, so Retry save cannot continue targeting the removed record. That flow
 passed separately in Chromium, WebKit and the iPhone profile.
+
+## Release verification
+
+Required checks passed: 544 Python tests (two opt-in skips), Ruff lint/format,
+`mypy app`, and 35 JavaScript tests. Browser coverage passed 129 distinct admin
+cases across Chromium, WebKit and iPhone emulation (three opt-in skips). One
+existing synthetic WebKit camera-start case passed on isolated rerun. Eighteen
+hosted preview cases were covered; the iPhone Save check passed after warming a
+preview instance that had scaled to zero. That navigation delay was separate from
+the delete flow. Production confirmation checks passed in all three profiles.
+Browser deletion requests use mocked records; the real Atlas transaction check
+above separately verifies deletion and rollback without changing existing data.
+
+Revision `visitadvisor-api-delete-393b43942940` now serves 100% of traffic from
+application commit `393b439` on `feat/guided-reference-capture`. Image digest:
+`sha256:34e63cf1ed16d67a59c09a9d59479090446b37fa28f6fc6beb256e9e7e42197b`.
+Cloud Build: `2b67eaad-bc8c-463e-a0f5-3283d2072250`.
+
+Production health/database, seven asset hashes/cache headers, unauthorized delete
+rejection, an authenticated missing-object transaction (404), runtime identity,
+environment, CPU/memory and one warm instance were checked. All 115 existing
+catalog objects and reference version
+`247a6f5b008a8ea79f2feef8ee4226ab5ed9881d00c2d1ed2b31dfd7e0857664` were retained.
+No existing application object, source, photo or reference was deleted during
+validation. The preceding `visitadvisor-api-mobile-68655a2f9d79` revision remains
+available for traffic rollback. `main` was not changed by this feature release.
