@@ -21,3 +21,5 @@ body.wizardOpen{overflow:hidden}.wizard{position:fixed;inset:0;z-index:50;overfl
 
 /* Keep mobile form text large enough to avoid iOS zooming on focus. */
 @media(max-width:850px),(pointer:coarse){.venueRow select,.toolbar input[type=search],.capturePhoto select{font-size:16px}}
+
+button.danger{background:#b3261e;border-color:#b3261e;color:#fff}button.danger:hover{background:#8f1e18;border-color:#8f1e18}#deleteDialog{max-width:440px;overflow-wrap:anywhere}#deleteObjectName{font-weight:600}#deleteError{color:#a12a22;font-size:14px}#deleteError:empty{display:none}.deleteActions{display:flex;justify-content:flex-end;gap:12px;flex-wrap:wrap}

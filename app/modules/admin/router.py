@@ -195,10 +195,35 @@ async def detail(location_id: str, object_id: str, service: Service) -> dict[str
     return await service.detail(validate_id(location_id), validate_id(object_id))
 
 
+@router.delete("/venues/{location_id}/objects/{object_id}", status_code=204)
+async def delete_object(
+    location_id: str, object_id: str, request: Request, service: Service
+) -> Response:
+    location_id, object_id = validate_id(location_id), validate_id(object_id)
+    lock = request.app.state.admin_preparation_lock
+    if lock.locked():
+        raise ApplicationError(
+            "PREPARATION_BUSY", "Photos are being saved. Retry shortly.", 409
+        )
+    async with lock:
+        await service.delete_object(location_id, object_id)
+        request.app.state.visual_geometry_cache.pop(object_id, None)
+        camera = request.app.state.camera.state
+        for name in ("references", "venue_references"):
+            references = getattr(camera, name, None)
+            if references is not None and (
+                references.location_id == location_id
+                or object_id in getattr(references, "object_ids", [])
+            ):
+                await references.invalidate()
+    return Response(status_code=204)
+
+
 @router.post("/venues/{location_id}/objects/{object_id}/photos", status_code=201)
 async def upload(
     location_id: str,
     object_id: str,
+    request: Request,
     service: Service,
     image: Annotated[UploadFile, File()],
     viewpoint: Annotated[str, Form(min_length=1, max_length=300)],
@@ -229,21 +254,30 @@ async def upload(
             source_id=validate_id(source_id) if source_id else "",
             capture_metadata=parse_capture_metadata(capture_metadata),
         )
-        photo_id = await service.upload(
-            validate_id(location_id),
-            validate_id(object_id),
-            data,
-            image.content_type,
-            metadata.model_dump(mode="json", exclude_none=True),
-            foreground_mask=(
-                await foreground_mask.read(MAX_FOREGROUND_MASK_BYTES + 1)
-                if foreground_mask is not None
-                else None
-            ),
-            mask_content_type=(
-                foreground_mask.content_type if foreground_mask is not None else None
-            ),
+        mask = (
+            await foreground_mask.read(MAX_FOREGROUND_MASK_BYTES + 1)
+            if foreground_mask is not None
+            else None
         )
+        lock = request.app.state.admin_preparation_lock
+        if lock.locked():
+            raise ApplicationError(
+                "PREPARATION_BUSY", "Photos are being saved. Retry shortly.", 409
+            )
+        async with lock:
+            photo_id = await service.upload(
+                validate_id(location_id),
+                validate_id(object_id),
+                data,
+                image.content_type,
+                metadata.model_dump(mode="json", exclude_none=True),
+                foreground_mask=mask,
+                mask_content_type=(
+                    foreground_mask.content_type
+                    if foreground_mask is not None
+                    else None
+                ),
+            )
         return {"id": photo_id, "status": "saved_for_preparation"}
     finally:
         await image.close()

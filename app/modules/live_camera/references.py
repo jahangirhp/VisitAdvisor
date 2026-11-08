@@ -347,6 +347,13 @@ class AtlasCameraReferences:
         self.session = candidate.session
         return candidate
 
+    async def invalidate(self) -> None:
+        """Drop deleted object descriptors immediately, retaining model weights."""
+        async with self.lock:
+            self.recognizer = None
+            self.checked_until = 0.0
+            self.retry_after = 0.0
+
     async def get(self) -> CameraRecognizer:
         async with self.lock:
             if self.recognizer is not None and monotonic() < self.checked_until:

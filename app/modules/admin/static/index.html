@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Objects | VisitAdvisor</title><link rel="stylesheet" href="./admin.css?v=mobile-20261108-1"><script src="./admin.js?v=mobile-20261108-1" defer></script></head>
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Objects | VisitAdvisor</title><link rel="stylesheet" href="./admin.css?v=delete-20261108-1"><script src="./admin.js?v=delete-20261108-1" defer></script></head>
 <body>
 <header id="siteHeader"><a class="brand" href="/admin/">VisitAdvisor<span>Collections</span></a><nav><a href="/live/">Visitor camera</a><button id="logout" hidden>Lock panel</button></nav></header>
 <main>
@@ -58,10 +58,15 @@
 </div>
 <div id="guidedFallback" class="guidedFallback"><button id="choosePhotos" type="button" class="textButton">Choose photos</button><button id="takePhoto" type="button" class="textButton">Use phone camera</button></div><p id="guidedUploadStatus" class="small muted" role="status" aria-live="polite"></p><input id="cameraInput" type="file" accept="image/*" capture="environment" hidden><input id="libraryInput" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple hidden>
 </dialog>
+<dialog id="deleteDialog" aria-labelledby="deleteTitle" aria-describedby="deleteDescription">
+<h2 id="deleteTitle">Delete object?</h2><p id="deleteObjectName"></p>
+<p id="deleteDescription">Permanently delete this object, its saved photos, and all image and text embeddings. This cannot be undone.</p>
+<p id="deleteError" role="alert"></p><div class="deleteActions"><button id="cancelDelete" type="button" autofocus>Cancel</button><button id="confirmDelete" type="button" class="danger">Delete object</button></div>
+</dialog>
 <template id="detailTemplate"><p class="eyebrow">OBJECT DETAILS</p><h2 id="objectName"></h2><p id="stale" class="notice" hidden>Source information changed. Refresh the existing photos before adding more.</p><h3>Photos</h3><div id="photos" class="photos"></div><button id="saveCollection" hidden>Save photos</button><hr><h3>Add a reference photo</h3>
 <form id="uploadForm">
 <label>Photo<input name="image" id="image" type="file" accept="image/jpeg,image/png,image/webp" required></label><p class="small muted">JPEG, PNG or WebP · up to 5 MiB and 16 megapixels</p><img id="preview" alt="Selected reference photo" hidden>
 <label>Viewpoint<input name="viewpoint" maxlength="300" placeholder="e.g. Front, left side, back" required></label>
 <button type="submit">Save photo</button>
-</form></template>
+</form><hr><button id="deleteObject" type="button" class="danger">Delete object</button></template>
 </body></html>

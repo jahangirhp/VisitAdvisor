@@ -1,4 +1,4 @@
-import { analyzeTarget } from './guided-quality.mjs?v=mobile-20261108-1';
+import { analyzeTarget } from './guided-quality.mjs?v=delete-20261108-1';
 
 const $ = id => document.getElementById(id);
 const sha256 = async blob => [...new Uint8Array(await crypto.subtle.digest('SHA-256', await blob.arrayBuffer()))].map(byte => byte.toString(16).padStart(2, '0')).join('');

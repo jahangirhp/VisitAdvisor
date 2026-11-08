@@ -396,3 +396,69 @@ test('admin login still works when tab storage is unavailable', async ({ page })
   await page.getByRole('button', { name: 'Lock panel' }).click();
   await expect(page.locator('#login')).toBeVisible();
 });
+
+for (const mode of ['success', 'retry', 'lost response']) {
+  test(`admin deletes an object and its embeddings with confirmation: ${mode}`, async ({ page }) => {
+    const requests = await mock(page); await login(page);
+    let deleted = false, attempts = 0;
+    await page.route(`**${base}`, async route => {
+      if (route.request().method() !== 'DELETE') return route.fallback();
+      attempts++;
+      if (attempts === 1 && mode === 'retry') return route.fulfill({ status: 503, json: { error: { message: 'Could not finish deleting the object. Please retry.' } } });
+      if (deleted) return route.fulfill({ status: 404, json: { error: { code: 'OBJECT_NOT_FOUND', message: 'Object not found in this venue.' } } });
+      deleted = true;
+      if (mode === 'lost response') return route.abort('failed');
+      await route.fulfill({ status: 204 });
+    });
+    await page.route(`**/api/v1/admin/venues/${location}/objects?**`, async route => deleted
+      ? route.fulfill({ json: { objects: [] } }) : route.fallback());
+    await page.getByRole('button', { name: /Painting & sculpture/ }).click();
+    await page.locator('#deleteObject').click();
+    await expect(page.locator('#deleteDialog')).toBeVisible();
+    await expect(page.locator('#deleteObjectName')).toHaveText('<Painting & sculpture>');
+    await expect(page.locator('#deleteDescription')).toContainText('all image and text embeddings');
+    expect(attempts).toBe(0);
+    await page.getByRole('button', { name: 'Cancel', exact: true }).click();
+    await expect(page.locator('#deleteDialog')).not.toBeVisible();
+    expect(attempts).toBe(0);
+    await page.locator('#deleteObject').click();
+    expect(await page.locator('#deleteDialog').evaluate(el => el.scrollWidth <= el.clientWidth + 1)).toBe(true);
+    await page.locator('#confirmDelete').click();
+    if (mode !== 'success') {
+      await expect(page.locator('#deleteError')).not.toBeEmpty();
+      await expect(page.locator('#deleteDialog')).toBeVisible();
+      await expect(page.locator('#confirmDelete')).toBeEnabled();
+      await page.locator('#confirmDelete').click();
+    }
+    await expect(page.locator('#deleteDialog')).not.toBeVisible();
+    await expect(page.locator('#objects')).toContainText('No objects match');
+    await expect(page.locator('#objectName')).toHaveCount(0);
+    await expect(page.locator('#status')).toHaveText('Object deleted.');
+    await expect(page.locator('#status')).toHaveClass('srOnly');
+    expect(attempts).toBe(mode === 'success' ? 1 : 2);
+    expect(requests.filter(r => ['POST', 'PUT', 'PATCH'].includes(r.method()))).toHaveLength(0);
+  });
+}
+
+test('deleting the last object on a page returns to the previous page', async ({ page }) => {
+  await mock(page); await login(page);
+  let deleted = false;
+  const firstPage = Array.from({ length: 50 }, (_, index) => ({ id: index.toString(16).padStart(24, '0'), name: `Other object ${index}`, type: 'artifact', prepared: 0, pending: 0, target: 4, missing: 4, needs_photos: true }));
+  await page.route(`**/api/v1/admin/venues/${location}/objects?**`, route => {
+    const offset = Number(new URL(route.request().url()).searchParams.get('offset'));
+    if (!offset) return route.fulfill({ json: { objects: firstPage } });
+    return route.fulfill({ json: { objects: deleted ? [] : [{ ...firstPage[0], id: object, name: '<Painting & sculpture>' }] } });
+  });
+  await page.locator('#refresh').click();
+  await page.getByRole('button', { name: 'Next', exact: true }).click();
+  await expect(page.locator('#page')).toHaveText('Page 2');
+  await page.route(`**${base}`, route => {
+    if (route.request().method() !== 'DELETE') return route.fallback();
+    deleted = true;
+    return route.fulfill({ status: 204 });
+  });
+  await page.getByRole('button', { name: /Painting & sculpture/ }).click();
+  await page.locator('#deleteObject').click(); await page.locator('#confirmDelete').click();
+  await expect(page.locator('#page')).toHaveText('Page 1');
+  await expect(page.locator('.objectCard')).toHaveCount(50);
+});

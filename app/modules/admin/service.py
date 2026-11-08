@@ -7,8 +7,11 @@ from typing import Any
 from uuid import uuid4
 
 from bson import ObjectId
+from pymongo.asynchronous.client_session import AsyncClientSession
 from pymongo.asynchronous.database import AsyncDatabase
-from pymongo.errors import DuplicateKeyError
+from pymongo.errors import DuplicateKeyError, PyMongoError
+from pymongo.read_concern import ReadConcern
+from pymongo.write_concern import WriteConcern
 
 from app.core.domain import validate_id
 from app.core.exceptions import ApplicationError
@@ -83,6 +86,46 @@ class PhotoService:
             {"_id": ObjectId(validate_id(location_id))}, {"_id": 1}
         ):
             raise ApplicationError("LOCATION_NOT_FOUND", "Venue not found.", 404)
+
+    async def delete_object(self, location_id: str, object_id: str) -> None:
+        location_id, object_id = validate_id(location_id), validate_id(object_id)
+        query = {"_id": ObjectId(object_id), "location_id": location_id}
+        related = {"object_id": object_id}
+
+        async def remove(session: AsyncClientSession) -> None:
+            if (
+                await self.db["objects"].find_one(query, {"_id": 1}, session=session)
+                is None
+            ):
+                raise ApplicationError(
+                    "OBJECT_NOT_FOUND", "Object not found in this venue.", 404
+                )
+            # Remove every model/version and inactive vector set for this object.
+            # Canonical sources can be shared with other objects and stay intact.
+            for collection in (
+                "visual_vectors",
+                "visual_references",
+                "knowledge_chunks",
+                "admin_reference_photos",
+            ):
+                await self.db[collection].delete_many(related, session=session)
+            await self.db["objects"].delete_one(query, session=session)
+
+        try:
+            async with asyncio.timeout(20):
+                async with self.db.client.start_session() as session:
+                    await session.with_transaction(
+                        remove,
+                        read_concern=ReadConcern("snapshot"),
+                        write_concern=WriteConcern("majority"),
+                        max_commit_time_ms=5000,
+                    )
+        except (PyMongoError, TimeoutError):
+            raise ApplicationError(
+                "OBJECT_DELETE_UNAVAILABLE",
+                "Could not finish deleting the object. Please retry.",
+                503,
+            ) from None
 
     def coverage(
         self,

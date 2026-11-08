@@ -4,6 +4,7 @@ let token = "", locationId = "", objectId = "", offset = 0, venueOffset = 0, ven
 let previewUrl = "", photoUrls = [], busy = false;
 let capturePhotos = [], captureDraft = null, captureReading = false, captureContext = 0, pendingPicker = null;
 let guidedCapture = null, guidedLaunching = false;
+let pendingDelete = null;
 const tokenStorageKey = "visitadvisor.adminToken";
 function storedToken() {
   try { return sessionStorage.getItem(tokenStorageKey) || ""; } catch { return ""; }
@@ -27,6 +28,7 @@ function lock() {
   rememberToken("");
   token = ""; generation++; objectId = ""; locationId = "";
   resetCapture(); showCollection(); $("venueDialog").close();
+  $("deleteDialog").close();
   clearImages(); $("detail").replaceChildren(); $("objects").replaceChildren();
   $("login").hidden = false; $("workspace").hidden = true; $("logout").hidden = true;
   $("token").value = ""; $("token").focus();
@@ -119,6 +121,13 @@ async function showObject(id) {
   $("detail").replaceChildren($("detailTemplate").content.cloneNode(true));
   $("objectName").textContent = data.name;
   $("stale").hidden = !data.stale;
+  $("deleteObject").addEventListener("click", () => {
+    if (busy) return;
+    pendingDelete = { id, path, name: data.name };
+    $("deleteObjectName").textContent = data.name;
+    $("deleteError").textContent = "";
+    $("deleteDialog").showModal();
+  });
   for (const photo of data.photos) {
     const card = document.createElement("div"); card.className = "photo";
     const img = document.createElement("img"); img.alt = photo.viewpoint;
@@ -191,6 +200,32 @@ async function savePhotoCollection(path, id) {
   }
   await inventory(true); await showObject(id); status("Photos saved.");
 }
+$("cancelDelete").addEventListener("click", () => $("deleteDialog").close());
+$("deleteDialog").addEventListener("cancel", event => { if (busy) event.preventDefault(); });
+$("deleteDialog").addEventListener("close", () => { pendingDelete = null; $("deleteError").textContent = ""; });
+$("confirmDelete").addEventListener("click", () => {
+  const selected = pendingDelete;
+  if (!selected || busy) return;
+  action(async () => {
+    $("deleteError").textContent = "";
+    try {
+      await api(selected.path, { method: "DELETE" });
+    } catch (error) {
+      // A lost response can leave the object already deleted. Retrying is safe.
+      if (error.status !== 404) {
+        if (token && $("deleteDialog").open) { $("deleteError").textContent = error.message; return; }
+        throw error;
+      }
+    }
+    $("deleteDialog").close();
+    objectId = ""; clearImages();
+    rows = rows.filter(row => row.id !== selected.id); renderObjects();
+    $("detail").textContent = "Object deleted.";
+    await inventory();
+    if (offset && !rows.length) { offset = Math.max(0, offset - 50); await inventory(); }
+    status("Object deleted."); $("search").focus();
+  });
+});
 async function action(work) {
   if (busy) return;
   busy = true;
@@ -433,7 +468,7 @@ async function launchGuidedCapture(message = "") {
   const launchContext = ++captureContext, venueId = locationId;
   try {
     if (!guidedCapture) {
-      const { GuidedCapture } = await import('./quick-capture.mjs?v=mobile-20261108-1');
+      const { GuidedCapture } = await import('./quick-capture.mjs?v=delete-20261108-1');
       guidedCapture = new GuidedCapture({ capacity: () => 4 - capturePhotos.length,
         analyze: (file, prompt, signal) => api(`/capture/analyze?${new URLSearchParams(prompt)}`, {
           method: "POST", headers: { "Content-Type": "image/jpeg" }, body: file, signal

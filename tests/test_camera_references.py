@@ -672,3 +672,33 @@ def test_focused_reference_with_mismatched_source_is_rejected(atlas):
     }
     with pytest.raises(CameraFailure, match="REFERENCES_UNAVAILABLE"):
         asyncio.run(loader.get())
+
+
+def test_admin_invalidation_drops_deleted_object_before_freshness_lease_ends(atlas):
+    loader, db, sessions, settings = atlas
+    loader = AtlasCameraReferences(
+        db, settings, loader.directory, discover_objects=True
+    )
+
+    async def run():
+        first = await loader.get()
+        removed = loader.object_ids[0]
+        db["objects"].rows = [
+            row for row in db["objects"].rows if str(row["_id"]) != removed
+        ]
+        db["visual_references"].rows = [
+            row for row in db["visual_references"].rows if row["object_id"] != removed
+        ]
+        # The ordinary lease is still fresh, so explicit invalidation matters.
+        assert await loader.get() is first
+        await loader.invalidate()
+        assert loader.recognizer is None
+        assert loader.retry_after == loader.checked_until == 0
+        assert loader.session is first.session
+        current = await loader.get()
+        assert current.reference_version != first.reference_version
+        assert all(obj["id"] != removed for obj in current.catalog["objects"])
+        assert current.session is first.session
+        assert len(sessions) == 1
+
+    asyncio.run(run())
