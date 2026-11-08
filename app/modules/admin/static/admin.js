@@ -218,6 +218,7 @@ $("confirmDelete").addEventListener("click", () => {
       }
     }
     $("deleteDialog").close();
+    if (captureDraft?.object.id === selected.id) resetCapture();
     objectId = ""; clearImages();
     rows = rows.filter(row => row.id !== selected.id); renderObjects();
     $("detail").textContent = "Object deleted.";

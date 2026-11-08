@@ -48,3 +48,7 @@ returned 503 and rolled back all changes; retry returned 204 and removed all thr
 versions of each related record. The unrelated fixture object and shared source
 remained, and another delete returned 404. Temporary collections were removed.
 Existing application records were not modified.
+
+Deleting a partially uploaded object also clears its pending browser capture
+draft, so Retry save cannot continue targeting the removed record. That flow
+passed separately in Chromium, WebKit and the iPhone profile.

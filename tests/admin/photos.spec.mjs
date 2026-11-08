@@ -462,3 +462,29 @@ test('deleting the last object on a page returns to the previous page', async ({
   await expect(page.locator('#page')).toHaveText('Page 1');
   await expect(page.locator('.objectCard')).toHaveCount(50);
 });
+
+test('deleting a partially uploaded object clears its pending capture draft', async ({ page }) => {
+  await mock(page); await login(page);
+  let deleted = false;
+  await page.route(`**/api/v1/admin/venues/${location}/objects`, route => route.fulfill({ status: 201, json: { id: object, name: 'Draft object', source_ids: [source] } }));
+  await page.route(`**${base}/photos`, route => route.fulfill({ status: 503, json: { error: { message: 'Upload interrupted.' } } }));
+  await selectCapturePhotos(page, ['red']);
+  await page.getByLabel('Object name', { exact: true }).fill('Draft object');
+  await page.getByLabel('Object type', { exact: true }).selectOption('sculpture');
+  await page.getByRole('button', { name: 'Save object', exact: true }).click();
+  await expect(page.getByRole('button', { name: 'Retry save', exact: true })).toBeEnabled();
+  await page.getByRole('button', { name: 'Back to collection', exact: true }).click();
+  await page.route(`**${base}`, route => {
+    if (route.request().method() !== 'DELETE') return route.fallback();
+    deleted = true;
+    return route.fulfill({ status: 204 });
+  });
+  await page.route(`**/api/v1/admin/venues/${location}/objects?**`, route => deleted ? route.fulfill({ json: { objects: [] } }) : route.fallback());
+  await page.getByRole('button', { name: /Painting & sculpture/ }).click();
+  await page.locator('#deleteObject').click(); await page.locator('#confirmDelete').click();
+  await expect(page.locator('#status')).toHaveText('Object deleted.');
+  await page.getByRole('button', { name: 'Add object', exact: true }).click();
+  await expect(page.locator('#guidedDialog')).toBeVisible();
+  await expect(page.locator('.capturePhoto')).toHaveCount(0);
+  await expect(page.getByLabel('Object name', { exact: true })).toHaveValue('');
+});
