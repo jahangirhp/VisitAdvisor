@@ -13,9 +13,14 @@ from pymongo.asynchronous.database import AsyncDatabase
 from starlette.concurrency import run_in_threadpool
 
 from app.core.config import Settings
+from app.modules.admin.reference_focus import FOCUS_VERSION
 from app.modules.live_camera.export import catalog_object
-from app.modules.live_camera.geometry import validate_local
-from app.modules.live_camera.inference import CameraFailure, CameraRecognizer
+from app.modules.live_camera.geometry import requires_geometry, validate_local
+from app.modules.live_camera.inference import (
+    MAX_CAMERA_OBJECTS,
+    CameraFailure,
+    CameraRecognizer,
+)
 from app.modules.live_camera.pipeline import PIPELINE_VERSION, profile, view_coverage
 from app.modules.visual.features import digest
 from app.modules.visual.repository import evidence_hash
@@ -27,7 +32,7 @@ POLICY = {
     "global_weight": 0.75,
     "calibrated": False,
     "geometry_min_score": 0.4,
-    "geometry_scope": "reference-view-v1",
+    "geometry_scope": "planar-and-scene-v2",
 }
 
 
@@ -43,7 +48,9 @@ class AtlasCameraReferences:
         self.discover_objects = discover_objects
         self.directory = directory
         self.location_id = settings.live_camera_location_id
-        self.object_ids = sorted(set(settings.live_camera_object_ids))
+        self.object_ids = (
+            [] if discover_objects else sorted(set(settings.live_camera_object_ids))
+        )
         self.policy: dict[str, Any] = dict(POLICY)
         if settings.live_camera_geometry_rerank:
             self.policy["geometry_ranking"] = "spatial-verification-v1"
@@ -87,13 +94,19 @@ class AtlasCameraReferences:
             records = (
                 await self.db["visual_references"]
                 .find({"location_id": self.location_id}, {"object_id": 1})
-                .to_list(length=13)
+                .to_list(length=MAX_CAMERA_OBJECTS + 1)
             )
             if not records:
                 raise CameraFailure("NO_PREPARED_REFERENCES")
-            if len(records) > 12:
+            if len(records) > MAX_CAMERA_OBJECTS:
                 raise CameraFailure("CAMERA_OBJECT_LIMIT")
-            self.object_ids = sorted({record["object_id"] for record in records})
+            self.object_ids = sorted(
+                {
+                    record["object_id"]
+                    for record in records
+                    if ObjectId.is_valid(record.get("object_id"))
+                }
+            )
         location = await self.db["locations"].find_one(
             {"_id": ObjectId(self.location_id), "status": "active"}, {"name": 1}
         )
@@ -120,7 +133,7 @@ class AtlasCameraReferences:
                     )
                 },
             )
-            .to_list(length=13)
+            .to_list(length=MAX_CAMERA_OBJECTS + 1)
         )
         records = (
             await self.db["visual_references"]
@@ -141,42 +154,62 @@ class AtlasCameraReferences:
                     )
                 },
             )
-            .to_list(length=13)
+            .to_list(length=MAX_CAMERA_OBJECTS + 1)
         )
-        if len(objects) != len(self.object_ids) or len(records) != len(self.object_ids):
+        if not self.discover_objects and (
+            len(objects) != len(self.object_ids) or len(records) != len(self.object_ids)
+        ):
             raise CameraFailure("REFERENCES_UNAVAILABLE")
         source_ids = {sid for obj in objects for sid in obj.get("source_ids", [])}
-        if not source_ids or len(source_ids) > 120:
+        if not source_ids or len(source_ids) > MAX_CAMERA_OBJECTS * 100:
             raise CameraFailure("REFERENCES_UNAVAILABLE")
         sources = (
             await self.db["sources"]
             .find(
                 {
-                    "_id": {"$in": [ObjectId(sid) for sid in source_ids]},
+                    "_id": {
+                        "$in": [
+                            ObjectId(sid)
+                            for sid in source_ids
+                            if ObjectId.is_valid(sid)
+                        ]
+                    },
                     "location_id": self.location_id,
                 },
                 {key: 1 for key in ("location_id", "title", "url", "raw_record")},
             )
-            .to_list(length=121)
+            .to_list(length=MAX_CAMERA_OBJECTS * 100 + 1)
         )
         by_source = {str(s["_id"]): s for s in sources}
         by_object = {str(obj["_id"]): obj for obj in objects}
         by_record = {r["object_id"]: r for r in records}
-        if set(by_source) != source_ids or set(by_record) != set(self.object_ids):
+        if not self.discover_objects and (
+            set(by_source) != source_ids or set(by_record) != set(self.object_ids)
+        ):
             raise CameraFailure("REFERENCES_UNAVAILABLE")
         rows = []
         for oid in self.object_ids:
-            obj, record = by_object[oid], by_record[oid]
-            evidence = [by_source[sid] for sid in sorted(obj.get("source_ids", []))]
+            obj, record = by_object.get(oid), by_record.get(oid)
+            if obj is None or record is None:
+                if self.discover_objects:
+                    continue
+                raise CameraFailure("REFERENCES_UNAVAILABLE")
+            linked = set(obj.get("source_ids", []))
+            evidence = [by_source[sid] for sid in sorted(linked) if sid in by_source]
             if (
                 not evidence
+                or len(evidence) != len(linked)
                 or record["model"] != self.model["source_model"]
                 or record["preprocessing"] != self.model["reference_preprocessing"]
                 or record["evidence_hash"] != evidence_hash(obj, evidence)
                 or not record.get("set_id")
             ):
+                if self.discover_objects:
+                    continue
                 raise CameraFailure("REFERENCES_UNAVAILABLE")
             rows.append({"object": obj, "record": record, "sources": evidence})
+        if not rows:
+            raise CameraFailure("NO_PREPARED_REFERENCES")
         self.reference_signature = digest(
             {"location": location, "rows": rows, "model": self.model}
         )
@@ -229,12 +262,10 @@ class AtlasCameraReferences:
                 "views.reference.viewpoint": 1,
                 "views.reference.rights_status": 1,
                 "views.derived.regions": 1,
+                "views.derived.preparation": 1,
                 "views.image_hash": 1,
             }
-            if (
-                not self.adaptive
-                or profile(row["object"].get("type", "other")) == "planar"
-            ):
+            if requires_geometry(row["object"].get("type", "other"), self.policy):
                 projection["views.derived.local"] = 1
             async with reads:
                 # Larger immutable descriptor transfers need more time than a
@@ -256,6 +287,17 @@ class AtlasCameraReferences:
             record = task.result()
             if record is None:
                 raise CameraFailure("REFERENCES_CHANGED", 409)
+            focused = []
+            for view in record["views"]:
+                preparation = view["derived"].get("preparation") or {}
+                if preparation.get("version") == FOCUS_VERSION:
+                    if preparation.get("source_sha256") != view.get("image_hash"):
+                        raise CameraFailure("REFERENCES_UNAVAILABLE")
+                    focused.append(view)
+            if focused:
+                # Do not let an unselected full-scene fallback reintroduce the
+                # background when this object has genuine selected references.
+                record = {**record, "views": focused}
             obj = catalog_object(row["object"], row["sources"], record)
             for view, original in zip(obj["views"], record["views"], strict=True):
                 reference_sources = set(view["source_ids"])
@@ -263,8 +305,17 @@ class AtlasCameraReferences:
                     row["object"]["source_ids"]
                 ):
                     raise CameraFailure("REFERENCES_UNAVAILABLE")
-                if not self.adaptive or profile(obj.get("type", "other")) == "planar":
+                if requires_geometry(obj.get("type", "other"), self.policy):
                     local = original["derived"]["local"]
+                    # Older OpenCV references may exceed nfeatures at tied
+                    # responses. Apply today's paired 800-feature cap in memory.
+                    if len(local["points"]) != len(local["descriptors"]):
+                        raise CameraFailure("REFERENCES_UNAVAILABLE")
+                    local = {
+                        **local,
+                        "points": local["points"][:800],
+                        "descriptors": local["descriptors"][:800],
+                    }
                     validate_local(local)
                     view["local"] = local
                 view["image_hash"] = original.get("image_hash")

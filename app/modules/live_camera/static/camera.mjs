@@ -131,6 +131,17 @@ async function nextFrame(run) {
     if (run !== generation || !running) return;
     if (!response.ok) {
       const error = await response.json().catch(() => ({}));
+      if (response.status === 429) {
+        networkErrors = 0;
+        clearTimeout(timeout);
+        pending = null;
+        resetTracking();
+        const retryAfter = Number(response.headers.get('Retry-After'));
+        const delay = Number.isFinite(retryAfter) ? Math.min(5000, Math.max(1000, retryAfter * 1000)) : 1500;
+        status('Checking the object…');
+        timer = setTimeout(() => nextFrame(run), delay);
+        return;
+      }
       if (response.status === 409 || ['REFERENCES_EXPIRED', 'REFERENCES_UNAVAILABLE'].includes(error.error)) {
         await loadCatalog($('location').value);
         return;
@@ -286,7 +297,7 @@ async function loadCatalog(key) {
       const data = await response.json().catch(() => ({}));
       const messages = {
         NO_PREPARED_REFERENCES: 'This venue has no prepared photo references yet. Prepare reference photos in admin, then reselect this venue.',
-        CAMERA_OBJECT_LIMIT: 'This venue exceeds the current camera limit of 12 prepared objects.',
+        CAMERA_OBJECT_LIMIT: 'This venue exceeds the current camera limit of 500 prepared objects.',
       };
       throw new Error(messages[data.error] || 'Venue references are unavailable. Try reloading shortly.');
     }

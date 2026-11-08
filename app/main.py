@@ -52,11 +52,7 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
         # Mounted applications do not receive a separate ASGI lifespan. Share
         # the parent client, whose shutdown is owned by this lifespan.
         app.state.camera.state.mongodb = mongodb
-        if (
-            settings.live_camera_preload
-            and settings.live_camera_location_id
-            and settings.live_camera_object_ids
-        ):
+        if settings.live_camera_preload and settings.live_camera_location_id:
             camera_preload = asyncio.create_task(app.state.camera.state.prepare())
         if settings.visual_enabled:
             from app.modules.visual.features import DinoEncoder, VisualFailure

@@ -653,3 +653,103 @@ test('all saved venues are selectable and an unprepared venue clears scanning', 
   await page.locator('#location').selectOption(location);
   await expect(page.locator('#start')).toBeEnabled();
 });
+
+test('full venue catalog recognizes an object beyond the old twelve-object limit', async ({ page }) => {
+  await fakeCamera(page);
+  const full = structuredClone(catalog);
+  full.objects = Array.from({length: 113}, (_, index) => ({
+    id: index.toString(16).padStart(24, '0'), location_id: location,
+    name: index === 112 ? 'Santa train' : `Object ${index}`, sources: [],
+  }));
+  await page.route('**/bundle/catalog.json*', route => route.fulfill({json: full}));
+  await page.goto('/');
+  await expect(page.locator('#start')).toBeEnabled();
+  await page.evaluate(id => { window.testCandidate = id; }, full.objects.at(-1).id);
+  await page.locator('#start').click();
+  await expect(page.locator('#object-name')).toHaveText('Santa train');
+  await page.locator('#stop').click();
+});
+
+test('busy responses wait and recover without consuming connection retries', async ({ page }) => {
+  await fakeCamera(page);
+  let requests = 0;
+  await page.route('**/recognize?*', async route => {
+    requests++;
+    if (requests <= 2 || requests === 7) return route.fulfill({
+      status: 503, json: {error: 'RECOGNITION_UNAVAILABLE'},
+    });
+    if (requests <= 6) return route.fulfill({
+      status: 429, headers: {'Retry-After': '1'}, json: {error: 'RECOGNITION_BUSY'},
+    });
+    return route.fulfill({json: {
+      version: 'camera-server-v1', location_id: location,
+      reference_version: catalog.reference_version, automatic_identification: false,
+      candidates: [{id: ids[0], score: 0.9}], inferenceMs: 10,
+    }});
+  });
+  await page.goto('/');
+  await page.locator('#start').click();
+  await expect(page.locator('#status')).toHaveText('Checking the object…');
+  await expect(page.locator('#stop')).toBeVisible();
+  await expect(page.locator('#object-name')).toHaveText('Painting 1', {timeout: 15000});
+  expect(requests).toBeGreaterThan(7);
+  await page.locator('#stop').click();
+});
+
+test('stop cancels a busy response retry', async ({ page }) => {
+  await fakeCamera(page);
+  let requests = 0;
+  await page.route('**/recognize?*', route => {
+    requests++;
+    return route.fulfill({status: 429, headers: {'Retry-After': '1'}, json: {error: 'RECOGNITION_BUSY'}});
+  });
+  await page.goto('/');
+  await page.locator('#start').click();
+  await expect(page.locator('#status')).toHaveText('Checking the object…');
+  await page.locator('#stop').click();
+  await page.waitForTimeout(1500);
+  expect(requests).toBe(1);
+  await expect(page.locator('#status')).toHaveText('Camera stopped.');
+});
+
+test('a detailed object is acquired despite small hand movement during server checks', async ({page}) => {
+  await fakeCamera(page);
+  await page.addInitScript(() => {
+    window.handShift = 0;
+    CanvasRenderingContext2D.prototype.drawImage = function () {
+      const size = this.canvas.width, pixels = this.createImageData(size, size);
+      for (let y = 0; y < size; y++) {
+        for (let x = 0; x < size; x++) {
+          const sx = x - window.handShift;
+          const inside = sx >= 35 && sx < 189 && y >= 35 && y < 189;
+          const value = inside ? (((sx >> 2) + (y >> 2)) % 2 ? 250 : 90) : 20;
+          const i = (y * size + x) * 4;
+          pixels.data[i] = pixels.data[i + 1] = pixels.data[i + 2] = value;
+          pixels.data[i + 3] = 255;
+        }
+      }
+      this.putImageData(pixels, 0, 0);
+    };
+  });
+  const santaCatalog = structuredClone(catalog);
+  santaCatalog.objects[0].name = 'Santa train';
+  santaCatalog.objects[0].type = 'sculpture';
+  await page.route('**/bundle/catalog.json*', route => route.fulfill({json: santaCatalog}));
+  let requests = 0;
+  await page.route('**/recognize?*', async route => {
+    requests++;
+    await page.evaluate(() => { window.handShift = window.handShift === 0 ? 6 : 0; });
+    await page.waitForTimeout(120);
+    await route.fulfill({json: {
+      version: 'camera-server-v1', location_id: location,
+      reference_version: catalog.reference_version, automatic_identification: false,
+      candidates: [{id: ids[0], score: 0.9}], inferenceMs: 100,
+    }});
+  });
+  await page.goto('/');
+  await page.locator('#start').click();
+  await expect(page.locator('#object-name')).toHaveText('Santa train', {timeout: 5000});
+  expect(requests).toBeGreaterThanOrEqual(3);
+  await expect(page.locator('#status')).toContainText('Possible match');
+  await page.locator('#stop').click();
+});

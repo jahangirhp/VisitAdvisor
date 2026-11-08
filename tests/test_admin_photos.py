@@ -768,7 +768,7 @@ def test_guided_metadata_preserves_original_and_stays_private_until_preparation(
     details = client.get(PATH, headers=HEADERS).json()
     assert details["photos"][0]["capture_metadata"] == CAPTURE_METADATA
     describe = AsyncMock()
-    # Descriptors run in a synchronous encoder thread, never on a crop or mask.
+    # Preparation derives a focused image without altering the private source.
     inputs = []
     encoder = SimpleNamespace(
         model="local-model",
@@ -781,7 +781,16 @@ def test_guided_metadata_preserves_original_and_stays_private_until_preparation(
     assert reference["evidence"]["capture_metadata"] == CAPTURE_METADATA
     assert reference["evidence"]["sha256"] == hashlib.sha256(image).hexdigest()
     assert reference["source_ids"] == [SOURCE]
-    assert inputs == [prepare_image(image, "image/jpeg")]
+    prepared = service.visual.publish.await_args.args[0]["views"][0]["derived"].get(
+        "preparation"
+    )
+    if prepared is None:
+        assert inputs == [prepare_image(photo["data"], "image/jpeg")]
+    else:
+        assert prepared["version"] == "object-focus-v1"
+        assert prepared["source_sha256"] == photo["sha256"]
+        assert hashlib.sha256(inputs[0]).hexdigest() == prepared["image_sha256"]
+        assert Image.open(io.BytesIO(inputs[0])).format == "PNG"
     assert db["objects"].rows == [obj]
     assert db["sources"].rows == [source]
 
@@ -859,7 +868,7 @@ def upload_mask(client, mask, capture=CAPTURE_METADATA, content_type="image/png"
     )
 
 
-def test_foreground_mask_is_private_source_linked_and_excluded_from_descriptors(setup):
+def test_foreground_mask_is_private_source_linked_and_focuses_descriptors(setup):
     client, service, db, *_ = setup
     response = upload_mask(client, png_mask())
     assert response.status_code == 201, response.text
@@ -897,7 +906,16 @@ def test_foreground_mask_is_private_source_linked_and_excluded_from_descriptors(
         "evidence"
     ]
     assert evidence["foreground_mask"] == photo["foreground_mask"]
-    assert inputs == [prepare_image(jpeg(), "image/jpeg")]
+    prepared = service.visual.publish.await_args.args[0]["views"][0]["derived"].get(
+        "preparation"
+    )
+    if prepared is None:
+        assert inputs == [prepare_image(photo["data"], "image/jpeg")]
+    else:
+        assert prepared["version"] == "object-focus-v1"
+        assert prepared["source_sha256"] == photo["sha256"]
+        assert hashlib.sha256(inputs[0]).hexdigest() == prepared["image_sha256"]
+        assert Image.open(io.BytesIO(inputs[0])).format == "PNG"
 
 
 @pytest.mark.parametrize(
@@ -965,3 +983,61 @@ def test_manual_photos_have_no_mask_or_capture_metadata(setup):
         client.get(PATH + f"/photos/{photo_id}/mask", headers=HEADERS).status_code
         == 404
     )
+
+
+def test_published_source_can_gain_focused_descriptors_without_duplicate_views(setup):
+    client, service, db, *_ = setup
+    assert upload_mask(client, png_mask()).status_code == 201
+    photo = db["admin_reference_photos"].rows[0]
+    encoder = SimpleNamespace(
+        model="local-model",
+        preprocessing="local-preprocess",
+        describe=lambda image, **kwargs: {"regions": []},
+    )
+    service.visual.publish = AsyncMock()
+    asyncio.run(service.publish(LOCATION, OBJECT, encoder))
+    legacy = deepcopy(service.visual.publish.await_args.args[0])
+    del legacy["views"][0]["derived"]["preparation"]
+    del legacy["views"][0]["reference"]["evidence"]["reference_preparation"]
+    db["visual_references"].rows = [legacy]
+    asyncio.run(service.publish(LOCATION, OBJECT, encoder))
+    updated, previous = service.visual.publish.await_args.args
+    assert previous["set_id"] == legacy["set_id"]
+    assert updated["set_id"] != legacy["set_id"]
+    assert len(updated["views"]) == len(legacy["views"]) == 1
+    assert updated["views"][0]["image_hash"] == photo["sha256"]
+    assert updated["views"][0]["derived"]["preparation"]["version"] == "object-focus-v1"
+    assert photo["data"] == jpeg()
+    db["visual_references"].rows = [updated]
+    with pytest.raises(ApplicationError, match="No new photos"):
+        asyncio.run(service.publish(LOCATION, OBJECT, encoder))
+
+
+@pytest.mark.parametrize("kind", ["room", "building"])
+def test_repreparing_a_scene_restores_context_instead_of_reusing_object_crop(
+    setup, kind
+):
+    client, service, db, *_ = setup
+    assert upload_mask(client, png_mask()).status_code == 201
+    photo = db["admin_reference_photos"].rows[0]
+    inputs = []
+    encoder = SimpleNamespace(
+        model="local-model",
+        preprocessing="local-preprocess",
+        describe=lambda image, **kwargs: inputs.append(image) or {"regions": []},
+    )
+    service.visual.publish = AsyncMock()
+    asyncio.run(service.publish(LOCATION, OBJECT, encoder))
+    focused = deepcopy(service.visual.publish.await_args.args[0])
+    assert focused["views"][0]["derived"]["preparation"]["method"] == "masked-crop"
+    db["visual_references"].rows = [focused]
+    db["objects"].rows[0]["type"] = kind
+    asyncio.run(service.publish(LOCATION, OBJECT, encoder))
+    restored, previous = service.visual.publish.await_args.args
+    assert previous["set_id"] == focused["set_id"]
+    assert restored["set_id"] != focused["set_id"]
+    assert len(restored["views"]) == 1
+    assert "preparation" not in restored["views"][0]["derived"]
+    assert "reference_preparation" not in restored["views"][0]["reference"]["evidence"]
+    assert inputs[-1] == prepare_image(photo["data"], photo["content_type"])
+    assert photo["data"] == jpeg()

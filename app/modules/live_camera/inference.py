@@ -11,14 +11,20 @@ from threading import Lock
 from time import perf_counter
 from typing import Any
 
-from PIL import Image, UnidentifiedImageError
+from PIL import Image, ImageStat, UnidentifiedImageError
 
-from app.modules.live_camera.geometry import describe_local, validate_local
+from app.modules.live_camera.geometry import (
+    describe_local,
+    requires_geometry,
+    validate_local,
+)
 from app.modules.visual.features import (
     geometric_evidence,
     geometric_score,
     verified_similarity,
 )
+
+MAX_CAMERA_OBJECTS = 500
 
 
 class CameraFailure(Exception):
@@ -60,7 +66,7 @@ class CameraRecognizer:
             or not 0.45 <= policy["candidate_floor"] <= 1
             or not 0.02 <= policy["candidate_margin"] <= 1
             or not 3 <= policy["stable_frames"] <= 10
-            or not 1 <= len(self.catalog["objects"]) <= 12
+            or not 1 <= len(self.catalog["objects"]) <= MAX_CAMERA_OBJECTS
         ):
             raise ValueError("Invalid camera references")
         self.views: list[tuple[str, list[Any]]] = []
@@ -99,13 +105,21 @@ class CameraRecognizer:
             views = []
             self.local_views[obj["id"]] = []
             for view in obj["views"]:
-                from app.modules.live_camera.pipeline import profile
-
-                if self.geometry_enabled and (
-                    not self.adaptive or profile(obj.get("type", "other")) == "planar"
+                if self.geometry_enabled and requires_geometry(
+                    obj.get("type", "other"), policy
                 ):
                     validate_local(view["local"])
-                    self.local_views[obj["id"]].append(view["local"])
+                    self.local_views[obj["id"]].append(
+                        {
+                            **view["local"],
+                            "points": np.asarray(
+                                view["local"]["points"], dtype=np.float32
+                            ),
+                            "descriptors": np.asarray(
+                                view["local"]["descriptors"], dtype=np.float32
+                            ),
+                        }
+                    )
                 vectors = np.asarray(view["vectors"], dtype=np.float32)
                 if (
                     vectors.ndim != 2
@@ -236,6 +250,21 @@ class CameraRecognizer:
             from app.modules.live_camera.pipeline import recognize
 
             return recognize(self, rgb, started)
+        if (
+            self.catalog.get("policy", {}).get("geometry_scope")
+            == "planar-and-scene-v2"
+            and max(ImageStat.Stat(rgb).stddev) < 2
+        ):
+            return {
+                "version": "camera-server-v1",
+                "location_id": self.catalog["location"]["id"],
+                "reference_version": self.reference_version,
+                "automatic_identification": False,
+                "candidates": [],
+                "decision": "unreadable",
+                "suggestion_allowed": False,
+                "inferenceMs": round((perf_counter() - started) * 1000, 2),
+            }
         means = np.array([0.485, 0.456, 0.406], dtype=np.float32)
         stds = np.array([0.229, 0.224, 0.225], dtype=np.float32)
         tensor = np.ascontiguousarray(
@@ -249,36 +278,84 @@ class CameraRecognizer:
         if vector.shape != (384,) or not np.isfinite(vector).all() or norm <= 0:
             raise CameraFailure("RECOGNITION_UNAVAILABLE")
         vector /= norm
-        local = describe_local(rgb) if self.geometry_enabled else None
-        candidates: list[dict[str, Any]] = []
+        geometry_rerank = getattr(self, "geometry_rerank", False)
+        baseline = 0.0 if self.geometry_enabled else -1.0
+        ranked_views = []
         for object_id, views in self.views:
-            score = 0.0 if local is not None else -1.0
-            for index, view in enumerate(views):
-                # Embedding and geometric evidence must describe the same view.
-                # A detail in one room view cannot verify a different, highly
-                # similar room view and let it outrank the depicted artwork.
-                if local is not None and getattr(self, "geometry_rerank", False):
-                    evidence = geometric_evidence(
-                        local, self.local_views[object_id][index]
-                    )
-                    score = max(
-                        score,
-                        verified_similarity(evidence, self.object_types[object_id]),
-                    )
-                    continue
-                if (
-                    local is not None
-                    and geometric_score(local, self.local_views[object_id][index]) < 0.4
-                ):
-                    continue
+            scores = []
+            for view in views:
                 similarities = view @ vector
-                score = max(
-                    score,
-                    0.75 * float(similarities[0]) + 0.25 * float(similarities.max()),
+                scores.append(
+                    0.75 * float(similarities[0]) + 0.25 * float(similarities.max())
                 )
+            ranked_views.append((max(baseline, *scores), object_id, scores))
+        if not geometry_rerank:
+            ranked_views.sort(key=lambda row: (-row[0], row[1]))
+        policy = self.catalog.get("policy", {})
+        # Below floor minus margin, even an unverified upper bound cannot
+        # establish a match or make an otherwise accepted match ambiguous.
+        # Omit those weak candidates rather than publish unverified scores.
+        minimum_bound = (
+            policy.get("candidate_floor", -1.0) - policy.get("candidate_margin", 0.0)
+            if policy.get("geometry_scope") == "planar-and-scene-v2"
+            and not geometry_rerank
+            else -1.0
+        )
+        local = None
+        candidates: list[dict[str, Any]] = []
+        for upper_bound, object_id, view_scores in ranked_views:
+            if upper_bound < minimum_bound:
+                break
+            # Geometry can only reject an embedding score. Once an object's
+            # best possible score is below third place, no remaining object
+            # can change the response. Keep equal bounds for deterministic ties.
+            if (
+                not geometry_rerank
+                and len(candidates) == 3
+                and upper_bound < candidates[-1]["score"]
+            ):
+                break
+            verify_geometry = self.geometry_enabled and requires_geometry(
+                getattr(self, "object_types", {}).get(object_id, "other"),
+                self.catalog.get("policy", {}),
+            )
+            score = baseline
+            indices = sorted(
+                range(len(view_scores)), key=view_scores.__getitem__, reverse=True
+            )
+            for index in indices:
+                if not geometry_rerank and view_scores[index] <= score:
+                    break
+                if verify_geometry:
+                    if local is None:
+                        described = describe_local(rgb)
+                        local = {
+                            **described,
+                            "points": np.asarray(described["points"], dtype=np.float32),
+                            "descriptors": np.asarray(
+                                described["descriptors"], dtype=np.float32
+                            ),
+                        }
+                    # Embedding and geometry must still describe the same view.
+                    reference = self.local_views[object_id][index]
+                    if geometry_rerank:
+                        evidence = geometric_evidence(local, reference)
+                        score = max(
+                            score,
+                            verified_similarity(evidence, self.object_types[object_id]),
+                        )
+                        continue
+                    if geometric_score(local, reference) < 0.4:
+                        continue
+                score = max(score, view_scores[index])
             if not math.isfinite(score):
                 raise CameraFailure("RECOGNITION_UNAVAILABLE")
             candidates.append({"id": object_id, "score": min(1.0, score)})
+            if not geometry_rerank:
+                candidates.sort(
+                    key=lambda item: (-float(item["score"]), str(item["id"]))
+                )
+                candidates = candidates[:3]
         candidates.sort(key=lambda item: (-float(item["score"]), str(item["id"])))
         self.check_fresh()
         return {

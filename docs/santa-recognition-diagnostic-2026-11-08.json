@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-08",
+  "scope": "Santa train cross-photo diagnostic, not independent recognition acceptance",
+  "production_object_count": 113,
+  "same_capture_session": true,
+  "automatic_identification": false,
+  "images_committed": false,
+  "floor": 0.55,
+  "margin": 0.04,
+  "geometry_gate": 0.4,
+  "rows": [
+    {
+      "photo_sha256": "b259402181ec00ea8096d8de48a8e57c1db0bac937d8ffbb88f545cdcabee09c",
+      "compared_reference_photos": 3,
+      "query_reference_overlap": false,
+      "previous_score": 0.0,
+      "corrected_score": 0.7562583982944489,
+      "other_112_objects_max_embedding_upper_bound": 0.2828105688095093,
+      "passes_existing_floor_and_margin": true
+    },
+    {
+      "photo_sha256": "784e7a33da166fb22774a5ab1203300938ddb7d6cd1ac1957ba6dd9200fd9416",
+      "compared_reference_photos": 3,
+      "query_reference_overlap": false,
+      "previous_score": 0.0,
+      "corrected_score": 0.7582769393920898,
+      "other_112_objects_max_embedding_upper_bound": 0.258501760661602,
+      "passes_existing_floor_and_margin": true
+    },
+    {
+      "photo_sha256": "d58a31d6d8d326d0ffed3ddc39fc9b962aec15b4211cde889aaa44a6ab5017ef",
+      "compared_reference_photos": 3,
+      "query_reference_overlap": false,
+      "previous_score": 0.0,
+      "corrected_score": 0.6124838441610336,
+      "other_112_objects_max_embedding_upper_bound": 0.30003780126571655,
+      "passes_existing_floor_and_margin": true
+    },
+    {
+      "photo_sha256": "e51fcdc4d007977a5f9ab5ea1ea858a3b48a93b465241d953e44d5dc59726054",
+      "compared_reference_photos": 3,
+      "query_reference_overlap": false,
+      "previous_score": 0.0,
+      "corrected_score": 0.7395825386047363,
+      "other_112_objects_max_embedding_upper_bound": 0.29233068227767944,
+      "passes_existing_floor_and_margin": true
+    }
+  ],
+  "unrelated_public_photo_diagnostic": {
+    "photos": 30,
+    "introduced_santa_suggestions": 0,
+    "max_santa_embedding_score": 0.1520894467830658
+  },
+  "limitations": [
+    "Query and retained references are different saved images from one user capture session, not independent held-out captures.",
+    "Competing objects use an embedding upper bound; geometric verification can only reduce their scores.",
+    "No physical iPhone or arbitrary unknown-object accuracy is claimed."
+  ]
+}

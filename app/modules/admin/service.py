@@ -13,6 +13,7 @@ from pymongo.errors import DuplicateKeyError
 from app.core.domain import validate_id
 from app.core.exceptions import ApplicationError
 from app.modules.admin.capture import prepare_foreground_mask
+from app.modules.admin.reference_focus import reference_image
 from app.modules.live_camera.pipeline import profile
 from app.modules.recognition.images import prepare_image
 from app.modules.sources.models import SourceCreate
@@ -327,18 +328,30 @@ class PhotoService:
             .to_list()
         )
         source_ids = {str(s["_id"]) for s in sources}
+        changed = False
         for photo in photos:
-            if any(
-                v["image_hash"] == photo["sha256"]
-                or v.get("normalized_image_hash") == photo["normalized_sha256"]
-                for v in views
+            image, preparation = await asyncio.to_thread(
+                reference_image, photo, obj.get("type", "other")
+            )
+            existing_index = next(
+                (
+                    index
+                    for index, view in enumerate(views)
+                    if view["image_hash"] == photo["sha256"]
+                    or view.get("normalized_image_hash") == photo["normalized_sha256"]
+                ),
+                None,
+            )
+            if (
+                existing_index is not None
+                and views[existing_index]["derived"].get("preparation") == preparation
             ):
                 continue
             if photo["source_id"] not in source_ids:
                 raise ApplicationError(
                     "SOURCE_MISMATCH", "Photo source no longer belongs to object.", 409
                 )
-            if len(views) >= MAX_VIEWS:
+            if existing_index is None and len(views) >= MAX_VIEWS:
                 raise ApplicationError(
                     "PHOTO_LIMIT", "Publishing would exceed four reference views.", 409
                 )
@@ -365,20 +378,24 @@ class PhotoService:
                 reference["evidence"]["capture_metadata"] = capture_metadata
             if photo.get("foreground_mask"):
                 reference["evidence"]["foreground_mask"] = photo["foreground_mask"]
-            image = await asyncio.to_thread(
-                prepare_image, bytes(photo["data"]), photo["content_type"]
-            )
+            if preparation is not None:
+                reference["evidence"]["reference_preparation"] = preparation
             derived = await asyncio.to_thread(encoder.describe, image, regions=True)
-            views.append(
-                {
-                    "reference": reference,
-                    "metadata_hash": digest(reference),
-                    "image_hash": photo["sha256"],
-                    "normalized_image_hash": photo["normalized_sha256"],
-                    "derived": derived,
-                }
-            )
-        if not views or len(views) == len((previous or {}).get("views", [])):
+            if preparation is not None:
+                derived["preparation"] = preparation
+            view = {
+                "reference": reference,
+                "metadata_hash": digest(reference),
+                "image_hash": photo["sha256"],
+                "normalized_image_hash": photo["normalized_sha256"],
+                "derived": derived,
+            }
+            if existing_index is None:
+                views.append(view)
+            else:
+                views[existing_index] = view
+            changed = True
+        if not views or not changed:
             raise ApplicationError(
                 "NO_PENDING_PHOTOS", "No new photos to prepare.", 409
             )
