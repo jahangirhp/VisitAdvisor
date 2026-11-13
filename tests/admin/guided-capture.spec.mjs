@@ -428,3 +428,37 @@ test('one Save from the camera uploads and embeds the entire named collection', 
   await expect(page.getByRole('button', { name: /Prepare|^OK$|^Done$/ })).toHaveCount(0);
   await expect(page.locator('#saveCollection')).toBeHidden();
 });
+
+
+for (const keepOriginal of [false, true]) test(`gallery photos share object analysis and save ${keepOriginal ? 'original' : 'mask'}`, async ({ page }) => {
+  const admin = await mockAdmin(page); await mockCamera(page);
+  await openCapture(page);
+  const analysis = await mockAnalysis(page);
+  const image = Buffer.from(await page.evaluate(() => {
+    const canvas = document.createElement('canvas'); canvas.width = 640; canvas.height = 480;
+    const context = canvas.getContext('2d'); context.fillStyle = 'blue'; context.fillRect(0, 0, 640, 480);
+    context.fillStyle = 'red'; context.fillRect(128, 96, 384, 288);
+    return canvas.toDataURL('image/png').split(',')[1];
+  }), 'base64');
+  const picker = page.waitForEvent('filechooser');
+  await page.locator('#choosePhotos').click();
+  await (await picker).setFiles({ name: 'online-photo.png', mimeType: 'image/png', buffer: image });
+  await expect(page.locator('.quickPhoto')).toHaveCount(1);
+  await expect.poll(() => analysis.calls.length).toBe(1);
+  await expect(page.locator('.quickPhoto')).toContainText('Object suggestion');
+  expect(await page.evaluate(() => window.__cameraFixture.requests)).toBe(1);
+  await page.locator('.quickPhoto').click();
+  await expect(page.locator('#quickSnapshot')).toBeVisible();
+  if (keepOriginal) {
+    await page.locator('#quickFullPhoto').click();
+    await expect(page.locator('.quickPhoto')).toContainText('Area adjusted');
+  } else await page.locator('#quickBack').click();
+  await page.locator('#quickDone').click();
+  await expect(page.locator('#capturePhotos .capturePhoto')).toHaveCount(1);
+  await saveObject(page);
+  expect(admin.uploads).toHaveLength(1);
+  expect(!!admin.uploads[0].get('foreground_mask')).toBe(!keepOriginal);
+  const metadata = JSON.parse(admin.uploads[0].get('capture_metadata'));
+  expect(metadata.selection.method).toBe(keepOriginal ? 'full-frame' : 'server-suggestion');
+  expect(metadata.selection.source_sha256).toBe(digest(await admin.uploads[0].get('image').arrayBuffer().then(bytes => Buffer.from(bytes))));
+});

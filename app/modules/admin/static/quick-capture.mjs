@@ -1,4 +1,4 @@
-import { analyzeTarget } from './guided-quality.mjs?v=delete-20261108-1';
+import { analyzeTarget } from './guided-quality.mjs?v=photo-focus-20261113-1';
 
 const $ = id => document.getElementById(id);
 const sha256 = async blob => [...new Uint8Array(await crypto.subtle.digest('SHA-256', await blob.arrayBuffer()))].map(byte => byte.toString(16).padStart(2, '0')).join('');
@@ -47,7 +47,7 @@ export class GuidedCapture {
     document.addEventListener('visibilitychange', () => { if (document.hidden) this.stopCamera(); });
     window.addEventListener('pagehide', () => this.close());
   }
-  open(profile = 'multiview') {
+  open(profile = 'multiview', { camera = true } = {}) {
     this.close();
     this.profile = ['planar', 'multiview', 'front-only', 'scene'].includes(profile) ? profile : 'multiview';
     this.limit = Math.max(0, Math.min(4, this.capacity())); this.point = [.5, .5]; this.delivered = false; this.analysisStopped = false;
@@ -55,7 +55,7 @@ export class GuidedCapture {
     $('guidedFallback').hidden = false; $('guidedStart').disabled = false; $('guidedStart').textContent = 'Retry camera';
     $('quickCamera').hidden = false; $('quickAim').style.left = '50%'; $('quickAim').style.top = '50%';
     this.say('Keep the whole object in view. Take photos from different angles.'); this.render();
-    $('guidedDialog').showModal(); void this.start();
+    $('guidedDialog').showModal(); if (camera) void this.start();
   }
   say(message) { $('quickStatus').textContent = message; }
   async start() {
@@ -130,6 +130,38 @@ export class GuidedCapture {
       void this.processQueue();
     } catch (error) { if (epoch === this.epoch) this.say(error.message); }
     finally { if (epoch === this.epoch) { this.encoding = false; this.render(); } }
+  }
+  async importPhotos(files) {
+    const epoch = this.epoch;
+    this.sessionId ||= crypto.randomUUID();
+    this.encoding = true; this.render();
+    let message = '';
+    try {
+      for (const file of files) {
+        if (this.entries.length >= this.limit) break;
+        const source = await decode(file), canvas = document.createElement('canvas');
+        const scale = Math.min(1, 1600 / Math.max(source.width, source.height));
+        canvas.width = Math.max(1, Math.round(source.width * scale)); canvas.height = Math.max(1, Math.round(source.height * scale));
+        contextOf(canvas).drawImage(source, 0, 0, canvas.width, canvas.height);
+        let blob;
+        for (const quality of [.88, .78, .66, .5]) { blob = await blobFrom(canvas, 'image/jpeg', quality); if (blob.size <= 1024 * 1024) break; }
+        if (blob.size > 1024 * 1024) { message = 'A photo is too large to analyze. Choose a smaller image.'; continue; }
+        const optimized = new File([blob], 'reference.jpg', { type: 'image/jpeg' });
+        const [sha, decoded] = await Promise.all([sha256(optimized), decode(optimized)]);
+        if (epoch !== this.epoch) return;
+        if (this.entries.some(entry => entry.sha === sha)) continue;
+        const quality = analyzeTarget(contextOf(decoded).getImageData(0, 0, decoded.width, decoded.height), [0, 0, 1, 1]);
+        const id = crypto.randomUUID();
+        this.entries.push({ file: optimized, canvas: decoded, point: [.5, .5], sha, id, version: 0,
+          state: ['planar', 'scene'].includes(this.profile) ? 'skipped' : 'queued', url: URL.createObjectURL(optimized),
+          captureMetadata: { version: 'guided-capture-v3', session_id: this.sessionId, frame_id: id, profile: this.profile,
+            requested_view: null, viewpoint_verified: false, target_box: [0, 0, 1, 1], quality_region: 'full-frame',
+            detection_status: ['planar', 'scene'].includes(this.profile) ? 'skipped' : 'pending',
+            quality: { sharpness: quality.sharpness, clipped_fraction: quality.clippedFraction, target_fraction: quality.targetFraction },
+            selection: { method: 'full-frame', reviewed: false, source_sha256: sha } } });
+      }
+      if (epoch === this.epoch) { this.say(message || 'Review each object suggestion. Tap a photo to adjust its area or keep the full photo.'); void this.processQueue(); }
+    } finally { if (epoch === this.epoch) { this.encoding = false; this.render(); } }
   }
   exportEntry(entry) {
     return { stepId: entry.id, file: entry.file, foregroundMask: entry.foregroundMask || null,

@@ -463,13 +463,13 @@ function updateGuidedPhoto(entry) {
   photo.captureMetadata.viewpoint_verified = !!photo.viewpoint && photo.viewpoint !== "unknown";
   renderCapture();
 }
-async function launchGuidedCapture(message = "") {
+async function launchGuidedCapture(message = "", files = null) {
   if (guidedLaunching || busy || captureReading || captureDraft || !locationId || capturePhotos.length >= 4) return;
   guidedLaunching = true;
   const launchContext = ++captureContext, venueId = locationId;
   try {
     if (!guidedCapture) {
-      const { GuidedCapture } = await import('./quick-capture.mjs?v=delete-20261108-1');
+      const { GuidedCapture } = await import('./quick-capture.mjs?v=photo-focus-20261113-1');
       guidedCapture = new GuidedCapture({ capacity: () => 4 - capturePhotos.length,
         analyze: (file, prompt, signal) => api(`/capture/analyze?${new URLSearchParams(prompt)}`, {
           method: "POST", headers: { "Content-Type": "image/jpeg" }, body: file, signal
@@ -484,7 +484,8 @@ async function launchGuidedCapture(message = "") {
     if (launchContext !== captureContext || venueId !== locationId || busy || captureReading || captureDraft || !token) return;
     const type = capturePhotos.length ? $("newObjectType").value : "";
     $("quickDetails").append($("captureIdentity"));
-    guidedCapture.open(["painting", "drawing", "print", "photograph"].includes(type) ? "planar" : ["building", "room"].includes(type) ? "scene" : "multiview");
+    guidedCapture.open(["painting", "drawing", "print", "photograph"].includes(type) ? "planar" : ["building", "room"].includes(type) ? "scene" : "multiview", { camera: !files });
+    if (files) await guidedCapture.importPhotos(files);
     $("guidedUploadStatus").textContent = message;
   } catch {
     if (launchContext !== captureContext || venueId !== locationId || !token) return;
@@ -505,6 +506,16 @@ for (const id of ["cameraInput", "libraryInput"]) {
     const context = captureContext, venue = locationId;
     if (picker?.entries.length) await importGuidedPhotos(picker.entries, () => context === captureContext && venue === locationId && !!token);
     if (context !== captureContext || venue !== locationId || !token) return;
+    if (guidedCapture) {
+      const optimized = [];
+      captureReading = true;
+      try {
+        for (const file of files.slice(0, 4 - capturePhotos.length)) optimized.push(await optimizePhoto(file));
+      } catch (error) { status(error.message); }
+      finally { captureReading = false; }
+      if (context !== captureContext || venue !== locationId || !token) return;
+      if (optimized.length) { await launchGuidedCapture("", optimized); return; }
+    }
     guidedCapture?.close(); $("guidedDialog").close();
     status("Optimizing photos on your device...");
     const message = await addCapturePhotos(files);
