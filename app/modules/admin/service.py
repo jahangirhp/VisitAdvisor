@@ -178,9 +178,13 @@ class PhotoService:
         records = await self.visual.references.find(
             {"location_id": location_id, "object_id": {"$in": ids}}, REFERENCE_FIELDS
         ).to_list()
-        photos = await self.photos.find(
-            {"location_id": location_id, "object_id": {"$in": ids}}, PHOTO_FIELDS
-        ).to_list()
+        photos = (
+            await self.photos.find(
+                {"location_id": location_id, "object_id": {"$in": ids}}, PHOTO_FIELDS
+            )
+            .sort("created_at", 1)
+            .to_list()
+        )
         source_ids = {sid for obj in objects for sid in obj.get("source_ids", [])}
         sources = (
             await self.db["sources"]
@@ -214,6 +218,9 @@ class PhotoService:
                     [p for p in photos if p["object_id"] == str(obj["_id"])],
                 )
             )
+        for row in rows:
+            first = next((p for p in photos if p["object_id"] == row["id"]), None)
+            row["first_photo_id"] = str(first["_id"]) if first else None
         return {"objects": rows, "offset": offset, "limit": limit}
 
     async def detail(self, location_id: str, object_id: str) -> dict[str, Any]:

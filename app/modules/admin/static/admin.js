@@ -5,6 +5,17 @@ let previewUrl = "", photoUrls = [], busy = false;
 let capturePhotos = [], captureDraft = null, captureReading = false, captureContext = 0, pendingPicker = null;
 let guidedCapture = null, guidedLaunching = false;
 let pendingDelete = null;
+let listPhotoUrls = [];
+function clearListImages() {
+  listPhotoUrls.forEach(url => URL.revokeObjectURL(url)); listPhotoUrls = [];
+}
+function confirmObjectDelete(id, name) {
+  if (busy) return;
+  pendingDelete = { id, path: `/venues/${locationId}/objects/${id}`, name };
+  $("deleteObjectName").textContent = name;
+  $("deleteError").textContent = "";
+  $("deleteDialog").showModal();
+}
 const tokenStorageKey = "visitadvisor.adminToken";
 function storedToken() {
   try { return sessionStorage.getItem(tokenStorageKey) || ""; } catch { return ""; }
@@ -29,7 +40,7 @@ function lock() {
   token = ""; generation++; objectId = ""; locationId = "";
   resetCapture(); showCollection(); $("venueDialog").close();
   $("deleteDialog").close();
-  clearImages(); $("detail").replaceChildren(); $("objects").replaceChildren();
+  clearImages(); clearListImages(); $("detail").replaceChildren(); $("objects").replaceChildren();
   $("login").hidden = false; $("workspace").hidden = true; $("logout").hidden = true;
   $("token").value = ""; $("token").focus();
 }
@@ -98,8 +109,10 @@ function renderObjects() {
   const query = $("search").value.toLowerCase();
   const visible = rows.filter(row => (!$("gaps").checked || row.needs_photos) && `${row.name} ${row.type}`.toLowerCase().includes(query));
   $("summary").textContent = `${visible.length} objects · ${rows.filter(row => row.needs_photos).length} need photos`;
+  clearListImages();
   $("objects").replaceChildren();
   for (const row of visible) {
+    const item = document.createElement("div"); item.className = "objectRow";
     const button = document.createElement("button"); button.className = "objectCard";
     button.setAttribute("aria-pressed", String(row.id === objectId));
     const content = document.createElement("span"), name = document.createElement("strong"), description = document.createElement("small"), badge = document.createElement("span");
@@ -107,9 +120,30 @@ function renderObjects() {
     description.textContent = `${row.type} · ${row.prepared} ready · ${row.pending} awaiting save`;
     badge.className = `badge${row.needs_photos ? "" : " complete"}`;
     badge.textContent = row.missing ? `${row.missing} more to target ${row.target}` : `Target ${row.target} collected`;
-    content.append(name, description); button.append(content, badge);
+    const thumbnail = document.createElement("span"); thumbnail.className = "objectThumbnail";
+    thumbnail.textContent = "No photo";
+    if (row.first_photo_id) {
+      thumbnail.textContent = "Loading?";
+      const venue = locationId;
+      fetch(`/api/v1/admin/venues/${venue}/objects/${row.id}/photos/${row.first_photo_id}`, {
+        headers: { Authorization: `Bearer ${token}` }, cache: "no-store"
+      }).then(async response => {
+        if (!response.ok) throw new Error("Photo unavailable");
+        const blob = await response.blob();
+        if (!item.isConnected) return;
+        const url = URL.createObjectURL(blob); listPhotoUrls.push(url);
+        const img = document.createElement("img"); img.alt = ""; img.src = url;
+        thumbnail.replaceChildren(img);
+      }).catch(() => { if (item.isConnected) thumbnail.textContent = "No preview"; });
+    }
+    content.className = "objectSummary";
+    content.append(name, description, badge); button.append(thumbnail, content);
+    const remove = document.createElement("button"); remove.type = "button";
+    remove.className = "objectDelete"; remove.textContent = "Delete";
+    remove.setAttribute("aria-label", `Delete ${row.name}`);
+    remove.addEventListener("click", () => confirmObjectDelete(row.id, row.name));
     button.addEventListener("click", () => { if (!busy) showObject(row.id).catch(error => status(error.message, true)); });
-    $("objects").append(button);
+    item.append(button, remove); $("objects").append(item);
   }
   if (!visible.length) $("objects").textContent = "No objects match these filters. Turn off the photo-gap filter to see the full page.";
 }
@@ -121,13 +155,7 @@ async function showObject(id) {
   $("detail").replaceChildren($("detailTemplate").content.cloneNode(true));
   $("objectName").textContent = data.name;
   $("stale").hidden = !data.stale;
-  $("deleteObject").addEventListener("click", () => {
-    if (busy) return;
-    pendingDelete = { id, path, name: data.name };
-    $("deleteObjectName").textContent = data.name;
-    $("deleteError").textContent = "";
-    $("deleteDialog").showModal();
-  });
+  $("deleteObject").addEventListener("click", () => confirmObjectDelete(id, data.name));
   for (const photo of data.photos) {
     const card = document.createElement("div"); card.className = "photo";
     const img = document.createElement("img"); img.alt = photo.viewpoint;
