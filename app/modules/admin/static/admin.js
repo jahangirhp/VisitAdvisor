@@ -497,7 +497,7 @@ async function launchGuidedCapture(message = "", files = null) {
   const launchContext = ++captureContext, venueId = locationId;
   try {
     if (!guidedCapture) {
-      const { GuidedCapture } = await import('./quick-capture.mjs?v=photo-focus-20261113-1');
+      const { GuidedCapture } = await import('./quick-capture.mjs?v=admin-cosmetic-20261115-1');
       guidedCapture = new GuidedCapture({ capacity: () => 4 - capturePhotos.length,
         analyze: (file, prompt, signal) => api(`/capture/analyze?${new URLSearchParams(prompt)}`, {
           method: "POST", headers: { "Content-Type": "image/jpeg" }, body: file, signal
