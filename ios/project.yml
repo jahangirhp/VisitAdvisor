@@ -9,7 +9,7 @@ packages:
     path: VisitAdvisorKit
   # Ray-Ban Meta camera streaming (developer preview; not App Store publishable yet).
   MWDAT:
-    url: https://github.com/facebook/meta-wearables-dat-ios
+    url: https://github.com/meta/meta-wearables-dat-ios
     exactVersion: 1.1.0
 settings:
   base:

@@ -91,7 +91,7 @@ static float median(std::vector<float> values) {
         cv::morphologyEx(edges, edges, cv::MORPH_CLOSE, cv::Mat::ones(3, 3, CV_8U));
 
         cv::Mat lab8, lab;
-        cv::cvtColor(rgb, lab8, cv::COLOR_RGB2LAB);
+        cv::cvtColor(rgb, lab8, cv::COLOR_RGB2Lab);
         lab8.convertTo(lab, CV_32FC3);
         // Border rows/columns in numpy order: top, bottom, left, right.
         float background[3];
