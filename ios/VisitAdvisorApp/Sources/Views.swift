@@ -49,7 +49,7 @@ struct VenueListView: View {
         }
         .navigationTitle("Venues")
         .toolbar {
-            NavigationLink { GlassesSettingsView() } label: { Image(systemName: "eyeglasses") }
+            NavigationLink { GlassesSettingsView() } label: { GlassesToolbarIcon() }
         }
         .navigationDestination(for: Venue.self) { VenueView(venue: $0) }
         .task { await library.refresh() }
@@ -100,6 +100,9 @@ struct VenueView: View {
                         Label("Glasses", systemImage: "eyeglasses").tag(FrameSourceKind.glasses)
                     }
                     .pickerStyle(.segmented)
+                    if sourceKind == .glasses {
+                        GlassesStatusRow()
+                    }
                     if sourceKind == .glasses && !glasses.isRegistered {
                         NavigationLink("Connect Ray-Ban Meta glasses…") { GlassesSettingsView() }
                     }
@@ -349,7 +352,12 @@ struct GlassesSettingsView: View {
     var body: some View {
         Form {
             Section {
-                LabeledContent("Status", value: glasses.statusText)
+                LabeledContent("Status") {
+                    HStack(spacing: 6) {
+                        Circle().fill(glasses.readiness.color).frame(width: 10, height: 10)
+                        Text(glasses.statusText)
+                    }
+                }
                 LabeledContent("Devices", value: "\(glasses.deviceCount)")
             }
             Section {
@@ -376,5 +384,35 @@ struct GlassesSettingsView: View {
             #endif
         }
         .navigationTitle("Glasses")
+    }
+}
+
+/// Glasses icon with a status dot: green ready, orange wear/connecting,
+/// grey not connected, red Meta AI unavailable.
+struct GlassesToolbarIcon: View {
+    @EnvironmentObject private var glasses: GlassesLink
+
+    var body: some View {
+        Image(systemName: "eyeglasses")
+            .overlay(alignment: .topTrailing) {
+                Circle()
+                    .fill(glasses.readiness.color)
+                    .frame(width: 9, height: 9)
+                    .overlay(Circle().stroke(Color(.systemBackground), lineWidth: 1.5))
+                    .offset(x: 4, y: -3)
+            }
+            .accessibilityLabel(glasses.readiness.title)
+    }
+}
+
+struct GlassesStatusRow: View {
+    @EnvironmentObject private var glasses: GlassesLink
+
+    var body: some View {
+        HStack(spacing: 8) {
+            Circle().fill(glasses.readiness.color).frame(width: 10, height: 10)
+            Text(glasses.readiness.title).font(.subheadline)
+        }
+        .accessibilityElement(children: .combine)
     }
 }

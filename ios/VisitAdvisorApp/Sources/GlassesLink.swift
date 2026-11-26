@@ -42,6 +42,39 @@ final class GlassesLink: ObservableObject {
 
     var isRegistered: Bool { registration == .registered }
 
+    /// Compact glasses status for the indicator dot and status lines.
+    enum Readiness {
+        case ready, putOn, connecting, notConnected, unavailable
+
+        var title: String {
+            switch self {
+            case .ready: "Glasses ready"
+            case .putOn: "Put on your glasses"
+            case .connecting: "Connecting…"
+            case .notConnected: "Glasses not connected"
+            case .unavailable: "Meta AI app needed"
+            }
+        }
+
+        var color: Color {
+            switch self {
+            case .ready: .green
+            case .putOn, .connecting: .orange
+            case .notConnected: .gray
+            case .unavailable: .red
+            }
+        }
+    }
+
+    var readiness: Readiness {
+        switch registration {
+        case .registered: hasActiveDevice ? .ready : .putOn
+        case .registering: .connecting
+        case .available: .notConnected
+        case .unavailable: .unavailable
+        }
+    }
+
     var statusText: String {
         switch registration {
         case .registered: hasActiveDevice ? "Glasses connected" : "Registered — put on your glasses"
