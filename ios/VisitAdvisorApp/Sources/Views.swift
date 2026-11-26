@@ -80,8 +80,10 @@ struct VenueView: View {
     let venue: Venue
     @EnvironmentObject private var library: LibraryModel
     @EnvironmentObject private var glasses: GlassesLink
-    @State private var package: VenuePackage?
-    @State private var scanning = false
+    /// The open scan. Presenting by item guarantees the screen gets its package
+    /// (an isPresented flag can show an empty cover before the package arrives).
+    @State private var session: ScanSession?
+    @State private var opening = false
     /// The camera mode is remembered between launches.
     @AppStorage("cameraMode") private var sourceKind: FrameSourceKind = .phone
 
@@ -106,7 +108,15 @@ struct VenueView: View {
                     if sourceKind == .glasses && !glasses.isRegistered {
                         NavigationLink("Connect Ray-Ban Meta glasses…") { GlassesSettingsView() }
                     }
-                    Button("Start scanning") { scan() }
+                    Button {
+                        scan()
+                    } label: {
+                        HStack {
+                            Text("Start scanning")
+                            if opening { Spacer(); ProgressView() }
+                        }
+                    }
+                    .disabled(opening)
                         .disabled(sourceKind == .glasses && !glasses.isRegistered)
                     Button("Check for update") { library.download(venue) }
                     Button("Delete download", role: .destructive) { Task { await library.delete(venue) } }
@@ -127,20 +137,30 @@ struct VenueView: View {
         .task {
             if library.downloads[venue.id] == .notInstalled { library.download(venue) }
         }
-        .fullScreenCover(isPresented: $scanning, onDismiss: {
-            if let package { Task { await library.store?.release(package) } }
-            package = nil
-        }) {
-            if let package { CameraScreen(package: package, kind: sourceKind, link: glasses) }
+        .fullScreenCover(item: $session, onDismiss: nil) { session in
+            CameraScreen(package: session.package, kind: session.kind, link: glasses)
+                .onDisappear { Task { await library.store?.release(session.package) } }
         }
     }
 
     private func scan() {
+        guard !opening else { return }
+        opening = true
+        let kind = sourceKind
         Task {
-            package = await library.openPackage(venue)
-            scanning = package != nil
+            defer { opening = false }
+            if let package = await library.openPackage(venue) {
+                session = ScanSession(package: package, kind: kind)
+            }
         }
     }
+
+}
+
+struct ScanSession: Identifiable {
+    let id = UUID()
+    let package: VenuePackage
+    let kind: FrameSourceKind
 }
 
 struct CameraScreen: View {
@@ -157,6 +177,7 @@ struct CameraScreen: View {
 
     var body: some View {
         ZStack {
+            Color.black.ignoresSafeArea()
             if let glasses = model.glasses {
                 GlassesPreview(source: glasses).ignoresSafeArea()
             } else {
