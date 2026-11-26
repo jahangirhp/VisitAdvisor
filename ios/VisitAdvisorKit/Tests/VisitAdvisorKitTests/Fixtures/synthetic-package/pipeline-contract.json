@@ -1,0 +1,89 @@
+{
+  "camera_preprocessing": {
+    "color": "RGB",
+    "frame": "center square of side min(width,height)*224/256",
+    "frame_sizes": [
+      224,
+      512
+    ],
+    "id": "camera-preprocessing-v1",
+    "layout": "NCHW float32",
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "model_input": "resize to 224x224 bicubic",
+    "scale": "pixel / 255",
+    "server_frame_transport": "JPEG quality 0.9 (phone path has no JPEG)",
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "id": "object-regions-types-v5/camera-preprocessing-v1",
+  "models": [
+    {
+      "architecture": "dinov2-small",
+      "dimensions": 384,
+      "implementation": "huggingface-transformers",
+      "output": "last_hidden_state[:,0,:] (CLS), L2-normalized",
+      "preprocessing_contract": "camera-preprocessing-v1",
+      "role": "visualEmbedding",
+      "server_export_sha256": "0000000000000000000000000000000000000000000000000000000000000003",
+      "source_model": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    }
+  ],
+  "planar_verification": {
+    "accept_at_or_above": 0.4,
+    "applies_to_profile": "planar",
+    "detector": "SIFT nfeatures=800 on grayscale region",
+    "effect": "replaces embedding score for planar objects (0 if rejected)",
+    "homography": "RANSAC reprojection 4.0 px, RNG seed 0",
+    "matcher": "BFMatcher L2 knn k=2, ratio 0.7, one match per reference point",
+    "minimum_inliers": 8,
+    "minimum_matches": 8,
+    "planar_types": [
+      "painting",
+      "drawing",
+      "print",
+      "photograph"
+    ],
+    "score": "inliers / good * min(inliers / 20, 1)"
+  },
+  "quality_gate": {
+    "decision": "unreadable",
+    "max_channel_stddev_below": 2.0
+  },
+  "region_proposals": {
+    "area_range": [
+      0.08,
+      0.85
+    ],
+    "canny": [
+      40,
+      120
+    ],
+    "crop_resize": "bicubic back to frame size",
+    "enabled_by_policy_key": "object_regions",
+    "gaussian_kernel": 3,
+    "iou_duplicate_reject": 0.7,
+    "iou_full_frame_reject": 0.9,
+    "lab_contrast_floor": 20.0,
+    "lab_contrast_percentile": 55,
+    "maximum": 2,
+    "minimum_fill": 0.25,
+    "minimum_side_px": 28,
+    "padding_fraction": 0.06,
+    "working_size": 224
+  },
+  "retrieval": {
+    "aggregate_across_boxes": "max per distinct object",
+    "metric": "dot product of L2-normalized vectors (raw cosine)",
+    "object_score": "max over views",
+    "space_id": "dinov2-small-cls-l2",
+    "top_k_objects": 3,
+    "view_score": "0.75 * score(region 0) + 0.25 * max(score(all regions))"
+  }
+}

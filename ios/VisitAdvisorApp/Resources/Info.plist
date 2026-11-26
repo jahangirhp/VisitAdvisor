@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>en</string>
+	<key>CFBundleDisplayName</key>
+	<string>VisitAdvisor</string>
+	<key>CFBundleExecutable</key>
+	<string>$(EXECUTABLE_NAME)</string>
+	<key>CFBundleIdentifier</key>
+	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>$(PRODUCT_NAME)</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>0.1.0</string>
+	<key>CFBundleVersion</key>
+	<string>1</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>visitadvisor</string>
+			</array>
+		</dict>
+	</array>
+	<!-- Meta Wearables Device Access Toolkit. AppLinkURLScheme must match CFBundleURLSchemes. -->
+	<key>MWDAT</key>
+	<dict>
+		<key>AppLinkURLScheme</key>
+		<string>visitadvisor://</string>
+		<key>MetaAppID</key>
+		<string>$(META_APP_ID)</string>
+		<key>ClientToken</key>
+		<string>$(META_CLIENT_TOKEN)</string>
+		<key>TeamID</key>
+		<string>$(DEVELOPMENT_TEAM)</string>
+	</dict>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>VisitAdvisor connects to your Ray-Ban Meta glasses so you can recognise exhibits hands-free.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>VisitAdvisor connects to your Ray-Ban Meta glasses so you can recognise exhibits hands-free.</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string>VisitAdvisor joins your glasses' Wi-Fi to receive their camera view. Frames are processed on this iPhone and not uploaded.</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_bonjour._tcp</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>bluetooth-central</string>
+	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>VisitAdvisor uses the camera to recognise exhibits. Images are processed on the device and are not uploaded or stored.</string>
+	<key>UILaunchScreen</key>
+	<dict/>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+	</array>
+	<key>VisitAdvisorAPIBaseURL</key>
+	<string>$(VISITADVISOR_API_BASE_URL)</string>
+</dict>
+</plist>

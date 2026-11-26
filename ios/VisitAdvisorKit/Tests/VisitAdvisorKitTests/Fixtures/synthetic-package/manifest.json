@@ -1,0 +1,84 @@
+{
+  "automaticIdentificationEnabled": false,
+  "catalogRevision": "0000000000000000000000000000000000000000000000000000000000000002",
+  "createdAt": "2026-11-26T00:00:00+00:00",
+  "decisionPolicyID": "uncalibrated-preview-v1",
+  "embeddingSpaces": [
+    {
+      "byteOrder": "little",
+      "dimension": 384,
+      "dtype": "float32",
+      "matrixPath": "vectors/dinov2-small-cls.f32",
+      "metric": "dot",
+      "modelRole": "visualEmbedding",
+      "normalization": "l2",
+      "rowCount": 34,
+      "scoreConvention": "raw_cosine",
+      "spaceID": "dinov2-small-cls-l2"
+    }
+  ],
+  "exhibitCount": 6,
+  "files": [
+    {
+      "path": "catalog.sqlite",
+      "sha256": "71f9d0066f50077de2709f9eeb6e7ec9a521ee231a02529d3571d2284ac2cb5c",
+      "sizeBytes": 53248
+    },
+    {
+      "path": "vectors/dinov2-small-cls.f32",
+      "sha256": "58743e718e81fe40b651cf1c87ee12a2c73775a4aa978bd30fcdd9817ae5636f",
+      "sizeBytes": 52224
+    },
+    {
+      "path": "verification/sift-points.f32",
+      "sha256": "7e85cfeacfbc0a25b677484508153188c47ab3e153c3bcf179c838e3f2507d1b",
+      "sizeBytes": 840
+    },
+    {
+      "path": "verification/sift-descriptors.f32",
+      "sha256": "e3bb8983acc9467ec49171dda9fc96da164e7802285bbc73018f2b7f287fecde",
+      "sizeBytes": 53760
+    },
+    {
+      "path": "pipeline-contract.json",
+      "sha256": "7212e8ecf9305539b27072f075bf981379dec97be9f7423b7b8376e17a819b9d",
+      "sizeBytes": 2544
+    },
+    {
+      "path": "decision-policy.json",
+      "sha256": "5919d047d1ca17c1cb2ca84b84d9faf95be2a5e28f28cd3ab7c65cdeeed61e1d",
+      "sizeBytes": 360
+    }
+  ],
+  "format": "visitadvisor-venue-package",
+  "localFeatures": {
+    "byteOrder": "little",
+    "descriptorDimension": 128,
+    "descriptorsPath": "verification/sift-descriptors.f32",
+    "dtype": "float32",
+    "pointCount": 105,
+    "pointsPath": "verification/sift-points.f32"
+  },
+  "minimumAppVersion": "0.1.0",
+  "models": [
+    {
+      "role": "visualEmbedding",
+      "serverExportSHA256": "0000000000000000000000000000000000000000000000000000000000000003",
+      "sourceModel": "facebook/dinov2-small@ed25f3a31f01632728cabb09d1542f84ab7b0056"
+    }
+  ],
+  "packageVersion": "0000000000000000000000000000000000000000000000000000000000000001",
+  "pipelineContractID": "object-regions-types-v5/camera-preprocessing-v1",
+  "requiredFiles": [
+    "catalog.sqlite",
+    "vectors/dinov2-small-cls.f32",
+    "verification/sift-points.f32",
+    "verification/sift-descriptors.f32",
+    "pipeline-contract.json",
+    "decision-policy.json"
+  ],
+  "schemaVersion": 1,
+  "venueID": "synthetic-venue",
+  "venueName": "Synthetic fixture venue",
+  "viewCount": 12
+}
