@@ -1,3 +1,4 @@
+import Accelerate
 import AVFoundation
 import CoreVideo
 import VisitAdvisorKit
@@ -89,7 +90,7 @@ final class CameraFrameSource: NSObject, AVCaptureVideoDataOutputSampleBufferDel
         continuation.yield(CameraFrame(id: nextID, captureTime: now, image: CameraPreprocessing.frame(from: image)))
     }
 
-    /// Copies the centre square region of a BGRA buffer into RGB, honouring bytesPerRow.
+    /// Converts a BGRA buffer to packed RGB with vImage (honours bytesPerRow).
     static func rgbImage(from buffer: CVPixelBuffer) -> RGBImage? {
         guard CVPixelBufferGetPixelFormatType(buffer) == kCVPixelFormatType_32BGRA,
               CVPixelBufferLockBaseAddress(buffer, .readOnly) == kCVReturnSuccess
@@ -97,16 +98,15 @@ final class CameraFrameSource: NSObject, AVCaptureVideoDataOutputSampleBufferDel
         defer { CVPixelBufferUnlockBaseAddress(buffer, .readOnly) }
         guard let base = CVPixelBufferGetBaseAddress(buffer) else { return nil }
         let width = CVPixelBufferGetWidth(buffer), height = CVPixelBufferGetHeight(buffer)
-        let stride = CVPixelBufferGetBytesPerRow(buffer)
-        let source = base.assumingMemoryBound(to: UInt8.self)
+        var source = vImage_Buffer(data: base, height: vImagePixelCount(height), width: vImagePixelCount(width),
+                                   rowBytes: CVPixelBufferGetBytesPerRow(buffer))
         var pixels = [UInt8](repeating: 0, count: width * height * 3)
-        for y in 0..<height {
-            let row = source + y * stride
-            for x in 0..<width {
-                let s = x * 4, d = (y * width + x) * 3
-                pixels[d] = row[s + 2]; pixels[d + 1] = row[s + 1]; pixels[d + 2] = row[s]
-            }
+        let status = pixels.withUnsafeMutableBytes { out -> vImage_Error in
+            var destination = vImage_Buffer(data: out.baseAddress, height: vImagePixelCount(height),
+                                            width: vImagePixelCount(width), rowBytes: width * 3)
+            return vImageConvert_BGRA8888toRGB888(&source, &destination, vImage_Flags(kvImageNoFlags))
         }
+        guard status == kvImageNoError else { return nil }
         return RGBImage(width: width, height: height, pixels: pixels)
     }
 }

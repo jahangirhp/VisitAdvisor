@@ -53,3 +53,8 @@ targets:
         OTHER_LDFLAGS: -lc++
         TARGETED_DEVICE_FAMILY: "1"
         GENERATE_INFOPLIST_FILE: NO
+      configs:
+        # Recognition is far too slow unoptimised; keep DEBUG features, optimise code.
+        Debug:
+          SWIFT_OPTIMIZATION_LEVEL: -O
+          GCC_OPTIMIZATION_LEVEL: "3"

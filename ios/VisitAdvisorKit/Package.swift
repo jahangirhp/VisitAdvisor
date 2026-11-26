@@ -8,7 +8,8 @@ let package = Package(
         .library(name: "VisitAdvisorKit", targets: ["VisitAdvisorKit"]),
     ],
     targets: [
-        .target(name: "VisitAdvisorKit"),
+        // Pixel loops are unusable unoptimised; optimise Debug builds too.
+        .target(name: "VisitAdvisorKit", swiftSettings: [.unsafeFlags(["-O"], .when(configuration: .debug))]),
         .testTarget(
             name: "VisitAdvisorKitTests",
             dependencies: ["VisitAdvisorKit"],

@@ -57,6 +57,12 @@ final class FrameSampler: @unchecked Sendable {
         }
     }
 
+    /// Same test as `admit()` without consuming the slot.
+    func wouldAdmit() -> Bool {
+        let now = ProcessInfo.processInfo.systemUptime * 1000
+        return lock.withLock { continuation != nil && now - lastSample >= 1000 / samplesPerSecond }
+    }
+
     func yield(_ frame: CameraFrame) {
         lock.withLock { _ = continuation?.yield(frame) }
     }
@@ -84,6 +90,15 @@ final class RateGate: @unchecked Sendable {
             return true
         }
     }
+}
+
+/// Lock-protected flag: at most one frame conversion in flight.
+final class BusyFlag: @unchecked Sendable {
+    private let lock = NSLock()
+    private var value = false
+    var isSet: Bool { lock.withLock { value } }
+    func trySet() -> Bool { lock.withLock { if value { return false }; value = true; return true } }
+    func clear() { lock.withLock { value = false } }
 }
 
 extension CameraFrameSource: FrameSource {

@@ -1,3 +1,4 @@
+import Accelerate
 import CoreGraphics
 import Foundation
 import MWDATCamera
@@ -40,6 +41,10 @@ final class GlassesFrameSource: ObservableObject, FrameSource {
     private let configuration: StreamConfiguration
     private let sampler = FrameSampler(samplesPerSecond: 3)
     private let previewGate = RateGate(perSecond: 12)
+    /// Conversion runs here, never on the SDK's frame callback, so the video
+    /// feed keeps flowing; a frame arriving while one is converting is skipped.
+    private let work = DispatchQueue(label: "glasses.frames", qos: .userInitiated)
+    private let busy = BusyFlag()
     private var session: DeviceSession?
     private var camera: MWDATCamera.Camera?
     private let sessionTokens = ListenerTokenBag()
@@ -153,18 +158,21 @@ final class GlassesFrameSource: ObservableObject, FrameSource {
         stream.errorPublisher.listen { [weak self] error in
             Task { @MainActor in self?.failed(error.localizedDescription) }
         }.store(in: streamTokens)
-        let sampler = sampler, previewGate = previewGate
+        let sampler = sampler, previewGate = previewGate, work = work, busy = busy
         stream.videoFramePublisher.listen { [weak self] frame in
-            // SDK queue. Decide cheaply before touching pixels.
-            let sample = sampler.admit()
+            // SDK callback: keep it light. Decide first, then hand off.
             let showPreview = previewGate.admit()
-            guard sample != nil || showPreview, let image = frame.makeUIImage() else { return }
-            if let sample, let rgb = Self.rgbImage(from: image) {
-                sampler.yield(CameraFrame(id: sample.id, captureTime: sample.time,
-                                          image: CameraPreprocessing.frame(from: rgb)))
-            }
+            let wantSample = !busy.isSet && sampler.wouldAdmit()
+            guard showPreview || wantSample, let image = frame.makeUIImage() else { return }
             if showPreview {
                 Task { @MainActor in self?.preview = image }
+            }
+            guard wantSample, busy.trySet() else { return }
+            work.async {
+                defer { busy.clear() }
+                guard let sample = sampler.admit(), let rgb = Self.rgbImage(from: image) else { return }
+                sampler.yield(CameraFrame(id: sample.id, captureTime: sample.time,
+                                          image: CameraPreprocessing.frame(from: rgb)))
             }
         }.store(in: streamTokens)
     }
@@ -214,11 +222,16 @@ final class GlassesFrameSource: ObservableObject, FrameSource {
         }
         guard drawn else { return nil }
         var pixels = [UInt8](repeating: 0, count: width * height * 3)
-        for i in 0..<(width * height) {
-            pixels[i * 3] = rgba[i * 4]
-            pixels[i * 3 + 1] = rgba[i * 4 + 1]
-            pixels[i * 3 + 2] = rgba[i * 4 + 2]
+        let status = rgba.withUnsafeMutableBytes { input in
+            pixels.withUnsafeMutableBytes { output -> vImage_Error in
+                var source = vImage_Buffer(data: input.baseAddress, height: vImagePixelCount(height),
+                                           width: vImagePixelCount(width), rowBytes: width * 4)
+                var destination = vImage_Buffer(data: output.baseAddress, height: vImagePixelCount(height),
+                                                width: vImagePixelCount(width), rowBytes: width * 3)
+                return vImageConvert_RGBA8888toRGB888(&source, &destination, vImage_Flags(kvImageNoFlags))
+            }
         }
+        guard status == kvImageNoError else { return nil }
         return RGBImage(width: width, height: height, pixels: pixels)
     }
 }
