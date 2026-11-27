@@ -187,10 +187,22 @@ struct ReviewSheet: View {
             }
             .navigationTitle(photo.view.label)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) { Button("Retake") { done(nil) } }
-                ToolbarItem(placement: .confirmationAction) { Button("Use photo") { done(photo) } }
+            .safeAreaInset(edge: .bottom) {
+                HStack(spacing: 12) {
+                    Button { done(nil) } label: {
+                        Label("Retake", systemImage: "arrow.counterclockwise").frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.bordered)
+                    Button { done(photo) } label: {
+                        Label("Use photo", systemImage: "checkmark").frame(maxWidth: .infinity)
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
+                .controlSize(.large)
+                .padding()
+                .background(.bar)
             }
+            .interactiveDismissDisabled()
         }
     }
 
