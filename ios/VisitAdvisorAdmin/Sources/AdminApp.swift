@@ -290,7 +290,8 @@ struct ObjectDetailView: View {
             if let detail {
                 NavigationStack {
                     CaptureView(api: api, venue: venue, objectID: objectID, objectType: detail.type,
-                                sourceID: detail.sources.last?.id) { capturing = false }
+                                sourceID: detail.sources.last?.id,
+                                existing: detail.prepared + detail.pending) { capturing = false }
                 }
             }
         }
@@ -389,7 +390,7 @@ enum ObjectKind: String, CaseIterable, Identifiable {
     var help: String {
         switch self {
         case .flat: "Matched by its details. 3 photos: straight on and at 45° each side."
-        case .object3D: "Matched from several angles. 4 or more photos around the object."
+        case .object3D: "Matched from several angles. 4 photos: front, 45° each side and back."
         case .scene: "Matched as a whole view; the full photo is always used."
         }
     }

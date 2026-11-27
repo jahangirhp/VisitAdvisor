@@ -8,6 +8,9 @@ import UniformTypeIdentifiers
 import Vision
 
 /// Angles the guided capture asks for (server `requested_view` values).
+/// Reference photos the server accepts per object (MAX_VIEWS on the server).
+let maxPhotos = 4
+
 enum CaptureAngle: String, CaseIterable, Identifiable, Codable {
     case front, left, right, back
     case obliqueLeft = "oblique-left", obliqueRight = "oblique-right", elevated
@@ -26,7 +29,8 @@ enum CaptureAngle: String, CaseIterable, Identifiable, Codable {
     }
 
     static func plan(planar: Bool) -> [CaptureAngle] {
-        planar ? [.front, .obliqueLeft, .obliqueRight] : [.front, .obliqueLeft, .obliqueRight, .left, .right, .back, .elevated]
+        // The server keeps at most `maxPhotos` reference photos per object.
+        planar ? [.front, .obliqueLeft, .obliqueRight] : [.front, .obliqueLeft, .obliqueRight, .back]
     }
 }
 

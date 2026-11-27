@@ -8,6 +8,8 @@ struct CaptureView: View {
     let objectID: String
     let objectType: String
     let sourceID: String?
+    /// Photos the object already has (saved or waiting); counts toward `maxPhotos`.
+    var existing = 0
     let onFinish: () -> Void
 
     @State private var camera = AdminCamera()
@@ -21,7 +23,8 @@ struct CaptureView: View {
     private let captureGroup = "admin-ios-\(UUID().uuidString)"
 
     private var profile: String { captureProfile(objectType) }
-    private var views: [CaptureAngle] { CaptureAngle.plan(planar: profile != "multiview") }
+    private var free: Int { max(0, maxPhotos - existing) }
+    private var views: [CaptureAngle] { Array(CaptureAngle.plan(planar: profile != "multiview").prefix(free)) }
     private var current: CaptureAngle? { index < views.count ? views[index] : nil }
 
     var body: some View {
@@ -67,6 +70,9 @@ struct CaptureView: View {
             if uploaded {
                 Text("Saved and prepared").font(.headline)
                 Text("Use “Test recognition score” to check how well it is recognised.").font(.caption)
+            } else if free == 0 {
+                Text("This object already has \(maxPhotos) photos").font(.headline)
+                Text("That is the most the server keeps. Delete a weaker photo on the object page to replace it.").font(.caption)
             } else if let current {
                 Text("Photo \(index + 1) of \(views.count): \(current.label)").font(.headline)
                 Text("Stand where visitors stand. Object fills about half to two-thirds of the screen, in its usual light.")
@@ -107,7 +113,7 @@ struct CaptureView: View {
                 Circle().fill(.white).frame(width: 72, height: 72)
                     .overlay(Circle().stroke(.black.opacity(0.3), lineWidth: 2).padding(4))
             }
-            .disabled(busy != nil || uploaded)
+            .disabled(busy != nil || uploaded || current == nil)
             .accessibilityLabel("Take photo")
             Spacer()
             Button(uploaded ? "Done" : "Upload \(photos.count)") {
@@ -140,6 +146,11 @@ struct CaptureView: View {
                 try await api.upload(venue: venue.id, object: objectID, photo: photo, captureGroup: captureGroup, sourceID: sourceID)
             } catch let failure as AdminError where failure.code == "DUPLICATE_PHOTO" {
                 continue
+            } catch let failure as AdminError where failure.code == "PHOTO_LIMIT" {
+                busy = nil
+                self.error = "The server keeps at most \(maxPhotos) photos per object; \(photos.count - n) were not uploaded. Delete a weaker photo on the object page to replace it."
+                photos.removeFirst(n)
+                return
             } catch {
                 busy = nil
                 self.error = "Photo \(n + 1): \(error.localizedDescription)"
