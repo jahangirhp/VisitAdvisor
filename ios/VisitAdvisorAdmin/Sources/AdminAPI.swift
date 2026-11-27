@@ -113,6 +113,22 @@ struct LiveCatalog: Codable {
     }
 }
 
+/// `POST /live/venues/{id}/package/prepare` (admin token).
+struct PreparedPackage: Codable {
+    let packageVersion: String
+    let exhibitCount: Int
+    let viewCount: Int
+    let totalBytes: Int
+    let createdAt: String
+    enum CodingKeys: String, CodingKey {
+        case packageVersion = "package_version"
+        case exhibitCount = "exhibit_count"
+        case viewCount = "view_count"
+        case totalBytes = "total_bytes"
+        case createdAt = "created_at"
+    }
+}
+
 struct LiveResult: Codable {
     struct Candidate: Codable, Hashable { let id: String; let score: Double }
     let candidates: [Candidate]
@@ -164,12 +180,13 @@ struct AdminAPI: Sendable {
             struct Body: Decodable { let code: String; let message: String }
             let error: Body?
         }
-        struct Flat: Decodable { let error: String }
+        struct Flat: Decodable { let error: String; let reason: String? }
         if let envelope = try? JSONDecoder().decode(Envelope.self, from: data), let body = envelope.error {
             return .server(code: body.code, message: body.message, status: status)
         }
         if let flat = try? JSONDecoder().decode(Flat.self, from: data) {
-            return .server(code: flat.error, message: flat.error.replacingOccurrences(of: "_", with: " ").capitalized, status: status)
+            let readable = (flat.reason ?? flat.error).replacingOccurrences(of: "_", with: " ").capitalized
+            return .server(code: flat.error, message: readable, status: status)
         }
         return .server(code: "HTTP_\(status)", message: "Server error \(status).", status: status)
     }
@@ -254,6 +271,35 @@ struct AdminAPI: Sendable {
         guard let http = response as? HTTPURLResponse else { throw AdminError.badResponse }
         guard http.statusCode == 200 else { throw Self.error(data, status: http.statusCode) }
         return try JSONDecoder().decode(LiveCatalog.self, from: data)
+    }
+
+    /// Asks the server to build the venue's offline package now.
+    func preparePackage(venue: String) async throws -> PreparedPackage {
+        var request = URLRequest(url: baseURL.appending(path: "live/venues/\(venue)/package/prepare"))
+        request.httpMethod = "POST"
+        request.timeoutInterval = 180
+        do {
+            return try JSONDecoder().decode(PreparedPackage.self, from: try await send(request))
+        } catch let failure as AdminError {
+            throw Self.packageError(failure)
+        }
+    }
+
+    private static func packageError(_ failure: AdminError) -> AdminError {
+        let message: String
+        switch failure.code {
+        case "OFFLINE_PACKAGES_DISABLED":
+            message = "Offline downloads are switched off on the server (LIVE_CAMERA_OFFLINE_PACKAGES)."
+        case "PACKAGE_UNAVAILABLE":
+            message = "The server could not build this venue's package (\(failure.errorDescription ?? "unknown reason"))."
+        case "READ_ONLY", "HTTP_404", "NOT_FOUND":
+            message = "The server does not have this feature yet. Deploy the latest server code first."
+        case "REFERENCES_EXPIRED", "REFERENCES_CHANGED":
+            message = "The venue's references just changed. Try again in a moment."
+        default:
+            return failure
+        }
+        return .server(code: failure.code ?? "", message: message, status: failure.status ?? 0)
     }
 
     func recognize(venue: String, referenceVersion: String, jpeg: Data) async throws -> LiveResult {

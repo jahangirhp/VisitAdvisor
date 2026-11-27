@@ -121,12 +121,40 @@ struct ObjectsView: View {
     @State private var error: String?
     @State private var creating = false
     @State private var showGaps = false
+    @State private var preparing = false
+    @State private var package: PreparedPackage?
+    @State private var packageError: String?
 
     private var shown: [AdminObjectRow] { showGaps ? objects.filter(\.needsPhotos) : objects }
 
     var body: some View {
         List {
             if let error { Text(error).foregroundStyle(.red) }
+            Section {
+                Button {
+                    Task { await preparePackage() }
+                } label: {
+                    HStack {
+                        Label("Prepare venue for download", systemImage: "arrow.down.app")
+                        if preparing { Spacer(); ProgressView() }
+                    }
+                }
+                .disabled(preparing)
+                if let package {
+                    Label("Ready: \(package.exhibitCount) objects, \(package.viewCount) photos, \(ByteCountFormatter.string(fromByteCount: Int64(package.totalBytes), countStyle: .file))",
+                          systemImage: "checkmark.circle.fill")
+                        .font(.caption).foregroundStyle(.green)
+                    Text("Version \(package.packageVersion.prefix(12)). Visitors get it the next time they open this venue.")
+                        .font(.caption2).foregroundStyle(.secondary)
+                }
+                if let packageError {
+                    Label(packageError, systemImage: "exclamationmark.triangle").font(.caption).foregroundStyle(.orange)
+                }
+            } header: {
+                Text("Offline download")
+            } footer: {
+                Text("Builds the visitor app's download from the current photos. Run it after adding or changing photos.")
+            }
             Toggle("Only objects needing photos", isOn: $showGaps)
             ForEach(shown) { object in
                 NavigationLink(value: object) {
@@ -156,6 +184,18 @@ struct ObjectsView: View {
 
     private func load() async {
         do { objects = try await api.objects(venue: venue.id); error = nil } catch { self.error = error.localizedDescription }
+    }
+
+    private func preparePackage() async {
+        preparing = true
+        defer { preparing = false }
+        do {
+            package = try await api.preparePackage(venue: venue.id)
+            packageError = nil
+        } catch {
+            package = nil
+            packageError = error.localizedDescription
+        }
     }
 }
 

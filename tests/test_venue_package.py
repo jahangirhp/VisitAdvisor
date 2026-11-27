@@ -287,3 +287,47 @@ def test_package_routes_are_disabled_by_default(tmp_path):
             ).status_code
             == 404
         )
+
+
+def test_admin_can_prepare_a_venue_package(tmp_path):
+    from fastapi.testclient import TestClient
+
+    from app.core.config import Settings
+    from app.modules.live_camera.server import create_camera_app
+
+    source = catalog()
+    source["location"]["id"] = "65" + "0" * 22
+    for obj in source["objects"]:
+        obj["location_id"] = source["location"]["id"]
+    engine = CameraRecognizer(tmp_path, source, session=object())
+    location = source["location"]["id"]
+    path = f"/venues/{location}/package/prepare"
+    enabled = Settings(
+        mongodb_uri="mongodb://localhost:1/test",
+        admin_token="secret-token",
+        live_camera_package_cache=tmp_path / "cache",
+        live_camera_offline_packages=True,
+    )
+    app = create_camera_app(recognizer=engine, configured_settings=enabled)
+    with TestClient(app) as client:
+        assert client.post(path).status_code == 401
+        bad = client.post(path, headers={"Authorization": "Bearer wrong"})
+        assert bad.status_code == 401
+        response = client.post(path, headers={"Authorization": "Bearer secret-token"})
+        assert response.status_code == 200, response.text
+        body = response.json()
+        assert body["status"] == "ready"
+        assert body["exhibit_count"] == len(source["objects"])
+        manifest = client.get(f"/venues/{location}/package/manifest").json()
+        assert manifest["packageVersion"] == body["package_version"]
+        assert body["total_bytes"] == sum(f["sizeBytes"] for f in manifest["files"])
+        # Preparing again is idempotent: the immutable version is reused.
+        again = client.post(path, headers={"Authorization": "Bearer secret-token"})
+        assert again.json()["package_version"] == body["package_version"]
+
+    disabled = Settings(mongodb_uri="mongodb://localhost:1/test", admin_token="t")
+    app = create_camera_app(recognizer=engine, configured_settings=disabled)
+    with TestClient(app) as client:
+        response = client.post(path, headers={"Authorization": "Bearer t"})
+        assert response.status_code == 409
+        assert response.json()["error"] == "OFFLINE_PACKAGES_DISABLED"

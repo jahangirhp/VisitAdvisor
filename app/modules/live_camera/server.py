@@ -4,6 +4,7 @@ import asyncio
 import json
 import os
 import re
+import secrets
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -82,9 +83,12 @@ def create_camera_app(
 
     @application.middleware("http")
     async def camera_boundary(request: Request, call_next: object) -> Response:
-        frame_route = request.url.path.rstrip("/").endswith("/recognize")
+        path = request.url.path.rstrip("/")
+        frame_route = path.endswith("/recognize")
+        # The only other write-style call: the admin-token package build.
+        prepare_route = re.search(r"/venues/[0-9a-f]{24}/package/prepare$", path)
         if request.method not in {"GET", "HEAD"} and not (
-            request.method == "POST" and frame_route
+            request.method == "POST" and (frame_route or prepare_route)
         ):
             response: Response = JSONResponse({"error": "READ_ONLY"}, status_code=405)
         else:
@@ -331,6 +335,55 @@ def create_camera_app(
         except Exception:
             raise CameraFailure("PACKAGE_UNAVAILABLE") from None
         return JSONResponse(manifest, headers={"ETag": etag})
+
+    @application.post("/venues/{location_id}/package/prepare")
+    async def prepare_package(location_id: str, request: Request) -> Response:
+        """Admin: build the venue's offline package now, so visitors' first
+        download is instant and problems show up before a visit."""
+        settings = configured_settings or Settings()
+        configured = settings.admin_token
+        if configured is None or not configured.get_secret_value():
+            return JSONResponse({"error": "ADMIN_DISABLED"}, status_code=503)
+        supplied = request.headers.get("authorization") or ""
+        expected = "Bearer " + configured.get_secret_value()
+        if not secrets.compare_digest(supplied.encode(), expected.encode()):
+            return JSONResponse({"error": "ADMIN_UNAUTHORIZED"}, status_code=401)
+        if not settings.live_camera_offline_packages:
+            # Publishing descriptors to phones stays an explicit server setting.
+            return JSONResponse({"error": "OFFLINE_PACKAGES_DISABLED"}, status_code=409)
+        if not ObjectId.is_valid(location_id):
+            raise CameraFailure("INVALID_LOCATION", 422)
+        value = await engine(location_id)
+        if value.catalog["location"]["id"] != location_id:
+            raise CameraFailure("REFERENCES_CHANGED", 409)
+        value.check_fresh()
+        try:
+            manifest = await run_in_threadpool(
+                build_package,
+                value.catalog,
+                settings.live_camera_package_cache
+                / location_id
+                / value.reference_version,
+            )
+        except PackageError as error:
+            # Fixed safe codes only (see PackageError); shown to the admin.
+            return JSONResponse(
+                {"error": "PACKAGE_UNAVAILABLE", "reason": str(error)},
+                status_code=409,
+            )
+        return JSONResponse(
+            {
+                "status": "ready",
+                "venue_id": manifest["venueID"],
+                "venue_name": manifest["venueName"],
+                "package_version": manifest["packageVersion"],
+                "exhibit_count": manifest["exhibitCount"],
+                "view_count": manifest["viewCount"],
+                "total_bytes": sum(entry["sizeBytes"] for entry in manifest["files"]),
+                "created_at": manifest["createdAt"],
+            },
+            headers={"Cache-Control": "no-store"},
+        )
 
     @application.get("/venues/{location_id}/package/{version}/{asset:path}")
     async def package_asset(location_id: str, version: str, asset: str) -> Response:
