@@ -58,3 +58,22 @@ targets:
         Debug:
           SWIFT_OPTIMIZATION_LEVEL: -O
           GCC_OPTIMIZATION_LEVEL: "3"
+
+  # Staff app: reference photos, objects and live score checks (admin token).
+  VisitAdvisorAdmin:
+    type: application
+    platform: iOS
+    sources:
+      - path: VisitAdvisorAdmin/Sources
+      - path: VisitAdvisorAdmin/Resources/Info.plist
+        buildPhase: none
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.steeltrace.visitadvisor.admin
+        PRODUCT_NAME: VisitAdvisorAdmin
+        INFOPLIST_FILE: VisitAdvisorAdmin/Resources/Info.plist
+        GENERATE_INFOPLIST_FILE: NO
+        TARGETED_DEVICE_FAMILY: "1"
+      configs:
+        Debug:
+          SWIFT_OPTIMIZATION_LEVEL: -O

@@ -1329,3 +1329,64 @@ def test_repreparing_a_scene_restores_context_instead_of_reusing_object_crop(
     assert "reference_preparation" not in restored["views"][0]["reference"]["evidence"]
     assert inputs[-1] == prepare_image(photo["data"], photo["content_type"])
     assert photo["data"] == jpeg()
+
+
+def device_capture():
+    capture = quick_capture("pending")
+    capture["detection_status"] = "suggested"
+    capture["segmentation"] = {
+        "model": "apple-vision-foreground-instance-mask",
+        "revision": "iOS 26.1",
+    }
+    capture["target_box"] = [0.1, 0.2, 0.8, 0.9]
+    capture["selection"].update(
+        method="device-mask",
+        reviewed=True,
+        mask_sha256=hashlib.sha256(png_mask()).hexdigest(),
+    )
+    return capture
+
+
+def test_device_mask_is_saved_with_its_on_device_identity(setup):
+    client, service, db, *_ = setup
+    capture = device_capture()
+    response = upload_mask(client, png_mask(), capture)
+    assert response.status_code == 201, response.text
+    photo = db["admin_reference_photos"].rows[0]
+    assert photo["data"] == jpeg()  # the original is kept unchanged
+    assert photo["capture_metadata"]["selection"]["method"] == "device-mask"
+    assert photo["foreground_mask"]["sha256"]
+    inputs = []
+    encoder = SimpleNamespace(
+        model="local-model",
+        preprocessing="local-preprocess",
+        describe=lambda image, **_kw: inputs.append(image) or {"regions": []},
+    )
+    service.visual.publish = AsyncMock()
+    asyncio.run(service.publish(LOCATION, OBJECT, encoder))
+    view = service.visual.publish.await_args.args[0]["views"][0]
+    assert view["derived"]["preparation"]["method"] == "masked-crop"
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"selection": {"reviewed": False}},
+        {"selection": {"candidate_id": "mask-0"}},
+        {"selection": {"mask_sha256": "c" * 64}},
+        {"segmentation": None},
+        {"detection_status": "skipped"},
+        {"version": "guided-capture-v2"},
+    ],
+)
+def test_device_mask_requires_review_identity_and_matching_mask(setup, change):
+    client, _, db, *_ = setup
+    capture = device_capture()
+    for key, value in change.items():
+        if key == "selection":
+            capture["selection"].update(value)
+        else:
+            capture[key] = value
+    response = upload_mask(client, png_mask(), capture)
+    assert response.status_code == 422, response.text
+    assert db["admin_reference_photos"].rows == []

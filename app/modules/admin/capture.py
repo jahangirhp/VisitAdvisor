@@ -40,7 +40,11 @@ class CaptureSegmentation(BaseModel):
 class CaptureSelection(BaseModel):
     model_config = ConfigDict(extra="forbid", strict=True)
 
-    method: Literal["server-mask", "server-suggestion", "manual-box", "full-frame"]
+    # device-mask: produced on the operator's phone (e.g. Apple Vision) and
+    # reviewed there; its model identity is recorded in `segmentation`.
+    method: Literal[
+        "server-mask", "server-suggestion", "manual-box", "full-frame", "device-mask"
+    ]
     reviewed: bool
     source_sha256: Sha256
     candidate_id: CaptureId | None = None
@@ -114,6 +118,8 @@ class GuidedCaptureMetadata(BaseModel):
                     raise ValueError("Version 2 requires explicit selection review.")
                 if self.selection.method == "server-suggestion":
                     raise ValueError("Automatic suggestions require capture version 3.")
+                if self.selection.method == "device-mask":
+                    raise ValueError("Device masks require capture version 3.")
                 if self.quality_region is not None or self.detection_status is not None:
                     raise ValueError(
                         "Automatic observations require capture version 3."
@@ -128,6 +134,17 @@ class GuidedCaptureMetadata(BaseModel):
                     and not self.selection.reviewed
                 ):
                     raise ValueError("Manual corrections require an operator choice.")
+                if self.selection.method == "device-mask" and (
+                    not self.selection.reviewed
+                    or self.detection_status != "suggested"
+                    or self.segmentation is None
+                    or self.segmentation.revision is None
+                    or self.analysis is not None
+                    or self.selection.candidate_id is not None
+                ):
+                    raise ValueError(
+                        "A device mask requires operator review and its model identity."
+                    )
                 if self.selection.method == "server-suggestion" and (
                     self.detection_status != "suggested"
                     or self.segmentation is None
@@ -149,6 +166,8 @@ class GuidedCaptureMetadata(BaseModel):
                     or self.segmentation.model_hash != self.analysis.model_hash
                 ):
                     raise ValueError("A server mask requires its analysis provenance.")
+            elif self.selection.method == "device-mask":
+                pass  # Validated above: on-device model identity, no server analysis.
             elif (
                 self.segmentation is not None or self.selection.candidate_id is not None
             ):

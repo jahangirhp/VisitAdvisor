@@ -109,3 +109,28 @@ Before the first glasses run:
 Distribution limit: the toolkit is a developer preview. Apps using it cannot be
 published on the App Store yet; testers get builds through Meta's release
 channels (Wearables Developer Center) plus TestFlight/ad-hoc installs.
+
+## VA Admin (staff app)
+
+A second app target, `VisitAdvisorAdmin`, for staff. It uses the same admin API
+as the web admin and is unlocked with the admin token, which is kept in the
+iPhone Keychain. Visitors never get it.
+
+- **Venues and objects:** photo progress per object, saved photos with how
+  recognition uses each one (background removed / box crop / full photo), and
+  the stored mask.
+- **Create and delete objects; delete photos.**
+- **Guided capture:** one photo per angle (front, 45° left/right, sides, back,
+  from above; 3 angles for paintings). Apple Vision makes the cut-out on the
+  phone. The review screen shows the original and the cut-out side by side.
+  The original is always uploaded unchanged, and the mask is uploaded as a
+  separate file (`device-mask`, recorded with its iOS version). After upload
+  the app runs "Save", so the photos are prepared for recognition right away.
+- **Recognition test:** sends the website's exact frame (centre 224/256
+  square) to `/live/recognize` about twice a second and shows the top scores
+  against the bar. The square on screen is exactly what is sent.
+
+Server requirement: uploading `device-mask` photos needs the server change in
+`app/modules/admin/capture.py` (same branch) to be deployed. Without it, the
+server rejects them with "Capture details are invalid"; turning the cut-out
+off for a photo uploads it as a full photo, which works on the current server.
