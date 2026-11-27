@@ -20,8 +20,8 @@ struct CaptureView: View {
     private let sessionID = "ios-" + UUID().uuidString.replacingOccurrences(of: "-", with: "").lowercased()
     private let captureGroup = "admin-ios-\(UUID().uuidString)"
 
-    private var profile: String { isPlanar(objectType) ? "planar" : "multiview" }
-    private var views: [CaptureAngle] { CaptureAngle.plan(planar: isPlanar(objectType)) }
+    private var profile: String { captureProfile(objectType) }
+    private var views: [CaptureAngle] { CaptureAngle.plan(planar: profile != "multiview") }
     private var current: CaptureAngle? { index < views.count ? views[index] : nil }
 
     var body: some View {

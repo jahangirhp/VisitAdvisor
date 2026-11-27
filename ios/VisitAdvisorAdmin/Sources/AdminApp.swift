@@ -176,6 +176,7 @@ struct NewObjectView: View {
     let venue: AdminVenue
     @Environment(\.dismiss) private var dismiss
     @State private var name = ""
+    @State private var kind: ObjectKind = .object3D
     @State private var type = "sculpture"
     @State private var year = ""
     @State private var description = ""
@@ -183,14 +184,22 @@ struct NewObjectView: View {
     @State private var error: String?
     @State private var created: CreatedObject?
 
-    static let types = [("painting", "Painting"), ("sculpture", "Sculpture / statue"), ("artifact", "Artifact / exhibit"),
-                        ("building", "Building / architecture"), ("room", "Room / interior"), ("other", "Other object")]
-
     var body: some View {
         NavigationStack {
             Form {
                 TextField("Name", text: $name)
-                Picker("Type", selection: $type) { ForEach(Self.types, id: \.0) { Text($0.1).tag($0.0) } }
+                Section {
+                    Picker("Kind", selection: $kind) {
+                        ForEach(ObjectKind.allCases) { Text($0.title).tag($0) }
+                    }
+                    .pickerStyle(.segmented)
+                    .onChange(of: kind) { _, new in type = new.types[0].value }
+                    Picker("Shown to visitors as", selection: $type) {
+                        ForEach(kind.types, id: \.value) { Text($0.label).tag($0.value) }
+                    }
+                } footer: {
+                    Text(kind.help)
+                }
                 Section("Optional") {
                     TextField("Year or period", text: $year)
                     TextField("Description", text: $description, axis: .vertical).lineLimit(3...6)
@@ -352,5 +361,36 @@ struct SavedPhotoRow: View {
 
     private func loadMask() async {
         if let data = try? await api.photoData(venue: venueID, object: objectID, photo: photo.id, mask: true) { mask = UIImage(data: data) }
+    }
+}
+
+/// The three ways recognition treats an object (server: planar, multiview,
+/// scene); the exact type is still stored and shown to visitors.
+enum ObjectKind: String, CaseIterable, Identifiable {
+    case flat, object3D, scene
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .flat: "2D artwork"
+        case .object3D: "3D object"
+        case .scene: "Room / building"
+        }
+    }
+
+    var types: [(value: String, label: String)] {
+        switch self {
+        case .flat: [("painting", "Painting"), ("drawing", "Drawing"), ("print", "Print"), ("photograph", "Photograph")]
+        case .object3D: [("sculpture", "Sculpture / statue"), ("artifact", "Artifact / exhibit"), ("other", "Other object")]
+        case .scene: [("room", "Room / interior"), ("building", "Building / architecture")]
+        }
+    }
+
+    var help: String {
+        switch self {
+        case .flat: "Matched by its details. 3 photos: straight on and at 45° each side."
+        case .object3D: "Matched from several angles. 4 or more photos around the object."
+        case .scene: "Matched as a whole view; the full photo is always used."
+        }
     }
 }

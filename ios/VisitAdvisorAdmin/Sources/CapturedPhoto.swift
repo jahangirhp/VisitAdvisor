@@ -35,6 +35,14 @@ func isPlanar(_ type: String) -> Bool {
     ["painting", "drawing", "print", "photograph"].contains(type.lowercased())
 }
 
+/// Capture profile sent with each photo: rooms and buildings are scenes (the
+/// server always uses their full photo), flat artworks planar, the rest 3D.
+func captureProfile(_ type: String) -> String {
+    let type = type.lowercased()
+    if ["room", "building"].contains(type) { return "scene" }
+    return isPlanar(type) ? "planar" : "multiview"
+}
+
 /// One captured reference photo: the untouched original (upright JPEG) plus an
 /// optional on-device foreground mask. The original is always uploaded; the
 /// mask is a separate file, so both versions stay available on the server.
@@ -127,8 +135,9 @@ enum PhotoProcessor {
             box = mask.box
             target = mask.fraction
         }
-        // Flat artworks are matched by keypoints; keep the whole photo by default.
-        let planar = profile == "planar"
+        // Only 3D objects use the cut-out by default: flat artworks are matched
+        // by keypoints and scenes always use the full photo.
+        let planar = profile != "multiview"
         return CapturedPhoto(
             view: view, profile: profile, jpeg: jpeg, preview: upright, maskPNG: maskPNG, cutout: cutout,
             targetBox: box, quality: (quality.sharpness, quality.clipped, target),
