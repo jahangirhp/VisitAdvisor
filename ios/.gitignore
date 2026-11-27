@@ -1,0 +1,5 @@
+.build/
+Vendor/
+VisitAdvisorApp/Models/
+*.xcodeproj/
+xcuserdata/

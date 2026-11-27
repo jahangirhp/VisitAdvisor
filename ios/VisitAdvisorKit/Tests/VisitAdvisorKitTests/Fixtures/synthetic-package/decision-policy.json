@@ -1,0 +1,14 @@
+{
+  "ambiguous_floor": 0.45,
+  "automatic_identification": false,
+  "calibrated": false,
+  "candidate_floor": 0.55,
+  "candidate_margin": 0.04,
+  "id": "uncalibrated-preview-v1",
+  "inference_budget_ms": 1500,
+  "minimum_stable_ms": 600,
+  "object_regions": true,
+  "profiles": {},
+  "score_convention": "raw_cosine_or_planar_geometry",
+  "stable_frames": 3
+}

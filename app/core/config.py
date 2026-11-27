@@ -45,6 +45,9 @@ class Settings(BaseSettings):
     live_camera_calibration: Path | None = None
     live_camera_refresh_seconds: int = Field(default=30, ge=5, le=120)
     live_camera_bundle: Path = Path(".local/live-camera")
+    live_camera_package_cache: Path = Path(".local/venue-packages")
+    # Off until the owner approves publishing derived reference descriptors.
+    live_camera_offline_packages: bool = False
 
     mongodb_uri: SecretStr
     mongodb_database: str = Field(default="visitadvisor", min_length=1)

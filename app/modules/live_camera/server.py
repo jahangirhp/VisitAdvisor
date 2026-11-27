@@ -1,7 +1,9 @@
 """Camera trial host: bounded ephemeral frame recognition, no database writes."""
 
 import asyncio
+import json
 import os
+import re
 from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from pathlib import Path
@@ -20,6 +22,7 @@ from app.db.mongodb import MongoDB
 from app.modules.live_camera.experience import read_experience
 from app.modules.live_camera.inference import CameraFailure, CameraRecognizer
 from app.modules.live_camera.references import AtlasCameraReferences
+from app.modules.live_camera.venue_package import PackageError, build_package
 
 STATIC = Path(__file__).with_name("static")
 MAX_FRAME_BYTES = 256 * 1024
@@ -298,6 +301,55 @@ def create_camera_app(
                 "review_status": prepared.review_status,
             }
         )
+
+    def package_root(location_id: str) -> Path:
+        settings = configured_settings or Settings()
+        if not settings.live_camera_offline_packages:
+            # Reference descriptors stay on the server unless explicitly enabled.
+            raise CameraFailure("NOT_FOUND", 404)
+        return settings.live_camera_package_cache / location_id
+
+    @application.get("/venues/{location_id}/package/manifest")
+    async def package_manifest(location_id: str, request: Request) -> Response:
+        """Offline iOS package for the exact snapshot this server recognizes against."""
+        root = package_root(location_id)
+        if not ObjectId.is_valid(location_id):
+            raise CameraFailure("INVALID_LOCATION", 422)
+        value = await engine(location_id)
+        if value.catalog["location"]["id"] != location_id:
+            raise CameraFailure("REFERENCES_CHANGED", 409)
+        version = value.reference_version
+        etag = f'"{version}"'
+        if request.headers.get("if-none-match") == etag:
+            return Response(status_code=304, headers={"ETag": etag})
+        try:
+            manifest = await run_in_threadpool(
+                build_package, value.catalog, root / version
+            )
+        except PackageError:
+            raise CameraFailure("PACKAGE_UNAVAILABLE", 409) from None
+        except Exception:
+            raise CameraFailure("PACKAGE_UNAVAILABLE") from None
+        return JSONResponse(manifest, headers={"ETag": etag})
+
+    @application.get("/venues/{location_id}/package/{version}/{asset:path}")
+    async def package_asset(location_id: str, version: str, asset: str) -> Response:
+        if not ObjectId.is_valid(location_id) or not re.fullmatch(
+            r"[0-9a-f]{64}", version
+        ):
+            return JSONResponse({"error": "NOT_FOUND"}, status_code=404)
+        root = package_root(location_id) / version
+        try:
+            manifest = json.loads((root / "manifest.json").read_text())
+        except (OSError, ValueError):
+            return JSONResponse({"error": "NOT_FOUND"}, status_code=404)
+        # Only files listed in the immutable manifest are served; no path input
+        # reaches the filesystem without matching an exact manifest entry.
+        if asset != "manifest.json" and asset not in {
+            entry["path"] for entry in manifest["files"]
+        }:
+            return JSONResponse({"error": "NOT_FOUND"}, status_code=404)
+        return FileResponse(root / asset, headers={"ETag": f'"{version}"'})
 
     @application.get("/bundle/{filename:path}")
     async def bundle_file(filename: str) -> Response:
